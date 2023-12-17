@@ -1,7 +1,8 @@
 import * as THREE from "three";
+import { DragControls } from "three/examples/jsm/controls/DragControls.js";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
-
 const COLORS = {
   GOLD: 0xffd700,
   WHITE: 0xffffff,
@@ -11,6 +12,10 @@ const COLORS = {
 };
 
 export class HolidaysApp {
+  private orbitControls: OrbitControls;
+  private rotating: boolean = false; // This will control the toggle
+  private dragControls: DragControls;
+  private lightVisuals: THREE.Object3D[] = [];
   private lights: THREE.PointLight[] = [];
   private scene: THREE.Scene;
   private camera: THREE.PerspectiveCamera;
@@ -26,6 +31,7 @@ export class HolidaysApp {
 
   constructor() {
     this.init();
+    this.setupKeyControls();
   }
 
   private init(): void {
@@ -104,12 +110,27 @@ export class HolidaysApp {
       // { color: COLORS.WHITE, x: -0.75, y: 0.5, z: 1.5 },
     ];
 
-    _lights.forEach(pos => {
-      const pointLight = new THREE.PointLight(pos.color, 1, 0);
-      pointLight.position.set(pos.x, pos.y, pos.z);
+    _lights.forEach(light => {
+      const pointLight = new THREE.PointLight(light.color, 1, 0);
+      pointLight.position.set(light.x, light.y, light.z);
       pointLight.castShadow = true;
       this.scene.add(pointLight);
       this.lights.push(pointLight);
+
+      const lightVisual = new THREE.Mesh(new THREE.SphereGeometry(0.1, 16, 16), new THREE.MeshBasicMaterial({ color: light.color }));
+      lightVisual.position.copy(pointLight.position);
+      this.scene.add(lightVisual);
+      this.lightVisuals.push(lightVisual);
+      this.initDragControls();
+      // // Set up the DragControls
+      //   this.dragControls = new DragControls(this.lightVisuals, this.camera, this.renderer.domElement);
+
+      //   // Add event listener to update light position when its visualizer is dragged
+      //   this.dragControls.addEventListener("drag", event => {
+      //     const selectedObject = event.object;
+      //     const light = this.lights[this.lightVisuals.indexOf(selectedObject)];
+      //     light.position.copy(selectedObject.position);
+      //   });
     });
 
     // Ambient Light (for overall scene illumination)
@@ -123,15 +144,47 @@ export class HolidaysApp {
     // Start the animation loop
     this.addLightHelpers();
     this.animate();
+    // this.initLightsAndControls();
+    this.initOrbitControls();
+  }
+  private initDragControls(): void {
+    // Set up the DragControls
+    this.dragControls = new DragControls(this.lightVisuals, this.camera, this.renderer.domElement);
+
+    // Disable orbit controls when dragging
+    this.dragControls.addEventListener("dragstart", event => {
+      this.orbitControls.enabled = false;
+    });
+
+    // Re-enable orbit controls after dragging
+    this.dragControls.addEventListener("dragend", event => {
+      this.orbitControls.enabled = true;
+    });
+
+    // Add event listener to update light position when its visualizer is dragged
+    this.dragControls.addEventListener("drag", event => {
+      const selectedObject = event.object;
+      const light = this.lights[this.lightVisuals.indexOf(selectedObject)];
+      light.position.copy(selectedObject.position);
+    });
+  }
+  private initOrbitControls(): void {
+    // Assuming `this.present` is your Christmas present object
+    // and it's already added to the scene
+    this.orbitControls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.orbitControls.target.copy(this.present.position);
+    this.orbitControls.update();
   }
 
   private _animate = (): void => {
     requestAnimationFrame(this._animate);
 
     // Rotate the camera around the present
-    this.cameraAngle += 0.005;
-    this.camera.position.x = 5 * Math.sin(this.cameraAngle);
-    this.camera.position.z = 5 * Math.cos(this.cameraAngle);
+    if (this.rotating) {
+      this.cameraAngle += 0.005;
+      this.camera.position.x = 5 * Math.sin(this.cameraAngle);
+      this.camera.position.z = 5 * Math.cos(this.cameraAngle);
+    }
     this.camera.lookAt(this.scene.position);
 
     this.renderer.render(this.scene, this.camera);
@@ -147,6 +200,13 @@ export class HolidaysApp {
     this.lights.forEach(light => {
       const helper = new THREE.PointLightHelper(light, 0.1, 0x00ffff);
       this.scene.add(helper);
+    });
+  }
+  private setupKeyControls(): void {
+    window.addEventListener("keydown", event => {
+      if (event.code === "Space") {
+        this.rotating = !this.rotating; // Toggle the rotation state
+      }
     });
   }
 }
