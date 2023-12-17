@@ -1,9 +1,10 @@
-import esbuild from "esbuild";
+import * as esbuild from "esbuild";
 import { esBuildContext } from "./esbuild-config";
 
 async function server() {
-  const ctx = await esbuild.context(esBuildContext);
-  const { host, port } = await ctx.serve({
+  let ctx = await esbuild.context(esBuildContext);
+  await ctx.watch();
+  let { host, port } = await ctx.serve({
     servedir: "static",
     port: 8080,
   });

@@ -1,5 +1,4 @@
 import { renderTransaction } from "./render-transaction/render-transaction";
-import { grid } from "./the-grid";
 import { pay } from "./web3/pay";
 (async function appAsyncWrapper() {
   try {
@@ -24,3 +23,5 @@ import { pay } from "./web3/pay";
 
 import { HolidaysApp } from "./holidays/holidays";
 new HolidaysApp();
+
+new EventSource("/esbuild").addEventListener("change", e => window.location.reload());
