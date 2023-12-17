@@ -2,12 +2,24 @@ import * as THREE from "three";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 
+const COLORS = {
+  GOLD: 0xffd700,
+  WHITE: 0xffffff,
+  RED: 0xff0000,
+  GREEN: 0x00ff00,
+  BLUE: 0x0000ff,
+};
+
 export class HolidaysApp {
+  private lights: THREE.PointLight[] = [];
   private scene: THREE.Scene;
   private camera: THREE.PerspectiveCamera;
   private renderer: THREE.WebGLRenderer;
   private present: THREE.Group;
-  private pointLight: THREE.PointLight;
+  // private pointLightBackLeft: THREE.PointLight;
+  // private pointLightBackRight: THREE.PointLight;
+  // private pointLightFrontRight: THREE.PointLight;
+  // private pointLightFrontLeft: THREE.PointLight;
   private ambientLight: THREE.AmbientLight;
   private plane: THREE.Mesh;
   private cameraAngle: number = 0; // Angle for camera rotation
@@ -47,7 +59,7 @@ export class HolidaysApp {
                 mesh.material instanceof THREE.MeshStandardMaterial ||
                 mesh.material instanceof THREE.MeshBasicMaterial
               ) {
-                (mesh.material as THREE.MeshPhongMaterial | THREE.MeshStandardMaterial | THREE.MeshBasicMaterial).color.set(0xffd700); // Gold color
+                (mesh.material as THREE.MeshPhongMaterial | THREE.MeshStandardMaterial | THREE.MeshBasicMaterial).color.set(COLORS.GOLD); // Gold color
               }
             } else {
               if (
@@ -55,7 +67,7 @@ export class HolidaysApp {
                 mesh.material instanceof THREE.MeshStandardMaterial ||
                 mesh.material instanceof THREE.MeshBasicMaterial
               ) {
-                (mesh.material as THREE.MeshPhongMaterial | THREE.MeshStandardMaterial | THREE.MeshBasicMaterial).color.set(0xffffff); // White color
+                (mesh.material as THREE.MeshPhongMaterial | THREE.MeshStandardMaterial | THREE.MeshBasicMaterial).color.set(COLORS.WHITE); // White color
               }
             }
           }
@@ -84,31 +96,42 @@ export class HolidaysApp {
     this.plane.receiveShadow = true;
     this.scene.add(this.plane);
 
-    // Point Light
-    this.pointLight = new THREE.PointLight(0xffffff, 1, 0);
-    this.pointLight.position.set(0, 2, 0);
-    this.pointLight.castShadow = true;
-    this.scene.add(this.pointLight);
+    const _lights = [
+      { color: COLORS.WHITE, x: 0.75, y: 2, z: -0.75 },
+      // { color: COLORS.RED, x: -0.75, y: 2, z: -0.75 },
+      { color: COLORS.WHITE, x: 1.1, y: -0.5, z: 1.1 },
+      // { color: COLORS.WHITE, x: -1.1, y: 1.5, z: -1.1 },
+      // { color: COLORS.WHITE, x: -0.75, y: 0.5, z: 1.5 },
+    ];
+
+    _lights.forEach(pos => {
+      const pointLight = new THREE.PointLight(pos.color, 1, 0);
+      pointLight.position.set(pos.x, pos.y, pos.z);
+      pointLight.castShadow = true;
+      this.scene.add(pointLight);
+      this.lights.push(pointLight);
+    });
 
     // Ambient Light (for overall scene illumination)
-    this.ambientLight = new THREE.AmbientLight(0xffffff, 1); // Soft white light
-    this.scene.add(this.ambientLight);
+    // this.ambientLight = new THREE.AmbientLight(0xffffff, 0.125); // Soft white light
+    // this.scene.add(this.ambientLight);
 
     // Set initial camera position
     this.camera.position.set(5, 5, 5);
     this.camera.lookAt(this.scene.position);
 
     // Start the animation loop
+    this.addLightHelpers();
     this.animate();
   }
 
   private _animate = (): void => {
-    requestAnimationFrame(this.animate);
+    requestAnimationFrame(this._animate);
 
     // Rotate the camera around the present
     this.cameraAngle += 0.005;
     this.camera.position.x = 5 * Math.sin(this.cameraAngle);
-    // this.camera.position.z = 5 * Math.cos(this.cameraAngle);
+    this.camera.position.z = 5 * Math.cos(this.cameraAngle);
     this.camera.lookAt(this.scene.position);
 
     this.renderer.render(this.scene, this.camera);
@@ -118,5 +141,12 @@ export class HolidaysApp {
   }
   public set animate(value) {
     this._animate = value;
+  }
+
+  private addLightHelpers(): void {
+    this.lights.forEach(light => {
+      const helper = new THREE.PointLightHelper(light, 0.1, 0x00ffff);
+      this.scene.add(helper);
+    });
   }
 }
