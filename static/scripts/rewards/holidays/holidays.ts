@@ -35,21 +35,17 @@ export class HolidaysApp {
   }
 
   private init(): void {
-    // Loaders
     const mtlLoader = new MTLLoader();
     const objLoader = new OBJLoader();
     const PATH = `/scripts/rewards/holidays/gift-model/gift`;
-    // Replace 'path/to/material.mtl' with the path to your actual .mtl file
     mtlLoader.load(PATH.concat(`.mtl`), materials => {
       materials.preload();
-      // Update materials to render both sides
       for (const materialName in materials.materials) {
         const material = materials.materials[materialName];
         material.side = THREE.DoubleSide; // Render both sides of the material
       }
       objLoader.setMaterials(materials);
 
-      // Replace 'path/to/model.obj' with the path to your actual .obj file
       objLoader.load(PATH.concat(`.obj`), (object): void => {
         object.traverse(child => {
           if ((child as THREE.Mesh).isMesh) {
@@ -103,15 +99,15 @@ export class HolidaysApp {
     this.scene.add(this.plane);
 
     const _lights = [
-      { color: COLORS.WHITE, x: 0.75, y: 2, z: -0.75 },
-      // { color: COLORS.RED, x: -0.75, y: 2, z: -0.75 },
-      { color: COLORS.WHITE, x: 1.1, y: -0.5, z: 1.1 },
-      // { color: COLORS.WHITE, x: -1.1, y: 1.5, z: -1.1 },
-      // { color: COLORS.WHITE, x: -0.75, y: 0.5, z: 1.5 },
+      { color: COLORS.GOLD, x: 0.75, y: 2, z: -0.75, intensity: 0.25 },
+      { color: COLORS.WHITE, x: -0.75, y: 2, z: -0.75, intensity: 2 },
+      { color: COLORS.GOLD, x: 1.1, y: -0.5, z: 1.1, intensity: 0.25 },
+      // { color: COLORS.BLUE, x: -1.1, y: 1.5, z: -1.1, intensity: 0.25 },
+      { color: COLORS.GOLD, x: -0.75, y: 0.5, z: 1.5, intensity: 0.25 },
     ];
 
     _lights.forEach(light => {
-      const pointLight = new THREE.PointLight(light.color, 1, 0);
+      const pointLight = new THREE.PointLight(light.color, light.intensity, 0);
       pointLight.position.set(light.x, light.y, light.z);
       pointLight.castShadow = true;
       this.scene.add(pointLight);
@@ -122,46 +118,26 @@ export class HolidaysApp {
       this.scene.add(lightVisual);
       this.lightVisuals.push(lightVisual);
       this.initDragControls();
-      // // Set up the DragControls
-      //   this.dragControls = new DragControls(this.lightVisuals, this.camera, this.renderer.domElement);
-
-      //   // Add event listener to update light position when its visualizer is dragged
-      //   this.dragControls.addEventListener("drag", event => {
-      //     const selectedObject = event.object;
-      //     const light = this.lights[this.lightVisuals.indexOf(selectedObject)];
-      //     light.position.copy(selectedObject.position);
-      //   });
     });
 
-    // Ambient Light (for overall scene illumination)
-    // this.ambientLight = new THREE.AmbientLight(0xffffff, 0.125); // Soft white light
-    // this.scene.add(this.ambientLight);
-
-    // Set initial camera position
     this.camera.position.set(5, 5, 5);
     this.camera.lookAt(this.scene.position);
 
-    // Start the animation loop
     this.addLightHelpers();
     this.animate();
-    // this.initLightsAndControls();
     this.initOrbitControls();
   }
   private initDragControls(): void {
-    // Set up the DragControls
     this.dragControls = new DragControls(this.lightVisuals, this.camera, this.renderer.domElement);
 
-    // Disable orbit controls when dragging
     this.dragControls.addEventListener("dragstart", event => {
       this.orbitControls.enabled = false;
     });
 
-    // Re-enable orbit controls after dragging
     this.dragControls.addEventListener("dragend", event => {
       this.orbitControls.enabled = true;
     });
 
-    // Add event listener to update light position when its visualizer is dragged
     this.dragControls.addEventListener("drag", event => {
       const selectedObject = event.object;
       const light = this.lights[this.lightVisuals.indexOf(selectedObject)];
@@ -169,17 +145,13 @@ export class HolidaysApp {
     });
   }
   private initOrbitControls(): void {
-    // Assuming `this.present` is your Christmas present object
-    // and it's already added to the scene
     this.orbitControls = new OrbitControls(this.camera, this.renderer.domElement);
-    this.orbitControls.target.copy(this.present.position);
     this.orbitControls.update();
   }
 
   private _animate = (): void => {
     requestAnimationFrame(this._animate);
 
-    // Rotate the camera around the present
     if (this.rotating) {
       this.cameraAngle += 0.005;
       this.camera.position.x = 5 * Math.sin(this.cameraAngle);
