@@ -1,17 +1,14 @@
 import { BigNumber, ethers } from "ethers";
-import { AppState, app } from "../app-state";
+import { app } from "../app-state";
+import { SponsorWallet } from "../web3/erc20-permit";
 import { Erc721Permit } from "./tx-type";
 
 export function shortenAddress(address: string): string {
   return `${address.slice(0, 10)}...${address.slice(-8)}`;
 }
 
-export function insertErc20PermitTableData(
-  app: AppState,
-  table: Element,
-  treasury: { balance: BigNumber; allowance: BigNumber; decimals: number; symbol: string }
-): Element {
-  const permit = app.permit;
+export function insertErc20PermitTableData(sponsor: SponsorWallet): Element {
+  const permit = app.reward;
   const requestedAmountElement = document.getElementById("rewardAmount") as Element;
   renderToFields(permit.transferDetails.to, app.currentExplorerUrl);
   renderTokenFields(permit.permit.permitted.token, app.currentExplorerUrl);
@@ -24,14 +21,14 @@ export function insertErc20PermitTableData(
         return deadline.lte(Number.MAX_SAFE_INTEGER.toString()) ? new Date(deadline.toNumber()).toLocaleString() : undefined;
       })(),
     },
-    { name: "Balance", value: treasury.balance.gte(0) ? `${ethers.utils.formatUnits(treasury.balance, treasury.decimals)} ${treasury.symbol}` : "N/A" },
-    { name: "Allowance", value: treasury.allowance.gte(0) ? `${ethers.utils.formatUnits(treasury.allowance, treasury.decimals)} ${treasury.symbol}` : "N/A" },
+    { name: "Balance", value: sponsor.balance.gte(0) ? `${ethers.utils.formatUnits(sponsor.balance, sponsor.decimals)} ${sponsor.symbol}` : "N/A" },
+    { name: "Allowance", value: sponsor.allowance.gte(0) ? `${ethers.utils.formatUnits(sponsor.allowance, sponsor.decimals)} ${sponsor.symbol}` : "N/A" },
   ]);
-  table.setAttribute(`data-claim-rendered`, "true");
+  app.state = "claim rendered";
   return requestedAmountElement;
 }
 
-export function insertErc721PermitTableData(permit: Erc721Permit, table: Element): Element {
+export function insertErc721PermitTableData(permit: Erc721Permit): Element {
   const requestedAmountElement = document.getElementById("rewardAmount") as Element;
   renderToFields(permit.request.beneficiary, app.currentExplorerUrl);
   renderTokenFields(permit.nftAddress, app.currentExplorerUrl);
@@ -63,7 +60,7 @@ export function insertErc721PermitTableData(permit: Erc721Permit, table: Element
     },
     { name: "Contribution Type", value: GITHUB_CONTRIBUTION_TYPE.split(",").join(", ") },
   ]);
-  table.setAttribute(`data-claim-rendered`, "true");
+  app.state = "claim rendered";
   return requestedAmountElement;
 }
 

@@ -1,7 +1,8 @@
 import { JsonRpcProvider } from "@ethersproject/providers";
 import { MaxUint256 } from "@uniswap/permit2-sdk";
 import { BigNumberish, Contract, utils } from "ethers";
-import { getErc20Contract } from "../rpc-optimization/getErc20Contract";
+import { app } from "../app-state";
+import { getErc20Contract } from "../web3/get-erc20-contract";
 
 export const tokens = [
   {
@@ -15,7 +16,6 @@ export const tokens = [
 ];
 
 export async function renderTokenSymbol({
-  table,
   requestedAmountElement,
   tokenAddress,
   ownerAddress,
@@ -23,7 +23,6 @@ export async function renderTokenSymbol({
   explorerUrl,
   provider,
 }: {
-  table: Element;
   requestedAmountElement: Element;
   tokenAddress: string;
   ownerAddress: string;
@@ -40,7 +39,7 @@ export async function renderTokenSymbol({
     decimals = await contract.decimals();
   }
 
-  table.setAttribute(`data-contract-loaded`, "true");
+  app.state = "contract loaded";
   requestedAmountElement.innerHTML = `<a target="_blank" rel="noopener noreferrer" href="${explorerUrl}/token/${tokenAddress}?a=${ownerAddress}">${utils.formatUnits(
     amount,
     decimals
@@ -48,13 +47,11 @@ export async function renderTokenSymbol({
 }
 
 export async function renderNftSymbol({
-  table,
   requestedAmountElement,
   tokenAddress,
   explorerUrl,
   provider,
 }: {
-  table: Element;
   requestedAmountElement: Element;
   tokenAddress: string;
   explorerUrl: string;
@@ -62,6 +59,6 @@ export async function renderNftSymbol({
 }): Promise<void> {
   const contract = await getErc20Contract(tokenAddress, provider);
   const symbol = await contract.symbol();
-  table.setAttribute(`data-contract-loaded`, "true");
+  app.state = "contract loaded";
   requestedAmountElement.innerHTML = `<a target="_blank" rel="noopener noreferrer" href="${explorerUrl}/token/${tokenAddress}">1 ${symbol}</a>`;
 }

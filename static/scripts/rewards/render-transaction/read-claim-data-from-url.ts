@@ -1,47 +1,21 @@
-import { Type } from "@sinclair/typebox";
-import { Value } from "@sinclair/typebox/value";
-import { AppState, app } from "../app-state";
-import { useFastestRpc } from "../rpc-optimization/get-optimal-provider";
-import { connectWallet } from "../web3/connect-wallet";
-import { verifyCurrentNetwork } from "../web3/verify-current-network";
+import { app } from "../app-state";
 import { claimRewardsPagination } from "./claim-rewards-pagination";
 import { renderTransaction } from "./render-transaction";
-import { setClaimMessage } from "./set-claim-message";
-import { claimTxT } from "./tx-type";
 
-export const table = document.getElementsByTagName(`table`)[0];
-const urlParams = new URLSearchParams(window.location.search);
-const base64encodedTxData = urlParams.get("claim");
-
-export async function readClaimDataFromUrl(app: AppState) {
-  if (!base64encodedTxData) {
-    // No claim data found
-    setClaimMessage({ type: "Notice", message: `No claim data found.` });
-    table.setAttribute(`data-claim`, "error");
-    return;
-  }
-
-  app.claims = decodeClaimData(base64encodedTxData);
-  app.provider = await useFastestRpc(app);
-  const networkId = app.permit?.networkId || app.networkId;
-  app.signer = await connectWallet(networkId).catch(console.error);
+export async function readClaimDataFromUrl() {
   displayRewardDetails();
   displayRewardPagination();
-
-  renderTransaction(true)
-    .then(() => verifyCurrentNetwork(networkId))
-    .catch(console.error);
+  renderTransaction({ nextPermit: true }).catch(console.error);
 }
 
-function decodeClaimData(base64encodedTxData: string) {
-  try {
-    return Value.Decode(Type.Array(claimTxT), JSON.parse(atob(base64encodedTxData)));
-  } catch (error) {
-    console.error(error);
-    setClaimMessage({ type: "Error", message: `Invalid claim data passed in URL` });
-    table.setAttribute(`data-claim`, "error");
-    throw error;
-  }
+function displayRewardDetails() {
+  let isDetailsVisible = false;
+  app.state = isDetailsVisible ? "details visible" : "details not visible";
+  const additionalDetails = document.getElementById(`additionalDetails`) as HTMLElement;
+  additionalDetails.addEventListener("click", () => {
+    isDetailsVisible = !isDetailsVisible;
+    app.state = isDetailsVisible ? "details visible" : "details not visible";
+  });
 }
 
 function displayRewardPagination() {
@@ -53,14 +27,4 @@ function displayRewardPagination() {
       claimRewardsPagination(rewardsCount);
     }
   }
-}
-
-function displayRewardDetails() {
-  let isDetailsVisible = false;
-  table.setAttribute(`data-details-visible`, isDetailsVisible.toString());
-  const additionalDetails = document.getElementById(`additionalDetails`) as HTMLElement;
-  additionalDetails.addEventListener("click", () => {
-    isDetailsVisible = !isDetailsVisible;
-    table.setAttribute(`data-details-visible`, isDetailsVisible.toString());
-  });
 }

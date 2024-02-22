@@ -123,37 +123,37 @@ table tr#additional-details-border > * {
   padding: 0;
   margin: 0;
 }
-table[data-claim-rendered] {
+table[data-state="claim rendered"] {
   /* border: 1px solid #80808020; */
   /* border-right: 0; */
   /* border-left: 0; */
 }
-table[data-claim-rendered] #controls {
+table[data-state="claim rendered"] #controls {
   display: flex;
 }
-table[data-claim-rendered] button {
+table[data-state="claim rendered"] button {
   opacity: 0.5;
 }
-table[data-claim-rendered] button:disabled {
+table[data-state="claim rendered"] button:disabled {
   opacity: 0.5;
   pointer-events: none;
 }
-table[data-claim-rendered] button:hover {
+table[data-state="claim rendered"] button:hover {
   background-color: #80808020;
   opacity: 1;
 }
-table[data-claim-rendered] button > div {
+table[data-state="claim rendered"] button > div {
   display: none;
 }
-table[data-claim-rendered] button:disabled > svg.claim-icon {
+table[data-state="claim rendered"] button:disabled > svg.claim-icon {
   display: none;
 }
-table[data-claim-rendered] button:hover > div {
+table[data-state="claim rendered"] button:hover > div {
   display: unset;
   color: #fff;
 }
 
-table[data-claim-rendered] button:hover > svg {
+table[data-state="claim rendered"] button:hover > svg {
   display: none !important;
 }
 
@@ -161,33 +161,33 @@ table[data-claim-rendered] button:hover > svg {
   display: block;
 }
 
-table[data-claim-rendered] button.hide-cl > svg.claim-loader {
+table[data-state="claim rendered"] button.hide-cl > svg.claim-loader {
   display: none;
 }
-table[data-claim-rendered] button.show-cl > svg.claim-icon {
+table[data-state="claim rendered"] button.show-cl > svg.claim-icon {
   display: none;
 }
 
-table[data-claim-rendered] button.show-cl > svg.claim-loader {
+table[data-state="claim rendered"] button.show-cl > svg.claim-loader {
   display: unset;
 }
-table[data-claim-rendered] button.hide-cl > svg.claim-icon {
+table[data-state="claim rendered"] button.hide-cl > svg.claim-icon {
   display: unset;
 }
 
-table[data-claim-rendered] button#additionalDetails {
+table[data-state="claim rendered"] button#additionalDetails {
   width: 100%;
   color: #fff;
   /* opacity: 0.25; */
 }
-table[data-claim-rendered] button#additionalDetails:hover {
+table[data-state="claim rendered"] button#additionalDetails:hover {
   /* opacity: 1; */
 }
-table[data-claim-rendered] tr {
+table[data-state="claim rendered"] tr {
   background-color: #80808000;
   transition: 125ms ease-in-out opacity;
 }
-table[data-claim-rendered] tr#additional-details-border {
+table[data-state="claim rendered"] tr#additional-details-border {
   /* background-color: #80808010; */
   background-color: var(--background-color-light);
   /* -webkit-backdrop-filter: blur(4px); */
@@ -196,19 +196,19 @@ table[data-claim-rendered] tr#additional-details-border {
   /* border-left: 0; */
   /* border-right: 0; */
 }
-table[data-claim-rendered] tr#additional-details-border + tr > * {
+table[data-state="claim rendered"] tr#additional-details-border + tr > * {
   padding-top: 24px;
 }
 table #additionalDetailsTable tr,
-table[data-details-visible="false"] #additionalDetailsTable tr {
+table[data-state="details not visible"] #additionalDetailsTable tr {
   opacity: 0;
   pointer-events: none;
   display: none;
 }
-table[data-details-visible="false"] {
+table[data-state="details not visible"] {
   /* border-bottom: 1px solid #80808000; */
 }
-table[data-details-visible="true"] #additionalDetailsTable tr {
+table[data-state="details visible"] #additionalDetailsTable tr {
   opacity: 1;
   pointer-events: unset;
   display: table-row;
@@ -216,10 +216,10 @@ table[data-details-visible="true"] #additionalDetailsTable tr {
   /* -webkit-backdrop-filter: blur(4px); */
   /* backdrop-filter: blur(4px); */
 }
-table[data-details-visible="true"] {
+table[data-state="details visible"] {
   /* border-bottom: 1px solid #80808020; */
 }
-table[data-contract-loaded] #Token {
+table[data-state="contract loaded"] #Token {
   display: none;
 }
 #rewardAmount a {
@@ -234,20 +234,20 @@ table[data-contract-loaded] #Token {
 #previousTx {
   fill: #fff;
 }
-table[data-details-visible="false"] #rewardToken .full,
-table[data-details-visible="true"] #rewardToken .short {
+table[data-state="details not visible"] #rewardToken .full,
+table[data-state="details visible"] #rewardToken .short {
   display: none;
 }
-table[data-details-visible="false"] #rewardToken .short,
-table[data-details-visible="true"] #rewardToken .full {
+table[data-state="details not visible"] #rewardToken .short,
+table[data-state="details visible"] #rewardToken .full {
   display: initial;
 }
-table[data-details-visible="false"] #rewardRecipient .full,
-table[data-details-visible="true"] #rewardRecipient .short {
+table[data-state="details not visible"] #rewardRecipient .full,
+table[data-state="details visible"] #rewardRecipient .short {
   display: none;
 }
-table[data-details-visible="false"] #rewardRecipient .short,
-table[data-details-visible="true"] #rewardRecipient .full {
+table[data-state="details not visible"] #rewardRecipient .short,
+table[data-state="details visible"] #rewardRecipient .full {
   display: initial;
 }
 #To > td,
@@ -260,16 +260,16 @@ table thead {
 table tbody {
   display: none;
 }
-table[data-claim="error"] thead {
+table[data-state="claim error"] thead {
   display: table-row-group;
 }
-table[data-claim="ok"] thead {
+table[data-state="claim ok"] thead {
   display: none;
 }
-table[data-claim="error"] tbody {
+table[data-state="claim error"] tbody {
   display: none;
 }
-table[data-claim="ok"] tbody {
+table[data-state="claim ok"] tbody {
   display: table-row-group;
 }
 
@@ -296,17 +296,17 @@ table[data-claim="ok"] tbody {
 #additionalDetails svg {
   /* display: none; */
 }
-table[data-details-visible="true"] #additionalDetails svg.opener {
+table[data-state="details visible"] #additionalDetails svg.opener {
   display: none;
 }
-table[data-details-visible="false"] #additionalDetails svg.opener {
+table[data-state="details not visible"] #additionalDetails svg.opener {
   display: unset;
 }
 
-table[data-details-visible="true"] #additionalDetails svg.closer {
+table[data-state="details visible"] #additionalDetails svg.closer {
   display: unset;
 }
-table[data-details-visible="false"] #additionalDetails svg.closer {
+table[data-state="details not visible"] #additionalDetails svg.closer {
   display: none;
 }
 

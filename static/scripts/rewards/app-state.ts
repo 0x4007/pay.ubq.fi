@@ -1,61 +1,117 @@
-import { JsonRpcProvider } from "@ethersproject/providers";
+import { JsonRpcProvider, JsonRpcSigner, Web3Provider } from "@ethersproject/providers";
+import { Type } from "@sinclair/typebox";
+import { Value } from "@sinclair/typebox/value";
+import { ethers } from "ethers";
 import { networkExplorers } from "./constants";
-import { RewardPermit } from "./render-transaction/tx-type";
+import { setClaimMessage } from "./render-transaction/set-claim-message";
+import { RewardPermit as Reward, claimTxT } from "./render-transaction/tx-type";
+import { useFastestRpc } from "./rpc-optimization/get-optimal-provider";
+import { toaster } from "./toaster";
+import { verifyCurrentNetwork } from "./web3/verify-current-network";
 
-export class AppState {
-  public claims: RewardPermit[] = [];
-  private _provider!: JsonRpcProvider;
-  private _currentIndex = 0;
-  private _signer;
+type TableStates =
+  | "initializing"
+  | "claim rendered"
+  | "details not visible"
+  | "details visible"
+  | "contract loaded"
+  | "no claim data"
+  | "claim error"
+  | "claim ok";
 
-  get signer() {
-    return this._signer;
+export class App {
+  public table = document.getElementsByTagName(`table`)[0]; // main claims table
+  public wallet: Web3Provider | null = null; // user local wallet
+  public signer: JsonRpcSigner | null = null; // user local wallet ready to sign transactions
+  public rpc: Promise<JsonRpcProvider>; // RPC provider (doesn't have to be from user's wallet)
+  public claims: Reward[] = []; // list of permits
+  private _claimIndex = 0; // current permit index
+
+  private _tableState: TableStates = "initializing"; // table state
+
+  set state(value: TableStates) {
+    this.table.setAttribute(`data-state`, value);
+    this._tableState = value;
   }
 
-  set signer(value) {
-    this._signer = value;
+  get state(): TableStates {
+    return this._tableState;
   }
 
-  get networkId(): number | null {
-    return this.permit?.networkId || null;
+  constructor() {
+    // parse claim data from URL
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const base64encodedTxData = urlParams.get("claim");
+
+    if (!base64encodedTxData) {
+      setClaimMessage({ type: "Notice", message: `No claim data found.` });
+      this.state = "no claim data";
+      throw new Error("No claim data found.");
+    } else {
+      this.claims = decodeClaimData(base64encodedTxData);
+    }
+
+    // init web3
+
+    if (window.ethereum) {
+      this.wallet = new ethers.providers.Web3Provider(window.ethereum);
+      // this.rpc = this.wallet; // Set the default RPC provider to be the wallet
+      this.signer = this.wallet.getSigner();
+      verifyCurrentNetwork(this.wallet, this.networkId).catch(console.error);
+    } else {
+      toaster.create("info", "No wallet found.");
+      // this.table.setAttribute(`data-claim`, "error");
+      // toaster.create("info", "Please use a web3 enabled browser to collect this reward.");
+      // toaster.create("info", "Please connect your wallet to collect this reward.");
+      // throw new Error("No wallet found.");
+    }
+    this.rpc = useFastestRpc(this);
   }
 
-  get provider(): JsonRpcProvider {
-    return this._provider;
-  }
-
-  set provider(value: JsonRpcProvider) {
-    this._provider = value;
+  get networkId(): number {
+    return this.reward.networkId;
   }
 
   get permitIndex(): number {
-    return this._currentIndex;
+    return this._claimIndex;
   }
 
-  get permit(): RewardPermit {
-    return this.permitIndex < this.claims.length ? this.claims[this.permitIndex] : this.claims[0];
-  }
-
-  get permitNetworkId() {
-    return this.permit?.networkId;
+  get reward(): Reward {
+    if (this.permitIndex < this.claims.length) {
+      return this.claims[this.permitIndex];
+    } else {
+      return this.claims[0];
+    }
   }
 
   get currentExplorerUrl(): string {
-    if (!this.permit) {
+    if (!this.reward) {
       return "https://etherscan.io";
     }
-    return networkExplorers[this.permit.networkId] || "https://etherscan.io";
+    return networkExplorers[this.reward.networkId] || "https://etherscan.io";
   }
 
-  nextPermit(): RewardPermit | null {
-    this._currentIndex = Math.min(this.claims.length - 1, this._currentIndex + 1);
-    return this.permit;
+  nextReward(): Reward | null {
+    this._claimIndex = Math.min(this.claims.length - 1, this._claimIndex + 1);
+    return this.reward;
   }
 
-  previousPermit(): RewardPermit | null {
-    this._currentIndex = Math.max(0, this._currentIndex - 1);
-    return this.permit;
+  previousReward(): Reward | null {
+    this._claimIndex = Math.max(0, this._claimIndex - 1);
+    return this.reward;
   }
 }
 
-export const app = new AppState();
+export const app = new App();
+
+function decodeClaimData(base64encodedTxData: string) {
+  try {
+    return Value.Decode(Type.Array(claimTxT), JSON.parse(atob(base64encodedTxData)));
+  } catch (error) {
+    console.error(error);
+    setClaimMessage({ type: "Error", message: `Invalid claim data passed in URL` });
+    app.state = "no claim data";
+    throw error;
+  }
+}
