@@ -1,13 +1,13 @@
 import { JsonRpcProvider } from "@ethersproject/providers";
-import { AppState } from "../app-state";
+import { App } from "../app-state";
 import { getFastestRpcProvider } from "./get-fastest-rpc-provider";
 import { testRpcPerformance } from "./test-rpc-performance";
 
 let isTestStarted = false;
 let isTestCompleted = false;
 
-export async function useFastestRpc(app: AppState): Promise<JsonRpcProvider> {
-  const networkId = app.permitNetworkId;
+export async function useFastestRpc(app: App): Promise<JsonRpcProvider> {
+  const networkId = app.networkId;
 
   if (!networkId) throw new Error("Network ID not found");
 

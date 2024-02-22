@@ -54,11 +54,9 @@ export async function testRpcPerformance(networkId: number) {
     const endTime = performance.now();
     const latency = endTime - startTime;
     if (verifyBlock(data)) {
-      // Save the latency in localStorage
-      latencies[`${baseURL}_${networkId}`] = latency;
+      latencies[`${networkId}_${baseURL}`] = latency;
       localStorage.setItem("rpcLatencies", JSON.stringify(latencies));
     } else {
-      // Throw an error to indicate an invalid block data
       throw new Error(`Invalid block data from ${baseURL}`);
     }
   });

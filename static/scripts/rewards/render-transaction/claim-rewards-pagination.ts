@@ -1,6 +1,5 @@
 import { app } from "../app-state";
 import { claimButton } from "../toaster";
-import { table } from "./read-claim-data-from-url";
 import { renderTransaction } from "./render-transaction";
 import { setPagination } from "./set-pagination";
 import { removeAllEventListeners } from "./utils";
@@ -12,10 +11,10 @@ export function claimRewardsPagination(rewardsCount: HTMLElement) {
   if (nextTxButton) {
     nextTxButton.addEventListener("click", () => {
       claimButton.element = removeAllEventListeners(claimButton.element) as HTMLButtonElement;
-      app.nextPermit();
+      app.nextReward();
       rewardsCount.innerHTML = `${app.permitIndex + 1}/${app.claims.length} reward`;
-      table.setAttribute(`data-claim`, "error");
-      renderTransaction(true).catch(console.error);
+      app.table.setAttribute(`data-claim`, "error");
+      renderTransaction({ nextPermit: true }).catch(console.error);
     });
   }
 
@@ -23,10 +22,10 @@ export function claimRewardsPagination(rewardsCount: HTMLElement) {
   if (prevTxButton) {
     prevTxButton.addEventListener("click", () => {
       claimButton.element = removeAllEventListeners(claimButton.element) as HTMLButtonElement;
-      app.previousPermit();
+      app.previousReward();
       rewardsCount.innerHTML = `${app.permitIndex + 1}/${app.claims.length} reward`;
-      table.setAttribute(`data-claim`, "error");
-      renderTransaction(true).catch(console.error);
+      app.table.setAttribute(`data-claim`, "error");
+      renderTransaction({ nextPermit: true }).catch(console.error);
     });
   }
 
