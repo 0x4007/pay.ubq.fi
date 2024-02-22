@@ -1,8 +1,8 @@
 import { JsonRpcProvider } from "@ethersproject/providers";
 import { MaxUint256 } from "@uniswap/permit2-sdk";
-import { BigNumberish, Contract, utils } from "ethers";
+import { BigNumberish, utils } from "ethers";
 import { app } from "../app-state";
-import { getErc20Contract } from "../web3/get-erc20-contract";
+import { GetErc20ContractWrapper } from "../web3/get-erc20-contract";
 
 export const tokens = [
   {
@@ -34,7 +34,7 @@ export async function renderTokenSymbol({
   let decimals = tokenAddress === tokens[0].address ? 18 : tokenAddress === tokens[1].address ? 18 : MaxUint256;
 
   if (!symbol || decimals === MaxUint256) {
-    const contract: Contract = await getErc20Contract(tokenAddress, provider);
+    const contract = new GetErc20ContractWrapper(tokenAddress, provider).getContract();
     symbol = await contract.symbol();
     decimals = await contract.decimals();
   }
@@ -57,7 +57,7 @@ export async function renderNftSymbol({
   explorerUrl: string;
   provider: JsonRpcProvider;
 }): Promise<void> {
-  const contract = await getErc20Contract(tokenAddress, provider);
+  const contract = new GetErc20ContractWrapper(tokenAddress, provider).getContract();
   const symbol = await contract.symbol();
   app.table.setAttribute("data-contract-loaded", "true");
   requestedAmountElement.innerHTML = `<a target="_blank" rel="noopener noreferrer" href="${explorerUrl}/token/${tokenAddress}">1 ${symbol}</a>`;

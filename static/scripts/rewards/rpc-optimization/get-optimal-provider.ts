@@ -6,7 +6,7 @@ import { testRpcPerformance } from "./test-rpc-performance";
 let isTestStarted = false;
 let isTestCompleted = false;
 
-export async function useFastestRpc(app: App): Promise<JsonRpcProvider> {
+export async function useFastestRpc(app: App): Promise<[JsonRpcProvider, string]> {
   const networkId = app.networkId;
 
   if (!networkId) throw new Error("Network ID not found");
@@ -17,5 +17,6 @@ export async function useFastestRpc(app: App): Promise<JsonRpcProvider> {
     isTestCompleted = true;
   }
 
-  return getFastestRpcProvider(networkId);
+  const optimalRPC = getFastestRpcProvider(networkId);
+  return [optimalRPC, optimalRPC.connection.url];
 }

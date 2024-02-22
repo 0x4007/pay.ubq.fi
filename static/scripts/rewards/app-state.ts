@@ -23,7 +23,7 @@ export class App {
   public table = document.getElementsByTagName(`table`)[0]; // main claims table
   public wallet: Web3Provider | null = null; // user local wallet
   public signer: JsonRpcSigner | null = null; // user local wallet ready to sign transactions
-  public rpc: Promise<JsonRpcProvider>; // RPC provider (doesn't have to be from user's wallet)
+  public rpc: Promise<[JsonRpcProvider, string]>; // RPC provider and its URL
   public claims: Reward[] = []; // list of permits
   private _claimIndex = 0; // current permit index
 

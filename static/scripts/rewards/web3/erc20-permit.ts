@@ -2,12 +2,12 @@ import { JsonRpcSigner, TransactionResponse } from "@ethersproject/providers";
 import { BigNumber, BigNumberish, Contract, ethers } from "ethers";
 import { permit2Abi } from "../abis";
 import { app } from "../app-state";
-import { permit2Address } from "../constants";
+import { networkRpcs, permit2Address } from "../constants";
 import invalidateButton from "../invalidate-component";
 import { tokens } from "../render-transaction/render-token-symbol";
 import { renderTransaction } from "../render-transaction/render-transaction";
 import { MetaMaskError, claimButton, errorToast, showLoader, toaster } from "../toaster";
-import { getErc20Contract } from "./get-erc20-contract";
+import { GetErc20ContractWrapper } from "./get-erc20-contract";
 
 export interface SponsorWallet {
   balance: BigNumber;
@@ -15,11 +15,16 @@ export interface SponsorWallet {
   decimals: number;
   symbol: string;
 }
-export async function fetchSponsorWallet(): Promise<SponsorWallet> {
+let attemptsRemaining = networkRpcs[app.networkId].length;
+
+export async function fetchSponsorWallet() {
   const reward = app.reward;
+  const tokenAddress = reward.permit.permitted.token.toLowerCase();
+  const tokenContractWrapper = new GetErc20ContractWrapper(tokenAddress, await app.rpc);
   try {
-    const tokenAddress = reward.permit.permitted.token.toLowerCase();
-    const tokenContract = await getErc20Contract(tokenAddress, await app.rpc);
+    const tokenContract = tokenContractWrapper.getContract();
+
+    // const tokenContract = await getErc20ContractWrapper(tokenAddress, await app.rpc);
 
     if (tokenAddress === tokens[0].address || tokenAddress === tokens[1].address) {
       const decimals = tokenAddress === tokens[0].address ? 18 : tokenAddress === tokens[1].address ? 18 : -1;
@@ -41,7 +46,21 @@ export async function fetchSponsorWallet(): Promise<SponsorWallet> {
       return { balance, allowance, decimals, symbol };
     }
   } catch (error: unknown) {
-    return { balance: BigNumber.from(-1), allowance: BigNumber.from(-1), decimals: -1, symbol: "" };
+    const badRpcUrl = tokenContractWrapper.getProviderUrl();
+    const networkRpcsForCurrentNetwork = networkRpcs[app.networkId];
+    const badRpcIndex = networkRpcsForCurrentNetwork.indexOf(badRpcUrl);
+
+    if (badRpcIndex !== -1) {
+      networkRpcsForCurrentNetwork.splice(badRpcIndex, 1);
+    }
+
+    await tokenContractWrapper.switchProvider(app);
+
+    if (attemptsRemaining > 0) {
+      console.warn({ attemptsRemaining });
+      attemptsRemaining--;
+      return await fetchSponsorWallet();
+    }
   }
 }
 
@@ -264,7 +283,8 @@ export async function generateInvalidatePermitAdminControl() {
 
 //mimics https://github.com/Uniswap/permit2/blob/a7cd186948b44f9096a35035226d7d70b9e24eaf/src/SignatureTransfer.sol#L150
 export async function isNonceClaimed(): Promise<boolean> {
-  const permit2Contract = new ethers.Contract(permit2Address, permit2Abi, await app.rpc);
+  const [provider, _url] = await app.rpc;
+  const permit2Contract = new ethers.Contract(permit2Address, permit2Abi, provider);
 
   const { wordPos, bitPos } = nonceBitmap(BigNumber.from(app.reward.permit.nonce));
 
