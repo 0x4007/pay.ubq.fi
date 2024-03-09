@@ -30,7 +30,7 @@ export async function insertErc20PermitTableData(
     { name: "Allowance", value: "Loading..." },
   ]);
 
-  renderTokenSymbol({
+  const params = {
     requestedAmountElement,
     tokenAddress: permit.permit.permitted.token,
     ownerAddress: permit.owner,
@@ -38,7 +38,9 @@ export async function insertErc20PermitTableData(
     explorerUrl: networkExplorers[permit.networkId],
     symbol,
     decimals,
-  });
+  };
+
+  renderTokenSymbol(params);
 
   // Optimistically rendered what we can so consider it loaded
   table.setAttribute(`data-claim`, "ok");

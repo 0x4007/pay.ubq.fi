@@ -1,25 +1,33 @@
+import { JsonRpcProvider } from "@ethersproject/providers";
 import { BigNumber, BigNumberish, ethers } from "ethers";
 import { permit2Abi } from "../abis";
 import { permit2Address } from "../constants";
 import { getErc20Contract, getOptimalProvider } from "../helpers";
-import { Erc20Permit } from "../render-transaction/tx-type";
-import { toaster, resetClaimButton, errorToast, loadingClaimButton, claimButton } from "../toaster";
-import { renderTransaction } from "../render-transaction/render-transaction";
-import { connectWallet } from "./wallet";
 import invalidateButton from "../invalidate-component";
-import { JsonRpcProvider } from "@ethersproject/providers";
-import { tokens } from "../render-transaction/render-token-symbol";
 import { insertErc20PermitTableData } from "../render-transaction/insert-table-data";
+import { tokens } from "../render-transaction/render-token-symbol";
+import { renderTransaction } from "../render-transaction/render-transaction";
+import { Erc20Permit } from "../render-transaction/tx-type";
+import { claimButton, errorToast, loadingClaimButton, resetClaimButton, toaster } from "../toaster";
+import { connectWallet } from "./wallet";
 
 export async function processERC20(tokenAddress: string, provider: JsonRpcProvider, permit: Erc20Permit, table: Element) {
-  let symbol = tokenAddress === tokens[0].address ? tokens[0].name : tokenAddress === tokens[1].address ? tokens[1].name : "";
-  let decimals = tokenAddress === tokens[0].address ? 18 : tokenAddress === tokens[1].address ? 18 : -1;
+  let symbol;
+  let decimals = -1;
+
+  if (tokenAddress === tokens[0].address) {
+    symbol = tokens[0].name;
+    decimals = await getDecimalsFromContract(tokenAddress, provider);
+  } else if (tokenAddress === tokens[1].address) {
+    symbol = tokens[1].name;
+    decimals = await getDecimalsFromContract(tokenAddress, provider);
+  }
 
   if (!symbol || decimals === -1) {
     try {
       const contract = await getErc20Contract(tokenAddress, provider);
-      symbol = contract.symbol();
-      decimals = contract.decimals();
+      symbol = await contract.symbol();
+      decimals = await getDecimalsFromContract(tokenAddress, provider);
     } catch (err) {
       throw new Error(`Error fetching symbol and decimals for token address: ${tokenAddress}`);
     }
@@ -180,4 +188,13 @@ export function nonceBitmap(nonce: BigNumberish): { wordPos: BigNumber; bitPos: 
   // bitPos is the last 8 bits of the nonce
   const bitPos = BigNumber.from(nonce).and(255).toNumber();
   return { wordPos, bitPos };
+}
+
+export async function getDecimalsFromContract(tokenAddress: string, provider: JsonRpcProvider): Promise<number> {
+  try {
+    const contract = await getErc20Contract(tokenAddress, provider);
+    return await contract.decimals();
+  } catch (err) {
+    throw new Error(`Error fetching decimals for token address: ${tokenAddress}`);
+  }
 }

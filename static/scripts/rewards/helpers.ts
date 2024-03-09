@@ -44,7 +44,6 @@ export async function getOptimalProvider(networkId: number) {
     return new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545", {
       name: "http://127.0.0.1:8545",
       chainId: 31337,
-      ensAddress: "",
     });
 
   const promises = networkRpcs[networkId].map(async (baseURL: string) => {

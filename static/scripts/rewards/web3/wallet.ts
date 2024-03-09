@@ -32,8 +32,8 @@ export async function handleNetwork(desiredNetworkId: number) {
     loadingClaimButton(false);
     invalidateButton.disabled = true;
   }
-
-  const currentNetworkId = (await web3provider.getNetwork()).chainId;
+  const network = await web3provider.getNetwork();
+  const currentNetworkId = network.chainId;
 
   // watch for network changes
   window.ethereum.on("chainChanged", <T>(newNetworkId: T | string) => handleIfOnCorrectNetwork(parseInt(newNetworkId as string, 16), desiredNetworkId));
