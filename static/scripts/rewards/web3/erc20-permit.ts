@@ -1,7 +1,7 @@
 import { JsonRpcSigner, TransactionResponse } from "@ethersproject/providers";
-import { permit2Address } from "@ubiquity-dao/rpc-handler";
-import { Permit } from "@ubiquity-os/permit-generation/types";
+import { Permit } from "@ubiquity-os/permit-generation";
 import { BigNumber, BigNumberish, Contract, ethers } from "ethers";
+import { permit2Address } from "../../../../shared/constants";
 import { erc20Abi, permit2Abi } from "../abis";
 import { AppState, app } from "../app-state";
 import { buttonController, getMakeClaimButton, viewClaimButton } from "../button-controller";

@@ -1,5 +1,4 @@
 import { JsonRpcProvider, JsonRpcSigner } from "@ethersproject/providers";
-import { networkExplorers } from "@ubiquity-dao/rpc-handler";
 import { Permit } from "@ubiquity-os/permit-generation/types";
 
 export class AppState {

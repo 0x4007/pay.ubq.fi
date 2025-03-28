@@ -22,6 +22,14 @@ export async function renderEnsName({ element, address, tokenAddress, tokenView,
   try {
     const ensName = await queryReverseEns(address, networkId);
 
+    console.trace({
+      ensName,
+      address,
+      tokenAddress,
+      tokenView,
+      networkId,
+    });
+
     if (ensName) {
       if (tokenView) {
         href = `${app.currentExplorerUrl}/token/${tokenAddress}?a=${address}`;

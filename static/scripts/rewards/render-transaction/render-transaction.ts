@@ -1,4 +1,3 @@
-import { networkExplorers } from "@ubiquity-dao/rpc-handler";
 import { TokenType } from "@ubiquity-os/permit-generation";
 import { app } from "../app-state";
 import { buttonController, getMakeClaimButton, viewClaimButton } from "../button-controller";

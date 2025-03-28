@@ -9,7 +9,8 @@
     "node": "20.10.0"
   },
   "scripts": {
-    "start": "run-s start:sign serve",
+    "start": "run-s start:sign start:ui",
+    "start:worker": "run-s start:sign serve",
     "watch": "nodemon -e ts,tsx --exec yarn start",
     "watch:ui": "nodemon -e ts,tsx --exec yarn start:ui",
     "format": "run-s format:lint format:prettier format:cspell",
@@ -46,11 +47,10 @@
     "@ethersproject/providers": "^5.7.2",
     "@supabase/supabase-js": "^2.44.4",
     "@ubiquity-dao/rpc-handler": "^1.1.0",
+    "@ubiquity-os/permit-generation": "^2.0.4",
+    "countries-and-timezones": "^3.6.0",
     "dotenv": "^16.4.4",
     "ethers": "^5.7.2",
-    "@ubiquity-os/permit-generation": "^1.4.1",
-    "countries-and-timezones": "^3.6.0",
-    "npm-run-all": "^4.1.5",
     "zod": "^3.23.8"
   },
   "devDependencies": {
