@@ -1,63 +1,55 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'; // Import QueryClient things
-import { StrictMode } from 'react'; // Re-add StrictMode import
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import { WagmiProvider, createConfig, http } from 'wagmi';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { injected } from '@wagmi/connectors';
+import { createBrowserHistory } from 'history';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { Router } from 'react-router-dom';
+import { createConfig, http, WagmiProvider, type Config } from 'wagmi';
 import { gnosis, mainnet, optimism } from 'wagmi/chains';
-// Removed Permit2RpcManager import as it's now used only in the worker
 import App from './App.tsx';
-// import './ubiquity-styles.css'; // Import ubiquity styles - REMOVED, will link in index.html
-// import './grid-styles.css'; // Import grid styles (once) - REMOVED, will link in index.html
-import { grid } from './the-grid';
-
-// Removed Permit2RpcManager instantiation and export
+import { grid } from './the-grid.ts';
 
 // Configure wagmi
-export const config = createConfig({ // Export config
-  chains: [mainnet, gnosis, optimism], // Added optimism
-  connectors: [
-    injected(), // Use injected connector (removed shimDisconnect)
-    // Add WalletConnect, Coinbase Wallet etc. here if needed later
-  ],
+const config = createConfig({
+  chains: [mainnet, gnosis, optimism],
+  connectors: [injected()],
   transports: {
-    // Revert back to default http transports
     [mainnet.id]: http(),
     [gnosis.id]: http(),
     [optimism.id]: http(),
   },
-});
+}) satisfies Config;
 
 // Create QueryClient instance
 const queryClient = new QueryClient();
 
+// Create browser history
+const history = createBrowserHistory();
+
+// Mount React app
 const rootElement = document.getElementById('root');
-const gridElement = document.getElementById('grid'); // Get the grid container
+const gridElement = document.getElementById('grid');
 
 if (!rootElement) {
   throw new Error("Could not find root element to mount React app");
 }
 if (!gridElement) {
-  console.warn("Could not find grid element for background animation"); // Warn if grid element is missing
+  console.warn("Could not find grid element for background animation");
 }
 
-createRoot(rootElement).render(
-  <StrictMode> {/* Re-enabled StrictMode */}
+ReactDOM.createRoot(rootElement).render(
+  <React.StrictMode>
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        {/* Removed AuthProvider wrapper */}
-        <BrowserRouter>
+        <Router location={history.location} navigator={history}>
           <App />
-        </BrowserRouter>
+        </Router>
       </QueryClientProvider>
     </WagmiProvider>
-  </StrictMode>
+  </React.StrictMode>
 );
 
-// Initialize the grid animation, targeting the #grid div if it exists
+// Initialize the grid animation if element exists
 if (gridElement) {
-  // Call grid with the element and the callback
   grid(gridElement, () => document.body.classList.add("grid-loaded"));
 }
-
-// Removed commented out duplicate import and call

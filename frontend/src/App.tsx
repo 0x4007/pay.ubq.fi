@@ -1,19 +1,14 @@
-import { useAccount } from "wagmi"; // Import useAccount hook from wagmi
+import { type ReactElement } from "react";
+import { Route, Routes } from "react-router-dom";
+import { useAccount } from "wagmi";
+import { DashboardPage } from "./components/dashboard-page.tsx";
+import { LoginPage } from "./components/login-page.tsx";
 
-// Import page components
-import { LoginPage } from "./components/login-page";
-import { DashboardPage } from "./components/dashboard-page";
-
-// Removed GitHubCallback import and related constants/logic
-
-function App() {
-  // Use wagmi's useAccount hook to check wallet connection status
-  const { isConnected } = useAccount(); // Removed isConnecting, not needed here
-
-  // Render LoginPage if not connected, DashboardPage if connected
-  // LoginPage will handle showing its own "Connecting..." state via useConnect status
-  return <>{isConnected ? <DashboardPage /> : <LoginPage />}</>;
-  // Removed Routes as only the root view is needed now
+export default function App(): ReactElement {
+  const { isConnected } = useAccount();
+  return (
+    <Routes>
+      <Route path="/" element={isConnected ? <DashboardPage /> : <LoginPage />} />
+    </Routes>
+  );
 }
-
-export default App;

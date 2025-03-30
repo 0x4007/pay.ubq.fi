@@ -1,30 +1,34 @@
-import { useConnect, useConnectors } from "wagmi"; // Added useConnectors hook
-import logoSvgContent from "../assets/ubiquity-os-logo.svg?raw"; // Import SVG content as raw string
-import { ICONS } from "./iconography"; // <-- Correct casing
+import { type Connector } from "@wagmi/core";
+import React, { type ReactElement } from "react";
+import { useConnect } from "wagmi";
+import logoSvgContent from "../assets/ubiquity-os-logo.svg?raw";
+import { ICONS } from "./iconography.tsx";
 
-// Update props if needed, or remove if connection is handled by context/hooks directly
-// interface LoginPageProps {
-// }
+interface EthereumProvider {
+  isMetaMask?: boolean;
+  isCoinbaseWallet?: boolean;
+  isUnlocked?: boolean;
+  enable?: () => Promise<void>;
+  request?: (args: { method: string; params?: Array<unknown> }) => Promise<unknown>;
+}
 
-export function LoginPage(/* Props if needed */) {
-  // Use `status` to check connection state
-  const { connect, error, status } = useConnect(); // Keep useConnect for connect function and status/error
-  const connectors = useConnectors(); // Get connector instances separately
+declare global {
+  interface Window {
+    ethereum?: EthereumProvider;
+  }
+}
 
-  // Removed debugging logs
+export function LoginPage(): ReactElement {
+  const { connect, connectors, error, isPending } = useConnect();
 
-  // Create a wrapper span for the SVG content
-  const LogoSpan = () => (
+  const LogoSpan: React.FC = () => (
     <span
-      id="header-logo-wrapper" // Use a wrapper class if needed for positioning/sizing
+      id="header-logo-wrapper"
       dangerouslySetInnerHTML={{ __html: logoSvgContent }}
     />
   );
 
-  // Basic example using wagmi's useConnect hook
-  // This assumes connectors are configured in the WagmiConfig provider
   return (
-    // Add the section wrapper to match DashboardPage
     <section id="header">
       <div id="logo-wrapper">
         <h1>
@@ -32,44 +36,30 @@ export function LoginPage(/* Props if needed */) {
           <span>Ubiquity OS Rewards</span>
         </h1>
       </div>
-      {/* Button is placed directly under #header */}
       {(() => {
-          // Explicitly find the injected connector from useConnectors result
-          const injectedConnectorInstance = connectors.find((c) => c.id === "injected");
+        const injectedConnector = connectors.find((c: Connector) => c.id === "injected");
 
-          // Removed debugging logs
+        if (!injectedConnector) {
+          return <div>Browser wallet connector not found. Please install MetaMask or a similar wallet.</div>;
+        }
 
-          if (!injectedConnectorInstance) {
-            return <div>Browser wallet connector not found. Please install MetaMask or a similar wallet.</div>;
-          }
+        const isReady = typeof window !== "undefined" && !!window.ethereum;
 
-          // Removed the complex/incorrect features check and unused isReady variable
-
-          // Workaround: Enable button if .ready is undefined but window.ethereum exists
-          const isReady = injectedConnectorInstance.ready ?? (typeof window !== "undefined" && !!window.ethereum);
-
-            return (
-              // Button is now directly under #header
-              <button
-                className="button-with-icon" // Add class
-                disabled={!isReady || status === "pending"} // Use the combined readiness check
-              key={injectedConnectorInstance.id}
-              onClick={() => connect({ connector: injectedConnectorInstance })} // Pass the instance to connect
-            >
-              {/* Always show icon */}
-              {ICONS.CONNECT}
-              {/* Ensure span structure is consistent */}
-              <span>
-                {status === "pending" ? "Connecting..." : "Connect Wallet"}
-                {/* Add unsupported text back inside span, only when applicable */}
-                {!isReady && status !== "pending" && " (unsupported)"}
-              </span>
-            </button>
-          );
-        })()}
-      {/* Show error message if connection fails - keep it outside the header section for now */}
+        return (
+          <button
+            className="button-with-icon"
+            disabled={!isReady || isPending}
+            onClick={() => connect({ connector: injectedConnector })}
+          >
+            {ICONS.CONNECT}
+            <span>
+              {isPending ? "Connecting..." : "Connect Wallet"}
+              {!isReady && !isPending && " (unsupported)"}
+            </span>
+          </button>
+        );
+      })()}
       {error && <div>{error.message}</div>}
     </section>
   );
-} // Added missing closing brace for the component function
-// Removed stray ); from the end
+}
