@@ -15,16 +15,18 @@ This file captures project-specific patterns, user preferences, and key insights
 - **Blockchain Interaction:** Use `viem` and `wagmi`.
 - **State Management:** Primarily React hooks (`useState`, `useRef`, `useEffect`) and `localStorage` for caching/preferences.
 - **Permit Validation:** Handled by `permit-checker.worker.ts` using batch RPC calls.
-- **Claiming:** Initiated client-side via `usePermitClaiming.ts`.
+- **Claiming:** Initiated client-side via `usePermitClaiming.ts`. Calls backend API `/api/permits/record-claim` on success to record tx hash.
 - **Caching:** `usePermitData.ts` uses `localStorage` to cache permit data (`PermitDataCache`) and last check timestamp (`lastCheckTimestamp`). `usePermitClaiming.ts` updates this cache on successful claims.
 - **Reward Swapping:** Uses CowSwap (`@cowprotocol/cow-sdk`) triggered after claims, based on user preference stored in `localStorage`.
 
-## Backend (Assumed based on Docs - Needs Verification if Backend work is needed)
+## Backend (Bundled in `frontend/server.ts`)
 - Platform: Deno Deploy
 - Routing: Hono
-- Database: Supabase
+- Database: Supabase (accessed via admin client using `SUPABASE_SERVICE_ROLE_KEY`)
+- `.env` Loading: Requires explicit load via `deno.land/std/dotenv` in `server.ts` for local testing.
 
 ## Known Issues & Focus Areas
-- **Permit Nonce Bug:** Critical bug where claiming a permit, refreshing, and trying to claim again causes an infinite RPC loop due to simulation failure (Permit2 nonce used) not being handled correctly in `usePermitClaiming.ts`. (Current Task)
+- **Build Process:** `bun run build` (which runs `tsc -b && vite build`) can hang intermittently. Workaround: Use `bun run dev` for development, or run `rm -rf node_modules bun.lockb && bun pm cache rm && bun install && bunx vite build` for production builds.
+- **Permit Nonce Bug:** Critical bug where claiming a permit, refreshing, and trying to claim again causes an infinite RPC loop due to simulation failure (Permit2 nonce used) not being handled correctly in `usePermitClaiming.ts`. (Previous Task - potentially needs re-verification)
 - **CowSwap Integration:** Needs real implementation details (SDK usage with viem WalletClient, UUSD address).
 - **Multicall Claiming:** Utility exists (`multicall-utils.ts` mentioned but not found in recent file lists?), but UI integration is pending.

@@ -286,6 +286,18 @@ export function usePermitClaiming({ permits, setPermits, claimablePermits, setEr
       });
 
       // console.log(`Claim transaction sent for ${permitKey}:`, txHash);
+
+      // --->>> NEW: Store nonce and networkId in localStorage keyed by txHash <<<---
+      try {
+        const dataToStore = JSON.stringify({ nonce: permitToClaim.nonce, networkId: permitToClaim.networkId });
+        localStorage.setItem(`pendingTx_${txHash}`, dataToStore);
+        console.log(`DEBUG: Stored {nonce, networkId} in localStorage for txHash ${txHash}`);
+      } catch (e) {
+        console.error("Failed to store pending permit info in localStorage", e);
+        // Continue even if localStorage fails, but log the error
+      }
+      // --->>> END NEW <<<---
+
       // Update permit state with hash (still Pending)
       setPermits((currentPermits) =>
         currentPermits.map((p) => (p.nonce === permitToClaim.nonce && p.networkId === permitToClaim.networkId ? { ...p, transactionHash: txHash } : p))
@@ -332,6 +344,80 @@ export function usePermitClaiming({ permits, setPermits, claimablePermits, setEr
     }
   // Corrected dependency array for useCallback
   }, [isConnected, address, chain, publicClient, writeContractAsync, setPermits, setError, resetWriteContract, updatePermitStatusCache]);
+
+  // --- Helper Function for Initiating Swaps ---
+  const initiateSwapsAfterClaims = useCallback(async (claimedInBatch: PermitData[]) => {
+    const preferredTokenAddress = localStorage.getItem('preferredRewardToken') as Address | null;
+    if (!preferredTokenAddress || !walletClient || !address || !chain) {
+      if (preferredTokenAddress && !walletClient) {
+        console.warn("Cannot initiate swaps: Wallet client not available.");
+        setError("Could not access wallet to sign swap orders.");
+      }
+      return; // Exit if no preference or wallet client issues
+    }
+
+    console.log("Checking for swaps needed after claims...");
+    setSwapSubmissionStatus({}); // Reset swap status
+
+    // Filter the permits passed in (those attempted in the batch) to find the ones that actually succeeded
+    // We need to check the main 'permits' state here as it holds the latest 'claimStatus'
+    const successfullyClaimedPermits = permits.filter(p =>
+      claimedInBatch.some(vp => vp.nonce === p.nonce && vp.networkId === p.networkId) && // Was part of the batch attempted
+      p.claimStatus === 'Success' // And actually succeeded according to the main state
+    );
+
+
+    if (successfullyClaimedPermits.length === 0) {
+      console.log("No permits were successfully claimed in this batch, skipping swaps.");
+      return;
+    }
+
+    const swapsToInitiate = new Map<Address, bigint>(); // Map<tokenAddress, totalAmount>
+
+    // Group successful claims by token address
+    successfullyClaimedPermits.forEach(p => {
+      if (p.tokenAddress && p.amount && p.tokenAddress.toLowerCase() !== preferredTokenAddress.toLowerCase()) {
+        const currentTotal = swapsToInitiate.get(p.tokenAddress as Address) || 0n;
+        try {
+          swapsToInitiate.set(p.tokenAddress as Address, currentTotal + BigInt(p.amount));
+        } catch (e) { console.error("Error summing amount for swap:", e); }
+      }
+    });
+
+    if (swapsToInitiate.size === 0) {
+      console.log("No swaps needed (all claimed tokens are the preferred token).");
+      return;
+    }
+
+    console.log(`Need to initiate ${swapsToInitiate.size} swaps.`);
+    setError(null); // Clear previous claim errors before showing swap status
+
+    for (const [tokenInAddress, totalAmountIn] of swapsToInitiate.entries()) {
+      const tokenInfo = getTokenInfo(chain.id, tokenInAddress);
+      const symbol = tokenInfo?.symbol || tokenInAddress.substring(0, 6);
+      const swapKey = tokenInAddress;
+
+      setSwapSubmissionStatus(prev => ({ ...prev, [swapKey]: { status: 'submitting', message: `Submitting swap for ${symbol}...` } }));
+
+      try {
+        const { orderUid } = await initiateCowSwap({
+          tokenIn: tokenInAddress,
+          tokenOut: preferredTokenAddress,
+          amountIn: totalAmountIn,
+          userAddress: address,
+          walletClient: walletClient,
+          chainId: chain.id,
+        });
+        console.log(`Swap submitted for ${symbol}. Order UID: ${orderUid}`);
+        setSwapSubmissionStatus(prev => ({ ...prev, [swapKey]: { status: 'submitted', message: `Swap for ${symbol} submitted (UID: ${orderUid.substring(0, 8)}...)`, orderUid } }));
+      } catch (swapError) {
+        console.error(`Swap initiation failed for ${symbol}:`, swapError);
+        const message = swapError instanceof Error ? swapError.message : "Unknown swap error";
+        setSwapSubmissionStatus(prev => ({ ...prev, [swapKey]: { status: 'error', message: `Swap failed for ${symbol}: ${message}` } }));
+        setError(prevError => `${prevError ? prevError + '; ' : ''}Swap failed for ${symbol}.`);
+      }
+    }
+  }, [address, chain, permits, walletClient, setError, setSwapSubmissionStatus]); // Dependencies for the swap helper
 
   // --- Handle Sequential Claim ---
   const handleClaimAllValidSequential = useCallback(async () => {
@@ -440,95 +526,105 @@ export function usePermitClaiming({ permits, setPermits, claimablePermits, setEr
     }
 
     // --- Initiate Swaps After Sequential Claims ---
-    const preferredTokenAddress = localStorage.getItem('preferredRewardToken') as Address | null;
-    if (preferredTokenAddress && walletClient && address && chain) {
-      // console.log("Checking for swaps needed after sequential claims...");
-      setSwapSubmissionStatus({}); // Reset swap status
-
-      const successfullyClaimedPermits = permits.filter(p =>
-        validPermitsToClaim.some(vp => vp.nonce === p.nonce && vp.networkId === p.networkId) && // Was part of the batch attempted
-        p.claimStatus === 'Success' // And actually succeeded
-      );
-
-      if (successfullyClaimedPermits.length > 0) {
-        const swapsToInitiate = new Map<Address, bigint>(); // Map<tokenAddress, totalAmount>
-
-        // Group successful claims by token address
-        successfullyClaimedPermits.forEach(p => {
-          if (p.tokenAddress && p.amount && p.tokenAddress.toLowerCase() !== preferredTokenAddress.toLowerCase()) {
-            const currentTotal = swapsToInitiate.get(p.tokenAddress as Address) || 0n;
-            try {
-              swapsToInitiate.set(p.tokenAddress as Address, currentTotal + BigInt(p.amount));
-            } catch (e) { console.error("Error summing amount for swap:", e); }
-          }
-        });
-
-        if (swapsToInitiate.size > 0) {
-          // console.log(`Need to initiate ${swapsToInitiate.size} swaps.`);
-          setError(null); // Clear previous claim errors before showing swap status
-
-          for (const [tokenInAddress, totalAmountIn] of swapsToInitiate.entries()) {
-            const tokenInfo = getTokenInfo(chain.id, tokenInAddress);
-            const symbol = tokenInfo?.symbol || tokenInAddress.substring(0, 6);
-            const swapKey = tokenInAddress;
-
-            setSwapSubmissionStatus(prev => ({ ...prev, [swapKey]: { status: 'submitting', message: `Submitting swap for ${symbol}...` } }));
-
-            try {
-              const { orderUid } = await initiateCowSwap({
-                tokenIn: tokenInAddress,
-                tokenOut: preferredTokenAddress,
-                amountIn: totalAmountIn,
-                userAddress: address,
-                walletClient: walletClient,
-                chainId: chain.id, // Add missing chainId
-              });
-              // console.log(`Swap submitted for ${symbol}. Order UID: ${orderUid}`);
-              setSwapSubmissionStatus(prev => ({ ...prev, [swapKey]: { status: 'submitted', message: `Swap for ${symbol} submitted (UID: ${orderUid.substring(0, 8)}...)`, orderUid } }));
-            } catch (swapError) {
-              console.error(`Swap initiation failed for ${symbol}:`, swapError);
-              const message = swapError instanceof Error ? swapError.message : "Unknown swap error";
-              setSwapSubmissionStatus(prev => ({ ...prev, [swapKey]: { status: 'error', message: `Swap failed for ${symbol}: ${message}` } }));
-              // Optionally set a global error as well
-              setError(prevError => `${prevError ? prevError + '; ' : ''}Swap failed for ${symbol}.`);
-            }
-          }
-        } else {
-          // console.log("No swaps needed (all claimed tokens are the preferred token or none succeeded).");
-        }
-      } else {
-        // console.log("No permits were successfully claimed in this batch, skipping swaps.");
-      }
-    } else if (preferredTokenAddress && !walletClient) {
-        console.warn("Cannot initiate swaps: Wallet client not available.");
-        setError("Could not access wallet to sign swap orders.");
-    }
+    // Pass the list of permits *attempted* in this batch to the swap helper
+    await initiateSwapsAfterClaims(validPermitsToClaim);
 
     setIsClaimingSequentially(false); // Finished claims and swap attempts
-  }, [publicClient, address, chain, claimablePermits, setPermits, handleClaimPermit, setError, updatePermitStatusCache, walletClient, permits]); // Added walletClient and permits
+  }, [publicClient, address, chain, claimablePermits, setPermits, handleClaimPermit, setError, updatePermitStatusCache, walletClient, permits, initiateSwapsAfterClaims]); // Added initiateSwapsAfterClaims
 
 
   // --- Effects for Handling Transaction Results ---
   useEffect(() => {
-    // Effect for successful confirmation
-    if (isClaimConfirmed && claimReceipt && claimTxHash) {
-      // console.log("Claim successful, Tx Hash:", claimTxHash);
+    // Effect for successful confirmation - Refactored to use localStorage
+    if (isClaimConfirmed && claimReceipt && claimTxHash && address) {
+      console.log("DEBUG: Claim confirmed, Tx Hash:", claimTxHash);
+      const storageKey = `pendingTx_${claimTxHash}`;
+      let confirmedNonce: string | null = null;
+      let networkId: number | null = null;
       let claimedPermitKey: string | null = null;
-      setPermits((current) =>
-        current.map((p) => {
-          if (p.transactionHash === claimTxHash) {
-            claimedPermitKey = `${p.nonce}-${p.networkId}`;
-            return { ...p, claimStatus: "Success", status: "Claimed", claimError: undefined };
+
+      try {
+        const storedDataString = localStorage.getItem(storageKey);
+        if (storedDataString) {
+          console.log(`DEBUG: Found stored data for ${storageKey}: ${storedDataString}`);
+          const storedData = JSON.parse(storedDataString);
+          if (storedData && storedData.nonce && storedData.networkId) {
+            confirmedNonce = storedData.nonce;
+            networkId = storedData.networkId;
+            claimedPermitKey = `${confirmedNonce}-${networkId}`;
+            console.log(`DEBUG: Parsed nonce ${confirmedNonce} and networkId ${networkId} from localStorage.`);
+          } else {
+            console.warn(`Parsed data from localStorage for ${storageKey} is missing nonce or networkId.`);
           }
-          return p;
-        })
-      );
-      if (claimedPermitKey) {
-        // console.log(`Updating cache for claimed permit: ${claimedPermitKey}`);
-        updatePermitStatusCache(claimedPermitKey, { isNonceUsed: true, checkError: undefined });
+        } else {
+          console.warn(`No data found in localStorage for key ${storageKey}. Cannot record claim or update specific permit state reliably.`);
+        }
+      } catch (e) {
+        console.error(`Error parsing data from localStorage for key ${storageKey}:`, e);
       }
+
+      // If we successfully retrieved nonce and networkId
+      if (claimedPermitKey && confirmedNonce && networkId) {
+        // 1. Update cache
+        console.log(`DEBUG: Updating cache for claimed permit: ${claimedPermitKey}`);
+        updatePermitStatusCache(claimedPermitKey, { isNonceUsed: true, checkError: undefined });
+
+        // 2. Update UI state directly using the retrieved nonce and networkId
+        setPermits((current) =>
+          current.map((p) => {
+            if (p.nonce === confirmedNonce && p.networkId === networkId) {
+              console.log(`DEBUG: Updating UI state for permit ${claimedPermitKey} to Success/Claimed.`);
+              return { ...p, claimStatus: "Success", status: "Claimed", claimError: undefined, transactionHash: claimTxHash }; // Ensure hash is also set
+            }
+            return p;
+          })
+        );
+
+        // 3. Record claim in DB
+        const recordData = {
+          nonce: confirmedNonce,
+          transactionHash: claimTxHash,
+          claimerAddress: address,
+        };
+
+        console.log(`DEBUG: Attempting to record claim for nonce ${recordData.nonce}`);
+        fetch("/api/permits/record-claim", {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(recordData),
+        })
+        .then(response => {
+          if (!response.ok) {
+            console.error(`Failed to record claim for permit nonce ${recordData.nonce}. Status: ${response.status}`);
+            response.json().then(err => console.error("Error details:", err)).catch(() => {});
+          } else {
+            console.log(`DEBUG: Successfully recorded claim for permit nonce ${recordData.nonce}`);
+          }
+        })
+        .catch(error => {
+          console.error(`Network error recording claim for permit nonce ${recordData.nonce}:`, error);
+        });
+
+      } else {
+        // Fallback: If we couldn't get nonce/networkId, update based on hash but cannot record claim
+        console.warn(`Could not reliably identify permit from localStorage for tx ${claimTxHash}. Updating UI based on hash only.`);
+        setPermits((current) =>
+          current.map((p) => {
+            if (p.transactionHash === claimTxHash) {
+              // Cannot guarantee this is the *only* permit with this hash if localStorage failed, but best effort
+              return { ...p, claimStatus: "Success", status: "Claimed", claimError: undefined };
+            }
+            return p;
+          })
+        );
+      }
+
+      // 4. Clean up localStorage regardless of success/failure to prevent stale entries
+      console.log(`DEBUG: Removing localStorage entry for key ${storageKey}`);
+      localStorage.removeItem(storageKey);
     }
-  }, [isClaimConfirmed, claimReceipt, claimTxHash, setPermits, updatePermitStatusCache]); // Dependencies for success
+    // Removed 'permits' from dependency array
+  }, [isClaimConfirmed, claimReceipt, claimTxHash, address, setPermits, updatePermitStatusCache]);
 
   useEffect(() => {
     // Effect for confirmation error

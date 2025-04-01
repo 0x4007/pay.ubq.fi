@@ -1,61 +1,59 @@
 # Progress: Permit Claiming Application (Rewrite)
 
-**Date:** 2025-03-29 (Updated)
+**Date:** 2025-04-02 (Updated)
 
 ## 1. Current Status Summary
 
 Implementation is progressing through multiple phases simultaneously, focusing on core functionality like permit fetching, validation, and claiming.
 
 *   **Phase 1: Backend Foundation & Auth**: Mostly COMPLETE.
-*   **Phase 2: Frontend Foundation & Auth**: COMPLETE (Auth context, login flow, basic layout, wallet connection via `wagmi`). Components refactored.
+*   **Phase 2: Frontend Foundation & Auth**: COMPLETE (Wallet connection via `wagmi`). Components refactored.
 *   **Phase 3: GitHub Scanning & Permit Display**: IN PROGRESS. Backend `/api/permits` fetches from DB. Frontend displays permits. GitHub scanning TBD.
-*   **Phase 4: Validation Logic**: IN PROGRESS. Backend validation needs RPC error handling. Frontend `hasRequiredFields` implemented. **Frontend pre-claim checks (owner balance, Permit2 allowance) implemented.**
-*   **Phase 5: Batch Claiming**: IN PROGRESS. Single permit claiming (`handleClaimPermit`) implemented. **Multicall utility function (`claimMultiplePermitsViaMulticall`) created in `multicall-utils.ts`. UI integration TBD.**
-*   **Phase 6: Claim Status Update & Polish**: IN PROGRESS. Frontend uses `useWaitForTransactionReceipt` and displays prerequisite check results/errors. Backend status update TBD.
-*   **Phase 7: Documentation & Deployment**: IN PROGRESS (Docs update, Frontend deployment script created, Frontend deployed). Backend deployment TBD.
+*   **Phase 4: Validation Logic**: IN PROGRESS. Worker validation logic implemented with caching. Frontend pre-claim checks implemented. Backend validation needs RPC error handling.
+*   **Phase 5: Batch Claiming**: IN PROGRESS. Single permit claiming (`handleClaimPermit`) implemented. Multicall utility function created. UI integration TBD.
+*   **Phase 6: Claim Status Update & Polish**: IN PROGRESS. Frontend uses `useWaitForTransactionReceipt` and displays prerequisite check results/errors. **Backend status update (claim recording) implemented via `/api/permits/record-claim`.** UI/UX polish ongoing.
+*   **Phase 7: Documentation & Deployment**: IN PROGRESS (Docs update, Frontend deployment script created, Frontend deployed). Backend deployment TBD. **Build process troubleshooting ongoing.**
 
 ## 2. What Works
 
-*   **Project Structure**: Standard monorepo setup with refactored frontend components.
-*   **Core Tech**: Backend (Deno/Hono), Frontend (React/Vite/Wagmi), Shared Types.
-*   **Authentication**: GitHub OAuth flow redirects, backend callback, JWT middleware.
+*   **Project Structure**: Standard monorepo setup with refactored frontend components and hooks.
+*   **Core Tech**: Backend (Deno/Hono/Supabase), Frontend (React/Vite/Wagmi/viem), Shared Types.
+*   **Authentication**: Wallet Connection (`wagmi`) as primary method.
 *   **Wallet Integration**: Connection via `wagmi`.
-*   **Permit Fetching**: Backend `/api/permits` fetches from DB, joins related tables, fetches beneficiary address. Frontend fetches reliably on connect.
-*   **Permit Display**: Frontend displays permits using dedicated `PermitsTable` and `PermitRow` components. Styling is handled via `app-styles.css`.
-*   **Permit Testing**: Backend `/api/permits/test` endpoint functional.
-*   **Single Claim**: Frontend `handleClaimPermit` (in `DashboardPage`) uses `useWriteContract` to initiate `permitTransferFrom`, `useWaitForTransactionReceipt` handles confirmation. **Includes pre-claim checks (in `permit-utils.ts`) for owner balance and Permit2 allowance.** UI (`PermitRow`) updated to reflect check status and potential issues.
-*   **Component Structure**: Frontend components (`App`, `LoginPage`, `DashboardPage`, `GitHubCallback`, `PermitsTable`, `PermitRow`) refactored into separate files. Helper functions moved to `permit-utils.ts`. `DashboardPage` line count significantly reduced.
-*   **Styling**: Inline styles removed and migrated to `app-styles.css`. `ubiquity-styles.css` and `grid-styles.css` imported. Added CSS rule for `.header-logo-wrapper svg`.
-*   **Background**: Integrated WebGL grid animation from `the-grid.ts` into the `#grid` element defined in `index.html`.
-*   **UI Elements**: Added Ubiquity OS logo (`ubiquity-os-logo.svg`) inline next to the main header text in `LoginPage` and `DashboardPage` by importing raw SVG content (`?raw`) and using `dangerouslySetInnerHTML`. Updated type definitions.
-*   **Bug Fixes**: Resolved multiple permit fetch issue. Resolved incorrect claim button disabling.
-*   **Multicall Utility**: Created `claimMultiplePermitsViaMulticall` function in `frontend/src/utils/multicall-utils.ts` using `viem` and `Multicall3.aggregate3` to bundle permit claims.
-*   **Frontend Server**: Added `frontend/server.ts` to serve built static assets on Deno Deploy, handling SPA routing.
-*   **Deployment Script**: Created `scripts/deploy-frontend.sh` for automated build and deployment to Deno Deploy using `deployctl`. Includes project name sanitization. Added `deploy` script to `frontend/package.json`.
-*   **Frontend Deployment**: Successfully deployed to Deno Deploy via the script.
-*   **Documentation**: Updated `frontend/README.md` with deployment instructions.
+*   **Permit Fetching & Validation**: Frontend hook (`usePermitData`) orchestrates worker (`permit-checker.worker.ts`) to fetch from Supabase and perform batch validation via RPC. Includes `localStorage` caching of data and timestamp.
+*   **Permit Display**: Frontend displays permits using `PermitsTable` and `PermitRow` components. Styling via CSS files. Network mismatch detection implemented in `PermitRow`.
+*   **Single Claim**: Frontend hook (`usePermitClaiming`) handles single claims using `wagmi`/`viem`. Includes pre-simulation and pre-claim checks (balance/allowance). UI updated based on status.
+*   **Claim Recording**: Backend API endpoint (`/api/permits/record-claim` in `server.ts`) receives claim details, verifies beneficiary, and updates Supabase `permits` table. Frontend calls this API on successful claim confirmation.
+*   **Local Server Env Vars**: Deno server (`server.ts`) loads `.env` file using standard library for local testing.
+*   **Component Structure**: Frontend components and hooks refactored for better organization.
+*   **Styling**: Raw CSS used. Grid background integrated. Header logo displayed.
+*   **Bug Fixes**: Resolved previous issues with multiple fetches and button disabling.
+*   **Multicall Utility**: `claimMultiplePermitsViaMulticall` function exists (UI integration pending).
+*   **Frontend Server**: `frontend/server.ts` serves static build and includes API routing via Hono.
+*   **Deployment Script**: `scripts/deploy-frontend.sh` automates build and deployment.
+*   **Documentation**: Core docs exist. `README.md` updated.
 
 ## 3. What's Next (High Level)
 
-*   **Verify Pre-Claim Checks**: Confirm frontend balance/allowance checks work correctly and display appropriate warnings/errors.
-*   **Test Single Claim**: Thoroughly test the end-to-end single claim flow, including success and failure cases (due to pre-claim checks or on-chain errors).
-*   **Address RPC Errors**: Improve backend validation error handling.
-*   **Implement GitHub Scanning**: Add logic to backend to scan GitHub for new permits (Phase 3).
-*   **Integrate Multicall Claiming**: Update UI to allow selecting multiple permits and trigger the `claimMultiplePermitsViaMulticall` function (Phase 5).
-*   **(Optional)** Implement Backend Status Update: Create `/api/permits/update-status` endpoint (Phase 6).
-*   **UI/UX Polish**: Refine loading states, error messages, overall flow (Phase 6).
-*   **Verify Frontend Deployment**: Check the deployed URLs (e.g., `https://pay-ubq-fi.deno.dev`) to ensure the application is running correctly.
+*   **Test Claim Recording**: Verify the end-to-end flow locally (claim -> API call -> DB update).
+*   **Resolve Build Hang**: Investigate and fix the intermittent hang in `bun run build` (likely `tsc -b` step). Consider simplifying build script.
+*   **Implement CowSwap Integration**: Implement post-claim swapping using `@cowprotocol/cow-sdk`'s `TradingSdk.postSwapOrder`.
+*   **Verify Pre-Claim Checks**: Ensure accuracy.
+*   **Test Single Claim Flow**: Thoroughly test success/failure cases.
+*   **Address RPC Errors**: Improve backend validation robustness.
+*   **Implement GitHub Scanning**: (Phase 3).
+*   **Integrate Multicall Claiming UI**: (Phase 5).
+*   **UI/UX Polish**: Refine loading states, errors, etc. (Phase 6).
 *   **Final Documentation & Deployment** (Phase 7).
 
 *(Refer to `docs/rewrite-plan.md` for detailed phase breakdown)*
 
 ## 4. Known Issues / Blockers
 
-*   **RPC Errors**: Intermittent `connection reset` errors from Gnosis RPC during backend on-chain validation.
-*   **GitHub Scanning**: Logic not implemented yet.
-*   **Multicall UI Integration**: UI for selecting and triggering batch claims not implemented yet.
-*   **Token Encryption**: Secure storage for GitHub token not implemented yet.
-*   **Auth Flow**: Full end-to-end verification of GitHub OAuth callback and session management needed.
-*   **Claim Failures**: `TRANSFER_FROM_FAILED` error was occurring; added pre-claim checks for balance/allowance as a likely fix. Needs verification.
+*   **Build Hang:** `bun run build` (specifically `tsc -b && vite build`) hangs intermittently. Workaround: use `bun run dev` or `bunx vite build` after clean install. Root cause unknown.
+*   **RPC Errors**: Intermittent errors during worker validation.
+*   **Multicall UI Integration**: Not possible with permit2.
+*   **CowSwap Integration**: Plan updated to use `TradingSdk.postSwapOrder`. Implementation pending. Needs UUSD address verification for Mainnet.
+*   **Claim Failures**: Need to verify if pre-claim checks fully resolved previous `TRANSFER_FROM_FAILED` errors.
 
 *(This document tracks the overall progress against the implementation phases.)*

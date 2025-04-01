@@ -20,11 +20,11 @@ This document outlines the technology stack and development environment for the 
 
 ## 2. Development Environment & Tooling
 
-*   **Package Manager:** Bun (as per user instructions)
-*   **Repository Structure:** Standard repository structure (e.g., separate directories for frontend, backend, shared code).
-*   **Build Tools:** Esbuild (from existing setup), Deno CLI tools
+*   **Package Manager:** Bun (used for frontend dependencies and scripts)
+*   **Repository Structure:** Standard repository structure.
+*   **Build Tools:** Vite (for frontend bundling), `tsc` (for type checking), Deno CLI tools.
 *   **Testing:**
-    *   Unit/Integration: bun test
+    *   Unit/Integration: `bun test`
     *   Component: React Testing Library (if using React)
 *   **Linting/Formatting:** ESLint, Prettier (using existing configurations), Deno fmt/lint
 *   **Version Control:** Git, GitHub
@@ -35,24 +35,26 @@ This document outlines the technology stack and development environment for the 
 *   `@octokit/rest`: GitHub API interaction (planned for backend scanner).
 *   `@supabase/supabase-js`: Database interaction.
 *   `react`, `react-dom`: Frontend framework.
-*   `hono`: Backend routing.
+*   `hono`: Backend routing (in `server.ts`).
 *   `wagmi`: React hooks for wallet connection and interaction.
 *   `@cowprotocol/cow-sdk`: For interacting with CowSwap API (quotes, orders).
 *   `@pavlovcik/permit2-rpc-manager`: RPC management library (to be integrated).
+*   `deno.land/std/dotenv`: Used in `server.ts` to load `.env` for local Deno execution.
 *   Testing libraries (`@testing-library/react`).
 
 ## 4. Infrastructure & Deployment
 
-*   **Backend Hosting:** Deno Deploy.
-*   **Frontend Hosting:** Deno Deploy (serving static build via `frontend/server.ts`).
+*   **Backend API Hosting:** Deno Deploy (via `frontend/server.ts`).
+*   **Frontend Hosting:** Deno Deploy (serving static build via the same `frontend/server.ts`).
 *   **Database Hosting:** Supabase Cloud.
 *   **Deployment:**
-    *   Frontend: Automated via `scripts/deploy-frontend.sh` (runnable via `bun run deploy` in `frontend/` or directly). Script handles build, project name sanitization (`pay.ubq.fi` -> `pay-ubq-fi`), and `deployctl` execution. Requires `deployctl` v1.12.0+.
-    *   Backend: Deno Deploy CLI/GitHub Integration (TBD).
+    *   Frontend/Backend: Automated via `scripts/deploy-frontend.sh` (runnable via `bun run deploy` in `frontend/`). Script handles build (`bun run build` - currently needs workaround) and deployment of `frontend/server.ts` using `deployctl`. Requires `deployctl` v1.12.0+.
     *   GitHub Actions: TBD for CI/CD.
 
 ## 5. Technical Constraints & Considerations
 
+*   **Build Stability:** The `bun run build` script (running `tsc -b && vite build`) has shown intermittent hangs, potentially related to the `tsc -b` step or Bun/Vite interaction. Workaround involves running `bunx vite build` after a clean install. Requires further investigation for reliable automated builds.
+*   **Deno `.env` Loading:** The Deno server (`server.ts`) requires explicit loading of `.env` files using the standard library for local development, as Deno doesn't load them automatically.
 *   Deno Deploy environment specifics and limitations.
 *   GitHub API rate limits.
 *   RPC provider reliability and rate limits.
