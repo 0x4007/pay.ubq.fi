@@ -160,7 +160,7 @@ export function handlePermitClaim(
       const transferDetailsArgs = { to: permitToClaim.beneficiary as Address, requestedAmount: BigInt(permitToClaim.amount) };
 
       // Submit transaction
-      // console.log(`Submitting actual claim transaction for permit: ${permitKey}`);
+      console.log(`DEBUG: Calling writeContractAsync for permit: ${permitKey}`);
       const txHash = await writeContractAsync({
         address: PERMIT2_ADDRESS,
         abi: permit2ABI,
@@ -168,10 +168,11 @@ export function handlePermitClaim(
         args: [permitArgs, transferDetailsArgs, permitToClaim.owner as Address, permitToClaim.signature as Hex],
       });
 
-      // console.log(`Claim transaction sent for ${permitKey}:`, txHash);
+      console.log(`DEBUG: writeContractAsync returned successfully with txHash: ${txHash} for permit: ${permitKey}`);
       // --->>> NEW: Store nonce and networkId in localStorage keyed by txHash <<<---
       try {
         const dataToStore = JSON.stringify({ nonce: permitToClaim.nonce, networkId: permitToClaim.networkId });
+        console.log(`DEBUG: PREPARING TO SET localStorage item for key: pendingTx_${txHash}`); // ADDED LOG
         localStorage.setItem(`pendingTx_${txHash}`, dataToStore);
         console.log(`DEBUG: Stored {nonce, networkId} in localStorage for txHash ${txHash}`);
       } catch (e) {
@@ -184,6 +185,7 @@ export function handlePermitClaim(
       return true; // Indicate success (submission)
 
     } catch (err) {
+      console.error(`DEBUG: Error caught during writeContractAsync for permit ${permitKey}:`, err); // Changed to error and added DEBUG prefix
       console.warn(`Claim submission failed for ${permitKey}:`, err); // Use warn for potential rejections
 
 

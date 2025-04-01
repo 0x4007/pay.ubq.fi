@@ -10,15 +10,17 @@ export function useManuallyUpdateStatusCache(
   applyFinalFilter: (permitsMap: Map<string, PermitData>) => void
 ) {
   return useCallback((permitKey: string, statusUpdate: Partial<PermitData>) => {
-    // console.log(`Attempting to update cache for key: ${permitKey} with status:`, statusUpdate); // Log cache update attempt
+    console.log(`DEBUG: useManuallyUpdateStatusCache called for key: ${permitKey} with statusUpdate:`, statusUpdate); // ADDED LOG
     const currentCache = loadCache();
     const existingCachedPermit = currentCache[permitKey];
     if (existingCachedPermit) {
-      console.log(`DEBUG: updatePermitStatusCache: Updating key ${permitKey} with`, statusUpdate); // DEBUG
+      console.log(`DEBUG: useManuallyUpdateStatusCache: Found existing permit for key ${permitKey}. Merging status...`); // ADDED LOG
 
 
       // Update the specific fields in the cached permit data
-      currentCache[permitKey] = { ...existingCachedPermit, ...statusUpdate };
+      const updatedPermit = { ...existingCachedPermit, ...statusUpdate }; // Store merged result
+      currentCache[permitKey] = updatedPermit;
+      console.log(`DEBUG: useManuallyUpdateStatusCache: Calling saveCache for key ${permitKey} with merged data:`, updatedPermit); // ADDED LOG
       saveCache(currentCache); // Save updated cache
 
 

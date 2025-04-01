@@ -81,15 +81,33 @@ export function handleClaimConfirmation(
           });
 
       } else {
-        // Fallback: If we couldn't get nonce/networkId, update based on hash but cannot record claim
-        console.warn(`Could not reliably identify permit from localStorage for tx ${claimTxHash}. Updating UI based on hash only.`);
+        // Fallback: If we couldn't get nonce/networkId from localStorage
+        console.warn(`Could not reliably identify permit key from localStorage for tx ${claimTxHash}. Attempting update via txHash match.`);
+
+        let fallbackPermitKey: string | null = null;
+
+        // Update UI state and try to find the permit key
         setPermits((current: PermitData[]) => current.map((p: PermitData) => {
-          if (p.transactionHash === claimTxHash) {
-            // Cannot guarantee this is the *only* permit with this hash if localStorage failed, but best effort
-            return { ...p, claimStatus: "Success", status: "Claimed", claimError: undefined };
+          // Check if transactionHash exists on the permit before comparing
+          if (p.transactionHash && p.transactionHash === claimTxHash) {
+            // Found the permit based on hash
+            fallbackPermitKey = `${p.nonce}-${p.networkId}`; // Get the key
+            console.log(`DEBUG: Fallback found permit key ${fallbackPermitKey} matching txHash ${claimTxHash}`);
+            // Update UI state, including isNonceUsed
+            return { ...p, claimStatus: "Success", status: "Claimed", isNonceUsed: true, claimError: undefined };
           }
           return p;
         }));
+
+        // If we found the key via the hash match, update the cache
+        if (fallbackPermitKey) {
+          console.log(`DEBUG: Fallback updating cache for key ${fallbackPermitKey} with isNonceUsed=true`);
+          updatePermitStatusCache(fallbackPermitKey, { isNonceUsed: true, checkError: undefined });
+        } else {
+          // This might happen if the setPermits update hasn't flushed yet, or the permit wasn't in the state.
+          // It's less critical as the primary cache update path failed anyway.
+          console.warn(`Could not find permit matching txHash ${claimTxHash} in current state for fallback cache update.`);
+        }
       }
 
       // 4. Clean up localStorage regardless of success/failure to prevent stale entries

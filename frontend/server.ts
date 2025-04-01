@@ -12,7 +12,8 @@ import type { Database } from "./src/database.types.ts"; // Added Database types
 // Loads variables from .env into Deno.env.get()
 // Assumes .env is in the same directory as server.ts (i.e., frontend/)
 // Use export: true to make them available via Deno.env.get()
-await load({ export: true });
+// Explicitly provide path relative to CWD where 'deno run' is executed
+await load({ export: true, envPath: "./frontend/.env" });
 // --- End Load .env file ---
 
 
@@ -128,7 +129,7 @@ api.post('/api/permits/record-claim', async (c) => {
 
 // --- Main Server Logic ---
 const PORT = 8000;
-const STATIC_DIR = "dist"; // Vite's default output directory
+const STATIC_DIR = "frontend/dist"; // Vite's default output directory (relative to CWD)
 
 console.log(`Server running. Access frontend at: http://localhost:${PORT}/`);
 
