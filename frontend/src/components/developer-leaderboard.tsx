@@ -1,5 +1,4 @@
-import React from "react";
-import { useLeaderboardData, LeaderboardEntry } from "../hooks/use-leaderboard-data";
+import { LeaderboardEntry, useLeaderboardData } from "../hooks/use-leaderboard-data.ts";
 // Assuming app-styles.css or similar is imported globally (e.g., in main.tsx)
 // import "../app-styles.css"; // Import styles if needed locally
 
@@ -70,6 +69,9 @@ export function DeveloperLeaderboard() {
           <tr>
             <th>Rank</th>
             <th>Developer</th>
+            <th>Comments XP</th>
+            <th>Task XP</th>
+            <th>Reviews XP</th>
             <th>Total XP</th>
           </tr>
         </thead>
@@ -89,6 +91,9 @@ export function DeveloperLeaderboard() {
                   <span>{entry.githubUsername}</span>
                 </div>
               </td>
+              <td>{formatXp(entry.xpByCategory?.comments || 0)}</td>
+              <td>{formatXp(entry.xpByCategory?.task || 0)}</td>
+              <td>{formatXp(entry.xpByCategory?.reviewRewards || 0)}</td>
               <td>{formatXp(entry.totalXp)}</td>
             </tr>
           ))}

@@ -6,6 +6,7 @@ export interface LeaderboardEntry {
   githubUsername: string;
   avatarUrl: string;
   totalXp: number; // Using 'number' as XP comes from JSON metadata
+  xpByCategory: Record<string, number>; // Added XP breakdown
 }
 
 // Structure returned by the worker (includes node_url now)
@@ -44,6 +45,7 @@ interface PermitCommentMetadata {
 interface AggregatedUserData {
   githubId: number;
   totalXp: number; // Store as number directly from JSON
+  xpByCategory: Record<string, number>; // Added XP breakdown
   login?: string; // Fetched from GitHub API
   avatarUrl?: string; // Fetched from GitHub API
 }
@@ -192,7 +194,8 @@ export function useLeaderboardData() {
 
     const aggregatedDataByUser: Record<number, AggregatedUserData> = {};
     const issuesToFetch = new Map<string, { owner: string; repo: string; issueNumber: number }>();
-    const issueXpAdded = new Map<string, Set<number>>();
+    // const issueXpAdded = new Map<string, Set<number>>(); // No longer needed for category breakdown
+    const xpSourceKeys = new Set<string>(); // Initialize Set inside useCallback
 
     console.log("processAndAggregateData: First pass - identifying users and issues...");
     for (const permit of rawPermits) {
@@ -203,7 +206,8 @@ export function useLeaderboardData() {
       }
 
       if (!aggregatedDataByUser[githubId]) {
-        aggregatedDataByUser[githubId] = { githubId, totalXp: 0 };
+        // Initialize with xpByCategory
+        aggregatedDataByUser[githubId] = { githubId, totalXp: 0, xpByCategory: {} };
       }
 
       if (permit.node_url && !issuesToFetch.has(permit.node_url)) {
@@ -227,6 +231,12 @@ export function useLeaderboardData() {
 
     console.log("processAndAggregateData: Second pass - extracting XP from comments...");
     const metadataCache = new Map<string, PermitCommentMetadata | null>();
+    // Reset totalXp and xpByCategory before the second pass to avoid double counting if logic changes
+    Object.values(aggregatedDataByUser).forEach(user => {
+        user.totalXp = 0;
+        user.xpByCategory = {};
+    });
+
 
     for (const permit of rawPermits) {
       const githubId = extractGitHubId(permit.githubUsername);
@@ -243,27 +253,60 @@ export function useLeaderboardData() {
       }
 
       if (metadata?.output) {
-        const userMetadataEntry = Object.values(metadata.output).find((entry) => entry.userId === githubId);
+        // Find the specific entry for the user within the metadata output
+        // Assuming the key in metadata.output is the username, which might not match githubId directly.
+        // We need a way to link githubId to the username key in metadata.output.
+        // For now, let's assume the first entry found with the matching userId is correct.
+        // This might need refinement if multiple entries have the same userId under different keys.
+        const userMetadataEntry = Object.values(metadata.output).find(entry => entry.userId === githubId);
 
-        if (userMetadataEntry && typeof userMetadataEntry.total === "number") {
-          const usersAddedForIssue = issueXpAdded.get(permit.node_url) ?? new Set<number>();
-          if (!usersAddedForIssue.has(githubId)) {
-            console.log(`processAndAggregateData: Adding ${userMetadataEntry.total} XP for user ${githubId} from issue ${permit.node_url}`);
-            aggregatedDataByUser[githubId].totalXp += userMetadataEntry.total;
-            usersAddedForIssue.add(githubId);
-            issueXpAdded.set(permit.node_url, usersAddedForIssue);
-          } else {
-            // console.log(`processAndAggregateData: XP for user ${githubId} from issue ${permit.node_url} already added.`);
-          }
+        if (userMetadataEntry) {
+          // Aggregate XP by category for this specific comment/issue
+          let currentCommentTotalXp = 0;
+          const knownCategories = ["task", "comments", "reviewRewards"]; // Use the identified keys
+
+          knownCategories.forEach(category => {
+            let categoryXp = 0;
+            const categoryData = userMetadataEntry[category as keyof typeof userMetadataEntry];
+
+            // Safely check task reward type
+            if (category === "task" && typeof categoryData === 'object' && categoryData !== null && typeof (categoryData as { reward?: unknown }).reward === 'number') {
+              categoryXp = (categoryData as { reward: number }).reward;
+            } else if (category === "comments" && Array.isArray(categoryData)) {
+              categoryXp = categoryData.reduce((sum: number, comment: { score?: { reward?: number } }) => sum + (comment?.score?.reward || 0), 0);
+            } else if (category === "reviewRewards" && Array.isArray(categoryData)) {
+              categoryXp = categoryData.reduce((sum: number, reviewReward: { reviews?: { reward?: number }[] }) => {
+                const reviewSum = Array.isArray(reviewReward?.reviews)
+                  ? reviewReward.reviews.reduce((rSum: number, review: { reward?: number }) => rSum + (review?.reward || 0), 0)
+                  : 0;
+                return sum + reviewSum;
+              }, 0);
+            }
+
+            if (categoryXp > 0) {
+              // Add to the user's category total
+              aggregatedDataByUser[githubId].xpByCategory[category] = (aggregatedDataByUser[githubId].xpByCategory[category] || 0) + categoryXp;
+              currentCommentTotalXp += categoryXp;
+              xpSourceKeys.add(category); // Add category to set if it contributed XP
+            }
+          });
+
+          // Add the XP calculated from categories for this comment to the user's overall total
+          // This avoids using the potentially pre-calculated 'total' from the metadata
+          aggregatedDataByUser[githubId].totalXp += currentCommentTotalXp;
+          console.log(`processAndAggregateData: Processed ${currentCommentTotalXp} XP for user ${githubId} from issue ${permit.node_url}`);
+
         } else {
-          console.warn(`Could not find user ID ${githubId} or valid 'total' XP in metadata for ${permit.node_url}`);
+           // Only warn if userMetadataEntry itself was not found for this user in this comment
+           console.warn(`Could not find metadata entry for user ID ${githubId} in issue ${permit.node_url}`);
         }
       }
-      // No warning here if metadata is null, already warned above
+      // No warning here if metadata is null, already warned above when setting metadataCache
     }
     console.log("processAndAggregateData: Finished extracting XP.");
+    console.log("Unique XP Source Keys Found:", Array.from(xpSourceKeys)); // Log the unique keys
 
-    // Fetch GitHub user details
+     // Fetch GitHub user details
     const uniqueUserIds = Object.keys(aggregatedDataByUser).map((id) => parseInt(id, 10));
     console.log(`Fetching GitHub user details for ${uniqueUserIds.length} users...`);
     const userDetailPromises = uniqueUserIds.map(fetchGitHubUserDetails);
@@ -283,7 +326,8 @@ export function useLeaderboardData() {
         return {
           githubUsername: userDetails?.login ?? `GitHub ID: ${userData.githubId}`,
           avatarUrl: userDetails?.avatar_url ?? "",
-          totalXp: userData.totalXp, // Use the aggregated XP from metadata
+          totalXp: userData.totalXp,
+          xpByCategory: userData.xpByCategory // Map the category breakdown
         };
       })
       .sort((a, b) => b.totalXp - a.totalXp);
@@ -337,7 +381,7 @@ export function useLeaderboardData() {
             const finalData = await processAndAggregateData(payload);
             console.log("Final leaderboard data:", {
               entries: finalData.length,
-              sampleEntry: finalData[0],
+              sampleEntry: finalData.length > 0 ? { ...finalData[0], xpByCategory: JSON.stringify(finalData[0].xpByCategory) } : null, // Log category breakdown for sample
               totalXpSum: finalData.reduce((sum, entry) => sum + entry.totalXp, 0),
             });
             setLeaderboardData(finalData);
