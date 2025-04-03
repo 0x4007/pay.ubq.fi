@@ -1,0 +1,391 @@
+{
+  "whilefoo": {
+    "userId": 139262667,
+    "total": 150,
+    "task": {
+      "reward": 150,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 150 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>150</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 150,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2774447057,
+        "content": "I would like to do that, but the endpoint is changeable so if another API is used (I know that shiv recommended others) the return code of the API can differ (and actually the return code of OpenAPI doesn't indicate that the comment is too long as far as I remember, just a failure) and parsing the error message feels unreliable.\r\nSee error code 429: https://platform.openai.com/docs/guides/error-codes\r\n_Originally posted by @gentlementlegen in https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/225#discussion_r1903285110_\r\n## Description\r\nCurrently if the LLM fails, we throw and abort the run completely, which cancels all the rewards and results, and needs a new run to be triggered afterwards. While some errors are not recoverable, the ones like us sending too many tokens to be handled can be avoided by splitting the prompt and retrying with a smaller prompt until it fits with the given model.\r\n## Needed changes\r\nWe should implement:\r\n- a retry mechanism which, on errors that are not fatal, would give another try with the LLM\r\n- covering cases like the token amount sent being too large, responses having truncated JSON content, network failures\r\n- post a message saying the results are being retried\r\n- set a failure limit\r\n- throw in the end if every try is unsecessfull\r\n- add related tests",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/236",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 7.96,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 11
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "h2": {
+                "score": 1,
+                "elementCount": 2
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 6
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 4.6
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 201,
+            "wordValue": 0.1,
+            "result": 1.72
+          },
+          "readability": {
+            "fleschKincaid": 46.55018099547516,
+            "syllables": 335,
+            "sentences": 7,
+            "score": 0.8655018099547516
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2593468607,
+        "content": "When you say \"already retry requests\", in which case, network failure? The idea was to cover problems like token size being too big, or the response from the LLM being truncated (sometimes the JSON is malformed for example). Will test in a bit.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240#issuecomment-2593468607",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 6.792,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 43,
+            "wordValue": 0.1,
+            "result": 2.25
+          },
+          "readability": {
+            "fleschKincaid": 74.24015503875972,
+            "syllables": 60,
+            "sentences": 3,
+            "score": 0.8575984496124027
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2593520460,
+        "content": "Very sorry if that wasn't clear enough, I will update the spec.\r\nAdded the following:",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240#issuecomment-2593520460",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.884,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 82.39000000000001,
+            "syllables": 22,
+            "sentences": 2,
+            "score": 0.7760999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2593596191,
+        "content": "@whilefoo how do you determine the size? There is no API for this (afaik) and for the same model you can have different limits according to the plan (or tier) you are using. Not sure if there is a better way to handle it.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240#issuecomment-2593596191",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 7.587,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 44,
+            "wordValue": 0.1,
+            "result": 2.27
+          },
+          "readability": {
+            "fleschKincaid": 80.43015151515155,
+            "syllables": 58,
+            "sentences": 3,
+            "score": 0.7956984848484845
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2594327766,
+        "content": "Maybe I don't understand but `js-tiktoken` can count tokens, but it cannot tell you that the model `gpt-4o` is limited to 128000 can it? I know that at first we were limited to half of this and asked OpenAI to increase the token limit, which is now upgraded to 128000, that's why I mention this.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240#issuecomment-2594327766",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 6.51,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 55,
+            "wordValue": 0.1,
+            "result": 2.46
+          },
+          "readability": {
+            "fleschKincaid": 72.78795454545455,
+            "syllables": 69,
+            "sentences": 2,
+            "score": 0.8721204545454545
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2595288637,
+        "content": "I believe you are correct, would this be handled by the built-in retry or should we add delay between API calss?\r\nI think the biggest issue the retry can cover is the malformed JSON, there are plenty of times we just had to restart the whole comments evaluation because one output was incorrect and breaks the whole evaluation.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240#issuecomment-2595288637",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 8.262,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 59,
+            "wordValue": 0.1,
+            "result": 2.51
+          },
+          "readability": {
+            "fleschKincaid": 56.445042372881375,
+            "syllables": 84,
+            "sentences": 2,
+            "score": 0.9644504237288137
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2629180406,
+        "content": "@0x4007 existing issue for what you mentioned: https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/57",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240#issuecomment-2629180406",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.135,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 38.960441176470624,
+            "syllables": 32,
+            "sentences": 2,
+            "score": 0.7896044117647062
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2578272515,
+            "effect": {
+              "addition": 6704,
+              "deletion": 3034
+            },
+            "reward": 292.14,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 150 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>292.14</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>7.96</td></tr><tr><td>Review</td><td>Comment</td><td>6</td><td>34.17</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240\" target=\"_blank\" rel=\"noopener\">#240</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+6704 -3034</td><td>3</td><td>292.14</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/236\" target=\"_blank\" rel=\"noopener\">I would like to do that, but the endpoint is changeable so if an&hellip;</a></h6></td><td><details><summary>6.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 11&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    h2:&#13;      score: 1&#13;      elementCount: 2&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 6&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 4.6&#13;regex:&#13;  wordCount: 201&#13;  wordValue: 0.1&#13;  result: 1.72&#13;</pre></details></td><td>1</td><td>1</td><td>7.96</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240#issuecomment-2593468607\" target=\"_blank\" rel=\"noopener\">When you say \"already retry requests\", in which case, network fa&hellip;</a></h6></td><td><details><summary>2.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 43&#13;  wordValue: 0.1&#13;  result: 2.25&#13;</pre></details></td><td>0.8</td><td>3</td><td>6.792</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240#issuecomment-2593520460\" target=\"_blank\" rel=\"noopener\">Very sorry if that wasn't clear enough, I will update the spec.&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.4</td><td>3</td><td>1.884</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240#issuecomment-2593596191\" target=\"_blank\" rel=\"noopener\">@whilefoo how do you determine the size? There is no API for thi&hellip;</a></h6></td><td><details><summary>2.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 44&#13;  wordValue: 0.1&#13;  result: 2.27&#13;</pre></details></td><td>0.9</td><td>3</td><td>7.587</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240#issuecomment-2594327766\" target=\"_blank\" rel=\"noopener\">Maybe I don't understand but &#96;js-tiktoken&#96; can count tok&hellip;</a></h6></td><td><details><summary>2.46</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 55&#13;  wordValue: 0.1&#13;  result: 2.46&#13;</pre></details></td><td>0.7</td><td>3</td><td>6.51</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240#issuecomment-2595288637\" target=\"_blank\" rel=\"noopener\">I believe you are correct, would this be handled by the built-in&hellip;</a></h6></td><td><details><summary>2.51</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 59&#13;  wordValue: 0.1&#13;  result: 2.51&#13;</pre></details></td><td>0.85</td><td>3</td><td>8.262</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240#issuecomment-2629180406\" target=\"_blank\" rel=\"noopener\">@0x4007 existing issue for what you mentioned: https://github.co&hellip;</a></h6></td><td><details><summary>1.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.5</td><td>3</td><td>3.135</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 3.426,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2614875431,
+        "content": "I suppose showing the logs along with the comment link could be enough for QA?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240#issuecomment-2614875431",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.8,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 78.81000000000003,
+            "syllables": 20,
+            "sentences": 1,
+            "score": 0.8118999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2629098983,
+        "content": "@whilefoo @gentlementlegen Auto merging should occur on approval. \nDisqualification should not be possible on approval.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240#issuecomment-2629098983",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.816,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 1.822499999999991,
+            "syllables": 35,
+            "sentences": 2,
+            "score": 0.4182249999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2629099330,
+        "content": "I can't merge due to conflicts",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240#issuecomment-2629099330",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.81,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 103.04428571428575,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 3.426 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>3</td><td>3.426</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240#issuecomment-2614875431\" target=\"_blank\" rel=\"noopener\">I suppose showing the logs along with the comment link could be &hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.4</td><td>3</td><td>1.8</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240#issuecomment-2629098983\" target=\"_blank\" rel=\"noopener\">@whilefoo @gentlementlegen Auto merging should occur on approval&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.816</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/240#issuecomment-2629099330\" target=\"_blank\" rel=\"noopener\">I can't merge due to conflicts</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.81</td></tr></tbody></table></details>"
+  }
+}

@@ -1,0 +1,976 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 210.139,
+    "task": {
+      "reward": 200,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 1954639846,
+        "content": "The bot hasn't linked me yet, I'm not going to assign myself and see if it auto-assigns\r\nWhatever you think is fair I'm good with whatever either way",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/168#issuecomment-1954639846",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.5,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 65.96125000000002,
+            "syllables": 41,
+            "sentences": 1,
+            "score": 0.9403874999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2144809593,
+        "content": "Follow-on task to #158 \r\nThe goal is to reduce TTC (time till claimable) by increasing performance or removing roadblocks\r\n- Optimistically render the static data available so as to remove the loading components all together\r\n- Circumvent slow RPC calls either via RPC reselection or something other\r\n- In the case of slow calls display what can be displayed do not wait until completion or reselection\r\nOriginal discussion:\r\n- https://github.com/ubiquity/pay.ubq.fi/pull/163",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/168",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.95,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.4
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 66,
+            "wordValue": 0.1,
+            "result": 2.57
+          },
+          "readability": {
+            "fleschKincaid": 42.29175000000001,
+            "syllables": 129,
+            "sentences": 4,
+            "score": 0.8229175000000001
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1735092698,
+        "content": "Resolves #168 \r\nThe issue with things as far as I could see was that the UI rendering was being held back due to the laggy RPC calls and you'd see this: \r\nhttps://github.com/ubiquity/pay.ubq.fi/assets/106303466/bbb7a2a5-a4a6-4de1-96c7-554b2a3ff2f8\r\nAlthough using the static data available through the permit and hardcoded token info we can see this instead:\r\nhttps://github.com/ubiquity/pay.ubq.fi/assets/106303466/5ad0b81b-1b70-456d-9a96-d1dbe9f09839\r\nIt has involved moving around a few parts but the new interval for the loading ui rendering is sub 1s\r\n![new_load_time](https://github.com/ubiquity/pay.ubq.fi/assets/106303466/401205f7-d688-47c9-bdbc-1d6465ec2c19)\r\nWith a forked foundry instance, I was trying to replicate the stalling offline to see if I could squeeze a tx through while the stalling rpc calls takes its time but I'm not able to replicate it and work with real permits as local anvil hits instantly everytime.\r\nBut thinking about it, you should be able to as mm will be using a different rpc/provider instance so long as the it's not locking down the UI and a user can click they should be able to make a claim with or without the treasuryInfo",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 4.689,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 9
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 167,
+            "wordValue": 0.1,
+            "result": 2.06
+          },
+          "readability": {
+            "fleschKincaid": 65.8236057692308,
+            "syllables": 268,
+            "sentences": 8,
+            "score": 0.941763942307692
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1954683499,
+        "content": "lmao I'll get there sooner or later with Git 😂",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1954683499",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 95.165,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.64835
+          },
+          "multiplier": 0,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 210.139 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>200</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.95</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.5</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>4.689</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/168\" target=\"_blank\" rel=\"noopener\">Follow-on task to #158 The goal is to reduce TTC (time till cl&hellip;</a></h6></td><td><details><summary>3.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.4&#13;regex:&#13;  wordCount: 66&#13;  wordValue: 0.1&#13;  result: 2.57&#13;</pre></details></td><td>1</td><td>1</td><td>4.95</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/168#issuecomment-1954639846\" target=\"_blank\" rel=\"noopener\">The bot hasn't linked me yet, I'm not going to assign myself and&hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.1</td><td>2</td><td>0.5</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169\" target=\"_blank\" rel=\"noopener\">Resolves #168 The issue with things as far as I could see was &hellip;</a></h6></td><td><details><summary>4.06</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 9&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 167&#13;  wordValue: 0.1&#13;  result: 2.06&#13;</pre></details></td><td>0.9</td><td>1</td><td>4.689</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1954683499\" target=\"_blank\" rel=\"noopener\">lmao I'll get there sooner or later with Git 😂</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.1</td><td>2</td><td>0</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 200,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1954630073,
+        "content": "Not sure if this is a two or four hour task",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/168#issuecomment-1954630073",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.764,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 111.07000000000002,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1954647075,
+        "content": "Should be instant so there's an issue. Either way we are moving to our kernel-plugin architecture which will make testing and implementation of all of these features far more robust",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/168#issuecomment-1954647075",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 4.518,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 63.69500000000001,
+            "syllables": 48,
+            "sentences": 2,
+            "score": 0.96305
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1963887247,
+        "content": "It's weird that GitHub is not considering your \"closing keyword\" an official link to this event. It's instead just considering it as a \"mention\"",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/168#issuecomment-1963887247",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.792,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 63.486153846153854,
+            "syllables": 40,
+            "sentences": 2,
+            "score": 0.9651384615384615
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1963905996,
+        "content": "lol the permit rendering broke again.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/168#issuecomment-1963905996",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.948,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 59.745000000000005,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.9974500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1963909275,
+        "content": "<details>\r\n    <summary>\r\n      <b\r\n        ><h3>\r\n          <a\r\n            href=\"https://pay.ubq.fi/?claim=W3sidHlwZSI6ImVyYzIwLXBlcm1pdCIsInBlcm1pdCI6eyJwZXJtaXR0ZWQiOnsidG9rZW4iOiIweGU5MUQxNTNFMGI0MTUxOEEyQ2U4RGQzRDc5NDRGYTg2MzQ2M2E5N2QiLCJhbW91bnQiOiI0MzU3MDAwMDAwMDAwMDAwMDAwMDAifSwibm9uY2UiOiIzNjkyNjE3MTgyMjY4NTcwODEwNzAyNDQ2MzY1NDE4NjIxOTU3NDc4MzY4Nzg4NDc5NDk4NjAyMTQwNDU3NjI5Njk3MTQ2MzQxNjQ4OSIsImRlYWRsaW5lIjoiMTE1NzkyMDg5MjM3MzE2MTk1NDIzNTcwOTg1MDA4Njg3OTA3ODUzMjY5OTg0NjY1NjQwNTY0MDM5NDU3NTg0MDA3OTEzMTI5NjM5OTM1In0sInRyYW5zZmVyRGV0YWlscyI6eyJ0byI6IjB4QWU1RDFGMTkyMDEzZGI4ODliMWUyMTE1QTM3MGFCMTMzZjM1OTc2NSIsInJlcXVlc3RlZEFtb3VudCI6IjQzNTcwMDAwMDAwMDAwMDAwMDAwMCJ9LCJvd25lciI6IjB4NDRDYTE1RGIxMDFmRDFjMTk0NDY3RGI2QUYwYzY3QzZCYkY0QUI1MSIsInNpZ25hdHVyZSI6IjB4YTJmNjkxYjVjZDkxMzJlYjllYzJlMjI1NzRiMTkxYWUxZDRhNzkzOGI0MTQ4ZDAwZTI0ZjhhN2Y3NTM3MmFlOTVmMzIyY2VlZjg5MzFlN2ZkZDYxOWNlYzNkNDA1NTNlOTZmNTg0OTFhOGJlMDU3NTBjYTY3ZDM0NGQ4YTIwY2ExYyIsIm5ldHdvcmtJZCI6MTAwfV0%3D\"\r\n          >\r\n            [ 435.7 WXDAI ]</a\r\n          >\r\n        </h3>\r\n        <h6>@Keyrxng</h6></b\r\n      >\r\n    </summary>\r\n    <h6>Contributions Overview</h6>\r\n<table><thead>\r\n<tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th>\r\n</thead><tbody>\r\n<tr><td>Issue</td><td>Specification</td><td>1</td><td>19</td></tr>\r\n<tr><td>Issue</td><td>Task</td><td>1</td><td>200</td></tr>\r\n<tr><td>Issue</td><td>Comment</td><td>1</td><td>6.4</td></tr>\r\n<tr><td>Issue</td><td>Comment</td><td>1</td><td>0</td></tr>\r\n<tr><td>Review</td><td>Comment</td><td>10</td><td>140.2</td></tr>\r\n<tr><td>Review</td><td>Comment</td><td>10</td><td>70.1</td></tr>\r\n</tbody></table>\r\n    <h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/168\">Follow-on task to #158 \r\nThe goal is to reduce TTC (time till ...</a></h6></td><td><details><summary>19</summary>\r\n<pre>li:\r\n  count: 4\r\n  score: \"4\"\r\n  words: 53\r\n</pre>\r\n</details></td><td>1</td><td>19</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/168#issuecomment-1954639846\">The bot hasn't linked me yet, I'm not going to assign myself and...</a></h6></td><td>6.4</td><td>0.05</td><td>6.4</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/168#issuecomment-1954639846\">The bot hasn't linked me yet, I'm not going to assign myself and...</a></h6></td><td>-</td><td>0.05</td><td>-</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1954683499\">lmao I'll get there sooner or later with Git 😂 ...</a></h6></td><td>2</td><td>0.05</td><td>2</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1957269289\">Optimistic rendering time till claimable:\r\n![optimistic-w-add-...</a></h6></td><td>2.2</td><td>0.57</td><td>2.2</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1957280053\">had a nightmare trying to get that submodule added, thats what c...</a></h6></td><td>11.2</td><td>0.29</td><td>11.2</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1957348255\">The rpc speed mapping is cool but I think it's a bit overkill pi...</a></h6></td><td>23.8</td><td>0.5</td><td>23.8</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1957797441\">It's not determined by a block being mined as it involves no onc...</a></h6></td><td>12.6</td><td>0.505</td><td>12.6</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1957817839\">> > It's not determined by a block being mined as it involves no...</a></h6></td><td><details><summary>18.6</summary>\r\n<pre>code:\r\n  count: 1\r\n  score: \"2\"\r\n  words: 3\r\n</pre>\r\n</details></td><td>0.52</td><td>18.6</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1957841044\">As did I without the additional 15 rpc calls however it's a good...</a></h6></td><td>6.6</td><td>0.59</td><td>6.6</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1960692481\">I'm a little confused as to what you mean by it's not currently ...</a></h6></td><td><details><summary>27.8</summary>\r\n<pre>a:\r\n  count: 1\r\n  score: \"2\"\r\n  words: 3\r\ncode:\r\n  count: 4\r\n  score: \"8\"\r\n  words: 6\r\n</pre>\r\n</details></td><td>0.75</td><td>27.8</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1961222782\">Hitting localhost I generated 10 permits with an open window eac...</a></h6></td><td><details><summary>16.6</summary>\r\n<pre>code:\r\n  count: 1\r\n  score: \"2\"\r\n  words: 7\r\n</pre>\r\n</details></td><td>0.71</td><td>16.6</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1963541663\">This resolves the no network issue. \r\nI test by setting the ``...</a></h6></td><td><details><summary>18.8</summary>\r\n<pre>code:\r\n  count: 5\r\n  score: \"10\"\r\n  words: 7\r\n</pre>\r\n</details></td><td>0.76</td><td>18.8</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1954683499\">lmao I'll get there sooner or later with Git 😂 ...</a></h6></td><td>1</td><td>0.05</td><td>1</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1957269289\">Optimistic rendering time till claimable:\r\n![optimistic-w-add-...</a></h6></td><td>1.1</td><td>0.57</td><td>1.1</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1957280053\">had a nightmare trying to get that submodule added, thats what c...</a></h6></td><td>5.6</td><td>0.29</td><td>5.6</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1957348255\">The rpc speed mapping is cool but I think it's a bit overkill pi...</a></h6></td><td>11.9</td><td>0.5</td><td>11.9</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1957797441\">It's not determined by a block being mined as it involves no onc...</a></h6></td><td>6.3</td><td>0.505</td><td>6.3</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1957817839\">> > It's not determined by a block being mined as it involves no...</a></h6></td><td><details><summary>9.3</summary>\r\n<pre>code:\r\n  count: 1\r\n  score: \"1\"\r\n  words: 3\r\n</pre>\r\n</details></td><td>0.52</td><td>9.3</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1957841044\">As did I without the additional 15 rpc calls however it's a good...</a></h6></td><td>3.3</td><td>0.59</td><td>3.3</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1960692481\">I'm a little confused as to what you mean by it's not currently ...</a></h6></td><td><details><summary>13.9</summary>\r\n<pre>a:\r\n  count: 1\r\n  score: \"1\"\r\n  words: 3\r\ncode:\r\n  count: 4\r\n  score: \"4\"\r\n  words: 6\r\n</pre>\r\n</details></td><td>0.75</td><td>13.9</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1961222782\">Hitting localhost I generated 10 permits with an open window eac...</a></h6></td><td><details><summary>8.3</summary>\r\n<pre>code:\r\n  count: 1\r\n  score: \"1\"\r\n  words: 7\r\n</pre>\r\n</details></td><td>0.71</td><td>8.3</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1963541663\">This resolves the no network issue. \r\nI test by setting the ``...</a></h6></td><td><details><summary>9.4</summary>\r\n<pre>code:\r\n  count: 5\r\n  score: \"5\"\r\n  words: 7\r\n</pre>\r\n</details></td><td>0.76</td><td>9.4</td></tr></tbody></table>\r\n  </details>\r\n  <details>\r\n    <summary>\r\n      <b\r\n        ><h3>\r\n          <a\r\n            href=\"https://pay.ubq.fi/?claim=W3sidHlwZSI6ImVyYzIwLXBlcm1pdCIsInBlcm1pdCI6eyJwZXJtaXR0ZWQiOnsidG9rZW4iOiIweGU5MUQxNTNFMGI0MTUxOEEyQ2U4RGQzRDc5NDRGYTg2MzQ2M2E5N2QiLCJhbW91bnQiOiI5OTAwMDAwMDAwMDAwMDAwMDAwIn0sIm5vbmNlIjoiMTE0MTU0MTY3NDA3NTQxMTMxOTk2NTk0MjU5NzQzMjQ1MTcyNDcxOTU3MTM2MzUyMDQ3MjQ1Mzg4NzIwNDM1NTk5NjYzMzU2OTU4MTA3IiwiZGVhZGxpbmUiOiIxMTU3OTIwODkyMzczMTYxOTU0MjM1NzA5ODUwMDg2ODc5MDc4NTMyNjk5ODQ2NjU2NDA1NjQwMzk0NTc1ODQwMDc5MTMxMjk2Mzk5MzUifSwidHJhbnNmZXJEZXRhaWxzIjp7InRvIjoiMHgzMzZDMDMzODQyRkEzMTZkNDcwZTgyMGM4MWI3NDJlNjJBMDc2NURDIiwicmVxdWVzdGVkQW1vdW50IjoiOTkwMDAwMDAwMDAwMDAwMDAwMCJ9LCJvd25lciI6IjB4NDRDYTE1RGIxMDFmRDFjMTk0NDY3RGI2QUYwYzY3QzZCYkY0QUI1MSIsInNpZ25hdHVyZSI6IjB4MDI3OThkMTljMjE0MDg3Mzk2NmFjYWY3NTFiMTlkNmM2ZmEyMjBjM2MwZTkyZTExOWVlMzI0NzBjNGViOGFjNTAwNzdjODJkZjQyMDdkZWE3MTk1ZDJhNzRkNTI0NTQyM2UwYjY1ODZmMWIwYWUyNzVjZmE0ODE0OWY5NWQ4MTcxYiIsIm5ldHdvcmtJZCI6MTAwfV0%3D\"\r\n          >\r\n            [ 9.9 WXDAI ]</a\r\n          >\r\n        </h3>\r\n        <h6>@rndquu</h6></b\r\n      >\r\n    </summary>\r\n    <h6>Contributions Overview</h6>\r\n<table><thead>\r\n<tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th>\r\n</thead><tbody>\r\n<tr><td>Review</td><td>Comment</td><td>2</td><td>9.9</td></tr>\r\n</tbody></table>\r\n    <h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1957785172\">> local anvil hits instantly everytime\r\nAs far as I remember w...</a></h6></td><td><details><summary>5.5</summary>\r\n<pre>a:\r\n  count: 1\r\n  score: \"1\"\r\n  words: 1\r\n</pre>\r\n</details></td><td>0.59</td><td>5.5</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1957804369\">> It's not determined by a block being mined as it involves no o...</a></h6></td><td><details><summary>4.4</summary>\r\n<pre>code:\r\n  count: 1\r\n  score: \"1\"\r\n  words: 3\r\n</pre>\r\n</details></td><td>0.44</td><td>4.4</td></tr></tbody></table>\r\n  </details>",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/168#issuecomment-1963909275",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.446,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 99
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 1089,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 90.93003868245734,
+            "syllables": 1739,
+            "sentences": 169,
+            "score": 0.6906996131754266
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1497569696,
+        "content": "Are you sure you're up to date? If you are then you might need to rebase or something because its unlikely that you went out of your way to remove this module.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169#discussion_r1497569696",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 0.984,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 79.85113636363639,
+            "syllables": 43,
+            "sentences": 2,
+            "score": 0.8014886363636361
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1501221103,
+        "content": "That doesn't look right. You should not return a truthy value if you want to filter it out.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169#discussion_r1501221103",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -12,9 +14,35 @@ export const entries = [...typescriptEntries, ...cssEntries];\n const allNetworkUrls: Record<string, string[]> = {};\n // this flattens all the rpcs into a single object, with key names that match the networkIds. The arrays are just of URLs per network ID.\n \n+const blacklist = [\"https://xdai-archive.blockscout.com\"];\n+\n Object.keys(extraRpcs).forEach((networkId) => {\n-  const officialUrls = extraRpcs[networkId].rpcs.filter((rpc) => typeof rpc === \"string\");\n-  const extraUrls: string[] = extraRpcs[networkId].rpcs.filter((rpc) => rpc.url !== undefined).map((rpc) => rpc.url);\n+  const officialUrls = extraRpcs[networkId].rpcs.filter((rpc) => {\n+    if (typeof rpc === \"string\") {\n+      if (blacklist.includes(rpc)) {\n+        return \"\";",
+        "score": {
+          "reward": 2.736,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 94.78197368421053,
+            "syllables": 23,
+            "sentences": 2,
+            "score": 0.6521802631578947
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1501221904,
+        "content": "I think it makes sense to put this in a local test file?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169#discussion_r1501221904",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -59,9 +59,22 @@ async function generate() {\n   ];\n \n   const base64encodedTxData = Buffer.from(JSON.stringify(txData)).toString(\"base64\");\n-  log.ok(\"Testing URL:\");\n-  console.log(`${process.env.FRONTEND_URL}?claim=${base64encodedTxData}`);\n-  log.ok(\"Public URL:\");\n-  console.log(`https://pay.ubq.fi?claim=${base64encodedTxData}`);\n-  console.log();\n+\n+  if (multi) {\n+    return `${process.env.FRONTEND_URL}?claim=${base64encodedTxData}`;\n+  } else {\n+    log.ok(\"Testing URL:\");\n+    console.log(`${process.env.FRONTEND_URL}?claim=${base64encodedTxData}`);\n+    log.ok(\"Public URL:\");\n+    console.log(`https://pay.ubq.fi?claim=${base64encodedTxData}`);\n+    console.log();\n+  }\n+}\n+\n+export async function generateMultiERC20Permits() {\n+  for (let i = 0; i < 5; i++) {\n+    const url = await generate(true);\n+    log.ok(\"Testing URL:\");\n+    console.log(url);\n+  }\n }",
+        "score": {
+          "reward": 1.31,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 96.02461538461542,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.6397538461538459
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1502430625,
+        "content": "This blacklist idea doesn't seem like a robust approach. We can merge it in but it should be handled dynamically. I think I implemented this in an unstable manner on my branch, I vaguely recall.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169#discussion_r1502430625",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -14,13 +14,13 @@ export const entries = [...typescriptEntries, ...cssEntries];\n const allNetworkUrls: Record<string, string[]> = {};\n // this flattens all the rpcs into a single object, with key names that match the networkIds. The arrays are just of URLs per network ID.\n \n-const blacklist = [\"https://xdai-archive.blockscout.com\"];\n+const blacklist = [\"https://xdai-archive.blockscout.com\", \"https://gnosis.api.onfinality.io/public\"];",
+        "score": {
+          "reward": 3.654,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 72.45500000000001,
+            "syllables": 52,
+            "sentences": 3,
+            "score": 0.8754499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1502434520,
+        "content": "Why did you recombine this?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169#discussion_r1502434520",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -33,8 +33,7 @@ export async function handleNetwork(desiredNetworkId: number) {\n     invalidateButton.disabled = true;\n   }\n \n-  const network = await web3provider.getNetwork();\n-  const currentNetworkId = network.chainId;\n+  const currentNetworkId = (await web3provider.getNetwork()).chainId;",
+        "score": {
+          "reward": 0.39,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 83.32000000000004,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 0.7667999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1502434944,
+        "content": "permit.permit should have been adjusted.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169#discussion_r1502434944",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -85,7 +84,7 @@ export async function checkPermitClaimable(permit: Erc20Permit, signer: ethers.p\n     return false;\n   }\n \n-  const { balance, allowance } = await fetchTreasury(permit, provider);\n+  const { balance, allowance } = await fetchTreasury(permit.permit.permitted.token, permit.owner, provider);",
+        "score": {
+          "reward": 1.216,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 76.89000000000003,
+            "syllables": 9,
+            "sentences": 2,
+            "score": 0.8310999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1502435793,
+        "content": "More typesafe to define the return type up here via \r\n```\r\nexport async function fetchTreasury(contractAddr: string, owner: string, provider: JsonRpcProvider): { balance: BigNumber; allowance: BigNumber } {\r\n```",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169#discussion_r1502435793",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -9,36 +9,35 @@ import { connectWallet } from \"./wallet\";\n import invalidateButton from \"../invalidate-component\";\n import { JsonRpcProvider } from \"@ethersproject/providers\";\n import { tokens } from \"../render-transaction/render-token-symbol\";\n+import { insertErc20PermitTableData } from \"../render-transaction/insert-table-data\";\n \n-export async function fetchTreasury(\n-  permit: Erc20Permit,\n-  provider: JsonRpcProvider\n-): Promise<{ balance: BigNumber; allowance: BigNumber; decimals: number; symbol: string }> {\n-  try {\n-    const tokenAddress = permit.permit.permitted.token.toLowerCase();\n-    const tokenContract = await getErc20Contract(tokenAddress, provider);\n-\n-    if (tokenAddress === tokens[0].address || tokenAddress === tokens[1].address) {\n-      const decimals = tokenAddress === tokens[0].address ? 18 : tokenAddress === tokens[1].address ? 18 : -1;\n-      const symbol = tokenAddress === tokens[0].address ? tokens[0].name : tokenAddress === tokens[1].address ? tokens[1].name : \"\";\n-\n-      const [balance, allowance] = await Promise.all([tokenContract.balanceOf(permit.owner), tokenContract.allowance(permit.owner, permit2Address)]);\n-\n-      return { balance, allowance, decimals, symbol };\n-    } else {\n-      console.log(`Hardcode this token in render-token-symbol.ts and save two calls: ${tokenAddress}`);\n-      const [balance, allowance, decimals, symbol] = await Promise.all([\n-        tokenContract.balanceOf(permit.owner),\n-        tokenContract.allowance(permit.owner, permit2Address),\n-        tokenContract.decimals(),\n-        tokenContract.symbol(),\n-      ]);\n-\n-      return { balance, allowance, decimals, symbol };\n+export async function processERC20(tokenAddress: string, provider: JsonRpcProvider, permit: Erc20Permit, table: Element) {\n+  let symbol = tokenAddress === tokens[0].address ? tokens[0].name : tokenAddress === tokens[1].address ? tokens[1].name : \"\";\n+  let decimals = tokenAddress === tokens[0].address ? 18 : tokenAddress === tokens[1].address ? 18 : -1;\n+\n+  if (!symbol || decimals === -1) {\n+    try {\n+      const contract = await getErc20Contract(tokenAddress, provider);\n+      symbol = contract.symbol();\n+      decimals = contract.decimals();\n+    } catch (err) {\n+      throw new Error(`Error fetching symbol and decimals for token address: ${tokenAddress}`);\n     }\n-  } catch (error: unknown) {\n-    return { balance: BigNumber.from(-1), allowance: BigNumber.from(-1), decimals: -1, symbol: \"\" };\n   }\n+\n+  await insertErc20PermitTableData(permit, provider, symbol, decimals, table);\n+}\n+\n+export async function fetchTreasury(contractAddr: string, owner: string, provider: JsonRpcProvider) {",
+        "score": {
+          "reward": 1.568,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 78.24500000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.8175499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1503013853,
+        "content": "It's because the CSS/style logic is implemented poorly. I tore it apart in my refactor but didn't get to put it all together in a totally stable way (mostly the other RPC related functions- I believe the styling code was significantly simplified and stable if I recall correctly). \nUnfortunately I'm running very low on code time because I'll need to focus on fundraising starting next week. So I'm just going to be focusing on top priority stuff.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169#discussion_r1503013853",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -14,13 +14,13 @@ export const entries = [...typescriptEntries, ...cssEntries];\n const allNetworkUrls: Record<string, string[]> = {};\n // this flattens all the rpcs into a single object, with key names that match the networkIds. The arrays are just of URLs per network ID.\n \n-const blacklist = [\"https://xdai-archive.blockscout.com\"];\n+const blacklist = [\"https://xdai-archive.blockscout.com\", \"https://gnosis.api.onfinality.io/public\"];",
+        "score": {
+          "reward": 2.696,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 83,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 54.28700301204822,
+            "syllables": 129,
+            "sentences": 4,
+            "score": 0.9428700301204822
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1505492465,
+        "content": "@Keyrxng",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169#discussion_r1505492465",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -33,8 +33,7 @@ export async function handleNetwork(desiredNetworkId: number) {\n     invalidateButton.disabled = true;\n   }\n \n-  const network = await web3provider.getNetwork();\n-  const currentNetworkId = network.chainId;\n+  const currentNetworkId = (await web3provider.getNetwork()).chainId;",
+        "score": {
+          "reward": 0.036,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": 121.22000000000003,
+            "syllables": 1,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1954640216,
+        "content": "Your code is outdated. Pull from head",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1954640216",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.54,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 106.59678571428573,
+            "syllables": 8,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1957833975,
+        "content": "I got it under one second on my [branch](https://github.com/pavlovcik/pay.ubq.fi/commit/c065b8c60a686f847959c596b3691b66724685fc). Just fixing some details around refactoring the code",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1957833975",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.504,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 73.79573529411766,
+            "syllables": 25,
+            "sentences": 2,
+            "score": 0.8620426470588234
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1959084214,
+        "content": "My plan is to combine both. Unfortunately I did a large refactor here (again) breaking apart large functions into seperate files. I anticipate some more merge conflicts. Let me get mine merged in first and then we can merge yours in?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1959084214",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.79,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 41,
+            "wordValue": 0.1,
+            "result": 2.2
+          },
+          "readability": {
+            "fleschKincaid": 70.56295731707318,
+            "syllables": 61,
+            "sentences": 4,
+            "score": 0.8943704268292682
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1960437636,
+        "content": "I was going to merge yours in but I realized that its not stable either due to a combination of my bad commit and the refactoring being incompatible with some pulls getting merged at the same time. Can you get this stable so we can use it for production? I need more time to fix my branch stability.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1960437636",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.41,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 58,
+            "wordValue": 0.1,
+            "result": 2.49
+          },
+          "readability": {
+            "fleschKincaid": 71.98063218390807,
+            "syllables": 79,
+            "sentences": 3,
+            "score": 0.8801936781609193
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1960917395,
+        "content": "It seems unstable when I refresh several times and press claim. If you set up a test wallet you can generate real permits with you can test almost the entire flow up until you confirm the transaction. You will see it only works some times. I assume there is an issue with some of the RPCs that need to be taken into account.   \nI don't think so but you should merge to development. It was my mistake because I briefly set main as the default branch but I realize given the pace of progress, stability might not be 100% so I switched the default back to development. After manual testing we can merge to main which automatically deploys to pay.ubq.fi\nYou just hit edit on the top right and change the merge target to development. Either way though the intermittent issues I mentioned I saw on your latest commit.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1960917395",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.004,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "br": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 152,
+            "wordValue": 0.1,
+            "result": 2.21
+          },
+          "readability": {
+            "fleschKincaid": 73.41226315789477,
+            "syllables": 212,
+            "sentences": 10,
+            "score": 0.8658773684210523
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1962070117,
+        "content": "Let me spend some time testing today and I'll be careful to clear cache etc to ensure that everything works as expected. \nI'll see if I can post proof of the specific error I remember receiving. \nThanks for testing!",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1962070117",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.662,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 41,
+            "wordValue": 0.1,
+            "result": 2.2
+          },
+          "readability": {
+            "fleschKincaid": 73.28528455284555,
+            "syllables": 58,
+            "sentences": 3,
+            "score": 0.8671471544715444
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1963084102,
+        "content": "The error that I got is from. \r\n```\r\nerc20-permit.ts:67 Error: could not detect network (event=\"noNetwork\", code=NETWORK_ERROR, version=providers/5.7.2)\r\n```\r\n<img width=\"996\" alt=\"image\" src=\"https://github.com/ubiquity/pay.ubq.fi/assets/4975670/4fde9b1b-bb79-432c-b7dd-4591de844be2\">",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1963084102",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.554,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 91.68733333333336,
+            "syllables": 35,
+            "sentences": 5,
+            "score": 0.6831266666666664
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1893228722,
+            "effect": {
+              "addition": 6126,
+              "deletion": 1912
+            },
+            "reward": 160.76,
+            "priority": 2
+          },
+          {
+            "reviewId": 1899016985,
+            "effect": {
+              "addition": 711,
+              "deletion": 673
+            },
+            "reward": 27.68,
+            "priority": 2
+          },
+          {
+            "reviewId": 1900585352,
+            "effect": {
+              "addition": 42,
+              "deletion": 27
+            },
+            "reward": 1.38,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 200 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>189.82</td></tr><tr><td>Issue</td><td>Comment</td><td>5</td><td>10.468</td></tr><tr><td>Review</td><td>Comment</td><td>16</td><td>37.054</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169\" target=\"_blank\" rel=\"noopener\">#169</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+6126 -1912</td><td>2</td><td>160.76</td></tr><tr><td>+711 -673</td><td>2</td><td>27.68</td></tr><tr><td>+42 -27</td><td>2</td><td>1.38</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/168#issuecomment-1954630073\" target=\"_blank\" rel=\"noopener\">Not sure if this is a two or four hour task</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.7</td><td>2</td><td>1.764</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/168#issuecomment-1954647075\" target=\"_blank\" rel=\"noopener\">Should be instant so there's an issue. Either way we are moving &hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.9</td><td>2</td><td>4.518</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/168#issuecomment-1963887247\" target=\"_blank\" rel=\"noopener\">It's weird that GitHub is not considering your \"closing keyword\"&hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.4</td><td>2</td><td>1.792</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/168#issuecomment-1963905996\" target=\"_blank\" rel=\"noopener\">lol the permit rendering broke again.</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.6</td><td>2</td><td>0.948</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/168#issuecomment-1963909275\" target=\"_blank\" rel=\"noopener\">&lt;details&gt;&lt;summary&gt;&lt;b&gt;&&hellip;</a></h6></td><td><details><summary>2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 99&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 1089&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>2</td><td>1.446</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#discussion_r1497569696\" target=\"_blank\" rel=\"noopener\">Are you sure you're up to date? If you are then you might need t&hellip;</a></h6></td><td><details><summary>1.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.2</td><td>2</td><td>0.984</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#discussion_r1501221103\" target=\"_blank\" rel=\"noopener\">That doesn't look right. You should not return a truthy value if&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.8</td><td>2</td><td>2.736</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#discussion_r1501221904\" target=\"_blank\" rel=\"noopener\">I think it makes sense to put this in a local test file?</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.5</td><td>2</td><td>1.31</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#discussion_r1502430625\" target=\"_blank\" rel=\"noopener\">This blacklist idea doesn't seem like a robust approach. We can &hellip;</a></h6></td><td><details><summary>2.07</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.7</td><td>2</td><td>3.654</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#discussion_r1502434520\" target=\"_blank\" rel=\"noopener\">Why did you recombine this?</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.3</td><td>2</td><td>0.39</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#discussion_r1502434944\" target=\"_blank\" rel=\"noopener\">permit.permit should have been adjusted.</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.8</td><td>2</td><td>1.216</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#discussion_r1502435793\" target=\"_blank\" rel=\"noopener\">More typesafe to define the return type up here via &#96;&#96;&hellip;</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.7</td><td>2</td><td>1.568</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#discussion_r1503013853\" target=\"_blank\" rel=\"noopener\">It's because the CSS/style logic is implemented poorly. I tore i&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 83&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.4</td><td>2</td><td>2.696</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#discussion_r1505492465\" target=\"_blank\" rel=\"noopener\">@Keyrxng</a></h6></td><td><details><summary>0.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>0.1</td><td>2</td><td>0.036</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1954640216\" target=\"_blank\" rel=\"noopener\">Your code is outdated. Pull from head</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.3</td><td>2</td><td>0.54</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1957833975\" target=\"_blank\" rel=\"noopener\">I got it under one second on my [branch](https://github.com/pavl&hellip;</a></h6></td><td><details><summary>2.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.6</td><td>2</td><td>3.504</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1959084214\" target=\"_blank\" rel=\"noopener\">My plan is to combine both. Unfortunately I did a large refactor&hellip;</a></h6></td><td><details><summary>2.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 41&#13;  wordValue: 0.1&#13;  result: 2.2&#13;</pre></details></td><td>0.5</td><td>2</td><td>2.79</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1960437636\" target=\"_blank\" rel=\"noopener\">I was going to merge yours in but I realized that its not stable&hellip;</a></h6></td><td><details><summary>2.49</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 58&#13;  wordValue: 0.1&#13;  result: 2.49&#13;</pre></details></td><td>0.7</td><td>2</td><td>4.41</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1960917395\" target=\"_blank\" rel=\"noopener\">It seems unstable when I refresh several times and press claim. &hellip;</a></h6></td><td><details><summary>2.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    br:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 152&#13;  wordValue: 0.1&#13;  result: 2.21&#13;</pre></details></td><td>0.9</td><td>2</td><td>5.004</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1962070117\" target=\"_blank\" rel=\"noopener\">Let me spend some time testing today and I'll be careful to clea&hellip;</a></h6></td><td><details><summary>2.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 41&#13;  wordValue: 0.1&#13;  result: 2.2&#13;</pre></details></td><td>0.3</td><td>2</td><td>1.662</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1963084102\" target=\"_blank\" rel=\"noopener\">The error that I got is from. &#96;&#96;&#96;erc20-permit.ts&hellip;</a></h6></td><td><details><summary>2.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.9</td><td>2</td><td>4.554</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 8.776,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 1957785172,
+        "content": "As far as I remember when you use a forked anvil instance and send a transaction then it is not mined instantly but waits for a new block from a forked network. Anyway there is also [this](https://hardhat.org/hardhat-network/docs/explanation/mining-modes#using-rpc-methods) option since anvil supports hardhat's RPC requiest.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1957785172",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.908,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 45,
+            "wordValue": 0.1,
+            "result": 2.29
+          },
+          "readability": {
+            "fleschKincaid": 65.55750000000002,
+            "syllables": 63,
+            "sentences": 2,
+            "score": 0.9444249999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1957804369,
+        "content": "I see, there is also the `--no-storage-caching ` option which will add some delay to read operations but obviously it would be better to have a separate delay option for onchain read operations",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1957804369",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.868,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 41.64741935483872,
+            "syllables": 49,
+            "sentences": 1,
+            "score": 0.8164741935483871
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/169"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 8.776 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>2</td><td>8.776</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1957785172\" target=\"_blank\" rel=\"noopener\">As far as I remember when you use a forked anvil instance and se&hellip;</a></h6></td><td><details><summary>3.29</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 45&#13;  wordValue: 0.1&#13;  result: 2.29&#13;</pre></details></td><td>0.7</td><td>2</td><td>5.908</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/169#issuecomment-1957804369\" target=\"_blank\" rel=\"noopener\">I see, there is also the &#96;--no-storage-caching &#96; option &hellip;</a></h6></td><td><details><summary>1.92</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.6</td><td>2</td><td>2.868</td></tr></tbody></table></details>"
+  }
+}

@@ -1,0 +1,369 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 50,
+    "task": {
+      "reward": 50,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 50 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>50</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 13.293,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 1799430403,
+        "content": "I think you can just export the result from `createPlugin` because it returns a Hono app instance and you can just [default export](https://hono.dev/docs/getting-started/cloudflare-workers#_2-hello-world)",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/16#discussion_r1799430403",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,25 @@\n+import { createClient } from \"@supabase/supabase-js\";\n+import { createPlugin } from \"@ubiquity-os/ubiquity-os-kernel\";\n+import { ExecutionContext } from \"hono\";\n+import manifest from \"../manifest.json\";\n+import { createAdapters } from \"./adapters\";\n+import { run } from \"./run\";\n+import { SupportedEvents } from \"./types/context\";\n+import { Database } from \"./types/database\";\n+import { Env } from \"./types/env\";\n+import { PluginSettings } from \"./types/plugin-input\";\n+\n+const pluginPromise = createPlugin<PluginSettings, Env, SupportedEvents>(\n+  (context) => {\n+    const supabase = createClient<Database>(context.env.SUPABASE_URL, context.env.SUPABASE_KEY);\n+    return run({ ...context, adapters: createAdapters(supabase, context) });\n+  },\n+  // @ts-expect-error strings cannot be assigned to events\n+  manifest\n+);\n+\n+export default {\n+  async fetch(request: Request, env: Env, context: ExecutionContext) {\n+    return (await pluginPromise).fetch(request, env, context);\n+  },\n+};",
+        "score": {
+          "reward": 2.616,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 69.14136363636365,
+            "syllables": 30,
+            "sentences": 1,
+            "score": 0.9085863636363635
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1807320786,
+        "content": "I think it should be in the env because it's something that the plugin developer should set, not the plugin user (partner).",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/16#discussion_r1807320786",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,24 +1,12 @@\n-import { EmitterWebhookEvent as WebhookEvent, EmitterWebhookEventName as WebhookEventName } from \"@octokit/webhooks\";\n-import { StandardValidator } from \"typebox-validators\";\n-import { SupportedEvents } from \"./context\";\n import { StaticDecode, Type as T } from \"@sinclair/typebox\";\n-\n-export interface PluginInputs<T extends WebhookEventName = SupportedEvents> {\n-  stateId: string;\n-  eventName: T;\n-  eventPayload: WebhookEvent<T>[\"payload\"];\n-  settings: CommandQuerySettings;\n-  authToken: string;\n-  ref: string;\n-}\n+import { LOG_LEVEL } from \"@ubiquity-os/ubiquity-os-logger\";\n \n export const pluginSettingsSchema = T.Object({\n   /**\n    * Allows any user to query anyone else. If false, only org members can query others.\n    */\n-  allowPublicQuery: T.Boolean({ default: true }),\n+  allowPublicQuery: T.Optional(T.Boolean({ default: true })),\n+  logLevel: T.Optional(T.Enum(LOG_LEVEL, { default: LOG_LEVEL.INFO })),",
+        "score": {
+          "reward": 1.456,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 62.10739130434784,
+            "syllables": 33,
+            "sentences": 1,
+            "score": 0.9789260869565216
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2411129341,
+        "content": "I will take a look",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/16#issuecomment-2411129341",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.138,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 117.16000000000003,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2412032993,
+        "content": "@gentlementlegen are you running it with your own kernel or production kernel? if you are using your own then you need to set custom public key in the `createPlugin` options parameter",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/16#issuecomment-2412032993",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.458,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 61.890000000000015,
+            "syllables": 46,
+            "sentences": 2,
+            "score": 0.9810999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2413026555,
+        "content": "The Hono server automatically reads the env from Cloudflare fetch or from `process.env` if it's run in Node. \r\nI didn't even notice that I'm validating the env from the `process.env` instead of from Hono context.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/16#issuecomment-2413026555",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.385,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 66.36500000000001,
+            "syllables": 52,
+            "sentences": 2,
+            "score": 0.9363499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2366509892,
+            "effect": {
+              "addition": 180,
+              "deletion": 224
+            },
+            "reward": 4.04,
+            "priority": 1
+          },
+          {
+            "reviewId": 2379424628,
+            "effect": {
+              "addition": 68,
+              "deletion": 52
+            },
+            "reward": 1.2,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/16"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 13.293 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>5.24</td></tr><tr><td>Review</td><td>Comment</td><td>5</td><td>8.053</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/16\" target=\"_blank\" rel=\"noopener\">#16</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+180 -224</td><td>1</td><td>4.04</td></tr><tr><td>+68 -52</td><td>1</td><td>1.2</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/16#discussion_r1799430403\" target=\"_blank\" rel=\"noopener\">I think you can just export the result from &#96;createPlugin&#9&hellip;</a></h6></td><td><details><summary>2.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.8</td><td>1</td><td>2.616</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/16#discussion_r1807320786\" target=\"_blank\" rel=\"noopener\">I think it should be in the env because it's something that the &hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.456</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/16#issuecomment-2411129341\" target=\"_blank\" rel=\"noopener\">I will take a look</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.138</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/16#issuecomment-2412032993\" target=\"_blank\" rel=\"noopener\">@gentlementlegen are you running it with your own kernel or prod&hellip;</a></h6></td><td><details><summary>1.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.6</td><td>1</td><td>1.458</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/16#issuecomment-2413026555\" target=\"_blank\" rel=\"noopener\">The Hono server automatically reads the env from Cloudflare fetc&hellip;</a></h6></td><td><details><summary>2.07</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.9</td><td>1</td><td>2.385</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 8.037,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1799447519,
+        "content": "```suggestion\r\n      \"ubiquity:example\": \"/query @UbiquityOS\",\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/16#discussion_r1799447519",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,9 +1,7 @@\n {\n   \"name\": \"Query user\",\n   \"description\": \"Queries a user and retrieves its related information, such as the wallet, the label access control, or the current XP.\",\n-  \"ubiquity:listeners\": [\n-    \"issue_comment.created\"\n-  ],\n+  \"ubiquity:listeners\": [\"issue_comment.created\"],\n   \"commands\": {\n     \"query\": {\n       \"ubiquity:example\": \"/query @ubiquibot\",",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1807065118,
+        "content": "Is this handled elsewhere?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/16#discussion_r1807065118",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -11,48 +11,4 @@ jobs:\n     permissions: write-all\n \n     steps:\n-      - uses: actions/checkout@v4\n-\n-      - name: Setup node\n-        uses: actions/setup-node@v4\n-        with:\n-          node-version: \"20.10.0\"\n-\n-      - name: Install deps and run configuration update\n-        run: |\n-          yarn install --immutable --immutable-cache --check-cache\n-          yarn tsc --noCheck --project tsconfig.json\n-\n-      - name: Update manifest configuration using GitHub Script\n-        uses: actions/github-script@v7\n-        with:\n-          script: |\n-            const fs = require('fs');\n-            const path = require('path');\n-\n-            const { pluginSettingsSchema } = require('./src/types/plugin-input');\n-\n-            const manifestPath = path.resolve(\"${{ github.workspace }}\", './manifest.json');\n-            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));\n-\n-            const configuration = JSON.stringify(pluginSettingsSchema);\n-\n-            manifest[\"configuration\"] = JSON.parse(configuration);\n-\n-            const updatedManifest = JSON.stringify(manifest, null, 2)\n-            console.log('Updated manifest:', updatedManifest);\n-            fs.writeFileSync(manifestPath, updatedManifest);\n-\n-      - name: Commit and Push generated types",
+        "score": {
+          "reward": 0.44,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 75.87500000000001,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 0.8412499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1807065807,
+        "content": "log level doesn't seem like a typical config option. This should be handled in the secrets/env of the plugin instead.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/16#discussion_r1807065807",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,24 +1,12 @@\n-import { EmitterWebhookEvent as WebhookEvent, EmitterWebhookEventName as WebhookEventName } from \"@octokit/webhooks\";\n-import { StandardValidator } from \"typebox-validators\";\n-import { SupportedEvents } from \"./context\";\n import { StaticDecode, Type as T } from \"@sinclair/typebox\";\n-\n-export interface PluginInputs<T extends WebhookEventName = SupportedEvents> {\n-  stateId: string;\n-  eventName: T;\n-  eventPayload: WebhookEvent<T>[\"payload\"];\n-  settings: CommandQuerySettings;\n-  authToken: string;\n-  ref: string;\n-}\n+import { LOG_LEVEL } from \"@ubiquity-os/ubiquity-os-logger\";\n \n export const pluginSettingsSchema = T.Object({\n   /**\n    * Allows any user to query anyone else. If false, only org members can query others.\n    */\n-  allowPublicQuery: T.Boolean({ default: true }),\n+  allowPublicQuery: T.Optional(T.Boolean({ default: true })),\n+  logLevel: T.Optional(T.Enum(LOG_LEVEL, { default: LOG_LEVEL.INFO })),",
+        "score": {
+          "reward": 1.755,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 80.30636363636367,
+            "syllables": 30,
+            "sentences": 2,
+            "score": 0.7969363636363633
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1807066273,
+        "content": "What do you need nodejs compatibility for?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/16#discussion_r1807066273",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,6 +1,9 @@\n name = \"command-query-user\"\n-main = \"src/worker.ts\"\n-compatibility_date = \"2024-01-01\"\n-node_compat = true\n+main = \"src/index.ts\"\n+compatibility_date = \"2024-09-24\"\n+compatibility_flags = [ \"nodejs_compat\" ]",
+        "score": {
+          "reward": 0.602,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 42.61571428571432,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.8261571428571431
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2366539768,
+            "effect": {
+              "addition": 180,
+              "deletion": 224
+            },
+            "reward": 4.04,
+            "priority": 1
+          },
+          {
+            "reviewId": 2379041450,
+            "effect": {
+              "addition": 68,
+              "deletion": 52
+            },
+            "reward": 1.2,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/16"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 8.037 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>5.24</td></tr><tr><td>Review</td><td>Comment</td><td>4</td><td>2.797</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/16\" target=\"_blank\" rel=\"noopener\">#16</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+180 -224</td><td>1</td><td>4.04</td></tr><tr><td>+68 -52</td><td>1</td><td>1.2</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/16#discussion_r1799447519\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion\"ubiquity:example\": \"/query @Ub&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/16#discussion_r1807065118\" target=\"_blank\" rel=\"noopener\">Is this handled elsewhere?</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.44</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/16#discussion_r1807065807\" target=\"_blank\" rel=\"noopener\">log level doesn't seem like a typical config option. This should&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.755</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/16#discussion_r1807066273\" target=\"_blank\" rel=\"noopener\">What do you need nodejs compatibility for?</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.602</td></tr></tbody></table></details>"
+  }
+}

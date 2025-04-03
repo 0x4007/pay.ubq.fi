@@ -1,0 +1,1412 @@
+{
+  "shiv810": {
+    "userId": 53160903,
+    "total": 601.446,
+    "task": {
+      "reward": 600,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2185368541,
+        "content": "Resolves #48 \r\n- [X] Control the depth, with which you want to explore new issues\r\n- [X]  Remove Elements from nodes if exceeding the context limit.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 1.446,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 59.10000000000004,
+            "syllables": 35,
+            "sentences": 1,
+            "score": 0.9910000000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1912748335,
+        "content": "Added a description",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1912748335",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -12,6 +12,7 @@ export const pluginSettingsSchema = T.Object({\n   model: T.String({ default: \"o1-mini\" }),\n   openAiBaseUrl: T.Optional(T.String()),\n   similarityThreshold: T.Number({ default: 0.9 }),\n+  maxDepth: T.Optional(T.Number({ default: 3 })),",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 62.79000000000002,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.9720999999999997
+          },
+          "multiplier": 0,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1913665457,
+        "content": "Fixed",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1913665457",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -49,6 +55,8 @@ export async function askLlm(context: Context, question: string, formattedChat:\n       ...(similarIssues?.map((issue: IssueSimilaritySearchResult) => issue.issue_plaintext) || []),\n     ];\n \n+    context.logger.info(\"Similar text: \" + similarText.join(\"\\n\"));",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 121.22000000000003,
+            "syllables": 1,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1913665797,
+        "content": "Updated this with pagination",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1913665797",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -0,0 +1,241 @@\n+import { Context } from \"../types\";\n+import { FetchParams, SimplifiedComment } from \"../types/github-types\";\n+import { logger } from \"./errors\";\n+\n+interface PullRequestGraphQlResponse {\n+  repository: {\n+    pullRequest: {\n+      body: string;\n+      closingIssuesReferences: {\n+        nodes: Array<{\n+          number: number;\n+          url: string;\n+          body: string;\n+          repository: {\n+            owner: {\n+              login: string;\n+            };\n+            name: string;\n+          };\n+        }>;\n+      };\n+      reviews: {\n+        nodes: Array<{\n+          comments: {\n+            nodes: Array<{\n+              id: string;\n+              body: string;\n+              user: {\n+                login: string;\n+                type: string;\n+              };\n+            }>;\n+          };\n+        }>;\n+      };\n+      comments: {\n+        nodes: Array<{\n+          id: string;\n+          body: string;\n+          user: {\n+            login: string;\n+            type: string;\n+          };\n+        }>;\n+      };\n+    };\n+  };\n+}\n+\n+interface PullRequestLinkedIssue {\n+  number: number;\n+  owner: string;\n+  repo: string;\n+  url: string;\n+  body: string;\n+}\n+\n+/**\n+ * Fetch both PR review comments and regular PR comments\n+ */\n+export async function fetchPullRequestComments(params: FetchParams) {\n+  const { octokit } = params.context;\n+  const { owner, repo, issueNum } = params;\n+\n+  try {\n+    // Fetch PR data including both types of comments\n+    const prData = await octokit.graphql<PullRequestGraphQlResponse>(\n+      `\n+      query($owner: String!, $repo: String!, $number: Int!) {\n+        repository(owner: $owner, name: $repo) {\n+          pullRequest(number: $number) {\n+            body\n+            closingIssuesReferences(first: 10) {",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 33.57500000000002,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.7357500000000001
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1913708419,
+        "content": "Isn't this all expected, since we're trying to extract as many referenced issues as possible from the main issue? Ideally, we should match all these cases except for the third one, as long as we can fit the content within the context. Without this approach, we would need to handle cases like \"Originally posted in #xx\" and other references individually.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1913708419",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -1,208 +1,377 @@\n import { Context } from \"../types\";\n-import { StreamlinedComment, StreamlinedComments, TokenLimits } from \"../types/llm\";\n-import { createKey, streamlineComments } from \"../handlers/comments\";\n-import { fetchPullRequestDiff, fetchIssue, fetchIssueComments } from \"./issue-fetching\";\n-import { pullReadmeFromRepoForIssue, splitKey } from \"./issue\";\n+import { StreamlinedComment, TokenLimits } from \"../types/llm\";\n+import { fetchIssue, recursivelyFetchLinkedIssues } from \"./issue-fetching\";\n+import { splitKey } from \"./issue\";\n import { logger } from \"./errors\";\n+import { Issue, LinkedIssues } from \"../types/github-types\";\n+import { encode } from \"gpt-tokenizer\";\n \n-export async function formatChatHistory(\n-  context: Context,\n-  streamlined: Record<string, StreamlinedComment[]>,\n-  specAndBodies: Record<string, string>\n-): Promise<string[]> {\n-  // At this point really we should have all the context we can obtain but we try again just in case\n-  const keys = new Set([...Object.keys(streamlined), ...Object.keys(specAndBodies), createKey(context.payload.issue.html_url)]);\n-  const tokenLimits: TokenLimits = {\n-    modelMaxTokenLimit: context.adapters.openai.completions.getModelMaxTokenLimit(context.config.model),\n-    maxCompletionTokens: context.config.maxTokens || context.adapters.openai.completions.getModelMaxOutputLimit(context.config.model),\n-    runningTokenCount: 0,\n-    tokensRemaining: 0,\n-  };\n+interface TreeNode {\n+  key: string;\n+  issue: Issue;\n+  children: TreeNode[];\n+  parent?: TreeNode;\n+  depth: number;\n+  comments?: StreamlinedComment[];\n+  body?: string;\n+  similarIssues?: Issue[];\n+  codeSnippets?: { body: string; path: string }[];\n+  readmeSection?: string;\n+}\n \n-  // what we start out with\n-  tokenLimits.tokensRemaining = tokenLimits.modelMaxTokenLimit - tokenLimits.maxCompletionTokens;\n-\n-  // careful adding any more API calls here as it's likely to hit the secondary rate limit\n-  const chatHistory = await Promise.all(\n-    // keys are owner/repo/issueNum; so for each issue, we want to create a block\n-    Array.from(keys).map(async (key, i) => {\n-      // if we run out of tokens, we should stop\n-      if (tokenLimits.tokensRemaining < 0) {\n-        logger.error(`Ran out of tokens at block ${i}`);\n-        return \"\";\n-      }\n-      try {\n-        const [currentTokenCount, result] = await createContextBlockSection({\n-          context,\n-          key,\n-          streamlined,\n-          specAndBodies,\n-          isCurrentIssue: key === createKey(context.payload.issue.html_url),\n-          tokenLimits,\n-        });\n-        // update the token count\n-        tokenLimits.runningTokenCount = currentTokenCount;\n-        tokenLimits.tokensRemaining = tokenLimits.modelMaxTokenLimit - tokenLimits.maxCompletionTokens - currentTokenCount;\n-        return result;\n-      } catch (error) {\n-        logger.error(`Error creating context block for ${key}: ${error}`);\n-      }\n-    })\n-  );\n+function updateTokenCount(text: string, tokenLimits: TokenLimits): boolean {\n+  const tokenCount = encode(text, { disallowedSpecial: new Set() }).length;\n+  if (tokenLimits.runningTokenCount + tokenCount > tokenLimits.tokensRemaining) {\n+    return false;\n+  }\n+  tokenLimits.runningTokenCount += tokenCount;\n+  return true;\n+}\n \n-  return Array.from(new Set(chatHistory)).filter((x): x is string => !!x);\n+function validateGitHubKey(key: string): boolean {\n+  const parts = key.split(\"/\");\n+\n+  if (parts.length !== 3) return false;\n+\n+  const [owner, repo, number] = parts;\n+\n+  if (!owner || owner === \"issues\" || !/^[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/i.test(owner)) {\n+    return false;\n+  }\n+\n+  if (!repo || !/^[a-zA-Z0-9-_]+$/i.test(repo)) {\n+    return false;\n+  }\n+\n+  return /^\\d+$/.test(number);\n }\n \n-// These give structure and provide the distinction between the different sections of the chat history\n-function getCorrectHeaderString(prDiff: string | null, isCurrentIssue: boolean, isConvo: boolean) {\n-  const strings = {\n-    convo: {\n-      pull: {\n-        linked: `Linked Pull Request Conversation`,\n-        current: `Current Pull Request Conversation`,\n-      },\n-      issue: {\n-        linked: `Linked Task Conversation`,\n-        current: `Current Task Conversation`,\n-      },\n-    },\n-    spec: {\n-      pull: {\n-        linked: `Linked Pull Request Specification`,\n-        current: `Current Pull Request Specification`,\n-      },\n-      issue: {\n-        linked: `Linked Task Specification`,\n-        current: `Current Task Specification`,\n-      },\n-    },\n-  };\n+function extractGitHubInfo(url: string): { owner: string; repo: string; number: string } | null {\n+  try {\n+    const urlMatch = url.match(/github\\.com\\/([^/]+)\\/([^/]+?)\\/(issues|pull)\\/(\\d+)/);\n+    if (urlMatch) {\n+      return {\n+        owner: urlMatch[1],\n+        repo: urlMatch[2],\n+        number: urlMatch[4],\n+      };\n+    }\n+\n+    const repoMatch = url.match(/([^/\\s]+)\\/([^/\\s#]+)#(\\d+)/);\n+    if (repoMatch) {\n+      return {\n+        owner: repoMatch[1],\n+        repo: repoMatch[2],\n+        number: repoMatch[3],\n+      };\n+    }\n+\n+    return null;\n+  } catch {\n+    return null;\n+  }\n+}\n+\n+async function extractReferencedIssuesAndPrs(body: string, owner: string, repo: string): Promise<string[]> {\n+  const links = new Set<string>();\n+  const processedRefs = new Set<string>();\n+\n+  function addValidReference(key: string) {\n+    key = key.replace(/[[]]/g, \"\");\n+\n+    if (!validateGitHubKey(key)) {\n+      return;\n+    }\n+    if (!processedRefs.has(key)) {\n+      processedRefs.add(key);\n+      links.add(key);\n+    }\n+  }\n+\n+  const numberRefs = body.match(/(?:^|\\s)#(\\d+)(?:\\s|$)/g) || [];\n+  for (const ref of numberRefs) {\n+    const number = ref.trim().substring(1);\n+    if (/^\\d+$/.test(number)) {\n+      const key = `${owner}/${repo}/${number}`;\n+      addValidReference(key);\n+    }\n+  }\n+\n+  const resolveRefs = body.match(/(?:Resolves|Closes|Fixes)\\s+#(\\d+)/gi) || [];",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 62,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 61.687365591397864,
+            "syllables": 91,
+            "sentences": 3,
+            "score": 0.9831263440860214
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1913708938,
+        "content": "Updated with the pagination,  handles the PRRC comments and the pull request comments.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1913708938",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -0,0 +1,241 @@\n+import { Context } from \"../types\";\n+import { FetchParams, SimplifiedComment } from \"../types/github-types\";\n+import { logger } from \"./errors\";\n+\n+interface PullRequestGraphQlResponse {\n+  repository: {\n+    pullRequest: {\n+      body: string;\n+      closingIssuesReferences: {\n+        nodes: Array<{\n+          number: number;\n+          url: string;\n+          body: string;\n+          repository: {\n+            owner: {\n+              login: string;\n+            };\n+            name: string;\n+          };\n+        }>;\n+      };\n+      reviews: {\n+        nodes: Array<{\n+          comments: {\n+            nodes: Array<{\n+              id: string;\n+              body: string;\n+              user: {\n+                login: string;\n+                type: string;\n+              };\n+            }>;\n+          };\n+        }>;\n+      };\n+      comments: {\n+        nodes: Array<{\n+          id: string;\n+          body: string;\n+          user: {\n+            login: string;\n+            type: string;\n+          };\n+        }>;\n+      };\n+    };\n+  };\n+}\n+\n+interface PullRequestLinkedIssue {\n+  number: number;\n+  owner: string;\n+  repo: string;\n+  url: string;\n+  body: string;\n+}\n+\n+/**\n+ * Fetch both PR review comments and regular PR comments\n+ */\n+export async function fetchPullRequestComments(params: FetchParams) {\n+  const { octokit } = params.context;\n+  const { owner, repo, issueNum } = params;\n+\n+  try {\n+    // Fetch PR data including both types of comments\n+    const prData = await octokit.graphql<PullRequestGraphQlResponse>(\n+      `\n+      query($owner: String!, $repo: String!, $number: Int!) {\n+        repository(owner: $owner, name: $repo) {\n+          pullRequest(number: $number) {\n+            body\n+            closingIssuesReferences(first: 10) {\n+              nodes {\n+                number\n+                url\n+                body\n+                repository {\n+                  owner {\n+                    login\n+                  }\n+                  name\n+                }\n+              }\n+            }\n+            reviews(first: 100) {",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 56.97846153846157,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 0.9697846153846157
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1921138085,
+        "content": "[PR Review Comment](https://github.com/ShivTestOrg/test-public/pull/208#discussion_r1920837880)",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1921138085",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -1,21 +1,83 @@\n import { Context } from \"../types/context\";\n \n+interface CommentOptions {\n+  inReplyTo?: {\n+    commentId?: number; // Required for replying to existing comments\n+  };\n+}\n+\n /**\n- * Add a comment to an issue\n+ * Add a comment to an issue or pull request\n  * @param context - The context object containing environment and configuration details\n  * @param message - The message to add as a comment\n+ * @param options - Optional parameters for pull request review comments\n  */\n-export async function addCommentToIssue(context: Context, message: string) {\n+export async function addCommentToIssue(context: Context, message: string, options?: CommentOptions) {\n   const { payload } = context;\n-  const issueNumber = payload.issue.number;\n+  const owner = payload.repository.owner.login;\n+  const repo = payload.repository.name;\n+\n   try {\n-    await context.octokit.rest.issues.createComment({\n-      owner: payload.repository.owner.login,\n-      repo: payload.repository.name,\n-      issue_number: issueNumber,\n-      body: message,\n-    });\n+    // If this is a pull request review comment",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 62.79000000000002,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.9720999999999997
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1921138106,
+        "content": "Fixed them, has to set them to const value for testing.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1921138106",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -0,0 +1,30 @@\n+import { Context } from \"../types\";\n+import { TokenLimits } from \"../types/llm\";\n+import { encode } from \"gpt-tokenizer\";\n+\n+export function createDefaultTokenLimits(context: Context): TokenLimits {\n+  // const modelMaxTokenLimit = context.adapters.openai.completions.getModelMaxTokenLimit(context.config.model);\n+  // const maxCompletionTokens = context.adapters.openai.completions.getModelMaxOutputLimit(context.config.model);\n+\n+  const modelMaxTokenLimit = 128_000;\n+  const maxCompletionTokens = 16_384;",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 95.68818181818183,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.6431181818181817
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1921138328,
+        "content": "No, re-ranking and embedding search, is different. Re-Ranking, uses the query (the question) and documents (the similar issues and comments), and ranks them in order of relevance to the query, this uses something `Cross Encoder`. This is very similar to embedding, but does not require us to create/manage embeddings.\r\nAnd, yes in theory the documents, could be text strings from any source.\r\ntldr; we extract similar issues/comments (Our DB) and then rank them in order for a relevance search(voyage reranker) with the question asked.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1921138328",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -27,4 +36,62 @@ export class Rerankers extends SuperVoyage {\n     const rerankedResults = response.data || [];\n     return rerankedResults.map((result) => result.document).filter((document): document is string => document !== undefined);\n   }\n+\n+  async reRankSimilarContent(",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 87,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 61.78779310344828,
+            "syllables": 131,
+            "sentences": 5,
+            "score": 0.9821220689655172
+          },
+          "multiplier": 0,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1921138726,
+        "content": "The Claude SDK has never worked for me with Openrouter. The only benefit it offers is the ability to cache system messages for 5 minutes.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1921138726",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -4,7 +4,7 @@ import { createClient } from \"@supabase/supabase-js\";\n import { VoyageAIClient } from \"voyageai\";\n import OpenAI from \"openai\";",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 62.17150000000001,
+            "syllables": 39,
+            "sentences": 2,
+            "score": 0.978285
+          },
+          "multiplier": 0,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1921139066,
+        "content": "I can manage these cases on a case-by-case basis; the alternative would be more complex. I assume, similar to \"Resolves #1234,\" there are only a few cases like this?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1921139066",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -1,208 +1,377 @@\n import { Context } from \"../types\";\n-import { StreamlinedComment, StreamlinedComments, TokenLimits } from \"../types/llm\";\n-import { createKey, streamlineComments } from \"../handlers/comments\";\n-import { fetchPullRequestDiff, fetchIssue, fetchIssueComments } from \"./issue-fetching\";\n-import { pullReadmeFromRepoForIssue, splitKey } from \"./issue\";\n+import { StreamlinedComment, TokenLimits } from \"../types/llm\";\n+import { fetchIssue, recursivelyFetchLinkedIssues } from \"./issue-fetching\";\n+import { splitKey } from \"./issue\";\n import { logger } from \"./errors\";\n+import { Issue, LinkedIssues } from \"../types/github-types\";\n+import { encode } from \"gpt-tokenizer\";\n \n-export async function formatChatHistory(\n-  context: Context,\n-  streamlined: Record<string, StreamlinedComment[]>,\n-  specAndBodies: Record<string, string>\n-): Promise<string[]> {\n-  // At this point really we should have all the context we can obtain but we try again just in case\n-  const keys = new Set([...Object.keys(streamlined), ...Object.keys(specAndBodies), createKey(context.payload.issue.html_url)]);\n-  const tokenLimits: TokenLimits = {\n-    modelMaxTokenLimit: context.adapters.openai.completions.getModelMaxTokenLimit(context.config.model),\n-    maxCompletionTokens: context.config.maxTokens || context.adapters.openai.completions.getModelMaxOutputLimit(context.config.model),\n-    runningTokenCount: 0,\n-    tokensRemaining: 0,\n-  };\n+interface TreeNode {\n+  key: string;\n+  issue: Issue;\n+  children: TreeNode[];\n+  parent?: TreeNode;\n+  depth: number;\n+  comments?: StreamlinedComment[];\n+  body?: string;\n+  similarIssues?: Issue[];\n+  codeSnippets?: { body: string; path: string }[];\n+  readmeSection?: string;\n+}\n \n-  // what we start out with\n-  tokenLimits.tokensRemaining = tokenLimits.modelMaxTokenLimit - tokenLimits.maxCompletionTokens;\n-\n-  // careful adding any more API calls here as it's likely to hit the secondary rate limit\n-  const chatHistory = await Promise.all(\n-    // keys are owner/repo/issueNum; so for each issue, we want to create a block\n-    Array.from(keys).map(async (key, i) => {\n-      // if we run out of tokens, we should stop\n-      if (tokenLimits.tokensRemaining < 0) {\n-        logger.error(`Ran out of tokens at block ${i}`);\n-        return \"\";\n-      }\n-      try {\n-        const [currentTokenCount, result] = await createContextBlockSection({\n-          context,\n-          key,\n-          streamlined,\n-          specAndBodies,\n-          isCurrentIssue: key === createKey(context.payload.issue.html_url),\n-          tokenLimits,\n-        });\n-        // update the token count\n-        tokenLimits.runningTokenCount = currentTokenCount;\n-        tokenLimits.tokensRemaining = tokenLimits.modelMaxTokenLimit - tokenLimits.maxCompletionTokens - currentTokenCount;\n-        return result;\n-      } catch (error) {\n-        logger.error(`Error creating context block for ${key}: ${error}`);\n-      }\n-    })\n-  );\n+function updateTokenCount(text: string, tokenLimits: TokenLimits): boolean {\n+  const tokenCount = encode(text, { disallowedSpecial: new Set() }).length;\n+  if (tokenLimits.runningTokenCount + tokenCount > tokenLimits.tokensRemaining) {\n+    return false;\n+  }\n+  tokenLimits.runningTokenCount += tokenCount;\n+  return true;\n+}\n \n-  return Array.from(new Set(chatHistory)).filter((x): x is string => !!x);\n+function validateGitHubKey(key: string): boolean {\n+  const parts = key.split(\"/\");\n+\n+  if (parts.length !== 3) return false;\n+\n+  const [owner, repo, number] = parts;\n+\n+  if (!owner || owner === \"issues\" || !/^[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/i.test(owner)) {\n+    return false;\n+  }\n+\n+  if (!repo || !/^[a-zA-Z0-9-_]+$/i.test(repo)) {\n+    return false;\n+  }\n+\n+  return /^\\d+$/.test(number);\n }\n \n-// These give structure and provide the distinction between the different sections of the chat history\n-function getCorrectHeaderString(prDiff: string | null, isCurrentIssue: boolean, isConvo: boolean) {\n-  const strings = {\n-    convo: {\n-      pull: {\n-        linked: `Linked Pull Request Conversation`,\n-        current: `Current Pull Request Conversation`,\n-      },\n-      issue: {\n-        linked: `Linked Task Conversation`,\n-        current: `Current Task Conversation`,\n-      },\n-    },\n-    spec: {\n-      pull: {\n-        linked: `Linked Pull Request Specification`,\n-        current: `Current Pull Request Specification`,\n-      },\n-      issue: {\n-        linked: `Linked Task Specification`,\n-        current: `Current Task Specification`,\n-      },\n-    },\n-  };\n+function extractGitHubInfo(url: string): { owner: string; repo: string; number: string } | null {\n+  try {\n+    const urlMatch = url.match(/github\\.com\\/([^/]+)\\/([^/]+?)\\/(issues|pull)\\/(\\d+)/);\n+    if (urlMatch) {\n+      return {\n+        owner: urlMatch[1],\n+        repo: urlMatch[2],\n+        number: urlMatch[4],\n+      };\n+    }\n+\n+    const repoMatch = url.match(/([^/\\s]+)\\/([^/\\s#]+)#(\\d+)/);\n+    if (repoMatch) {\n+      return {\n+        owner: repoMatch[1],\n+        repo: repoMatch[2],\n+        number: repoMatch[3],\n+      };\n+    }\n+\n+    return null;\n+  } catch {\n+    return null;\n+  }\n+}\n+\n+async function extractReferencedIssuesAndPrs(body: string, owner: string, repo: string): Promise<string[]> {\n+  const links = new Set<string>();\n+  const processedRefs = new Set<string>();\n+\n+  function addValidReference(key: string) {\n+    key = key.replace(/[[]]/g, \"\");\n+\n+    if (!validateGitHubKey(key)) {\n+      return;\n+    }\n+    if (!processedRefs.has(key)) {\n+      processedRefs.add(key);\n+      links.add(key);\n+    }\n+  }\n+\n+  const numberRefs = body.match(/(?:^|\\s)#(\\d+)(?:\\s|$)/g) || [];\n+  for (const ref of numberRefs) {\n+    const number = ref.trim().substring(1);\n+    if (/^\\d+$/.test(number)) {\n+      const key = `${owner}/${repo}/${number}`;\n+      addValidReference(key);\n+    }\n+  }\n+\n+  const resolveRefs = body.match(/(?:Resolves|Closes|Fixes)\\s+#(\\d+)/gi) || [];",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 76.48314516129035,
+            "syllables": 42,
+            "sentences": 2,
+            "score": 0.8351685483870965
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2483455070,
+        "content": "QA: \r\n[Without the structured representation](https://github.com/sshivaditya2019/test-public/issues/181#181)\r\n[New Implementation](https://github.com/sshivaditya2019/test-public/issues/210#issuecomment-2483437508)",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#issuecomment-2483455070",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": -5.727142857142809,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2591414274,
+        "content": "QA:\r\n1. Normal Discussion Reference [Issue](https://github.com/ShivTestOrg/test-public/issues/237#issuecomment-2591402594)\r\n2. Fix Links in Responses [Issue](https://github.com/ShivTestOrg/test-public/issues/247#issuecomment-2590998114)\r\n3. Large Context Issue Thread [Issue](https://github.com/ShivTestOrg/test-public/issues/248)",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#issuecomment-2591414274",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.3
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 44.97000000000003,
+            "syllables": 26,
+            "sentences": 1,
+            "score": 0.8497000000000002
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2594407412,
+        "content": "The Openrouter account has run out of credits and needs to be topped up.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#issuecomment-2594407412",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 77.81071428571428,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.8218928571428572
+          },
+          "multiplier": 0,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2594412975,
+        "content": "Earlier, we retrieved all the contexts and tried to include everything in the context. In this approach, it's the opposite: we first extract the root issue or pull request review comment, then find similar issues and comments. Starting with the body of each issue and comment, we look for any references to other issues or pull requests. This process is repeated recursively until we reach either the maximum depth or token limit.\r\nOnce we have all the relevant data, we restructure it into a tree format (which could potentially be converted to XML). The final structure will always be smaller than the original recursive retrieval, as unnecessary tokens will be removed. This ensures there is always enough space for the output tokens.\r\nTL;DR: This method enables us to fetch data at depths of up to 30 (or more), as long as it fits within the context memory.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#issuecomment-2594412975",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 149,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 56.77223573825506,
+            "syllables": 231,
+            "sentences": 8,
+            "score": 0.9677223573825506
+          },
+          "multiplier": 0,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 601.446 XP ]</a>&nbsp;</h3><h6>@shiv810</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>600</td></tr><tr><td>Review</td><td>Comment</td><td>15</td><td>1.446</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35\" target=\"_blank\" rel=\"noopener\">Resolves #48 - [X] Control the depth, with which you want to e&hellip;</a></h6></td><td><details><summary>1.86</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.6</td><td>1</td><td>1.446</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1912748335\" target=\"_blank\" rel=\"noopener\">Added a description</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1913665457\" target=\"_blank\" rel=\"noopener\">Fixed</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1913665797\" target=\"_blank\" rel=\"noopener\">Updated this with pagination</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1913708419\" target=\"_blank\" rel=\"noopener\">Isn't this all expected, since we're trying to extract as many r&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 62&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1913708938\" target=\"_blank\" rel=\"noopener\">Updated with the pagination,  handles the PRRC comments and the &hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1921138085\" target=\"_blank\" rel=\"noopener\">[PR Review Comment](https://github.com/ShivTestOrg/test-public/p&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1921138106\" target=\"_blank\" rel=\"noopener\">Fixed them, has to set them to const value for testing.</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1921138328\" target=\"_blank\" rel=\"noopener\">No, re-ranking and embedding search, is different. Re-Ranking, u&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 87&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1921138726\" target=\"_blank\" rel=\"noopener\">The Claude SDK has never worked for me with Openrouter. The only&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1921139066\" target=\"_blank\" rel=\"noopener\">I can manage these cases on a case-by-case basis; the alternativ&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#issuecomment-2483455070\" target=\"_blank\" rel=\"noopener\">QA: [Without the structured representation](https://github.com&hellip;</a></h6></td><td><details><summary>2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#issuecomment-2591414274\" target=\"_blank\" rel=\"noopener\">QA:1. Normal Discussion Reference [Issue](https://github.com/S&hellip;</a></h6></td><td><details><summary>3.3</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.3&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#issuecomment-2594407412\" target=\"_blank\" rel=\"noopener\">The Openrouter account has run out of credits and needs to be to&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.4</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#issuecomment-2594412975\" target=\"_blank\" rel=\"noopener\">Earlier, we retrieved all the contexts and tried to include ever&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 149&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>3</td><td>0</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 183.522,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2581796013,
+        "content": "@gentlementlegen you should always suggest a time estimate when filing new issues. @shiv810 please feel free to add the time label if you think you can handle this.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/issues/48#issuecomment-2581796013",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.374,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 71.76785714285715,
+            "syllables": 40,
+            "sentences": 2,
+            "score": 0.8823214285714285
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2561199916,
+        "content": "QA seems fine",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#pullrequestreview-2561199916",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.138,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 119.19000000000003,
+            "syllables": 3,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1918062097,
+        "content": "Why string and number? Seems wrong",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1918062097",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -33,7 +34,7 @@ export type GroundTruthsSystemMessageTemplate = {\n };\n \n export type StreamlinedComment = {\n-  id: number;\n+  id: string | number;",
+        "score": {
+          "reward": 1.896,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 105.09000000000002,
+            "syllables": 7,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1918063286,
+        "content": "```suggestion\nexport type GraphQlIssueSearchResult = {\n```\nI would write out the full term to reduce cognitive overhead.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1918063286",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,26 +1,88 @@\n import { RestEndpointMethodTypes } from \"@octokit/rest\";\n import { Context } from \"./context\";\n \n-export type Issue = RestEndpointMethodTypes[\"issues\"][\"get\"][\"response\"][\"data\"];\n-export type IssueComments = RestEndpointMethodTypes[\"issues\"][\"listComments\"][\"response\"][\"data\"][0];\n-export type ReviewComments = RestEndpointMethodTypes[\"pulls\"][\"listReviewComments\"][\"response\"][\"data\"][0];\n+type BaseIssue = RestEndpointMethodTypes[\"issues\"][\"get\"][\"response\"][\"data\"];\n+export interface Issue extends BaseIssue {\n+  prDetails?: PullRequestDetails;\n+}\n+\n export type User = RestEndpointMethodTypes[\"users\"][\"getByUsername\"][\"response\"][\"data\"];\n \n export type FetchParams = {\n   context: Context;\n   issueNum?: number;\n   owner?: string;\n   repo?: string;\n+  currentDepth?: number; // Current depth in the tree\n+  maxDepth?: number; // Maximum depth to traverse\n+  parentIssueKey?: string; // Parent issue key (Tree structure)\n+};\n+\n+type Repository = {\n+  owner: {\n+    login: string;\n+  };\n+  name: string;\n+};\n+\n+type IssueData = {\n+  number: number;\n+  url: string;\n+  body: string;\n+  repository: Repository;\n+};\n+\n+type PullRequestNode = {\n+  id: string;\n+  body: string;\n+  closingIssuesReferences: {\n+    nodes: IssueData[];\n+  };\n+};\n+\n+type PullRequestReviewCommentNode = {\n+  id: string;\n+  body: string;\n+  pullRequest: PullRequestNode;\n };\n \n-export type LinkedIssues = {\n+type IssueCommentNode = {\n+  id: string;\n+  body: string;\n+  issue: IssueData;\n+};\n+\n+export type GqlIssueSearchResult = {",
+        "score": {
+          "reward": 2.562,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 72.61545454545457,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.8738454545454544
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1918070832,
+        "content": "So you're reranking based on embeddings. And the embeddings I assume are already in the database when this process of asking is started. Does this mean we can also include embeddings from other sources like telegram etc?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1918070832",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -27,4 +36,62 @@ export class Rerankers extends SuperVoyage {\n     const rerankedResults = response.data || [];\n     return rerankedResults.map((result) => result.document).filter((document): document is string => document !== undefined);\n   }\n+\n+  async reRankSimilarContent(",
+        "score": {
+          "reward": 4.11,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 64.85201754385966,
+            "syllables": 58,
+            "sentences": 3,
+            "score": 0.9514798245614035
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1918072201,
+        "content": "Do you have QA for this",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1918072201",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,21 +1,83 @@\n import { Context } from \"../types/context\";\n \n+interface CommentOptions {\n+  inReplyTo?: {\n+    commentId?: number; // Required for replying to existing comments\n+  };\n+}\n+\n /**\n- * Add a comment to an issue\n+ * Add a comment to an issue or pull request\n  * @param context - The context object containing environment and configuration details\n  * @param message - The message to add as a comment\n+ * @param options - Optional parameters for pull request review comments\n  */\n-export async function addCommentToIssue(context: Context, message: string) {\n+export async function addCommentToIssue(context: Context, message: string, options?: CommentOptions) {\n   const { payload } = context;\n-  const issueNumber = payload.issue.number;\n+  const owner = payload.repository.owner.login;\n+  const repo = payload.repository.name;\n+\n   try {\n-    await context.octokit.rest.issues.createComment({\n-      owner: payload.repository.owner.login,\n-      repo: payload.repository.name,\n-      issue_number: issueNumber,\n-      body: message,\n-    });\n+    // If this is a pull request review comment",
+        "score": {
+          "reward": 1.422,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 116.14500000000001,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1918075983,
+        "content": "Shouldn't we look this up from a collection based on what model we selected?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1918075983",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,30 @@\n+import { Context } from \"../types\";\n+import { TokenLimits } from \"../types/llm\";\n+import { encode } from \"gpt-tokenizer\";\n+\n+export function createDefaultTokenLimits(context: Context): TokenLimits {\n+  // const modelMaxTokenLimit = context.adapters.openai.completions.getModelMaxTokenLimit(context.config.model);\n+  // const maxCompletionTokens = context.adapters.openai.completions.getModelMaxOutputLimit(context.config.model);\n+\n+  const modelMaxTokenLimit = 128_000;\n+  const maxCompletionTokens = 16_384;",
+        "score": {
+          "reward": 3.996,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 84.45000000000003,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.7554999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1918077238,
+        "content": "Shouldn't we be using open router? I wonder if we should use Claude instead perhaps we should compare outputs.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1918077238",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -4,7 +4,7 @@ import { createClient } from \"@supabase/supabase-js\";\n import { VoyageAIClient } from \"voyageai\";\n import OpenAI from \"openai\";",
+        "score": {
+          "reward": 3.312,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 78.24500000000002,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.8175499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2591834952,
+        "content": "It's a bit difficult for me to wrap my head around how much context was imported just by looking at the QA, but I trust that you ensured that there is a significant amount of context in the tests. \nMaybe you can elaborate on your changes made so that I can understand your strategy and approach better?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#issuecomment-2591834952",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.864,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 58,
+            "wordValue": 0.1,
+            "result": 2.49
+          },
+          "readability": {
+            "fleschKincaid": 62.1689655172414,
+            "syllables": 79,
+            "sentences": 2,
+            "score": 0.9783103448275859
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2594905699,
+        "content": "Can we coordinate in Telegram to fix this? As I understand it's your account but let's use my account instead and I can handle paying for it?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#issuecomment-2594905699",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.088,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 75.42784482758621,
+            "syllables": 40,
+            "sentences": 2,
+            "score": 0.8457215517241379
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2532992666,
+            "effect": {
+              "addition": 1847,
+              "deletion": 641
+            },
+            "reward": 74.64,
+            "priority": 3
+          },
+          {
+            "reviewId": 2555263603,
+            "effect": {
+              "addition": 1180,
+              "deletion": 1021
+            },
+            "reward": 66.03,
+            "priority": 3
+          },
+          {
+            "reviewId": 2561199916,
+            "effect": {
+              "addition": 342,
+              "deletion": 261
+            },
+            "reward": 18.09,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 183.522 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>158.76</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.374</td></tr><tr><td>Review</td><td>Comment</td><td>9</td><td>23.388</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35\" target=\"_blank\" rel=\"noopener\">#35</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+1847 -641</td><td>3</td><td>74.64</td></tr><tr><td>+1180 -1021</td><td>3</td><td>66.03</td></tr><tr><td>+342 -261</td><td>3</td><td>18.09</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/issues/48#issuecomment-2581796013\" target=\"_blank\" rel=\"noopener\">@gentlementlegen you should always suggest a time estimate when &hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.2</td><td>3</td><td>1.374</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#pullrequestreview-2561199916\" target=\"_blank\" rel=\"noopener\">QA seems fine</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.138</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1918062097\" target=\"_blank\" rel=\"noopener\">Why string and number? Seems wrong</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.896</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1918063286\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionexport type GraphQlIssueSearchResult =&hellip;</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.562</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1918070832\" target=\"_blank\" rel=\"noopener\">So you're reranking based on embeddings. And the embeddings I as&hellip;</a></h6></td><td><details><summary>2.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.5</td><td>3</td><td>4.11</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1918072201\" target=\"_blank\" rel=\"noopener\">Do you have QA for this</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.6</td><td>3</td><td>1.422</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1918075983\" target=\"_blank\" rel=\"noopener\">Shouldn't we look this up from a collection based on what model &hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.9</td><td>3</td><td>3.996</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1918077238\" target=\"_blank\" rel=\"noopener\">Shouldn't we be using open router? I wonder if we should use Cla&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.6</td><td>3</td><td>3.312</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#issuecomment-2591834952\" target=\"_blank\" rel=\"noopener\">It's a bit difficult for me to wrap my head around how much cont&hellip;</a></h6></td><td><details><summary>2.49</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 58&#13;  wordValue: 0.1&#13;  result: 2.49&#13;</pre></details></td><td>0.4</td><td>3</td><td>3.864</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#issuecomment-2594905699\" target=\"_blank\" rel=\"noopener\">Can we coordinate in Telegram to fix this? As I understand it's &hellip;</a></h6></td><td><details><summary>1.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.3</td><td>3</td><td>2.088</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 145.271,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2581803500,
+        "content": "I must say I didn't work on that plugin and wouldn't be able to give an estimate on this one so I left it empty.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/issues/48#issuecomment-2581803500",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.326,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 79.16333333333336,
+            "syllables": 32,
+            "sentences": 1,
+            "score": 0.8083666666666665
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2775282277,
+        "content": "```diff\r\n! No answer from OpenAI\r\n```\r\n_Originally posted by @ubiquity-os-beta[bot] in https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/67#issuecomment-2577541987_\r\n## What happened\r\nThe `/ask` command failed to run, due to a context being too large, thus failing with\r\n```json\r\n{\r\n       \"res\": {\r\n         \"error\": {\r\n           \"message\": \"Provider returned error\",\r\n           \"code\": 400,\r\n           \"metadata\": {\r\n             \"raw\": \"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"This model's maximum context length has been exceeded. Please reduce the length of the messages.\\\",\\n    \\\"type\\\": \\\"invalid_request_error\\\",\\n    \\\"param\\\": \\\"messages\\\",\\n    \\\"code\\\": \\\"context_length_exceeded\\\"\\n  }\\n}\",\r\n             \"provider_name\": \"OpenAI\"\r\n           }\r\n         },\r\n         \"user_id\": \"user_2njZil2BmAzm3iDZvVsx69KWg4A\"\r\n       },\r\n       \"caller\": \"Completions.createCompletion\"\r\n     }\r\n```\r\nMultiple problems here:\r\n- it should use `postComment` so we get the run url and the proper error stack\r\n- there should not be two comments for the failure\r\n- the context should be truncated in some way to allow `/ask` to run properly\r\n## What was expected\r\n`/ask` should truncate the context so it runs properly and still gives an accurate answer.\r\n## How to reproduce\r\nThe easiest would probably to run `/ask` against the aforementioned issue, or create an issue with a very long content.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/issues/48",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 8.54,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 8
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "h2": {
+                "score": 1,
+                "elementCount": 3
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 4.3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 103,
+            "wordValue": 0.1,
+            "result": 2.59
+          },
+          "readability": {
+            "fleschKincaid": 39.959022988505765,
+            "syllables": 175,
+            "sentences": 3,
+            "score": 0.7995902298850577
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1905415887,
+        "content": "Wouldn't these logs be `debug` instead of `info`?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1905415887",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -49,6 +55,8 @@ export async function askLlm(context: Context, question: string, formattedChat:\n       ...(similarIssues?.map((issue: IssueSimilaritySearchResult) => issue.issue_plaintext) || []),\n     ];\n \n+    context.logger.info(\"Similar text: \" + similarText.join(\"\\n\"));",
+        "score": {
+          "reward": 1.35,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 103.04428571428575,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1905418177,
+        "content": "Would be nice to have a description here",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1905418177",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -12,6 +12,7 @@ export const pluginSettingsSchema = T.Object({\n   model: T.String({ default: \"o1-mini\" }),\n   openAiBaseUrl: T.Optional(T.String()),\n   similarityThreshold: T.Number({ default: 0.9 }),\n+  maxDepth: T.Optional(T.Number({ default: 3 })),",
+        "score": {
+          "reward": 1.911,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 92.965,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.67035
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1905428946,
+        "content": "This seems dangerous and lead to issues before, like in the following scenarios:\n- multiple closing PRs\n- this content located in the comment of the body\n- this content located in a reference to another comment, or within a code block\n- after `#` there can be a number or a URL",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1905428946",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,208 +1,377 @@\n import { Context } from \"../types\";\n-import { StreamlinedComment, StreamlinedComments, TokenLimits } from \"../types/llm\";\n-import { createKey, streamlineComments } from \"../handlers/comments\";\n-import { fetchPullRequestDiff, fetchIssue, fetchIssueComments } from \"./issue-fetching\";\n-import { pullReadmeFromRepoForIssue, splitKey } from \"./issue\";\n+import { StreamlinedComment, TokenLimits } from \"../types/llm\";\n+import { fetchIssue, recursivelyFetchLinkedIssues } from \"./issue-fetching\";\n+import { splitKey } from \"./issue\";\n import { logger } from \"./errors\";\n+import { Issue, LinkedIssues } from \"../types/github-types\";\n+import { encode } from \"gpt-tokenizer\";\n \n-export async function formatChatHistory(\n-  context: Context,\n-  streamlined: Record<string, StreamlinedComment[]>,\n-  specAndBodies: Record<string, string>\n-): Promise<string[]> {\n-  // At this point really we should have all the context we can obtain but we try again just in case\n-  const keys = new Set([...Object.keys(streamlined), ...Object.keys(specAndBodies), createKey(context.payload.issue.html_url)]);\n-  const tokenLimits: TokenLimits = {\n-    modelMaxTokenLimit: context.adapters.openai.completions.getModelMaxTokenLimit(context.config.model),\n-    maxCompletionTokens: context.config.maxTokens || context.adapters.openai.completions.getModelMaxOutputLimit(context.config.model),\n-    runningTokenCount: 0,\n-    tokensRemaining: 0,\n-  };\n+interface TreeNode {\n+  key: string;\n+  issue: Issue;\n+  children: TreeNode[];\n+  parent?: TreeNode;\n+  depth: number;\n+  comments?: StreamlinedComment[];\n+  body?: string;\n+  similarIssues?: Issue[];\n+  codeSnippets?: { body: string; path: string }[];\n+  readmeSection?: string;\n+}\n \n-  // what we start out with\n-  tokenLimits.tokensRemaining = tokenLimits.modelMaxTokenLimit - tokenLimits.maxCompletionTokens;\n-\n-  // careful adding any more API calls here as it's likely to hit the secondary rate limit\n-  const chatHistory = await Promise.all(\n-    // keys are owner/repo/issueNum; so for each issue, we want to create a block\n-    Array.from(keys).map(async (key, i) => {\n-      // if we run out of tokens, we should stop\n-      if (tokenLimits.tokensRemaining < 0) {\n-        logger.error(`Ran out of tokens at block ${i}`);\n-        return \"\";\n-      }\n-      try {\n-        const [currentTokenCount, result] = await createContextBlockSection({\n-          context,\n-          key,\n-          streamlined,\n-          specAndBodies,\n-          isCurrentIssue: key === createKey(context.payload.issue.html_url),\n-          tokenLimits,\n-        });\n-        // update the token count\n-        tokenLimits.runningTokenCount = currentTokenCount;\n-        tokenLimits.tokensRemaining = tokenLimits.modelMaxTokenLimit - tokenLimits.maxCompletionTokens - currentTokenCount;\n-        return result;\n-      } catch (error) {\n-        logger.error(`Error creating context block for ${key}: ${error}`);\n-      }\n-    })\n-  );\n+function updateTokenCount(text: string, tokenLimits: TokenLimits): boolean {\n+  const tokenCount = encode(text, { disallowedSpecial: new Set() }).length;\n+  if (tokenLimits.runningTokenCount + tokenCount > tokenLimits.tokensRemaining) {\n+    return false;\n+  }\n+  tokenLimits.runningTokenCount += tokenCount;\n+  return true;\n+}\n \n-  return Array.from(new Set(chatHistory)).filter((x): x is string => !!x);\n+function validateGitHubKey(key: string): boolean {\n+  const parts = key.split(\"/\");\n+\n+  if (parts.length !== 3) return false;\n+\n+  const [owner, repo, number] = parts;\n+\n+  if (!owner || owner === \"issues\" || !/^[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/i.test(owner)) {\n+    return false;\n+  }\n+\n+  if (!repo || !/^[a-zA-Z0-9-_]+$/i.test(repo)) {\n+    return false;\n+  }\n+\n+  return /^\\d+$/.test(number);\n }\n \n-// These give structure and provide the distinction between the different sections of the chat history\n-function getCorrectHeaderString(prDiff: string | null, isCurrentIssue: boolean, isConvo: boolean) {\n-  const strings = {\n-    convo: {\n-      pull: {\n-        linked: `Linked Pull Request Conversation`,\n-        current: `Current Pull Request Conversation`,\n-      },\n-      issue: {\n-        linked: `Linked Task Conversation`,\n-        current: `Current Task Conversation`,\n-      },\n-    },\n-    spec: {\n-      pull: {\n-        linked: `Linked Pull Request Specification`,\n-        current: `Current Pull Request Specification`,\n-      },\n-      issue: {\n-        linked: `Linked Task Specification`,\n-        current: `Current Task Specification`,\n-      },\n-    },\n-  };\n+function extractGitHubInfo(url: string): { owner: string; repo: string; number: string } | null {\n+  try {\n+    const urlMatch = url.match(/github\\.com\\/([^/]+)\\/([^/]+?)\\/(issues|pull)\\/(\\d+)/);\n+    if (urlMatch) {\n+      return {\n+        owner: urlMatch[1],\n+        repo: urlMatch[2],\n+        number: urlMatch[4],\n+      };\n+    }\n+\n+    const repoMatch = url.match(/([^/\\s]+)\\/([^/\\s#]+)#(\\d+)/);\n+    if (repoMatch) {\n+      return {\n+        owner: repoMatch[1],\n+        repo: repoMatch[2],\n+        number: repoMatch[3],\n+      };\n+    }\n+\n+    return null;\n+  } catch {\n+    return null;\n+  }\n+}\n+\n+async function extractReferencedIssuesAndPrs(body: string, owner: string, repo: string): Promise<string[]> {\n+  const links = new Set<string>();\n+  const processedRefs = new Set<string>();\n+\n+  function addValidReference(key: string) {\n+    key = key.replace(/[[]]/g, \"\");\n+\n+    if (!validateGitHubKey(key)) {\n+      return;\n+    }\n+    if (!processedRefs.has(key)) {\n+      processedRefs.add(key);\n+      links.add(key);\n+    }\n+  }\n+\n+  const numberRefs = body.match(/(?:^|\\s)#(\\d+)(?:\\s|$)/g) || [];\n+  for (const ref of numberRefs) {\n+    const number = ref.trim().substring(1);\n+    if (/^\\d+$/.test(number)) {\n+      const key = `${owner}/${repo}/${number}`;\n+      addValidReference(key);\n+    }\n+  }\n+\n+  const resolveRefs = body.match(/(?:Resolves|Closes|Fixes)\\s+#(\\d+)/gi) || [];",
+        "score": {
+          "reward": 8.964,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              }
+            },
+            "result": 0.4
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 48,
+            "wordValue": 0.1,
+            "result": 2.35
+          },
+          "readability": {
+            "fleschKincaid": 29.452500000000015,
+            "syllables": 73,
+            "sentences": 1,
+            "score": 0.6945250000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1905432440,
+        "content": "Seems strange to return either or Record or `void`, `null` might be more appropriate",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1905432440",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,17 +1,181 @@\n import { createKey } from \"../handlers/comments\";\n-import { FetchParams } from \"../types/github-types\";\n-import { StreamlinedComment } from \"../types/llm\";\n-import { idIssueFromComment, mergeStreamlinedComments, splitKey } from \"./issue\";\n-import { fetchLinkedIssues, fetchIssue, fetchAndHandleIssue, mergeCommentsAndFetchSpec } from \"./issue-fetching\";\n+import { FetchParams, User, LinkedIssues } from \"../types/github-types\";\n+import { StreamlinedComment, TokenLimits } from \"../types/llm\";\n+import {\n+  idIssueFromComment,\n+  mergeStreamlinedComments,\n+  splitKey,\n+  fetchSimilarIssues,\n+  fetchCodeLinkedFromIssue,\n+  pullReadmeFromRepoForIssue,\n+  fetchLinkedIssuesFromComment,\n+} from \"./issue\";\n+import { recursivelyFetchLinkedIssues, fetchIssue, mergeCommentsAndFetchSpec } from \"./issue-fetching\";\n+import { encode } from \"gpt-tokenizer\";\n \n-export async function handleIssue(params: FetchParams, streamlinedComments: Record<string, StreamlinedComment[]>, alreadySeen: Set<string>) {\n-  if (alreadySeen.has(createKey(`${params.owner}/${params.repo}/${params.issueNum}`))) {\n+const UNKNOWN_ERROR = \"An unknown error occurred during promise throttling\";\n+\n+function createStreamlinedComment(params: {\n+  id: string | number;\n+  body: string;\n+  user: Partial<User> | null | string;\n+  org: string;\n+  repo: string;\n+  issueUrl: string;\n+}): StreamlinedComment {\n+  return {\n+    id: params.id,\n+    user: typeof params.user === \"string\" ? params.user : params.user?.login,\n+    body: params.body,\n+    org: params.org,\n+    repo: params.repo,\n+    issueUrl: params.issueUrl,\n+  };\n+}\n+\n+function updateTokenCount(text: string, tokenLimits: TokenLimits): void {\n+  const tokenCount = encode(text, { disallowedSpecial: new Set() }).length;\n+  tokenLimits.runningTokenCount += tokenCount;\n+  tokenLimits.tokensRemaining = tokenLimits.modelMaxTokenLimit - tokenLimits.maxCompletionTokens - tokenLimits.runningTokenCount;\n+}\n+\n+function createDefaultTokenLimits(params: FetchParams): TokenLimits {\n+  return {\n+    modelMaxTokenLimit: params.context.adapters.openai.completions.getModelMaxTokenLimit(params.context.config.model),\n+    maxCompletionTokens: params.context.config.maxTokens,\n+    runningTokenCount: 0,\n+    tokensRemaining: 0,\n+  };\n+}\n+\n+interface CodeSnippet {\n+  id: string;\n+  body?: string;\n+  org: string;\n+  repo: string;\n+  issueUrl: string;\n+}\n+\n+async function throttlePromises(promises: Promise<void>[], limit: number): Promise<void> {\n+  const executing = new Set<Promise<void>>();\n+  const allPromises: Promise<void>[] = [];\n+\n+  try {\n+    for (const promise of promises) {\n+      const wrappedPromise = Promise.resolve(promise).finally(() => {\n+        executing.delete(wrappedPromise);\n+      });\n+\n+      // Add to our sets\n+      executing.add(wrappedPromise);\n+      allPromises.push(wrappedPromise);\n+\n+      // If we're at the limit, wait for one to finish\n+      if (executing.size >= limit) {\n+        await Promise.race(Array.from(executing));\n+      }\n+    }\n+\n+    // Wait for all promises to complete\n+    await Promise.all(allPromises);\n+  } catch (error) {\n+    throw error instanceof Error ? error : new Error(\"An unknown error occurred during promise throttling\");\n+  }\n+}\n+\n+export async function handleIssue(\n+  params: FetchParams,\n+  streamlinedComments: Record<string, StreamlinedComment[]>,\n+  alreadySeen: Set<string>,\n+  parentKey?: string,\n+  tokenLimits?: TokenLimits\n+): Promise<Record<string, StreamlinedComment[]> | void> {",
+        "score": {
+          "reward": 2.358,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 74.805,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0.85195
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1905433668,
+        "content": "Might be safer to go for `100` (which I believe is the limit)",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1905433668",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,241 @@\n+import { Context } from \"../types\";\n+import { FetchParams, SimplifiedComment } from \"../types/github-types\";\n+import { logger } from \"./errors\";\n+\n+interface PullRequestGraphQlResponse {\n+  repository: {\n+    pullRequest: {\n+      body: string;\n+      closingIssuesReferences: {\n+        nodes: Array<{\n+          number: number;\n+          url: string;\n+          body: string;\n+          repository: {\n+            owner: {\n+              login: string;\n+            };\n+            name: string;\n+          };\n+        }>;\n+      };\n+      reviews: {\n+        nodes: Array<{\n+          comments: {\n+            nodes: Array<{\n+              id: string;\n+              body: string;\n+              user: {\n+                login: string;\n+                type: string;\n+              };\n+            }>;\n+          };\n+        }>;\n+      };\n+      comments: {\n+        nodes: Array<{\n+          id: string;\n+          body: string;\n+          user: {\n+            login: string;\n+            type: string;\n+          };\n+        }>;\n+      };\n+    };\n+  };\n+}\n+\n+interface PullRequestLinkedIssue {\n+  number: number;\n+  owner: string;\n+  repo: string;\n+  url: string;\n+  body: string;\n+}\n+\n+/**\n+ * Fetch both PR review comments and regular PR comments\n+ */\n+export async function fetchPullRequestComments(params: FetchParams) {\n+  const { octokit } = params.context;\n+  const { owner, repo, issueNum } = params;\n+\n+  try {\n+    // Fetch PR data including both types of comments\n+    const prData = await octokit.graphql<PullRequestGraphQlResponse>(\n+      `\n+      query($owner: String!, $repo: String!, $number: Int!) {\n+        repository(owner: $owner, name: $repo) {\n+          pullRequest(number: $number) {\n+            body\n+            closingIssuesReferences(first: 10) {",
+        "score": {
+          "reward": 3.024,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 88.905,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.71095
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1905434427,
+        "content": "Don't you need to use pagination for all of these, or you don't care about the whole content?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1905434427",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,241 @@\n+import { Context } from \"../types\";\n+import { FetchParams, SimplifiedComment } from \"../types/github-types\";\n+import { logger } from \"./errors\";\n+\n+interface PullRequestGraphQlResponse {\n+  repository: {\n+    pullRequest: {\n+      body: string;\n+      closingIssuesReferences: {\n+        nodes: Array<{\n+          number: number;\n+          url: string;\n+          body: string;\n+          repository: {\n+            owner: {\n+              login: string;\n+            };\n+            name: string;\n+          };\n+        }>;\n+      };\n+      reviews: {\n+        nodes: Array<{\n+          comments: {\n+            nodes: Array<{\n+              id: string;\n+              body: string;\n+              user: {\n+                login: string;\n+                type: string;\n+              };\n+            }>;\n+          };\n+        }>;\n+      };\n+      comments: {\n+        nodes: Array<{\n+          id: string;\n+          body: string;\n+          user: {\n+            login: string;\n+            type: string;\n+          };\n+        }>;\n+      };\n+    };\n+  };\n+}\n+\n+interface PullRequestLinkedIssue {\n+  number: number;\n+  owner: string;\n+  repo: string;\n+  url: string;\n+  body: string;\n+}\n+\n+/**\n+ * Fetch both PR review comments and regular PR comments\n+ */\n+export async function fetchPullRequestComments(params: FetchParams) {\n+  const { octokit } = params.context;\n+  const { owner, repo, issueNum } = params;\n+\n+  try {\n+    // Fetch PR data including both types of comments\n+    const prData = await octokit.graphql<PullRequestGraphQlResponse>(\n+      `\n+      query($owner: String!, $repo: String!, $number: Int!) {\n+        repository(owner: $owner, name: $repo) {\n+          pullRequest(number: $number) {\n+            body\n+            closingIssuesReferences(first: 10) {\n+              nodes {\n+                number\n+                url\n+                body\n+                repository {\n+                  owner {\n+                    login\n+                  }\n+                  name\n+                }\n+              }\n+            }\n+            reviews(first: 100) {",
+        "score": {
+          "reward": 4.44,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 76.55500000000004,
+            "syllables": 26,
+            "sentences": 1,
+            "score": 0.8344499999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1912651127,
+        "content": "To be deleted",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1912651127",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 90.99000000000004,
+            "syllables": 4,
+            "sentences": 1,
+            "score": 0.6900999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 1915292778,
+        "content": "If you think this has no side effect then that is fine. I mention this because in the body comment, as an example, we always quote \"Resolves #1234\" which will potentially link all the issues to the issue #1234 if there is any in the repository.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1915292778",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,208 +1,377 @@\n import { Context } from \"../types\";\n-import { StreamlinedComment, StreamlinedComments, TokenLimits } from \"../types/llm\";\n-import { createKey, streamlineComments } from \"../handlers/comments\";\n-import { fetchPullRequestDiff, fetchIssue, fetchIssueComments } from \"./issue-fetching\";\n-import { pullReadmeFromRepoForIssue, splitKey } from \"./issue\";\n+import { StreamlinedComment, TokenLimits } from \"../types/llm\";\n+import { fetchIssue, recursivelyFetchLinkedIssues } from \"./issue-fetching\";\n+import { splitKey } from \"./issue\";\n import { logger } from \"./errors\";\n+import { Issue, LinkedIssues } from \"../types/github-types\";\n+import { encode } from \"gpt-tokenizer\";\n \n-export async function formatChatHistory(\n-  context: Context,\n-  streamlined: Record<string, StreamlinedComment[]>,\n-  specAndBodies: Record<string, string>\n-): Promise<string[]> {\n-  // At this point really we should have all the context we can obtain but we try again just in case\n-  const keys = new Set([...Object.keys(streamlined), ...Object.keys(specAndBodies), createKey(context.payload.issue.html_url)]);\n-  const tokenLimits: TokenLimits = {\n-    modelMaxTokenLimit: context.adapters.openai.completions.getModelMaxTokenLimit(context.config.model),\n-    maxCompletionTokens: context.config.maxTokens || context.adapters.openai.completions.getModelMaxOutputLimit(context.config.model),\n-    runningTokenCount: 0,\n-    tokensRemaining: 0,\n-  };\n+interface TreeNode {\n+  key: string;\n+  issue: Issue;\n+  children: TreeNode[];\n+  parent?: TreeNode;\n+  depth: number;\n+  comments?: StreamlinedComment[];\n+  body?: string;\n+  similarIssues?: Issue[];\n+  codeSnippets?: { body: string; path: string }[];\n+  readmeSection?: string;\n+}\n \n-  // what we start out with\n-  tokenLimits.tokensRemaining = tokenLimits.modelMaxTokenLimit - tokenLimits.maxCompletionTokens;\n-\n-  // careful adding any more API calls here as it's likely to hit the secondary rate limit\n-  const chatHistory = await Promise.all(\n-    // keys are owner/repo/issueNum; so for each issue, we want to create a block\n-    Array.from(keys).map(async (key, i) => {\n-      // if we run out of tokens, we should stop\n-      if (tokenLimits.tokensRemaining < 0) {\n-        logger.error(`Ran out of tokens at block ${i}`);\n-        return \"\";\n-      }\n-      try {\n-        const [currentTokenCount, result] = await createContextBlockSection({\n-          context,\n-          key,\n-          streamlined,\n-          specAndBodies,\n-          isCurrentIssue: key === createKey(context.payload.issue.html_url),\n-          tokenLimits,\n-        });\n-        // update the token count\n-        tokenLimits.runningTokenCount = currentTokenCount;\n-        tokenLimits.tokensRemaining = tokenLimits.modelMaxTokenLimit - tokenLimits.maxCompletionTokens - currentTokenCount;\n-        return result;\n-      } catch (error) {\n-        logger.error(`Error creating context block for ${key}: ${error}`);\n-      }\n-    })\n-  );\n+function updateTokenCount(text: string, tokenLimits: TokenLimits): boolean {\n+  const tokenCount = encode(text, { disallowedSpecial: new Set() }).length;\n+  if (tokenLimits.runningTokenCount + tokenCount > tokenLimits.tokensRemaining) {\n+    return false;\n+  }\n+  tokenLimits.runningTokenCount += tokenCount;\n+  return true;\n+}\n \n-  return Array.from(new Set(chatHistory)).filter((x): x is string => !!x);\n+function validateGitHubKey(key: string): boolean {\n+  const parts = key.split(\"/\");\n+\n+  if (parts.length !== 3) return false;\n+\n+  const [owner, repo, number] = parts;\n+\n+  if (!owner || owner === \"issues\" || !/^[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/i.test(owner)) {\n+    return false;\n+  }\n+\n+  if (!repo || !/^[a-zA-Z0-9-_]+$/i.test(repo)) {\n+    return false;\n+  }\n+\n+  return /^\\d+$/.test(number);\n }\n \n-// These give structure and provide the distinction between the different sections of the chat history\n-function getCorrectHeaderString(prDiff: string | null, isCurrentIssue: boolean, isConvo: boolean) {\n-  const strings = {\n-    convo: {\n-      pull: {\n-        linked: `Linked Pull Request Conversation`,\n-        current: `Current Pull Request Conversation`,\n-      },\n-      issue: {\n-        linked: `Linked Task Conversation`,\n-        current: `Current Task Conversation`,\n-      },\n-    },\n-    spec: {\n-      pull: {\n-        linked: `Linked Pull Request Specification`,\n-        current: `Current Pull Request Specification`,\n-      },\n-      issue: {\n-        linked: `Linked Task Specification`,\n-        current: `Current Task Specification`,\n-      },\n-    },\n-  };\n+function extractGitHubInfo(url: string): { owner: string; repo: string; number: string } | null {\n+  try {\n+    const urlMatch = url.match(/github\\.com\\/([^/]+)\\/([^/]+?)\\/(issues|pull)\\/(\\d+)/);\n+    if (urlMatch) {\n+      return {\n+        owner: urlMatch[1],\n+        repo: urlMatch[2],\n+        number: urlMatch[4],\n+      };\n+    }\n+\n+    const repoMatch = url.match(/([^/\\s]+)\\/([^/\\s#]+)#(\\d+)/);\n+    if (repoMatch) {\n+      return {\n+        owner: repoMatch[1],\n+        repo: repoMatch[2],\n+        number: repoMatch[3],\n+      };\n+    }\n+\n+    return null;\n+  } catch {\n+    return null;\n+  }\n+}\n+\n+async function extractReferencedIssuesAndPrs(body: string, owner: string, repo: string): Promise<string[]> {\n+  const links = new Set<string>();\n+  const processedRefs = new Set<string>();\n+\n+  function addValidReference(key: string) {\n+    key = key.replace(/[[]]/g, \"\");\n+\n+    if (!validateGitHubKey(key)) {\n+      return;\n+    }\n+    if (!processedRefs.has(key)) {\n+      processedRefs.add(key);\n+      links.add(key);\n+    }\n+  }\n+\n+  const numberRefs = body.match(/(?:^|\\s)#(\\d+)(?:\\s|$)/g) || [];\n+  for (const ref of numberRefs) {\n+    const number = ref.trim().substring(1);\n+    if (/^\\d+$/.test(number)) {\n+      const key = `${owner}/${repo}/${number}`;\n+      addValidReference(key);\n+    }\n+  }\n+\n+  const resolveRefs = body.match(/(?:Resolves|Closes|Fixes)\\s+#(\\d+)/gi) || [];",
+        "score": {
+          "reward": 7.104,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 46,
+            "wordValue": 0.1,
+            "result": 2.31
+          },
+          "readability": {
+            "fleschKincaid": 65.78565217391306,
+            "syllables": 64,
+            "sentences": 2,
+            "score": 0.9421434782608693
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2603624189,
+        "content": "@shiv810 \r\n<img width=\"458\" alt=\"image\" src=\"https://github.com/user-attachments/assets/ad96a609-f9b1-4550-9567-e5a55776dd9f\" />",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#issuecomment-2603624189",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.908,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 75.50000000000003,
+            "syllables": 26,
+            "sentences": 2,
+            "score": 0.8449999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2603697423,
+        "content": "@shiv810 That was the related run correct? https://github.com/ubiquity-os-marketplace/command-ask/actions/runs/12879810114/job/35907862016",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#issuecomment-2603697423",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.556,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 73.16833333333334,
+            "syllables": 30,
+            "sentences": 3,
+            "score": 0.8683166666666666
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2534270049,
+            "effect": {
+              "addition": 1847,
+              "deletion": 641
+            },
+            "reward": 74.64,
+            "priority": 3
+          },
+          {
+            "reviewId": 2545686603,
+            "effect": {
+              "addition": 371,
+              "deletion": 534
+            },
+            "reward": 27.15,
+            "priority": 3
+          },
+          {
+            "reviewId": 2550503920,
+            "effect": {
+              "addition": 0,
+              "deletion": 0
+            },
+            "reward": 0,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 145.271 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>101.79</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>8.54</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.326</td></tr><tr><td>Review</td><td>Comment</td><td>10</td><td>33.615</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35\" target=\"_blank\" rel=\"noopener\">#35</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+1847 -641</td><td>3</td><td>74.64</td></tr><tr><td>+371 -534</td><td>3</td><td>27.15</td></tr><tr><td>+0 -0</td><td>3</td><td>0</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/issues/48\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;diff! No answer from OpenAI&#96;&#96;&#96;_&hellip;</a></h6></td><td><details><summary>6.89</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 8&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    h2:&#13;      score: 1&#13;      elementCount: 3&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 4.3&#13;regex:&#13;  wordCount: 103&#13;  wordValue: 0.1&#13;  result: 2.59&#13;</pre></details></td><td>1</td><td>1</td><td>8.54</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/issues/48#issuecomment-2581803500\" target=\"_blank\" rel=\"noopener\">I must say I didn't work on that plugin and wouldn't be able to &hellip;</a></h6></td><td><details><summary>1.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>0.2</td><td>3</td><td>1.326</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1905415887\" target=\"_blank\" rel=\"noopener\">Wouldn't these logs be &#96;debug&#96; instead of &#96;info&#96;?</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.5</td><td>3</td><td>1.35</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1905418177\" target=\"_blank\" rel=\"noopener\">Would be nice to have a description here</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.7</td><td>3</td><td>1.911</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1905428946\" target=\"_blank\" rel=\"noopener\">This seems dangerous and lead to issues before, like in the foll&hellip;</a></h6></td><td><details><summary>2.75</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;  result: 0.4&#13;regex:&#13;  wordCount: 48&#13;  wordValue: 0.1&#13;  result: 2.35&#13;</pre></details></td><td>0.9</td><td>3</td><td>8.964</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1905432440\" target=\"_blank\" rel=\"noopener\">Seems strange to return either or Record or &#96;void&#96;, &#96&hellip;</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.6</td><td>3</td><td>2.358</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1905433668\" target=\"_blank\" rel=\"noopener\">Might be safer to go for &#96;100&#96; (which I believe is the l&hellip;</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.8</td><td>3</td><td>3.024</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1905434427\" target=\"_blank\" rel=\"noopener\">Don't you need to use pagination for all of these, or you don't &hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.44</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1912651127\" target=\"_blank\" rel=\"noopener\">To be deleted</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#discussion_r1915292778\" target=\"_blank\" rel=\"noopener\">If you think this has no side effect then that is fine. I mentio&hellip;</a></h6></td><td><details><summary>2.31</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 46&#13;  wordValue: 0.1&#13;  result: 2.31&#13;</pre></details></td><td>0.8</td><td>3</td><td>7.104</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#issuecomment-2603624189\" target=\"_blank\" rel=\"noopener\">@shiv810 &lt;img width=\"458\" alt=\"image\" src=\"https://github.c&hellip;</a></h6></td><td><details><summary>1.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.908</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#issuecomment-2603697423\" target=\"_blank\" rel=\"noopener\">@shiv810 That was the related run correct? https://github.com/ub&hellip;</a></h6></td><td><details><summary>1.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.4</td><td>3</td><td>2.556</td></tr></tbody></table></details>"
+  },
+  "Keyrxng": {
+    "total": 0.504,
+    "userId": 106303466,
+    "comments": [
+      {
+        "id": 2593684878,
+        "content": "Nice to see `maxDepth` being implemented finally - one of the things I advocated for early on in development of this plugin but better late than never. gg",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35#issuecomment-2593684878",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.504,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 66.74000000000002,
+            "syllables": 39,
+            "sentences": 2,
+            "score": 0.9325999999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/35"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 0.504 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>1</td><td>0.504</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/35#issuecomment-2593684878\" target=\"_blank\" rel=\"noopener\">Nice to see &#96;maxDepth&#96; being implemented finally - one o&hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.504</td></tr></tbody></table></details>"
+  }
+}

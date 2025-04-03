@@ -1,0 +1,206 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 6,
+    "task": {
+      "reward": 6,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 6 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>6</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 3.435,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2408968755,
+        "content": "So when what is this spec about? Using a personal profile?",
+        "url": "https://github.com/ubiquity-os/action-deploy-plugin/issues/3#issuecomment-2408968755",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.246,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 70.50704545454548,
+            "syllables": 17,
+            "sentences": 2,
+            "score": 0.8949295454545453
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2411711622,
+        "content": "Dedicated GitHub Apps are always preferred.",
+        "url": "https://github.com/ubiquity-os/action-deploy-plugin/issues/3#issuecomment-2411711622",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.693,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 45.64500000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.8564500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2383541513,
+        "content": "QA looks good. Cant understand too much of the rest but seems fine",
+        "url": "https://github.com/ubiquity-os/action-deploy-plugin/pull/12#pullrequestreview-2383541513",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.143,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 102.62211538461541,
+            "syllables": 15,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1807265522,
+        "content": "This is an interesting technique",
+        "url": "https://github.com/ubiquity-os/action-deploy-plugin/pull/12#discussion_r1807265522",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -134,39 +134,93 @@ runs:\n         app_id: ${{ env.APP_ID }}\n         private_key: ${{ env.APP_PRIVATE_KEY }}\n \n-    - name: Commit and Push changes\n+    - name: Install dependencies for GitHub Auth\n+      shell: bash\n+      run: |\n+        yarn add \"@actions/github\"\n+\n+    - name: Update manifest.json and dist folder\n       shell: bash\n       env:\n         GITHUB_TOKEN: ${{ steps.get_installation_token.outputs.token || github.token }}\n       run: |\n-        app_token=\"${{ steps.get_installation_token.outputs.token }}\" # Assuming this outputs your app token\n-        \n-        user_info=$(curl -s -H \"Authorization: token $app_token\" https://api.github.com/user)\n-        \n-        user_name=$(echo \"$user_info\" | jq -r .name)\n-        user_email=$(echo \"$user_info\" | jq -r .email)\n-        \n-        if [ \"$user_email\" == \"null\" ]; then\n-          user_email=\"ubiquity-os[bot]@users.noreply.github.com\"\n-          user_name=\"ubiquity-os[bot]\"\n-        fi\n-        \n-        # Configure Git with the retrieved user information\n-        git config --global user.name \"$user_name\"\n-        git config --global user.email \"$user_email\"\n-        git remote set-url origin https://${{ env.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git\n-        \n         git add \"${{ inputs.manifestPath }}\"\n         git add -f ${{ github.workspace }}/dist/\\*\n+        echo \"Changed files:\"\n+        echo \"$(git diff-index --cached --name-only HEAD)\"\n         if [ -n \"$(git diff-index --cached --name-only HEAD)\" ]; then\n-          git commit -m \"${{ inputs.commitMessage }}\" || echo \"Commit failed\"\n-          # Attempt to pull and resolve conflicts\n-          git pull origin ${{ github.ref_name }} || {\n-            echo \"Rebase failed, force pushing changes.\"\n-            git push --force origin HEAD:${{ github.ref_name }}\n-            exit 0\n-          }\n-          git push origin HEAD:${{ github.ref_name }}\n+          node -e \"",
+        "score": {
+          "reward": 0.195,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 32.56000000000003,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.7256000000000004
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1807267063,
+        "content": "If you have to force it in CI you're doing something wrong",
+        "url": "https://github.com/ubiquity-os/action-deploy-plugin/pull/12#discussion_r1807267063",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -134,39 +134,93 @@ runs:\n         app_id: ${{ env.APP_ID }}\n         private_key: ${{ env.APP_PRIVATE_KEY }}\n \n-    - name: Commit and Push changes\n+    - name: Install dependencies for GitHub Auth\n+      shell: bash\n+      run: |\n+        yarn add \"@actions/github\"\n+\n+    - name: Update manifest.json and dist folder\n       shell: bash\n       env:\n         GITHUB_TOKEN: ${{ steps.get_installation_token.outputs.token || github.token }}\n       run: |\n-        app_token=\"${{ steps.get_installation_token.outputs.token }}\" # Assuming this outputs your app token\n-        \n-        user_info=$(curl -s -H \"Authorization: token $app_token\" https://api.github.com/user)\n-        \n-        user_name=$(echo \"$user_info\" | jq -r .name)\n-        user_email=$(echo \"$user_info\" | jq -r .email)\n-        \n-        if [ \"$user_email\" == \"null\" ]; then\n-          user_email=\"ubiquity-os[bot]@users.noreply.github.com\"\n-          user_name=\"ubiquity-os[bot]\"\n-        fi\n-        \n-        # Configure Git with the retrieved user information\n-        git config --global user.name \"$user_name\"\n-        git config --global user.email \"$user_email\"\n-        git remote set-url origin https://${{ env.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git\n-        \n         git add \"${{ inputs.manifestPath }}\"\n         git add -f ${{ github.workspace }}/dist/\\*\n+        echo \"Changed files:\"\n+        echo \"$(git diff-index --cached --name-only HEAD)\"\n         if [ -n \"$(git diff-index --cached --name-only HEAD)\" ]; then\n-          git commit -m \"${{ inputs.commitMessage }}\" || echo \"Commit failed\"\n-          # Attempt to pull and resolve conflicts\n-          git pull origin ${{ github.ref_name }} || {\n-            echo \"Rebase failed, force pushing changes.\"\n-            git push --force origin HEAD:${{ github.ref_name }}\n-            exit 0\n-          }\n-          git push origin HEAD:${{ github.ref_name }}\n+          node -e \"\n+            const fs = require('fs');\n+            const path = require('path');\n+            const github = require('@actions/github');\n+            const manifestPath = path.relative('.', '${{ inputs.manifestPath }}');\n+\n+            async function pushChanges() {\n+              const octokit = github.getOctokit(process.env.GITHUB_TOKEN);\n+\n+              const context = github.context;\n+              const owner = context.repo.owner;\n+              const repo = context.repo.repo;\n+              const ref = 'heads/${{ github.ref_name }}';\n+\n+              try {\n+                const currentCommit = await octokit.rest.git.getRef({\n+                  owner,\n+                  repo,\n+                  ref\n+                });\n+\n+                const newTree = await octokit.rest.git.createTree({\n+                  owner,\n+                  repo,\n+                  base_tree: currentCommit.data.object.sha,\n+                  tree: [\n+                    {\n+                      path: manifestPath,\n+                      mode: '100644',\n+                      type: 'blob',\n+                      content: fs.readFileSync(manifestPath, 'utf8'),\n+                    },\n+                    ...fs.readdirSync('${{ github.workspace }}/dist').map((file) => {\n+                        const relativePath = path.relative('.', '${{ github.workspace }}/dist/' + file);\n+                        return {\n+                          path: relativePath,\n+                          mode: '100644',\n+                          type: 'blob',\n+                          content: fs.readFileSync(\n+                          '${{ github.workspace }}/dist/' + file,\n+                          'utf-8',\n+                        ),\n+                      };\n+                    }),\n+                  ],\n+                });\n+\n+                const newCommit = await octokit.rest.git.createCommit({\n+                  owner,\n+                  repo,\n+                  message: '${{ inputs.commitMessage }}',\n+                  tree: newTree.data.sha,\n+                  parents: [currentCommit.data.object.sha]\n+                });\n+\n+                await octokit.rest.git.updateRef({\n+                  owner,\n+                  repo,\n+                  ref,\n+                  sha: newCommit.data.sha,\n+                  force: true",
+        "score": {
+          "reward": 1.048,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 96.02461538461542,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.6397538461538459
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2379324027,
+            "effect": {
+              "addition": 83,
+              "deletion": 27
+            },
+            "reward": 1.1,
+            "priority": 1
+          },
+          {
+            "reviewId": 2383541513,
+            "effect": {
+              "addition": 1,
+              "deletion": 0
+            },
+            "reward": 0.01,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/action-deploy-plugin/pull/12"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 3.435 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>1.11</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>0.939</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>1.386</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/action-deploy-plugin/pull/12\" target=\"_blank\" rel=\"noopener\">#12</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+83 -27</td><td>1</td><td>1.1</td></tr><tr><td>+1 -0</td><td>1</td><td>0.01</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/action-deploy-plugin/issues/3#issuecomment-2408968755\" target=\"_blank\" rel=\"noopener\">So when what is this spec about? Using a personal profile?</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.246</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/action-deploy-plugin/issues/3#issuecomment-2411711622\" target=\"_blank\" rel=\"noopener\">Dedicated GitHub Apps are always preferred.</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.693</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/action-deploy-plugin/pull/12#pullrequestreview-2383541513\" target=\"_blank\" rel=\"noopener\">QA looks good. Cant understand too much of the rest but seems fi&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.143</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/action-deploy-plugin/pull/12#discussion_r1807265522\" target=\"_blank\" rel=\"noopener\">This is an interesting technique</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.195</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/action-deploy-plugin/pull/12#discussion_r1807267063\" target=\"_blank\" rel=\"noopener\">If you have to force it in CI you're doing something wrong</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.048</td></tr></tbody></table></details>"
+  }
+}

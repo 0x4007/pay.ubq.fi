@@ -1,0 +1,915 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 373.737,
+    "task": {
+      "reward": 300,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2561980491,
+        "content": "@0x4007 continuing the discussion here to not pollute the other issue.\r\nI think the proper solution is to only run the `disqualifier` checks within the repo where the event was triggered (not the whole org). This is because we can have repo scoped configurations, which only apply to that specific repo.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2561980491",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 8.807,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 50,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 59.63433333333336,
+            "syllables": 77,
+            "sentences": 3,
+            "score": 0.9963433333333336
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2562042581,
+        "content": "Then we should simply ensure that the disqualifier runs not based on event but time intervals.\r\nHaving the disqualifier being able to read configs would just lead to code duplication and complex workflow logic, which should be avoided. Also if the base org does not have the disqualifer but the repo does have it, it means that either way events would only be triggered from this repo and the config would apply to other repos (which should not happen since the org does not have the plugin enabled).",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2562042581",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 9.153,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 88,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 55.92984848484849,
+            "syllables": 126,
+            "sentences": 3,
+            "score": 0.9592984848484849
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2563037352,
+        "content": "The SDK does not handle the configuration for plugins, only the kernel knows how to read / decode / validate it. Plugins are only aware of their own configuration which is sent by the kernel.\r\nConsider the following scenario:\r\n- the organization does not have `daemon-disqualifier` enabled\r\n- this repository has `daemon-disqualifier` enabled\r\nin this case, the `daemon-disqualifier` will run in the whole org regardless, which I don't think is a desired behavior.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2563037352",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 9.477,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 67,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 47.796517412935344,
+            "syllables": 108,
+            "sentences": 3,
+            "score": 0.8779651741293535
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2567330701,
+        "content": "To me the solutions are either:\r\n- run the disqualifier only on the repo where the event happened;\r\n- run the disqualifier on a time based interval to not rely on events happening\r\nThe base of the problem is calling all the repositories for an event.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2567330701",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 8.465,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 44,
+            "wordValue": 0.1,
+            "result": 2.27
+          },
+          "readability": {
+            "fleschKincaid": 27.584090909090946,
+            "syllables": 70,
+            "sentences": 1,
+            "score": 0.6758409090909094
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2567339192,
+        "content": "Yes but the run itself is triggered from the kernel, which tells the plugin to run. The problem is that this plugin runs on the whole organization using its own configuration which should be specific to its repository only.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2567339192",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 7.425,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 39,
+            "wordValue": 0.1,
+            "result": 2.15
+          },
+          "readability": {
+            "fleschKincaid": 52.550192307692356,
+            "syllables": 62,
+            "sentences": 2,
+            "score": 0.9255019230769236
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2567344308,
+        "content": "Yes but this issue was filled to fix the following scenario:\r\n- `business-development` is configured to not disqualify on missing pull-request\r\n- `daemon-disqualifier` was triggered from another repository in the `ubiquity` organization, which was configured to disqualify on missing pull-request\r\n- `daemon-disqualifier` evaluated issues in `business-development` using the other repository configuration, thus disqualifying the user\r\nLast step is incorrect, and would be solved by running `daemon-disqualifer` only in the repo where the event happened.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2567344308",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 8.64,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              }
+            },
+            "result": 0.3
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 67,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": -13.955074626865667,
+            "syllables": 121,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2570286936,
+        "content": "I had an idea that maybe would solve our problems, without needing to change anything inside of the kernel nor implementing crons within our system.\r\nTo handle the cron part, we could have an Action script like `cron.yml` which would trigger once every 24h, which only purpose is to trigger a `compute.yml` run.\r\nThe workflow would be the following:\r\n- `daemon-disqualifier` would run the same as it is now\r\n- at the end of the run, we would store the repository list that needs reminders to be sent (could be a json within this repo?)\r\n- `cron.yml` waits 24h, then triggers `compute.yml`\r\n- `compute.yml` runs as usual, updates the repository reminders read from the list we stored before\r\n- if there is nothing to be done (e.g. there is no more assignees to watch anywhere), then `compute.yml` disables `cron.yml` workflow\r\n- later on, if someone gets assigned, enable `cron.yml` workflow from `compute.yml`, rinse and repeat\r\nThis way, no useless runs would happen from the cron, we would properly watch repositories and use the correct configuration during runs. This would also lower our API usage significantly.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2570286936",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 9.207,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 10
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 6
+              }
+            },
+            "result": 0.6
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 170,
+            "wordValue": 0.1,
+            "result": 2.03
+          },
+          "readability": {
+            "fleschKincaid": 58.2708823529412,
+            "syllables": 249,
+            "sentences": 7,
+            "score": 0.982708823529412
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2571621218,
+        "content": "You are correct. For the installation token, we have `APP_ID` and `APP_PRIVATE_KEY` organization wide, which should enable the cron to authenticate as well?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2571621218",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 4.68,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 55.17750000000001,
+            "syllables": 35,
+            "sentences": 2,
+            "score": 0.951775
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2604014962,
+        "content": "Also about the `CRON`, quoting the docs:",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2604014962",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.693,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 73.84500000000001,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.8615499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2759063221,
+        "content": "@0x4007 So the configuration is correct and does not require a pull-request as you can see [here](https://github.com/ubiquity/business-development/blob/development/.github/.ubiquity-os.config.yml#L370). However during the run that value was `true` as you can see [here](https://github.com/ubiquity-os-marketplace/daemon-disqualifier/actions/runs/12478009115/job/34824958340#step:3:26). This is probably due to the fact that the run was triggered from another repo where that value is `true`. Not sure how we should handle this scenario.\r\n_Originally posted by @gentlementlegen in https://github.com/ubiquity/business-development/issues/103#issuecomment-2560735421_",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 7.19,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 62,
+            "wordValue": 0.1,
+            "result": 2.54
+          },
+          "readability": {
+            "fleschKincaid": 60.70500000000001,
+            "syllables": 114,
+            "sentences": 6,
+            "score": 0.9929499999999999
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 373.737 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>300</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>7.19</td></tr><tr><td>Issue</td><td>Comment</td><td>9</td><td>66.547</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68\" target=\"_blank\" rel=\"noopener\">@0x4007 So the configuration is correct and does not require a p&hellip;</a></h6></td><td><details><summary>5.54</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3&#13;regex:&#13;  wordCount: 62&#13;  wordValue: 0.1&#13;  result: 2.54&#13;</pre></details></td><td>1</td><td>1</td><td>7.19</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2561980491\" target=\"_blank\" rel=\"noopener\">@0x4007 continuing the discussion here to not pollute the other &hellip;</a></h6></td><td><details><summary>2.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 50&#13;  wordValue: 0.1&#13;  result: 2.38&#13;</pre></details></td><td>0.95</td><td>3</td><td>8.807</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2562042581\" target=\"_blank\" rel=\"noopener\">Then we should simply ensure that the disqualifier runs not base&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 88&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.9</td><td>3</td><td>9.153</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2563037352\" target=\"_blank\" rel=\"noopener\">The SDK does not handle the configuration for plugins, only the &hellip;</a></h6></td><td><details><summary>2.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 67&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>0.9</td><td>3</td><td>9.477</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2567330701\" target=\"_blank\" rel=\"noopener\">To me the solutions are either:- run the disqualifier only on &hellip;</a></h6></td><td><details><summary>2.47</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 44&#13;  wordValue: 0.1&#13;  result: 2.27&#13;</pre></details></td><td>0.95</td><td>3</td><td>8.465</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2567339192\" target=\"_blank\" rel=\"noopener\">Yes but the run itself is triggered from the kernel, which tells&hellip;</a></h6></td><td><details><summary>2.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 39&#13;  wordValue: 0.1&#13;  result: 2.15&#13;</pre></details></td><td>0.9</td><td>3</td><td>7.425</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2567344308\" target=\"_blank\" rel=\"noopener\">Yes but this issue was filled to fix the following scenario:- &hellip;</a></h6></td><td><details><summary>2.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;  result: 0.3&#13;regex:&#13;  wordCount: 67&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>1</td><td>3</td><td>8.64</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2570286936\" target=\"_blank\" rel=\"noopener\">I had an idea that maybe would solve our problems, without needi&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 10&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 6&#13;  result: 0.6&#13;regex:&#13;  wordCount: 170&#13;  wordValue: 0.1&#13;  result: 2.03&#13;</pre></details></td><td>0.9</td><td>3</td><td>9.207</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2571621218\" target=\"_blank\" rel=\"noopener\">You are correct. For the installation token, we have &#96;APP_ID&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.68</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2604014962\" target=\"_blank\" rel=\"noopener\">Also about the &#96;CRON&#96;, quoting the docs:</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.693</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 50.931,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2561996883,
+        "content": "I disagree. There's many repos without much activity and a few with the most so the former would be very unmaintained by the disqualifier. \nInstead the disqualifier should build a mapping of every (merged) config to every repo. \nIdeally it should use the identical SDK logic the kernel uses to interpret the configs.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2561996883",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 8.397,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 54,
+            "wordValue": 0.1,
+            "result": 2.44
+          },
+          "readability": {
+            "fleschKincaid": 52.13250000000002,
+            "syllables": 90,
+            "sentences": 4,
+            "score": 0.9213250000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2563008357,
+        "content": "I'm not convinced. I think the SDK handles most of the config related logic so duplication is fine because it's imported.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2563008357",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 4.872,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 73.77989130434786,
+            "syllables": 33,
+            "sentences": 2,
+            "score": 0.8622010869565214
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2567115749,
+        "content": "@whilefoo rfc \nI'm not sure what else can be done here",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2567115749",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.86,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 95.955,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.64045
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2567333417,
+        "content": "Another idea is to hand off the event from the kernel to a GitHub Action, and have the Action continue to retry, with an exponential backoff, if there are failures. \r\nIn less than six hours it should be able to sort itself out with this strategy.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2567333417",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 7.176,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 46,
+            "wordValue": 0.1,
+            "result": 2.31
+          },
+          "readability": {
+            "fleschKincaid": 62.10739130434784,
+            "syllables": 66,
+            "sentences": 2,
+            "score": 0.9789260869565216
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2567340498,
+        "content": "No my idea is that it should run on every repository in the organization. The problem we are trying to solve is related to rate limits and exponential backoffs are a solution to this.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2567340498",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 6.966,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 34,
+            "wordValue": 0.1,
+            "result": 2.01
+          },
+          "readability": {
+            "fleschKincaid": 55.21529411764709,
+            "syllables": 54,
+            "sentences": 2,
+            "score": 0.9521529411764709
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2571622197,
+        "content": "We can try your suggestion I just hope it's not too brittle but that depends on how well it's implemented",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2571622197",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 4.116,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 76.83227272727274,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.8316772727272727
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2605122894,
+        "content": "It would be nice if the script can toggle itself to renew that timer.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2605122894",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.556,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 83.85357142857143,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.7614642857142857
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2572912395,
+        "content": "I guess let's merge and try in production I think this one is difficult to QA",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/73#pullrequestreview-2572912395",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.458,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 85.07411764705884,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 0.7492588235294115
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2612436421,
+        "content": "Seems like it might be tedious to show QA but are you able to show any? Alternatively we can merge and observe the business-development repo",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/73#issuecomment-2612436421",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.39,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 60.23230769230773,
+            "syllables": 41,
+            "sentences": 2,
+            "score": 0.9976769230769227
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2572912395,
+            "effect": {
+              "addition": 316,
+              "deletion": 22
+            },
+            "reward": 10.14,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/73"
+      },
+      {
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/55"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 50.931 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>10.14</td></tr><tr><td>Issue</td><td>Comment</td><td>7</td><td>35.943</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>4.848</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/73\" target=\"_blank\" rel=\"noopener\">#73</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+316 -22</td><td>3</td><td>10.14</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2561996883\" target=\"_blank\" rel=\"noopener\">I disagree. There's many repos without much activity and a few w&hellip;</a></h6></td><td><details><summary>2.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 54&#13;  wordValue: 0.1&#13;  result: 2.44&#13;</pre></details></td><td>0.9</td><td>3</td><td>8.397</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2563008357\" target=\"_blank\" rel=\"noopener\">I'm not convinced. I think the SDK handles most of the config re&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.872</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2567115749\" target=\"_blank\" rel=\"noopener\">@whilefoo rfc I'm not sure what else can be done here</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.5</td><td>3</td><td>1.86</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2567333417\" target=\"_blank\" rel=\"noopener\">Another idea is to hand off the event from the kernel to a GitHu&hellip;</a></h6></td><td><details><summary>2.31</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 46&#13;  wordValue: 0.1&#13;  result: 2.31&#13;</pre></details></td><td>0.8</td><td>3</td><td>7.176</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2567340498\" target=\"_blank\" rel=\"noopener\">No my idea is that it should run on every repository in the orga&hellip;</a></h6></td><td><details><summary>2.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 34&#13;  wordValue: 0.1&#13;  result: 2.01&#13;</pre></details></td><td>0.9</td><td>3</td><td>6.966</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2571622197\" target=\"_blank\" rel=\"noopener\">We can try your suggestion I just hope it's not too brittle but &hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.7</td><td>3</td><td>4.116</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2605122894\" target=\"_blank\" rel=\"noopener\">It would be nice if the script can toggle itself to renew that t&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.6</td><td>3</td><td>2.556</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/73#pullrequestreview-2572912395\" target=\"_blank\" rel=\"noopener\">I guess let's merge and try in production I think this one is di&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.458</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/73#issuecomment-2612436421\" target=\"_blank\" rel=\"noopener\">Seems like it might be tedious to show QA but are you able to sh&hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.5</td><td>3</td><td>3.39</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 39.507,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 2569302512,
+        "content": "There's no easy answer to this. \r\nWe could implement cron jobs but that would hit rate limits even faster because on every kernel run (for example every minute) it would have to check every config that exists and see if there's a cron plugin that needs to be run.\r\nFetching all repo configs on every org event is also not a good idea for rate limits but can be a fix for the problem of correct configs.\r\nA temporary fix would be to put the plugin in org config and specify all repos that require a PR.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2569302512",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 10.14,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 99,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 61.22284090909092,
+            "syllables": 141,
+            "sentences": 4,
+            "score": 0.9877715909090908
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2571617515,
+        "content": "If I understand correctly every time `issues.assigned` triggers the plugin it would add the issue to a list and store it somewhere and on `issues.unassigned` remove it from the list and if the list is non-empty it would enable `cron.yml` that would run `compute.yml` every x hours, and if the list is empty it would disable `cron.yml`. On every `compute.yml` run it would check if reminders need to be sent or unassign inactive users.\r\nThe main problem I see is how would the plugin get the installation token when it's run by `cron.yml`?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2571617515",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 9.207,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 88,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 58.81393939393941,
+            "syllables": 123,
+            "sentences": 3,
+            "score": 0.9881393939393941
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1929282598,
+        "content": "don't we use [actions/create-github-app-token](https://github.com/actions/create-github-app-token) now?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/73#discussion_r1929282598",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -42,3 +46,22 @@ jobs:\n \n       - name: Watch Activity\n         uses: ./\n+\n+      - name: Get GitHub App token\n+        if: env.APP_ID != '' && env.APP_PRIVATE_KEY != ''\n+        uses: tibdex/github-app-token@v1.7.0",
+        "score": {
+          "reward": 5.568,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 86.70500000000001,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.7329499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1929312919,
+        "content": "isn't this basically the same as calling `removeEntryFromDatabase`?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/73#discussion_r1929312919",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -91,6 +106,14 @@ async function updateReminders(context: ContextPlugin, repo: ListForOrg[\"data\"][\n         await updateTaskReminder(context, repo, issue);\n       } else {\n         logger.info(`Skipping issue ${issue.html_url} because no user is assigned.`);\n+        const { owner, repo } = parseIssueUrl(issue.html_url);\n+        const key = `${owner}/${repo}`;\n+        if (db.data[key]) {\n+          await db.update((data) => {\n+            data[key] = data[key].filter((o) => o.issueNumber !== issue.number);\n+            return data;\n+          });\n+        }",
+        "score": {
+          "reward": 2.592,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 71.81500000000001,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.8818499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2573658843,
+            "effect": {
+              "addition": 316,
+              "deletion": 22
+            },
+            "reward": 10.14,
+            "priority": 3
+          },
+          {
+            "reviewId": 2573985682,
+            "effect": {
+              "addition": 22,
+              "deletion": 20
+            },
+            "reward": 1.26,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/73"
+      },
+      {
+        "reviews": [
+          {
+            "reviewId": 2568365211,
+            "effect": {
+              "addition": 17,
+              "deletion": 3
+            },
+            "reward": 0.6,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/55"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 39.507 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>12</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>19.347</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>8.16</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/73\" target=\"_blank\" rel=\"noopener\">#73</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+316 -22</td><td>3</td><td>10.14</td></tr><tr><td>+22 -20</td><td>3</td><td>1.26</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/plugin-sdk/pull/55\" target=\"_blank\" rel=\"noopener\">#55</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+17 -3</td><td>3</td><td>0.6</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2569302512\" target=\"_blank\" rel=\"noopener\">There's no easy answer to this. We could implement cron jobs b&hellip;</a></h6></td><td><details><summary>2.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 99&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>1</td><td>3</td><td>10.14</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/68#issuecomment-2571617515\" target=\"_blank\" rel=\"noopener\">If I understand correctly every time &#96;issues.assigned&#96; t&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 88&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.9</td><td>3</td><td>9.207</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/73#discussion_r1929282598\" target=\"_blank\" rel=\"noopener\">don't we use [actions/create-github-app-token](https://github.co&hellip;</a></h6></td><td><details><summary>1.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.8</td><td>3</td><td>5.568</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/73#discussion_r1929312919\" target=\"_blank\" rel=\"noopener\">isn't this basically the same as calling &#96;removeEntryFromDat&hellip;</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.9</td><td>3</td><td>2.592</td></tr></tbody></table></details>"
+  },
+  "Keyrxng": {
+    "total": 0.129,
+    "userId": 106303466,
+    "comments": [
+      {
+        "id": 2608067974,
+        "content": "Hey @gentlementlegen, would you mind shooting me a dm on telegram when you see this please? Thank you.",
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/55#issuecomment-2608067974",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.129,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 80.20000000000003,
+            "syllables": 25,
+            "sentences": 2,
+            "score": 0.7979999999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/73"
+      },
+      {
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/55"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 0.129 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>1</td><td>0.129</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugin-sdk/pull/55#issuecomment-2608067974\" target=\"_blank\" rel=\"noopener\">Hey @gentlementlegen, would you mind shooting me a dm on telegra&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.129</td></tr></tbody></table></details>"
+  }
+}

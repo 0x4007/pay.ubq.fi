@@ -1,0 +1,106 @@
+{
+  "0x4007": {
+    "userId": 4975670,
+    "total": 40.233,
+    "task": {
+      "reward": 24,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2595593422,
+        "content": "If the org/repo name is too long, the issue will not sync.\r\n### Context\r\nBased on the error messages in the log, it appears there are recurring issues with creating new GitHub issues. The main problem seems to be related to label validation. Here's a summary of the types of issues:\r\n### Label Validation Errors:\r\nThe most common error is: \r\n```\r\n\"Validation Failed: {\"value\":\"Partner: [repository name]\",\"resource\":\"Label\",\"field\":\"name\",\"code\":\"invalid\"}\"\r\n```\r\nThis occurs for various partner repositories, including:\r\n- ubiquity/uniswap-v3-liquidity-provider-indicator\r\n- ubiquity-os-marketplace/tet-conversation-rewards\r\n- ubiquity-os-marketplace/command-start-stop\r\n- ubiquity-os-marketplace/daemon-disqualifier\r\n### Summary\r\nThe root cause appears to be an issue with the label names being used when creating new issues. The \"Partner: [repository-name]\" label format is being rejected by the GitHub API as invalid. This could be due to length restrictions, character limitations, or other label naming constraints imposed by GitHub.\r\n# Task\r\nI think we can safely delete this Partner label because it doesn't seem to be read anywhere.",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/50",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 8.07,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 10
+              },
+              "h3": {
+                "score": 1,
+                "elementCount": 3
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              },
+              "h1": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 4.4
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 160,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 38.75750000000005,
+            "syllables": 274,
+            "sentences": 7,
+            "score": 0.7875750000000005
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2131252043,
+        "content": "Had to do a refactoring, and for thorough testing I had to knock out a few of small tasks in one go. \r\n- Resolves https://github.com/ubiquity/devpool-directory-tasks/issues/45\r\n   - Took a very deep dive to find out exactly where the problem is. The refactoring was inspired mostly by the incorrectly named variables, making this really misleading to find (partnerIssue would be named directoryIssue meaning the opposite etc)\r\n- Resolves https://github.com/ubiquity/devpool-directory-tasks/issues/50\r\n   - Used to be initialized as a \"[default label](https://github.com/ubiquity/devpool-directory/pull/1693/files#diff-f8fce3dd64d28733565f3b18422b98bb101d52d2de0cb6173a983d6f84836c1fR5)\" \r\n- Resolves https://github.com/ubiquity/devpool-directory-tasks/issues/51\r\n   - This was key to initializing a new Directory ([needs the label](https://github.com/ubiquity/devpool-directory/pull/1693/files#diff-dcdc3e0b3362edb8fec2a51d3fa51f8fb8af8f70247e06d9887fa934834c9122R14) or silently fails)",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1693",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 8.163,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 6
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 4
+              }
+            },
+            "result": 4.6
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 85,
+            "wordValue": 0.1,
+            "result": 2.64
+          },
+          "readability": {
+            "fleschKincaid": 44.37047619047621,
+            "syllables": 190,
+            "sentences": 6,
+            "score": 0.8437047619047621
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 40.233 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>24</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>8.07</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>8.163</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/50\" target=\"_blank\" rel=\"noopener\">If the org/repo name is too long, the issue will not sync.### &hellip;</a></h6></td><td><details><summary>6.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 10&#13;    h3:&#13;      score: 1&#13;      elementCount: 3&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;    h1:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 4.4&#13;regex:&#13;  wordCount: 160&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>1</td><td>1</td><td>8.07</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1693\" target=\"_blank\" rel=\"noopener\">Had to do a refactoring, and for thorough testing I had to knock&hellip;</a></h6></td><td><details><summary>7.24</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ul:&#13;      score: 0&#13;      elementCount: 4&#13;    li:&#13;      score: 0.1&#13;      elementCount: 6&#13;    a:&#13;      score: 1&#13;      elementCount: 4&#13;  result: 4.6&#13;regex:&#13;  wordCount: 85&#13;  wordValue: 0.1&#13;  result: 2.64&#13;</pre></details></td><td>0.9</td><td>1</td><td>8.163</td></tr></tbody></table></details>"
+  }
+}

@@ -1,0 +1,346 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 154.68,
+    "task": {
+      "reward": 150,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2254757893,
+        "content": "The new bot version requires new configuration elements, that can currently be found at\r\nhttps://github.com/ubiquibot/conversation-rewards/blob/development/rewards-configuration.default.yml\r\nThese elements should be served within the default configuration.\r\nTasks to be carried out:\r\n- add the required elements to the configuration\r\n- provide default values\r\n- make sure configuration merging works as expected\r\n- release a new version of this package",
+        "url": "https://github.com/ubiquity-os/configuration-loader/issues/8",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.68,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 8
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.4
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 52,
+            "wordValue": 0.1,
+            "result": 2.41
+          },
+          "readability": {
+            "fleschKincaid": 36.53987500000002,
+            "syllables": 119,
+            "sentences": 5,
+            "score": 0.7653987500000002
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 154.68 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>150</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.68</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/configuration-loader/issues/8\" target=\"_blank\" rel=\"noopener\">The new bot version requires new configuration elements, that ca&hellip;</a></h6></td><td><details><summary>3.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 8&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.4&#13;regex:&#13;  wordCount: 52&#13;  wordValue: 0.1&#13;  result: 2.41&#13;</pre></details></td><td>1</td><td>1</td><td>4.68</td></tr></tbody></table></details>"
+  },
+  "gitcoindev": {
+    "total": 64.041,
+    "userId": 88761781,
+    "comments": [
+      {
+        "id": 2021670343,
+        "content": "I left a few comments to add documentation but in general a good job!",
+        "url": "https://github.com/ubiquity-os/configuration-loader/pull/9#pullrequestreview-2021670343",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.555,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 65.72500000000001,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 0.9427499999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1578964110,
+        "content": "If I understand correctly, the syntax is: first value ISSUE / REVIEW , depends on location where the comment is located. Second value on the person: ISSUER /  ASSIGNEE / COLLABORATOR / CONTRIBUTOR . Third value depends on the action COMMENTED / SPECIFICATION / TASK (perhaps SPECIFIED / TASK_CREATED would be more clear but I think we can leave as is) . Therefore in general this is a triple [ location / person / action ] . Would be good to put this information into a readme or instruction somewhere.",
+        "url": "https://github.com/ubiquity-os/configuration-loader/pull/9#discussion_r1578964110",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -7,3 +7,70 @@ command-settings:\n #  header:  \"Thank you for contributing to UbiquiBot! Please be sure to set your wallet address before completing your first bounty so that the automatic payout upon task completion will work for you.\"\r\n #  helpMenu: true\r\n #  footer:  \"###### Also please star this repository and [@ubiquity/devpool-directory](https://github.com/ubiquity/devpool-directory/) to show your support. It helps a lot!\"\r\n+\r\n+incentives:\r\n+  enabled: true\r\n+  contentEvaluator:\r\n+    enabled: true\r\n+  userExtractor:\r\n+    enabled: true\r\n+    redeemTask: true\r\n+  dataPurge:\r\n+    enabled: true\r\n+  formattingEvaluator:\r\n+    enabled: true\r\n+    scores:\r\n+      br: 0\r\n+      code: 1\r\n+      p: 1\r\n+      em: 0\r\n+      img: 0\r\n+      strong: 0\r\n+      blockquote: 0\r\n+      h1: 1\r\n+      h2: 1\r\n+      h3: 1\r\n+      h4: 1\r\n+      h5: 1\r\n+      h6: 1\r\n+      a: 1\r\n+      li: 1\r\n+      td: 1\r\n+      hr: 0\r\n+    multipliers:\r\n+      - type: [ ISSUE, ISSUER, SPECIFICATION ]\r",
+        "score": {
+          "reward": 1.968,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 75,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 44.97000000000003,
+            "syllables": 130,
+            "sentences": 5,
+            "score": 0.8497000000000002
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1578968738,
+        "content": "Why not 2.0.0 ?",
+        "url": "https://github.com/ubiquity-os/configuration-loader/pull/9#discussion_r1578968738",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -1,6 +1,6 @@\n {\n   \"name\": \"@ubiquibot/configuration\",\n-  \"version\": \"1.1.0\",\n+  \"version\": \"2.0.1\",",
+        "score": {
+          "reward": 0.306,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 120.54333333333335,
+            "syllables": 5,
+            "sentences": 3,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1578971464,
+        "content": "It would be good also to document what each of those configuration types mean, can be above the code.",
+        "url": "https://github.com/ubiquity-os/configuration-loader/pull/9#discussion_r1578971464",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -0,0 +1,9 @@\n+import { Static, Type } from \"@sinclair/typebox\";\n+\n+export const githubCommentConfigurationType = Type.Object({\n+  enabled: Type.Boolean({ default: true }),\n+  post: Type.Boolean({ default: true }),\n+  debug: Type.Boolean({ default: false }),",
+        "score": {
+          "reward": 0.966,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 67.32894736842107,
+            "syllables": 27,
+            "sentences": 1,
+            "score": 0.9267105263157893
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2076497568,
+        "content": "@gentlementlegen I noticed Jests tests are failing, please look into this as well https://github.com/ubiquibot/configuration/actions/runs/8826720734/job/24232850716?pr=9",
+        "url": "https://github.com/ubiquity-os/configuration-loader/pull/9#issuecomment-2076497568",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.836,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 59.632666666666694,
+            "syllables": 41,
+            "sentences": 3,
+            "score": 0.9963266666666669
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2021670343,
+            "effect": {
+              "addition": 907,
+              "deletion": 527
+            },
+            "reward": 43.02,
+            "priority": 3
+          },
+          {
+            "reviewId": 2035409941,
+            "effect": {
+              "addition": 501,
+              "deletion": 12
+            },
+            "reward": 15.39,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/configuration-loader/pull/9"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 64.041 XP ]</a>&nbsp;</h3><h6>@gitcoindev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>58.41</td></tr><tr><td>Review</td><td>Comment</td><td>5</td><td>5.631</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/configuration-loader/pull/9\" target=\"_blank\" rel=\"noopener\">#9</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+907 -527</td><td>3</td><td>43.02</td></tr><tr><td>+501 -12</td><td>3</td><td>15.39</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/configuration-loader/pull/9#pullrequestreview-2021670343\" target=\"_blank\" rel=\"noopener\">I left a few comments to add documentation but in general a good&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.5</td><td>3</td><td>0.555</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/configuration-loader/pull/9#discussion_r1578964110\" target=\"_blank\" rel=\"noopener\">If I understand correctly, the syntax is: first value ISSUE / RE&hellip;</a></h6></td><td><details><summary>2.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 75&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.968</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/configuration-loader/pull/9#discussion_r1578968738\" target=\"_blank\" rel=\"noopener\">Why not 2.0.0 ?</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.6</td><td>3</td><td>0.306</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/configuration-loader/pull/9#discussion_r1578971464\" target=\"_blank\" rel=\"noopener\">It would be good also to document what each of those configurati&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.7</td><td>3</td><td>0.966</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/configuration-loader/pull/9#issuecomment-2076497568\" target=\"_blank\" rel=\"noopener\">@gentlementlegen I noticed Jests tests are failing, please look &hellip;</a></h6></td><td><details><summary>2.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.9</td><td>3</td><td>1.836</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 47.832,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1578824474,
+        "content": "I'm still confused about this syntax. Can you explain what these are meant to express?",
+        "url": "https://github.com/ubiquity-os/configuration-loader/pull/9#discussion_r1578824474",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -7,3 +7,70 @@ command-settings:\n #  header:  \"Thank you for contributing to UbiquiBot! Please be sure to set your wallet address before completing your first bounty so that the automatic payout upon task completion will work for you.\"\r\n #  helpMenu: true\r\n #  footer:  \"###### Also please star this repository and [@ubiquity/devpool-directory](https://github.com/ubiquity/devpool-directory/) to show your support. It helps a lot!\"\r\n+\r\n+incentives:\r\n+  enabled: true\r\n+  contentEvaluator:\r\n+    enabled: true\r\n+  userExtractor:\r\n+    enabled: true\r\n+    redeemTask: true\r\n+  dataPurge:\r\n+    enabled: true\r\n+  formattingEvaluator:\r\n+    enabled: true\r\n+    scores:\r\n+      br: 0\r\n+      code: 1\r\n+      p: 1\r\n+      em: 0\r\n+      img: 0\r\n+      strong: 0\r\n+      blockquote: 0\r\n+      h1: 1\r\n+      h2: 1\r\n+      h3: 1\r\n+      h4: 1\r\n+      h5: 1\r\n+      h6: 1\r\n+      a: 1\r\n+      li: 1\r\n+      td: 1\r\n+      hr: 0\r\n+    multipliers:\r\n+      - type: [ ISSUE, ISSUER, SPECIFICATION ]\r",
+        "score": {
+          "reward": 3.72,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 87.67750000000001,
+            "syllables": 21,
+            "sentences": 2,
+            "score": 0.7232249999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1578825245,
+        "content": "What is redeem task?",
+        "url": "https://github.com/ubiquity-os/configuration-loader/pull/9#discussion_r1578825245",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,8 @@\n+import { Static, Type } from \"@sinclair/typebox\";\n+\n+export const userExtractorConfigurationType = Type.Object({\n+  enabled: Type.Boolean({ default: true }),\n+  redeemTask: Type.Boolean({ default: true }),",
+        "score": {
+          "reward": 1.092,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 97.025,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.6297499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2021458874,
+            "effect": {
+              "addition": 907,
+              "deletion": 527
+            },
+            "reward": 43.02,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/configuration-loader/pull/9"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 47.832 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>43.02</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>4.812</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/configuration-loader/pull/9\" target=\"_blank\" rel=\"noopener\">#9</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+907 -527</td><td>3</td><td>43.02</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/configuration-loader/pull/9#discussion_r1578824474\" target=\"_blank\" rel=\"noopener\">I'm still confused about this syntax. Can you explain what these&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.8</td><td>3</td><td>3.72</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/configuration-loader/pull/9#discussion_r1578825245\" target=\"_blank\" rel=\"noopener\">What is redeem task?</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.7</td><td>3</td><td>1.092</td></tr></tbody></table></details>"
+  }
+}

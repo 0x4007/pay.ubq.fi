@@ -1,0 +1,453 @@
+{
+  "gpylypchuk": {
+    "userId": 68362755,
+    "total": 25.58,
+    "task": {
+      "reward": 25,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 1934873541,
+        "content": "Do you mean a method like this?\r\n```solidity\r\nfunction invalidateNonce(uint256 _nonceValue) external onlyOwner {\r\n        nonceRedeemed[_nonceValue] = true;\r\n}\r\n```\r\nSo when your're going to mint, that nonce is already used and the require should fail.",
+        "url": "https://github.com/ubiquity/nft-rewards/issues/4#issuecomment-1934873541",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.49,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 95.955,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.64045
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1728294005,
+        "content": "Resolves #4 issue.",
+        "url": "https://github.com/ubiquity/nft-rewards/pull/8",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 0.09,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 62.79000000000002,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.9720999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 25.58 XP ]</a>&nbsp;</h3><h6>@gpylypchuk</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>25</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.49</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>0.09</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/issues/4#issuecomment-1934873541\" target=\"_blank\" rel=\"noopener\">Do you mean a method like this?&#96;&#96;&#96;solidityfuncti&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>1</td><td>1</td><td>0.49</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/pull/8\" target=\"_blank\" rel=\"noopener\">Resolves #4 issue.</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.09</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 4.82,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 1936170196,
+        "content": "Exactly",
+        "url": "https://github.com/ubiquity/nft-rewards/issues/4#issuecomment-1936170196",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.14,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": -47.97999999999996,
+            "syllables": 3,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2063923727,
+        "content": "Owner should be able to invalidate [nonce](https://github.com/ubiquity/nft-rewards/blob/31871eb28c84fe0b95b413e2ea420c8c52191255/src/NftReward.sol#L23) for already signed mint request.\r\nWhat should be done:\r\n1. Add a new method `invalidateNonce()` where owner can pass a nonce value and invalidate mint request.\r\n2. Cover with tests the `invalidateNonce()` method",
+        "url": "https://github.com/ubiquity/nft-rewards/issues/4",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.15,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 70.105,
+            "syllables": 53,
+            "sentences": 3,
+            "score": 0.8989499999999999
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1884557389,
+            "effect": {
+              "addition": 52,
+              "deletion": 1
+            },
+            "reward": 0.53,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/nft-rewards/pull/8"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 4.82 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>0.53</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.15</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.14</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/nft-rewards/pull/8\" target=\"_blank\" rel=\"noopener\">#8</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+52 -1</td><td>1</td><td>0.53</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/issues/4\" target=\"_blank\" rel=\"noopener\">Owner should be able to invalidate [nonce](https://github.com/ub&hellip;</a></h6></td><td><details><summary>3.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.2&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>1</td><td>1</td><td>4.15</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/issues/4#issuecomment-1936170196\" target=\"_blank\" rel=\"noopener\">Exactly</a></h6></td><td><details><summary>0.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>1</td><td>1</td><td>0.14</td></tr></tbody></table></details>"
+  },
+  "molecula451": {
+    "total": 2.457,
+    "userId": 41552663,
+    "comments": [
+      {
+        "id": 1949261876,
+        "content": "thanks for the PR @gpylypchuk hold while we get you the bot generate the permit claim to you",
+        "url": "https://github.com/ubiquity/nft-rewards/issues/4#issuecomment-1949261876",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.301,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 75.76500000000001,
+            "syllables": 24,
+            "sentences": 1,
+            "score": 0.8423499999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1949277664,
+        "content": "yeah it looks like on the last action it throw the key/pair incorrect that we know",
+        "url": "https://github.com/ubiquity/nft-rewards/issues/4#issuecomment-1949277664",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.08,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 90.05058823529413,
+            "syllables": 20,
+            "sentences": 1,
+            "score": 0.6994941176470587
+          },
+          "multiplier": 0.25,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1951380320,
+        "content": "pavlovcik let's not forget to issue this contributors permit",
+        "url": "https://github.com/ubiquity/nft-rewards/issues/4#issuecomment-1951380320",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.14,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 44.405,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.84405
+          },
+          "multiplier": 0.25,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1884905694,
+        "content": "looking good but it left to desire a bit, @gpylypchuk can you add a `require()` statement that checks the nonce has not been used?",
+        "url": "https://github.com/ubiquity/nft-rewards/pull/8#pullrequestreview-1884905694",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.4,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 76.82043478260871,
+            "syllables": 29,
+            "sentences": 1,
+            "score": 0.8317956521739128
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1885913837,
+        "content": "I'm accepting this PR because:\r\n1. rndquu already put eyes on it\r\n2. the PR meet the specification and conversational at the PR issue\r\n3. the user applied all the changes and meet the specification\r\n4. I tested locally and it invalidate the stuff\r\nLast but not least:\r\n1. There might be other edges cases to improve the security of the invalidation",
+        "url": "https://github.com/ubiquity/nft-rewards/pull/8#pullrequestreview-1885913837",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.516,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              }
+            },
+            "result": 0.5
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 58,
+            "wordValue": 0.1,
+            "result": 2.49
+          },
+          "readability": {
+            "fleschKincaid": 12.313275862068991,
+            "syllables": 93,
+            "sentences": 1,
+            "score": 0.5231327586206899
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1884905694,
+            "effect": {
+              "addition": 52,
+              "deletion": 1
+            },
+            "reward": 0.53,
+            "priority": 1
+          },
+          {
+            "reviewId": 1885913837,
+            "effect": {
+              "addition": 49,
+              "deletion": 0
+            },
+            "reward": 0.49,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/nft-rewards/pull/8"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 2.457 XP ]</a>&nbsp;</h3><h6>@molecula451</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>1.02</td></tr><tr><td>Issue</td><td>Comment</td><td>3</td><td>0.521</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>0.916</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/nft-rewards/pull/8\" target=\"_blank\" rel=\"noopener\">#8</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+52 -1</td><td>1</td><td>0.53</td></tr><tr><td>+49 -0</td><td>1</td><td>0.49</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/issues/4#issuecomment-1949261876\" target=\"_blank\" rel=\"noopener\">thanks for the PR @gpylypchuk hold while we get you the bot gene&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.301</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/issues/4#issuecomment-1949277664\" target=\"_blank\" rel=\"noopener\">yeah it looks like on the last action it throw the key/pair inco&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.08</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/issues/4#issuecomment-1951380320\" target=\"_blank\" rel=\"noopener\">pavlovcik let's not forget to issue this contributors permit</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.14</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/pull/8#pullrequestreview-1884905694\" target=\"_blank\" rel=\"noopener\">looking good but it left to desire a bit, @gpylypchuk can you ad&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.4</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/pull/8#pullrequestreview-1885913837\" target=\"_blank\" rel=\"noopener\">I'm accepting this PR because:1. rndquu already put eyes on it&hellip;</a></h6></td><td><details><summary>2.99</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ol:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;  result: 0.5&#13;regex:&#13;  wordCount: 58&#13;  wordValue: 0.1&#13;  result: 2.49&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.516</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 0.67,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1949272068,
+        "content": "Weird that it didn't even start the process here. Maybe I broke it by changing the GitHub secret in the other organization. Although I would've expected a crash after the calculating rewards comment is posted.",
+        "url": "https://github.com/ubiquity/nft-rewards/issues/4#issuecomment-1949272068",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.536,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 37,
+            "wordValue": 0.1,
+            "result": 2.1
+          },
+          "readability": {
+            "fleschKincaid": 68.55990990990992,
+            "syllables": 55,
+            "sentences": 3,
+            "score": 0.9144009009009008
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1951380413,
+        "content": "We can try regenerating here.",
+        "url": "https://github.com/ubiquity/nft-rewards/issues/4#issuecomment-1951380413",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.134,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 49.48000000000002,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.8948000000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/nft-rewards/pull/8"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 0.67 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>2</td><td>0.67</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/issues/4#issuecomment-1949272068\" target=\"_blank\" rel=\"noopener\">Weird that it didn't even start the process here. Maybe I broke &hellip;</a></h6></td><td><details><summary>2.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 37&#13;  wordValue: 0.1&#13;  result: 2.1&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.536</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/issues/4#issuecomment-1951380413\" target=\"_blank\" rel=\"noopener\">We can try regenerating here.</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.134</td></tr></tbody></table></details>"
+  }
+}

@@ -1,0 +1,1176 @@
+{
+  "EresDev": {
+    "userId": 11886219,
+    "total": 150,
+    "task": {
+      "reward": 150,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 150 XP ]</a>&nbsp;</h3><h6>@EresDev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>150</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 150,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2246840969,
+        "content": "You can handle this project after #55 is complete.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/45#issuecomment-2246840969",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.52,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 75.50000000000003,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.8449999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2272289365,
+        "content": "Using the open ai playground helped me rapidly iterate and improve the results by easily being able to adjust the prompt and test, so I highly recommend using that for prompt development. \nThe first attempt I think I might have spent at least a couple hours on the prompting alone.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/45#issuecomment-2272289365",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 8.289,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 50,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 56.252000000000024,
+            "syllables": 74,
+            "sentences": 2,
+            "score": 0.9625200000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2369697791,
+        "content": "I realize that pull request review comments should be `relevance: 1` always. They definitely don't make sense out of the context of its associated code sample. \r\nEventually it would be great to score pull request review comment relevance in a different manner, where we can feed the code sample to ChatGPT and provide it a new prompt, such as, \"is this a valuable pull request reviewer comment for the following code snippet?\"\r\nhttps://github.com/ubiquity/ts-template/issues/50#issuecomment-2186008265",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/45",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.68,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 71,
+            "wordValue": 0.1,
+            "result": 2.6
+          },
+          "readability": {
+            "fleschKincaid": 59.83644444444445,
+            "syllables": 125,
+            "sentences": 5,
+            "score": 0.9983644444444445
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2296427364,
+        "content": "It seems fine although to be honest sometimes it's a bit difficult to tell what's going on from our results table, especially from mobile.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#pullrequestreview-2296427364",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.345,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 53.54500000000003,
+            "syllables": 39,
+            "sentences": 1,
+            "score": 0.9354500000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1720519410,
+        "content": "That doesn't seem right.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1720519410",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -112,12 +110,59 @@ export class ContentEvaluatorModule implements Module {\n     return commentsWithScore;\n   }\n \n+  _splitCommentsByPrompt(commentsWithScore: Readonly<GithubCommentScore>[]): {\n+    commentsToEvaluate: CommentToEvaluate[];\n+    reviewCommentsToEvaluate: ReviewCommentToEvaluate[];\n+  } {\n+    // exclude comments that have fixed relevance multiplier. e.g. review comments = 1\n+    const commentsToEvaluate: CommentToEvaluate[] = [];\n+    const reviewCommentsToEvaluate: ReviewCommentToEvaluate[] = [];\n+    for (let i = 0; i < commentsWithScore.length; i++) {\n+      const currentComment = commentsWithScore[i];\n+      if (!this._fixedRelevances[currentComment.type]) {\n+        if (currentComment.type & CommentKind.PULL) {\n+          if (currentComment?.diff_hunk) {",
+        "score": {
+          "reward": 1.449,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 117.16000000000003,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1720521058,
+        "content": "I think include the specification because as a human reviewer sometimes (but not always) I review the spec when looking at some of the changes. Maybe this is 1 out of 10 times but if I'm confused on why certain changes are made then I review the spec. I think it's a good idea to give the LLM the additional context if it's needed if it is cheap to do so.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1720521058",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -159,4 +204,15 @@ export class ContentEvaluatorModule implements Module {\n       comments.length\n     }.`;\n   }\n+\n+  _generatePromptForReviewComments(issue: string, comments: ReviewCommentToEvaluate[]) {\n+    if (!issue?.length) {\n+      throw new Error(\"Issue specification comment is missing or empty\");\n+    }\n+    return `I need to evaluate the value of a GitHub contributor's code review. Specifically, I'm interested in how much each code review comment helps to solve the GitHub issue and improve code quality. Please provide a float between 0 and 1 to represent the value of the code review comment. A score of 1 indicates that the comment is very valuable and significantly improves the submitted solution and code quality, whereas a score of 0 indicates a  negative or zero impact. A stringified JSON is given below that contains the specification of the GitHub issue, and code review comments by different contributors. The property \"diff_hunk\" presents the chunk of code being addressed for a possible change. \\n\\n\\`\\`\\`\\n${JSON.stringify(\n+      { specification: issue, comments: comments }",
+        "score": {
+          "reward": 8.91,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 74,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 72.046981981982,
+            "syllables": 96,
+            "sentences": 3,
+            "score": 0.87953018018018
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1720912190,
+        "content": "I'm not sure what the right answer is but I feel like maybe one more prompt could be the solution. We just need to provide the spec, full diff, the full pull conversation, and then ask if it's a useful comment I think.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1720912190",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -112,12 +110,59 @@ export class ContentEvaluatorModule implements Module {\n     return commentsWithScore;\n   }\n \n+  _splitCommentsByPrompt(commentsWithScore: Readonly<GithubCommentScore>[]): {\n+    commentsToEvaluate: CommentToEvaluate[];\n+    reviewCommentsToEvaluate: ReviewCommentToEvaluate[];\n+  } {\n+    // exclude comments that have fixed relevance multiplier. e.g. review comments = 1\n+    const commentsToEvaluate: CommentToEvaluate[] = [];\n+    const reviewCommentsToEvaluate: ReviewCommentToEvaluate[] = [];\n+    for (let i = 0; i < commentsWithScore.length; i++) {\n+      const currentComment = commentsWithScore[i];\n+      if (!this._fixedRelevances[currentComment.type]) {\n+        if (currentComment.type & CommentKind.PULL) {\n+          if (currentComment?.diff_hunk) {",
+        "score": {
+          "reward": 6.816,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 45,
+            "wordValue": 0.1,
+            "result": 2.29
+          },
+          "readability": {
+            "fleschKincaid": 80.5975,
+            "syllables": 55,
+            "sentences": 2,
+            "score": 0.794025
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1726643456,
+        "content": "As a human manager I feel that I would take all of this into context to determine how useful somebody's comment is, that's why I suggested these elements.  \nLet's send empty diffHunk then.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1726643456",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -112,12 +110,59 @@ export class ContentEvaluatorModule implements Module {\n     return commentsWithScore;\n   }\n \n+  _splitCommentsByPrompt(commentsWithScore: Readonly<GithubCommentScore>[]): {\n+    commentsToEvaluate: CommentToEvaluate[];\n+    reviewCommentsToEvaluate: ReviewCommentToEvaluate[];\n+  } {\n+    // exclude comments that have fixed relevance multiplier. e.g. review comments = 1\n+    const commentsToEvaluate: CommentToEvaluate[] = [];\n+    const reviewCommentsToEvaluate: ReviewCommentToEvaluate[] = [];\n+    for (let i = 0; i < commentsWithScore.length; i++) {\n+      const currentComment = commentsWithScore[i];\n+      if (!this._fixedRelevances[currentComment.type]) {\n+        if (currentComment.type & CommentKind.PULL) {\n+          if (currentComment?.diff_hunk) {",
+        "score": {
+          "reward": 5.628,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "br": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 61.665000000000006,
+            "syllables": 54,
+            "sentences": 2,
+            "score": 0.98335
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1759962376,
+        "content": "I think the rule is pascal case and technically it's pascal case.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1759962376",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -133,14 +126,60 @@ export class ContentEvaluatorModule implements Module {\n     }, {});\n   }\n \n+  _splitCommentsByPrompt(commentsWithScore: Readonly<GithubCommentScore>[]): {\n+    commentsToEvaluate: CommentToEvaluate[];\n+    PrCommentsToEvaluate: PrCommentToEvaluate[];",
+        "score": {
+          "reward": 2.52,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 69.99384615384618,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.9000615384615382
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2342405301,
+        "content": "Honestly it's a bit difficult to understand results in detail especially from mobile but if you think that it looks as expected we can merge. \nI'm a bit confused why many are scored zero",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#issuecomment-2342405301",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.005,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 64.015,
+            "syllables": 53,
+            "sentences": 2,
+            "score": 0.95985
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2342453056,
+        "content": "Interesting point. If relevance evaluation was skipped due to the config, then - makes sense. If it evaluated to 0 then we should write 0. Let's do this.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#issuecomment-2342453056",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.683,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 81.89428571428574,
+            "syllables": 39,
+            "sentences": 4,
+            "score": 0.7810571428571426
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2343235590,
+        "content": "@gentlementlegen change the package version to `*` to waste less time on housekeeping",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#issuecomment-2343235590",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.144,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 46.60500000000002,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 0.8660500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2356067907,
+        "content": "@EresDev Solve merge conflict and you can merge",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#issuecomment-2356067907",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.256,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 82.39000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.7760999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2366288094,
+        "content": "Looks like there's a ton of changes. Perhaps you should ensure it works by posting QA",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#issuecomment-2366288094",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.808,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 98.67808823529413,
+            "syllables": 20,
+            "sentences": 2,
+            "score": 0.6132191176470587
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2243849882,
+            "effect": {
+              "addition": 21586,
+              "deletion": 1450
+            },
+            "reward": 691.08,
+            "priority": 3
+          },
+          {
+            "reviewId": 2253906547,
+            "effect": {
+              "addition": 337,
+              "deletion": 334
+            },
+            "reward": 20.13,
+            "priority": 3
+          },
+          {
+            "reviewId": 2296427364,
+            "effect": {
+              "addition": 22529,
+              "deletion": 11350
+            },
+            "reward": 1016.37,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 150 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>1727.58</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.68</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>10.809</td></tr><tr><td>Review</td><td>Comment</td><td>11</td><td>45.564</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79\" target=\"_blank\" rel=\"noopener\">#79</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+21586 -1450</td><td>3</td><td>691.08</td></tr><tr><td>+337 -334</td><td>3</td><td>20.13</td></tr><tr><td>+22529 -11350</td><td>3</td><td>1016.37</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/45\" target=\"_blank\" rel=\"noopener\">I realize that pull request review comments should be &#96;relev&hellip;</a></h6></td><td><details><summary>3.6</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 71&#13;  wordValue: 0.1&#13;  result: 2.6&#13;</pre></details></td><td>1</td><td>1</td><td>4.68</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/45#issuecomment-2246840969\" target=\"_blank\" rel=\"noopener\">You can handle this project after #55 is complete.</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.8</td><td>3</td><td>2.52</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/45#issuecomment-2272289365\" target=\"_blank\" rel=\"noopener\">Using the open ai playground helped me rapidly iterate and impro&hellip;</a></h6></td><td><details><summary>2.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 50&#13;  wordValue: 0.1&#13;  result: 2.38&#13;</pre></details></td><td>0.9</td><td>3</td><td>8.289</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#pullrequestreview-2296427364\" target=\"_blank\" rel=\"noopener\">It seems fine although to be honest sometimes it's a bit difficu&hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.5</td><td>3</td><td>3.345</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1720519410\" target=\"_blank\" rel=\"noopener\">That doesn't seem right.</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.7</td><td>3</td><td>1.449</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1720521058\" target=\"_blank\" rel=\"noopener\">I think include the specification because as a human reviewer so&hellip;</a></h6></td><td><details><summary>2.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 74&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.9</td><td>3</td><td>8.91</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1720912190\" target=\"_blank\" rel=\"noopener\">I'm not sure what the right answer is but I feel like maybe one &hellip;</a></h6></td><td><details><summary>2.29</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 45&#13;  wordValue: 0.1&#13;  result: 2.29&#13;</pre></details></td><td>0.8</td><td>3</td><td>6.816</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1726643456\" target=\"_blank\" rel=\"noopener\">As a human manager I feel that I would take all of this into con&hellip;</a></h6></td><td><details><summary>2.07</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    br:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.7</td><td>3</td><td>5.628</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1759962376\" target=\"_blank\" rel=\"noopener\">I think the rule is pascal case and technically it's pascal case.</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.6</td><td>3</td><td>2.52</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#issuecomment-2342405301\" target=\"_blank\" rel=\"noopener\">Honestly it's a bit difficult to understand results in detail es&hellip;</a></h6></td><td><details><summary>2.07</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.5</td><td>3</td><td>4.005</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#issuecomment-2342453056\" target=\"_blank\" rel=\"noopener\">Interesting point. If relevance evaluation was skipped due to th&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.7</td><td>3</td><td>4.683</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#issuecomment-2343235590\" target=\"_blank\" rel=\"noopener\">@gentlementlegen change the package version to &#96;*&#96; to wa&hellip;</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.8</td><td>3</td><td>3.144</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#issuecomment-2356067907\" target=\"_blank\" rel=\"noopener\">@EresDev Solve merge conflict and you can merge</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.8</td><td>3</td><td>2.256</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#issuecomment-2366288094\" target=\"_blank\" rel=\"noopener\">Looks like there's a ton of changes. Perhaps you should ensure i&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.6</td><td>3</td><td>2.808</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 150,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 1717948889,
+        "content": "Why are these removed?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1717948889",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -16,22 +16,6 @@ export const contentEvaluatorConfigurationType = Type.Object({\n           select: [\"ISSUE_SPECIFICATION\"],\n           relevance: 1,\n         },\n-        {",
+        "score": {
+          "reward": 0.936,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 97.025,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.6297499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1717952090,
+        "content": "Is it GitHub wrapping or is it weirdly formatted?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1717952090",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -159,4 +204,15 @@ export class ContentEvaluatorModule implements Module {\n       comments.length\n     }.`;\n   }\n+\n+  _generatePromptForReviewComments(issue: string, comments: ReviewCommentToEvaluate[]) {\n+    if (!issue?.length) {\n+      throw new Error(\"Issue specification comment is missing or empty\");\n+    }\n+    return `I need to evaluate the value of a GitHub contributor's code review. Specifically, I'm interested in how much each code review comment helps to solve the GitHub issue and improve code quality. Please provide a float between 0 and 1 to represent the value of the code review comment. A score of 1 indicates that the comment is very valuable and significantly improves the submitted solution and code quality, whereas a score of 0 indicates a  negative or zero impact. A stringified JSON is given below that contains the specification of the GitHub issue, and code review comments by different contributors. The property \"diff_hunk\" presents the chunk of code being addressed for a possible change. \\n\\n\\`\\`\\`\\n${JSON.stringify(\n+      { specification: issue, comments: comments }\n+    )}\\n\\`\\`\\`\\n\\n\\nTo what degree are each of the code review comments valuable? Please reply with ONLY a JSON where each key is the comment ID given in JSON above, and the value is a float number between 0 and 1 corresponding to the comment. The float number should represent the value of the code review comment for improving the issue solution and code quality. The total number of properties in your JSON response should equal exactly ${\n+      comments.length",
+        "score": {
+          "reward": 0.945,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 75.50000000000003,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.8449999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1717956202,
+        "content": "I am not sure if that makes sense. The idea was the pull-request comments are related to the code itself, and not to the specification which is why we put the relevance to `1` in the first place, because these comments are unrelated.\r\n@0x4007 maybe the comments for the pull-request should be checked against the code block they are commenting, or something related to code anyway? I also usually like to specify in the pull-request what are the changes implied which also could be used instead of the specification.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1717956202",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -159,4 +204,15 @@ export class ContentEvaluatorModule implements Module {\n       comments.length\n     }.`;\n   }\n+\n+  _generatePromptForReviewComments(issue: string, comments: ReviewCommentToEvaluate[]) {\n+    if (!issue?.length) {\n+      throw new Error(\"Issue specification comment is missing or empty\");\n+    }\n+    return `I need to evaluate the value of a GitHub contributor's code review. Specifically, I'm interested in how much each code review comment helps to solve the GitHub issue and improve code quality. Please provide a float between 0 and 1 to represent the value of the code review comment. A score of 1 indicates that the comment is very valuable and significantly improves the submitted solution and code quality, whereas a score of 0 indicates a  negative or zero impact. A stringified JSON is given below that contains the specification of the GitHub issue, and code review comments by different contributors. The property \"diff_hunk\" presents the chunk of code being addressed for a possible change. \\n\\n\\`\\`\\`\\n${JSON.stringify(\n+      { specification: issue, comments: comments }",
+        "score": {
+          "reward": 8.136,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 91,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 63.816277472527474,
+            "syllables": 129,
+            "sentences": 4,
+            "score": 0.9618372252747253
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1717957651,
+        "content": "Is it okay to change? I think the mocks return `/comment-incentives/issues/22` API responses.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1717957651",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -23,7 +23,7 @@ import configuration from \"../src/configuration/config-reader\";\n import validConfiguration from \"./__mocks__/results/valid-configuration.json\";\n import \"../src/parser/command-line\";\n \n-const issueUrl = process.env.TEST_ISSUE_URL || \"https://github.com/ubiquibot/comment-incentives/issues/22\";\n+const issueUrl = process.env.TEST_ISSUE_URL || \"https://github.com/ubiquibot/conversation-rewards/issues/5\";",
+        "score": {
+          "reward": 2.604,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 94.995,
+            "syllables": 15,
+            "sentences": 2,
+            "score": 0.6500499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1718147155,
+        "content": "If they are added back to the configuration via the file, will they override anything? If these options are not available at all anymore, it would be great to remove them from the codebase too, otherwise ignore my comment.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1718147155",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -16,22 +16,6 @@ export const contentEvaluatorConfigurationType = Type.Object({\n           select: [\"ISSUE_SPECIFICATION\"],\n           relevance: 1,\n         },\n-        {",
+        "score": {
+          "reward": 6.624,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 39,
+            "wordValue": 0.1,
+            "result": 2.15
+          },
+          "readability": {
+            "fleschKincaid": 54.71942307692311,
+            "syllables": 61,
+            "sentences": 2,
+            "score": 0.947194230769231
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1759918776,
+        "content": "Shouldn't this be spotted by `eslint`?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1759918776",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -133,14 +126,60 @@ export class ContentEvaluatorModule implements Module {\n     }, {});\n   }\n \n+  _splitCommentsByPrompt(commentsWithScore: Readonly<GithubCommentScore>[]): {\n+    commentsToEvaluate: CommentToEvaluate[];\n+    PrCommentsToEvaluate: PrCommentToEvaluate[];",
+        "score": {
+          "reward": 1.185,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 116.14500000000001,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1760432842,
+        "content": "If that was the case then the linter would detect `commentsToEvaluate` as wrong. Either it accepts both, either there is no rule for this.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1760432842",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -133,14 +126,60 @@ export class ContentEvaluatorModule implements Module {\n     }, {});\n   }\n \n+  _splitCommentsByPrompt(commentsWithScore: Readonly<GithubCommentScore>[]): {\n+    commentsToEvaluate: CommentToEvaluate[];\n+    PrCommentsToEvaluate: PrCommentToEvaluate[];",
+        "score": {
+          "reward": 3.528,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 88.49293478260873,
+            "syllables": 29,
+            "sentences": 2,
+            "score": 0.7150706521739127
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2338230328,
+        "content": "@EresDev Could you resolve conflicts so we can get this in please?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#issuecomment-2338230328",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.536,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 81.85500000000002,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.7814499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2342447196,
+        "content": "I'd be in favor to replace the `-` for relevances by `0` because to me it feels like no relevance was evaluated at all. I will test this on some previously closed tasks.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#issuecomment-2342447196",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.145,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 74.27000000000001,
+            "syllables": 44,
+            "sentences": 2,
+            "score": 0.8573
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2342483319,
+        "content": "@EresDev I gave it a try [here](https://github.com/ubiquibot/conversation-rewards/actions/runs/10803715813/job/29968013705#step:7:467) and got a relevance of 1 for all pull-request commands. Perhaps the configuration should be changed as well?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#issuecomment-2342483319",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 8.28,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 73.24769230769233,
+            "syllables": 37,
+            "sentences": 2,
+            "score": 0.8675230769230766
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2345246649,
+        "content": "Not sure how this is relevant to the problem, I just probably didn't merge / use latest commit properly when updating in my org.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#issuecomment-2345246649",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.645,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 59.10000000000004,
+            "syllables": 35,
+            "sentences": 1,
+            "score": 0.9910000000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2239706805,
+            "effect": {
+              "addition": 8767,
+              "deletion": 1448
+            },
+            "reward": 306.45,
+            "priority": 3
+          },
+          {
+            "reviewId": 2303122348,
+            "effect": {
+              "addition": 35684,
+              "deletion": 11685
+            },
+            "reward": 1421.07,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 150 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>1727.52</td></tr><tr><td>Review</td><td>Comment</td><td>11</td><td>39.564</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79\" target=\"_blank\" rel=\"noopener\">#79</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+8767 -1448</td><td>3</td><td>306.45</td></tr><tr><td>+35684 -11685</td><td>3</td><td>1421.07</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1717948889\" target=\"_blank\" rel=\"noopener\">Why are these removed?</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.6</td><td>3</td><td>0.936</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1717952090\" target=\"_blank\" rel=\"noopener\">Is it GitHub wrapping or is it weirdly formatted?</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.945</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1717956202\" target=\"_blank\" rel=\"noopener\">I am not sure if that makes sense. The idea was the pull-request&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 91&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.8</td><td>3</td><td>8.136</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1717957651\" target=\"_blank\" rel=\"noopener\">Is it okay to change? I think the mocks return &#96;/comment-inc&hellip;</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.604</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1718147155\" target=\"_blank\" rel=\"noopener\">If they are added back to the configuration via the file, will t&hellip;</a></h6></td><td><details><summary>2.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 39&#13;  wordValue: 0.1&#13;  result: 2.15&#13;</pre></details></td><td>0.8</td><td>3</td><td>6.624</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1759918776\" target=\"_blank\" rel=\"noopener\">Shouldn't this be spotted by &#96;eslint&#96;?</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.5</td><td>3</td><td>1.185</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1760432842\" target=\"_blank\" rel=\"noopener\">If that was the case then the linter would detect &#96;commentsT&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.6</td><td>3</td><td>3.528</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#issuecomment-2338230328\" target=\"_blank\" rel=\"noopener\">@EresDev Could you resolve conflicts so we can get this in pleas&hellip;</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.4</td><td>3</td><td>1.536</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#issuecomment-2342447196\" target=\"_blank\" rel=\"noopener\">I'd be in favor to replace the &#96;-&#96; for relevances by &#9&hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.7</td><td>3</td><td>5.145</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#issuecomment-2342483319\" target=\"_blank\" rel=\"noopener\">@EresDev I gave it a try [here](https://github.com/ubiquibot/con&hellip;</a></h6></td><td><details><summary>2.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.8</td><td>3</td><td>8.28</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#issuecomment-2345246649\" target=\"_blank\" rel=\"noopener\">Not sure how this is relevant to the problem, I just probably di&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.645</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 150,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 1718696825,
+        "content": "```suggestion\r\n              codeDiff: reviewComment?.pull_request_review_id ? reviewComment?.diff_hunk : undefined,\r\n```\r\nI think this way is more elegant",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1718696825",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -37,6 +49,7 @@ export class DataPurgeModule implements Module {\n               content: newContent,\n               url: comment.html_url,\n               type: comment.type,\n+              ...reviewCommentProps,",
+        "score": {
+          "reward": 1.992,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 90.95857142857145,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.6904142857142855
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1718698190,
+        "content": "```suggestion\r\n      const promptForReviewComments = this._generatePromptForReviewComments(specification, reviewComments);\r\n```\r\nI think you called the wrong function here",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1718698190",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -112,12 +110,59 @@ export class ContentEvaluatorModule implements Module {\n     return commentsWithScore;\n   }\n \n+  _splitCommentsByPrompt(commentsWithScore: Readonly<GithubCommentScore>[]): {\n+    commentsToEvaluate: CommentToEvaluate[];\n+    reviewCommentsToEvaluate: ReviewCommentToEvaluate[];\n+  } {\n+    // exclude comments that have fixed relevance multiplier. e.g. review comments = 1\n+    const commentsToEvaluate: CommentToEvaluate[] = [];\n+    const reviewCommentsToEvaluate: ReviewCommentToEvaluate[] = [];\n+    for (let i = 0; i < commentsWithScore.length; i++) {\n+      const currentComment = commentsWithScore[i];\n+      if (!this._fixedRelevances[currentComment.type]) {\n+        if (currentComment.type & CommentKind.PULL) {\n+          if (currentComment?.diff_hunk) {\n+            //Eval PR comment with diff_hunk, all other PR comments get relevance:1 by default\n+\n+            reviewCommentsToEvaluate.push({\n+              id: currentComment.id,\n+              comment: currentComment.content,\n+              diff_hunk: currentComment.diff_hunk,\n+            });\n+          }\n+        } else {\n+          commentsToEvaluate.push({\n+            id: currentComment.id,\n+            comment: currentComment.content,\n+          });\n+        }\n+      }\n+    }\n+    return { commentsToEvaluate, reviewCommentsToEvaluate };\n+  }\n+\n   async _evaluateComments(\n     specification: string,\n-    comments: { id: number; comment: string }[]\n-  ): Promise<RelevancesByOpenAi> {\n-    const prompt = this._generatePrompt(specification, comments);\n+    comments: CommentToEvaluate[],\n+    reviewComments: ReviewCommentToEvaluate[]\n+  ): Promise<Relevances> {\n+    let combinedRelevances: Relevances = {};\n+\n+    if (comments.length) {\n+      const promptForComments = this._generatePromptForComments(specification, comments);\n+      combinedRelevances = await this._submitPrompt(promptForComments);\n+    }\n+\n+    if (reviewComments.length) {\n+      const promptForReviewComments = this._generatePromptForComments(specification, reviewComments);",
+        "score": {
+          "reward": 2.673,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 103.54,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1718703083,
+        "content": "I think it's more readable if you have two separate variables for relevances without combined relevance and return`{ ...commentRelevances, ...reviewCommentRelevances }`",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1718703083",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -112,12 +110,59 @@ export class ContentEvaluatorModule implements Module {\n     return commentsWithScore;\n   }\n \n+  _splitCommentsByPrompt(commentsWithScore: Readonly<GithubCommentScore>[]): {\n+    commentsToEvaluate: CommentToEvaluate[];\n+    reviewCommentsToEvaluate: ReviewCommentToEvaluate[];\n+  } {\n+    // exclude comments that have fixed relevance multiplier. e.g. review comments = 1\n+    const commentsToEvaluate: CommentToEvaluate[] = [];\n+    const reviewCommentsToEvaluate: ReviewCommentToEvaluate[] = [];\n+    for (let i = 0; i < commentsWithScore.length; i++) {\n+      const currentComment = commentsWithScore[i];\n+      if (!this._fixedRelevances[currentComment.type]) {\n+        if (currentComment.type & CommentKind.PULL) {\n+          if (currentComment?.diff_hunk) {\n+            //Eval PR comment with diff_hunk, all other PR comments get relevance:1 by default\n+\n+            reviewCommentsToEvaluate.push({\n+              id: currentComment.id,\n+              comment: currentComment.content,\n+              diff_hunk: currentComment.diff_hunk,\n+            });\n+          }\n+        } else {\n+          commentsToEvaluate.push({\n+            id: currentComment.id,\n+            comment: currentComment.content,\n+          });\n+        }\n+      }\n+    }\n+    return { commentsToEvaluate, reviewCommentsToEvaluate };\n+  }\n+\n   async _evaluateComments(\n     specification: string,\n-    comments: { id: number; comment: string }[]\n-  ): Promise<RelevancesByOpenAi> {\n-    const prompt = this._generatePrompt(specification, comments);\n+    comments: CommentToEvaluate[],\n+    reviewComments: ReviewCommentToEvaluate[]\n+  ): Promise<Relevances> {\n+    let combinedRelevances: Relevances = {};\n+\n+    if (comments.length) {\n+      const promptForComments = this._generatePromptForComments(specification, comments);\n+      combinedRelevances = await this._submitPrompt(promptForComments);\n+    }\n+\n+    if (reviewComments.length) {\n+      const promptForReviewComments = this._generatePromptForComments(specification, reviewComments);\n+      const relevances = await this._submitPrompt(promptForReviewComments);\n+      combinedRelevances = { ...combinedRelevances, ...relevances };",
+        "score": {
+          "reward": 3.759,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 45.06578947368425,
+            "syllables": 32,
+            "sentences": 1,
+            "score": 0.8506578947368425
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1718743428,
+        "content": "what happens with comments without code?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1718743428",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -112,12 +110,59 @@ export class ContentEvaluatorModule implements Module {\n     return commentsWithScore;\n   }\n \n+  _splitCommentsByPrompt(commentsWithScore: Readonly<GithubCommentScore>[]): {\n+    commentsToEvaluate: CommentToEvaluate[];\n+    reviewCommentsToEvaluate: ReviewCommentToEvaluate[];\n+  } {\n+    // exclude comments that have fixed relevance multiplier. e.g. review comments = 1\n+    const commentsToEvaluate: CommentToEvaluate[] = [];\n+    const reviewCommentsToEvaluate: ReviewCommentToEvaluate[] = [];\n+    for (let i = 0; i < commentsWithScore.length; i++) {\n+      const currentComment = commentsWithScore[i];\n+      if (!this._fixedRelevances[currentComment.type]) {\n+        if (currentComment.type & CommentKind.PULL) {\n+          if (currentComment?.diff_hunk) {",
+        "score": {
+          "reward": 1.386,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 73.84500000000001,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.8615499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1720984666,
+        "content": "okay then at least make it camelCase",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1720984666",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -37,6 +49,7 @@ export class DataPurgeModule implements Module {\n               content: newContent,\n               url: comment.html_url,\n               type: comment.type,\n+              ...reviewCommentProps,",
+        "score": {
+          "reward": 1.032,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 78.87285714285717,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.8112714285714283
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1759728859,
+        "content": "```suggestion\r\n    prCommentsToEvaluate: PrCommentToEvaluate[];\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1759728859",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -133,14 +126,60 @@ export class ContentEvaluatorModule implements Module {\n     }, {});\n   }\n \n+  _splitCommentsByPrompt(commentsWithScore: Readonly<GithubCommentScore>[]): {\n+    commentsToEvaluate: CommentToEvaluate[];\n+    PrCommentsToEvaluate: PrCommentToEvaluate[];",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1760042550,
+        "content": "then the rule should be changed to camelCase",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1760042550",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -133,14 +126,60 @@ export class ContentEvaluatorModule implements Module {\n     }, {});\n   }\n \n+  _splitCommentsByPrompt(commentsWithScore: Readonly<GithubCommentScore>[]): {\n+    commentsToEvaluate: CommentToEvaluate[];\n+    PrCommentsToEvaluate: PrCommentToEvaluate[];",
+        "score": {
+          "reward": 0.846,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 82.39000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.7760999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2240853723,
+            "effect": {
+              "addition": 8767,
+              "deletion": 1448
+            },
+            "reward": 306.45,
+            "priority": 3
+          },
+          {
+            "reviewId": 2304438016,
+            "effect": {
+              "addition": 35684,
+              "deletion": 11685
+            },
+            "reward": 1421.07,
+            "priority": 3
+          },
+          {
+            "reviewId": 2309913261,
+            "effect": {
+              "addition": 3,
+              "deletion": 4
+            },
+            "reward": 0.21,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 150 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>1727.73</td></tr><tr><td>Review</td><td>Comment</td><td>7</td><td>11.688</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79\" target=\"_blank\" rel=\"noopener\">#79</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+8767 -1448</td><td>3</td><td>306.45</td></tr><tr><td>+35684 -11685</td><td>3</td><td>1421.07</td></tr><tr><td>+3 -4</td><td>3</td><td>0.21</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1718696825\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestioncodeDiff: reviewComment&hellip;</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.992</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1718698190\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionconst promptForReviewComments =&hellip;</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.9</td><td>3</td><td>2.673</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1718703083\" target=\"_blank\" rel=\"noopener\">I think it's more readable if you have two separate variables fo&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.7</td><td>3</td><td>3.759</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1718743428\" target=\"_blank\" rel=\"noopener\">what happens with comments without code?</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.6</td><td>3</td><td>1.386</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1720984666\" target=\"_blank\" rel=\"noopener\">okay then at least make it camelCase</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.4</td><td>3</td><td>1.032</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1759728859\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionprCommentsToEvaluate: PrCommentTo&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/79#discussion_r1760042550\" target=\"_blank\" rel=\"noopener\">then the rule should be changed to camelCase</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.846</td></tr></tbody></table></details>"
+  }
+}

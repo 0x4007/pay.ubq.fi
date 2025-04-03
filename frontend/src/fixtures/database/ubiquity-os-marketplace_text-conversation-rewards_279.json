@@ -1,0 +1,307 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 150,
+    "task": {
+      "reward": 150,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 150 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>150</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 17.944,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2732223173,
+        "content": "Yes that sounds correct!",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/279#issuecomment-2732223173",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 97.025,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.6297499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2739812816,
+        "content": "You need to use /stop when you're not working on a task.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/279#issuecomment-2739812816",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 102.53230769230771,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2859391952,
+        "content": "$25 flat seems excessive at times\nNew idea is to make line review credit only apply if review is set to approved or request changes. \nRemove the flat $25 reward concept. \nI think this might scale better with smaller/larger sizes proportionally. \nReference rewards:\nhttps://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/27#issuecomment-2664627267",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/279",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.21,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 44,
+            "wordValue": 0.1,
+            "result": 2.27
+          },
+          "readability": {
+            "fleschKincaid": 55.7482105263158,
+            "syllables": 94,
+            "sentences": 5,
+            "score": 0.957482105263158
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2003539022,
+        "content": "Aren't defaults always set in the manifest? Meaning we should never set a default in the code?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/311#discussion_r2003539022",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -113,22 +114,57 @@ export class ContentEvaluatorModule extends BaseModule {\n     const commentsWithScore: GithubCommentScore[] = [...comments];\n     const { commentsToEvaluate, prCommentsToEvaluate } = this._splitCommentsByPrompt(commentsWithScore);\n \n-    const relevancesByAi = await this._evaluateComments(\n-      specificationBody,\n-      commentsToEvaluate,\n-      allComments,\n-      prCommentsToEvaluate\n-    );\n+    const relevancesByAi = await retry(\n+      async () => {\n+        const relevances = await this._evaluateComments(\n+          specificationBody,\n+          commentsToEvaluate,\n+          allComments,\n+          prCommentsToEvaluate\n+        );\n \n-    if (Object.keys(relevancesByAi).length !== commentsToEvaluate.length + prCommentsToEvaluate.length) {\n-      throw this.context.logger.error(\"Relevance / Comment length mismatch!\", {\n-        expectedRelevances: commentsToEvaluate.length + prCommentsToEvaluate.length,\n-        receivedRelevances: Object.keys(relevancesByAi).length,\n-        relevancesByAi,\n-        commentsToEvaluate,\n-        prCommentsToEvaluate,\n-      });\n-    }\n+        if (Object.keys(relevances).length !== commentsToEvaluate.length + prCommentsToEvaluate.length) {\n+          throw this.context.logger.error(\"Relevance / Comment length mismatch!\", {\n+            expectedRelevances: commentsToEvaluate.length + prCommentsToEvaluate.length,\n+            receivedRelevances: Object.keys(relevances).length,\n+            relevances,\n+            commentsToEvaluate,\n+            prCommentsToEvaluate,\n+          });\n+        }\n+\n+        return relevances;\n+      },\n+      {\n+        maxRetries: this._configuration?.openAi.maxRetries ?? 3,",
+        "score": {
+          "reward": 4.152,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 75.50000000000003,
+            "syllables": 26,
+            "sentences": 2,
+            "score": 0.8449999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2003646665,
+        "content": "You should be able to cast it in the future.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/311#discussion_r2003646665",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -113,22 +114,57 @@ export class ContentEvaluatorModule extends BaseModule {\n     const commentsWithScore: GithubCommentScore[] = [...comments];\n     const { commentsToEvaluate, prCommentsToEvaluate } = this._splitCommentsByPrompt(commentsWithScore);\n \n-    const relevancesByAi = await this._evaluateComments(\n-      specificationBody,\n-      commentsToEvaluate,\n-      allComments,\n-      prCommentsToEvaluate\n-    );\n+    const relevancesByAi = await retry(\n+      async () => {\n+        const relevances = await this._evaluateComments(\n+          specificationBody,\n+          commentsToEvaluate,\n+          allComments,\n+          prCommentsToEvaluate\n+        );\n \n-    if (Object.keys(relevancesByAi).length !== commentsToEvaluate.length + prCommentsToEvaluate.length) {\n-      throw this.context.logger.error(\"Relevance / Comment length mismatch!\", {\n-        expectedRelevances: commentsToEvaluate.length + prCommentsToEvaluate.length,\n-        receivedRelevances: Object.keys(relevancesByAi).length,\n-        relevancesByAi,\n-        commentsToEvaluate,\n-        prCommentsToEvaluate,\n-      });\n-    }\n+        if (Object.keys(relevances).length !== commentsToEvaluate.length + prCommentsToEvaluate.length) {\n+          throw this.context.logger.error(\"Relevance / Comment length mismatch!\", {\n+            expectedRelevances: commentsToEvaluate.length + prCommentsToEvaluate.length,\n+            receivedRelevances: Object.keys(relevances).length,\n+            relevances,\n+            commentsToEvaluate,\n+            prCommentsToEvaluate,\n+          });\n+        }\n+\n+        return relevances;\n+      },\n+      {\n+        maxRetries: this._configuration?.openAi.maxRetries ?? 3,",
+        "score": {
+          "reward": 1.62,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 95.165,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.64835
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2006949408,
+        "content": "Is this right?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/311#discussion_r2006949408",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -56,9 +54,7 @@ export class ReviewIncentivizerModule extends BaseModule {\n         if (linkedPullReviews.reviews && linkedPullReviews.self && username !== linkedPullReviews.self.user.login) {\n           const reviewsByUser = linkedPullReviews.reviews.filter((v) => v.user?.login === username);\n \n-          const reviewBaseReward = reviewsByUser.some((v) => v.state === \"APPROVED\" || v.state === \"CHANGES_REQUESTED\")\n-            ? { reward: this._conclusiveReviewCredit }\n-            : { reward: 0 };\n+          const reviewBaseReward = { reward: 0 };",
+        "score": {
+          "reward": 0.966,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 119.19000000000003,
+            "syllables": 3,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2742494744,
+        "content": "The related code should be deleted, not just set to 0",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/311#issuecomment-2742494744",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.132,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 95.68818181818183,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.6431181818181817
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2742505248,
+        "content": "Just no flat reward anymore",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/311#issuecomment-2742505248",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.224,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 66.40000000000003,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.9359999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2698814669,
+            "effect": {
+              "addition": 2,
+              "deletion": 20
+            },
+            "reward": 0.66,
+            "priority": 3
+          },
+          {
+            "reviewId": 2704900741,
+            "effect": {
+              "addition": 46,
+              "deletion": 20
+            },
+            "reward": 1.98,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/311"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 17.944 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>2.64</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.21</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>0</td></tr><tr><td>Review</td><td>Comment</td><td>5</td><td>11.094</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/311\" target=\"_blank\" rel=\"noopener\">#311</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+2 -20</td><td>3</td><td>0.66</td></tr><tr><td>+46 -20</td><td>3</td><td>1.98</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/279\" target=\"_blank\" rel=\"noopener\">$25 flat seems excessive at timesNew idea is to make line revie&hellip;</a></h6></td><td><details><summary>3.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 44&#13;  wordValue: 0.1&#13;  result: 2.27&#13;</pre></details></td><td>1</td><td>1</td><td>4.21</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/279#issuecomment-2732223173\" target=\"_blank\" rel=\"noopener\">Yes that sounds correct!</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/279#issuecomment-2739812816\" target=\"_blank\" rel=\"noopener\">You need to use /stop when you're not working on a task.</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/311#discussion_r2003539022\" target=\"_blank\" rel=\"noopener\">Aren't defaults always set in the manifest? Meaning we should ne&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.152</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/311#discussion_r2003646665\" target=\"_blank\" rel=\"noopener\">You should be able to cast it in the future.</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.5</td><td>3</td><td>1.62</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/311#discussion_r2006949408\" target=\"_blank\" rel=\"noopener\">Is this right?</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.7</td><td>3</td><td>0.966</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/311#issuecomment-2742494744\" target=\"_blank\" rel=\"noopener\">The related code should be deleted, not just set to 0</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.9</td><td>3</td><td>3.132</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/311#issuecomment-2742505248\" target=\"_blank\" rel=\"noopener\">Just no flat reward anymore</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.6</td><td>3</td><td>1.224</td></tr></tbody></table></details>"
+  }
+}

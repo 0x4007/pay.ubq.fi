@@ -1,0 +1,1082 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 61.14,
+    "task": {
+      "reward": 50,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2432832804,
+        "content": "about 2 hours and is priority 3 I'd say since it's an essential part of review",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/350#issuecomment-2432832804",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.211,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 75.76500000000001,
+            "syllables": 24,
+            "sentences": 1,
+            "score": 0.8423499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2609226564,
+        "content": "Cypress has been broken for the past two weeks just about and should be stabilized as it's an important part of review for this CI to be green.\r\nAnother task should be made to address the problem regarding the fact that the workflow is not an active part of pull request CI as it has allowed PRs through in the last two weeks which have completely overlooked this area of development.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/350",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.35,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 72,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 53.97000000000003,
+            "syllables": 99,
+            "sentences": 2,
+            "score": 0.9397000000000003
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2135105812,
+        "content": "Resolves https://github.com/ubiquity/pay.ubq.fi/issues/350\r\nRelated to https://github.com/ubiquity/rpc-handler/issues/54\r\nRelated to #332\r\n- updates `rpc-handler` so that we are now actually using the proxy\r\n- fixes tests that were failing across three suites\r\n- Uses `rpc-handler` to fetch ENS name\r\nTested locally with anvil\r\nTested on [polygon mainnet](https://polygonscan.com/address/0xae5d1f192013db889b1e2115a370ab133f359765)\r\nTested with Cypress\r\nHaven't been able to produce a single UI breaking error or problem in regards to RPC interactions both claiming and invalidating but I've watched the retry and proxy logic in action by setting `strictLogs: false` and watching every log taking place from within the `rpc-handler`.\r\nI thought it would be easier to just hardcode the `permitConfig` that you previously fetched with `Cypress.env`, I think this means that we'll need to re-use one of the permits from one of the prior two tests to use as the \"claimed\" one? Or something to that effect right?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 6.579,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 11
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 133,
+            "wordValue": 0.1,
+            "result": 2.39
+          },
+          "readability": {
+            "fleschKincaid": 64.95300000000002,
+            "syllables": 213,
+            "sentences": 7,
+            "score": 0.9504699999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1810484827,
+        "content": "1. It's still possible for anvil to panic and crash unrelated to the RPC so we'd need some retry logic anyway, this also happened to me during testing.\r\n2. The function returned a wss provider in error during my testing so the fn needed fixed",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1810484827",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -1,21 +1,64 @@\n-/* eslint-disable sonarjs/no-duplicate-string */\n-import { spawn } from \"child_process\";\n-import { getFastestRpcUrl } from \"../../shared/helpers\";\n+import { spawnSync } from \"child_process\";\n+import { useHandler } from \"../../static/scripts/rewards/web3/use-rpc-handler\";\n+import { RPCHandler } from \"@ubiquity-dao/rpc-handler\";\n \n-async function forkNetwork() {\n-  const fastestRpcUrl = await getFastestRpcUrl(100);\n+class Anvil {\n+  rpcs: string[] = [];\n+  rpcHandler: RPCHandler | null = null;\n+  networkIdToFork = 100;\n+  networkIdForAnvilToForkAs = 31337;\n \n-  const anvil = spawn(\"anvil\", [\"--chain-id\", \"31337\", \"--fork-url\", fastestRpcUrl, \"--host\", \"127.0.0.1\", \"--port\", \"8545\"], {\n-    stdio: \"inherit\",\n-  });\n+  async init() {\n+    this.rpcHandler = useHandler(this.networkIdToFork);\n+    console.log(`[RPCHandler] Fetching RPCs...`);\n+    await this.rpcHandler.testRpcPerformance();",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 45,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 59.91750000000002,
+            "syllables": 66,
+            "sentences": 2,
+            "score": 0.9991750000000001
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1810486494,
+        "content": "I can't remember exactly what the error was mate but it looked and felt like it had returned a wss provider url in error not that it had made a wss connection and the call failed",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1810486494",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -1,29 +1,26 @@\n-import { app } from \"../app-state\";\n-import { useHandler, useRpcHandler } from \"../web3/use-rpc-handler\";\n import { ethers } from \"ethers\";\n+import { useHandler } from \"../web3/use-rpc-handler\";\n \n-export async function queryReverseEns(address: string, networkId: number) {\n+export async function queryReverseEns(address: string) {\n   // Try to get the ENS name from localStorage\n   const cachedEnsName = localStorage.getItem(address);\n-  const endpoint = app.provider?.connection.url || (await useRpcHandler(app)).connection.url;\n \n-  if (!endpoint) {\n-    console.error(\"ENS lookup failed: No endpoint found for network ID\", networkId);\n-    if (cachedEnsName) return cachedEnsName;\n+  const handler = useHandler(1);\n+  // todo fix .getFirstAvailableRpcProvider() can return wss:// in error",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 37,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 59.528648648648655,
+            "syllables": 48,
+            "sentences": 1,
+            "score": 0.9952864864864865
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1810488313,
+        "content": "it was duplicated and has two steps here doing the same thing but I see that I accidently trimmed `if-no-files-found: ignore` in the valid step just above this\r\nturns out i didn't remove it the diff just looked like i did",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1810488313",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -67,10 +66,4 @@ jobs:\n         with:\n           name: cypress-screenshots\n           path: cypress/screenshots\n-          if-no-files-found: ignore\n-      - uses: actions/upload-artifact@v4\n-        if: failure()\n-        with:\n-          name: cypress-videos\n-          path: cypress/videos\n-          if-no-files-found: ignore",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 40,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 64.71500000000002,
+            "syllables": 48,
+            "sentences": 1,
+            "score": 0.9528499999999999
+          },
+          "multiplier": 0,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1810495233,
+        "content": "Agree with you that retry should be part of `rpc-handler` and it is, we extract the URL from the provider so we do not have retry logic benefits when spawning the fork, and it the anvil kernel may panic (I can't think verbatim what the error is, something to do with rust/cargo anyway).\r\nI returned this out of instinct I guess, we could use `getFastestRpc` (or the fixed getFirstAvailable) as you implemented and build retry logic for spawning anvil with the single RPC returned but either way we need retry logix for spawning anvil",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1810495233",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -1,21 +1,64 @@\n-/* eslint-disable sonarjs/no-duplicate-string */\n-import { spawn } from \"child_process\";\n-import { getFastestRpcUrl } from \"../../shared/helpers\";\n+import { spawnSync } from \"child_process\";\n+import { useHandler } from \"../../static/scripts/rewards/web3/use-rpc-handler\";\n+import { RPCHandler } from \"@ubiquity-dao/rpc-handler\";\n \n-async function forkNetwork() {\n-  const fastestRpcUrl = await getFastestRpcUrl(100);\n+class Anvil {\n+  rpcs: string[] = [];\n+  rpcHandler: RPCHandler | null = null;\n+  networkIdToFork = 100;\n+  networkIdForAnvilToForkAs = 31337;\n \n-  const anvil = spawn(\"anvil\", [\"--chain-id\", \"31337\", \"--fork-url\", fastestRpcUrl, \"--host\", \"127.0.0.1\", \"--port\", \"8545\"], {\n-    stdio: \"inherit\",\n-  });\n+  async init() {\n+    this.rpcHandler = useHandler(this.networkIdToFork);\n+    console.log(`[RPCHandler] Fetching RPCs...`);\n+    await this.rpcHandler.testRpcPerformance();\n+    const latencies: Record<string, number> = this.rpcHandler.getLatencies();\n+    const sorted = Object.entries(latencies).sort(([, a], [, b]) => a - b);\n+    console.log(\n+      `Fetched ${sorted.length} RPCs.\\nFastest: ${sorted[0][0]} (${sorted[0][1]}ms)\\nSlowest: ${sorted[sorted.length - 1][0]} (${sorted[sorted.length - 1][1]}ms)`\n+    );\n \n-  anvil.on(\"close\", (code) => {\n-    console.log(`Anvil exited with code ${code}`);\n-  });\n+    this.rpcs = sorted.map(([rpc]) => rpc.split(\"__\")[1]);\n+  }\n \n-  anvil.on(\"error\", (err) => {\n-    console.error(\"Failed to start Anvil\", err);\n-  });\n+  async run() {\n+    await this.init();\n+    console.log(`Starting Anvil...`);\n+    const isSuccess = await this.spawner(this.rpcs.shift());\n+\n+    if (!isSuccess) {\n+      throw new Error(`Anvil failed to start`);\n+    }\n+  }\n+\n+  async spawner(rpc?: string): Promise<boolean> {\n+    if (!rpc) {\n+      console.log(`No RPCs left to try`);\n+      return false;\n+    }\n+\n+    console.log(`Forking with RPC: ${rpc}`);\n+\n+    const anvil = spawnSync(\"anvil\", [\"--chain-id\", `${this.networkIdForAnvilToForkAs}`, \"--fork-url\", rpc, \"--host\", \"127.0.0.1\", \"--port\", \"8545\"], {\n+      stdio: \"inherit\",\n+    });\n+\n+    if (anvil.status !== 0) {\n+      console.log(`Anvil failed to start with RPC: ${rpc}`);\n+      console.log(`Retrying with next RPC...`);\n+      return this.spawner(this.rpcs.shift());",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 94,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 37.629999999999995,
+            "syllables": 135,
+            "sentences": 2,
+            "score": 0.7763
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1811888590,
+        "content": "you can't really do that in CI though and CI should be stable so I'll implement your suggestion: use the rpc url returned from the handler and we'll just retry with that url n times before throwing",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1811888590",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -1,21 +1,64 @@\n-/* eslint-disable sonarjs/no-duplicate-string */\n-import { spawn } from \"child_process\";\n-import { getFastestRpcUrl } from \"../../shared/helpers\";\n+import { spawnSync } from \"child_process\";\n+import { useHandler } from \"../../static/scripts/rewards/web3/use-rpc-handler\";\n+import { RPCHandler } from \"@ubiquity-dao/rpc-handler\";\n \n-async function forkNetwork() {\n-  const fastestRpcUrl = await getFastestRpcUrl(100);\n+class Anvil {\n+  rpcs: string[] = [];\n+  rpcHandler: RPCHandler | null = null;\n+  networkIdToFork = 100;\n+  networkIdForAnvilToForkAs = 31337;\n \n-  const anvil = spawn(\"anvil\", [\"--chain-id\", \"31337\", \"--fork-url\", fastestRpcUrl, \"--host\", \"127.0.0.1\", \"--port\", \"8545\"], {\n-    stdio: \"inherit\",\n-  });\n+  async init() {\n+    this.rpcHandler = useHandler(this.networkIdToFork);\n+    console.log(`[RPCHandler] Fetching RPCs...`);\n+    await this.rpcHandler.testRpcPerformance();\n+    const latencies: Record<string, number> = this.rpcHandler.getLatencies();\n+    const sorted = Object.entries(latencies).sort(([, a], [, b]) => a - b);\n+    console.log(\n+      `Fetched ${sorted.length} RPCs.\\nFastest: ${sorted[0][0]} (${sorted[0][1]}ms)\\nSlowest: ${sorted[sorted.length - 1][0]} (${sorted[sorted.length - 1][1]}ms)`\n+    );\n \n-  anvil.on(\"close\", (code) => {\n-    console.log(`Anvil exited with code ${code}`);\n-  });\n+    this.rpcs = sorted.map(([rpc]) => rpc.split(\"__\")[1]);\n+  }\n \n-  anvil.on(\"error\", (err) => {\n-    console.error(\"Failed to start Anvil\", err);\n-  });\n+  async run() {\n+    await this.init();\n+    console.log(`Starting Anvil...`);\n+    const isSuccess = await this.spawner(this.rpcs.shift());\n+\n+    if (!isSuccess) {\n+      throw new Error(`Anvil failed to start`);\n+    }\n+  }\n+\n+  async spawner(rpc?: string): Promise<boolean> {\n+    if (!rpc) {\n+      console.log(`No RPCs left to try`);\n+      return false;\n+    }\n+\n+    console.log(`Forking with RPC: ${rpc}`);\n+\n+    const anvil = spawnSync(\"anvil\", [\"--chain-id\", `${this.networkIdForAnvilToForkAs}`, \"--fork-url\", rpc, \"--host\", \"127.0.0.1\", \"--port\", \"8545\"], {\n+      stdio: \"inherit\",\n+    });\n+\n+    if (anvil.status !== 0) {\n+      console.log(`Anvil failed to start with RPC: ${rpc}`);\n+      console.log(`Retrying with next RPC...`);\n+      return this.spawner(this.rpcs.shift());",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 40,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 58.37000000000003,
+            "syllables": 51,
+            "sentences": 1,
+            "score": 0.9837000000000004
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1811929340,
+        "content": "Where we pull all of our data from inside `rpc-handler` via `lib/chainlist`\r\n```ts\r\nexport async function generateChainData(){\r\n    const chains = await fetcher(\"https://chainid.network/chains.json\");\r\n    const chainTvls = await fetcher(\"https://api.llama.fi/chains\");\r\n    const overwrittenIds = overwrittenChains.reduce((acc, curr)=>{\r\n        acc[curr.chainId] = true;\r\n        return acc\r\n    }, {})\r\n    const sortedChains = chains\r\n      .filter((c) => c.status !== \"deprecated\" && !overwrittenIds[c.chainId])\r\n      .concat(overwrittenChains)\r\n      .map((chain) => populateChain(chain, chainTvls))\r\n      .sort((a, b) => {\r\n        return (b.tvl ?? 0) - (a.tvl ?? 0);\r\n      });\r\n    return sortedChains\r\n}  \r\n```\r\nhttps://github.com/ubiquity/rpc-handler/blob/development/build/dynamic-types.ts\r\nWe don't perform any actions on the returned data. \r\nAny suggestions on how we can improve the security and remove that risk from our base of RPCs?\r\nThe only things I can think of cost money to run/use idk if there are free services we could use, whitelisting is no good and not scalable.\r\nIs there a platform like chainlist you know of which provides more trusted rpcs?\r\nSounds like it's actually pretty critical to address this point ASAP if that feature can be hijacked?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1811929340",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -1,21 +1,64 @@\n-/* eslint-disable sonarjs/no-duplicate-string */\n-import { spawn } from \"child_process\";\n-import { getFastestRpcUrl } from \"../../shared/helpers\";\n+import { spawnSync } from \"child_process\";\n+import { useHandler } from \"../../static/scripts/rewards/web3/use-rpc-handler\";\n+import { RPCHandler } from \"@ubiquity-dao/rpc-handler\";\n \n-async function forkNetwork() {\n-  const fastestRpcUrl = await getFastestRpcUrl(100);\n+class Anvil {\n+  rpcs: string[] = [];\n+  rpcHandler: RPCHandler | null = null;\n+  networkIdToFork = 100;\n+  networkIdForAnvilToForkAs = 31337;\n \n-  const anvil = spawn(\"anvil\", [\"--chain-id\", \"31337\", \"--fork-url\", fastestRpcUrl, \"--host\", \"127.0.0.1\", \"--port\", \"8545\"], {\n-    stdio: \"inherit\",\n-  });\n+  async init() {\n+    this.rpcHandler = useHandler(this.networkIdToFork);\n+    console.log(`[RPCHandler] Fetching RPCs...`);\n+    await this.rpcHandler.testRpcPerformance();\n+    const latencies: Record<string, number> = this.rpcHandler.getLatencies();\n+    const sorted = Object.entries(latencies).sort(([, a], [, b]) => a - b);\n+    console.log(\n+      `Fetched ${sorted.length} RPCs.\\nFastest: ${sorted[0][0]} (${sorted[0][1]}ms)\\nSlowest: ${sorted[sorted.length - 1][0]} (${sorted[sorted.length - 1][1]}ms)`\n+    );\n \n-  anvil.on(\"close\", (code) => {\n-    console.log(`Anvil exited with code ${code}`);\n-  });\n+    this.rpcs = sorted.map(([rpc]) => rpc.split(\"__\")[1]);\n+  }\n \n-  anvil.on(\"error\", (err) => {\n-    console.error(\"Failed to start Anvil\", err);\n-  });\n+  async run() {\n+    await this.init();\n+    console.log(`Starting Anvil...`);\n+    const isSuccess = await this.spawner(this.rpcs.shift());\n+\n+    if (!isSuccess) {\n+      throw new Error(`Anvil failed to start`);\n+    }\n+  }\n+\n+  async spawner(rpc?: string): Promise<boolean> {\n+    if (!rpc) {\n+      console.log(`No RPCs left to try`);\n+      return false;\n+    }\n+\n+    console.log(`Forking with RPC: ${rpc}`);\n+\n+    const anvil = spawnSync(\"anvil\", [\"--chain-id\", `${this.networkIdForAnvilToForkAs}`, \"--fork-url\", rpc, \"--host\", \"127.0.0.1\", \"--port\", \"8545\"], {\n+      stdio: \"inherit\",\n+    });\n+\n+    if (anvil.status !== 0) {\n+      console.log(`Anvil failed to start with RPC: ${rpc}`);\n+      console.log(`Retrying with next RPC...`);\n+      return this.spawner(this.rpcs.shift());",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 7
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 98,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 73.21409090909094,
+            "syllables": 153,
+            "sentences": 7,
+            "score": 0.8678590909090906
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1813449261,
+        "content": "I've opened a [task](https://github.com/ubiquity/rpc-handler/issues/60) in `rpc-handler` so I'll resolve this since it's not related to this PR.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1813449261",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -1,21 +1,64 @@\n-/* eslint-disable sonarjs/no-duplicate-string */\n-import { spawn } from \"child_process\";\n-import { getFastestRpcUrl } from \"../../shared/helpers\";\n+import { spawnSync } from \"child_process\";\n+import { useHandler } from \"../../static/scripts/rewards/web3/use-rpc-handler\";\n+import { RPCHandler } from \"@ubiquity-dao/rpc-handler\";\n \n-async function forkNetwork() {\n-  const fastestRpcUrl = await getFastestRpcUrl(100);\n+class Anvil {\n+  rpcs: string[] = [];\n+  rpcHandler: RPCHandler | null = null;\n+  networkIdToFork = 100;\n+  networkIdForAnvilToForkAs = 31337;\n \n-  const anvil = spawn(\"anvil\", [\"--chain-id\", \"31337\", \"--fork-url\", fastestRpcUrl, \"--host\", \"127.0.0.1\", \"--port\", \"8545\"], {\n-    stdio: \"inherit\",\n-  });\n+  async init() {\n+    this.rpcHandler = useHandler(this.networkIdToFork);\n+    console.log(`[RPCHandler] Fetching RPCs...`);\n+    await this.rpcHandler.testRpcPerformance();\n+    const latencies: Record<string, number> = this.rpcHandler.getLatencies();\n+    const sorted = Object.entries(latencies).sort(([, a], [, b]) => a - b);\n+    console.log(\n+      `Fetched ${sorted.length} RPCs.\\nFastest: ${sorted[0][0]} (${sorted[0][1]}ms)\\nSlowest: ${sorted[sorted.length - 1][0]} (${sorted[sorted.length - 1][1]}ms)`\n+    );\n \n-  anvil.on(\"close\", (code) => {\n-    console.log(`Anvil exited with code ${code}`);\n-  });\n+    this.rpcs = sorted.map(([rpc]) => rpc.split(\"__\")[1]);\n+  }\n \n-  anvil.on(\"error\", (err) => {\n-    console.error(\"Failed to start Anvil\", err);\n-  });\n+  async run() {\n+    await this.init();\n+    console.log(`Starting Anvil...`);\n+    const isSuccess = await this.spawner(this.rpcs.shift());\n+\n+    if (!isSuccess) {\n+      throw new Error(`Anvil failed to start`);\n+    }\n+  }\n+\n+  async spawner(rpc?: string): Promise<boolean> {\n+    if (!rpc) {\n+      console.log(`No RPCs left to try`);\n+      return false;\n+    }\n+\n+    console.log(`Forking with RPC: ${rpc}`);\n+\n+    const anvil = spawnSync(\"anvil\", [\"--chain-id\", `${this.networkIdForAnvilToForkAs}`, \"--fork-url\", rpc, \"--host\", \"127.0.0.1\", \"--port\", \"8545\"], {\n+      stdio: \"inherit\",\n+    });\n+\n+    if (anvil.status !== 0) {\n+      console.log(`Anvil failed to start with RPC: ${rpc}`);\n+      console.log(`Retrying with next RPC...`);\n+      return this.spawner(this.rpcs.shift());",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 89.5921052631579,
+            "syllables": 22,
+            "sentences": 1,
+            "score": 0.7040789473684209
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2425637464,
+        "content": "I also investigated why `blockscan` was giving us 404 errors and I was correct in that it is just not as quick to populate a transaction than a dedicated network explorer is.\r\nIn my testing on Polygon it pulled two explorers, the first being polygonscan.com, the official one and I could view the tx instantly. I copied the same hash into `blockscan` and it would take between 1 and 8 minutes to populate on that platform.\r\nFor this reason I've added a toast in the case we can't find an explorer for a given network that gives feedback saying the default generic explorer may take longer to find the tx.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#issuecomment-2425637464",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 111,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 63.11821621621624,
+            "syllables": 159,
+            "sentences": 5,
+            "score": 0.9688178378378376
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2427725174,
+        "content": "The tests have been failing consistently for the past two weeks, this PR fixes them.\r\nIt would also be good to ensure that tests are ran as part of CI as they haven't been for a little while and it's been allowing PRs through that are breaking tests although I'm not sure how to resolve that off the top of my head.\r\nhttps://github.com/ubiquity/pay.ubq.fi/blob/development/.github/workflows/cypress-testing.yml - Is it because `pull_target` is missing?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#issuecomment-2427725174",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 70,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 84.38464285714288,
+            "syllables": 111,
+            "sentences": 8,
+            "score": 0.7561535714285712
+          },
+          "multiplier": 0,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2427855070,
+        "content": "QA of the tests now working:\r\nhttps://github.com/ubq-testing/pay.ubq.fi/actions/runs/11449624381/job/31855559926\r\nReady for review\r\n---\r\nNot sure of more elegant ways to link this workflow to CI, any suggestions?\r\n- Why do we wait for the build [workflow](https://github.com/ubiquity/pay.ubq.fi/blob/development/.github/workflows/build.yml) before running cypress? Can it be ignored and we just run it on `pull_request`? Unless I'm missing something it's not actually required to run the test suite is it?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#issuecomment-2427855070",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 61,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 85.21040540540544,
+            "syllables": 97,
+            "sentences": 7,
+            "score": 0.7478959459459457
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2428931716,
+        "content": "I create a permit with a function that uses `cy.wrap` to hoist it, the 3rd test needs a claimed permit to work and the previous tests create and claim a permit using the url that `cy.wrap` saves, this is no good?\r\nI assumed you were using a real claimed permit url but I wasn't sure because obv as you say we'd hit a signer issue",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#issuecomment-2428931716",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 65,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 72.32750000000003,
+            "syllables": 78,
+            "sentences": 2,
+            "score": 0.8767249999999998
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2430939231,
+        "content": "I hear you. I'm sure you authored those tests but you were pulling a env variables from your `.env` that that as far as I could tell you didn't detail or anything which was was I asked for your input initially to understand what conditions you had set that were no longer true. I take it the permit URL you used I cannot use again?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#issuecomment-2430939231",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 66,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 75.55045454545456,
+            "syllables": 85,
+            "sentences": 3,
+            "score": 0.8444954545454544
+          },
+          "multiplier": 0,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2430990737,
+        "content": "Sorry your message read like I'd need to create a new one against the anvil default account and because of the `.env` thing I thought you were using one of your own testing wallets.\r\nWill address these things today, ty",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#issuecomment-2430990737",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 40,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 76.55500000000004,
+            "syllables": 52,
+            "sentences": 2,
+            "score": 0.8344499999999997
+          },
+          "multiplier": 0,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2433321814,
+        "content": "Hardcoded the permit as requested but I'm still using the `createPermitUrl` function and piggybacking the callback because Cypress is complaining that `clearAllCookies` is producing a promise that `cy.visit` is being invoked inside (when `clearAllCookies` is a `beforeEach` fn). \r\nI stabilized the tests in this repo but I'm no cypress or testing/automation expert by any means, is this acceptable?\r\nKept my anvil spawner logic as you agreed it's the better approach when considering CI.\r\nQA: https://github.com/ubq-testing/pay.ubq.fi/actions/runs/11487208662",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#issuecomment-2433321814",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 73,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 67.75500000000001,
+            "syllables": 126,
+            "sentences": 7,
+            "score": 0.9224499999999999
+          },
+          "multiplier": 0,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 61.14 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>50</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.35</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.211</td></tr><tr><td>Review</td><td>Comment</td><td>15</td><td>6.579</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/350\" target=\"_blank\" rel=\"noopener\">Cypress has been broken for the past two weeks just about and sh&hellip;</a></h6></td><td><details><summary>2.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 72&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>1</td><td>1</td><td>3.35</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/350#issuecomment-2432832804\" target=\"_blank\" rel=\"noopener\">about 2 hours and is priority 3 I'd say since it's an essential &hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.211</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345\" target=\"_blank\" rel=\"noopener\">Resolves https://github.com/ubiquity/pay.ubq.fi/issues/350Rela&hellip;</a></h6></td><td><details><summary>5.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 11&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.3&#13;regex:&#13;  wordCount: 133&#13;  wordValue: 0.1&#13;  result: 2.39&#13;</pre></details></td><td>0.9</td><td>1</td><td>6.579</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1810484827\" target=\"_blank\" rel=\"noopener\">1. It's still possible for anvil to panic and crash unrelated to&hellip;</a></h6></td><td><details><summary>0.2</summary><pre>content:&#13;  content:&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 45&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1810486494\" target=\"_blank\" rel=\"noopener\">I can't remember exactly what the error was mate but it looked a&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 37&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1810488313\" target=\"_blank\" rel=\"noopener\">it was duplicated and has two steps here doing the same thing bu&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 40&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1810495233\" target=\"_blank\" rel=\"noopener\">Agree with you that retry should be part of &#96;rpc-handler&#96&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 94&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1811888590\" target=\"_blank\" rel=\"noopener\">you can't really do that in CI though and CI should be stable so&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 40&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1811929340\" target=\"_blank\" rel=\"noopener\">Where we pull all of our data from inside &#96;rpc-handler&#96; &hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 7&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 98&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1813449261\" target=\"_blank\" rel=\"noopener\">I've opened a [task](https://github.com/ubiquity/rpc-handler/iss&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#issuecomment-2425637464\" target=\"_blank\" rel=\"noopener\">I also investigated why &#96;blockscan&#96; was giving us 404 er&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 111&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#issuecomment-2427725174\" target=\"_blank\" rel=\"noopener\">The tests have been failing consistently for the past two weeks,&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 70&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#issuecomment-2427855070\" target=\"_blank\" rel=\"noopener\">QA of the tests now working:https://github.com/ubq-testing/pay&hellip;</a></h6></td><td><details><summary>2.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.1&#13;regex:&#13;  wordCount: 61&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#issuecomment-2428931716\" target=\"_blank\" rel=\"noopener\">I create a permit with a function that uses &#96;cy.wrap&#96; to&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 65&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#issuecomment-2430939231\" target=\"_blank\" rel=\"noopener\">I hear you. I'm sure you authored those tests but you were pulli&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 66&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#issuecomment-2430990737\" target=\"_blank\" rel=\"noopener\">Sorry your message read like I'd need to create a new one agains&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 40&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.4</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#issuecomment-2433321814\" target=\"_blank\" rel=\"noopener\">Hardcoded the permit as requested but I'm still using the &#96;c&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 73&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>1</td><td>0</td></tr></tbody></table></details>"
+  },
+  "EresDev": {
+    "total": 14.797,
+    "userId": 11886219,
+    "comments": [
+      {
+        "id": 2383706814,
+        "content": "This is problematic. This means one test has a dependency on other test. Tests should be independent. You can move both to same test if test isn't too big. Or do the claiming first in second test. \r\nOr you can reuse one of the previously claimed permit on network 100 as this is what anvil uses by default. Probably will have to deal with signer problem though if you face one.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#pullrequestreview-2383706814",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.72,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 72,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 84.77000000000002,
+            "syllables": 95,
+            "sentences": 7,
+            "score": 0.7522999999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2394315942,
+        "content": "Yes, tests are passing now. I ran multiple times, and one test was failing that time continuously. For me the quick guess was the claim URL. But I see that is what e2e tests do sometimes. They seem fine now. \r\nSeems correct, but I am also learning these workflow. So, no expert here either.\r\nYes, I just tried myself too, and they are still showing up. \r\nI feel like it is a problem with workflow code (how they are passing those secrets) and probably not code side. Code works fine on my local setup. I will look more into this with my next PR.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#pullrequestreview-2394315942",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.468,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 104,
+            "wordValue": 0.1,
+            "result": 2.59
+          },
+          "readability": {
+            "fleschKincaid": 90.67517482517485,
+            "syllables": 131,
+            "sentences": 11,
+            "score": 0.6932482517482516
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1809813273,
+        "content": "any reason for removing this?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1809813273",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -67,10 +66,4 @@ jobs:\n         with:\n           name: cypress-screenshots\n           path: cypress/screenshots\n-          if-no-files-found: ignore\n-      - uses: actions/upload-artifact@v4\n-        if: failure()\n-        with:\n-          name: cypress-videos\n-          path: cypress/videos\n-          if-no-files-found: ignore",
+        "score": {
+          "reward": 0.136,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 66.40000000000003,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.9359999999999996
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1809842765,
+        "content": "sorting and retrying should be part of `rpc-handler`. Letting it fail here is a quality test of rpc-handler. If failing too often, rpc-handler should be improved.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1809842765",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -1,21 +1,64 @@\n-/* eslint-disable sonarjs/no-duplicate-string */\n-import { spawn } from \"child_process\";\n-import { getFastestRpcUrl } from \"../../shared/helpers\";\n+import { spawnSync } from \"child_process\";\n+import { useHandler } from \"../../static/scripts/rewards/web3/use-rpc-handler\";\n+import { RPCHandler } from \"@ubiquity-dao/rpc-handler\";\n \n-async function forkNetwork() {\n-  const fastestRpcUrl = await getFastestRpcUrl(100);\n+class Anvil {\n+  rpcs: string[] = [];\n+  rpcHandler: RPCHandler | null = null;\n+  networkIdToFork = 100;\n+  networkIdForAnvilToForkAs = 31337;\n \n-  const anvil = spawn(\"anvil\", [\"--chain-id\", \"31337\", \"--fork-url\", fastestRpcUrl, \"--host\", \"127.0.0.1\", \"--port\", \"8545\"], {\n-    stdio: \"inherit\",\n-  });\n+  async init() {\n+    this.rpcHandler = useHandler(this.networkIdToFork);\n+    console.log(`[RPCHandler] Fetching RPCs...`);\n+    await this.rpcHandler.testRpcPerformance();\n+    const latencies: Record<string, number> = this.rpcHandler.getLatencies();\n+    const sorted = Object.entries(latencies).sort(([, a], [, b]) => a - b);\n+    console.log(\n+      `Fetched ${sorted.length} RPCs.\\nFastest: ${sorted[0][0]} (${sorted[0][1]}ms)\\nSlowest: ${sorted[sorted.length - 1][0]} (${sorted[sorted.length - 1][1]}ms)`\n+    );\n \n-  anvil.on(\"close\", (code) => {\n-    console.log(`Anvil exited with code ${code}`);\n-  });\n+    this.rpcs = sorted.map(([rpc]) => rpc.split(\"__\")[1]);\n+  }\n \n-  anvil.on(\"error\", (err) => {\n-    console.error(\"Failed to start Anvil\", err);\n-  });\n+  async run() {\n+    await this.init();\n+    console.log(`Starting Anvil...`);\n+    const isSuccess = await this.spawner(this.rpcs.shift());\n+\n+    if (!isSuccess) {\n+      throw new Error(`Anvil failed to start`);\n+    }\n+  }\n+\n+  async spawner(rpc?: string): Promise<boolean> {\n+    if (!rpc) {\n+      console.log(`No RPCs left to try`);\n+      return false;\n+    }\n+\n+    console.log(`Forking with RPC: ${rpc}`);\n+\n+    const anvil = spawnSync(\"anvil\", [\"--chain-id\", `${this.networkIdForAnvilToForkAs}`, \"--fork-url\", rpc, \"--host\", \"127.0.0.1\", \"--port\", \"8545\"], {\n+      stdio: \"inherit\",\n+    });\n+\n+    if (anvil.status !== 0) {\n+      console.log(`Anvil failed to start with RPC: ${rpc}`);\n+      console.log(`Retrying with next RPC...`);\n+      return this.spawner(this.rpcs.shift());",
+        "score": {
+          "reward": 0.495,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 81.76666666666668,
+            "syllables": 37,
+            "sentences": 3,
+            "score": 0.7823333333333332
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1809977352,
+        "content": "wss error could be just a normal failure like other rpc. I remember making a provider with wss from rpc-handler and it was working without problem. In fact, it was much faster than HTTP ones.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1809977352",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -1,29 +1,26 @@\n-import { app } from \"../app-state\";\n-import { useHandler, useRpcHandler } from \"../web3/use-rpc-handler\";\n import { ethers } from \"ethers\";\n+import { useHandler } from \"../web3/use-rpc-handler\";\n \n-export async function queryReverseEns(address: string, networkId: number) {\n+export async function queryReverseEns(address: string) {\n   // Try to get the ENS name from localStorage\n   const cachedEnsName = localStorage.getItem(address);\n-  const endpoint = app.provider?.connection.url || (await useRpcHandler(app)).connection.url;\n \n-  if (!endpoint) {\n-    console.error(\"ENS lookup failed: No endpoint found for network ID\", networkId);\n-    if (cachedEnsName) return cachedEnsName;\n+  const handler = useHandler(1);\n+  // todo fix .getFirstAvailableRpcProvider() can return wss:// in error",
+        "score": {
+          "reward": 0.455,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 77.15500000000002,
+            "syllables": 50,
+            "sentences": 3,
+            "score": 0.8284499999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1809980747,
+        "content": "Isn't it better to use `getFastestRpcProvider`, and not deal with sorting here.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1809980747",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -1,21 +1,64 @@\n-/* eslint-disable sonarjs/no-duplicate-string */\n-import { spawn } from \"child_process\";\n-import { getFastestRpcUrl } from \"../../shared/helpers\";\n+import { spawnSync } from \"child_process\";\n+import { useHandler } from \"../../static/scripts/rewards/web3/use-rpc-handler\";\n+import { RPCHandler } from \"@ubiquity-dao/rpc-handler\";\n \n-async function forkNetwork() {\n-  const fastestRpcUrl = await getFastestRpcUrl(100);\n+class Anvil {\n+  rpcs: string[] = [];\n+  rpcHandler: RPCHandler | null = null;\n+  networkIdToFork = 100;\n+  networkIdForAnvilToForkAs = 31337;\n \n-  const anvil = spawn(\"anvil\", [\"--chain-id\", \"31337\", \"--fork-url\", fastestRpcUrl, \"--host\", \"127.0.0.1\", \"--port\", \"8545\"], {\n-    stdio: \"inherit\",\n-  });\n+  async init() {\n+    this.rpcHandler = useHandler(this.networkIdToFork);\n+    console.log(`[RPCHandler] Fetching RPCs...`);\n+    await this.rpcHandler.testRpcPerformance();",
+        "score": {
+          "reward": 0.248,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 95.955,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.64045
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1811818835,
+        "content": "The retry logic helps with starting the anvil. It doesn't help afterward if I am getting it right. For me, sometimes anvil stops working afterward. On start, you can just rerun the command if it fails. I see, it is a lot of code for a very little benefit.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1811818835",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -1,21 +1,64 @@\n-/* eslint-disable sonarjs/no-duplicate-string */\n-import { spawn } from \"child_process\";\n-import { getFastestRpcUrl } from \"../../shared/helpers\";\n+import { spawnSync } from \"child_process\";\n+import { useHandler } from \"../../static/scripts/rewards/web3/use-rpc-handler\";\n+import { RPCHandler } from \"@ubiquity-dao/rpc-handler\";\n \n-async function forkNetwork() {\n-  const fastestRpcUrl = await getFastestRpcUrl(100);\n+class Anvil {\n+  rpcs: string[] = [];\n+  rpcHandler: RPCHandler | null = null;\n+  networkIdToFork = 100;\n+  networkIdForAnvilToForkAs = 31337;\n \n-  const anvil = spawn(\"anvil\", [\"--chain-id\", \"31337\", \"--fork-url\", fastestRpcUrl, \"--host\", \"127.0.0.1\", \"--port\", \"8545\"], {\n-    stdio: \"inherit\",\n-  });\n+  async init() {\n+    this.rpcHandler = useHandler(this.networkIdToFork);\n+    console.log(`[RPCHandler] Fetching RPCs...`);\n+    await this.rpcHandler.testRpcPerformance();\n+    const latencies: Record<string, number> = this.rpcHandler.getLatencies();\n+    const sorted = Object.entries(latencies).sort(([, a], [, b]) => a - b);\n+    console.log(\n+      `Fetched ${sorted.length} RPCs.\\nFastest: ${sorted[0][0]} (${sorted[0][1]}ms)\\nSlowest: ${sorted[sorted.length - 1][0]} (${sorted[sorted.length - 1][1]}ms)`\n+    );\n \n-  anvil.on(\"close\", (code) => {\n-    console.log(`Anvil exited with code ${code}`);\n-  });\n+    this.rpcs = sorted.map(([rpc]) => rpc.split(\"__\")[1]);\n+  }\n \n-  anvil.on(\"error\", (err) => {\n-    console.error(\"Failed to start Anvil\", err);\n-  });\n+  async run() {\n+    await this.init();\n+    console.log(`Starting Anvil...`);\n+    const isSuccess = await this.spawner(this.rpcs.shift());\n+\n+    if (!isSuccess) {\n+      throw new Error(`Anvil failed to start`);\n+    }\n+  }\n+\n+  async spawner(rpc?: string): Promise<boolean> {\n+    if (!rpc) {\n+      console.log(`No RPCs left to try`);\n+      return false;\n+    }\n+\n+    console.log(`Forking with RPC: ${rpc}`);\n+\n+    const anvil = spawnSync(\"anvil\", [\"--chain-id\", `${this.networkIdForAnvilToForkAs}`, \"--fork-url\", rpc, \"--host\", \"127.0.0.1\", \"--port\", \"8545\"], {\n+      stdio: \"inherit\",\n+    });\n+\n+    if (anvil.status !== 0) {\n+      console.log(`Anvil failed to start with RPC: ${rpc}`);\n+      console.log(`Retrying with next RPC...`);\n+      return this.spawner(this.rpcs.shift());",
+        "score": {
+          "reward": 0.518,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 50,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 79.93700000000003,
+            "syllables": 69,
+            "sentences": 5,
+            "score": 0.8006299999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1811910326,
+        "content": "For CI, your solution seems useful. You can keep it then. \r\nEventually, we should think about improving rpc-handler. I started to feel like chainlist  doesn't have that many good rpcs. Plus, it is important that we get trusted RPCs, where I see chainlist has some approval process. With untrusted rpc, someone can take over the gift card feature.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1811910326",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -1,21 +1,64 @@\n-/* eslint-disable sonarjs/no-duplicate-string */\n-import { spawn } from \"child_process\";\n-import { getFastestRpcUrl } from \"../../shared/helpers\";\n+import { spawnSync } from \"child_process\";\n+import { useHandler } from \"../../static/scripts/rewards/web3/use-rpc-handler\";\n+import { RPCHandler } from \"@ubiquity-dao/rpc-handler\";\n \n-async function forkNetwork() {\n-  const fastestRpcUrl = await getFastestRpcUrl(100);\n+class Anvil {\n+  rpcs: string[] = [];\n+  rpcHandler: RPCHandler | null = null;\n+  networkIdToFork = 100;\n+  networkIdForAnvilToForkAs = 31337;\n \n-  const anvil = spawn(\"anvil\", [\"--chain-id\", \"31337\", \"--fork-url\", fastestRpcUrl, \"--host\", \"127.0.0.1\", \"--port\", \"8545\"], {\n-    stdio: \"inherit\",\n-  });\n+  async init() {\n+    this.rpcHandler = useHandler(this.networkIdToFork);\n+    console.log(`[RPCHandler] Fetching RPCs...`);\n+    await this.rpcHandler.testRpcPerformance();\n+    const latencies: Record<string, number> = this.rpcHandler.getLatencies();\n+    const sorted = Object.entries(latencies).sort(([, a], [, b]) => a - b);\n+    console.log(\n+      `Fetched ${sorted.length} RPCs.\\nFastest: ${sorted[0][0]} (${sorted[0][1]}ms)\\nSlowest: ${sorted[sorted.length - 1][0]} (${sorted[sorted.length - 1][1]}ms)`\n+    );\n \n-  anvil.on(\"close\", (code) => {\n-    console.log(`Anvil exited with code ${code}`);\n-  });\n+    this.rpcs = sorted.map(([rpc]) => rpc.split(\"__\")[1]);\n+  }\n \n-  anvil.on(\"error\", (err) => {\n-    console.error(\"Failed to start Anvil\", err);\n-  });\n+  async run() {\n+    await this.init();\n+    console.log(`Starting Anvil...`);\n+    const isSuccess = await this.spawner(this.rpcs.shift());\n+\n+    if (!isSuccess) {\n+      throw new Error(`Anvil failed to start`);\n+    }\n+  }\n+\n+  async spawner(rpc?: string): Promise<boolean> {\n+    if (!rpc) {\n+      console.log(`No RPCs left to try`);\n+      return false;\n+    }\n+\n+    console.log(`Forking with RPC: ${rpc}`);\n+\n+    const anvil = spawnSync(\"anvil\", [\"--chain-id\", `${this.networkIdForAnvilToForkAs}`, \"--fork-url\", rpc, \"--host\", \"127.0.0.1\", \"--port\", \"8545\"], {\n+      stdio: \"inherit\",\n+    });\n+\n+    if (anvil.status !== 0) {\n+      console.log(`Anvil failed to start with RPC: ${rpc}`);\n+      console.log(`Retrying with next RPC...`);\n+      return this.spawner(this.rpcs.shift());",
+        "score": {
+          "reward": 0.624,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 60,
+            "wordValue": 0.1,
+            "result": 2.52
+          },
+          "readability": {
+            "fleschKincaid": 79.65500000000002,
+            "syllables": 83,
+            "sentences": 6,
+            "score": 0.8034499999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2430927713,
+        "content": "This makes a precondition that test-1 must pass before test-2.\r\nFor me it is one of the core rules that should not be broken. One test that shouldn't depend on the other test. And it is just not about dependency. It breaks 2 more rules. Test should be isolated and deterministic.\r\nThe best solution is to find an old claimed permit and or just make one even of 0.00001 wxdai and let the test use it. The test will be decoupled, isolated, and deterministic.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#issuecomment-2430927713",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.729,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 88,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 83.46964646464649,
+            "syllables": 118,
+            "sentences": 9,
+            "score": 0.7653035353535351
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2430971011,
+        "content": "If you are referring to test \"should reveal a redeem code after claim\", yes you can use the existing permit URL that was there.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#issuecomment-2430971011",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.371,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 69.67500000000004,
+            "syllables": 32,
+            "sentences": 1,
+            "score": 0.9032499999999996
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2435786875,
+        "content": "I gave it a run. Rpc is working nicely for me. However, there are some problems with the cypress tests. \r\n1. The tests are not passing in the given QA, see their logs. The tests are failing because reloadly sandbox keys were not added to the source repository. They are e2e tests and need reloadly sandbox keys (ask me if you don't have one). https://github.com/ubiquity/pay.ubq.fi/blob/9b88dd6ffe04a13650d51a055441696a13047be9/.github/workflows/cypress-testing.yml#L44\r\n At least some tests should report failure. This needs fix along with the addition of sandbox keys. \r\n2. The claimUrl is same in 2 test files. \r\n![image](https://github.com/user-attachments/assets/a24bb139-e2e3-4154-9f71-cebea803c107)\r\nEven though this is not ideal, but currently the blockchain is shared in tests. When one test claims one permit, the second test will fail. Both need different claim URL.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#issuecomment-2435786875",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.083,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 119,
+            "wordValue": 0.1,
+            "result": 2.5
+          },
+          "readability": {
+            "fleschKincaid": 82.66724758560143,
+            "syllables": 184,
+            "sentences": 17,
+            "score": 0.7733275241439856
+          },
+          "multiplier": 0.25,
+          "relevance": 0.95
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2383706814,
+            "effect": {
+              "addition": 585,
+              "deletion": 303
+            },
+            "reward": 8.88,
+            "priority": 1
+          },
+          {
+            "reviewId": 2394315942,
+            "effect": {
+              "addition": 4,
+              "deletion": 3
+            },
+            "reward": 0.07,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 14.797 XP ]</a>&nbsp;</h3><h6>@EresDev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>8.95</td></tr><tr><td>Review</td><td>Comment</td><td>11</td><td>5.847</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345\" target=\"_blank\" rel=\"noopener\">#345</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+585 -303</td><td>1</td><td>8.88</td></tr><tr><td>+4 -3</td><td>1</td><td>0.07</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#pullrequestreview-2383706814\" target=\"_blank\" rel=\"noopener\">This is problematic. This means one test has a dependency on oth&hellip;</a></h6></td><td><details><summary>2.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 72&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.72</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#pullrequestreview-2394315942\" target=\"_blank\" rel=\"noopener\">Yes, tests are passing now. I ran multiple times, and one test w&hellip;</a></h6></td><td><details><summary>2.59</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 104&#13;  wordValue: 0.1&#13;  result: 2.59&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.468</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1809813273\" target=\"_blank\" rel=\"noopener\">any reason for removing this?</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.136</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1809842765\" target=\"_blank\" rel=\"noopener\">sorting and retrying should be part of &#96;rpc-handler&#96;. Le&hellip;</a></h6></td><td><details><summary>1.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.495</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1809977352\" target=\"_blank\" rel=\"noopener\">wss error could be just a normal failure like other rpc. I remem&hellip;</a></h6></td><td><details><summary>2.07</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.455</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1809980747\" target=\"_blank\" rel=\"noopener\">Isn't it better to use &#96;getFastestRpcProvider&#96;, and not &hellip;</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.248</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1811818835\" target=\"_blank\" rel=\"noopener\">The retry logic helps with starting the anvil. It doesn't help a&hellip;</a></h6></td><td><details><summary>2.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 50&#13;  wordValue: 0.1&#13;  result: 2.38&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.518</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#discussion_r1811910326\" target=\"_blank\" rel=\"noopener\">For CI, your solution seems useful. You can keep it then. Even&hellip;</a></h6></td><td><details><summary>2.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 60&#13;  wordValue: 0.1&#13;  result: 2.52&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.624</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#issuecomment-2430927713\" target=\"_blank\" rel=\"noopener\">This makes a precondition that test-1 must pass before test-2.&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 88&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.729</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#issuecomment-2430971011\" target=\"_blank\" rel=\"noopener\">If you are referring to test \"should reveal a redeem code after &hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.371</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#issuecomment-2435786875\" target=\"_blank\" rel=\"noopener\">I gave it a run. Rpc is working nicely for me. However, there ar&hellip;</a></h6></td><td><details><summary>3.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ol:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.2&#13;regex:&#13;  wordCount: 119&#13;  wordValue: 0.1&#13;  result: 2.5&#13;</pre></details></td><td>0.95</td><td>1</td><td>1.083</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 9.631,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2393020027,
+        "content": "1. Local claims seems to be working fine\r\n2. Hope this PR adds more stability\r\n3. I really need it for reloadly gift cards production setup",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345#pullrequestreview-2393020027",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.741,
+          "formatting": {
+            "content": {
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0.3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 58.429130434782635,
+            "syllables": 34,
+            "sentences": 1,
+            "score": 0.9842913043478263
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2393020027,
+            "effect": {
+              "addition": 586,
+              "deletion": 303
+            },
+            "reward": 8.89,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/345"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 9.631 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>8.89</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>0.741</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345\" target=\"_blank\" rel=\"noopener\">#345</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+586 -303</td><td>1</td><td>8.89</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/345#pullrequestreview-2393020027\" target=\"_blank\" rel=\"noopener\">1. Local claims seems to be working fine2. Hope this PR adds m&hellip;</a></h6></td><td><details><summary>1.91</summary><pre>content:&#13;  content:&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0.3&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.741</td></tr></tbody></table></details>"
+  }
+}

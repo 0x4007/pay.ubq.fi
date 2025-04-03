@@ -1,0 +1,238 @@
+{
+  "0x4007": {
+    "userId": 4975670,
+    "total": 126.353,
+    "task": {
+      "reward": 100,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2400339497,
+        "content": "Yes but to clarify this used to work as expected. The problem now is that it seems when the task is assigned and unassigned, it links back even on forks.",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/45#issuecomment-2400339497",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 9.24,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 84.45000000000003,
+            "syllables": 38,
+            "sentences": 2,
+            "score": 0.7554999999999997
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2572156857,
+        "content": "So the issue is:\r\n1. New devpool issue is created\r\n2. Fork of https://github.com/ubiquity/devpool-directory creates a new issue with `www` prefix (which is expected) in order not to reference (i.e. spam) the original issue ([example](https://github.com/jordan-ae/devpool-directory/issues/1025))\r\n3. Devpool issue is closed because somebody was assigned\r\n4. Devpool issue is reopened because somebody was unassigned\r\n5. Now the forked issue displays github issue URL without the `www` prefix (while expected behavior to display URL with the `www` prefix) thus spamming original issue ([example](https://github.com/jordan-ae/devpool-directory/issues/867))\r\n---\r\nhttps://github.com/jordan-ae/devpool-directory/issues/867\r\nWhen it is reopened, it writes the non `www.` prefixed link to the issue, which \"references\" the original issue which appears as spam \r\n<img width=\"1555\" alt=\"image\" src=\"https://github.com/user-attachments/assets/9534d0a4-365b-4cb9-b335-1db674627140\">\r\n![github com_ubiquity_ubiquity-dollar_issues_937](https://github.com/user-attachments/assets/fc1a3abd-c9a7-4588-b966-8e90995875de)",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/45",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 8.95,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 10
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 4
+              }
+            },
+            "result": 4.5
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 101,
+            "wordValue": 0.1,
+            "result": 2.6
+          },
+          "readability": {
+            "fleschKincaid": 46.79335301837273,
+            "syllables": 208,
+            "sentences": 6,
+            "score": 0.8679335301837273
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2131252043,
+        "content": "Had to do a refactoring, and for thorough testing I had to knock out a few of small tasks in one go. \r\n- Resolves https://github.com/ubiquity/devpool-directory-tasks/issues/45\r\n   - Took a very deep dive to find out exactly where the problem is. The refactoring was inspired mostly by the incorrectly named variables, making this really misleading to find (partnerIssue would be named directoryIssue meaning the opposite etc)\r\n- Resolves https://github.com/ubiquity/devpool-directory-tasks/issues/50\r\n   - Used to be initialized as a \"[default label](https://github.com/ubiquity/devpool-directory/pull/1693/files#diff-f8fce3dd64d28733565f3b18422b98bb101d52d2de0cb6173a983d6f84836c1fR5)\" \r\n- Resolves https://github.com/ubiquity/devpool-directory-tasks/issues/51\r\n   - This was key to initializing a new Directory ([needs the label](https://github.com/ubiquity/devpool-directory/pull/1693/files#diff-dcdc3e0b3362edb8fec2a51d3fa51f8fb8af8f70247e06d9887fa934834c9122R14) or silently fails)",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1693",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 8.163,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 6
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 4
+              }
+            },
+            "result": 4.6
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 85,
+            "wordValue": 0.1,
+            "result": 2.64
+          },
+          "readability": {
+            "fleschKincaid": 44.37047619047621,
+            "syllables": 190,
+            "sentences": 6,
+            "score": 0.8437047619047621
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 126.353 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>100</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>8.95</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>9.24</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>8.163</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/45\" target=\"_blank\" rel=\"noopener\">So the issue is:1. New devpool issue is created2. Fork of ht&hellip;</a></h6></td><td><details><summary>7.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 10&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 4&#13;  result: 4.5&#13;regex:&#13;  wordCount: 101&#13;  wordValue: 0.1&#13;  result: 2.6&#13;</pre></details></td><td>1</td><td>1</td><td>8.95</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/45#issuecomment-2400339497\" target=\"_blank\" rel=\"noopener\">Yes but to clarify this used to work as expected. The problem no&hellip;</a></h6></td><td><details><summary>1.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>1</td><td>4</td><td>9.24</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1693\" target=\"_blank\" rel=\"noopener\">Had to do a refactoring, and for thorough testing I had to knock&hellip;</a></h6></td><td><details><summary>7.24</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ul:&#13;      score: 0&#13;      elementCount: 4&#13;    li:&#13;      score: 0.1&#13;      elementCount: 6&#13;    a:&#13;      score: 1&#13;      elementCount: 4&#13;  result: 4.6&#13;regex:&#13;  wordCount: 85&#13;  wordValue: 0.1&#13;  result: 2.64&#13;</pre></details></td><td>0.9</td><td>1</td><td>8.163</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 42.736,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2400265938,
+        "content": "So:\r\n1. https://github.com/ubiquity/devpool-directory should reference github issues without the `www` prefix (which works as expected right now)\r\n2. Forks of https://github.com/ubiquity/devpool-directory should reference github issues with the `www` prefix in order not to spam original issues\r\nCorrect?",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/45#issuecomment-2400265938",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 12.416,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.2
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 40.79364341085275,
+            "syllables": 77,
+            "sentences": 3,
+            "score": 0.8079364341085276
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2400363756,
+        "content": "So the issue is:\r\n1. New devpool issue is created\r\n2. Fork of https://github.com/ubiquity/devpool-directory creates a new issue with `www` prefix (which is expected) in order not to reference (i.e. spam) the original issue ([example](https://github.com/jordan-ae/devpool-directory/issues/1025))\r\n3. Devpool issue is closed because somebody was assigned\r\n4. Devpool issue is reopened because somebody was unassigned\r\n5. Now the forked issue displays github issue URL without the `www` prefix (while expected behavior to display URL with the `www` prefix) thus spamming original issue ([example](https://github.com/jordan-ae/devpool-directory/issues/867))",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/45#issuecomment-2400363756",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 30.32,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.5
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 73,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 40.07735759493676,
+            "syllables": 137,
+            "sentences": 4,
+            "score": 0.8007735759493676
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1693"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 42.736 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>2</td><td>42.736</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/45#issuecomment-2400265938\" target=\"_blank\" rel=\"noopener\">So:1. https://github.com/ubiquity/devpool-directory should ref&hellip;</a></h6></td><td><details><summary>3.12</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.2&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.8</td><td>4</td><td>12.416</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/45#issuecomment-2400363756\" target=\"_blank\" rel=\"noopener\">So the issue is:1. New devpool issue is created2. Fork of ht&hellip;</a></h6></td><td><details><summary>6.11</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.5&#13;regex:&#13;  wordCount: 73&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>1</td><td>4</td><td>30.32</td></tr></tbody></table></details>"
+  }
+}

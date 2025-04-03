@@ -1,0 +1,178 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 13.044,
+    "task": {
+      "reward": 12,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2418685050,
+        "content": "@0x4007 This is because the help is directly embedded within the kernel. Maybe it could be as simple as adding an `enabled` property at the top of the configuration?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/152#issuecomment-2418685050",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.044,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 65.72500000000001,
+            "syllables": 42,
+            "sentences": 2,
+            "score": 0.9427499999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 13.044 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>12</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.044</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/152#issuecomment-2418685050\" target=\"_blank\" rel=\"noopener\">@0x4007 This is because the help is directly embedded within the&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.9</td><td>2</td><td>1.044</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 12,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2418690170,
+        "content": "I think much simpler to check specifically for this use-case. No config found means don't render help menu.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/152#issuecomment-2418690170",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 3.68,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 78.24500000000002,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.8175499999999998
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2593783887,
+        "content": "We are trying to have dev and prod apps installed across all orgs so they can interface with all GitHub Actions across our orgs. However only one should respond to user actions and commands, hence why we implemented https://github.com/ubiquity-os/ubiquity-os-kernel/issues/122\r\nFor this effect to be complete, the help menu should only render on those with a config (I just deleted the prod config in ubiquity-os-marketplace)\r\n### Available Commands\r\n| Command | Description | Example |\r\n|---|---|---|\r\n| `/help` | List all available commands. | `/help` |\r\n_Originally posted by @ubiquity-os[bot] in https://github.com/ubiquity-os-marketplace/command-wallet/issues/4#issuecomment-2418655126_",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/152",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 7.05,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "h3": {
+                "score": 1,
+                "elementCount": 1
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 81,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 43.83085436893208,
+            "syllables": 173,
+            "sentences": 5,
+            "score": 0.8383085436893208
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1822922095,
+        "content": "I thought we use our logger instead?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/179#discussion_r1822922095",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -27,12 +27,16 @@ export async function postHelpCommand(context: GitHubContext<\"issue_comment.crea\n     const { plugin } = pluginElement.uses[0];\n     commands.push(...(await parseCommandsFromManifest(context, plugin)));\n   }\n-  await context.octokit.rest.issues.createComment({\n-    body: comments.concat(commands.sort()).join(\"\\n\"),\n-    issue_number: context.payload.issue.number,\n-    owner: context.payload.repository.owner.login,\n-    repo: context.payload.repository.name,\n-  });\n+  if (!commands.length) {\n+    console.warn(\"No commands found, will not post the help command message.\");",
+        "score": {
+          "reward": 0.996,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 90.95857142857145,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.6904142857142855
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2405424162,
+            "effect": {
+              "addition": 68,
+              "deletion": 7
+            },
+            "reward": 1.5,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/179"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 12 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>1.5</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>7.05</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>3.68</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>0.996</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/179\" target=\"_blank\" rel=\"noopener\">#179</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+68 -7</td><td>2</td><td>1.5</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/152\" target=\"_blank\" rel=\"noopener\">We are trying to have dev and prod apps installed across all org&hellip;</a></h6></td><td><details><summary>5.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    h3:&#13;      score: 1&#13;      elementCount: 1&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 3&#13;regex:&#13;  wordCount: 81&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>1</td><td>1</td><td>7.05</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/152#issuecomment-2418690170\" target=\"_blank\" rel=\"noopener\">I think much simpler to check specifically for this use-case. No&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>1</td><td>2</td><td>3.68</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/179#discussion_r1822922095\" target=\"_blank\" rel=\"noopener\">I thought we use our logger instead?</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.6</td><td>2</td><td>0.996</td></tr></tbody></table></details>"
+  }
+}

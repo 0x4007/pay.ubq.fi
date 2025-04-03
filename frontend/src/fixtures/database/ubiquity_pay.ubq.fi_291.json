@@ -1,0 +1,1002 @@
+{
+  "EresDev": {
+    "userId": 11886219,
+    "total": 156.015,
+    "task": {
+      "reward": 150,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2338786454,
+        "content": "What I see is that we are probably going to introduce the virtual card feature before the rollup feature.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2338786454",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.665,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 62.87631578947371,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.971236842105263
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2501478904,
+        "content": "In the virtual card feature, we have two parts in a single transaction to mint a virtual card.\r\n1. Claim the permit by transferring the permit reward to the treasury wallet\r\n2. If the step-1 is successful, order the virtual card at Reloadly\r\nThe problem is that the transaction isn't atomic because each step happens in a different system. Step-2 can fail while still leaving the permit amount in the treasury. Why would step-2 fail? There could be one of the many reasons.\r\n- virtual card suddenly becoming out of stock\r\n- any network error on user side or Reloadly side\r\n- user closing browser before the permit transaction confirmation\r\n- change in the best picked card, suddenly a better card becomes available or currently picked card becomes unavailable\r\n- [RPC-handler](https://github.com/ubiquity/rpc-handler) failing to find rpc for backend to use, or if it finds one but the rpc stops working\r\nCurrently, the solution to this problem is manual. It is either a manual refund or manual resending of the card order request to `/post-order` with some parameters (productId, tx hash, country).\r\nWe can improve this by implementing one of the following solutions.\r\n- a manual refund can become automatic by issuing a new permit of the same amount\r\n- resend the mint request to backend to `/post-order`\r\nI am inclined towards resending the mint request. One problem is that `/post-order` needs the transaction hash of the permit transfer to the treasury. Sometimes you will have it, and you can store it in the cookies/local storage. But sometimes you will not have it and you will have to read it either from blockchain or ask the user to manually insert the transaction hash to retry minting. I think you can read it from blockchain by looking into [permit2 events](https://gnosisscan.io/address/0x000000000022d473030f116ddee9f6b43ac78ba3#events) \r\nThe goal of this issue is to implement a mechanism to resend the mint request or a better solution if you can think of one. \r\nSince the best-picked virtual card can change in this duration, a better option is to rename the mint button to \"Retry Mint\" and let the user click first so that user can see they are ordering a different card now. \r\nPlease note that the virtual cards feature is present in `beta` branch at the moment. But it can move to development branch anytime. So, keep an eye on that and open a PR accordingly.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/291",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.35,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 17
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 9
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.9
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 390,
+            "wordValue": 0.1,
+            "result": 0.46
+          },
+          "readability": {
+            "fleschKincaid": 58.385090497737565,
+            "syllables": 577,
+            "sentences": 17,
+            "score": 0.9838509049773756
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 156.015 XP ]</a>&nbsp;</h3><h6>@EresDev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>150</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.35</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.665</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/291\" target=\"_blank\" rel=\"noopener\">In the virtual card feature, we have two parts in a single trans&hellip;</a></h6></td><td><details><summary>3.36</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 17&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 9&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.9&#13;regex:&#13;  wordCount: 390&#13;  wordValue: 0.1&#13;  result: 0.46&#13;</pre></details></td><td>1</td><td>1</td><td>4.35</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2338786454\" target=\"_blank\" rel=\"noopener\">What I see is that we are probably going to introduce the virtua&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.665</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 19.029,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2325287606,
+        "content": "I think reading from local storage is ideal, then from the chain, generally speaking for these sorts of things.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2325287606",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 4.392,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 67.32894736842107,
+            "syllables": 27,
+            "sentences": 1,
+            "score": 0.9267105263157893
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2423397085,
+        "content": "I think you can use any email provider like proton mail",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2423397085",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 80.30636363636367,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.7969363636363633
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2423653159,
+        "content": "Im sure that you can use your own domain's email then. Setting up email forwarding is simple on cloudflare and google domains.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2423653159",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 73.77989130434786,
+            "syllables": 33,
+            "sentences": 2,
+            "score": 0.8622010869565214
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2440028820,
+        "content": "@gentlementlegen disqualify check",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2440028820",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": -78.20999999999998,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2441687346,
+        "content": "Can you fix this signature thing across all of our plugins?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2441687346",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 80.30636363636367,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.7969363636363633
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2441906129,
+        "content": "Do you guys have a solution in mind?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2441906129",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.273,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 92.965,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.67035
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2572320846,
+        "content": "That was before the limits were implemented. And yes there was a brief period of time that the specification rewards algorithm was wrong.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2572320846",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 66.42336956521743,
+            "syllables": 35,
+            "sentences": 2,
+            "score": 0.9357663043478257
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2572428036,
+        "content": "I don't understand these logs but seems overly verbose to dump the source code and all those arrays.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2572428036",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 76.2342105263158,
+            "syllables": 25,
+            "sentences": 1,
+            "score": 0.8376578947368419
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2572436918,
+        "content": "Adding the source map is definitely a good idea for debugging.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2572436918",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.369,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 49.54272727272729,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.895427272727273
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2444921175,
+        "content": "Code seems fine. What's the best way to test it?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/357#pullrequestreview-2444921175",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.756,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 116.6525,
+            "syllables": 11,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2456722912,
+        "content": "Code looks fine",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/357#pullrequestreview-2456722912",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.138,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 119.19000000000003,
+            "syllables": 3,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1848020834,
+        "content": "Perhaps you should always return a response",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/357#discussion_r1848020834",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -242,15 +242,43 @@ function validateTransferTransaction(txParsed: TransactionDescription, txReceipt\n   }\n }\n \n-function validatePermitTransaction(txParsed: TransactionDescription, txReceipt: TransactionReceipt, chainId: number, giftCard: GiftCard): Response | void {\n-  if (!permitAllowedChainIds.includes(chainId)) {\n+function validatePermitTransaction(\n+  txParsed: TransactionDescription,\n+  txReceipt: TransactionReceipt,\n+  postOrderParams: PostOrderParams,\n+  giftCard: GiftCard\n+): Response | void {",
+        "score": {
+          "reward": 2.112,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 66.7871428571429,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.9321285714285711
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1848022506,
+        "content": "Shouldn't we default to the international one",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/357#discussion_r1848022506",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -32,48 +34,48 @@ export function attachMintAction(giftCard: GiftCard, app: AppState) {\n }\n \n async function mintGiftCard(productId: number, app: AppState) {\n-  if (app.signer) {\n-    const country = await getUserCountryCode();\n-    if (!country) {\n-      toaster.create(\"error\", \"Failed to detect your location to pick a suitable card for you.\");\n+  if (!app.signer) {\n+    toaster.create(\"error\", \"Connect your wallet.\");\n+    return;\n+  }\n+\n+  const country = await getUserCountryCode();\n+  if (!country) {\n+    toaster.create(\"error\", \"Failed to detect your location to pick a suitable card for you.\");",
+        "score": {
+          "reward": 2.079,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 61.24000000000001,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.9875999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1848023873,
+        "content": "```suggestion\n    let signedMessage;\n```",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/357#discussion_r1848023873",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -32,48 +34,48 @@ export function attachMintAction(giftCard: GiftCard, app: AppState) {\n }\n \n async function mintGiftCard(productId: number, app: AppState) {\n-  if (app.signer) {\n-    const country = await getUserCountryCode();\n-    if (!country) {\n-      toaster.create(\"error\", \"Failed to detect your location to pick a suitable card for you.\");\n+  if (!app.signer) {\n+    toaster.create(\"error\", \"Connect your wallet.\");\n+    return;\n+  }\n+\n+  const country = await getUserCountryCode();\n+  if (!country) {\n+    toaster.create(\"error\", \"Failed to detect your location to pick a suitable card for you.\");\n+    return;\n+  }\n+\n+  const txHash: string = getIncompleteMintTx(app.reward.nonce) || (await claimPermitToCardTreasury(app));\n+\n+  if (txHash) {\n+    let signedMessage = \"\";",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2444921175,
+            "effect": {
+              "addition": 191,
+              "deletion": 48
+            },
+            "reward": 7.17,
+            "priority": 3
+          },
+          {
+            "reviewId": 2456722912,
+            "effect": {
+              "addition": 30,
+              "deletion": 28
+            },
+            "reward": 1.74,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/357"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 19.029 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>8.91</td></tr><tr><td>Issue</td><td>Comment</td><td>9</td><td>5.034</td></tr><tr><td>Review</td><td>Comment</td><td>5</td><td>5.085</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/357\" target=\"_blank\" rel=\"noopener\">#357</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+191 -48</td><td>3</td><td>7.17</td></tr><tr><td>+30 -28</td><td>3</td><td>1.74</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2325287606\" target=\"_blank\" rel=\"noopener\">I think reading from local storage is ideal, then from the chain&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.392</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2423397085\" target=\"_blank\" rel=\"noopener\">I think you can use any email provider like proton mail</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2423653159\" target=\"_blank\" rel=\"noopener\">Im sure that you can use your own domain's email then. Setting u&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2440028820\" target=\"_blank\" rel=\"noopener\">@gentlementlegen disqualify check</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2441687346\" target=\"_blank\" rel=\"noopener\">Can you fix this signature thing across all of our plugins?</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2441906129\" target=\"_blank\" rel=\"noopener\">Do you guys have a solution in mind?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.273</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2572320846\" target=\"_blank\" rel=\"noopener\">That was before the limits were implemented. And yes there was a&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2572428036\" target=\"_blank\" rel=\"noopener\">I don't understand these logs but seems overly verbose to dump t&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2572436918\" target=\"_blank\" rel=\"noopener\">Adding the source map is definitely a good idea for debugging.</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.369</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/357#pullrequestreview-2444921175\" target=\"_blank\" rel=\"noopener\">Code seems fine. What's the best way to test it?</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.756</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/357#pullrequestreview-2456722912\" target=\"_blank\" rel=\"noopener\">Code looks fine</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.138</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/357#discussion_r1848020834\" target=\"_blank\" rel=\"noopener\">Perhaps you should always return a response</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.8</td><td>3</td><td>2.112</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/357#discussion_r1848022506\" target=\"_blank\" rel=\"noopener\">Shouldn't we default to the international one</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.079</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/357#discussion_r1848023873\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionlet signedMessage;&#96;&#96;&#96;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>3</td><td>0</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 2.133,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 2332371037,
+        "content": "I think this problem will be solved once we implement reward rollup and permits will be generated on demand.\r\nFor virtual cards this means when the virtual card is created, a entry in the DB will be created but if there's an error creating a virtual card, you don't write to the DB and everything is as it was. The user can retry the operation until it successfully creates a virtual card.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2332371037",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 2.016,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 74,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 65.18752252252256,
+            "syllables": 102,
+            "sentences": 3,
+            "score": 0.9481247747747744
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2444093065,
+        "content": "We could modify the SDK to verify the signature for either prod or dev bot",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2444093065",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.117,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 67.53000000000003,
+            "syllables": 22,
+            "sentences": 1,
+            "score": 0.9246999999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/357"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 2.133 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>2</td><td>2.133</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2332371037\" target=\"_blank\" rel=\"noopener\">I think this problem will be solved once we implement reward rol&hellip;</a></h6></td><td><details><summary>2.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 74&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.8</td><td>3</td><td>2.016</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2444093065\" target=\"_blank\" rel=\"noopener\">We could modify the SDK to verify the signature for either prod &hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.117</td></tr></tbody></table></details>"
+  },
+  "zugdev": {
+    "total": 0.864,
+    "userId": 155616000,
+    "comments": [
+      {
+        "id": 2423326796,
+        "content": "Can someone dm me sandbox API keys? I can't register in Reloadly since I don't have a business email.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2423326796",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.864,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 75.32035714285716,
+            "syllables": 30,
+            "sentences": 2,
+            "score": 0.8467964285714283
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/357"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 0.864 XP ]</a>&nbsp;</h3><h6>@zugdev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.864</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2423326796\" target=\"_blank\" rel=\"noopener\">Can someone dm me sandbox API keys? I can't register in Reloadly&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.6</td><td>3</td><td>0.864</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 0,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2440645288,
+        "content": "You can always check the logs: https://github.com/ubiquity-os-marketplace/daemon-disqualifier/actions/runs/11548428245/job/32139825686",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2440645288",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 59.16092105263158,
+            "syllables": 31,
+            "sentences": 2,
+            "score": 0.9916092105263158
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2441902653,
+        "content": "@whilefoo pointed out that it could potentially be because of the use of both the beta and the release that would require different signatures.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2441902653",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 52.05000000000001,
+            "syllables": 37,
+            "sentences": 1,
+            "score": 0.9205000000000001
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2441911239,
+        "content": "If that is indeed the reason we need to make proper use of environments for the plugins and secrets. I need to check if that's the root cause.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2441911239",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 84.17956896551725,
+            "syllables": 37,
+            "sentences": 2,
+            "score": 0.7582043103448275
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2572416179,
+        "content": "@0x4007 `text-conversation-rewards` configuration has to be updated, will fix.\r\nhttps://github.com/ubiquity-os-marketplace/text-conversation-rewards/actions/runs/12627969570/job/35183364847",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2572416179",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 53.264393939393955,
+            "syllables": 38,
+            "sentences": 3,
+            "score": 0.9326439393939395
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2572429383,
+        "content": "`node.js` dumps the minified code because there is no sourcemap with it currently.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2572429383",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 60.70500000000001,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.9929499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2572511668,
+        "content": "Sorry about all the spam, I forgot that this repo had a different configuration and wouldn't understand why the changes wouldn't work, it is now up to date.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/291#issuecomment-2572511668",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 57.945000000000036,
+            "syllables": 42,
+            "sentences": 1,
+            "score": 0.9794500000000004
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/357"
+      }
+    ]
+  },
+  "rndquu": {
+    "total": 24.984,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2454184378,
+        "content": "Works fine",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/357#pullrequestreview-2454184378",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.099,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 120.20500000000001,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2487903100,
+        "content": "@EresDev \r\n1. Could you add a unit test for a successfull \"partial mint\" (i.e. when `/post-order` fails at first but then user calls it again and the mint is successfull)?\r\n2. Check [this](https://github.com/ubiquity/pay.ubq.fi/blob/3547192bd51c346c538fb5b6a88591af37dcddd6/functions/get-order.ts#L49) line which retrieves reloadly order transactions for the last year. If, for example, user mints a card on `01.01.24` and then tries to mint the card again using the same signature on `01.01.25` (1 year later) then [this](https://github.com/ubiquity/pay.ubq.fi/blob/3547192bd51c346c538fb5b6a88591af37dcddd6/functions/post-order.ts#L95-L98) check will be passed. Question is: Is it possible to create an order transaction in reloadly API with the same order id?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/357#issuecomment-2487903100",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 16.335,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 89,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 75.81062734082398,
+            "syllables": 122,
+            "sentences": 6,
+            "score": 0.8418937265917602
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2454184378,
+            "effect": {
+              "addition": 215,
+              "deletion": 70
+            },
+            "reward": 8.55,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/357"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 24.984 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>8.55</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>16.434</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/357\" target=\"_blank\" rel=\"noopener\">#357</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+215 -70</td><td>3</td><td>8.55</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/357#pullrequestreview-2454184378\" target=\"_blank\" rel=\"noopener\">Works fine</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.099</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/357#issuecomment-2487903100\" target=\"_blank\" rel=\"noopener\">@EresDev 1. Could you add a unit test for a successfull \"parti&hellip;</a></h6></td><td><details><summary>4.83</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.2&#13;regex:&#13;  wordCount: 89&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.9</td><td>3</td><td>16.335</td></tr></tbody></table></details>"
+  }
+}

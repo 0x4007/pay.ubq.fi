@@ -1,0 +1,150 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 51.94,
+    "task": {
+      "reward": 50,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2215495959,
+        "content": "The `WEBHOOK_PROXY_URL` is for development only. But the `WEBHOOK_SECRET` is required to communicate with the GitHub app, if set. Will check if it can be made optional.\r\n---\r\n`WEBHOOK_SECRET` is definitely required due to https://github.com/ubiquity/ubiquibot-kernel/blob/afc96262f402f62e6dc611142b9a02c7eac8942c/src/github/github-event-handler.ts#L33 which is not optional.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/69#issuecomment-2215495959",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.94,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 34,
+            "wordValue": 0.1,
+            "result": 2.01
+          },
+          "readability": {
+            "fleschKincaid": 56.97032312925171,
+            "syllables": 82,
+            "sentences": 6,
+            "score": 0.9697032312925171
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 51.94 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>50</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.94</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/69#issuecomment-2215495959\" target=\"_blank\" rel=\"noopener\">The &#96;WEBHOOK_PROXY_URL&#96; is for development only. But the&hellip;</a></h6></td><td><details><summary>3.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 34&#13;  wordValue: 0.1&#13;  result: 2.01&#13;</pre></details></td><td>1</td><td>2</td><td>1.94</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 5.62,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2394988974,
+        "content": "Upon deploy of v2 we had to add several new secrets which were not necessary for v1. This indicates that they are not essential and must be removed. \r\n- `WEBHOOK_SECRET`\r\n- `WEBHOOK_PROXY_URL`",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/69",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 2.56,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 68.74642857142858,
+            "syllables": 41,
+            "sentences": 2,
+            "score": 0.9125357142857142
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1669761112,
+        "content": "Debating on if it makes sense to prefix this with APP since it is defined in the GitHub App settings.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/70#discussion_r1669761112",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -34,16 +34,14 @@ jobs:\n \n       - uses: cloudflare/wrangler-action@v3\n         with:\n-          wranglerVersion: \"3.57.0\"\n+          wranglerVersion: \"3.63.1\"\n           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}\n           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}\n           secrets: |\n-            WEBHOOK_PROXY_URL\n-            WEBHOOK_SECRET\n             APP_ID\n-            PRIVATE_KEY\n+            APP_PRIVATE_KEY\n+            WEBHOOK_SECRET",
+        "score": {
+          "reward": 2.22,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 76.55500000000004,
+            "syllables": 26,
+            "sentences": 1,
+            "score": 0.8344499999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2165089407,
+            "effect": {
+              "addition": 22,
+              "deletion": 20
+            },
+            "reward": 0.84,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/70"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 5.62 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>0.84</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>2.56</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>2.22</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/70\" target=\"_blank\" rel=\"noopener\">#70</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+22 -20</td><td>2</td><td>0.84</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/69\" target=\"_blank\" rel=\"noopener\">Upon deploy of v2 we had to add several new secrets which were n&hellip;</a></h6></td><td><details><summary>2.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>1</td><td>1</td><td>2.56</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/70#discussion_r1669761112\" target=\"_blank\" rel=\"noopener\">Debating on if it makes sense to prefix this with APP since it i&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.6</td><td>2</td><td>2.22</td></tr></tbody></table></details>"
+  }
+}

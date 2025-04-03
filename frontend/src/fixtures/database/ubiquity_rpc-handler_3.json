@@ -1,0 +1,2303 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 1201.92,
+    "task": {
+      "reward": 1200,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 1996470994,
+        "content": "this is resolved in ubiquity/pay.ubq.fi#177, the temporary fix was preventing the claim button from flickering on the live portal (since only gnosis is used right now I only blacklisted those that were failing), senseless but effective\r\nWe can't know if an rpc call is going to fail until it's attempted, those that fail return no data through `` const { data } = await API.post(\"\", RPC_BODY); ``. In logging ``status`` and ``statusText`` you only get ``200`` responses. Although in testing mainnet (49 rpcs on ``sync-erc-permits``) some fail but may succeed later whereas the two I added for gnosis makeup three failed calls which I haven't saw succeed once.\r\nSo we can't dynamically pop RPCs from the list until they've been tried at least once and even then with no data returned there are no bad latency entries to pop either\r\nI think filtering out the ``tracking: \"yes\"`` category should be considered at least. ``none``-only takes mainnet down to 18 and gnosis down to 7. ``Limited`` adds 4 more to gnosis and 7 for mainnet.\r\nchainlist/extraRpcs.js\r\n```yml\r\n      {\r\n        url: \"https://eth.nodeconnect.org/\",\r\n        tracking: \"yes\",\r\n        trackingDetails: privacyStatement.nodeconnect,\r\n      },\r\n      {\r\n        url: \"https://rpc.polysplit.cloud/v1/chain/1\",\r\n        tracking: \"none\",\r\n        trackingDetails: privacyStatement.polysplit,\r\n      },\r\n       {\r\n      \turl: \"https://eth-mainnet.diamondswap.org/rpc\",\r\n      \ttracking: \"limited\",\r\n      \ttrackingDetails: privacyStatement.diamondswap,\r\n      },\r\n```",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1996470994",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 1.92,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 169,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 72.54303846153847,
+            "syllables": 234,
+            "sentences": 10,
+            "score": 0.8745696153846153
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 1201.92 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>1200</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.92</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1996470994\" target=\"_blank\" rel=\"noopener\">this is resolved in ubiquity/pay.ubq.fi#177, the temporary fix w&hellip;</a></h6></td><td><details><summary>2.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;  result: 0&#13;regex:&#13;  wordCount: 169&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>1</td><td>3</td><td>1.92</td></tr></tbody></table></details>"
+  },
+  "molecula451": {
+    "total": 192.234,
+    "userId": 41552663,
+    "comments": [
+      {
+        "id": 1996471010,
+        "content": "it's senseless to send each time a PR to just blacklist a RPC",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1996471010",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.63,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 89.89642857142859,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0.7010357142857141
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1996471042,
+        "content": "Context: https://chat.openai.com/share/3c64624c-f8dc-4066-ba69-e86c08a75ee0",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1996471042",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.21,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": 80.0587878787879,
+            "syllables": 16,
+            "sentences": 3,
+            "score": 0.799412121212121
+          },
+          "multiplier": 0.25,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1996471105,
+        "content": "If you're proficient with sync-erc-permits, consider forking another branch and merging changes from main or development. Then, ensure all changes align with your intended outcome.\"",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1996471105",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.87,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 64.41880952380956,
+            "syllables": 44,
+            "sentences": 3,
+            "score": 0.9558119047619045
+          },
+          "multiplier": 0.25,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1996471145,
+        "content": "moving this to RPC handler repo",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1996471145",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.399,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 73.84500000000001,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.8615499999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1996594360,
+        "content": "congrats @Keyrxng even tho i linked your [PR](https://github.com/ubiquity/rpc-handler/pull/1), github did not  automatically closed perhaps, tho this was targeted to another branch, closing as completed",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1996594360",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 2.016,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 48.525000000000034,
+            "syllables": 38,
+            "sentences": 1,
+            "score": 0.8852500000000003
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1996802211,
+        "content": "permit was not generated due to an already known [issue ](https://github.com/ubiquibot/comment-incentives/issues/31)\r\nhttps://github.com/ubiquibot/comment-incentives/actions/runs/8276258518/job/22645535224#step:5:798",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1996802211",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.846,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 60.70500000000001,
+            "syllables": 38,
+            "sentences": 2,
+            "score": 0.9929499999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1510009218,
+        "content": "bring it over https://github.com/ubiquity/web3-rpc-racer/actions/runs/8123062862/job/22205701380?pr=1",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1510009218",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -1,33 +1,65 @@\n import esbuild from \"esbuild\";\n-const typescriptEntries = [\"static/main.ts\"];\n-// const cssEntries = [\"static/style.css\"];\n-const entries = [\n-  ...typescriptEntries,\n-  //  ...cssEntries\n-];\n+import chainlist from \"../lib/chainlist/constants/extraRpcs\";\n+\n+const typescriptEntries = [\"rpc-handler.ts\", \"constants.ts\", \"handler.ts\", \"services/RPCService.ts\", \"services/StorageService.ts\"];",
+        "score": {
+          "reward": 0.756,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 81.64803921568628,
+            "syllables": 24,
+            "sentences": 3,
+            "score": 0.7835196078431372
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1511326602,
+        "content": "the power of the generative pre-trained 🤣",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1511326602",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -0,0 +1,30 @@\n+#!/bin/bash",
+        "score": {
+          "reward": 0.132,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 66.7871428571429,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.9321285714285711
+          },
+          "multiplier": 0.25,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1512207843,
+        "content": "too much bash cryptic in this file, it only made sense that it was done by GPT, as a helpful, it's good tho!",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1512207843",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -0,0 +1,30 @@\n+#!/bin/bash",
+        "score": {
+          "reward": 0.612,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 83.77500000000002,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.7622499999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1513549177,
+        "content": "it's idiomatic to put the last else, as is, tho",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1513549177",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -0,0 +1,212 @@\n+import { JsonRpcProvider } from \"@ethersproject/providers\";\n+import { LOCAL_HOST, networkRpcs, tokens, networkIds, networkNames, networkCurrencies, networkExplorers, Token } from \"./constants\";\n+import { HandlerInterface, HandlerConstructorConfig } from \"./handler\";\n+\n+import { RPCService } from \"./services/rpc-service\";\n+import { StorageService } from \"./services/storage-service\";\n+\n+export class RPCHandler implements HandlerInterface {\n+  private static _instance: RPCHandler | null = null;\n+  private _provider: JsonRpcProvider | null = null;\n+  private _networkId: number;\n+  private _env: string = \"node\";\n+\n+  private _cacheRefreshCycles: number = 10;\n+  private _refreshLatencies: number = 0;\n+  private _autoStorage: boolean = false;\n+\n+  private _runtimeRpcs: string[] = [];\n+  private _latencies: Record<string | number, number> = {};\n+\n+  private _networkIds = networkIds;\n+  private _tokens = tokens;\n+  private _networkNames = networkNames;\n+  private _networkCurrencies = networkCurrencies;\n+  private _networkRpcs = networkRpcs;\n+  private _networkExplorers = networkExplorers;\n+\n+  constructor(networkId: number, config?: HandlerConstructorConfig) {\n+    this._networkId = networkId;\n+    this._initialize(config);\n+  }\n+\n+  public async getFastestRpcProvider(networkId: number): Promise<JsonRpcProvider> {\n+    if (networkId === 31337) {\n+      this._provider = new JsonRpcProvider(LOCAL_HOST, networkId);\n+    } else if (networkId !== 31337 && this._provider?.connection.url.includes(\"localhost\")) {\n+      this._provider = await this.testRpcPerformance(networkId);\n+    } else {\n+      this._provider = await this.testRpcPerformance(networkId);",
+        "score": {
+          "reward": 0.609,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 87.99727272727276,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.7200272727272724
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1513724709,
+        "content": "done renamed",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1513724709",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -1,8 +1,85 @@\n-# `@ubiquity/ts-template`\n+# `@ubiquity/rpc-handler`\n \n-This template repository includes support for the following:\n+This packages leverages [Chainlist's](https://github.com/DefiLlama/chainlist) network RPC list to return the lowest latency provider from the list for any given network ID.\n \n-- TypeScript\n-- Environment Variables\n-- Conventional Commits\n-- Automatic deployment to Cloudflare Pages\n+## Features\n+\n+- Returns the lowest latency provider for a given network ID\n+- Drops bad endpoints from the list and creates a runtime/local storage cache\n+- Can re-test the cached RPCs by calling `handler.getFastestRpcProvider(networkId)`\n+- Can be used in both the browser and Node.js\n+- Fully configurable and extendable\n+- Only uses endpoints which Chainlist report as tracking _no_ data (see [`extraRpcs.js`](https://github.com/DefiLlama/chainlist/blob/main/constants/extraRpcs.js))\n+\n+## Installation\n+\n+```bash\n+yarn add @ubiquity/rpc-handler",
+        "score": {
+          "reward": 0.192,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 77.90500000000002,
+            "syllables": 3,
+            "sentences": 1,
+            "score": 0.8209499999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1524240974,
+        "content": "but the org it's named **ubiquity** here on github",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1524240974",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -1,23 +1,32 @@\n {\n-  \"name\": \"ts-template\",\n+  \"name\": \"@ubiquity/rpc-handler\",",
+        "score": {
+          "reward": 0.729,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 103.70000000000002,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1524264357,
+        "content": "remame here too accordingly",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1524264357",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -1,8 +1,87 @@\n-# `@ubiquity/ts-template`\n+# `@ubiquity/rpc-handler`\n \n-This template repository includes support for the following:\n+This packages leverages [Chainlist's](https://github.com/DefiLlama/chainlist) network RPC list to return the lowest latency provider from the list for any given network ID.\n \n-- TypeScript\n-- Environment Variables\n-- Conventional Commits\n-- Automatic deployment to Cloudflare Pages\n+## Features\n+\n+- Returns the lowest latency provider for a given network ID\n+- Drops bad endpoints from the list and creates a runtime/local storage cache\n+- Can re-test the cached RPCs by calling `handler.getFastestRpcProvider()`\n+- Can be used in both the browser and Node.js\n+- Fully configurable and extendable\n+- Only uses endpoints which Chainlist report as tracking _no_ data (see [`extraRpcs.js`](https://github.com/DefiLlama/chainlist/blob/main/constants/extraRpcs.js))\n+\n+## Installation\n+\n+```bash\n+yarn add @ubiquity/rpc-handler",
+        "score": {
+          "reward": 0.351,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 33.57500000000002,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.7357500000000001
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1524265431,
+        "content": "if people do yarn add @ubiquity/ will get 404, do `\"@ubiquitydao/rpc-handler\"` considering the package it's gonna be hosted there, i rember i renamed just to match the repo name",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1524265431",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -1,8 +1,87 @@\n-# `@ubiquity/ts-template`\n+# `@ubiquity/rpc-handler`\n \n-This template repository includes support for the following:\n+This packages leverages [Chainlist's](https://github.com/DefiLlama/chainlist) network RPC list to return the lowest latency provider from the list for any given network ID.\n \n-- TypeScript\n-- Environment Variables\n-- Conventional Commits\n-- Automatic deployment to Cloudflare Pages\n+## Features\n+\n+- Returns the lowest latency provider for a given network ID\n+- Drops bad endpoints from the list and creates a runtime/local storage cache\n+- Can re-test the cached RPCs by calling `handler.getFastestRpcProvider()`\n+- Can be used in both the browser and Node.js\n+- Fully configurable and extendable\n+- Only uses endpoints which Chainlist report as tracking _no_ data (see [`extraRpcs.js`](https://github.com/DefiLlama/chainlist/blob/main/constants/extraRpcs.js))\n+\n+## Installation\n+\n+```bash\n+yarn add @ubiquity/rpc-handler",
+        "score": {
+          "reward": 1.62,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 57.793103448275886,
+            "syllables": 41,
+            "sentences": 1,
+            "score": 0.9779310344827589
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1976762875,
+        "content": "build still fails @Keyrxng",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1976762875",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.294,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 118.17500000000001,
+            "syllables": 4,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1976811635,
+        "content": "yes you can skip/ignore knip",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1976811635",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.3,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 102.045,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1976862535,
+        "content": "you mean the build.yml?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1976862535",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.153,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 119.69750000000002,
+            "syllables": 5,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1976895698,
+        "content": "yeah we are on a permissions issue: cc @gitcoindev \r\n![Screenshot from 2024-03-04 11-50-12](https://github.com/ubiquity/web3-rpc-racer/assets/41552663/40762440-72f3-46a3-9f64-2ab1847d9482)",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1976895698",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.648,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 66.10000000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.9389999999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1978110176,
+        "content": "extraRpcs it's part of chainlist submodule make sure you git recursively clone or init the module",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1978110176",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.107,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 45.26235294117649,
+            "syllables": 29,
+            "sentences": 1,
+            "score": 0.8526235294117649
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1996585418,
+        "content": "Tested, working good, it looks like https://gnosis-pokt.nodies.app it's making the race at this time of writing, the README can be improved further with all the stuff that was tested here, as it it only available as a **NPM** installation on the current readme\r\n![rpc](https://github.com/ubiquity/rpc-handler/assets/41552663/37db9f13-f540-40d6-a2d1-6986730eeeda)",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1996585418",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 2.7,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 42,
+            "wordValue": 0.1,
+            "result": 2.23
+          },
+          "readability": {
+            "fleschKincaid": 79.33333333333336,
+            "syllables": 62,
+            "sentences": 3,
+            "score": 0.8066666666666664
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1996588015,
+        "content": "Code looks good and well structured, the package it's working well, there are maybe things to improve that will only become handful as the package it's use, mergin this, good stuff @Keyrxng",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1996588015",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.56,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 34,
+            "wordValue": 0.1,
+            "result": 2.01
+          },
+          "readability": {
+            "fleschKincaid": 65.3308823529412,
+            "syllables": 43,
+            "sentences": 1,
+            "score": 0.946691176470588
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1912695718,
+            "effect": {
+              "addition": 3763,
+              "deletion": 180
+            },
+            "reward": 118.29,
+            "priority": 3
+          },
+          {
+            "reviewId": 1914581538,
+            "effect": {
+              "addition": 358,
+              "deletion": 81
+            },
+            "reward": 13.17,
+            "priority": 3
+          },
+          {
+            "reviewId": 1918210793,
+            "effect": {
+              "addition": 349,
+              "deletion": 205
+            },
+            "reward": 16.62,
+            "priority": 3
+          },
+          {
+            "reviewId": 1918609702,
+            "effect": {
+              "addition": 40,
+              "deletion": 23
+            },
+            "reward": 1.89,
+            "priority": 3
+          },
+          {
+            "reviewId": 1935691507,
+            "effect": {
+              "addition": 453,
+              "deletion": 396
+            },
+            "reward": 25.47,
+            "priority": 3
+          },
+          {
+            "reviewId": 1935728514,
+            "effect": {
+              "addition": 1,
+              "deletion": 1
+            },
+            "reward": 0.06,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 192.234 XP ]</a>&nbsp;</h3><h6>@molecula451</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>6</td><td>175.5</td></tr><tr><td>Issue</td><td>Comment</td><td>6</td><td>4.971</td></tr><tr><td>Review</td><td>Comment</td><td>15</td><td>11.763</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/rpc-handler/pull/1\" target=\"_blank\" rel=\"noopener\">#1</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+3763 -180</td><td>3</td><td>118.29</td></tr><tr><td>+358 -81</td><td>3</td><td>13.17</td></tr><tr><td>+349 -205</td><td>3</td><td>16.62</td></tr><tr><td>+40 -23</td><td>3</td><td>1.89</td></tr><tr><td>+453 -396</td><td>3</td><td>25.47</td></tr><tr><td>+1 -1</td><td>3</td><td>0.06</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1996471010\" target=\"_blank\" rel=\"noopener\">it's senseless to send each time a PR to just blacklist a RPC</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.6</td><td>3</td><td>0.63</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1996471042\" target=\"_blank\" rel=\"noopener\">Context: https://chat.openai.com/share/3c64624c-f8dc-4066-ba69-e&hellip;</a></h6></td><td><details><summary>1.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.21</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1996471105\" target=\"_blank\" rel=\"noopener\">If you're proficient with sync-erc-permits, consider forking ano&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.5</td><td>3</td><td>0.87</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1996471145\" target=\"_blank\" rel=\"noopener\">moving this to RPC handler repo</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.7</td><td>3</td><td>0.399</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1996594360\" target=\"_blank\" rel=\"noopener\">congrats @Keyrxng even tho i linked your [PR](https://github.com&hellip;</a></h6></td><td><details><summary>2.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.8</td><td>3</td><td>2.016</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1996802211\" target=\"_blank\" rel=\"noopener\">permit was not generated due to an already known [issue ](https:&hellip;</a></h6></td><td><details><summary>2.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.846</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1510009218\" target=\"_blank\" rel=\"noopener\">bring it over https://github.com/ubiquity/web3-rpc-racer/actions&hellip;</a></h6></td><td><details><summary>1.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.6</td><td>3</td><td>0.756</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1511326602\" target=\"_blank\" rel=\"noopener\">the power of the generative pre-trained 🤣</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.132</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1512207843\" target=\"_blank\" rel=\"noopener\">too much bash cryptic in this file, it only made sense that it w&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.4</td><td>3</td><td>0.612</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1513549177\" target=\"_blank\" rel=\"noopener\">it's idiomatic to put the last else, as is, tho</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.7</td><td>3</td><td>0.609</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1513724709\" target=\"_blank\" rel=\"noopener\">done renamed</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.8</td><td>3</td><td>0.192</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1524240974\" target=\"_blank\" rel=\"noopener\">but the org it's named **ubiquity** here on github</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.9</td><td>3</td><td>0.729</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1524264357\" target=\"_blank\" rel=\"noopener\">remame here too accordingly</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.9</td><td>3</td><td>0.351</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1524265431\" target=\"_blank\" rel=\"noopener\">if people do yarn add @ubiquity/ will get 404, do &#96;\"@ubiquit&hellip;</a></h6></td><td><details><summary>1.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.9</td><td>3</td><td>1.62</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1976762875\" target=\"_blank\" rel=\"noopener\">build still fails @Keyrxng</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.7</td><td>3</td><td>0.294</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1976811635\" target=\"_blank\" rel=\"noopener\">yes you can skip/ignore knip</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.5</td><td>3</td><td>0.3</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1976862535\" target=\"_blank\" rel=\"noopener\">you mean the build.yml?</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.153</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1976895698\" target=\"_blank\" rel=\"noopener\">yeah we are on a permissions issue: cc @gitcoindev ![Screensho&hellip;</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.8</td><td>3</td><td>0.648</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1978110176\" target=\"_blank\" rel=\"noopener\">extraRpcs it's part of chainlist submodule make sure you git rec&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.9</td><td>3</td><td>1.107</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1996585418\" target=\"_blank\" rel=\"noopener\">Tested, working good, it looks like https://gnosis-pokt.nodies.a&hellip;</a></h6></td><td><details><summary>3.23</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 42&#13;  wordValue: 0.1&#13;  result: 2.23&#13;</pre></details></td><td>0.9</td><td>3</td><td>2.7</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1996588015\" target=\"_blank\" rel=\"noopener\">Code looks good and well structured, the package it's working we&hellip;</a></h6></td><td><details><summary>2.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 34&#13;  wordValue: 0.1&#13;  result: 2.01&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.56</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 271.092,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1996471027,
+        "content": "I handled all of those cases in my unstable branch. It starts with a Promise.race and then continues with the fastest functional RPC basically.\r\nTracking I didn't care about but we can eventually get around to it. \r\nI think what makes the most sense is to actually create a standalone `npm` module that handles this in any context (browser or node) then we can use it across all of our codebases.",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1996471027",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 9.87,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 72,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 73.54400000000001,
+            "syllables": 101,
+            "sentences": 5,
+            "score": 0.8645599999999999
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1996471129,
+        "content": "I think it might be easier from scratch although you are definitely welcome to reference my logic. I realized that my implementation was overly complicated when it didn't need to be for our business goals. I only realized after taking a step back and writing this spec lol",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1996471129",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 8.316,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 49,
+            "wordValue": 0.1,
+            "result": 2.37
+          },
+          "readability": {
+            "fleschKincaid": 60.76687074829937,
+            "syllables": 75,
+            "sentences": 3,
+            "score": 0.9923312925170064
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1998617039,
+        "content": "@Keyrxng you think you can swap out the logic in the repos using the old version with your package? I'm not sure which all have it off hand but I assume onboard, audit, and pay have this logic.",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1998617039",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 5.565,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 39,
+            "wordValue": 0.1,
+            "result": 2.15
+          },
+          "readability": {
+            "fleschKincaid": 82.9194230769231,
+            "syllables": 48,
+            "sentences": 2,
+            "score": 0.770805769230769
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2185433962,
+        "content": "We want to use Chainlist's list of RPC endpoints. Create a class that will handle this:\r\n- We should import the Chainlist repository as a submodule to stay in sync.\r\n- The URLs should be tested upon initialization (i.e. page load) via `Promise.race`\r\n- The class should rank sort based on latency. \r\n- The class should drop failed endpoints. \r\n- The class should have a wrapper method to make a network request using the optimal RPC endpoint, and to drop it/automatically rotate to the next best from the list if a network request fails. \r\nWe will use this across all of our products that require RPC calls so: \r\n- Make a standalone and polymorphic (frontend and backend compatible) npm module.\r\n- Make sure to have unit tests in Jest.\r\n### Original Spec\r\nThe code should drop bad RPCs dynamically. I had a prototype implemented where it would delete from local storage if there was an error for example. Later in the code it would only select from local storage options. \r\n_Originally posted by @pavlovcik in https://github.com/ubiquity/pay.ubq.fi/pull/169#discussion_r1502430625_",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/3",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 6.03,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 11
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 7
+              },
+              "h3": {
+                "score": 1,
+                "elementCount": 1
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 2.7
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 169,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 69.28862604748606,
+            "syllables": 267,
+            "sentences": 16,
+            "score": 0.9071137395251394
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1509681020,
+        "content": "I guess it would be best not to publish these",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1509681020",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -28,8 +28,8 @@ jobs:\n           yarn\n           yarn build\n         # env: # Set environment variables for the build\n-          # SUPABASE_URL: \"https://wfzpewmlyiozupulbuur.supabase.co\"\n-          # SUPABASE_ANON_KEY: \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndmenBld21seWlvenVwdWxidXVyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTU2NzQzMzksImV4cCI6MjAxMTI1MDMzOX0.SKIL3Q0NOBaMehH0ekFspwgcu3afp3Dl9EDzPqs1nKs\"\n+        # SUPABASE_URL: \"https://wfzpewmlyiozupulbuur.supabase.co\"",
+        "score": {
+          "reward": 2.808,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 103.625,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1509682142,
+        "content": "I'm surprised it passed kebab case test?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1509682142",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,33 +1,65 @@\n import esbuild from \"esbuild\";\n-const typescriptEntries = [\"static/main.ts\"];\n-// const cssEntries = [\"static/style.css\"];\n-const entries = [\n-  ...typescriptEntries,\n-  //  ...cssEntries\n-];\n+import chainlist from \"../lib/chainlist/constants/extraRpcs\";\n+\n+const typescriptEntries = [\"rpc-handler.ts\", \"constants.ts\", \"handler.ts\", \"services/RPCService.ts\", \"services/StorageService.ts\"];",
+        "score": {
+          "reward": 0.819,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 92.965,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.67035
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1509682956,
+        "content": "It would make more sense to associate tokens per network in case they aren't matching",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1509682956",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,24 @@\n+export declare const extraRpcs: Record<number, string[]>;\n+export declare enum NetworkIds {\n+  Mainnet = 1,\n+  Goerli = 5,\n+  Gnosis = 100,\n+  Anvil = 31337,\n+}\n+export declare enum Tokens {\n+  DAI = \"0x6b175474e89094c44da98b954eedeac495271d0f\",",
+        "score": {
+          "reward": 3.36,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 74.27000000000001,
+            "syllables": 22,
+            "sentences": 1,
+            "score": 0.8573
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1509690192,
+        "content": "I don't think local storage modification should be within this module. \nInstead the results should be stored on the object. The end user should manually handle local storage if it's necessary I think.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1509690192",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,28 @@\n+export class StorageService {\n+  static getLatencies(env: string): Record<string | number, number> {\n+    if (env === \"browser\") {\n+      return JSON.parse(localStorage.getItem(\"rpcLatencies\") || \"{}\");",
+        "score": {
+          "reward": 7.155,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 59.633333333333354,
+            "syllables": 56,
+            "sentences": 3,
+            "score": 0.9963333333333335
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1509946358,
+        "content": "Not for now but I suppose this should be passed in as constructor arguments instead so that the application can handle this?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1509946358",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,24 @@\n+export declare const extraRpcs: Record<number, string[]>;\n+export declare enum NetworkIds {\n+  Mainnet = 1,\n+  Goerli = 5,\n+  Gnosis = 100,\n+  Anvil = 31337,\n+}\n+export declare enum Tokens {\n+  DAI = \"0x6b175474e89094c44da98b954eedeac495271d0f\",",
+        "score": {
+          "reward": 4.872,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 61.45045454545455,
+            "syllables": 32,
+            "sentences": 1,
+            "score": 0.9854954545454545
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1509946645,
+        "content": "You can consider decoupling the logic if you don't want each UI to handle it redundantly. Just have the localStorage logic in a separate method. \nHowever I would argue that it may not be necessary to use localStorage at all. If we do a Promise.race once upon page load  every time that's probably not bad and will accommodate for changing rpc conditions on a sporadic basis. \nSince all the RPC endpoints fire off in parallel we shouldn't have any bottle necks initializing like this.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1509946645",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,28 @@\n+export class StorageService {\n+  static getLatencies(env: string): Record<string | number, number> {\n+    if (env === \"browser\") {\n+      return JSON.parse(localStorage.getItem(\"rpcLatencies\") || \"{}\");",
+        "score": {
+          "reward": 9.207,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 88,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 61.20287878787883,
+            "syllables": 136,
+            "sentences": 6,
+            "score": 0.9879712121212116
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1512206068,
+        "content": "I don't understand",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1512206068",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,30 @@\n+#!/bin/bash",
+        "score": {
+          "reward": 0.165,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 75.87500000000001,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 0.8412499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1512326605,
+        "content": "GPT is the future. Also I made this script lol",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1512326605",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,30 @@\n+#!/bin/bash",
+        "score": {
+          "reward": 0.351,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 100.24000000000002,
+            "syllables": 12,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1512333373,
+        "content": "Yes I just think its not really necessary and adds complexity to making this polymorphic, or also being able to run in node.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1512333373",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,28 @@\n+export class StorageService {\n+  static getLatencies(env: string): Record<string | number, number> {\n+    if (env === \"browser\") {\n+      return JSON.parse(localStorage.getItem(\"rpcLatencies\") || \"{}\");",
+        "score": {
+          "reward": 4.92,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 51.07260869565218,
+            "syllables": 36,
+            "sentences": 1,
+            "score": 0.9107260869565218
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1513581552,
+        "content": "Why don't you output both in the same format? I guess cjs is the most common?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1513581552",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -43,7 +43,7 @@ esbuild\n     ...esBuildContext,\n     tsconfig: \"tsconfig.web.json\",\n     platform: \"browser\",\n-    outdir: \"dist/esm\",\n+    outdir: \"dist/esm/src\",",
+        "score": {
+          "reward": 2.34,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 98.67808823529413,
+            "syllables": 20,
+            "sentences": 2,
+            "score": 0.6132191176470587
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1513582249,
+        "content": "```suggestion\r\n    } else if (this._provider?.connection.url.includes(\"localhost\")) {\r\n```",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1513582249",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -27,20 +27,66 @@ export class RPCHandler implements HandlerInterface {\n \n   constructor(networkId: number, config?: HandlerConstructorConfig) {\n     this._networkId = networkId;\n-    this._provider = new JsonRpcProvider(networkRpcs[networkId][0], networkId);\n     this._initialize(config);\n   }\n \n-  private _initialize(config?: HandlerConstructorConfig): void {\n-    this._env = typeof window === \"undefined\" ? \"node\" : \"browser\";\n+  public async getFastestRpcProvider(networkId: number): Promise<JsonRpcProvider> {\n+    if (networkId === 31337) {\n+      this._provider = new JsonRpcProvider(LOCAL_HOST, networkId);\n+    } else if (networkId !== 31337 && this._provider?.connection.url.includes(\"localhost\")) {",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1513584260,
+        "content": "By definition this code isn't polymorphic if you have to write separate tests for node and browser. You should make the code simpler to maintain by only writing one version that works in both environments.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1513584260",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -43,7 +43,7 @@ esbuild\n     ...esBuildContext,\n     tsconfig: \"tsconfig.web.json\",\n     platform: \"browser\",\n-    outdir: \"dist/esm\",\n+    outdir: \"dist/esm/src\",",
+        "score": {
+          "reward": 7.209,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 64.015,
+            "syllables": 53,
+            "sentences": 2,
+            "score": 0.95985
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1513666902,
+        "content": "We should rename this repo to match.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1513666902",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,8 +1,85 @@\n-# `@ubiquity/ts-template`\n+# `@ubiquity/rpc-handler`\n \n-This template repository includes support for the following:\n+This packages leverages [Chainlist's](https://github.com/DefiLlama/chainlist) network RPC list to return the lowest latency provider from the list for any given network ID.\n \n-- TypeScript\n-- Environment Variables\n-- Conventional Commits\n-- Automatic deployment to Cloudflare Pages\n+## Features\n+\n+- Returns the lowest latency provider for a given network ID\n+- Drops bad endpoints from the list and creates a runtime/local storage cache\n+- Can re-test the cached RPCs by calling `handler.getFastestRpcProvider(networkId)`\n+- Can be used in both the browser and Node.js\n+- Fully configurable and extendable\n+- Only uses endpoints which Chainlist report as tracking _no_ data (see [`extraRpcs.js`](https://github.com/DefiLlama/chainlist/blob/main/constants/extraRpcs.js))\n+\n+## Installation\n+\n+```bash\n+yarn add @ubiquity/rpc-handler",
+        "score": {
+          "reward": 1.494,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 90.95857142857145,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.6904142857142855
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1513668676,
+        "content": "jest.config.ts please\r\nhttps://github.com/ubiquity/ts-template/pull/19/files",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1513668676",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 2.715,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 73.38240384615384,
+            "syllables": 20,
+            "sentences": 4,
+            "score": 0.8661759615384617
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1524257384,
+        "content": "We just created https://www.npmjs.com/org/ubiquitydao and this will be deployed to npm there!",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1524257384",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,23 +1,32 @@\n {\n-  \"name\": \"ts-template\",\n+  \"name\": \"@ubiquity/rpc-handler\",",
+        "score": {
+          "reward": 4.266,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 91.60098039215687,
+            "syllables": 22,
+            "sentences": 3,
+            "score": 0.6839901960784313
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1524257762,
+        "content": "```suggestion\r\n  \"name\": \"@ubiquitydao/rpc-handler\",\r\n```",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1524257762",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,23 +1,32 @@\n {\n-  \"name\": \"ts-template\",\n+  \"name\": \"@ubiquity/rpc-handler\",",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1978202489,
+        "content": "I just deleted this while adjusting the DNS settings yesterday. I presume that the code isn't handling the case when a provider goes down successfully.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1978202489",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.376,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 63.486153846153854,
+            "syllables": 40,
+            "sentences": 2,
+            "score": 0.9651384615384615
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1987239803,
+        "content": "Just make a GitHub action to prove its not env related?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1987239803",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.124,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 87.99727272727276,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.7200272727272724
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1912264651,
+            "effect": {
+              "addition": 3763,
+              "deletion": 180
+            },
+            "reward": 118.29,
+            "priority": 3
+          },
+          {
+            "reviewId": 1915979341,
+            "effect": {
+              "addition": 358,
+              "deletion": 78
+            },
+            "reward": 13.08,
+            "priority": 3
+          },
+          {
+            "reviewId": 1916215997,
+            "effect": {
+              "addition": 0,
+              "deletion": 0
+            },
+            "reward": 0,
+            "priority": 3
+          },
+          {
+            "reviewId": 1916222779,
+            "effect": {
+              "addition": 0,
+              "deletion": 0
+            },
+            "reward": 0,
+            "priority": 3
+          },
+          {
+            "reviewId": 1918262404,
+            "effect": {
+              "addition": 661,
+              "deletion": 119
+            },
+            "reward": 23.4,
+            "priority": 3
+          },
+          {
+            "reviewId": 1918451149,
+            "effect": {
+              "addition": 40,
+              "deletion": 23
+            },
+            "reward": 1.89,
+            "priority": 3
+          },
+          {
+            "reviewId": 1935717422,
+            "effect": {
+              "addition": 453,
+              "deletion": 396
+            },
+            "reward": 25.47,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 271.092 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>7</td><td>182.13</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>6.03</td></tr><tr><td>Issue</td><td>Comment</td><td>3</td><td>23.751</td></tr><tr><td>Review</td><td>Comment</td><td>18</td><td>59.181</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/rpc-handler/pull/1\" target=\"_blank\" rel=\"noopener\">#1</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+3763 -180</td><td>3</td><td>118.29</td></tr><tr><td>+358 -78</td><td>3</td><td>13.08</td></tr><tr><td>+0 -0</td><td>3</td><td>0</td></tr><tr><td>+0 -0</td><td>3</td><td>0</td></tr><tr><td>+661 -119</td><td>3</td><td>23.4</td></tr><tr><td>+40 -23</td><td>3</td><td>1.89</td></tr><tr><td>+453 -396</td><td>3</td><td>25.47</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/3\" target=\"_blank\" rel=\"noopener\">We want to use Chainlist's list of RPC endpoints. Create a class&hellip;</a></h6></td><td><details><summary>4.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 11&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 7&#13;    h3:&#13;      score: 1&#13;      elementCount: 1&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 2.7&#13;regex:&#13;  wordCount: 169&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>1</td><td>1</td><td>6.03</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1996471027\" target=\"_blank\" rel=\"noopener\">I handled all of those cases in my unstable branch. It starts wi&hellip;</a></h6></td><td><details><summary>2.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 72&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>1</td><td>3</td><td>9.87</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1996471129\" target=\"_blank\" rel=\"noopener\">I think it might be easier from scratch although you are definit&hellip;</a></h6></td><td><details><summary>2.37</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 49&#13;  wordValue: 0.1&#13;  result: 2.37&#13;</pre></details></td><td>0.9</td><td>3</td><td>8.316</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1998617039\" target=\"_blank\" rel=\"noopener\">@Keyrxng you think you can swap out the logic in the repos using&hellip;</a></h6></td><td><details><summary>2.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 39&#13;  wordValue: 0.1&#13;  result: 2.15&#13;</pre></details></td><td>0.7</td><td>3</td><td>5.565</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1509681020\" target=\"_blank\" rel=\"noopener\">I guess it would be best not to publish these</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.8</td><td>3</td><td>2.808</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1509682142\" target=\"_blank\" rel=\"noopener\">I'm surprised it passed kebab case test?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.819</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1509682956\" target=\"_blank\" rel=\"noopener\">It would make more sense to associate tokens per network in case&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.7</td><td>3</td><td>3.36</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1509690192\" target=\"_blank\" rel=\"noopener\">I don't think local storage modification should be within this m&hellip;</a></h6></td><td><details><summary>2.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>0.9</td><td>3</td><td>7.155</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1509946358\" target=\"_blank\" rel=\"noopener\">Not for now but I suppose this should be passed in as constructo&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.872</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1509946645\" target=\"_blank\" rel=\"noopener\">You can consider decoupling the logic if you don't want each UI &hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 88&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.9</td><td>3</td><td>9.207</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1512206068\" target=\"_blank\" rel=\"noopener\">I don't understand</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.165</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1512326605\" target=\"_blank\" rel=\"noopener\">GPT is the future. Also I made this script lol</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.351</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1512333373\" target=\"_blank\" rel=\"noopener\">Yes I just think its not really necessary and adds complexity to&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.92</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1513581552\" target=\"_blank\" rel=\"noopener\">Why don't you output both in the same format? I guess cjs is the&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.5</td><td>3</td><td>2.34</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1513582249\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion} else if (this._provider?.connec&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1513584260\" target=\"_blank\" rel=\"noopener\">By definition this code isn't polymorphic if you have to write s&hellip;</a></h6></td><td><details><summary>2.07</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.9</td><td>3</td><td>7.209</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1513666902\" target=\"_blank\" rel=\"noopener\">We should rename this repo to match.</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.6</td><td>3</td><td>1.494</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1513668676\" target=\"_blank\" rel=\"noopener\">jest.config.ts pleasehttps://github.com/ubiquity/ts-template/p&hellip;</a></h6></td><td><details><summary>1.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.5</td><td>3</td><td>2.715</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1524257384\" target=\"_blank\" rel=\"noopener\">We just created https://www.npmjs.com/org/ubiquitydao and this w&hellip;</a></h6></td><td><details><summary>1.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.6</td><td>3</td><td>4.266</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1524257762\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion\"name\": \"@ubiquitydao/rpc-handler\",&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1978202489\" target=\"_blank\" rel=\"noopener\">I just deleted this while adjusting the DNS settings yesterday. &hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.8</td><td>3</td><td>5.376</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1987239803\" target=\"_blank\" rel=\"noopener\">Just make a GitHub action to prove its not env related?</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.6</td><td>3</td><td>2.124</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 222.578,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 1996763553,
+        "content": "The permit was not generated. \r\n@pavlovcik Do we need a manual payout here? \r\n@FernandVEYRIER Could you take a look at the root cause of why the permit was not generated and perhaps create a new issue for this case?",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1996763553",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.421,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 39,
+            "wordValue": 0.1,
+            "result": 2.15
+          },
+          "readability": {
+            "fleschKincaid": 76.50153846153849,
+            "syllables": 54,
+            "sentences": 3,
+            "score": 0.8349846153846151
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1913757101,
+        "content": "@Keyrxng Pls add a proper readme file which describes:\r\n- what the package does\r\n- how to install it\r\n- how to use it\r\n- how to run tests",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#pullrequestreview-1913757101",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 6.24,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              }
+            },
+            "result": 0.4
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 79.94000000000001,
+            "syllables": 30,
+            "sentences": 1,
+            "score": 0.8005999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1926489691,
+        "content": "1. If you build the project with `yarn build` then this line `import { HandlerConstructorConfig } from \"./dist/cjs/src/handler\";` returns the `Module '\"./dist/cjs/src/handler\"' has no exported member 'HandlerConstructorConfig'` error. But if you build with `yarn build:cjs` there is no such error. Pls make sure that `yarn build`, `yarn build:cjs` and `yarn build:esm` are working the same way.\r\n2. Getting this error:\r\n```\r\nrndquu@Users-MacBook-Pro web3-rpc-racer % npx tsx my.ts\r\nnode:internal/modules/cjs/loader:1144\r\n  const err = new Error(message);\r\n              ^\r\nError: Cannot find module './dist/cjs/src/rpc-handler'\r\nRequire stack:\r\n- /Users/rndquu/Public/projects/backend/web3-rpc-racer/my.ts\r\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1144:15)\r\n    at a._resolveFilename (/Users/rndquu/Public/projects/backend/web3-rpc-racer/node_modules/tsx/dist/cjs/index.cjs:1:1729)\r\n    at Module._load (node:internal/modules/cjs/loader:985:27)\r\n    at Module.require (node:internal/modules/cjs/loader:1235:19)\r\n    at require (node:internal/modules/helpers:176:18)\r\n    at <anonymous> (/Users/rndquu/Public/projects/backend/web3-rpc-racer/my.ts:2:28)\r\n    at Object.<anonymous> (/Users/rndquu/Public/projects/backend/web3-rpc-racer/my.ts:16:6)\r\n    at Module._compile (node:internal/modules/cjs/loader:1376:14)\r\n    at Object.S (/Users/rndquu/Public/projects/backend/web3-rpc-racer/node_modules/tsx/dist/cjs/index.cjs:1:1292)\r\n    at Module.load (node:internal/modules/cjs/loader:1207:32) {\r\n  code: 'MODULE_NOT_FOUND',\r\n  requireStack: [ '/Users/rndquu/Public/projects/backend/web3-rpc-racer/my.ts' ]\r\n}\r\nNode.js v20.11.1\r\n```\r\nHow to reproduce:\r\n1. Checkout to the latest commit from this PR\r\n2. `yarn install`\r\n3. `git submodule update --init --recursive`\r\n4. `yarn build:cjs`\r\n5. `npx tsx my.ts`\r\n```ts\r\nimport { HandlerConstructorConfig } from \"./dist/cjs/src/handler\";\r\nimport { RPCHandler } from \"./dist/cjs/src/rpc-handler\";\r\nconst config: HandlerConstructorConfig = {\r\n    networkId: 100,\r\n    autoStorage: false,\r\n    cacheRefreshCycles: 5,\r\n  };\r\nasync function main() {\r\n    const handler = new RPCHandler(config);\r\n    const provider = await handler.getFastestRpcProvider();\r\n    console.log(provider);\r\n}\r\nmain();\r\n```",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#pullrequestreview-1926489691",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 9.882,
+          "formatting": {
+            "content": {
+              "ol": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 7
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 8
+              }
+            },
+            "result": 0.7
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 46,
+            "wordValue": 0.1,
+            "result": 2.31
+          },
+          "readability": {
+            "fleschKincaid": 88.49293478260873,
+            "syllables": 58,
+            "sentences": 4,
+            "score": 0.7150706521739127
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1927259140,
+        "content": "Works fine",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#pullrequestreview-1927259140",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.099,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 120.20500000000001,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1512252379,
+        "content": "```suggestion\r\nconst provider = await handler.getFastestRpcProvider();\r\n```",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1512252379",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,8 +1,84 @@\n-# `@ubiquity/ts-template`\n+# `@ubiquity/rpc-handler`\n \n-This template repository includes support for the following:\n+This packages leverages [Chainlist's](https://github.com/DefiLlama/chainlist) network RPC list to return the lowest latency provider from the list for any given network ID.\n \n-- TypeScript\n-- Environment Variables\n-- Conventional Commits\n-- Automatic deployment to Cloudflare Pages\n+## Features\n+\n+- Returns the lowest latency provider for a given network ID\n+- Drops bad endpoints from the list and creates a runtime/local storage cache\n+- Can re-test the cached RPCs by calling `handler.getFastestRpcProvider()` optionally passing a network ID\n+- Can be used in both the browser and Node.js\n+- Fully configurable and extendable\n+- Only uses endpoints which Chainlist report as tracking _no_ data (see [`extraRpcs.js`](https://github.com/DefiLlama/chainlist/blob/main/constants/extraRpcs.js))\n+\n+## Installation\n+\n+```bash\n+yarn add @ubiquity/rpc-handler\n+```\n+\n+## Usage\n+\n+- Import the handler for your environment\n+\n+```typescript\n+import { RPCHandler } from \"@ubiquity/rpc-handler/dist/esm/rpc-handler\";\n+```\n+\n+- Instantiate the handler with your network ID\n+\n+```typescript\n+const handler = new RPCHandler(100);\n+```\n+\n+###### or\n+\n+```typescript\n+const handler = await RPCHandler.getInstance(1);\n+```\n+\n+- Get the provider\n+\n+```typescript\n+const provider = handler.getProvider();\n+```\n+\n+- Re-test the cached RPCs\n+\n+```typescript\n+const provider = handler.getFastestRpcProvider();",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1978107539,
+        "content": "@Keyrxng \r\nTrying to run this code:\r\n```\r\nimport { RPCHandler } from \"./src\";\r\nasync function main() {\r\n    const handler = new RPCHandler(100);    \r\n}\r\nmain();\r\n```\r\nGetting this error:\r\n```\r\nrndquu@User-MBP web3-rpc-racer % npx tsx my.ts\r\n/Users/rndquu/Public/projects/backend/web3-rpc-racer/src/constants.ts:78\r\n  [networkIds.Mainnet]: [\"https://rpc-pay.ubq.fi/v1/mainnet\", ...(extraRpcs[networkIds.Mainnet] || [])],\r\n                                                                  ^\r\nReferenceError: extraRpcs is not defined\r\n    at extraRpcs (/Users/rndquu/Public/projects/backend/web3-rpc-racer/src/constants.ts:78:67)\r\n    at Object.<anonymous> (/Users/rndquu/Public/projects/backend/web3-rpc-racer/src/constants.ts:85:27)\r\n    at Module._compile (node:internal/modules/cjs/loader:1376:14)\r\n    at Object.S (/Users/rndquu/Public/projects/backend/web3-rpc-racer/node_modules/tsx/dist/cjs/index.cjs:1:1292)\r\n    at Module.load (node:internal/modules/cjs/loader:1207:32)\r\n    at Module._load (node:internal/modules/cjs/loader:1023:12)\r\n    at Module.require (node:internal/modules/cjs/loader:1235:19)\r\n    at require (node:internal/modules/helpers:176:18)\r\n    at <anonymous> (/Users/rndquu/Public/projects/backend/web3-rpc-racer/src/index.ts:1:131)\r\n    at Object.<anonymous> (/Users/rndquu/Public/projects/backend/web3-rpc-racer/src/index.ts:16:28)\r\nNode.js v20.11.1\r\n```\r\nWhat am I doing wrong?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1978107539",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.726,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 95.93928571428573,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.6406071428571427
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1978108689,
+        "content": "Thanks, I'll try",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1978108689",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.171,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 118.17500000000001,
+            "syllables": 4,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1978119431,
+        "content": "@Keyrxng \r\nI've installed git submodules via `git submodule update --init --recursive` and rebuilt the project.\r\nTrying to get RPCs for BNB chain via:\r\n```\r\nimport { RPCHandler } from \"./dist/cjs/rpc-handler\";\r\nasync function main() {\r\n    const handler = new RPCHandler(56);    \r\n}\r\nmain();\r\n```\r\nGetting this error:\r\n```\r\nTypeError: Cannot read properties of undefined (reading '0')\r\n    at new r (/Users/rndquu/Public/projects/backend/web3-rpc-racer/dist/cjs/rpc-handler.js:19:6622)\r\n    at main (/Users/rndquu/Public/projects/backend/web3-rpc-racer/my.ts:4:21)\r\n    at <anonymous> (/Users/rndquu/Public/projects/backend/web3-rpc-racer/my.ts:7:1)\r\n    at Object.<anonymous> (/Users/rndquu/Public/projects/backend/web3-rpc-racer/my.ts:7:6)\r\n    at Module._compile (node:internal/modules/cjs/loader:1376:14)\r\n    at Object.S (/Users/rndquu/Public/projects/backend/web3-rpc-racer/node_modules/tsx/dist/cjs/index.cjs:1:1292)\r\n    at Module.load (node:internal/modules/cjs/loader:1207:32)\r\n    at Module._load (node:internal/modules/cjs/loader:1023:12)\r\n    at cjsLoader (node:internal/modules/esm/translators:356:17)\r\n    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:305:7)\r\n```\r\nWhat am I doing wrong?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1978119431",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.913,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 83.46583333333336,
+            "syllables": 35,
+            "sentences": 2,
+            "score": 0.7653416666666664
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1978136945,
+        "content": "@Keyrxng \r\nThis code returns the same provider all the time (`https://rpc-pay.ubq.fi/v1/mainnet`). Why is it happening? Is `https://rpc-pay.ubq.fi/v1/mainnet` so fast?\r\n```\r\nimport { RPCHandler } from \"./dist/cjs/rpc-handler\";\r\nasync function main() {\r\n    const handler = new RPCHandler(1);   \r\n    const provider = handler.getProvider();\r\n    console.log(provider);\r\n}\r\nmain();\r\n```",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1978136945",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 9.6,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 91.60098039215687,
+            "syllables": 22,
+            "sentences": 3,
+            "score": 0.6839901960784313
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1980225934,
+        "content": "@Keyrxng Check this code:\r\n```\r\nimport { HandlerConstructorConfig } from \"./dist/cjs/src/handler\";\r\nimport { RPCHandler } from \"./dist/cjs/rpc-handler\";\r\nconst config: HandlerConstructorConfig = {\r\n    autoStorage: true,\r\n    cacheRefreshCycles: 5,\r\n  };\r\nasync function main() {\r\n    const networkId = 100;\r\n    const handler = new RPCHandler(networkId, config);\r\n    const provider = await handler.getFastestRpcProvider(networkId);\r\n    console.log(provider);\r\n}\r\nmain();\r\n```\r\nQuestions:\r\n1. The code above returns `http://localhost:8545` as the best provider all the time, is it expected?\r\n2. Why do we need to pass `networkId` both to `new RPCHandler(networkId, config)` and `handler.getFastestRpcProvider(networkId)`? Can't we set this config param only 1 time in a single place?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1980225934",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 11.259,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 42,
+            "wordValue": 0.1,
+            "result": 2.23
+          },
+          "readability": {
+            "fleschKincaid": 87.88214285714287,
+            "syllables": 52,
+            "sentences": 3,
+            "score": 0.7211785714285713
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1980850546,
+        "content": "Yes\r\nNow I'm getting the `Module '\"./dist/cjs/src/handler\"' has no exported member 'HandlerConstructorConfig'` error\r\n<img width=\"1512\" alt=\"Screenshot 2024-03-06 at 16 11 50\" src=\"https://github.com/ubiquity/rpc-handler/assets/119500907/89f14c77-0c92-417b-8ae1-fc9cbe45b02a\">\r\nHow to reproduce:\r\n1. Checkout to the latest commit from this PR\r\n2. `yarn install`\r\n3. `git submodule update --init --recursive`\r\n4. `yarn build`\r\n5. `npx tsx my.ts`\r\n```ts\r\nimport { HandlerConstructorConfig } from \"./dist/cjs/src/handler\";\r\nimport { RPCHandler } from \"./dist/cjs/src/rpc-handler\";\r\nconst config: HandlerConstructorConfig = {\r\n    autoStorage: true,\r\n    cacheRefreshCycles: 5,\r\n  };\r\nasync function main() {\r\n    const networkId = 56;\r\n    const handler = new RPCHandler(networkId, config);\r\n    const provider = await handler.getFastestRpcProvider();\r\n    console.log(provider);\r\n}\r\nmain();\r\n```",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1980850546",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 11.042,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 9
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.5
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 71.06409090909092,
+            "syllables": 59,
+            "sentences": 2,
+            "score": 0.8893590909090908
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1987751190,
+        "content": "@Keyrxng I haven't touched anything in the code since yesterday but today the build is performed without errors\r\nCheck this script:\r\n```ts\r\nimport { HandlerConstructorConfig } from \"../dist/cjs/src/handler\";\r\nimport { RPCHandler } from \"../dist/cjs/src/rpc-handler\";\r\nconst config: HandlerConstructorConfig = {\r\n  networkId: 314,\r\n  autoStorage: false,\r\n};\r\nasync function main() {\r\n  const handler = new RPCHandler(config);\r\n  const provider = await handler.getFastestRpcProvider();\r\n  console.log(provider);\r\n}\r\nmain();\r\n```\r\nIt returns:\r\n```\r\nrndquu@User-MBP web3-rpc-racer % npx tsx tests/script-test.ts\r\n[RPCService] Latencies object is empty\r\n[RPCService] Failed to find fastest RPC\r\n```\r\nAlthough there are available RPCs for the Filecoin network:\r\n<img width=\"1512\" alt=\"Screenshot 2024-03-11 at 10 03 52\" src=\"https://github.com/ubiquity/rpc-handler/assets/119500907/a869983d-1c56-4fa8-bcf8-43580c57410e\">\r\nWhy is it happening?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1987751190",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 11.745,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 50,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 55.34821428571429,
+            "syllables": 89,
+            "sentences": 2,
+            "score": 0.953482142857143
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1987921780,
+        "content": "You're right, ubiquity case is covered, all these settings (timeout, `data-tracking-none`) could be moved to config in a separate issue",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1987921780",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.85,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 55.40500000000003,
+            "syllables": 31,
+            "sentences": 1,
+            "score": 0.9540500000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1913757101,
+            "effect": {
+              "addition": 3614,
+              "deletion": 183
+            },
+            "reward": 113.91,
+            "priority": 3
+          },
+          {
+            "reviewId": 1916056065,
+            "effect": {
+              "addition": 113,
+              "deletion": 7
+            },
+            "reward": 3.6,
+            "priority": 3
+          },
+          {
+            "reviewId": 1926489691,
+            "effect": {
+              "addition": 611,
+              "deletion": 393
+            },
+            "reward": 30.12,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 222.578 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>147.63</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>2.421</td></tr><tr><td>Review</td><td>Comment</td><td>12</td><td>72.527</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/rpc-handler/pull/1\" target=\"_blank\" rel=\"noopener\">#1</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+3614 -183</td><td>3</td><td>113.91</td></tr><tr><td>+113 -7</td><td>3</td><td>3.6</td></tr><tr><td>+611 -393</td><td>3</td><td>30.12</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1996763553\" target=\"_blank\" rel=\"noopener\">The permit was not generated. @pavlovcik Do we need a manual p&hellip;</a></h6></td><td><details><summary>2.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 39&#13;  wordValue: 0.1&#13;  result: 2.15&#13;</pre></details></td><td>0.3</td><td>3</td><td>2.421</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#pullrequestreview-1913757101\" target=\"_blank\" rel=\"noopener\">@Keyrxng Pls add a proper readme file which describes:- what t&hellip;</a></h6></td><td><details><summary>2.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;  result: 0.4&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.8</td><td>3</td><td>6.24</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#pullrequestreview-1926489691\" target=\"_blank\" rel=\"noopener\">1. If you build the project with &#96;yarn build&#96; then this &hellip;</a></h6></td><td><details><summary>3.01</summary><pre>content:&#13;  content:&#13;    ol:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 7&#13;    p:&#13;      score: 0&#13;      elementCount: 8&#13;  result: 0.7&#13;regex:&#13;  wordCount: 46&#13;  wordValue: 0.1&#13;  result: 2.31&#13;</pre></details></td><td>0.9</td><td>3</td><td>9.882</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#pullrequestreview-1927259140\" target=\"_blank\" rel=\"noopener\">Works fine</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.099</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1512252379\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionconst provider = await handler.getFas&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1978107539\" target=\"_blank\" rel=\"noopener\">@Keyrxng Trying to run this code:&#96;&#96;&#96;import { R&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.9</td><td>3</td><td>3.726</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1978108689\" target=\"_blank\" rel=\"noopener\">Thanks, I'll try</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.171</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1978119431\" target=\"_blank\" rel=\"noopener\">@Keyrxng I've installed git submodules via &#96;git submodule &hellip;</a></h6></td><td><details><summary>1.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;  result: 0&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>0.9</td><td>3</td><td>5.913</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1978136945\" target=\"_blank\" rel=\"noopener\">@Keyrxng This code returns the same provider all the time (&#9&hellip;</a></h6></td><td><details><summary>3.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.8</td><td>3</td><td>9.6</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1980225934\" target=\"_blank\" rel=\"noopener\">@Keyrxng Check this code:&#96;&#96;&#96;import { HandlerCons&hellip;</a></h6></td><td><details><summary>3.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.2&#13;regex:&#13;  wordCount: 42&#13;  wordValue: 0.1&#13;  result: 2.23&#13;</pre></details></td><td>0.9</td><td>3</td><td>11.259</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1980850546\" target=\"_blank\" rel=\"noopener\">YesNow I'm getting the &#96;Module '\"./dist/cjs/src/handler\"' &hellip;</a></h6></td><td><details><summary>3.42</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 9&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.5&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.85</td><td>3</td><td>11.042</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1987751190\" target=\"_blank\" rel=\"noopener\">@Keyrxng I haven't touched anything in the code since yesterday &hellip;</a></h6></td><td><details><summary>3.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 50&#13;  wordValue: 0.1&#13;  result: 2.38&#13;</pre></details></td><td>0.9</td><td>3</td><td>11.745</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#issuecomment-1987921780\" target=\"_blank\" rel=\"noopener\">You're right, ubiquity case is covered, all these settings (time&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.5</td><td>3</td><td>2.85</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 153.777,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 1513504908,
+        "content": "Might make more sense to replace `number` by the key of network ids (applies for the other variables as well) to make sure every key is implemented",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1513504908",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,69 @@\n+export declare const extraRpcs: Record<number, string[]>;\n+\n+export const networkIds: Record<string, number> = {\n+  Mainnet: 1,\n+  Goerli: 5,\n+  Gnosis: 100,\n+  Anvil: 31337,\n+};\n+\n+export type Token = {\n+  address: string;\n+  decimals: number;\n+};\n+\n+export const tokens: Record<number, Record<string, Token>> = {\n+  [networkIds.Mainnet]: {\n+    DAI: {\n+      address: \"0x6b175474e89094c44da98b954eedeac495271d0f\",\n+      decimals: 18,\n+    },\n+  },\n+  [networkIds.Gnosis]: {\n+    WXDAI: {\n+      address: \"0xe91d153e0b41518a2ce8dd3d7944fa863463a97d\",\n+      decimals: 18,\n+    },\n+  },\n+};\n+\n+export const LOCAL_HOST = \"http://127.0.0.1:8545\";\n+\n+export const networkNames = {\n+  [networkIds.Mainnet]: \"Ethereum Mainnet\",\n+  [networkIds.Goerli]: \"Goerli Testnet\",\n+  [networkIds.Gnosis]: \"Gnosis Chain\",\n+  [networkIds.Anvil]: LOCAL_HOST,\n+};\n+\n+export const networkCurrencies: Record<number, { symbol: string; decimals: number }> = {\n+  [networkIds.Mainnet]: { symbol: \"ETH\", decimals: 18 },\n+  [networkIds.Goerli]: { symbol: \"GoerliETH\", decimals: 18 },\n+  [networkIds.Gnosis]: { symbol: \"XDAI\", decimals: 18 },\n+  [networkIds.Anvil]: { symbol: \"XDAI\", decimals: 18 },\n+};\n+\n+export function getNetworkName(networkId?: number) {\n+  const networkName = networkNames[networkId as keyof typeof networkNames];\n+  if (!networkName) {\n+    console.error(`Unknown network ID: ${networkId}`);\n+  }\n+  return networkName ?? \"Unknown Network\";\n+}\n+\n+export const networkExplorers: Record<number, string> = {",
+        "score": {
+          "reward": 6.048,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 63.306538461538494,
+            "syllables": 36,
+            "sentences": 1,
+            "score": 0.966934615384615
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1513505709,
+        "content": "else if and else are identical",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1513505709",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,212 @@\n+import { JsonRpcProvider } from \"@ethersproject/providers\";\n+import { LOCAL_HOST, networkRpcs, tokens, networkIds, networkNames, networkCurrencies, networkExplorers, Token } from \"./constants\";\n+import { HandlerInterface, HandlerConstructorConfig } from \"./handler\";\n+\n+import { RPCService } from \"./services/rpc-service\";\n+import { StorageService } from \"./services/storage-service\";\n+\n+export class RPCHandler implements HandlerInterface {\n+  private static _instance: RPCHandler | null = null;\n+  private _provider: JsonRpcProvider | null = null;\n+  private _networkId: number;\n+  private _env: string = \"node\";\n+\n+  private _cacheRefreshCycles: number = 10;\n+  private _refreshLatencies: number = 0;\n+  private _autoStorage: boolean = false;\n+\n+  private _runtimeRpcs: string[] = [];\n+  private _latencies: Record<string | number, number> = {};\n+\n+  private _networkIds = networkIds;\n+  private _tokens = tokens;\n+  private _networkNames = networkNames;\n+  private _networkCurrencies = networkCurrencies;\n+  private _networkRpcs = networkRpcs;\n+  private _networkExplorers = networkExplorers;\n+\n+  constructor(networkId: number, config?: HandlerConstructorConfig) {\n+    this._networkId = networkId;\n+    this._initialize(config);\n+  }\n+\n+  public async getFastestRpcProvider(networkId: number): Promise<JsonRpcProvider> {\n+    if (networkId === 31337) {\n+      this._provider = new JsonRpcProvider(LOCAL_HOST, networkId);\n+    } else if (networkId !== 31337 && this._provider?.connection.url.includes(\"localhost\")) {\n+      this._provider = await this.testRpcPerformance(networkId);\n+    } else {\n+      this._provider = await this.testRpcPerformance(networkId);",
+        "score": {
+          "reward": 1.848,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 73.84500000000001,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.8615499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1524230453,
+        "content": "Should be `@ubiquitydao/rpc-handler`",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1524230453",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,23 +1,32 @@\n {\n-  \"name\": \"ts-template\",\n+  \"name\": \"@ubiquity/rpc-handler\",",
+        "score": {
+          "reward": 0.693,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 120.20500000000001,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1524273076,
+        "content": "Sadly @ubiquity already exists but no one seems to know who owns it",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1524273076",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,23 +1,32 @@\n {\n-  \"name\": \"ts-template\",\n+  \"name\": \"@ubiquity/rpc-handler\",",
+        "score": {
+          "reward": 1.278,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 63.486153846153854,
+            "syllables": 20,
+            "sentences": 1,
+            "score": 0.9651384615384615
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1918139796,
+            "effect": {
+              "addition": 3761,
+              "deletion": 184
+            },
+            "reward": 118.35,
+            "priority": 3
+          },
+          {
+            "reviewId": 1935675319,
+            "effect": {
+              "addition": 461,
+              "deletion": 387
+            },
+            "reward": 25.44,
+            "priority": 3
+          },
+          {
+            "reviewId": 1935741323,
+            "effect": {
+              "addition": 2,
+              "deletion": 2
+            },
+            "reward": 0.12,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/rpc-handler/pull/1"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 153.777 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>143.91</td></tr><tr><td>Review</td><td>Comment</td><td>4</td><td>9.867</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/rpc-handler/pull/1\" target=\"_blank\" rel=\"noopener\">#1</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+3761 -184</td><td>3</td><td>118.35</td></tr><tr><td>+461 -387</td><td>3</td><td>25.44</td></tr><tr><td>+2 -2</td><td>3</td><td>0.12</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1513504908\" target=\"_blank\" rel=\"noopener\">Might make more sense to replace &#96;number&#96; by the key of &hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.9</td><td>3</td><td>6.048</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1513505709\" target=\"_blank\" rel=\"noopener\">else if and else are identical</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.848</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1524230453\" target=\"_blank\" rel=\"noopener\">Should be &#96;@ubiquitydao/rpc-handler&#96;</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.7</td><td>3</td><td>0.693</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/1#discussion_r1524273076\" target=\"_blank\" rel=\"noopener\">Sadly @ubiquity already exists but no one seems to know who owns&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.278</td></tr></tbody></table></details>"
+  }
+}

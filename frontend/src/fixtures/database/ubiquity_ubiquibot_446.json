@@ -1,0 +1,338 @@
+{
+  "BeanieMen": {
+    "userId": 62057938,
+    "total": 37.764,
+    "task": {
+      "reward": 37.5,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 1635409423,
+        "content": "@rndquu what do you think of this approach\r\nadding all tokens to search to a list and checking them",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/446#issuecomment-1635409423",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.264,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 85.13947368421054,
+            "syllables": 23,
+            "sentences": 1,
+            "score": 0.7486052631578946
+          },
+          "multiplier": 0.25,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 37.764 XP ]</a>&nbsp;</h3><h6>@BeanieMen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>37.5</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.264</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/446#issuecomment-1635409423\" target=\"_blank\" rel=\"noopener\">@rndquu what do you think of this approachadding all tokens to&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.264</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 31.298,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 1635509379,
+        "content": "Perhaps we could check [here](https://github.com/ubiquity/ubiquibot/blob/development/src/handlers/payout/action.ts#L75) that if an author of a comment is the `ubiquibot` and comment contains `https://pay.ubq.fi?claim=` then we could consider it to be a \"bot posted claim URL\" event",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/446#issuecomment-1635509379",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 14.82,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 69.22500000000004,
+            "syllables": 38,
+            "sentences": 1,
+            "score": 0.9077499999999996
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1782325183,
+        "content": "Check this [issue](https://github.com/ubiquity/ubiquity-dollar/issues/643)\r\nThere are 2 permits generated for different networks:\r\n1. https://github.com/ubiquity/ubiquity-dollar/issues/643#issuecomment-1569384273\r\n2. https://github.com/ubiquity/ubiquity-dollar/issues/643#issuecomment-1607152588\r\nWhat happened:\r\n1. When the issue was closed the 1st time  the payout network was set to ethereum mainnet so the bot generated the [1st permit](https://github.com/ubiquity/ubiquity-dollar/issues/643#issuecomment-1569384273)\r\n2. Then we updated the bot's config and switched to gnosis chain for payouts\r\n3. When issue was closed the 2nd time the bot [couldn't find](https://github.com/ubiquity/ubiquibot/blob/development/src/handlers/payout/action.ts#L75) the permit URL for gnosis chain so generated a new permit\r\nSo on step 3 the bot should have been looking for permit for any chain, not the currently set in the config.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/446",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 6.38,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 9
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.5
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 95,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 42.13014492753625,
+            "syllables": 171,
+            "sentences": 3,
+            "score": 0.8213014492753625
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1265066358,
+        "content": "Yes, parsing the URL with `URLSearchParams` is a better approach\r\nThis PR solves the original issue + we don't have plans of adding more query params besides `claim` and `network` so I don't think that refactoring to `URLSearchParams` is an urgent issue\r\nNo, the generated URL is `https://pay.ubq.fi?claim=` so everything is fine",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/508#discussion_r1265066358",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -74,9 +74,8 @@ export const handleIssueClosed = async () => {\n   logger.info(`Posting a payout url to the issue, url: ${payoutUrl}`);\n   const comment = `### [ **[ CLAIM ${priceInEth} ${tokenSymbol.toUpperCase()} ]** ](${payoutUrl})\\n` + \"```\" + shortenRecipient + \"```\";\n   const comments = await getAllIssueComments(issue.number);\n-  const commentContents = comments.map((i) => i.body);\n-  const exist = commentContents.find((content) => content.includes(comment));\n-  if (exist) {\n+  const permitComments = comments.filter((content) => content.body.includes(\"https://pay.ubq.fi?claim=\") && content.user.type == UserType.Bot);",
+        "score": {
+          "reward": 9.888,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 48,
+            "wordValue": 0.1,
+            "result": 2.35
+          },
+          "readability": {
+            "fleschKincaid": 36.50250000000001,
+            "syllables": 69,
+            "sentences": 1,
+            "score": 0.7650250000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1532305784,
+            "effect": {
+              "addition": 3,
+              "deletion": 4
+            },
+            "reward": 0.21,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquibot/pull/508"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 31.298 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>0.21</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>6.38</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>14.82</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>9.888</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquibot/pull/508\" target=\"_blank\" rel=\"noopener\">#508</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+3 -4</td><td>3</td><td>0.21</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/446\" target=\"_blank\" rel=\"noopener\">Check this [issue](https://github.com/ubiquity/ubiquity-dollar/i&hellip;</a></h6></td><td><details><summary>5.12</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 9&#13;    ol:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.5&#13;regex:&#13;  wordCount: 95&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>1</td><td>1</td><td>6.38</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/446#issuecomment-1635509379\" target=\"_blank\" rel=\"noopener\">Perhaps we could check [here](https://github.com/ubiquity/ubiqui&hellip;</a></h6></td><td><details><summary>3.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>1</td><td>3</td><td>14.82</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/508#discussion_r1265066358\" target=\"_blank\" rel=\"noopener\">Yes, parsing the URL with &#96;URLSearchParams&#96; is a better &hellip;</a></h6></td><td><details><summary>3.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 48&#13;  wordValue: 0.1&#13;  result: 2.35&#13;</pre></details></td><td>0.8</td><td>3</td><td>9.888</td></tr></tbody></table></details>"
+  },
+  "0xcodercrane": {
+    "total": 0.81,
+    "userId": 108444211,
+    "comments": [
+      {
+        "id": 1263791527,
+        "content": "```suggestion\r\n  const permitComments = comments.filter((content) => content.body.includes(\"https://pay.ubq.fi?claim=\") && content.user.type == UserType.Bot);\r\n    if (permitComments.length > 0) {\r\n```",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/508#discussion_r1263791527",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -74,9 +74,10 @@ export const handleIssueClosed = async () => {\n   logger.info(`Posting a payout url to the issue, url: ${payoutUrl}`);\n   const comment = `### [ **[ CLAIM ${priceInEth} ${tokenSymbol.toUpperCase()} ]** ](${payoutUrl})\\n` + \"```\" + shortenRecipient + \"```\";\n   const comments = await getAllIssueComments(issue.number);\n-  const commentContents = comments.map((i) => i.body);\n-  const exist = commentContents.find((content) => content.includes(comment));\n-  if (exist) {\n+  //const commentContents = comments.map((i) => i.body);\n+  const permitComments = comments.filter((content) => content.body.includes(\"https://pay.ubq.fi?claim=\"));\n+  const exist = permitComments.filter((content) => content.user.type == \"Bot\")\n+  if (exist.length) {",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1635956341,
+        "content": "@me505 you might need to import `UserType`",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/508#issuecomment-1635956341",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.36,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 102.045,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1530395821,
+            "effect": {
+              "addition": 4,
+              "deletion": 3
+            },
+            "reward": 0.21,
+            "priority": 3
+          },
+          {
+            "reviewId": 1530510432,
+            "effect": {
+              "addition": 3,
+              "deletion": 5
+            },
+            "reward": 0.24,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquibot/pull/508"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 0.81 XP ]</a>&nbsp;</h3><h6>@0xcodercrane</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>0.45</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>0.36</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquibot/pull/508\" target=\"_blank\" rel=\"noopener\">#508</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+4 -3</td><td>3</td><td>0.21</td></tr><tr><td>+3 -5</td><td>3</td><td>0.24</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/508#discussion_r1263791527\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionconst permitComments = comments.fil&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/508#issuecomment-1635956341\" target=\"_blank\" rel=\"noopener\">@me505 you might need to import &#96;UserType&#96;</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.6</td><td>3</td><td>0.36</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 12.819,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1264616253,
+        "content": "@rndquu this seems too brittle. \r\nWe should actually parse the URL with the URL constructor, and then work backwards from there. Besides, isn't it supposed to be \r\n`https://pay.ubq.fi/?claim=`\r\nnot \r\n`https://pay.ubq.fi?claim=`",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/508#discussion_r1264616253",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -74,9 +74,8 @@ export const handleIssueClosed = async () => {\n   logger.info(`Posting a payout url to the issue, url: ${payoutUrl}`);\n   const comment = `### [ **[ CLAIM ${priceInEth} ${tokenSymbol.toUpperCase()} ]** ](${payoutUrl})\\n` + \"```\" + shortenRecipient + \"```\";\n   const comments = await getAllIssueComments(issue.number);\n-  const commentContents = comments.map((i) => i.body);\n-  const exist = commentContents.find((content) => content.includes(comment));\n-  if (exist) {\n+  const permitComments = comments.filter((content) => content.body.includes(\"https://pay.ubq.fi?claim=\") && content.user.type == UserType.Bot);",
+        "score": {
+          "reward": 12.609,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 89.08540229885058,
+            "syllables": 37,
+            "sentences": 3,
+            "score": 0.7091459770114942
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1531666042,
+            "effect": {
+              "addition": 3,
+              "deletion": 4
+            },
+            "reward": 0.21,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquibot/pull/508"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 12.819 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>0.21</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>12.609</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquibot/pull/508\" target=\"_blank\" rel=\"noopener\">#508</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+3 -4</td><td>3</td><td>0.21</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/508#discussion_r1264616253\" target=\"_blank\" rel=\"noopener\">@rndquu this seems too brittle. We should actually parse the U&hellip;</a></h6></td><td><details><summary>3.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.9</td><td>3</td><td>12.609</td></tr></tbody></table></details>"
+  }
+}

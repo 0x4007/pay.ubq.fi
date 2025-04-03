@@ -1,0 +1,1017 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 105.629,
+    "task": {
+      "reward": 75,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2500374420,
+        "content": "Yeah I think it deserves it's own task vs holding back https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/25\r\nYes so it is that's my mistake, the redirect URL should be updated within the `UbiquityOS` GitHub app so that as soon as they install the app, they are redirected to the installer.\r\nA redirect from `interactive-setup` would still make sense for contributors imo but I get it.\r\nPlease see this [comment](https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/25#issuecomment-2500319084) but to sum up:\r\n- `orgs.listForUser` is not reliable if the user has their membership as `private`\r\n- extracting public orgs from above and trying to use `orgs.listMemberShipForAuthUser` throws the below error for `ubiquity` for my account, yet I am a `member` and I have `write` access because I can push straight to any repo.\r\n![image](https://github.com/user-attachments/assets/c2220177-9cdd-4dfd-984d-1e6a88650608)\r\nSo it appears to me like org settings are affecting our API responses when using these methods (I tried with a PAT token and got the same results) which makes sense because `ubiquity` did not show for @gentlementlegen amongst others.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/26#issuecomment-2500374420",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 12.015,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 8
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 149,
+            "wordValue": 0.1,
+            "result": 2.24
+          },
+          "readability": {
+            "fleschKincaid": 58.03000000000003,
+            "syllables": 220,
+            "sentences": 5,
+            "score": 0.9803000000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2504577188,
+        "content": "@rndquu #31 \r\nI tried near all available methods and all of them errored when I tried to find out more about their permissions (via the error screenshot above) through `rest.org` although `rest.repo` allows you to check permission for a particular repo which seems to bypass whatever is preventing the `rest.org`.\r\nSo if `-marketplace` shows up for you guys then the PR fixes things I think",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/26#issuecomment-2504577188",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 7.848,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 61,
+            "wordValue": 0.1,
+            "result": 2.53
+          },
+          "readability": {
+            "fleschKincaid": 57.99225409836066,
+            "syllables": 85,
+            "sentences": 2,
+            "score": 0.9799225409836066
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2683309620,
+        "content": "Orgs to select for editing come from the below method currently\r\nhttps://docs.github.com/en/rest/orgs/orgs?apiVersion=2022-11-28#list-organizations-for-the-authenticated-user\r\n```ts\r\npublic async getGitHubUserOrgs(): Promise<string[]> {\r\n    const octokit = await this.getOctokit();\r\n    const response = await octokit.rest.orgs.listForAuthenticatedUser();\r\n    return response.data.map((org: { login: string }) => org.login);\r\n  }\r\n```\r\n1. Who is using this installer? I'd assume a redirect after https://github.com/ubiquity-os/ubiquity-os-kernel/issues/171 is complete to the installer UI which would naturally be the owner of the org. Then potentially who after that? Admin & Owner? Partner defined?\r\n2. What orgs should be shown when a partner uses the installer?\r\n- Orgs that they are an admin of or just owner of, collaborator of?\r\n- Should the partner determine which roles can edit the config or do we enforce rules, if we enforce then what should they be?\r\nWe sort of scrapped global config variables from `ubiquity-os-config.yml` but we could leverage that to enforce partner defined roles which can edit (at least via the UI). \r\nE.g: The org owner must use it after `kernel-setup` and we allow them to input roles that can edit and we write this to the config separate from `plugins:` and we read this on fetch and check against our authenticated user.\r\n_Originally posted by @Keyrxng in https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/25#issuecomment-2493797026_",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/26",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 7.07,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 9
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.4
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 164,
+            "wordValue": 0.1,
+            "result": 2.09
+          },
+          "readability": {
+            "fleschKincaid": 64.18748923959828,
+            "syllables": 316,
+            "sentences": 17,
+            "score": 0.9581251076040173
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2204087204,
+        "content": "Resolves #26\r\nRequires #25 \r\nChanges:\r\n1. `rest.users.getAuthenticated()`\r\n2. `rest.orgs.listForAuthenticatedUser()`\r\n3. `rest.orgs.listForUser(username)`\r\n4. `rest.repos.getCollaboratorPermissionLevel(org, .ubiquity-os)`\r\nQA:\r\n![image](https://github.com/user-attachments/assets/57e1725f-9a05-423d-9e5d-fa9c4e971ae1)\r\nConsole:\r\n![image](https://github.com/user-attachments/assets/dba19381-54cc-4110-b87c-27ec0d056ab3)\r\nElse:\r\nI tried every `.rest.org` method that seemed relevant and none of them returned `-marketplace` for me so idk if that's a me problem or an org problem but it should be fetched at least and either errored in the console or displayed but it's neither. It also didn't display for you either @gentlementlegen and we are both public members of the org.\r\nCould you try to see if `-marketplace` shows up for you now with this change?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 3.696,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 14
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              }
+            },
+            "result": 0.4
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 85,
+            "wordValue": 0.1,
+            "result": 2.64
+          },
+          "readability": {
+            "fleschKincaid": 66.6037254901961,
+            "syllables": 112,
+            "sentences": 3,
+            "score": 0.933962745098039
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2507814153,
+        "content": "Okay that's fine then ty\r\nWill address that\r\nIf you clicked add but made a mistake/wanted to change a param, you'd want to be able to click add again yeah? But otherwise it should only allow you to click add once?\r\n1. user clicks `add`/`remove` > user clicks `push to github` > A) render `pluginSelector` B) disable `add`/`remove`\r\n2. user clicks `add`/`remove` > user closes the notification or it disappears > do nothing\r\n1. It should not disappear at all and requires the user to close or push?\r\n2. If hovered, do not disappear else disappear?\r\nWill address that",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2507814153",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 8
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              }
+            },
+            "result": 0.4
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 87,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 71.51193103448277,
+            "syllables": 121,
+            "sentences": 5,
+            "score": 0.8848806896551723
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2507944746,
+        "content": "@gentlementlegen \r\nIs the preferred behaviour to be this:\r\n![image](https://github.com/user-attachments/assets/73980435-97b5-4fc9-afc7-d33f48e0d152)\r\nor for the prop to not be included in the config?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2507944746",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 58.42368421052632,
+            "syllables": 29,
+            "sentences": 1,
+            "score": 0.9842368421052632
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2508022923,
+        "content": "Implemented\r\nAddressed\r\nImplemented:\r\n- user clicks add/remove > user closes the notification or it disappears > do nothing\r\n- user clicks add/remove > user clicks push to github > render `pluginSelector`\r\nI'm unsure how you want me to handle multiple `add` clicks prior to `push`, please lmk if I should use another approach. Perhaps updating the values directly from input change and refactoring `add` into the push event and removing the notification as one alt? If you could create a new task for it that would be ideal as it'll involve a bit of work, ty.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2508022923",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 90,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 47.60500000000005,
+            "syllables": 137,
+            "sentences": 3,
+            "score": 0.8760500000000004
+          },
+          "multiplier": 0,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2508043254,
+        "content": "@zugdev fancy doing a review bud?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2508043254",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 73.84500000000001,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.8615499999999998
+          },
+          "multiplier": 0,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2508099256,
+        "content": "@rndquu your membership is private so it would only be returned by `listForAuthenticatedUser`, can you confirm that it returns it from that call pls? Just like how `-marketplace` doesn't appear anywhere for me but it's showing up for @gentlementlegen makes me believe that it can be settings related which is almost out of our control when considering arbitrary partner orgs.\r\nPerhaps it's the `permission === \"write\"` check or something I'm not sure, but it's difficult for me to debug your conditions",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2508099256",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 81,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 58.27444444444447,
+            "syllables": 116,
+            "sentences": 3,
+            "score": 0.9827444444444446
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2508106799,
+        "content": "Ty for the clarification I will look into it",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2508106799",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 66.10000000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.9389999999999997
+          },
+          "multiplier": 0,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2508163646,
+        "content": "I expect the issue stems from your org not having a config repo, which we rely on to identify permissions to work around OAuth errors with org settings. I duplicated the logic [here](https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/23).\r\nThis approach:\r\n- Returns all orgs from `listForAuthenticatedUser`.\r\n- Includes publicly fetched orgs that have a `.ubiquity-os` repo to check permissions.\r\nAn alternative would be to list all org repos and check any repo if `.ubiquity-os` does not exist. Let me know which approach you'd prefer.\r\nHopefully this has resolved it for you, again it's hard for me to debug your conditions locally so my apologies for the back and forth",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2508163646",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 101,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 68.22168316831684,
+            "syllables": 148,
+            "sentences": 7,
+            "score": 0.9177831683168316
+          },
+          "multiplier": 0,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 105.629 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>75</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>7.07</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>19.863</td></tr><tr><td>Review</td><td>Comment</td><td>8</td><td>3.696</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/26\" target=\"_blank\" rel=\"noopener\">Orgs to select for editing come from the below method currently&hellip;</a></h6></td><td><details><summary>5.49</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 9&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.4&#13;regex:&#13;  wordCount: 164&#13;  wordValue: 0.1&#13;  result: 2.09&#13;</pre></details></td><td>1</td><td>1</td><td>7.07</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/26#issuecomment-2500374420\" target=\"_blank\" rel=\"noopener\">Yeah I think it deserves it's own task vs holding back https://g&hellip;</a></h6></td><td><details><summary>3.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 8&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.2&#13;regex:&#13;  wordCount: 149&#13;  wordValue: 0.1&#13;  result: 2.24&#13;</pre></details></td><td>0.9</td><td>3</td><td>12.015</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/26#issuecomment-2504577188\" target=\"_blank\" rel=\"noopener\">@rndquu #31 I tried near all available methods and all of them&hellip;</a></h6></td><td><details><summary>2.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 61&#13;  wordValue: 0.1&#13;  result: 2.53&#13;</pre></details></td><td>0.8</td><td>3</td><td>7.848</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31\" target=\"_blank\" rel=\"noopener\">Resolves #26Requires #25 Changes:1. &#96;rest.users.getAut&hellip;</a></h6></td><td><details><summary>3.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 14&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;  result: 0.4&#13;regex:&#13;  wordCount: 85&#13;  wordValue: 0.1&#13;  result: 2.64&#13;</pre></details></td><td>0.95</td><td>1</td><td>3.696</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2507814153\" target=\"_blank\" rel=\"noopener\">Okay that's fine then tyWill address thatIf you clicked add &hellip;</a></h6></td><td><details><summary>0.4</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 8&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;  result: 0.4&#13;regex:&#13;  wordCount: 87&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2507944746\" target=\"_blank\" rel=\"noopener\">@gentlementlegen Is the preferred behaviour to be this:![ima&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2508022923\" target=\"_blank\" rel=\"noopener\">ImplementedAddressedImplemented:- user clicks add/remove &&hellip;</a></h6></td><td><details><summary>0.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 90&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.85</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2508043254\" target=\"_blank\" rel=\"noopener\">@zugdev fancy doing a review bud?</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.2</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2508099256\" target=\"_blank\" rel=\"noopener\">@rndquu your membership is private so it would only be returned &hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 81&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2508106799\" target=\"_blank\" rel=\"noopener\">Ty for the clarification I will look into it</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2508163646\" target=\"_blank\" rel=\"noopener\">I expect the issue stems from your org not having a config repo,&hellip;</a></h6></td><td><details><summary>1.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.2&#13;regex:&#13;  wordCount: 101&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>3</td><td>0</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 73.053,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2500140847,
+        "content": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer is used by partners who wants to start using the https://github.com/apps/ubiquity-os bot.\r\nNo, https://github.com/ubiquity-os/ubiquity-os-kernel/issues/171 is for collaborators. Partners should only interact with the https://github.com/ubiquity-os/ubiquity-os-plugin-installer, they don't need to deploy the bot from scratch, we've already installed it for them.\r\nAdmin or owner, I suppose owner in most cases.\r\nAll orgs where authenticated user has a `write` access in the organization. If it's hard to get the access level via github API then all organizations where currently authenticated user is admin or owner (i.e. has a role with `write` access because that permission is required for editing the bot's config).\r\nKeep it simple for now, if authenticated user has `write` permissions then he's allowed to edit an organization config.\r\nTo sum up, as far as I understand, as a part of this issue we should fix [this](https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/25#issuecomment-2497319574) bug.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/26#issuecomment-2500140847",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 28.65,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 5
+              }
+            },
+            "result": 5
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 137,
+            "wordValue": 0.1,
+            "result": 2.35
+          },
+          "readability": {
+            "fleschKincaid": 59.86907894736845,
+            "syllables": 272,
+            "sentences": 14,
+            "score": 0.9986907894736845
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2504171908,
+        "content": "So, as far as I understand from [this](https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/25#issuecomment-2500302845) comment, if user's membership is private then organization won't be displayed on plugin setup. Is there a way (i.e. API method) to get all user organizations (i.e. with both public and private organization membership)?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/26#issuecomment-2504171908",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 12.81,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 46,
+            "wordValue": 0.1,
+            "result": 2.31
+          },
+          "readability": {
+            "fleschKincaid": 62.957681159420304,
+            "syllables": 74,
+            "sentences": 6,
+            "score": 0.970423188405797
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2519436350,
+        "content": "@gentlementlegen In this github issue task reward is 75 USD while task solver received 150 WXDAI. Is it a bug or somewhat expected?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/26#issuecomment-2519436350",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.624,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 62.74510869565219,
+            "syllables": 36,
+            "sentences": 2,
+            "score": 0.9725489130434781
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2470243637,
+        "content": "Getting 3 out of 4 expected organizations:\r\n<img width=\"1511\" alt=\"Screenshot 2024-11-29 at 19 09 30\" src=\"https://github.com/user-attachments/assets/a5b83eb0-917a-4bb4-9675-93a824a2b942\">\r\nThe only missing org is https://github.com/rndquu-org where my account is an owner. It used to be displayed in the previous PRs but this PR somehow doesn't display it.\r\nPls fix.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#pullrequestreview-2470243637",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 13.128,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 50,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 76.79154545454547,
+            "syllables": 91,
+            "sentences": 5,
+            "score": 0.8320845454545452
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2472746694,
+        "content": "Works fine, 4 out of 4 organizations are displayed for me, as expected",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#pullrequestreview-2472746694",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.1,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 69.99384615384618,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.9000615384615382
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2508105451,
+        "content": "The missing https://github.com/rndquu-org is displayed in [this](https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/23) PR, so it's smth code related.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2508105451",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 7.791,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 94.30000000000001,
+            "syllables": 22,
+            "sentences": 2,
+            "score": 0.6569999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2470243637,
+            "effect": {
+              "addition": 143,
+              "deletion": 84
+            },
+            "reward": 6.81,
+            "priority": 3
+          },
+          {
+            "reviewId": 2472746694,
+            "effect": {
+              "addition": 25,
+              "deletion": 13
+            },
+            "reward": 1.14,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 73.053 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>7.95</td></tr><tr><td>Issue</td><td>Comment</td><td>3</td><td>42.084</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>23.019</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31\" target=\"_blank\" rel=\"noopener\">#31</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+143 -84</td><td>3</td><td>6.81</td></tr><tr><td>+25 -13</td><td>3</td><td>1.14</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/26#issuecomment-2500140847\" target=\"_blank\" rel=\"noopener\">https://github.com/ubiquity-os/ubiquity-os-plugin-installer is u&hellip;</a></h6></td><td><details><summary>7.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    a:&#13;      score: 1&#13;      elementCount: 5&#13;  result: 5&#13;regex:&#13;  wordCount: 137&#13;  wordValue: 0.1&#13;  result: 2.35&#13;</pre></details></td><td>1</td><td>3</td><td>28.65</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/26#issuecomment-2504171908\" target=\"_blank\" rel=\"noopener\">So, as far as I understand from [this](https://github.com/ubiqui&hellip;</a></h6></td><td><details><summary>3.31</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 46&#13;  wordValue: 0.1&#13;  result: 2.31&#13;</pre></details></td><td>1</td><td>3</td><td>12.81</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/26#issuecomment-2519436350\" target=\"_blank\" rel=\"noopener\">@gentlementlegen In this github issue task reward is 75 USD whil&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.624</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#pullrequestreview-2470243637\" target=\"_blank\" rel=\"noopener\">Getting 3 out of 4 expected organizations:&lt;img width=\"1511\"&hellip;</a></h6></td><td><details><summary>4.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 50&#13;  wordValue: 0.1&#13;  result: 2.38&#13;</pre></details></td><td>0.8</td><td>3</td><td>13.128</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#pullrequestreview-2472746694\" target=\"_blank\" rel=\"noopener\">Works fine, 4 out of 4 organizations are displayed for me, as ex&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.5</td><td>3</td><td>2.1</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2508105451\" target=\"_blank\" rel=\"noopener\">The missing https://github.com/rndquu-org is displayed in [this]&hellip;</a></h6></td><td><details><summary>3.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.7</td><td>3</td><td>7.791</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 0,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2519464925,
+        "content": "Limits are enforced for all rewards to the assignee task reward amount. The warning exists in the breakdown. \nCurrently the only way to go beyond the limit is if the assignee wrote the spec as well. \nPerhaps we need to think through this more but to me it makes sense that if the assignee also wrote the spec that they should receive more rewards. \nLastly I still believe that we need to dial down spec rewards, perhaps remove the priority multiplier on it.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/26#issuecomment-2519464925",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 83,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 72.76913253012052,
+            "syllables": 115,
+            "sentences": 5,
+            "score": 0.8723086746987948
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2519603492,
+        "content": "As I understand you're doing a multiplier and then multiplying the priority level so 3 x 4 =12x multiplier which is too high.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/26#issuecomment-2519603492",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 59.10000000000004,
+            "syllables": 35,
+            "sentences": 1,
+            "score": 0.9910000000000003
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31"
+      }
+    ]
+  },
+  "gentlementlegen": {
+    "total": 33.321,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2519475334,
+        "content": "Right now you can get maximum twice the total of the reward, so in this case 75 for the reward, plus 75 for incentives (comments, spec etc) totaling 150. I didn't intend that total at first but it was deemed as a feature so for now it works that way, we can always change it if needed.\r\n@0x4007 all it takes is setting this to one in the cfg: https://github.com/ubiquity-os/.ubiquity-os/blob/main/.github/.ubiquity-os.config.dev.yml#L67",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/26#issuecomment-2519475334",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.317,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 70,
+            "wordValue": 0.1,
+            "result": 2.6
+          },
+          "readability": {
+            "fleschKincaid": 86.94553488372094,
+            "syllables": 113,
+            "sentences": 10,
+            "score": 0.7305446511627907
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2519736728,
+        "content": "That is correct, first multiplier is applied to the comment evaluation and the priority then applies to the final result so x12. Putting the multiplier back to 1 should solve that.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/26#issuecomment-2519736728",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.744,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 62.837983870967776,
+            "syllables": 47,
+            "sentences": 2,
+            "score": 0.9716201612903222
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2507165429,
+        "content": "@Keyrxng Could we have preview deployments like we have for other frontend projects?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2507165429",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.1,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 69.99384615384618,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.9000615384615382
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2507219815,
+        "content": "The orgs show up properly on my side\r\n<img width=\"495\" alt=\"image\" src=\"https://github.com/user-attachments/assets/2545706a-3439-4db2-8cff-d75327adf0b3\">\r\n## Bug list\r\n- When you maintain a click on the set defaults, here it what happens\r\n<img width=\"495\" alt=\"image\" src=\"https://github.com/user-attachments/assets/1fbfa96b-4f19-4c2e-bf8e-551ca4c31cad\">\r\n- You can click and infinite amount of times on the \"add\" button\r\n<img width=\"1149\" alt=\"image\" src=\"https://github.com/user-attachments/assets/3ad6fc0d-d491-4c83-b737-eb203eeb5368\">\r\n- the toast asking you if you want to save disappear even when hovered\r\n- it set the value to \"undefined\" for OpenAiBaseUrl which I don't think is the desired behavior",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2507219815",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 24.624,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "h2": {
+                "score": 1,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 4.4
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 83,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 60.71034482758621,
+            "syllables": 160,
+            "sentences": 4,
+            "score": 0.9928965517241379
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2507950496,
+        "content": "@Keyrxng Not to be included so the default value is used on `Decode` call. If set to an empty string the value then would be `\"\"` not the default.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2507950496",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.536,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 89.73250000000002,
+            "syllables": 33,
+            "sentences": 2,
+            "score": 0.7026749999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 33.321 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>2</td><td>2.061</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>31.26</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/26#issuecomment-2519475334\" target=\"_blank\" rel=\"noopener\">Right now you can get maximum twice the total of the reward, so &hellip;</a></h6></td><td><details><summary>3.6</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 70&#13;  wordValue: 0.1&#13;  result: 2.6&#13;</pre></details></td><td>0.1</td><td>3</td><td>1.317</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/26#issuecomment-2519736728\" target=\"_blank\" rel=\"noopener\">That is correct, first multiplier is applied to the comment eval&hellip;</a></h6></td><td><details><summary>1.92</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.744</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2507165429\" target=\"_blank\" rel=\"noopener\">@Keyrxng Could we have preview deployments like we have for othe&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.5</td><td>3</td><td>2.1</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2507219815\" target=\"_blank\" rel=\"noopener\">The orgs show up properly on my side&lt;img width=\"495\" alt=\"i&hellip;</a></h6></td><td><details><summary>7.03</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    h2:&#13;      score: 1&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 3&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 4.4&#13;regex:&#13;  wordCount: 83&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.9</td><td>3</td><td>24.624</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2507950496\" target=\"_blank\" rel=\"noopener\">@Keyrxng Not to be included so the default value is used on &#96&hellip;</a></h6></td><td><details><summary>1.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>0.7</td><td>3</td><td>4.536</td></tr></tbody></table></details>"
+  },
+  "zugdev": {
+    "total": 0.483,
+    "userId": 155616000,
+    "comments": [
+      {
+        "id": 2508708814,
+        "content": "I think the previous push toaster should disappear if I press on add again",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2508708814",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.333,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 71.76785714285715,
+            "syllables": 20,
+            "sentences": 1,
+            "score": 0.8823214285714285
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2508725680,
+        "content": "This doesnt change anything for me, so not sure",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2508725680",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.15,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 94.30000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.6569999999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 0.483 XP ]</a>&nbsp;</h3><h6>@zugdev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>2</td><td>0.483</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2508708814\" target=\"_blank\" rel=\"noopener\">I think the previous push toaster should disappear if I press on&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.333</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/31#issuecomment-2508725680\" target=\"_blank\" rel=\"noopener\">This doesnt change anything for me, so not sure</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.15</td></tr></tbody></table></details>"
+  }
+}

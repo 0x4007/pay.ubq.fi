@@ -1,0 +1,327 @@
+{
+  "BeanieMen": {
+    "userId": 62057938,
+    "total": 12.5,
+    "task": {
+      "reward": 12.5,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 12.5 XP ]</a>&nbsp;</h3><h6>@BeanieMen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>12.5</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 11.467,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1712799784,
+        "content": "This seems too high. I believe it is crediting the italicized text but I just removed credit for italics. \r\nhttps://github.com/ubiquity/ubiquibot-config/blob/development/.github/ubiquibot-config.yml\r\n@whilefoo rfc\r\nIt should be $5.2 based on the word count, with a 4x issue creator multiplier. \r\nThe italics and anchor inside the italics should not be credited for. Can you fix this?",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/503#issuecomment-1712799784",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 3.094,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 53,
+            "wordValue": 0.1,
+            "result": 2.43
+          },
+          "readability": {
+            "fleschKincaid": 64.14444444444447,
+            "syllables": 104,
+            "sentences": 9,
+            "score": 0.9585555555555553
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1715259948,
+        "content": "Yes that's correct. The default config should have rewards disabled for every element. The organization must manually enable support for italicized text if they want it. \r\nFor whatever its worth, when I was reading the `mdast` documentation, it considered bold and italics the same element.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/503#issuecomment-1715259948",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.312,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 45,
+            "wordValue": 0.1,
+            "result": 2.29
+          },
+          "readability": {
+            "fleschKincaid": 46.89625000000004,
+            "syllables": 79,
+            "sentences": 4,
+            "score": 0.8689625000000004
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1718464399,
+        "content": "Interesting problem. I imagine that we need some type of special value to instruct to the parser to exclude it from the calculation entirely. Perhaps we can use `null` or even `ignore`?\r\nFor example:\r\n```\r\nul: 0\r\nli: 0.5\r\ni: ignore\r\n```\r\n```\r\n- this is a _test_\r\n```\r\nWould yield `0.5 + ( 0.1 * 3 ) = 0.8`, ignoring \"_test_\"",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/503#issuecomment-1718464399",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.421,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 59.05000000000004,
+            "syllables": 59,
+            "sentences": 4,
+            "score": 0.9905000000000004
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1720074261,
+        "content": "- https://github.com/ubiquity/ubiquibot/issues/772",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/503#issuecomment-1720074261",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.52,
+          "formatting": {
+            "content": {
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 21.99678571428572,
+            "syllables": 15,
+            "sentences": 2,
+            "score": 0.6199678571428572
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1802966583,
+        "content": "Let's reword this to \nPermit generation skipped because this is marked as unplanned. \n_Originally posted by @ubiquibot in https://github.com/ubiquity/pay.ubq.fi/issues/48#issuecomment-1633646803_",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/503",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.12,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 54.10500000000002,
+            "syllables": 52,
+            "sentences": 5,
+            "score": 0.9410500000000002
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/ubiquibot/pull/733"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 11.467 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.12</td></tr><tr><td>Issue</td><td>Comment</td><td>4</td><td>8.347</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/503\" target=\"_blank\" rel=\"noopener\">Let's reword this to Permit generation skipped because this is &hellip;</a></h6></td><td><details><summary>2.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>1</td><td>1</td><td>3.12</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/503#issuecomment-1712799784\" target=\"_blank\" rel=\"noopener\">This seems too high. I believe it is crediting the italicized te&hellip;</a></h6></td><td><details><summary>3.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 53&#13;  wordValue: 0.1&#13;  result: 2.43&#13;</pre></details></td><td>0.7</td><td>1</td><td>3.094</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/503#issuecomment-1715259948\" target=\"_blank\" rel=\"noopener\">Yes that's correct. The default config should have rewards disab&hellip;</a></h6></td><td><details><summary>2.29</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 45&#13;  wordValue: 0.1&#13;  result: 2.29&#13;</pre></details></td><td>0.8</td><td>1</td><td>2.312</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/503#issuecomment-1718464399\" target=\"_blank\" rel=\"noopener\">Interesting problem. I imagine that we need some type of special&hellip;</a></h6></td><td><details><summary>2.07</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.9</td><td>1</td><td>2.421</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/503#issuecomment-1720074261\" target=\"_blank\" rel=\"noopener\">- https://github.com/ubiquity/ubiquibot/issues/772</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.1&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.52</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 6.921,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 1715246956,
+        "content": "If I understand correctly the text inside italics (and anchor) should not be credited only when config is `i: 0` or even if italics have reward?",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/503#issuecomment-1715246956",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.872,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 45.00000000000003,
+            "syllables": 39,
+            "sentences": 1,
+            "score": 0.8500000000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1715269041,
+        "content": "Ok so this behavior should be for all elements, if an element has reward `0` then it should not count the text inside. Because currently even if all elements have `0` reward and word reward is `1` it will credit every word.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/503#issuecomment-1715269041",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.651,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 39,
+            "wordValue": 0.1,
+            "result": 2.15
+          },
+          "readability": {
+            "fleschKincaid": 61.2271153846154,
+            "syllables": 58,
+            "sentences": 2,
+            "score": 0.9877288461538459
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 1719091405,
+        "content": "That might be a little bit awkward for partners because default config will be `ignore` so if they want to count the words inside paragraphs they have to explicitly set `p: 0`. Unless we make some sensible defaults.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/503#issuecomment-1719091405",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.358,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 65.79821428571432,
+            "syllables": 51,
+            "sentences": 2,
+            "score": 0.9420178571428568
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1618796599,
+            "effect": {
+              "addition": 2,
+              "deletion": 2
+            },
+            "reward": 0.04,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquibot/pull/733"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 6.921 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>0.04</td></tr><tr><td>Issue</td><td>Comment</td><td>3</td><td>6.881</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquibot/pull/733\" target=\"_blank\" rel=\"noopener\">#733</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+2 -2</td><td>1</td><td>0.04</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/503#issuecomment-1715246956\" target=\"_blank\" rel=\"noopener\">If I understand correctly the text inside italics (and anchor) s&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.872</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/503#issuecomment-1715269041\" target=\"_blank\" rel=\"noopener\">Ok so this behavior should be for all elements, if an element ha&hellip;</a></h6></td><td><details><summary>2.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 39&#13;  wordValue: 0.1&#13;  result: 2.15&#13;</pre></details></td><td>0.95</td><td>1</td><td>2.651</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/503#issuecomment-1719091405\" target=\"_blank\" rel=\"noopener\">That might be a little bit awkward for partners because default &hellip;</a></h6></td><td><details><summary>2.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>0.9</td><td>1</td><td>2.358</td></tr></tbody></table></details>"
+  }
+}

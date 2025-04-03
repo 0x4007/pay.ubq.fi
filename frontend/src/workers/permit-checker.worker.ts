@@ -3,11 +3,11 @@ import { createRpcClient } from '@ubiquity-dao/permit2-rpc-client';
 import { type Address, parseAbiItem } from "viem";
 import type { Tables } from "../database.types.ts";
 import type { PermitData } from "../types.ts";
-import { fetchAllPermitsForLeaderboard } from "./fetch-all-permits-for-leaderboard";
-import { fetchPermitsFromDb } from "./fetch-permits-from-db";
-import { mapDbPermitsToPermitData } from "./map-db-permit-to-permit-data";
-import { initializeSupabase } from "./supabase-singleton";
-import { validatePermitsBatch } from "./validate-permits-batch";
+import { fetchAllPermitsForLeaderboard } from "./fetch-all-permits-for-leaderboard.ts"; // Add .ts
+import { fetchPermitsFromDb } from "./fetch-permits-from-db.ts"; // Add .ts
+import { mapDbPermitsToPermitData } from "./map-db-permit-to-permit-data.ts"; // Import the correct plural function
+import { initializeSupabase } from "./supabase-singleton.ts"; // Add .ts
+import { validatePermitsBatch } from "./validate-permits-batch.ts"; // Add .ts
 
 // --- Worker Setup ---
 let workerInitialized = false;
@@ -60,17 +60,20 @@ self.onmessage = async (event: MessageEvent<{ type: string; payload?: WorkerPayl
           throw new Error('Worker not initialized');
         }
 
-        const combinedData = await fetchAllPermitsForLeaderboard();
+        const combinedData: CombinedLeaderboardData[] = await fetchAllPermitsForLeaderboard();
 
         // Map combined data to the format expected by the hook
-        const mappedData = combinedData.map(permit => ({
+        // Explicitly type 'permit' here
+        const mappedData: RawPermitWithUser[] = combinedData.map((permit: CombinedLeaderboardData) => ({
           nonce: permit.nonce,
           networkId: permit.token?.network ?? 1, // Default to mainnet if not specified
-          amount: permit.amount,
-          githubUsername: permit.github_user ? `GitHub ID: ${permit.github_user.id}` : 'Unknown',
+          amount: permit.amount ?? '', // Convert null to empty string
+          githubUsername: permit.github_user ? `GitHub ID: ${permit.github_user.id}` : 'Unknown', // Keep placeholder for now
           avatarUrl: '', // Will be fetched by the hook
           node_url: permit.location?.node_url ?? null,
-          created_at: permit.created
+          created_at: permit.created,
+          category: permit.category, // Pass through category
+          repository: permit.repository // Pass through repository
         }));
 
         self.postMessage({
@@ -92,12 +95,14 @@ self.onmessage = async (event: MessageEvent<{ type: string; payload?: WorkerPayl
         try {
           // Fetch new permits from DB
           console.log('Worker: Fetching new permits...');
+          // Assuming fetchPermitsFromDb expects address as string
           const newPermits = await fetchPermitsFromDb(
-            parseInt(payload.address),
+            payload.address,
             payload.lastCheckTimestamp as string | null
           );
 
           console.log(`Worker: Processing ${newPermits.length} new permits...`);
+          // Use the plural function name which accepts an array
           const mappedPermits = mapDbPermitsToPermitData(newPermits);
 
           console.log(`Worker: Validating ${mappedPermits.length} mapped permits...`);
@@ -170,7 +175,7 @@ export type PermitRow = Tables<'permits'> & {
 // Use more specific types based on the actual select query
 type FetchedPermitInfo = {
     nonce: Tables<'permits'>['nonce'];
-    amount: Tables<'permits'>['amount'];
+    amount: Tables<'permits'>['amount'] | null; // Allow null for amount
     created: Tables<'permits'>['created'];
     beneficiary_id: Tables<'permits'>['beneficiary_id'];
     token: { network: Tables<'tokens'>['network'] } | null;
@@ -187,9 +192,13 @@ export interface GitHubUserInfo {
 // Combined type after manual join in worker
 export type CombinedLeaderboardData = FetchedPermitInfo & {
     github_user: GitHubUserInfo | null; // User info will be attached
+    // Add parsed metadata fields
+    category?: string;
+    repository?: string;
 };
 
 // Define the structure expected by the hook
+// NOTE: This RawPermitWithUser might be redundant now if useLeaderboardData directly uses CombinedLeaderboardData
 export interface RawPermitWithUser {
   // Include necessary fields from PermitData that the hook might use for aggregation
   nonce: string;
@@ -201,4 +210,6 @@ export interface RawPermitWithUser {
   node_url: string | null; // Add node_url
   // Add any other fields needed for potential future filtering/display
   created_at?: string;
+  category?: string; // Add category
+  repository?: string; // Add repository
 }

@@ -1,0 +1,719 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 604.64,
+    "task": {
+      "reward": 600,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2294401975,
+        "content": "We should have the capability of running the plugins inside Workers, which would be very useful for short-lived tasks that require responsiveness like commands for example. Currently, we only support Actions, which works fine but takes ~1 minute response time, which is not user friendly when it comes to using commands with the bot.\r\nIn the configuration, for each plugin it is possible to specify a [`type`](https://github.com/ubiquity/ubiquibot-kernel/blob/c8da3c0e07eb2735b0e7d63d5f2997a138fd2135/src/github/types/plugin-configuration.ts#L37) that should determine what kind of plugin it is. A new value like `worker` should be added, and should make the plugin run on a worker instead of calling a GitHub Action.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/39",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.64,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 98,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 55.06750000000001,
+            "syllables": 147,
+            "sentences": 4,
+            "score": 0.950675
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 604.64 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>600</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.64</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/39\" target=\"_blank\" rel=\"noopener\">We should have the capability of running the plugins inside Work&hellip;</a></h6></td><td><details><summary>3.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 98&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>1</td><td>1</td><td>4.64</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 71.148,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2111838546,
+        "content": "My vision was to derive the type based on the plugin id in the config and whether it includes a protocol prefix (https://) \nFor example:\nid: https://bot-assistive-pricing.workers.dev\nNo protocol prefix means that it's hosted on GitHub. \nid: ubiquibot/assistive-pricing",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/39#issuecomment-2111838546",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 16.02,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 39,
+            "wordValue": 0.1,
+            "result": 2.15
+          },
+          "readability": {
+            "fleschKincaid": 64.58423913043481,
+            "syllables": 71,
+            "sentences": 4,
+            "score": 0.9541576086956519
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2119192268,
+        "content": "Should be 3. \nAs we discussed some time ago, all auth should be from the kernel. The plugins should just act as functions that accept input and return output to the kernel. The kernel should be the only module with direct read/write access to the partner repositories. \nI assume that by passing the context object, the plugins have all the data they need. If it's a lot of data, in the further future in the config we can specify what data needs to be passed, but for now, we should pass everything which includes all the org, repo, issue, pull, webhook event information.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/39#issuecomment-2119192268",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 9.84,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 105,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 69.02107142857145,
+            "syllables": 149,
+            "sentences": 6,
+            "score": 0.9097892857142855
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2119281445,
+        "content": "We should not be passing the token. I think it's a lazy approach and introduces security issues. \nPerhaps for a prototype we can pass the token, but for v1 we should never pass the authentication token to any plugins. We should only pass the data they need.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/39#issuecomment-2119281445",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 8.97,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 48,
+            "wordValue": 0.1,
+            "result": 2.35
+          },
+          "readability": {
+            "fleschKincaid": 69.5175,
+            "syllables": 71,
+            "sentences": 4,
+            "score": 0.904825
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2119300239,
+        "content": "Due to the serverless architecture we can not preserve the token \"in memory\" during the entire plugin execution workflow. \nBecause of this I agree we can store it temporarily in something like KV. Not to introduce new technologies but a technology like Redis might seem to be appropriate as well.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/39#issuecomment-2119300239",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 7.176,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 50,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 46.09833333333336,
+            "syllables": 85,
+            "sentences": 3,
+            "score": 0.8609833333333335
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2119339521,
+        "content": "GitHub apps can definitely access private repo info I implemented that personally. \nDon't pass the auth. Just pass all the contextual information please reread my comments carefully.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/39#issuecomment-2119339521",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 6.075,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 40.24738095238098,
+            "syllables": 52,
+            "sentences": 3,
+            "score": 0.8024738095238098
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2122678056,
+        "content": "I'm sure this is possible to do. Like I said before we can consider passing token auth for the prototype but in the future, for security reasons, all read/writes should proxy through the kernel. I'm sure we can build a generalized proxy of sorts, and just ban certain APIs from making it to the other side.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/39#issuecomment-2122678056",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 8.64,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 59,
+            "wordValue": 0.1,
+            "result": 2.51
+          },
+          "readability": {
+            "fleschKincaid": 67.85977401129944,
+            "syllables": 83,
+            "sentences": 3,
+            "score": 0.9214022598870056
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1606473926,
+        "content": "```suggestion\n    const ref = isGithubPluginObject ? plugin.ref ?? (await getDefaultBranch(context, plugin.owner, plugin.repo)) : null;\n```\nHow about no empty strings?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42#discussion_r1606473926",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -73,13 +84,17 @@ async function handleEvent(event: EmitterWebhookEvent, eventHandler: InstanceTyp\n       inputs: new Array(pluginChain.uses.length),\n     };\n \n-    const ref = plugin.ref ?? (await getDefaultBranch(context, plugin.owner, plugin.repo));\n+    const ref = isGithubPluginObject ? plugin.ref ?? (await getDefaultBranch(context, plugin.owner, plugin.repo)) : \"\";",
+        "score": {
+          "reward": 1.56,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 83.32000000000004,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 0.7667999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1606474356,
+        "content": "Does it make sense to throw messages instead?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42#discussion_r1606474356",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -33,6 +34,10 @@ export async function repositoryDispatch(context: GitHubContext<\"repository_disp\n   }\n \n   const currentPlugin = state.pluginChain[state.currentPlugin];\n+  if (!isGithubPlugin(currentPlugin.plugin)) {\n+    console.error(\"Trying to call a non-github plugin.\");\n+    return;",
+        "score": {
+          "reward": 1.911,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 92.965,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.67035
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1606477492,
+        "content": "I wonder if there are any special headers we should include for plugin developers. For example, org/repo information. Perhaps some type of auth mechanism etc.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42#discussion_r1606477492",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -32,6 +32,17 @@ export async function dispatchWorkflow(context: GitHubContext, options: Workflow\n   });\n }\n \n+export async function dispatchWorker(targetUrl: string, payload: Record<string, unknown>) {\n+  const result = await fetch(targetUrl, {\n+    body: JSON.stringify(payload),\n+    method: \"POST\",\n+    headers: {\n+      \"Content-Type\": \"application/json\",",
+        "score": {
+          "reward": 6.075,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 58.12294871794876,
+            "syllables": 43,
+            "sentences": 3,
+            "score": 0.9812294871794875
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2119339694,
+        "content": "@rndquu youre admin please facilitate",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42#issuecomment-2119339694",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.201,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 49.48000000000002,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.8948000000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2065733836,
+            "effect": {
+              "addition": 108,
+              "deletion": 48
+            },
+            "reward": 4.68,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 71.148 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>4.68</td></tr><tr><td>Issue</td><td>Comment</td><td>6</td><td>56.721</td></tr><tr><td>Review</td><td>Comment</td><td>4</td><td>9.747</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42\" target=\"_blank\" rel=\"noopener\">#42</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+108 -48</td><td>3</td><td>4.68</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/39#issuecomment-2111838546\" target=\"_blank\" rel=\"noopener\">My vision was to derive the type based on the plugin id in the c&hellip;</a></h6></td><td><details><summary>4.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 39&#13;  wordValue: 0.1&#13;  result: 2.15&#13;</pre></details></td><td>1</td><td>3</td><td>16.02</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/39#issuecomment-2119192268\" target=\"_blank\" rel=\"noopener\">Should be 3. As we discussed some time ago, all auth should be &hellip;</a></h6></td><td><details><summary>2.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 105&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>1</td><td>3</td><td>9.84</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/39#issuecomment-2119281445\" target=\"_blank\" rel=\"noopener\">We should not be passing the token. I think it's a lazy approach&hellip;</a></h6></td><td><details><summary>2.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 48&#13;  wordValue: 0.1&#13;  result: 2.35&#13;</pre></details></td><td>1</td><td>3</td><td>8.97</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/39#issuecomment-2119300239\" target=\"_blank\" rel=\"noopener\">Due to the serverless architecture we can not preserve the token&hellip;</a></h6></td><td><details><summary>2.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 50&#13;  wordValue: 0.1&#13;  result: 2.38&#13;</pre></details></td><td>0.8</td><td>3</td><td>7.176</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/39#issuecomment-2119339521\" target=\"_blank\" rel=\"noopener\">GitHub apps can definitely access private repo info I implemente&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.9</td><td>3</td><td>6.075</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/39#issuecomment-2122678056\" target=\"_blank\" rel=\"noopener\">I'm sure this is possible to do. Like I said before we can consi&hellip;</a></h6></td><td><details><summary>2.51</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 59&#13;  wordValue: 0.1&#13;  result: 2.51&#13;</pre></details></td><td>0.9</td><td>3</td><td>8.64</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42#discussion_r1606473926\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionconst ref = isGithubPluginObject ?&hellip;</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.56</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42#discussion_r1606474356\" target=\"_blank\" rel=\"noopener\">Does it make sense to throw messages instead?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.7</td><td>3</td><td>1.911</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42#discussion_r1606477492\" target=\"_blank\" rel=\"noopener\">I wonder if there are any special headers we should include for &hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.9</td><td>3</td><td>6.075</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42#issuecomment-2119339694\" target=\"_blank\" rel=\"noopener\">@rndquu youre admin please facilitate</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.201</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 53.212,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 2119240879,
+        "content": "Using cloudflare queues requires plugins to be in the same Cloudflare account as far as I know and also the messages are not delivered in the same [order](https://developers.cloudflare.com/queues/reference/how-queues-works/#what-is-a-queue).\r\nSecond option also requires plugins to be in the same account, which is fine if we only have our own plugins but we also plan to support third party plugins. We could use this option only for our own plugins but this increases complexity since we have to support two ways to call plugins.\r\nThird option works with both our own plugins and third-party plugins but has another problem (aside from the one @gentlementlegen mentioned where our bot token which has read/write access to the repo is shared with any URL endpoint) that the callback mechanism (like `repository_dispatch` for Actions plugins) needs to be secure.\r\nOne idea is to generate a unique ID for every plugin in the chain alongside the state ID which is same for all plugins in the executing chain. This is passed with the HTTPS request and passed back in the response.\r\nThe problem with Workers plugins is that you can't see the deployed code like on Github, but if we use Workers plugins only for our first-party plugins and only allow Github Actions for third-party plugins, then we avoid this problem and can use option 2 which is safer",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/39#issuecomment-2119240879",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 9.092,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 226,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 55.02606194690266,
+            "syllables": 318,
+            "sentences": 7,
+            "score": 0.9502606194690266
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2119328098,
+        "content": "The reason we pass token to the plugin is because if a repo is private then plugin can't access it, also some plugins like assistive-pricing set labels so they need write access to the repo. \r\nEDIT: I think a Github app can't access a repo even if it's public if the app is not installed on the repo. The plugin could use a personal access token (which is bound to a user) which isn't really its intended use",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/39#issuecomment-2119328098",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 8.696,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 83,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 61.53646586345383,
+            "syllables": 115,
+            "sentences": 3,
+            "score": 0.9846353413654617
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2122434485,
+        "content": "I've just tested to be sure. A Github App can access any public repo, but it can only access private repo if the app is installed on that repo.\r\nIf we don't pass token then the plugin needs its own Github app which means it won't be able to access private repos or do any write actions like posting a comment or assigning a label.\r\nWe can solve comments by letting the plugin return comment HTML back to the kernel, but we can't really proxy every write action through the kernel",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/39#issuecomment-2122434485",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 9.045,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 95,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 66.96032894736844,
+            "syllables": 130,
+            "sentences": 4,
+            "score": 0.9303967105263156
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1608963527,
+        "content": "I suppose worker plugins will be only used for short-running tasks so it's probably fine to get results back directly from the response instead of having a callback",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42#discussion_r1608963527",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -32,6 +32,17 @@ export async function dispatchWorkflow(context: GitHubContext, options: Workflow\n   });\n }\n \n+export async function dispatchWorker(targetUrl: string, payload: Record<string, unknown>) {\n+  const result = await fetch(targetUrl, {\n+    body: JSON.stringify(payload),\n+    method: \"POST\",\n+    headers: {\n+      \"Content-Type\": \"application/json\",\n+    },\n+  });\n+  return result.json();",
+        "score": {
+          "reward": 5.76,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 52.305000000000035,
+            "syllables": 44,
+            "sentences": 1,
+            "score": 0.9230500000000004
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1608965854,
+        "content": "if previous plugin is a github plugin, then next plugin might be a worker plugin so you should call `dispatchWorker` or `dispatchWorkflow` depending on what the next plugin is",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42#discussion_r1608965854",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -46,6 +50,9 @@ export async function repositoryDispatch(context: GitHubContext<\"repository_disp\n     await context.eventHandler.pluginChainState.put(pluginOutput.state_id, state);\n     return;\n   }\n+  if (!isGithubPlugin(nextPlugin.plugin)) {\n+    throw new Error(\"Trying to call a non-github plugin.\");",
+        "score": {
+          "reward": 6.237,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 60.363333333333344,
+            "syllables": 38,
+            "sentences": 1,
+            "score": 0.9963666666666665
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1610574134,
+        "content": "We could make a callback but it needs to secure, one idea I posted in the issue was to generate a UUID every time you call a worker plugin and store it in the KV, and in the callback we can validate that state id and invocation id match",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42#discussion_r1610574134",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -32,6 +32,17 @@ export async function dispatchWorkflow(context: GitHubContext, options: Workflow\n   });\n }\n \n+export async function dispatchWorker(targetUrl: string, payload: Record<string, unknown>) {\n+  const result = await fetch(targetUrl, {\n+    body: JSON.stringify(payload),\n+    method: \"POST\",\n+    headers: {\n+      \"Content-Type\": \"application/json\",\n+    },\n+  });\n+  return result.json();",
+        "score": {
+          "reward": 7.548,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 49,
+            "wordValue": 0.1,
+            "result": 2.37
+          },
+          "readability": {
+            "fleschKincaid": 43.14897959183676,
+            "syllables": 66,
+            "sentences": 1,
+            "score": 0.8314897959183676
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2135563732,
+        "content": "we can merge this, right?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42#issuecomment-2135563732",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.414,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 117.16000000000003,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2069641841,
+            "effect": {
+              "addition": 106,
+              "deletion": 48
+            },
+            "reward": 4.62,
+            "priority": 3
+          },
+          {
+            "reviewId": 2074399543,
+            "effect": {
+              "addition": 33,
+              "deletion": 27
+            },
+            "reward": 1.8,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 53.212 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>6.42</td></tr><tr><td>Issue</td><td>Comment</td><td>3</td><td>26.833</td></tr><tr><td>Review</td><td>Comment</td><td>4</td><td>19.959</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42\" target=\"_blank\" rel=\"noopener\">#42</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+106 -48</td><td>3</td><td>4.62</td></tr><tr><td>+33 -27</td><td>3</td><td>1.8</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/39#issuecomment-2119240879\" target=\"_blank\" rel=\"noopener\">Using cloudflare queues requires plugins to be in the same Cloud&hellip;</a></h6></td><td><details><summary>2.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 226&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.95</td><td>3</td><td>9.092</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/39#issuecomment-2119328098\" target=\"_blank\" rel=\"noopener\">The reason we pass token to the plugin is because if a repo is p&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 83&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.85</td><td>3</td><td>8.696</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/39#issuecomment-2122434485\" target=\"_blank\" rel=\"noopener\">I've just tested to be sure. A Github App can access any public &hellip;</a></h6></td><td><details><summary>2.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 95&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.9</td><td>3</td><td>9.045</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42#discussion_r1608963527\" target=\"_blank\" rel=\"noopener\">I suppose worker plugins will be only used for short-running tas&hellip;</a></h6></td><td><details><summary>1.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.8</td><td>3</td><td>5.76</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42#discussion_r1608965854\" target=\"_blank\" rel=\"noopener\">if previous plugin is a github plugin, then next plugin might be&hellip;</a></h6></td><td><details><summary>1.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>0.9</td><td>3</td><td>6.237</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42#discussion_r1610574134\" target=\"_blank\" rel=\"noopener\">We could make a callback but it needs to secure, one idea I post&hellip;</a></h6></td><td><details><summary>2.37</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 49&#13;  wordValue: 0.1&#13;  result: 2.37&#13;</pre></details></td><td>0.85</td><td>3</td><td>7.548</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42#issuecomment-2135563732\" target=\"_blank\" rel=\"noopener\">we can merge this, right?</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.414</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 10.731,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2119834796,
+        "content": "@gentlementlegen \r\nCheck this [workflow](https://github.com/ubiquity/ubiquibot-kernel/actions/runs/9149319076/workflow?pr=42)\r\nHow it works right now:\r\n1. PR is opened\r\n2. The **development** branch is checked out [here](https://github.com/ubiquity/ubiquibot-kernel/actions/runs/9149319076/workflow?pr=42#L22) (not the PR branch because the workflow is running on `pull_request_target`)\r\n3. Tests are run against the development branch\r\nIf [here](https://github.com/ubiquity/ubiquibot-kernel/actions/runs/9149319076/workflow?pr=42#L22) we change the code to checkout the PR branch using `pull_request_target` then any fork will have access to [these](https://github.com/ubiquity/ubiquibot-kernel/actions/runs/9149319076/workflow?pr=42#L9-L11) env variables.\r\nSo right now [this](https://github.com/ubiquity/ubiquibot-kernel/actions/runs/9149319076/workflow?pr=42) workflow is literally 1 line away from leaking secrets.\r\nThere are viable 2 options:\r\n1. Refactor tests and mock everything in a way that we wouldn't need to provide any env vars\r\n2. Keep using [this](https://github.com/ubiquity/ubiquibot-kernel/actions/runs/9149319076/workflow?pr=42) workflow with `pull_request_target`, checkout the PR branch [here](https://github.com/ubiquity/ubiquibot-kernel/actions/runs/9149319076/workflow?pr=42#L22), hardcode env variables and use some dummy values that are used only for testing",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42#issuecomment-2119834796",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 10.731,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 11
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.5
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 117,
+            "wordValue": 0.1,
+            "result": 2.51
+          },
+          "readability": {
+            "fleschKincaid": 51.55769230769231,
+            "syllables": 160,
+            "sentences": 3,
+            "score": 0.9155769230769231
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 10.731 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>1</td><td>10.731</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/42#issuecomment-2119834796\" target=\"_blank\" rel=\"noopener\">@gentlementlegen Check this [workflow](https://github.com/ubiq&hellip;</a></h6></td><td><details><summary>4.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 11&#13;    ol:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.5&#13;regex:&#13;  wordCount: 117&#13;  wordValue: 0.1&#13;  result: 2.51&#13;</pre></details></td><td>0.7</td><td>3</td><td>10.731</td></tr></tbody></table></details>"
+  }
+}

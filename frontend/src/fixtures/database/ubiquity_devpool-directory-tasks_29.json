@@ -1,0 +1,173 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 51.404,
+    "task": {
+      "reward": 50,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2176107833,
+        "content": "@0x4007 how should the `opt.out` be handled in in terms of stats, should they also be excluded?\r\nThis is how it looks with them excluded and removing an unnecessary  call to `labels.some()` \r\n```ts\r\nrewards: { \r\n  notAssigned: 6299, \r\n  assigned: 4450, \r\n  completed: 34100, \r\n  total: 44849 \r\n},\r\ntasks: { \r\n  notAssigned: 23, \r\n  assigned: 18, \r\n  completed: 261, \r\n  total: 302 \r\n}\r\n```\r\nMaybe exclude the open and assigned tasks from the counts if `opt.out` but keep in the completed figures I think this makes sense and looks good\r\n```ts\r\nrewards: {\r\n  notAssigned: 6299,\r\n  assigned: 4450,\r\n  completed: 53238,\r\n  total: 63987\r\n},\r\ntasks: {\r\n  notAssigned: 23,\r\n  assigned: 18,\r\n  completed: 459,\r\n  total: 500\r\n}\r\n```",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/29#issuecomment-2176107833",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.404,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 55,
+            "wordValue": 0.1,
+            "result": 2.46
+          },
+          "readability": {
+            "fleschKincaid": 72.78795454545455,
+            "syllables": 69,
+            "sentences": 2,
+            "score": 0.8721204545454545
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 51.404 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>50</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.404</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/29#issuecomment-2176107833\" target=\"_blank\" rel=\"noopener\">@0x4007 how should the &#96;opt.out&#96; be handled in in terms &hellip;</a></h6></td><td><details><summary>2.46</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 55&#13;  wordValue: 0.1&#13;  result: 2.46&#13;</pre></details></td><td>0.9</td><td>2</td><td>1.404</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 11.48,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2172346226,
+        "content": "@Keyrxng perhaps you can take a look. This came to mind because I want to display the analytics on ubq.fi for our marketing purposes, and as I started working on it I realized the numbers looked off.",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/29#issuecomment-2172346226",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 4.716,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 82.66254385964915,
+            "syllables": 50,
+            "sentences": 3,
+            "score": 0.7733745614035086
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2176920270,
+        "content": "<img width=\"1317\" alt=\"image\" src=\"https://github.com/ubiquity/devpool-directory-bounties/assets/4975670/58f8428d-7090-4568-aead-ba5fbc03b64c\">\r\n👍👍",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/29#issuecomment-2176920270",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.254,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 61.32500000000002,
+            "syllables": 32,
+            "sentences": 2,
+            "score": 0.9867499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2356444868,
+        "content": "According to the report, we have 173 tasks currently being worked on. I have a feeling its double counting the completed and assigned metrics. Another red flag is the dollar amount of projects being worked on right now ($25821) \r\nPlease verify that this is correct. \r\nhttps://github.com/ubiquity/devpool-directory/blob/178460b549838e11e52c1d40763e656c5924a05b/total-rewards.json\r\n```json\r\n{\r\n  \"rewards\": {\r\n    \"notAssigned\": 5724,\r\n    \"assigned\": 25821,\r\n    \"completed\": 52788,\r\n    \"total\": 84333\r\n  },\r\n  \"tasks\": {\r\n    \"notAssigned\": 24,\r\n    \"assigned\": 173,\r\n    \"completed\": 457,\r\n    \"total\": 654\r\n  }\r\n}\r\n```",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/29",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.23,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 45,
+            "wordValue": 0.1,
+            "result": 2.29
+          },
+          "readability": {
+            "fleschKincaid": 64.41880952380956,
+            "syllables": 88,
+            "sentences": 6,
+            "score": 0.9558119047619045
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2126406876,
+            "effect": {
+              "addition": 27,
+              "deletion": 37
+            },
+            "reward": 1.28,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1213"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 11.48 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>1.28</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.23</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>5.97</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/devpool-directory/pull/1213\" target=\"_blank\" rel=\"noopener\">#1213</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+27 -37</td><td>2</td><td>1.28</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/29\" target=\"_blank\" rel=\"noopener\">According to the report, we have 173 tasks currently being worke&hellip;</a></h6></td><td><details><summary>3.29</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 45&#13;  wordValue: 0.1&#13;  result: 2.29&#13;</pre></details></td><td>1</td><td>1</td><td>4.23</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/29#issuecomment-2172346226\" target=\"_blank\" rel=\"noopener\">@Keyrxng perhaps you can take a look. This came to mind because &hellip;</a></h6></td><td><details><summary>2.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.9</td><td>2</td><td>4.716</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/29#issuecomment-2176920270\" target=\"_blank\" rel=\"noopener\">&lt;img width=\"1317\" alt=\"image\" src=\"https://github.com/ubiquit&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.3</td><td>2</td><td>1.254</td></tr></tbody></table></details>"
+  }
+}

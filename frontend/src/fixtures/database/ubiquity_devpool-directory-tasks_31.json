@@ -1,0 +1,1680 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 164.763,
+    "task": {
+      "reward": 150,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2296632533,
+        "content": "Out at the moment but was tasked with this earlier on TG. \nI have a hot fix PR opened at work.ubq.fi to solve the UI problem immediately\nI'd be grateful if you could assign or I will once back",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2296632533",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.816,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 42,
+            "wordValue": 0.1,
+            "result": 2.23
+          },
+          "readability": {
+            "fleschKincaid": 89.42035714285716,
+            "syllables": 53,
+            "sentences": 4,
+            "score": 0.7057964285714284
+          },
+          "multiplier": 0.25,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2308293157,
+        "content": "I think this needs re-opened as the run isn't deleting issues ([run](https://github.com/ubiquity/devpool-directory/actions/runs/10537424760/job/29198801008))\r\n- it's trying to delete all issues from all bots\r\n- it doesn't have correct access to delete issues\r\n- [spam issues](https://github.com/ubiquity/devpool-directory/issues/1334) still in the devpool\r\n---\r\nTo delete an issue the `authToken` used must have admin permissions which I'm sure the bot does not have",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2308293157",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 3.996,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.3
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 58,
+            "wordValue": 0.1,
+            "result": 2.49
+          },
+          "readability": {
+            "fleschKincaid": 38.56844827586208,
+            "syllables": 75,
+            "sentences": 1,
+            "score": 0.7856844827586208
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2308362168,
+        "content": "- https://docs.github.com/en/rest/authentication/permissions-required-for-github-apps?apiVersion=2022-11-28\r\nThe app auth itself wouldn't be valid but if it's possible to give it admin permissions and then use it's token I don't see why that wouldn't work.\r\nWe might be able to do it by creating a fine-grained PAT with the resource owner being either the org or failing that then a user who has admin permissions. Scope it only to the `devpool-directory` repo with access to `issues` and `admin` on repo settings and idk if needed but `admin` on org too.",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2308362168",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 3.159,
+          "formatting": {
+            "content": {
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 1
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 85,
+            "wordValue": 0.1,
+            "result": 2.64
+          },
+          "readability": {
+            "fleschKincaid": 75.83233498349836,
+            "syllables": 136,
+            "sentences": 6,
+            "score": 0.8416766501650165
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2308672173,
+        "content": "![image](https://github.com/user-attachments/assets/f2821b01-7baf-481e-981e-a8193e1f06f3)\r\n---\r\nI expect that @jordan-ae will be required to resolve this considering a payout was made yeah? \r\nSo what needs done is:\r\n- create a new github app\r\n- ensure that is given an `admin` role/permissions within the org\r\n- Use the `authToken` from that app to delete the issues\r\n- Ensure that the bot can delete and only unauthorized issues are removed\r\n- Ensure that for in the case of forks, the contributor's issues don't get deleted\r\n###### `/remindMe 1 day` ;)))",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2308672173",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 3.12,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 8
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              },
+              "h6": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.5
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 74,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 49.23945945945947,
+            "syllables": 105,
+            "sentences": 2,
+            "score": 0.8923945945945947
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2036042231,
+        "content": "Resolves https://github.com/ubiquity/devpool-directory-bounties/issues/31\r\nI QA'd the script manually locally and it works as expected. When using my PAT (with admin rights) issues are deleted. When using a different PAT it failed to remove any. Without the official instance env vars this was as close as I could get to fully testing it locally but I expect no issues.\r\n- All issues created by my bot and `Keyrxng` were kept and any by my alt `Keyrxng2` were deleted.\r\n- `GH_TOKEN` needs to be defined in secrets for this script to have the correct permissions.\r\n- We authenticate as the `App` using the `APP_PRIVATE_KEY` and `APP_ID` so we can pull the installs. \r\n- We then map those to cover `User` and `Bot` types. If it's a bot we need to map the username to the `appSlug` as it's `userId` does not correspond to the `orgId` which it belongs to.\r\n- For user's we map the `userId` directly.\r\nWhile it's usually best to use numbers vs strings for identification this works just fine for identifying Bots as far as I could QA and was the best option I could think of given what was available.\r\n---\r\nIn regards to future contributions we have two options:\r\n1. Leave it as-is and forks need to define the correct secrets for this functionality to work\r\n2. Don't throw for missing vars and without env vars we can assume this feature is disabled",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 3.672,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 11
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 7
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.7
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 221,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 71.17295986622076,
+            "syllables": 320,
+            "sentences": 13,
+            "score": 0.8882704013377923
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 164.763 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>150</td></tr><tr><td>Issue</td><td>Comment</td><td>4</td><td>11.091</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>3.672</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2296632533\" target=\"_blank\" rel=\"noopener\">Out at the moment but was tasked with this earlier on TG. I hav&hellip;</a></h6></td><td><details><summary>2.23</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 42&#13;  wordValue: 0.1&#13;  result: 2.23&#13;</pre></details></td><td>0.4</td><td>3</td><td>0.816</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2308293157\" target=\"_blank\" rel=\"noopener\">I think this needs re-opened as the run isn't deleting issues ([&hellip;</a></h6></td><td><details><summary>4.79</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.3&#13;regex:&#13;  wordCount: 58&#13;  wordValue: 0.1&#13;  result: 2.49&#13;</pre></details></td><td>0.9</td><td>3</td><td>3.996</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2308362168\" target=\"_blank\" rel=\"noopener\">- https://docs.github.com/en/rest/authentication/permissions-req&hellip;</a></h6></td><td><details><summary>3.74</summary><pre>content:&#13;  content:&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 1&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.1&#13;regex:&#13;  wordCount: 85&#13;  wordValue: 0.1&#13;  result: 2.64&#13;</pre></details></td><td>0.9</td><td>3</td><td>3.159</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2308672173\" target=\"_blank\" rel=\"noopener\">![image](https://github.com/user-attachments/assets/f2821b01-7ba&hellip;</a></h6></td><td><details><summary>4.11</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 8&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;    h6:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.5&#13;regex:&#13;  wordCount: 74&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.8</td><td>3</td><td>3.12</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341\" target=\"_blank\" rel=\"noopener\">Resolves https://github.com/ubiquity/devpool-directory-bounties/&hellip;</a></h6></td><td><details><summary>3.22</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 11&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 7&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.7&#13;regex:&#13;  wordCount: 221&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.9</td><td>1</td><td>3.672</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 115.791,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2296694311,
+        "content": "There's already a similar issue https://github.com/ubiquity/devpool-directory-bounties/issues/30\r\n@jordan-ae was the 1st one to pick it up so if he's still working on it then let's give him some time to self assign",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2296694311",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 9.288,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 34,
+            "wordValue": 0.1,
+            "result": 2.01
+          },
+          "readability": {
+            "fleschKincaid": 64.99854651162792,
+            "syllables": 61,
+            "sentences": 2,
+            "score": 0.9500145348837208
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2296985508,
+        "content": "This issue is pretty critical because it affects `work.ubq.fi` so either make sure your PR runs [locally](https://github.com/ubiquity/devpool-directory/blob/6c638ae0b21727962f92f25b4a79db2123ed9f52/.github/workflows/sync-issues.yml#L49) against your own `devpool-directory` repository without any errors either let @Keyrxng self assign it",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2296985508",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 9.558,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 40.2896551724138,
+            "syllables": 47,
+            "sentences": 1,
+            "score": 0.802896551724138
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2473357994,
+        "content": "Original [comment](https://github.com/ubiquity/devpool-directory-bounties/issues/30#issuecomment-2292647684)\r\nRight now anybody can create a new github issue in https://github.com/ubiquity/devpool-directory and it will be displayed at `work.ubq.fi`:\r\n<img width=\"1512\" alt=\"Screenshot 2024-08-19 at 16 09 32\" src=\"https://github.com/user-attachments/assets/fedf1158-b4c7-44be-a33d-7ba86378f97b\">\r\nAllowing anybody to create issues in https://github.com/ubiquity/devpool-directory is not optimal because:\r\n- anybody can flood `work.ubq.fi` with issues (illustrated on the screenshot above)\r\n- anybody can create a github issue with phishing URLs and that github issue will be displayed directly at `work.ubq.fi`\r\nOne of the solutions could be to remove issues from https://github.com/ubiquity/devpool-directory if they're opened not by one of the following bots (id => github URL):\r\n1. `76412717: https://github.com/ubiquity`\r\n2. `133917611: https://github.com/ubiquibot`\r\n3. `165700353: https://github.com/UbiquityOS`\r\nP.S. There is also the [limit interaction](https://docs.github.com/en/communities/moderating-comments-and-conversations/limiting-interactions-in-your-repository#about-temporary-interaction-limits) option but if we enable it then new contributors won't be able to open PRs towards https://github.com/ubiquity/devpool-directory",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 12.66,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 11
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 7
+              }
+            },
+            "result": 7.5
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 118,
+            "wordValue": 0.1,
+            "result": 2.5
+          },
+          "readability": {
+            "fleschKincaid": 48.63488970588236,
+            "syllables": 251,
+            "sentences": 8,
+            "score": 0.8863488970588236
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2309881165,
+        "content": "@Keyrxng I've just QAed with an issue created by a user (by me actually) and the issue was deleted as expected https://github.com/ubiquity/devpool-directory/issues/1374.\r\nRight now [GH_TOKEN](https://github.com/ubiquity/devpool-directory/blob/61045f468246a6fdde9901a400f0f9c1b348272f/.github/workflows/sync-issues.yml#L54) end variable is set to `0x4007`'s  PAT.  Do we keep using this PAT or we should create a separate github app with admin access to the https://github.com/ubiquity/devpool-directory repository solely for deleting issues?",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2309881165",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 19.089,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 56,
+            "wordValue": 0.1,
+            "result": 2.47
+          },
+          "readability": {
+            "fleschKincaid": 57.265000000000015,
+            "syllables": 112,
+            "sentences": 5,
+            "score": 0.9726500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2309896317,
+        "content": "The solution with deleting unauthorized issues on \"sync\" still has a window for phishing since the sync workflow runs [once an hour](https://github.com/ubiquity/devpool-directory/blob/61045f468246a6fdde9901a400f0f9c1b348272f/.github/workflows/sync-issues.yml#L12) so an issue created by an adversary will be visible for a whole hour at `work.ubq.fi` in the worst case.",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2309896317",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 10.8,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 41,
+            "wordValue": 0.1,
+            "result": 2.2
+          },
+          "readability": {
+            "fleschKincaid": 43.47853658536589,
+            "syllables": 59,
+            "sentences": 1,
+            "score": 0.8347853658536589
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2309901933,
+        "content": "@0x4007 Are you ok with the approach that your github PAT is used for deleting issues?",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2309901933",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.844,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 79.5575,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 0.804425
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2309902674,
+        "content": "What PR do you mean?",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2309902674",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.414,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 117.16000000000003,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2309911912,
+        "content": "It its current view it doesn't solve the phishing issue",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2309911912",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.478,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 87.99727272727276,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.7200272727272724
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2309916759,
+        "content": "@Keyrxng What if we run [delete-unauthorized-issues.ts](https://github.com/ubiquity/devpool-directory/blob/61045f468246a6fdde9901a400f0f9c1b348272f/scripts/delete-unauthorized-issues.ts) in a separate workflow on `issues.opened`?",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2309916759",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 6.624,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 66.7871428571429,
+            "syllables": 22,
+            "sentences": 2,
+            "score": 0.9321285714285711
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2309921653,
+        "content": "Why is that an issue?",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2309921653",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.621,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 100.24000000000002,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2309929979,
+        "content": "https://github.com/ubiquity/devpool-directory-bounties/issues/35",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2309929979",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.428,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 23.667500000000018,
+            "syllables": 19,
+            "sentences": 2,
+            "score": 0.6366750000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2315616823,
+        "content": "I've just tried to use the bot's access token to delete [this](https://github.com/ubiquity/devpool-directory/issues/1377) issue and got the `GraphQL: Viewer not authorized to delete (deleteIssue)` error in [this](https://github.com/ubiquity/devpool-directory/actions/runs/10599106506/job/29373303161) CI run.\r\nAs [stated](https://docs.github.com/en/issues/tracking-your-work-with-issues/deleting-an-issue) in the docs `Only accounts with admin or owner permissions can delete issues in a repository owned by an organization`. So although the `ubiquity-os` has read/write permissions for issues it can't delete them.\r\nSo we have 2 choices:\r\n1. Use someone's PAT to delete issues\r\n2. Simply close unauthorized issues by the bot",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2315616823",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 19.089,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 61,
+            "wordValue": 0.1,
+            "result": 2.53
+          },
+          "readability": {
+            "fleschKincaid": 81.79231557377051,
+            "syllables": 79,
+            "sentences": 4,
+            "score": 0.782076844262295
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2373490201,
+        "content": "To sum up, as far as I understand, we have 2 account instances for managing https://github.com/ubiquity/devpool-directory:\r\n1. https://github.com/ubiquity-devpool: github account with the \"owner\" role [used](https://github.com/ubiquity/devpool-directory/blob/32f312e2b72fd15b447ab13264b85f3a0f1c342e/.github/workflows/sync-issues.yml#L54) for deleting unauthorized github issues\r\n2. https://github.com/apps/devpool-directory-superintendent: github app [used](https://github.com/ubiquity/devpool-directory/blob/32f312e2b72fd15b447ab13264b85f3a0f1c342e/.github/workflows/sync-issues.yml#L44) for opening and closing github issues",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2373490201",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 20.898,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 4
+              }
+            },
+            "result": 4.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 38.03250000000003,
+            "syllables": 99,
+            "sentences": 4,
+            "score": 0.7803250000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 115.791 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>12.66</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>18.846</td></tr><tr><td>Review</td><td>Comment</td><td>10</td><td>84.285</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/31\" target=\"_blank\" rel=\"noopener\">Original [comment](https://github.com/ubiquity/devpool-directory&hellip;</a></h6></td><td><details><summary>10</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 11&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 7&#13;  result: 7.5&#13;regex:&#13;  wordCount: 118&#13;  wordValue: 0.1&#13;  result: 2.5&#13;</pre></details></td><td>1</td><td>1</td><td>12.66</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2296694311\" target=\"_blank\" rel=\"noopener\">There's already a similar issue https://github.com/ubiquity/devp&hellip;</a></h6></td><td><details><summary>3.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 34&#13;  wordValue: 0.1&#13;  result: 2.01&#13;</pre></details></td><td>0.8</td><td>3</td><td>9.288</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2296985508\" target=\"_blank\" rel=\"noopener\">This issue is pretty critical because it affects &#96;work.ubq.f&hellip;</a></h6></td><td><details><summary>2.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.9</td><td>3</td><td>9.558</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2309881165\" target=\"_blank\" rel=\"noopener\">@Keyrxng I've just QAed with an issue created by a user (by me a&hellip;</a></h6></td><td><details><summary>5.47</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3&#13;regex:&#13;  wordCount: 56&#13;  wordValue: 0.1&#13;  result: 2.47&#13;</pre></details></td><td>0.9</td><td>3</td><td>19.089</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2309896317\" target=\"_blank\" rel=\"noopener\">The solution with deleting unauthorized issues on \"sync\" still h&hellip;</a></h6></td><td><details><summary>3.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 41&#13;  wordValue: 0.1&#13;  result: 2.2&#13;</pre></details></td><td>0.9</td><td>3</td><td>10.8</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2309901933\" target=\"_blank\" rel=\"noopener\">@0x4007 Are you ok with the approach that your github PAT is use&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.6</td><td>3</td><td>2.844</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2309902674\" target=\"_blank\" rel=\"noopener\">What PR do you mean?</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.414</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2309911912\" target=\"_blank\" rel=\"noopener\">It its current view it doesn't solve the phishing issue</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.478</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2309916759\" target=\"_blank\" rel=\"noopener\">@Keyrxng What if we run [delete-unauthorized-issues.ts](https://&hellip;</a></h6></td><td><details><summary>2.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.8</td><td>3</td><td>6.624</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2309921653\" target=\"_blank\" rel=\"noopener\">Why is that an issue?</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.621</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2309929979\" target=\"_blank\" rel=\"noopener\">https://github.com/ubiquity/devpool-directory-bounties/issues/35</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.4</td><td>3</td><td>1.428</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2315616823\" target=\"_blank\" rel=\"noopener\">I've just tried to use the bot's access token to delete [this](h&hellip;</a></h6></td><td><details><summary>5.73</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.2&#13;regex:&#13;  wordCount: 61&#13;  wordValue: 0.1&#13;  result: 2.53&#13;</pre></details></td><td>0.9</td><td>3</td><td>19.089</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2373490201\" target=\"_blank\" rel=\"noopener\">To sum up, as far as I understand, we have 2 account instances f&hellip;</a></h6></td><td><details><summary>6.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 4&#13;  result: 4.2&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.9</td><td>3</td><td>20.898</td></tr></tbody></table></details>"
+  },
+  "jordan-ae": {
+    "total": 1.68,
+    "userId": 33989423,
+    "comments": [
+      {
+        "id": 2296967691,
+        "content": "@rndquu since we opened a new pr here we can close #30 as not planned.  I'm working on it almost done. I could submit a PR right away but I don't know how to test this repo locally that's whats been holding me back",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2296967691",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 1.68,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 47,
+            "wordValue": 0.1,
+            "result": 2.33
+          },
+          "readability": {
+            "fleschKincaid": 90.13333333333335,
+            "syllables": 56,
+            "sentences": 3,
+            "score": 0.6986666666666664
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 1.68 XP ]</a>&nbsp;</h3><h6>@jordan-ae</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.68</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2296967691\" target=\"_blank\" rel=\"noopener\">@rndquu since we opened a new pr here we can close #30 as not pl&hellip;</a></h6></td><td><details><summary>2.33</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 47&#13;  wordValue: 0.1&#13;  result: 2.33&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.68</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 83.4,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2297497613,
+        "content": "You make your own directory and test against it",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2297497613",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.52,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 75.50000000000003,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.8449999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2306908267,
+        "content": "@gentlementlegen it didnt collect any review comments this time.",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2306908267",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.272,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 47.30000000000004,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.8730000000000004
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2308358910,
+        "content": "Hmm should we make a dedicated GitHub app for this purpose? It seems safer?",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2308358910",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 3.834,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 84.9157142857143,
+            "syllables": 19,
+            "sentences": 2,
+            "score": 0.750842857142857
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2308670513,
+        "content": "I think it looks more professional to use a bot instead of a personal account. And I'm pretty sure PAT is only for personal accounts. \nI can make the app when I'm back on my computer tomorrow. I'll write a reminder.",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2308670513",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 7.668,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 44,
+            "wordValue": 0.1,
+            "result": 2.27
+          },
+          "readability": {
+            "fleschKincaid": 76.46090909090911,
+            "syllables": 62,
+            "sentences": 4,
+            "score": 0.8353909090909089
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2309710851,
+        "content": "Doesn't make sense that keyrxng got review rewards as the assignee @gentlementlegen",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2309710851",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.278,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 56.97846153846157,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 0.9697846153846157
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2309727143,
+        "content": "He is the assignee to this issue. Doesn't matter how many pulls, he should not be eligible for review incentives.",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2309727143",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.746,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 67.2632142857143,
+            "syllables": 32,
+            "sentences": 2,
+            "score": 0.927367857142857
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2309748182,
+        "content": "It didn't reward assignees for reviews. \nThere is a hierarchy of roles and each contributor is selected as the highest rank role that they are eligible for. I forget if issue author or assignee is the top ranking role, but I'm thinking it must have been assignee for it to work as it did.",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2309748182",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.862,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 56,
+            "wordValue": 0.1,
+            "result": 2.47
+          },
+          "readability": {
+            "fleschKincaid": 64.00976190476193,
+            "syllables": 82,
+            "sentences": 3,
+            "score": 0.9599023809523807
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2309770246,
+        "content": "Make sure to review from before you started making changes to the plugin. It is possible that you introduced a bug. Look at how I implemented it originally (cross reference commit times and permit timestamps) it was important that it did not reward assignees for reviews because thats too easily exploitable.",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2309770246",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.754,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 51,
+            "wordValue": 0.1,
+            "result": 2.4
+          },
+          "readability": {
+            "fleschKincaid": 51.897647058823566,
+            "syllables": 83,
+            "sentences": 3,
+            "score": 0.9189764705882356
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2309989735,
+        "content": "I think its more professional to use a dedicated app for this. Besides, I'm pretty sure it counts towards my contribution history on my profile, which would not be genuine. \r\nI can make the app in a bit.",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2309989735",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.67,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 39,
+            "wordValue": 0.1,
+            "result": 2.15
+          },
+          "readability": {
+            "fleschKincaid": 74.33230769230771,
+            "syllables": 55,
+            "sentences": 3,
+            "score": 0.8566769230769229
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2310403247,
+        "content": "<img width=\"797\" alt=\"Screenshot 2024-08-26 at 23 48 55\" src=\"https://github.com/user-attachments/assets/e4019d1e-8f81-4a46-b42e-85a2a473d970\">\r\n@Keyrxng I am deleting `GH_TOKEN`. Please use these to authenticate as the new app.",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2310403247",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 8.112,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 82.27882882882884,
+            "syllables": 49,
+            "sentences": 3,
+            "score": 0.7772117117117117
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2310865187,
+        "content": "Just merge and test in prod it's fine.",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2310865187",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.327,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 113.10000000000002,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2310897666,
+        "content": "I'm pretty sure they will be automatically repopulated every time the script runs.",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2310897666",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.296,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 41.553571428571445,
+            "syllables": 25,
+            "sentences": 1,
+            "score": 0.8155357142857145
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2315628434,
+        "content": "2. Will negatively affect statistics on ubq.fi\r\nMaybe I can look for some type of admin permissions for the dedicated app. Otherwise yes, PAT.\r\nJust verified that [there is no endpoint](https://docs.github.com/en/rest/authentication/permissions-required-for-github-apps#repository-permissions-for-issues) for deleting issues. So I can set up a dedicated account with the PAT then.",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2315628434",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 9.072,
+          "formatting": {
+            "content": {
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 1
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 46,
+            "wordValue": 0.1,
+            "result": 2.31
+          },
+          "readability": {
+            "fleschKincaid": 70.59700000000002,
+            "syllables": 69,
+            "sentences": 5,
+            "score": 0.8940299999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2315665800,
+        "content": "Just re-added `GH_TOKEN` hope that somebody can fix this script.",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2315665800",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.99,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 86.70500000000001,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.7329499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2315682308,
+        "content": "I asked ChatGPT but I'm not sure. Let me go higher then.",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2315682308",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.429,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 109.12980769230771,
+            "syllables": 14,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2315691210,
+        "content": "I am now using a classic token with full repo permissions.",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2315691210",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.875,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 64.9245454545455,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0.9507545454545451
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2315697651,
+        "content": "I think that the logic must have been changed because my permissions have been set to admin. Please review the code @Keyrxng",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2315697651",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.438,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 87.99727272727276,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.7200272727272724
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2315779684,
+        "content": "I see. The account is an admin of the repo, not the org. Seems a bit dangerous. \nIf it's the only option I'll look into it later.",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2315779684",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.375,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 88.62107758620692,
+            "syllables": 38,
+            "sentences": 4,
+            "score": 0.7137892241379308
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2316620927,
+        "content": "Looks like the logic isn't correct. It deleted basically everything. \r\nhttps://github.com/ubiquity/devpool-directory/actions/runs/10599742418/job/29401088016#step:8:11\r\n---\r\nI ran it again and I think its fine now.  \r\nhttps://github.com/ubiquity/devpool-directory/actions/runs/10608034464/job/29401475685",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2316620927",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 12.258,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 62.957681159420304,
+            "syllables": 74,
+            "sentences": 6,
+            "score": 0.970423188405797
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2316651463,
+        "content": "I fixed the permissions problem for committing the statistics to the repository just now. We are using another dedicated app for higher rate limits.",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2316651463",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.389,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 46.60500000000002,
+            "syllables": 42,
+            "sentences": 2,
+            "score": 0.8660500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2374775246,
+        "content": "Yes that is correct. I only did it this way because using a personal account seems like a hack, and I tried to minimize the dependency of this for our system.",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2374775246",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.645,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 71.02508064516131,
+            "syllables": 44,
+            "sentences": 2,
+            "score": 0.8897491935483869
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2259330463,
+            "effect": {
+              "addition": 138,
+              "deletion": 15
+            },
+            "reward": 4.59,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 83.4 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>4.59</td></tr><tr><td>Issue</td><td>Comment</td><td>8</td><td>23.934</td></tr><tr><td>Review</td><td>Comment</td><td>13</td><td>54.876</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/devpool-directory/pull/1341\" target=\"_blank\" rel=\"noopener\">#1341</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+138 -15</td><td>3</td><td>4.59</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2297497613\" target=\"_blank\" rel=\"noopener\">You make your own directory and test against it</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.8</td><td>3</td><td>2.52</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2306908267\" target=\"_blank\" rel=\"noopener\">@gentlementlegen it didnt collect any review comments this time.</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.4</td><td>3</td><td>1.272</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2308358910\" target=\"_blank\" rel=\"noopener\">Hmm should we make a dedicated GitHub app for this purpose? It s&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.9</td><td>3</td><td>3.834</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2308670513\" target=\"_blank\" rel=\"noopener\">I think it looks more professional to use a bot instead of a per&hellip;</a></h6></td><td><details><summary>2.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 44&#13;  wordValue: 0.1&#13;  result: 2.27&#13;</pre></details></td><td>0.9</td><td>3</td><td>7.668</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2309710851\" target=\"_blank\" rel=\"noopener\">Doesn't make sense that keyrxng got review rewards as the assign&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.278</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2309727143\" target=\"_blank\" rel=\"noopener\">He is the assignee to this issue. Doesn't matter how many pulls,&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.746</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2309748182\" target=\"_blank\" rel=\"noopener\">It didn't reward assignees for reviews. There is a hierarchy of&hellip;</a></h6></td><td><details><summary>2.47</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 56&#13;  wordValue: 0.1&#13;  result: 2.47&#13;</pre></details></td><td>0.3</td><td>3</td><td>2.862</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2309770246\" target=\"_blank\" rel=\"noopener\">Make sure to review from before you started making changes to th&hellip;</a></h6></td><td><details><summary>2.4</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 51&#13;  wordValue: 0.1&#13;  result: 2.4&#13;</pre></details></td><td>0.3</td><td>3</td><td>2.754</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2309989735\" target=\"_blank\" rel=\"noopener\">I think its more professional to use a dedicated app for this. B&hellip;</a></h6></td><td><details><summary>2.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 39&#13;  wordValue: 0.1&#13;  result: 2.15&#13;</pre></details></td><td>0.7</td><td>3</td><td>5.67</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2310403247\" target=\"_blank\" rel=\"noopener\">&lt;img width=\"797\" alt=\"Screenshot 2024-08-26 at 23 48 55\" src=&hellip;</a></h6></td><td><details><summary>2.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.8</td><td>3</td><td>8.112</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2310865187\" target=\"_blank\" rel=\"noopener\">Just merge and test in prod it's fine.</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.327</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2310897666\" target=\"_blank\" rel=\"noopener\">I'm pretty sure they will be automatically repopulated every tim&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.296</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2315628434\" target=\"_blank\" rel=\"noopener\">2. Will negatively affect statistics on ubq.fiMaybe I can look&hellip;</a></h6></td><td><details><summary>3.41</summary><pre>content:&#13;  content:&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 1&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.1&#13;regex:&#13;  wordCount: 46&#13;  wordValue: 0.1&#13;  result: 2.31&#13;</pre></details></td><td>0.7</td><td>3</td><td>9.072</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2315665800\" target=\"_blank\" rel=\"noopener\">Just re-added &#96;GH_TOKEN&#96; hope that somebody can fix this&hellip;</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.99</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2315682308\" target=\"_blank\" rel=\"noopener\">I asked ChatGPT but I'm not sure. Let me go higher then.</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.429</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2315691210\" target=\"_blank\" rel=\"noopener\">I am now using a classic token with full repo permissions.</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.5</td><td>3</td><td>1.875</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2315697651\" target=\"_blank\" rel=\"noopener\">I think that the logic must have been changed because my permiss&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.6</td><td>3</td><td>3.438</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2315779684\" target=\"_blank\" rel=\"noopener\">I see. The account is an admin of the repo, not the org. Seems a&hellip;</a></h6></td><td><details><summary>1.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.5</td><td>3</td><td>3.375</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2316620927\" target=\"_blank\" rel=\"noopener\">Looks like the logic isn't correct. It deleted basically everyth&hellip;</a></h6></td><td><details><summary>3.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.9</td><td>3</td><td>12.258</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2316651463\" target=\"_blank\" rel=\"noopener\">I fixed the permissions problem for committing the statistics to&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.7</td><td>3</td><td>4.389</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1341#issuecomment-2374775246\" target=\"_blank\" rel=\"noopener\">Yes that is correct. I only did it this way because using a pers&hellip;</a></h6></td><td><details><summary>1.92</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.5</td><td>3</td><td>3.645</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 0,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2309564520,
+        "content": "@0x4007 Here you have results with the correct fetching of the linked pull-request. GraphQl is definitely more reliable to get this info.",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2309564520",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 70.10163043478265,
+            "syllables": 34,
+            "sentences": 2,
+            "score": 0.8989836956521735
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2309721718,
+        "content": "There are two pull requests linked to this issue. One he is, one he is not. What should we do about it?",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2309721718",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 103.25530303030304,
+            "syllables": 25,
+            "sentences": 3,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2309734697,
+        "content": "There is a different multiplier for `ISSUE_AUTHOR` and `PULL_AUTHOR` as well as `PULL_ASSIGNED` and `ISSUE_ASSIGNEE`.\r\nKeyrxng is:\r\n- `ISSUE_ASSIGNEE` on https://github.com/ubiquity/devpool-directory-bounties/issues/31\r\n- `PULL_AUTHOR` on https://github.com/ubiquity/devpool-directory/pull/1341\r\n- `PULL_COLLABORATOR` on https://github.com/ubiquity/devpool-directory/pull/1330\r\nWhich is why the second one rewards him. This would imply changing the whole logic to look at the originally assigned user to the issue from the PR and then consider the relationship to be `ISSUE_ASSIGNED` to override the `PULL_COLLABORATOR`. I do not know how v1 worked on this regard (with the bug it had it would reward everything regardless).",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2309734697",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.3
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 74,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 59.170909090909134,
+            "syllables": 156,
+            "sentences": 7,
+            "score": 0.9917090909090913
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2309764461,
+        "content": "https://github.com/ubiquibot/conversation-rewards/issues/29#issuecomment-2222260068\r\nI got rewarded for my comments on the PR, while I was assigned to the Issue and author of the PR, so I thought it was a normal scenario.\r\nThen when checking the pull-request I will look back at its original issue and check if that person is assigned.",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2309764461",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 50,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 61.04500000000003,
+            "syllables": 89,
+            "sentences": 3,
+            "score": 0.9895499999999997
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2309777825,
+        "content": "Pretty sure that the v2 always rewarded assignees of the issue but in 99% of them, the PR author was the same as the issue, so a multiplier of `0` was applied to both. Here is a rare case when multiple PRs and assigned users happened on the same issue.",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/31#issuecomment-2309777825",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 49,
+            "wordValue": 0.1,
+            "result": 2.37
+          },
+          "readability": {
+            "fleschKincaid": 68.01647959183674,
+            "syllables": 66,
+            "sentences": 2,
+            "score": 0.9198352040816326
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1341"
+      }
+    ]
+  }
+}

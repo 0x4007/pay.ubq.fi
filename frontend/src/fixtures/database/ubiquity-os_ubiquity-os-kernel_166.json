@@ -1,0 +1,1140 @@
+{
+  "whilefoo": {
+    "userId": 139262667,
+    "total": 1201.65,
+    "task": {
+      "reward": 1200,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2439557817,
+        "content": "This will clash with the ask plugin because both would be responding to the @tag, this command router would respond as if the question is about a command and ask plugin would respond as if it's a general question.\r\nOne option would be to first trigger command router and if it doesn't know the answer, then trigger the ask plugin. However this is gonna be a bit complicated to set up because the ask plugin is a normal plugin that is defined in the config so we would have to modify the kernel to have so called \"global\" plugins that would be triggered by the kernel on its own without the need to define it in the config.\r\nAnother option is to move the ask plugin to the kernel however this defeats the purpose of plugins and you can't disable or enable it.\r\nThe third option is to implement command router in the ask plugin but the problem is that the plugins can't call another plugin unless we implement a way for a plugin to tell the kernel which command/plugin to call however this is not secure as any third-party could call another plugin",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/166#issuecomment-2439557817",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.65,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 200,
+            "wordValue": 0.1,
+            "result": 1.73
+          },
+          "readability": {
+            "fleschKincaid": 46.94900000000003,
+            "syllables": 282,
+            "sentences": 5,
+            "score": 0.8694900000000003
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 1201.65 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>1200</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.65</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/166#issuecomment-2439557817\" target=\"_blank\" rel=\"noopener\">This will clash with the ask plugin because both would be respon&hellip;</a></h6></td><td><details><summary>1.73</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 200&#13;  wordValue: 0.1&#13;  result: 1.73&#13;</pre></details></td><td>1</td><td>3</td><td>1.65</td></tr></tbody></table></details>"
+  },
+  "shiv810": {
+    "total": 5.01,
+    "userId": 53160903,
+    "comments": [
+      {
+        "id": 2432062753,
+        "content": "This is an excellent use case for OpenAI function calling. We can map the functions and enable the model to select actions accordingly. By classifying user intent with the LLM, we can then allow the functions to execute the necessary tasks. However, a challenge is that all existing functions may need to be modified to accommodate invocation from the LLM, or alternatively, we would need to create a new adapter for the functions.\nNon-LLM approach is possible as well, we could create a dictionary of keywords for the all of the /slash functions and then use winkjs small English model for classification.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/166#issuecomment-2432062753",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 2.46,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 103,
+            "wordValue": 0.1,
+            "result": 2.59
+          },
+          "readability": {
+            "fleschKincaid": 50.40172815533984,
+            "syllables": 165,
+            "sentences": 5,
+            "score": 0.9040172815533984
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2439629996,
+        "content": "This task should be split into two parts: first, developing a kernel interface to invoke any slash command, and second, processing user queries.\r\nThis method won’t interfere with the `command-ask` plugin. Users will enter queries, and assuming we have a kernel-level interface for calling (\\slash plugins), where the input acts like a switch case, no response will be generated at this stage. Instead, control will be handed off to the appropriate plugin. @whilefoo and @0x4007, rfc?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/166#issuecomment-2439629996",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 2.55,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 77,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 62.65594805194806,
+            "syllables": 117,
+            "sentences": 5,
+            "score": 0.9734405194805195
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 5.01 XP ]</a>&nbsp;</h3><h6>@shiv810</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>2</td><td>5.01</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/166#issuecomment-2432062753\" target=\"_blank\" rel=\"noopener\">This is an excellent use case for OpenAI function calling. We ca&hellip;</a></h6></td><td><details><summary>2.59</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 103&#13;  wordValue: 0.1&#13;  result: 2.59&#13;</pre></details></td><td>1</td><td>3</td><td>2.46</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/166#issuecomment-2439629996\" target=\"_blank\" rel=\"noopener\">This task should be split into two parts: first, developing a ke&hellip;</a></h6></td><td><details><summary>2.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 77&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>1</td><td>3</td><td>2.55</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 77.191,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2436504365,
+        "content": "@gentlementlegen @whilefoo please design this interface",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/166#issuecomment-2436504365",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.647,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": -10.754999999999995,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2439569489,
+        "content": "We obviously change ask to /ask and then it acts like any normal plugin",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/166#issuecomment-2439569489",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 3.48,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 77.81071428571428,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.8218928571428572
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2499892382,
+        "content": "Interesting that rewards don't generate and there is no error message. This should be fixed.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/166#issuecomment-2499892382",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.966,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 71.81500000000001,
+            "syllables": 24,
+            "sentences": 2,
+            "score": 0.8818499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2506692111,
+        "content": "There was no error message posted",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/166#issuecomment-2506692111",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.222,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 87.94500000000002,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.7205499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2607517148,
+        "content": "I would like to abstract all of the configured capabilities behind tagging @UbiquityOS. For example, we converted `/ask` to @UbiquityOS so you can more naturally ask a context aware question to your \"AI team member.\" \r\nI think its useful to retain the `/` syntax, defined within the plugins, for shorthand. However we should have a small and cheap model (like 4o-mini?) that can read the repo's configured help menu, read their descriptions, and then invoke them on behalf of the user query. I think we can optimize costs further without the use of an LLM on a later date, as I don't see costs being a problem for awhile. \r\n| Command | Description | Example |\r\n|---|---|---|\r\n| `/help` | List all available commands. | `/help` |\r\n| `/allow` | Allows the user to modify the given label. | `/allow @user1 label` |\r\n| `/query` | Returns the user's wallet, access, and multiplier information. | `/query @ubiquibot` |\r\n| `/start` | Assign yourself to the issue. | `/start` |\r\n| `/stop` | Unassign yourself from the issue. | `/stop` |\r\n| `/wallet` | Register your wallet address for payments. | `/wallet ubq.eth` |\r\nExamples:\r\n@ubiquityos can i be assigned to the issue?\r\n@ubiquityos please set my wallet address to 0x0000...\r\n@ubiquityos let @0x4007 set priority labels. \r\nThis could be really nice as we grow the commands set further over time.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/166",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 2.41,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 15
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 187,
+            "wordValue": 0.1,
+            "result": 1.86
+          },
+          "readability": {
+            "fleschKincaid": 59.25026236631018,
+            "syllables": 300,
+            "sentences": 16,
+            "score": 0.9925026236631018
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1837356678,
+        "content": "Format",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1837356678",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 0.051,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": 36.62000000000003,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 0.7662000000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1837358518,
+        "content": "I wonder if we should offer a short hand syntax. \nAs I understand @UbiquityOS wouldn't automatically populate on the GitHub UI. \nMixed thoughts on this idea, but it might be more ergonomic to use with something like @u or @os \nAlso this next idea could be out of scope but wondering if we should intercept all comments and run commands on behalf. Would be perfect if we could handle those assigns for the newcomers asking to work on tasks for example.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1837358518",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,9 +1,212 @@\n+import { Manifest } from \"@ubiquity-os/plugin-sdk/manifest\";\n import { GitHubContext } from \"../github-context\";\n+import { PluginInput } from \"../types/plugin\";\n+import { isGithubPlugin, PluginConfiguration } from \"../types/plugin-configuration\";\n+import { getConfig } from \"../utils/config\";\n+import { getManifest } from \"../utils/plugins\";\n+import { dispatchWorker, dispatchWorkflow, getDefaultBranch } from \"../utils/workflow-dispatch\";\n import { postHelpCommand } from \"./help-command\";\n \n export default async function issueCommentCreated(context: GitHubContext<\"issue_comment.created\">) {\n-  const body = context.payload.comment.body.trim();\n-  if (/^\\/help$/.test(body)) {\n+  const body = context.payload.comment.body.trim().toLowerCase();\n+  if (body.startsWith(`@ubiquityos`)) {",
+        "score": {
+          "reward": 8.184,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 82,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 61.19091463414635,
+            "syllables": 121,
+            "sentences": 4,
+            "score": 0.9880908536585364
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1837359759,
+        "content": "This is a high quality prompt good job",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1837359759",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,9 +1,212 @@\n+import { Manifest } from \"@ubiquity-os/plugin-sdk/manifest\";\n import { GitHubContext } from \"../github-context\";\n+import { PluginInput } from \"../types/plugin\";\n+import { isGithubPlugin, PluginConfiguration } from \"../types/plugin-configuration\";\n+import { getConfig } from \"../utils/config\";\n+import { getManifest } from \"../utils/plugins\";\n+import { dispatchWorker, dispatchWorkflow, getDefaultBranch } from \"../utils/workflow-dispatch\";\n import { postHelpCommand } from \"./help-command\";\n \n export default async function issueCommentCreated(context: GitHubContext<\"issue_comment.created\">) {\n-  const body = context.payload.comment.body.trim();\n-  if (/^\\/help$/.test(body)) {\n+  const body = context.payload.comment.body.trim().toLowerCase();\n+  if (body.startsWith(`@ubiquityos`)) {\n+    await commandRouter(context);\n+  }\n+  if (body.startsWith(`/help`)) {\n     await postHelpCommand(context);\n   }\n }\n+\n+interface OpenAiFunction {\n+  type: \"function\";\n+  function: {\n+    name: string;\n+    description?: string;\n+    parameters?: Record<string, unknown>;\n+    strict?: boolean | null;\n+  };\n+}\n+\n+const embeddedCommands: Array<OpenAiFunction> = [\n+  {\n+    type: \"function\",\n+    function: {\n+      name: \"help\",\n+      description: \"Shows all available commands and their examples\",\n+      strict: false,\n+      parameters: {\n+        type: \"object\",\n+        properties: {},\n+        additionalProperties: false,\n+      },\n+    },\n+  },\n+];\n+\n+async function commandRouter(context: GitHubContext<\"issue_comment.created\">) {\n+  if (!(\"installation\" in context.payload) || context.payload.installation?.id === undefined) {\n+    console.log(`No installation found, cannot invoke command`);\n+    return;\n+  }\n+\n+  const commands = [...embeddedCommands];\n+  const config = await getConfig(context);\n+  const pluginsWithManifest: { plugin: PluginConfiguration[\"plugins\"][0][\"uses\"][0]; manifest: Manifest }[] = [];\n+  for (let i = 0; i < config.plugins.length; ++i) {\n+    const plugin = config.plugins[i].uses[0];\n+\n+    const manifest = await getManifest(context, plugin.plugin);\n+    if (!manifest?.commands) {\n+      continue;\n+    }\n+    pluginsWithManifest.push({\n+      plugin: plugin,\n+      manifest,\n+    });\n+    for (const command of manifest.commands) {\n+      commands.push({\n+        type: \"function\",\n+        function: {\n+          ...command,\n+          parameters: command.parameters\n+            ? {\n+                ...command.parameters,\n+                required: Object.keys(command.parameters.properties),\n+                additionalProperties: false,\n+              }\n+            : undefined,\n+          strict: true,\n+        },\n+      });\n+    }\n+  }\n+\n+  const response = await context.openAi.chat.completions.create({\n+    model: \"gpt-4o-mini\",\n+    messages: [\n+      {\n+        role: \"system\",\n+        content: [\n+          {\n+            text: `\n+You are a GitHub bot named **UbiquityOS**. Your role is to interpret and execute commands based on user comments provided in structured JSON format.\n+\n+### JSON Structure:\n+The input will include the following fields:\n+- repositoryOwner: The username of the repository owner.\n+- repositoryName: The name of the repository where the comment was made.\n+- issueNumber: The issue or pull request number where the comment appears.\n+- author: The username of the user who posted the comment.\n+- comment: The comment text directed at UbiquityOS.\n+\n+### Example JSON:\n+{\n+  \"repositoryOwner\": \"repoOwnerUsername\",\n+  \"repositoryName\": \"example-repo\",\n+  \"issueNumber\": 42,\n+  \"author\": \"user1\",\n+  \"comment\": \"@UbiquityOS please allow @user2 to change priority and time labels.\"\n+}\n+\n+### Instructions:\n+- **Interpretation Mode**:\n+  - **Tagged Natural Language**: Interpret the \"comment\" field provided in JSON. Users will mention you with \"@UbiquityOS\", followed by their request. Infer the intended command and parameters based on the \"comment\" content.\n+\n+- **Action**: Map the user's intent to one of your available functions. When responding, use the \"author\", \"repositoryOwner\", \"repositoryName\", and \"issueNumber\" fields as context if relevant.\n+`,",
+        "score": {
+          "reward": 1.092,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 92.965,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.67035
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1839372433,
+        "content": "It might be interesting to have some type of local logic (perhaps non LLM) to determine if the comment is likely asking for some type of action. Accuracy can be pretty low and in theory it could still cut quite a bit of costs. \nAlso with mini models costs might already be cheap enough for it to be feasible. We would need to run projections I suppose.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1839372433",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,9 +1,212 @@\n+import { Manifest } from \"@ubiquity-os/plugin-sdk/manifest\";\n import { GitHubContext } from \"../github-context\";\n+import { PluginInput } from \"../types/plugin\";\n+import { isGithubPlugin, PluginConfiguration } from \"../types/plugin-configuration\";\n+import { getConfig } from \"../utils/config\";\n+import { getManifest } from \"../utils/plugins\";\n+import { dispatchWorker, dispatchWorkflow, getDefaultBranch } from \"../utils/workflow-dispatch\";\n import { postHelpCommand } from \"./help-command\";\n \n export default async function issueCommentCreated(context: GitHubContext<\"issue_comment.created\">) {\n-  const body = context.payload.comment.body.trim();\n-  if (/^\\/help$/.test(body)) {\n+  const body = context.payload.comment.body.trim().toLowerCase();\n+  if (body.startsWith(`@ubiquityos`)) {",
+        "score": {
+          "reward": 6.909,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 67,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 68.61583955223882,
+            "syllables": 96,
+            "sentences": 4,
+            "score": 0.9138416044776118
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1865912058,
+        "content": "A solution would be to hook into the issue author's name. At least under the issue this would be intuitive. Under the pull I'm not sure if it makes sense to hook into the pull author, as they are generally not the person you would ask these sort of questions to.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1865912058",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,9 +1,212 @@\n+import { Manifest } from \"@ubiquity-os/plugin-sdk/manifest\";\n import { GitHubContext } from \"../github-context\";\n+import { PluginInput } from \"../types/plugin\";\n+import { isGithubPlugin, PluginConfiguration } from \"../types/plugin-configuration\";\n+import { getConfig } from \"../utils/config\";\n+import { getManifest } from \"../utils/plugins\";\n+import { dispatchWorker, dispatchWorkflow, getDefaultBranch } from \"../utils/workflow-dispatch\";\n import { postHelpCommand } from \"./help-command\";\n \n export default async function issueCommentCreated(context: GitHubContext<\"issue_comment.created\">) {\n-  const body = context.payload.comment.body.trim();\n-  if (/^\\/help$/.test(body)) {\n+  const body = context.payload.comment.body.trim().toLowerCase();\n+  if (body.startsWith(`@ubiquityos`)) {",
+        "score": {
+          "reward": 5.454,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 53,
+            "wordValue": 0.1,
+            "result": 2.43
+          },
+          "readability": {
+            "fleschKincaid": 77.16748427672958,
+            "syllables": 70,
+            "sentences": 3,
+            "score": 0.8283251572327042
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2454414557,
+        "content": "@sshivaditya2019 perhaps you can offer some pointers related to function calling",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2454414557",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.089,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 41.8518181818182,
+            "syllables": 20,
+            "sentences": 1,
+            "score": 0.818518181818182
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2469386346,
+        "content": "This is amazing for demos to see let's merge it if you think it's in a good spot to. \nReally looking forward to this natural language interface either on the copilot chat window on GitHub web desktop / iOS and/or our telegram bot.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2469386346",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.425,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 45,
+            "wordValue": 0.1,
+            "result": 2.29
+          },
+          "readability": {
+            "fleschKincaid": 63.67750000000001,
+            "syllables": 64,
+            "sentences": 2,
+            "score": 0.9632249999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2478147185,
+        "content": "Can't this be done async? Lets just merge these and then fix the plugins later? Or will kernel be broken?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2478147185",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.276,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 94.98714285714289,
+            "syllables": 26,
+            "sentences": 3,
+            "score": 0.6501285714285712
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2496923215,
+        "content": "What's the status on updating all the plugins? Should we merge?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2496923215",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.89,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 87.94500000000002,
+            "syllables": 16,
+            "sentences": 2,
+            "score": 0.7205499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2511628157,
+        "content": "@whilefoo @gentlementlegen \r\n1. We need to fix the stability of the kernel since this merged in it seems unreliable. \r\n2. I think this would be useful if it also intercepted tags to the issue author under the issue because it is common for new contributors to ask questions like \"can I start this\" or general questions \"what is this repo for\" which might be useful for the bot to intervene. I suppose we should experiment.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2511628157",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 9.666,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 73,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 51.18050228310506,
+            "syllables": 113,
+            "sentences": 3,
+            "score": 0.9118050228310506
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2428397103,
+            "effect": {
+              "addition": 737,
+              "deletion": 144
+            },
+            "reward": 26.43,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 77.191 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>26.43</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>2.41</td></tr><tr><td>Issue</td><td>Comment</td><td>4</td><td>6.315</td></tr><tr><td>Review</td><td>Comment</td><td>10</td><td>42.036</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186\" target=\"_blank\" rel=\"noopener\">#186</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+737 -144</td><td>3</td><td>26.43</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/166\" target=\"_blank\" rel=\"noopener\">I would like to abstract all of the configured capabilities behi&hellip;</a></h6></td><td><details><summary>1.86</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 15&#13;  result: 0&#13;regex:&#13;  wordCount: 187&#13;  wordValue: 0.1&#13;  result: 1.86&#13;</pre></details></td><td>1</td><td>1</td><td>2.41</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/166#issuecomment-2436504365\" target=\"_blank\" rel=\"noopener\">@gentlementlegen @whilefoo please design this interface</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.9</td><td>3</td><td>1.647</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/166#issuecomment-2439569489\" target=\"_blank\" rel=\"noopener\">We obviously change ask to /ask and then it acts like any normal&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.8</td><td>3</td><td>3.48</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/166#issuecomment-2499892382\" target=\"_blank\" rel=\"noopener\">Interesting that rewards don't generate and there is no error me&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.966</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/166#issuecomment-2506692111\" target=\"_blank\" rel=\"noopener\">There was no error message posted</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.222</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1837356678\" target=\"_blank\" rel=\"noopener\">Format</a></h6></td><td><details><summary>0.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.051</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1837358518\" target=\"_blank\" rel=\"noopener\">I wonder if we should offer a short hand syntax. As I understan&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 82&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.8</td><td>3</td><td>8.184</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1837359759\" target=\"_blank\" rel=\"noopener\">This is a high quality prompt good job</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.4</td><td>3</td><td>1.092</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1839372433\" target=\"_blank\" rel=\"noopener\">It might be interesting to have some type of local logic (perhap&hellip;</a></h6></td><td><details><summary>2.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 67&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>0.7</td><td>3</td><td>6.909</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1865912058\" target=\"_blank\" rel=\"noopener\">A solution would be to hook into the issue author's name. At lea&hellip;</a></h6></td><td><details><summary>2.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 53&#13;  wordValue: 0.1&#13;  result: 2.43&#13;</pre></details></td><td>0.6</td><td>3</td><td>5.454</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2454414557\" target=\"_blank\" rel=\"noopener\">@sshivaditya2019 perhaps you can offer some pointers related to &hellip;</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.089</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2469386346\" target=\"_blank\" rel=\"noopener\">This is amazing for demos to see let's merge it if you think it'&hellip;</a></h6></td><td><details><summary>2.29</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 45&#13;  wordValue: 0.1&#13;  result: 2.29&#13;</pre></details></td><td>0.5</td><td>3</td><td>4.425</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2478147185\" target=\"_blank\" rel=\"noopener\">Can't this be done async? Lets just merge these and then fix the&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.6</td><td>3</td><td>3.276</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2496923215\" target=\"_blank\" rel=\"noopener\">What's the status on updating all the plugins? Should we merge?</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.5</td><td>3</td><td>1.89</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2511628157\" target=\"_blank\" rel=\"noopener\">@whilefoo @gentlementlegen 1. We need to fix the stability of &hellip;</a></h6></td><td><details><summary>2.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 73&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.9</td><td>3</td><td>9.666</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 107.091,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2499907291,
+        "content": "@0x4007 Did you see the error message? We just upgraded everything the have the LLM capability.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/166#issuecomment-2499907291",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 3.465,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 61.24000000000001,
+            "syllables": 26,
+            "sentences": 2,
+            "score": 0.9875999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1833715981,
+        "content": "We have moved to `ESM` so I'd suggest trying `unstable_mock` instead. As such, imports should happen after the mock, since it is hoisted.\r\nhttps://jestjs.io/docs/ecmascript-modules\r\n(And I second you, it's a pain in the ass to deal with all this `CJS` `ESM compatibility, I am having nightmares within `text-conversation-rewards`)",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1833715981",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,320 @@\n+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, jest } from \"@jest/globals\";\n+import { RestEndpointMethodTypes } from \"@octokit/plugin-rest-endpoint-methods\";\n+import { config } from \"dotenv\";\n+import { http, HttpResponse } from \"msw\";\n+import { GitHubContext } from \"../src/github/github-context\";\n+import { GitHubEventHandler } from \"../src/github/github-event-handler\";\n+import { CONFIG_FULL_PATH } from \"../src/github/utils/config\";\n+import { server } from \"./__mocks__/node\";\n+import \"./__mocks__/webhooks\";\n+\n+jest.mock(\"@octokit/plugin-paginate-rest\", () => ({}));\n+jest.mock(\"@octokit/plugin-rest-endpoint-methods\", () => ({}));\n+jest.mock(\"@octokit/plugin-retry\", () => ({}));\n+jest.mock(\"@octokit/plugin-throttling\", () => ({}));\n+jest.mock(\"@octokit/auth-app\", () => ({}));\n+\n+config({ path: \".dev.vars\" });\n+\n+const name = \"ubiquity-os-kernel\";\n+\n+const dispatchWorkflow = jest.fn();\n+jest.mock(\"../src/github/utils/workflow-dispatch\", () => ({\n+  //...(jest.requireActual(\"../src/github/utils/workflow-dispatch\") as object),\n+  getDefaultBranch: async () => \"main\",\n+  dispatchWorkflow: dispatchWorkflow,\n+}));",
+        "score": {
+          "reward": 10.584,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 41,
+            "wordValue": 0.1,
+            "result": 2.2
+          },
+          "readability": {
+            "fleschKincaid": 85.10875,
+            "syllables": 61,
+            "sentences": 4,
+            "score": 0.7489125
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1834085295,
+        "content": "Update: it broke in the SDK when I moved it too. It is usually easier to fake network calls than the actual package.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1834085295",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,320 @@\n+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, jest } from \"@jest/globals\";\n+import { RestEndpointMethodTypes } from \"@octokit/plugin-rest-endpoint-methods\";\n+import { config } from \"dotenv\";\n+import { http, HttpResponse } from \"msw\";\n+import { GitHubContext } from \"../src/github/github-context\";\n+import { GitHubEventHandler } from \"../src/github/github-event-handler\";\n+import { CONFIG_FULL_PATH } from \"../src/github/utils/config\";\n+import { server } from \"./__mocks__/node\";\n+import \"./__mocks__/webhooks\";\n+\n+jest.mock(\"@octokit/plugin-paginate-rest\", () => ({}));\n+jest.mock(\"@octokit/plugin-rest-endpoint-methods\", () => ({}));\n+jest.mock(\"@octokit/plugin-retry\", () => ({}));\n+jest.mock(\"@octokit/plugin-throttling\", () => ({}));\n+jest.mock(\"@octokit/auth-app\", () => ({}));\n+\n+config({ path: \".dev.vars\" });\n+\n+const name = \"ubiquity-os-kernel\";\n+\n+const dispatchWorkflow = jest.fn();\n+jest.mock(\"../src/github/utils/workflow-dispatch\", () => ({\n+  //...(jest.requireActual(\"../src/github/utils/workflow-dispatch\") as object),\n+  getDefaultBranch: async () => \"main\",\n+  dispatchWorkflow: dispatchWorkflow,\n+}));",
+        "score": {
+          "reward": 4.137,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 84.8146739130435,
+            "syllables": 30,
+            "sentences": 2,
+            "score": 0.7518532608695649
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1835265927,
+        "content": "This can happen if the module you are trying to lock is previously imported by another module first, in such case the mock won't work. I've seen such scenario within the SDK.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1835265927",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,320 @@\n+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, jest } from \"@jest/globals\";\n+import { RestEndpointMethodTypes } from \"@octokit/plugin-rest-endpoint-methods\";\n+import { config } from \"dotenv\";\n+import { http, HttpResponse } from \"msw\";\n+import { GitHubContext } from \"../src/github/github-context\";\n+import { GitHubEventHandler } from \"../src/github/github-event-handler\";\n+import { CONFIG_FULL_PATH } from \"../src/github/utils/config\";\n+import { server } from \"./__mocks__/node\";\n+import \"./__mocks__/webhooks\";\n+\n+jest.mock(\"@octokit/plugin-paginate-rest\", () => ({}));\n+jest.mock(\"@octokit/plugin-rest-endpoint-methods\", () => ({}));\n+jest.mock(\"@octokit/plugin-retry\", () => ({}));\n+jest.mock(\"@octokit/plugin-throttling\", () => ({}));\n+jest.mock(\"@octokit/auth-app\", () => ({}));\n+\n+config({ path: \".dev.vars\" });\n+\n+const name = \"ubiquity-os-kernel\";\n+\n+const dispatchWorkflow = jest.fn();\n+jest.mock(\"../src/github/utils/workflow-dispatch\", () => ({\n+  //...(jest.requireActual(\"../src/github/utils/workflow-dispatch\") as object),\n+  getDefaultBranch: async () => \"main\",\n+  dispatchWorkflow: dispatchWorkflow,\n+}));",
+        "score": {
+          "reward": 6.12,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 34,
+            "wordValue": 0.1,
+            "result": 2.01
+          },
+          "readability": {
+            "fleschKincaid": 70.14470588235295,
+            "syllables": 48,
+            "sentences": 2,
+            "score": 0.8985529411764704
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1835557858,
+        "content": "Glad you figured it out. Jest has been giving me headaches a lot lately particularly when ESM came into play.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1835557858",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,320 @@\n+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, jest } from \"@jest/globals\";\n+import { RestEndpointMethodTypes } from \"@octokit/plugin-rest-endpoint-methods\";\n+import { config } from \"dotenv\";\n+import { http, HttpResponse } from \"msw\";\n+import { GitHubContext } from \"../src/github/github-context\";\n+import { GitHubEventHandler } from \"../src/github/github-event-handler\";\n+import { CONFIG_FULL_PATH } from \"../src/github/utils/config\";\n+import { server } from \"./__mocks__/node\";\n+import \"./__mocks__/webhooks\";\n+\n+jest.mock(\"@octokit/plugin-paginate-rest\", () => ({}));\n+jest.mock(\"@octokit/plugin-rest-endpoint-methods\", () => ({}));\n+jest.mock(\"@octokit/plugin-retry\", () => ({}));\n+jest.mock(\"@octokit/plugin-throttling\", () => ({}));\n+jest.mock(\"@octokit/auth-app\", () => ({}));\n+\n+config({ path: \".dev.vars\" });\n+\n+const name = \"ubiquity-os-kernel\";\n+\n+const dispatchWorkflow = jest.fn();\n+jest.mock(\"../src/github/utils/workflow-dispatch\", () => ({\n+  //...(jest.requireActual(\"../src/github/utils/workflow-dispatch\") as object),\n+  getDefaultBranch: async () => \"main\",\n+  dispatchWorkflow: dispatchWorkflow,\n+}));",
+        "score": {
+          "reward": 2.256,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 69.78500000000001,
+            "syllables": 30,
+            "sentences": 2,
+            "score": 0.9021499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1835800627,
+        "content": "```suggestion\r\n  if (!toolCalls?.length) {\r\n```",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1835800627",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,9 +1,212 @@\n+import { Manifest } from \"@ubiquity-os/plugin-sdk/manifest\";\n import { GitHubContext } from \"../github-context\";\n+import { PluginInput } from \"../types/plugin\";\n+import { isGithubPlugin, PluginConfiguration } from \"../types/plugin-configuration\";\n+import { getConfig } from \"../utils/config\";\n+import { getManifest } from \"../utils/plugins\";\n+import { dispatchWorker, dispatchWorkflow, getDefaultBranch } from \"../utils/workflow-dispatch\";\n import { postHelpCommand } from \"./help-command\";\n \n export default async function issueCommentCreated(context: GitHubContext<\"issue_comment.created\">) {\n-  const body = context.payload.comment.body.trim();\n-  if (/^\\/help$/.test(body)) {\n+  const body = context.payload.comment.body.trim().toLowerCase();\n+  if (body.startsWith(`@ubiquityos`)) {\n+    await commandRouter(context);\n+  }\n+  if (body.startsWith(`/help`)) {\n     await postHelpCommand(context);\n   }\n }\n+\n+interface OpenAiFunction {\n+  type: \"function\";\n+  function: {\n+    name: string;\n+    description?: string;\n+    parameters?: Record<string, unknown>;\n+    strict?: boolean | null;\n+  };\n+}\n+\n+const embeddedCommands: Array<OpenAiFunction> = [\n+  {\n+    type: \"function\",\n+    function: {\n+      name: \"help\",\n+      description: \"Shows all available commands and their examples\",\n+      strict: false,\n+      parameters: {\n+        type: \"object\",\n+        properties: {},\n+        additionalProperties: false,\n+      },\n+    },\n+  },\n+];\n+\n+async function commandRouter(context: GitHubContext<\"issue_comment.created\">) {\n+  if (!(\"installation\" in context.payload) || context.payload.installation?.id === undefined) {\n+    console.log(`No installation found, cannot invoke command`);\n+    return;\n+  }\n+\n+  const commands = [...embeddedCommands];\n+  const config = await getConfig(context);\n+  const pluginsWithManifest: { plugin: PluginConfiguration[\"plugins\"][0][\"uses\"][0]; manifest: Manifest }[] = [];\n+  for (let i = 0; i < config.plugins.length; ++i) {\n+    const plugin = config.plugins[i].uses[0];\n+\n+    const manifest = await getManifest(context, plugin.plugin);\n+    if (!manifest?.commands) {\n+      continue;\n+    }\n+    pluginsWithManifest.push({\n+      plugin: plugin,\n+      manifest,\n+    });\n+    for (const command of manifest.commands) {\n+      commands.push({\n+        type: \"function\",\n+        function: {\n+          ...command,\n+          parameters: command.parameters\n+            ? {\n+                ...command.parameters,\n+                required: Object.keys(command.parameters.properties),\n+                additionalProperties: false,\n+              }\n+            : undefined,\n+          strict: true,\n+        },\n+      });\n+    }\n+  }\n+\n+  const response = await context.openAi.chat.completions.create({\n+    model: \"gpt-4o-mini\",\n+    messages: [\n+      {\n+        role: \"system\",\n+        content: [\n+          {\n+            text: `\n+You are a GitHub bot named **UbiquityOS**. Your role is to interpret and execute commands based on user comments provided in structured JSON format.\n+\n+### JSON Structure:\n+The input will include the following fields:\n+- repositoryOwner: The username of the repository owner.\n+- repositoryName: The name of the repository where the comment was made.\n+- issueNumber: The issue or pull request number where the comment appears.\n+- author: The username of the user who posted the comment.\n+- comment: The comment text directed at UbiquityOS.\n+\n+### Example JSON:\n+{\n+  \"repositoryOwner\": \"repoOwnerUsername\",\n+  \"repositoryName\": \"example-repo\",\n+  \"issueNumber\": 42,\n+  \"author\": \"user1\",\n+  \"comment\": \"@UbiquityOS please allow @user2 to change priority and time labels.\"\n+}\n+\n+### Instructions:\n+- **Interpretation Mode**:\n+  - **Tagged Natural Language**: Interpret the \"comment\" field provided in JSON. Users will mention you with \"@UbiquityOS\", followed by their request. Infer the intended command and parameters based on the \"comment\" content.\n+\n+- **Action**: Map the user's intent to one of your available functions. When responding, use the \"author\", \"repositoryOwner\", \"repositoryName\", and \"issueNumber\" fields as context if relevant.\n+`,\n+            type: \"text\",\n+          },\n+        ],\n+      },\n+      {\n+        role: \"user\",\n+        content: [\n+          {\n+            text: JSON.stringify({\n+              repositoryOwner: context.payload.repository.owner.login,\n+              repositoryName: context.payload.repository.name,\n+              issueNumber: context.payload.issue.number,\n+              author: context.payload.comment.user?.login,\n+              comment: context.payload.comment.body,\n+            }),\n+            type: \"text\",\n+          },\n+        ],\n+      },\n+    ],\n+    temperature: 1,\n+    max_tokens: 2048,\n+    top_p: 1,\n+    frequency_penalty: 0,\n+    presence_penalty: 0,\n+    tools: commands,\n+    parallel_tool_calls: false,\n+    response_format: {\n+      type: \"text\",\n+    },\n+  });\n+\n+  if (response.choices.length === 0) {\n+    return;\n+  }\n+\n+  const toolCalls = response.choices[0].message.tool_calls;\n+  if (!toolCalls || toolCalls.length === 0) {",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1839425946,
+        "content": "I agree with @whilefoo that tagging another person is not good. Maybe we should create a @UbiquityOS account to get the auto-completion when typing the name.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1839425946",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,9 +1,212 @@\n+import { Manifest } from \"@ubiquity-os/plugin-sdk/manifest\";\n import { GitHubContext } from \"../github-context\";\n+import { PluginInput } from \"../types/plugin\";\n+import { isGithubPlugin, PluginConfiguration } from \"../types/plugin-configuration\";\n+import { getConfig } from \"../utils/config\";\n+import { getManifest } from \"../utils/plugins\";\n+import { dispatchWorker, dispatchWorkflow, getDefaultBranch } from \"../utils/workflow-dispatch\";\n import { postHelpCommand } from \"./help-command\";\n \n export default async function issueCommentCreated(context: GitHubContext<\"issue_comment.created\">) {\n-  const body = context.payload.comment.body.trim();\n-  if (/^\\/help$/.test(body)) {\n+  const body = context.payload.comment.body.trim().toLowerCase();\n+  if (body.startsWith(`@ubiquityos`)) {",
+        "score": {
+          "reward": 5.544,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 61.53250000000003,
+            "syllables": 42,
+            "sentences": 2,
+            "score": 0.9846749999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2453726773,
+        "content": "Second option seems proper to me because it is what we use for all the plugins so the parser is ready without any change, making maintenance easier.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2453726773",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.52,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 57.23000000000002,
+            "syllables": 39,
+            "sentences": 1,
+            "score": 0.9723000000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2466694278,
+        "content": "@whilefoo The types not matching was there before somehow, not sure about the cause.\r\nWhat I usually do is to build with a `--watch` so I don't have to think of it. If that is too burdensome, we can consider merging it back, but it has to be perfectly separated otherwise we will have the circular reference again which will break `ncc` compilation.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2466694278",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 6.888,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 62,
+            "wordValue": 0.1,
+            "result": 2.54
+          },
+          "readability": {
+            "fleschKincaid": 63.05188172043013,
+            "syllables": 90,
+            "sentences": 3,
+            "score": 0.9694811827956987
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2466970943,
+        "content": "@whilefoo Looks cool. I wanted to try some commands, I guess the bot was not able to execute them which is ok but I got no feedback on them: https://github.com/ubiquibot-whilefoo-testing/testing/issues/7#issuecomment-2466970407 should there be some error message displayed in such case?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2466970943",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 10.854,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 39,
+            "wordValue": 0.1,
+            "result": 2.15
+          },
+          "readability": {
+            "fleschKincaid": 68.09433333333337,
+            "syllables": 72,
+            "sentences": 3,
+            "score": 0.9190566666666663
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2485158094,
+        "content": "@whilefoo could you update the `.dev.vars.example` with the `OPEN_API_KEY`?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2485158094",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.806,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 78.87285714285717,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.8112714285714283
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2498507368,
+        "content": "Every plugin has been merged, two remain with deployment issues that are being fixed. Afterwards this will be merged.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2498507368",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.258,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 72.51881578947369,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.8748118421052631
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2499800998,
+        "content": "Current only https://github.com/ubiquity-os-marketplace/text-vector-embeddings/ is not deployed but was not working before anyway, so I am merging this, expect a fix for the plugin today.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2499800998",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 7.014,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 53.120000000000005,
+            "syllables": 52,
+            "sentences": 2,
+            "score": 0.9312
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2513586315,
+        "content": "I am not sure if this is related to the stability issues because we had these problems before, not as much as now, that's the only difference.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2513586315",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.525,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 60.579285714285746,
+            "syllables": 39,
+            "sentences": 1,
+            "score": 0.9942071428571425
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2422712238,
+            "effect": {
+              "addition": 742,
+              "deletion": 96
+            },
+            "reward": 25.14,
+            "priority": 3
+          },
+          {
+            "reviewId": 2425614009,
+            "effect": {
+              "addition": 188,
+              "deletion": 85
+            },
+            "reward": 8.19,
+            "priority": 3
+          },
+          {
+            "reviewId": 2425873108,
+            "effect": {
+              "addition": 27,
+              "deletion": 66
+            },
+            "reward": 2.79,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 107.091 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>36.12</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>3.465</td></tr><tr><td>Review</td><td>Comment</td><td>13</td><td>67.506</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186\" target=\"_blank\" rel=\"noopener\">#186</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+742 -96</td><td>3</td><td>25.14</td></tr><tr><td>+188 -85</td><td>3</td><td>8.19</td></tr><tr><td>+27 -66</td><td>3</td><td>2.79</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/166#issuecomment-2499907291\" target=\"_blank\" rel=\"noopener\">@0x4007 Did you see the error message? We just upgraded everythi&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.7</td><td>3</td><td>3.465</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1833715981\" target=\"_blank\" rel=\"noopener\">We have moved to &#96;ESM&#96; so I'd suggest trying &#96;unstab&hellip;</a></h6></td><td><details><summary>3.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 41&#13;  wordValue: 0.1&#13;  result: 2.2&#13;</pre></details></td><td>0.9</td><td>3</td><td>10.584</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1834085295\" target=\"_blank\" rel=\"noopener\">Update: it broke in the SDK when I moved it too. It is usually e&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.7</td><td>3</td><td>4.137</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1835265927\" target=\"_blank\" rel=\"noopener\">This can happen if the module you are trying to lock is previous&hellip;</a></h6></td><td><details><summary>2.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 34&#13;  wordValue: 0.1&#13;  result: 2.01&#13;</pre></details></td><td>0.8</td><td>3</td><td>6.12</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1835557858\" target=\"_blank\" rel=\"noopener\">Glad you figured it out. Jest has been giving me headaches a lot&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.4</td><td>3</td><td>2.256</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1835800627\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionif (!toolCalls?.length) {&#96;&#9&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#discussion_r1839425946\" target=\"_blank\" rel=\"noopener\">I agree with @whilefoo that tagging another person is not good. &hellip;</a></h6></td><td><details><summary>1.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>0.8</td><td>3</td><td>5.544</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2453726773\" target=\"_blank\" rel=\"noopener\">Second option seems proper to me because it is what we use for a&hellip;</a></h6></td><td><details><summary>1.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>0.8</td><td>3</td><td>5.52</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2466694278\" target=\"_blank\" rel=\"noopener\">@whilefoo The types not matching was there before somehow, not s&hellip;</a></h6></td><td><details><summary>2.54</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 62&#13;  wordValue: 0.1&#13;  result: 2.54&#13;</pre></details></td><td>0.7</td><td>3</td><td>6.888</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2466970943\" target=\"_blank\" rel=\"noopener\">@whilefoo Looks cool. I wanted to try some commands, I guess the&hellip;</a></h6></td><td><details><summary>3.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 39&#13;  wordValue: 0.1&#13;  result: 2.15&#13;</pre></details></td><td>0.9</td><td>3</td><td>10.854</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2485158094\" target=\"_blank\" rel=\"noopener\">@whilefoo could you update the &#96;.dev.vars.example&#96; with &hellip;</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.7</td><td>3</td><td>1.806</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2498507368\" target=\"_blank\" rel=\"noopener\">Every plugin has been merged, two remain with deployment issues &hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.6</td><td>3</td><td>3.258</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2499800998\" target=\"_blank\" rel=\"noopener\">Current only https://github.com/ubiquity-os-marketplace/text-vec&hellip;</a></h6></td><td><details><summary>2.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.7</td><td>3</td><td>7.014</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/186#issuecomment-2513586315\" target=\"_blank\" rel=\"noopener\">I am not sure if this is related to the stability issues because&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.5</td><td>3</td><td>3.525</td></tr></tbody></table></details>"
+  }
+}

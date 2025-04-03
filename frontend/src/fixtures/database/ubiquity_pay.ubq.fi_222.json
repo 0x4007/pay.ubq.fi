@@ -1,0 +1,541 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 164.499,
+    "task": {
+      "reward": 150,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2053847502,
+        "content": "@0x4007 Ok it makes sense. I tried to avoid any downtime or backfire during the update. Still this issue is relevant because the types and decode used should be updated to handle the new data shape of the permits!",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/222#issuecomment-2053847502",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 7.209,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 39,
+            "wordValue": 0.1,
+            "result": 2.15
+          },
+          "readability": {
+            "fleschKincaid": 78.67076923076925,
+            "syllables": 53,
+            "sentences": 3,
+            "score": 0.8132923076923074
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2238830279,
+        "content": "Multiple breaking changes have been introduced by the new structure of Permits located [here](https://github.com/ubiquibot/permit-generation/blob/588d5fb8168e5e07412d948966f2dc450c98edb5/src/types/permits.ts)\r\nConsequently the `pay.ubq.fi` parser cannot properly populate the permit values, that use an [old schema](https://github.com/ubiquity/pay.ubq.fi/blob/b5d17936f1a8da253c42a4b8ec35b6a32864932c/static/scripts/rewards/render-transaction/tx-type.ts).\r\nIdeally, we should avoid breaking all the old permits by handling the two schema shapes in the first place, then eventually discard the old schema as every new permit will be generated with the new one.\r\nTasks to be carried out:\r\n- include `\"@ubiquibot/permit-generation\"` decode function\r\n- handle both permit shapes and decode them properly\r\nRelated conversation: https://github.com/ubiquibot/permit-generation/pull/10#discussion_r1561386341",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/222",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 7.29,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 7
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 82,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 43.363530219780216,
+            "syllables": 151,
+            "sentences": 4,
+            "score": 0.8336353021978021
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 164.499 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>150</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>7.29</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>7.209</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/222\" target=\"_blank\" rel=\"noopener\">Multiple breaking changes have been introduced by the new struct&hellip;</a></h6></td><td><details><summary>5.83</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 7&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.2&#13;regex:&#13;  wordCount: 82&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>1</td><td>1</td><td>7.29</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/222#issuecomment-2053847502\" target=\"_blank\" rel=\"noopener\">@0x4007 Ok it makes sense. I tried to avoid any downtime or back&hellip;</a></h6></td><td><details><summary>2.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 39&#13;  wordValue: 0.1&#13;  result: 2.15&#13;</pre></details></td><td>0.9</td><td>3</td><td>7.209</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 23.694,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2053556816,
+        "content": "No need. Drop support of old permits because people generally claim them immediately. If for some reason there's unclaimed old permits, we can provide the cloudflare deploy preview link of the previous commit. These all exist right now and no extra work is required. \nNo need to make your job harder than it needs to be.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/222#issuecomment-2053556816",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 9.36,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 57,
+            "wordValue": 0.1,
+            "result": 2.48
+          },
+          "readability": {
+            "fleschKincaid": 73.55873684210528,
+            "syllables": 82,
+            "sentences": 5,
+            "score": 0.8644126315789472
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1569164124,
+        "content": "Why did you change from `RewardPermit`? I think more specific naming is better.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/224#discussion_r1569164124",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -48,12 +48,12 @@ export class AppState {\n     return networkExplorers[this.reward.networkId] || \"https://etherscan.io\";\n   }\n \n-  nextPermit(): RewardPermit | null {\n+  nextPermit(): Permit | null {",
+        "score": {
+          "reward": 2.646,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 87.94500000000002,
+            "syllables": 16,
+            "sentences": 2,
+            "score": 0.7205499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1569165738,
+        "content": "Our coding style guide should have this written as `Erc20Permit`\nIt is an implicit rule according to the contributing.md in the Ubiquity Dollar repo",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/224#discussion_r1569165738",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,6 +1,6 @@\n+import { ERC20Permit, ERC721Permit } from \"@ubiquibot/permit-generation/types\";",
+        "score": {
+          "reward": 5.112,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 53.655,
+            "syllables": 40,
+            "sentences": 2,
+            "score": 0.93655
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1569167743,
+        "content": "I've never seen this before why did you set this?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/224#discussion_r1569167743",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -25,7 +25,7 @@\n     /* Modules */\n     \"module\": \"commonjs\" /* Specify what module code is generated. */,\n     // \"rootDir\": \"./\",                                  /* Specify the root folder within your source files. */\n-    // \"moduleResolution\": \"node10\",                     /* Specify how TypeScript looks up a file from a given module specifier. */\n+    \"moduleResolution\": \"Node16\",                        /* Specify how TypeScript looks up a file from a given module specifier. */",
+        "score": {
+          "reward": 2.088,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 95.68818181818183,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.6431181818181817
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1571812485,
+        "content": "Not yet!",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/224#discussion_r1571812485",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,6 +1,6 @@\n+import { ERC20Permit, ERC721Permit } from \"@ubiquibot/permit-generation/types\";",
+        "score": {
+          "reward": 0.198,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 120.20500000000001,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2006624968,
+            "effect": {
+              "addition": 76,
+              "deletion": 67
+            },
+            "reward": 4.29,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/224"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 23.694 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>4.29</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>9.36</td></tr><tr><td>Review</td><td>Comment</td><td>4</td><td>10.044</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/224\" target=\"_blank\" rel=\"noopener\">#224</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+76 -67</td><td>3</td><td>4.29</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/222#issuecomment-2053556816\" target=\"_blank\" rel=\"noopener\">No need. Drop support of old permits because people generally cl&hellip;</a></h6></td><td><details><summary>2.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 57&#13;  wordValue: 0.1&#13;  result: 2.48&#13;</pre></details></td><td>1</td><td>3</td><td>9.36</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/224#discussion_r1569164124\" target=\"_blank\" rel=\"noopener\">Why did you change from &#96;RewardPermit&#96;? I think more spe&hellip;</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.646</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/224#discussion_r1569165738\" target=\"_blank\" rel=\"noopener\">Our coding style guide should have this written as &#96;Erc20Per&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.8</td><td>3</td><td>5.112</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/224#discussion_r1569167743\" target=\"_blank\" rel=\"noopener\">I've never seen this before why did you set this?</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.6</td><td>3</td><td>2.088</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/224#discussion_r1571812485\" target=\"_blank\" rel=\"noopener\">Not yet!</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.198</td></tr></tbody></table></details>"
+  },
+  "molecula451": {
+    "total": 5.376,
+    "userId": 41552663,
+    "comments": [
+      {
+        "id": 2067744653,
+        "content": "@0x4007 regen here",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/222#issuecomment-2067744653",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.198,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 90.99000000000004,
+            "syllables": 4,
+            "sentences": 1,
+            "score": 0.6900999999999996
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1571495040,
+        "content": "can you clarify what you mean? @whilefoo",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/224#discussion_r1571495040",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -31,9 +31,9 @@ export function claimErc721PermitHandler(reward: Erc721Permit) {\n \n     buttonController.showLoader();\n     try {\n-      const nftContract = new ethers.Contract(reward.permit.permitted.token, nftRewardAbi, signer);\n+      const nftContract = new ethers.Contract(reward.tokenAddress, nftRewardAbi, signer);\n \n-      const tx: TransactionResponse = await nftContract.safeMint(reward.request, reward.signature);\n+      const tx: TransactionResponse = await nftContract.safeMint(reward, reward.signature);",
+        "score": {
+          "reward": 0.198,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 70.33964285714288,
+            "syllables": 11,
+            "sentences": 2,
+            "score": 0.8966035714285713
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1573353556,
+        "content": "can be addresses in subsequently PRs with typechain",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/224#discussion_r1573353556",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -31,9 +31,9 @@ export function claimErc721PermitHandler(reward: Erc721Permit) {\n \n     buttonController.showLoader();\n     try {\n-      const nftContract = new ethers.Contract(reward.permit.permitted.token, nftRewardAbi, signer);\n+      const nftContract = new ethers.Contract(reward.tokenAddress, nftRewardAbi, signer);\n \n-      const tx: TransactionResponse = await nftContract.safeMint(reward.request, reward.signature);\n+      const tx: TransactionResponse = await nftContract.safeMint(reward, reward.signature);",
+        "score": {
+          "reward": 0.36,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 50.66500000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.9066500000000002
+          },
+          "multiplier": 0.25,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2010084256,
+            "effect": {
+              "addition": 76,
+              "deletion": 67
+            },
+            "reward": 4.29,
+            "priority": 3
+          },
+          {
+            "reviewId": 2013125507,
+            "effect": {
+              "addition": 10,
+              "deletion": 1
+            },
+            "reward": 0.33,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/224"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 5.376 XP ]</a>&nbsp;</h3><h6>@molecula451</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>4.62</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.198</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>0.558</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/224\" target=\"_blank\" rel=\"noopener\">#224</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+76 -67</td><td>3</td><td>4.29</td></tr><tr><td>+10 -1</td><td>3</td><td>0.33</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/222#issuecomment-2067744653\" target=\"_blank\" rel=\"noopener\">@0x4007 regen here</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.6</td><td>3</td><td>0.198</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/224#discussion_r1571495040\" target=\"_blank\" rel=\"noopener\">can you clarify what you mean? @whilefoo</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.198</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/224#discussion_r1573353556\" target=\"_blank\" rel=\"noopener\">can be addresses in subsequently PRs with typechain</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.5</td><td>3</td><td>0.36</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 7.272,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 2009029215,
+        "content": "otherwise looks good",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/224#pullrequestreview-2009029215",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.099,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 62.79000000000002,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.9720999999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1570849041,
+        "content": "I think it's not correct to pass our permit struct. `safeMint` has its own struct defined in the [ABI](https://github.com/ubiquity/pay.ubq.fi/blob/development/static/scripts/rewards/abis/nft-reward-abi.ts)",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/224#discussion_r1570849041",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -31,9 +31,9 @@ export function claimErc721PermitHandler(reward: Erc721Permit) {\n \n     buttonController.showLoader();\n     try {\n-      const nftContract = new ethers.Contract(reward.permit.permitted.token, nftRewardAbi, signer);\n+      const nftContract = new ethers.Contract(reward.tokenAddress, nftRewardAbi, signer);\n \n-      const tx: TransactionResponse = await nftContract.safeMint(reward.request, reward.signature);\n+      const tx: TransactionResponse = await nftContract.safeMint(reward, reward.signature);",
+        "score": {
+          "reward": 1.944,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 99.23460526315789,
+            "syllables": 22,
+            "sentences": 2,
+            "score": 0.6076539473684212
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1573345416,
+        "content": "it would be nice to have TS types for contracts",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/224#discussion_r1573345416",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -31,9 +31,9 @@ export function claimErc721PermitHandler(reward: Erc721Permit) {\n \n     buttonController.showLoader();\n     try {\n-      const nftContract = new ethers.Contract(reward.permit.permitted.token, nftRewardAbi, signer);\n+      const nftContract = new ethers.Contract(reward.tokenAddress, nftRewardAbi, signer);\n \n-      const tx: TransactionResponse = await nftContract.safeMint(reward.request, reward.signature);\n+      const tx: TransactionResponse = await nftContract.safeMint(reward, reward.signature);",
+        "score": {
+          "reward": 0.609,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 103.625,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2009029215,
+            "effect": {
+              "addition": 76,
+              "deletion": 67
+            },
+            "reward": 4.29,
+            "priority": 3
+          },
+          {
+            "reviewId": 2013120118,
+            "effect": {
+              "addition": 10,
+              "deletion": 1
+            },
+            "reward": 0.33,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/224"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 7.272 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>4.62</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>2.652</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/224\" target=\"_blank\" rel=\"noopener\">#224</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+76 -67</td><td>3</td><td>4.29</td></tr><tr><td>+10 -1</td><td>3</td><td>0.33</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/224#pullrequestreview-2009029215\" target=\"_blank\" rel=\"noopener\">otherwise looks good</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.099</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/224#discussion_r1570849041\" target=\"_blank\" rel=\"noopener\">I think it's not correct to pass our permit struct. &#96;safeMin&hellip;</a></h6></td><td><details><summary>2.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.9</td><td>3</td><td>1.944</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/224#discussion_r1573345416\" target=\"_blank\" rel=\"noopener\">it would be nice to have TS types for contracts</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.7</td><td>3</td><td>0.609</td></tr></tbody></table></details>"
+  }
+}

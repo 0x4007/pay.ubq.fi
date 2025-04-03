@@ -1,0 +1,916 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 614.27,
+    "task": {
+      "reward": 600,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2333160803,
+        "content": "Rather than returning a list of RPCs considered valid based on their `eth_getBlockNumber` response and the burden being on the package user to handle call failures > endpoint reselection via the module, it should be built-in directly.\r\nTo do this, the package should return a JS `Proxy` to the provider. This `Proxy` should effectively handle call retries, RPC reselection, error feedback and be configurable.\r\nThis means that any read/write op a user makes will now pass through the module (as opposed to only read ops in the linked issue) which is a lot of ground to cover in terms of potential errors.\r\nA proxy user should never need to get involved with errors unless they have caused them more or less and since what they assign as their `\"app.provider\"` is our `Proxy` they should never need to change provider.\r\n<hr/>\r\n- The proxy should be the default\r\n- Expose both the proxy and a non-proxied version (basically what the package does now)\r\n- configurables: breakpoints, tiered log output, log message constants\r\n- tests should cover read & write ops, as well as any new functionality\r\n<hr/>\r\nThe intention is that for a package user everything out of their control is abstracted away, they ask for a provider and it just works unless ofc it's user error.\r\nThe expectation is that the user would receive valuable error feedback only if the package is not able to complete the op and this really should only ever happen because of user error.\r\nUser-side [Proxy implementation](https://github.com/ubq-testing/pay.ubq.fi/blob/development/static/scripts/rewards/web3/onchain-call-handler.ts) for reference\r\n_original context https://github.com/ubiquity/pay.ubq.fi/issues/235_\r\n##### time: hard to say, <1 day maybe more",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/23",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 5.91,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 14
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "h5": {
+                "score": 1,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 3.4
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 258,
+            "wordValue": 0.1,
+            "result": 1.2
+          },
+          "readability": {
+            "fleschKincaid": 55.13975485188972,
+            "syllables": 401,
+            "sentences": 11,
+            "score": 0.9513975485188972
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1909284734,
+        "content": "Resolves #23\r\nShould fix https://github.com/ubiquity/pay.ubq.fi/issues/235\r\n- Added `Proxy` and non-proxy returned providers\r\n- Adopted `Ubiquity/Logger` type logs\r\n- Added tests covering logs and retry logic\r\n- Simplified the structure all into `/types` removing the need for a distinct test esbuild flow\r\n- updated the `yarn build` command which I hope will fix the issue where the NPM push actually has the types included. I thought perhaps the `postbuild` was not executing in the wf? We'll see after this is bumped.\r\n<hr/>\r\nTook a generic approach to errors and have attempted to fill logs with as much detail as available.\r\nCodebases will require an update as there is now a new config option `proxySettings`.\r\nQA:\r\n- I have disabled solvency and `isClaimed` checks for the sake of QA\r\n- The TX I'm sending is just `eth_call, [null,null,null]` which will never succeed\r\nhttps://github.com/ubiquity/rpc-handler/assets/106303466/04d633ad-aca1-4059-8ddb-dc7442860f22\r\nhttps://github.com/ubiquity/rpc-handler/assets/106303466/4321adf8-9b8b-4ae6-8bcb-5f1960d384f2\r\nBalance and allowance shown meaning read ops are working as shown with no MM connection, it then succeeds in telling me I've claimed that permit already using `nonceBitmap` \r\nhttps://github.com/ubiquity/rpc-handler/assets/106303466/77e0fe19-e173-4715-be31-58cb9a1d7b16\r\n![image](https://github.com/ubiquity/rpc-handler/assets/106303466/f48fbbb4-489b-428f-9d5d-12d57bc299c8)",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 8.36,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 18
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 7
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 4
+              }
+            },
+            "result": 4.7
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 153,
+            "wordValue": 0.1,
+            "result": 2.2
+          },
+          "readability": {
+            "fleschKincaid": 68.19494402985076,
+            "syllables": 289,
+            "sentences": 12,
+            "score": 0.9180505597014924
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 614.27 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>600</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>5.91</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>8.36</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/23\" target=\"_blank\" rel=\"noopener\">Rather than returning a list of RPCs considered valid based on t&hellip;</a></h6></td><td><details><summary>4.6</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 14&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    h5:&#13;      score: 1&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 3.4&#13;regex:&#13;  wordCount: 258&#13;  wordValue: 0.1&#13;  result: 1.2&#13;</pre></details></td><td>1</td><td>1</td><td>5.91</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/24\" target=\"_blank\" rel=\"noopener\">Resolves #23Should fix https://github.com/ubiquity/pay.ubq.fi/&hellip;</a></h6></td><td><details><summary>6.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 18&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 7&#13;    a:&#13;      score: 1&#13;      elementCount: 4&#13;  result: 4.7&#13;regex:&#13;  wordCount: 153&#13;  wordValue: 0.1&#13;  result: 2.2&#13;</pre></details></td><td>0.95</td><td>1</td><td>8.36</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 125.364,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2235150752,
+        "content": "The relevance scoring is broken but it seems like your average is roughly at 60%. You may notice a difference once its fixed in v2.",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/23#issuecomment-2235150752",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.639,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 75.70750000000002,
+            "syllables": 35,
+            "sentences": 2,
+            "score": 0.8429249999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2235151802,
+        "content": "@gentlementlegen any idea why it has no rewards for everybody else?",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/23#issuecomment-2235151802",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.357,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 34.160909090909115,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 0.7416090909090911
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2106147301,
+        "content": "It's always a red flag if you have thousands of lines of code changes in a single pull with any sufficiently mature codebase. \nI looked quickly on my phone and it appears that you merged in the rpc manager package source code in here. That's not right. It should be handled in the separate package and imported here as a dependency. \n--\nSorry just realized this isn't pay.ubq.fi!",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24#pullrequestreview-2106147301",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 6.63,
+          "formatting": {
+            "content": {
+              "h2": {
+                "score": 1,
+                "elementCount": 1
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 72,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 84.77000000000002,
+            "syllables": 95,
+            "sentences": 7,
+            "score": 0.7522999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2179036453,
+        "content": "I assume all is well since you know this codebase the best too",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24#pullrequestreview-2179036453",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.399,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 89.51692307692309,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.704830769230769
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2185908252,
+        "content": "You should not force push because then we have to review all the changes in their entirety instead of from the last viewed commit.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24#issuecomment-2185908252",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.389,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 73.20000000000002,
+            "syllables": 31,
+            "sentences": 1,
+            "score": 0.8679999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2106147301,
+            "effect": {
+              "addition": 1384,
+              "deletion": 129
+            },
+            "reward": 45.39,
+            "priority": 3
+          },
+          {
+            "reviewId": 2179036453,
+            "effect": {
+              "addition": 1928,
+              "deletion": 324
+            },
+            "reward": 67.56,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 125.364 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>112.95</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>0.996</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>11.418</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/rpc-handler/pull/24\" target=\"_blank\" rel=\"noopener\">#24</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+1384 -129</td><td>3</td><td>45.39</td></tr><tr><td>+1928 -324</td><td>3</td><td>67.56</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/23#issuecomment-2235150752\" target=\"_blank\" rel=\"noopener\">The relevance scoring is broken but it seems like your average i&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.639</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/23#issuecomment-2235151802\" target=\"_blank\" rel=\"noopener\">@gentlementlegen any idea why it has no rewards for everybody el&hellip;</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.357</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/24#pullrequestreview-2106147301\" target=\"_blank\" rel=\"noopener\">It's always a red flag if you have thousands of lines of code ch&hellip;</a></h6></td><td><details><summary>3.61</summary><pre>content:&#13;  content:&#13;    h2:&#13;      score: 1&#13;      elementCount: 1&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 72&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.5</td><td>3</td><td>6.63</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/24#pullrequestreview-2179036453\" target=\"_blank\" rel=\"noopener\">I assume all is well since you know this codebase the best too</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.399</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/24#issuecomment-2185908252\" target=\"_blank\" rel=\"noopener\">You should not force push because then we have to review all the&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.7</td><td>3</td><td>4.389</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 1.485,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2235161175,
+        "content": "@0x4007 not sure no. Linked that PR to an issue, will have a look at it.",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/23#issuecomment-2235161175",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.485,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 108.82750000000001,
+            "syllables": 17,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 1.485 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.485</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/23#issuecomment-2235161175\" target=\"_blank\" rel=\"noopener\">@0x4007 not sure no. Linked that PR to an issue, will have a loo&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.485</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 491.184,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2136011686,
+        "content": "Works fine",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24#pullrequestreview-2136011686",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.198,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 120.20500000000001,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2179922625,
+        "content": "@Keyrxng \r\nYou mean this PR introduces breaking changes, right? So if other packages update `rpc-handler` to this version then they will be broken, correct?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24#issuecomment-2179922625",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.221,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 77.45815217391308,
+            "syllables": 32,
+            "sentences": 2,
+            "score": 0.8254184782608692
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2179939774,
+        "content": "@Keyrxng \r\nRegarding this error:\r\n```\r\n➤ YN0028: -  linkType: hard\r\n➤ YN0028: +  linkType: hard\r\n➤ YN0028: The lockfile would have been modified by this install, which is explicitly forbidden.\r\n```\r\nTry to remove and create a lock file from scratch. Also make sure your local yarn version is v4 as stated [here](https://github.com/ubiquity/rpc-handler/blob/d5b34465f66aea7cfa9c815010d3647a38de0710/package.json#L89).\r\nP.S. The package works fine",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24#issuecomment-2179939774",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 8.52,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 91.94525,
+            "syllables": 41,
+            "sentences": 5,
+            "score": 0.6805475
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2185850261,
+        "content": "@Keyrxng Could you merge https://github.com/Keyrxng/web3-rpc-racer-1/pull/6 ?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24#issuecomment-2185850261",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.805,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 103.04428571428575,
+            "syllables": 16,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2136011686,
+            "effect": {
+              "addition": 8656,
+              "deletion": 7192
+            },
+            "reward": 475.44,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 491.184 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>475.44</td></tr><tr><td>Review</td><td>Comment</td><td>4</td><td>15.744</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/rpc-handler/pull/24\" target=\"_blank\" rel=\"noopener\">#24</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+8656 -7192</td><td>3</td><td>475.44</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/24#pullrequestreview-2136011686\" target=\"_blank\" rel=\"noopener\">Works fine</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.198</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/24#issuecomment-2179922625\" target=\"_blank\" rel=\"noopener\">@Keyrxng You mean this PR introduces breaking changes, right? &hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.7</td><td>3</td><td>4.221</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/24#issuecomment-2179939774\" target=\"_blank\" rel=\"noopener\">@Keyrxng Regarding this error:&#96;&#96;&#96;➤ YN0028: -  &hellip;</a></h6></td><td><details><summary>2.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.8</td><td>3</td><td>8.52</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/24#issuecomment-2185850261\" target=\"_blank\" rel=\"noopener\">@Keyrxng Could you merge https://github.com/Keyrxng/web3-rpc-rac&hellip;</a></h6></td><td><details><summary>1.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.5</td><td>3</td><td>2.805</td></tr></tbody></table></details>"
+  },
+  "molecula451": {
+    "total": 600,
+    "userId": 41552663,
+    "comments": [
+      {
+        "id": 2136485318,
+        "content": "great improvement in all edges",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24#pullrequestreview-2136485318",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.204,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 66.40000000000003,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.9359999999999996
+          },
+          "multiplier": 0.25,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1631298236,
+        "content": "hopfully",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24#discussion_r1631298236",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -1,15 +1,17 @@\n # `@ubiquity-dao/rpc-handler`\n \n-This packages leverages [Chainlist's](https://github.com/DefiLlama/chainlist) network RPC list to return the lowest latency provider from the list for any given network ID.\n-\n-## Features\n-\n-- Returns the lowest latency provider for a given network ID\n-- Drops bad endpoints from the list and creates a runtime/local storage cache\n-- Can re-test the cached RPCs by calling `handler.getFastestRpcProvider()`\n-- Can be used in both the browser and Node.js\n-- Fully configurable and extendable\n-- Only uses endpoints which Chainlist report as tracking _no_ data (see [`extraRpcs.js`](https://github.com/DefiLlama/chainlist/blob/main/constants/extraRpcs.js))\n+## Why use this package?\n+\n+- **No more slow RPCs**: No more slow RPCs, no more failed requests, no more headaches",
+        "score": {
+          "reward": 0.036,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": -47.97999999999996,
+            "syllables": 3,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1632120278,
+        "content": "should we default to Ethereum Mainnet? why?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24#discussion_r1632120278",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -26,13 +28,22 @@ import { RPCHandler, HandlerConstructorConfig } from \"@ubiquity-dao/rpc-handler/\n \n export function useHandler(networkId: number) {\n   const config: HandlerConstructorConfig = {\n-    networkId: 1,\n-    rpcTimeout: 1500,\n-    autoStorage: false,\n-    cacheRefreshCycles: 10,\n-    networkName: null, // the name will be deduced from the networkId, unless using a custom network\n-    networkRpcs: null, // same as networkName, but for injecting additional RPCs\n-    runtimeRpcs: null, // same as networkRpcs, although these are considered error-free\n+    networkId: 1;",
+        "score": {
+          "reward": 0.528,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 70.33964285714288,
+            "syllables": 11,
+            "sentences": 2,
+            "score": 0.8966035714285713
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1647794439,
+        "content": "we need to ensure this is 32 bytes",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24#discussion_r1647794439",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -0,0 +1,207 @@\n+import { expect, jest } from \"@jest/globals\";\n+import { JsonRpcProvider } from \"@ethersproject/providers\";\n+import { HandlerConstructorConfig, RPCHandler, PrettyLogs } from \"../dist\";\n+import { testConfig } from \"./rpc-handler.test\";\n+\n+const nonceBitmapData = {\n+  to: \"0x000000000022D473030F116dDEE9F6B43aC78BA3\",\n+  data: \"0x4fe02b44000000000000000000000000d9530f3fbbea11bed01dc09e79318f2f20223716001fd097bcb5a1759ce02c0a671386a0bbbfa8216559e5855698a9d4de4cddea\",\n+};\n+const rpcList = [\n+  \"http://127.0.0.1:85451\",\n+  \"http://127.0.0.1:85454\",\n+  \"http://127.0.0.1:85453\",\n+  \"http://127.0.0.1:854531\",\n+  \"http://127.0.0.1:854532\",\n+  \"http://127.0.0.1:854533\",\n+  \"http://127.0.0.1:854535\",\n+  \"http://127.0.0.1:854\",\n+  \"http://127.0.0.1:85\",\n+  \"http://127.0.0.1:81\",\n+  \"http://127.0.0.1:8545\",\n+];\n+const txHashRegex = new RegExp(\"0x[0-9a-f]{64}\");\n+\n+describe(\"Call Handler\", () => {\n+  afterAll(() => {\n+    jest.clearAllMocks();\n+    jest.clearAllTimers();\n+    jest.resetAllMocks();\n+    jest.resetModules();\n+  });\n+\n+  beforeEach(() => {\n+    jest.clearAllMocks();\n+    jest.clearAllTimers();\n+    jest.resetAllMocks();\n+    jest.resetModules();\n+  });\n+\n+  describe(\"createProviderProxy\", () => {\n+    let provider: JsonRpcProvider;\n+    const handler: RPCHandler = new RPCHandler({ ...testConfig, proxySettings: { ...testConfig.proxySettings, logTier: \"verbose\" } });\n+\n+    it(\"should make a successful get_blockNumber call\", async () => {\n+      provider = await handler.getFastestRpcProvider();\n+      const blockNumber = await provider.send(\"eth_blockNumber\", [\"latest\"]);\n+      expect(parseInt(blockNumber)).toBeGreaterThan(0);\n+    });\n+\n+    it(\"should make a successful eth_call\", async () => {\n+      provider = await handler.getFastestRpcProvider();\n+      const response = await provider.send(\"eth_call\", [nonceBitmapData, \"latest\"]);\n+      if (response) {\n+        expect(response).toBeDefined();\n+        expect(response).toBe(\"0x0000000000000000000000000000000000000000000000000000000000000000\");",
+        "score": {
+          "reward": 0.675,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 103.54,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1649761758,
+        "content": "ha! catch it!",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24#discussion_r1649761758",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -0,0 +1,371 @@\n+import { expect, jest } from \"@jest/globals\";\n+import { JsonRpcProvider } from \"@ethersproject/providers\";\n+import { HandlerConstructorConfig, RPCHandler, PrettyLogs, LOCAL_HOST } from \"../dist\";\n+\n+const nonceBitmapData = {\n+  to: \"0x000000000022D473030F116dDEE9F6B43aC78BA3\",\n+  data: \"0x4fe02b44000000000000000000000000d9530f3fbbea11bed01dc09e79318f2f20223716001fd097bcb5a1759ce02c0a671386a0bbbfa8216559e5855698a9d4de4cddea\",\n+};\n+\n+const rpcList = [LOCAL_HOST];\n+const ansiEscapeCodes = /\\x1b\\[\\d+m|\\s/g;\n+\n+const INITIALIZED = `✓[RPCHandler] Provider initialized: {\"provider\": \"http://127.0.0.1:8545\" }`;\n+const BLOCK_NUMBER_CALL = `💬[RPCHandler] Successfully called provider method send ${JSON.stringify({\n+  method: \"send\",\n+  args: [\"eth_blockNumber\", []],\n+  metadata: {\n+    rpc: \"http://127.0.0.1:8545\",\n+  },\n+})}`;\n+const DEBUG_RETRY_IN_20 = `›› [RPCHandler] Retrying in 20ms...`;\n+const DEBUG_CALL_NUMBER = `›› [RPCHandler] Call number: `;\n+const DEBUG_CONNECT_TO = `›› [RPCHandler] Connected to: 31337__http://127.0.0.1:8545`;\n+const DEBUG_RETRY = `›› [RPCHandler] Current provider failed, retrying with next fastest provider... ${JSON.stringify({\n+  method: \"send\",\n+  args: [\"eth_call\", [null, null, null, \"latest\"]],\n+})}`;\n+const NULL_ARG_TX_CALL = `×${JSON.stringify({\n+  error: {\n+    reason: \"processing response error\",\n+    code: \"SERVER_ERROR\",\n+    body: '{\"jsonrpc\":\"2.0\",\"id\":42,\"error\":{\"code\":-32602,\"message\":\"invalid type: null, expected struct WithOtherFieldsHelper\"}}',\n+    error: {\n+      code: -32602,\n+    },\n+    requestBody: '{\"method\":\"eth_call\",\"params\":[null,null,null,\"latest\"],\"id\":42,\"jsonrpc\":\"2.0\"}',\n+    requestMethod: \"POST\",\n+    url: \"http://127.0.0.1:8545\",\n+  },\n+  method: \"send\",\n+  args: [\"eth_call\", [null, null, null, \"latest\"]],\n+})}`;\n+const NULL_ARG_TX_CALL_RETRY = `⚠${JSON.stringify({\n+  error: {\n+    reason: \"processing response error\",\n+    code: \"SERVER_ERROR\",\n+    body: '{\"jsonrpc\":\"2.0\",\"id\":42,\"error\":{\"code\":-32602,\"message\":\"invalid type: null, expected struct WithOtherFieldsHelper\"}}',\n+    error: {\n+      code: -32602,\n+    },\n+    requestBody: '{\"method\":\"eth_call\",\"params\":[null,null,null,\"latest\"],\"id\":42,\"jsonrpc\":\"2.0\"}',\n+    requestMethod: \"POST\",\n+    url: \"http://127.0.0.1:8545\",\n+  },\n+  method: \"send\",\n+  args: [\"eth_call\", [null, null, null, \"latest\"]],\n+  metadata: {\n+    rpc: \"http://127.0.0.1:8545\",\n+  },\n+})}`;\n+\n+const NONCE_BITMAP_ETH_CALL = `💬 [RPCHandler] Successfully called provider method send ${JSON.stringify({\n+  method: \"send\",\n+  args: [\n+    \"eth_call\",\n+    [\n+      {\n+        to: \"0x000000000022D473030F116dDEE9F6B43aC78BA3\",\n+        data: \"0x4fe02b44000000000000000000000000d9530f3fbbea11bed01dc09e79318f2f20223716001fd097bcb5a1759ce02c0a671386a0bbbfa8216559e5855698a9d4de4cddea\",\n+      },\n+      \"latest\",\n+    ],\n+  ],\n+  metadata: {\n+    rpc: \"http://127.0.0.1:8545\",\n+  },\n+})}`;\n+\n+describe(\"Logs\", () => {\n+  let handler: RPCHandler;\n+  let provider: JsonRpcProvider;\n+\n+  const mods: HandlerConstructorConfig = {\n+    runtimeRpcs: rpcList,\n+    networkRpcs: rpcList,\n+    autoStorage: false,\n+    cacheRefreshCycles: 1,\n+    networkName: \"anvil\",\n+    networkId: \"31337\",\n+    rpcTimeout: 700,\n+    proxySettings: {\n+      retryCount: 3,\n+      retryDelay: 10,\n+      logTier: \"ok\",\n+      logger: new PrettyLogs(),\n+      strictLogs: true,\n+    },\n+  };\n+\n+  afterAll(() => {\n+    jest.clearAllMocks();\n+    jest.clearAllTimers();\n+    jest.resetAllMocks();\n+    jest.resetModules();\n+  });\n+\n+  beforeEach(() => {\n+    jest.clearAllMocks();\n+    jest.clearAllTimers();\n+    jest.resetAllMocks();\n+    jest.resetModules();\n+  });\n+\n+  it(\"should log only 'ok' tiered logs\", async () => {\n+    const logSpy = jest.spyOn(console, \"log\");\n+    const errorSpy = jest.spyOn(console, \"error\");\n+    const debugSpy = jest.spyOn(console, \"debug\");\n+    const warnSpy = jest.spyOn(console, \"warn\");\n+\n+    handler = new RPCHandler({ ...mods, proxySettings: { ...mods.proxySettings, logTier: \"ok\" } });\n+    provider = await handler.getFastestRpcProvider();\n+    const blockNumberResponse = await provider.send(\"eth_blockNumber\", []);\n+    expect(blockNumberResponse).toBeDefined();\n+    expect(parseInt(blockNumberResponse)).toBeGreaterThan(0);\n+\n+    try {\n+      const response = await provider.send(\"eth_call\", [null, null, null, \"latest\"]);\n+      expect(response).toBeDefined();\n+    } catch (er) {\n+      expect(er).toBeDefined();\n+      expect(er).toBeInstanceOf(Error);\n+    }\n+\n+    expect(logSpy).toBeCalledTimes(1);\n+    expect(errorSpy).toBeCalledTimes(0);\n+    expect(debugSpy).toBeCalledTimes(0);\n+    expect(warnSpy).toBeCalledTimes(0);\n+\n+    const cleanLogStrings = cleanSpyLogs(logSpy);\n+    expect(cleanLogStrings).toEqual(expect.arrayContaining([cleanLogString(INITIALIZED)]));\n+  });\n+\n+  it(\"should log only 'info' tiered logs\", async () => {\n+    const consoleSpy = jest.spyOn(console, \"log\");\n+    const errorSpy = jest.spyOn(console, \"error\");\n+    const debugSpy = jest.spyOn(console, \"debug\");\n+    const warnSpy = jest.spyOn(console, \"warn\");\n+    const infoSpy = jest.spyOn(console, \"info\");\n+    handler = new RPCHandler({ ...mods, proxySettings: { ...mods.proxySettings, logTier: \"info\" } });\n+    provider = await handler.getFastestRpcProvider();\n+    const blockNumberResponse = await provider.send(\"eth_blockNumber\", []);\n+    expect(blockNumberResponse).toBeDefined();\n+    expect(parseInt(blockNumberResponse)).toBeGreaterThan(0);\n+\n+    try {\n+      const response = await provider.send(\"eth_call\", [null, null, null, \"latest\"]);\n+      expect(response).toBeDefined();\n+    } catch (er) {\n+      expect(er).toBeDefined();\n+      expect(er).toBeInstanceOf(Error);\n+    }\n+\n+    expect(consoleSpy).toBeCalledTimes(0);\n+    expect(errorSpy).toBeCalledTimes(0);\n+    expect(debugSpy).toBeCalledTimes(0);\n+    expect(warnSpy).toBeCalledTimes(0);\n+    expect(infoSpy).toBeCalledTimes(1);\n+\n+    const latencies = handler.getLatencies();\n+    const rpcLatency = latencies[\"31337__http://127.0.0.1:8545\"];\n+    const INFO_CALL = `› [RPCHandler] ${JSON.stringify({\n+      latencies: {\n+        \"31337__http://127.0.0.1:8545\": rpcLatency,\n+      },\n+    })}`;\n+\n+    const cleanInfoStrings = cleanSpyLogs(infoSpy);\n+    expect(cleanInfoStrings).toEqual(expect.arrayContaining([cleanLogString(INFO_CALL)]));\n+  });\n+\n+  it(\"should log only 'warn' tiered logs\", async () => {\n+    const errorSpy = jest.spyOn(console, \"error\");\n+    const consoleSpy = jest.spyOn(console, \"log\");\n+    const debugSpy = jest.spyOn(console, \"debug\");\n+    const warnSpy = jest.spyOn(console, \"warn\");\n+    handler = new RPCHandler({ ...mods, proxySettings: { ...mods.proxySettings, logTier: \"error\" } });\n+    provider = await handler.getFastestRpcProvider();\n+\n+    try {\n+      const response = await provider.send(\"eth_call\", [null, null, null, \"latest\"]);\n+      expect(response).toBeDefined();\n+    } catch (er) {\n+      expect(er).toBeDefined();\n+      expect(er).toBeInstanceOf(Error);\n+    }\n+\n+    expect(errorSpy).toBeCalledTimes(0);\n+    expect(consoleSpy).toBeCalledTimes(0);\n+    expect(debugSpy).toBeCalledTimes(0);\n+    expect(warnSpy).toBeCalledTimes(4);\n+\n+    const cleanWarnStrings = cleanSpyLogs(warnSpy).flat();\n+    const filteredStrings = cleanWarnStrings.filter((str) => str.includes(cleanLogString(NULL_ARG_TX_CALL_RETRY)));\n+    expect(filteredStrings.length).toBeGreaterThanOrEqual(2)\n+  });\n+\n+  it(\"should log only 'fatal' tiered logs\", async () => {\n+    const errorSpy = jest.spyOn(console, \"error\");\n+    const consoleSpy = jest.spyOn(console, \"log\");\n+    const debugSpy = jest.spyOn(console, \"debug\");\n+    const warnSpy = jest.spyOn(console, \"warn\");\n+\n+    handler = new RPCHandler({ ...mods, proxySettings: { ...mods.proxySettings, logTier: \"fatal\" } });\n+    provider = await handler.getFastestRpcProvider();\n+    const response = await provider.send(\"eth_blockNumber\", []);\n+    expect(response).toBeDefined();\n+    expect(parseInt(response)).toBeGreaterThan(0);\n+\n+    try {\n+      const ethCallResponse = await provider.send(\"eth_call\", [null, null, null, \"latest\"]);\n+      expect(ethCallResponse).toBeDefined();\n+    } catch (er) {\n+      expect(er).toBeDefined();\n+      expect(er).toBeInstanceOf(Error);\n+    }\n+\n+    const cleanLogStrings = cleanSpyLogs(consoleSpy);\n+    const cleanDebugStrings = cleanSpyLogs(debugSpy);\n+    const cleanErrorStrings = cleanSpyLogs(errorSpy);\n+\n+    expect(errorSpy).toBeCalledTimes(4);\n+    expect(consoleSpy).toBeCalledTimes(0);\n+    expect(debugSpy).toBeCalledTimes(0);\n+\n+    expect(cleanLogStrings).toEqual([]);\n+    expect(cleanDebugStrings).toEqual([]);\n+\n+    const filteredStrings = cleanErrorStrings.filter((str) => str.includes(cleanLogString(NULL_ARG_TX_CALL)));\n+    expect(filteredStrings.length).toBeGreaterThanOrEqual(1);\n+  });\n+\n+  it(\"should log all logs when 'verbose'\", async () => {\n+    const logSpy = jest.spyOn(console, \"log\");\n+    const errorSpy = jest.spyOn(console, \"error\");\n+    const debugSpy = jest.spyOn(console, \"debug\");\n+    handler = new RPCHandler({ ...mods, proxySettings: { ...mods.proxySettings, logTier: \"verbose\" } });\n+    provider = await handler.getFastestRpcProvider();\n+    const response = await provider.send(\"eth_blockNumber\", []);\n+    expect(response).toBeDefined();\n+    expect(parseInt(response)).toBeGreaterThan(0);\n+\n+    const cleanLogStrings = cleanSpyLogs(logSpy);\n+    expect(cleanLogStrings).toEqual(expect.arrayContaining([cleanLogString(INITIALIZED)]));\n+\n+    const cleanDebugStrings = cleanSpyLogs(debugSpy);\n+    expect(cleanDebugStrings).toEqual(expect.arrayContaining([cleanLogString(BLOCK_NUMBER_CALL), cleanLogString(BLOCK_NUMBER_CALL)]));\n+\n+    try {\n+      const ethCallResponse = await provider.send(\"eth_call\", [null, null, null, \"latest\"]);\n+      expect(ethCallResponse).toBeDefined();\n+\n+      const cleanErrorStrings = cleanSpyLogs(errorSpy);\n+      expect(cleanErrorStrings).toEqual(expect.arrayContaining([cleanLogString(NULL_ARG_TX_CALL)]));\n+    } catch (er) {\n+      expect(er).toBeDefined();\n+      expect(er).toBeInstanceOf(Error);\n+\n+      const cleanErrorStrings = cleanSpyLogs(errorSpy);\n+      const filteredStrings = cleanErrorStrings.filter((str) => str.includes(cleanLogString(NULL_ARG_TX_CALL)));\n+      expect(filteredStrings.length).toBeGreaterThanOrEqual(1);\n+    }\n+  });\n+\n+  it(\"should log all logs when 'strictLogs == false' regardless of tier\", async () => {\n+    const logSpy = jest.spyOn(console, \"log\");\n+    const errorSpy = jest.spyOn(console, \"error\");\n+    const debugSpy = jest.spyOn(console, \"debug\");\n+    handler = new RPCHandler({ ...mods, proxySettings: { ...mods.proxySettings, strictLogs: false, logTier: \"info\" } });\n+    provider = await handler.getFastestRpcProvider();\n+\n+    const response = await provider.send(\"eth_blockNumber\", []);\n+    expect(response).toBeDefined();\n+    expect(parseInt(response)).toBeGreaterThan(0);\n+\n+    const cleanLogStrings = cleanSpyLogs(logSpy);\n+    expect(cleanLogStrings).toEqual(expect.arrayContaining([cleanLogString(INITIALIZED)]));\n+\n+    const cleanErrorStrings = cleanSpyLogs(errorSpy);\n+    expect(cleanErrorStrings).toEqual([]);\n+\n+    const cleanDebugStrings = cleanSpyLogs(debugSpy);\n+    expect(cleanDebugStrings).toEqual(expect.arrayContaining([cleanLogString(BLOCK_NUMBER_CALL), cleanLogString(BLOCK_NUMBER_CALL)]));\n+  });\n+\n+  it(\"should have multiple logs when retrying failed requests\", async () => {\n+    const logSpy = jest.spyOn(console, \"log\");\n+    const errorSpy = jest.spyOn(console, \"error\");\n+    const debugSpy = jest.spyOn(console, \"debug\");\n+    const warnSpy = jest.spyOn(console, \"warn\");\n+\n+    const badRpcs = [\"http://127.0.0.1:8546\", \"http://127.0.0.1:8544\", \"http://127.0.0.1:8544\", \"http://127.0.0.1:8544\", \"http://127.0.0.1:8545\"];\n+\n+    handler = new RPCHandler({\n+      ...mods,\n+      networkRpcs: badRpcs,\n+      proxySettings: { ...mods.proxySettings, logTier: \"verbose\", strictLogs: false, retryCount: 5, retryDelay: 20 },\n+    });\n+    provider = await handler.getFastestRpcProvider();\n+\n+    try {\n+      // this call will always fail and bad rpcs are filtered out\n+      // so it retries 5 times then fails\n+      const response = await provider.send(\"eth_call\", [null, null, null, \"latest\"]);\n+      expect(response).toBeDefined();\n+      expect(response).toBe(\"0x\" + \"00\".repeat(32));\n+    } catch (error) {\n+      expect(error).toBeDefined();\n+      expect(error).toBeInstanceOf(Error);\n+    }\n+\n+    let cleanErrorStrings = cleanSpyLogs(errorSpy);\n+    const filteredStrings = cleanErrorStrings.filter((str) => str.includes(cleanLogString(NULL_ARG_TX_CALL)));\n+    expect(filteredStrings.length).toBeGreaterThanOrEqual(2);\n+\n+    let cleanDebugStrings = cleanSpyLogs(debugSpy);\n+    expect(cleanDebugStrings).toEqual(\n+      expect.arrayContaining([\n+        cleanLogString(DEBUG_CONNECT_TO),\n+        cleanLogString(DEBUG_RETRY),\n+        cleanLogString(DEBUG_RETRY_IN_20),\n+        cleanLogString(`${DEBUG_CALL_NUMBER}1`),\n+        cleanLogString(`${DEBUG_CALL_NUMBER}2`),\n+        cleanLogString(`${DEBUG_CALL_NUMBER}3`),\n+        cleanLogString(`${DEBUG_CALL_NUMBER}4`),\n+      ])\n+    );\n+\n+    debugSpy.mockClear();\n+    errorSpy.mockClear();\n+\n+    const res = await provider.send(\"eth_call\", [nonceBitmapData, \"latest\"]);\n+    expect(res).toBeDefined();\n+    expect(res).toBe(\"0x\" + \"00\".repeat(32));",
+        "score": {
+          "reward": 0.231,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 120.7125,
+            "syllables": 3,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1649762009,
+        "content": "i mean the last one was 32 bytes we could have done an assertion, this seems like a innovative way 😄",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24#discussion_r1649762009",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -0,0 +1,371 @@\n+import { expect, jest } from \"@jest/globals\";\n+import { JsonRpcProvider } from \"@ethersproject/providers\";\n+import { HandlerConstructorConfig, RPCHandler, PrettyLogs, LOCAL_HOST } from \"../dist\";\n+\n+const nonceBitmapData = {\n+  to: \"0x000000000022D473030F116dDEE9F6B43aC78BA3\",\n+  data: \"0x4fe02b44000000000000000000000000d9530f3fbbea11bed01dc09e79318f2f20223716001fd097bcb5a1759ce02c0a671386a0bbbfa8216559e5855698a9d4de4cddea\",\n+};\n+\n+const rpcList = [LOCAL_HOST];\n+const ansiEscapeCodes = /\\x1b\\[\\d+m|\\s/g;\n+\n+const INITIALIZED = `✓[RPCHandler] Provider initialized: {\"provider\": \"http://127.0.0.1:8545\" }`;\n+const BLOCK_NUMBER_CALL = `💬[RPCHandler] Successfully called provider method send ${JSON.stringify({\n+  method: \"send\",\n+  args: [\"eth_blockNumber\", []],\n+  metadata: {\n+    rpc: \"http://127.0.0.1:8545\",\n+  },\n+})}`;\n+const DEBUG_RETRY_IN_20 = `›› [RPCHandler] Retrying in 20ms...`;\n+const DEBUG_CALL_NUMBER = `›› [RPCHandler] Call number: `;\n+const DEBUG_CONNECT_TO = `›› [RPCHandler] Connected to: 31337__http://127.0.0.1:8545`;\n+const DEBUG_RETRY = `›› [RPCHandler] Current provider failed, retrying with next fastest provider... ${JSON.stringify({\n+  method: \"send\",\n+  args: [\"eth_call\", [null, null, null, \"latest\"]],\n+})}`;\n+const NULL_ARG_TX_CALL = `×${JSON.stringify({\n+  error: {\n+    reason: \"processing response error\",\n+    code: \"SERVER_ERROR\",\n+    body: '{\"jsonrpc\":\"2.0\",\"id\":42,\"error\":{\"code\":-32602,\"message\":\"invalid type: null, expected struct WithOtherFieldsHelper\"}}',\n+    error: {\n+      code: -32602,\n+    },\n+    requestBody: '{\"method\":\"eth_call\",\"params\":[null,null,null,\"latest\"],\"id\":42,\"jsonrpc\":\"2.0\"}',\n+    requestMethod: \"POST\",\n+    url: \"http://127.0.0.1:8545\",\n+  },\n+  method: \"send\",\n+  args: [\"eth_call\", [null, null, null, \"latest\"]],\n+})}`;\n+const NULL_ARG_TX_CALL_RETRY = `⚠${JSON.stringify({\n+  error: {\n+    reason: \"processing response error\",\n+    code: \"SERVER_ERROR\",\n+    body: '{\"jsonrpc\":\"2.0\",\"id\":42,\"error\":{\"code\":-32602,\"message\":\"invalid type: null, expected struct WithOtherFieldsHelper\"}}',\n+    error: {\n+      code: -32602,\n+    },\n+    requestBody: '{\"method\":\"eth_call\",\"params\":[null,null,null,\"latest\"],\"id\":42,\"jsonrpc\":\"2.0\"}',\n+    requestMethod: \"POST\",\n+    url: \"http://127.0.0.1:8545\",\n+  },\n+  method: \"send\",\n+  args: [\"eth_call\", [null, null, null, \"latest\"]],\n+  metadata: {\n+    rpc: \"http://127.0.0.1:8545\",\n+  },\n+})}`;\n+\n+const NONCE_BITMAP_ETH_CALL = `💬 [RPCHandler] Successfully called provider method send ${JSON.stringify({\n+  method: \"send\",\n+  args: [\n+    \"eth_call\",\n+    [\n+      {\n+        to: \"0x000000000022D473030F116dDEE9F6B43aC78BA3\",\n+        data: \"0x4fe02b44000000000000000000000000d9530f3fbbea11bed01dc09e79318f2f20223716001fd097bcb5a1759ce02c0a671386a0bbbfa8216559e5855698a9d4de4cddea\",\n+      },\n+      \"latest\",\n+    ],\n+  ],\n+  metadata: {\n+    rpc: \"http://127.0.0.1:8545\",\n+  },\n+})}`;\n+\n+describe(\"Logs\", () => {\n+  let handler: RPCHandler;\n+  let provider: JsonRpcProvider;\n+\n+  const mods: HandlerConstructorConfig = {\n+    runtimeRpcs: rpcList,\n+    networkRpcs: rpcList,\n+    autoStorage: false,\n+    cacheRefreshCycles: 1,\n+    networkName: \"anvil\",\n+    networkId: \"31337\",\n+    rpcTimeout: 700,\n+    proxySettings: {\n+      retryCount: 3,\n+      retryDelay: 10,\n+      logTier: \"ok\",\n+      logger: new PrettyLogs(),\n+      strictLogs: true,\n+    },\n+  };\n+\n+  afterAll(() => {\n+    jest.clearAllMocks();\n+    jest.clearAllTimers();\n+    jest.resetAllMocks();\n+    jest.resetModules();\n+  });\n+\n+  beforeEach(() => {\n+    jest.clearAllMocks();\n+    jest.clearAllTimers();\n+    jest.resetAllMocks();\n+    jest.resetModules();\n+  });\n+\n+  it(\"should log only 'ok' tiered logs\", async () => {\n+    const logSpy = jest.spyOn(console, \"log\");\n+    const errorSpy = jest.spyOn(console, \"error\");\n+    const debugSpy = jest.spyOn(console, \"debug\");\n+    const warnSpy = jest.spyOn(console, \"warn\");\n+\n+    handler = new RPCHandler({ ...mods, proxySettings: { ...mods.proxySettings, logTier: \"ok\" } });\n+    provider = await handler.getFastestRpcProvider();\n+    const blockNumberResponse = await provider.send(\"eth_blockNumber\", []);\n+    expect(blockNumberResponse).toBeDefined();\n+    expect(parseInt(blockNumberResponse)).toBeGreaterThan(0);\n+\n+    try {\n+      const response = await provider.send(\"eth_call\", [null, null, null, \"latest\"]);\n+      expect(response).toBeDefined();\n+    } catch (er) {\n+      expect(er).toBeDefined();\n+      expect(er).toBeInstanceOf(Error);\n+    }\n+\n+    expect(logSpy).toBeCalledTimes(1);\n+    expect(errorSpy).toBeCalledTimes(0);\n+    expect(debugSpy).toBeCalledTimes(0);\n+    expect(warnSpy).toBeCalledTimes(0);\n+\n+    const cleanLogStrings = cleanSpyLogs(logSpy);\n+    expect(cleanLogStrings).toEqual(expect.arrayContaining([cleanLogString(INITIALIZED)]));\n+  });\n+\n+  it(\"should log only 'info' tiered logs\", async () => {\n+    const consoleSpy = jest.spyOn(console, \"log\");\n+    const errorSpy = jest.spyOn(console, \"error\");\n+    const debugSpy = jest.spyOn(console, \"debug\");\n+    const warnSpy = jest.spyOn(console, \"warn\");\n+    const infoSpy = jest.spyOn(console, \"info\");\n+    handler = new RPCHandler({ ...mods, proxySettings: { ...mods.proxySettings, logTier: \"info\" } });\n+    provider = await handler.getFastestRpcProvider();\n+    const blockNumberResponse = await provider.send(\"eth_blockNumber\", []);\n+    expect(blockNumberResponse).toBeDefined();\n+    expect(parseInt(blockNumberResponse)).toBeGreaterThan(0);\n+\n+    try {\n+      const response = await provider.send(\"eth_call\", [null, null, null, \"latest\"]);\n+      expect(response).toBeDefined();\n+    } catch (er) {\n+      expect(er).toBeDefined();\n+      expect(er).toBeInstanceOf(Error);\n+    }\n+\n+    expect(consoleSpy).toBeCalledTimes(0);\n+    expect(errorSpy).toBeCalledTimes(0);\n+    expect(debugSpy).toBeCalledTimes(0);\n+    expect(warnSpy).toBeCalledTimes(0);\n+    expect(infoSpy).toBeCalledTimes(1);\n+\n+    const latencies = handler.getLatencies();\n+    const rpcLatency = latencies[\"31337__http://127.0.0.1:8545\"];\n+    const INFO_CALL = `› [RPCHandler] ${JSON.stringify({\n+      latencies: {\n+        \"31337__http://127.0.0.1:8545\": rpcLatency,\n+      },\n+    })}`;\n+\n+    const cleanInfoStrings = cleanSpyLogs(infoSpy);\n+    expect(cleanInfoStrings).toEqual(expect.arrayContaining([cleanLogString(INFO_CALL)]));\n+  });\n+\n+  it(\"should log only 'warn' tiered logs\", async () => {\n+    const errorSpy = jest.spyOn(console, \"error\");\n+    const consoleSpy = jest.spyOn(console, \"log\");\n+    const debugSpy = jest.spyOn(console, \"debug\");\n+    const warnSpy = jest.spyOn(console, \"warn\");\n+    handler = new RPCHandler({ ...mods, proxySettings: { ...mods.proxySettings, logTier: \"error\" } });\n+    provider = await handler.getFastestRpcProvider();\n+\n+    try {\n+      const response = await provider.send(\"eth_call\", [null, null, null, \"latest\"]);\n+      expect(response).toBeDefined();\n+    } catch (er) {\n+      expect(er).toBeDefined();\n+      expect(er).toBeInstanceOf(Error);\n+    }\n+\n+    expect(errorSpy).toBeCalledTimes(0);\n+    expect(consoleSpy).toBeCalledTimes(0);\n+    expect(debugSpy).toBeCalledTimes(0);\n+    expect(warnSpy).toBeCalledTimes(4);\n+\n+    const cleanWarnStrings = cleanSpyLogs(warnSpy).flat();\n+    const filteredStrings = cleanWarnStrings.filter((str) => str.includes(cleanLogString(NULL_ARG_TX_CALL_RETRY)));\n+    expect(filteredStrings.length).toBeGreaterThanOrEqual(2)\n+  });\n+\n+  it(\"should log only 'fatal' tiered logs\", async () => {\n+    const errorSpy = jest.spyOn(console, \"error\");\n+    const consoleSpy = jest.spyOn(console, \"log\");\n+    const debugSpy = jest.spyOn(console, \"debug\");\n+    const warnSpy = jest.spyOn(console, \"warn\");\n+\n+    handler = new RPCHandler({ ...mods, proxySettings: { ...mods.proxySettings, logTier: \"fatal\" } });\n+    provider = await handler.getFastestRpcProvider();\n+    const response = await provider.send(\"eth_blockNumber\", []);\n+    expect(response).toBeDefined();\n+    expect(parseInt(response)).toBeGreaterThan(0);\n+\n+    try {\n+      const ethCallResponse = await provider.send(\"eth_call\", [null, null, null, \"latest\"]);\n+      expect(ethCallResponse).toBeDefined();\n+    } catch (er) {\n+      expect(er).toBeDefined();\n+      expect(er).toBeInstanceOf(Error);\n+    }\n+\n+    const cleanLogStrings = cleanSpyLogs(consoleSpy);\n+    const cleanDebugStrings = cleanSpyLogs(debugSpy);\n+    const cleanErrorStrings = cleanSpyLogs(errorSpy);\n+\n+    expect(errorSpy).toBeCalledTimes(4);\n+    expect(consoleSpy).toBeCalledTimes(0);\n+    expect(debugSpy).toBeCalledTimes(0);\n+\n+    expect(cleanLogStrings).toEqual([]);\n+    expect(cleanDebugStrings).toEqual([]);\n+\n+    const filteredStrings = cleanErrorStrings.filter((str) => str.includes(cleanLogString(NULL_ARG_TX_CALL)));\n+    expect(filteredStrings.length).toBeGreaterThanOrEqual(1);\n+  });\n+\n+  it(\"should log all logs when 'verbose'\", async () => {\n+    const logSpy = jest.spyOn(console, \"log\");\n+    const errorSpy = jest.spyOn(console, \"error\");\n+    const debugSpy = jest.spyOn(console, \"debug\");\n+    handler = new RPCHandler({ ...mods, proxySettings: { ...mods.proxySettings, logTier: \"verbose\" } });\n+    provider = await handler.getFastestRpcProvider();\n+    const response = await provider.send(\"eth_blockNumber\", []);\n+    expect(response).toBeDefined();\n+    expect(parseInt(response)).toBeGreaterThan(0);\n+\n+    const cleanLogStrings = cleanSpyLogs(logSpy);\n+    expect(cleanLogStrings).toEqual(expect.arrayContaining([cleanLogString(INITIALIZED)]));\n+\n+    const cleanDebugStrings = cleanSpyLogs(debugSpy);\n+    expect(cleanDebugStrings).toEqual(expect.arrayContaining([cleanLogString(BLOCK_NUMBER_CALL), cleanLogString(BLOCK_NUMBER_CALL)]));\n+\n+    try {\n+      const ethCallResponse = await provider.send(\"eth_call\", [null, null, null, \"latest\"]);\n+      expect(ethCallResponse).toBeDefined();\n+\n+      const cleanErrorStrings = cleanSpyLogs(errorSpy);\n+      expect(cleanErrorStrings).toEqual(expect.arrayContaining([cleanLogString(NULL_ARG_TX_CALL)]));\n+    } catch (er) {\n+      expect(er).toBeDefined();\n+      expect(er).toBeInstanceOf(Error);\n+\n+      const cleanErrorStrings = cleanSpyLogs(errorSpy);\n+      const filteredStrings = cleanErrorStrings.filter((str) => str.includes(cleanLogString(NULL_ARG_TX_CALL)));\n+      expect(filteredStrings.length).toBeGreaterThanOrEqual(1);\n+    }\n+  });\n+\n+  it(\"should log all logs when 'strictLogs == false' regardless of tier\", async () => {\n+    const logSpy = jest.spyOn(console, \"log\");\n+    const errorSpy = jest.spyOn(console, \"error\");\n+    const debugSpy = jest.spyOn(console, \"debug\");\n+    handler = new RPCHandler({ ...mods, proxySettings: { ...mods.proxySettings, strictLogs: false, logTier: \"info\" } });\n+    provider = await handler.getFastestRpcProvider();\n+\n+    const response = await provider.send(\"eth_blockNumber\", []);\n+    expect(response).toBeDefined();\n+    expect(parseInt(response)).toBeGreaterThan(0);\n+\n+    const cleanLogStrings = cleanSpyLogs(logSpy);\n+    expect(cleanLogStrings).toEqual(expect.arrayContaining([cleanLogString(INITIALIZED)]));\n+\n+    const cleanErrorStrings = cleanSpyLogs(errorSpy);\n+    expect(cleanErrorStrings).toEqual([]);\n+\n+    const cleanDebugStrings = cleanSpyLogs(debugSpy);\n+    expect(cleanDebugStrings).toEqual(expect.arrayContaining([cleanLogString(BLOCK_NUMBER_CALL), cleanLogString(BLOCK_NUMBER_CALL)]));\n+  });\n+\n+  it(\"should have multiple logs when retrying failed requests\", async () => {\n+    const logSpy = jest.spyOn(console, \"log\");\n+    const errorSpy = jest.spyOn(console, \"error\");\n+    const debugSpy = jest.spyOn(console, \"debug\");\n+    const warnSpy = jest.spyOn(console, \"warn\");\n+\n+    const badRpcs = [\"http://127.0.0.1:8546\", \"http://127.0.0.1:8544\", \"http://127.0.0.1:8544\", \"http://127.0.0.1:8544\", \"http://127.0.0.1:8545\"];\n+\n+    handler = new RPCHandler({\n+      ...mods,\n+      networkRpcs: badRpcs,\n+      proxySettings: { ...mods.proxySettings, logTier: \"verbose\", strictLogs: false, retryCount: 5, retryDelay: 20 },\n+    });\n+    provider = await handler.getFastestRpcProvider();\n+\n+    try {\n+      // this call will always fail and bad rpcs are filtered out\n+      // so it retries 5 times then fails\n+      const response = await provider.send(\"eth_call\", [null, null, null, \"latest\"]);\n+      expect(response).toBeDefined();\n+      expect(response).toBe(\"0x\" + \"00\".repeat(32));\n+    } catch (error) {\n+      expect(error).toBeDefined();\n+      expect(error).toBeInstanceOf(Error);\n+    }\n+\n+    let cleanErrorStrings = cleanSpyLogs(errorSpy);\n+    const filteredStrings = cleanErrorStrings.filter((str) => str.includes(cleanLogString(NULL_ARG_TX_CALL)));\n+    expect(filteredStrings.length).toBeGreaterThanOrEqual(2);\n+\n+    let cleanDebugStrings = cleanSpyLogs(debugSpy);\n+    expect(cleanDebugStrings).toEqual(\n+      expect.arrayContaining([\n+        cleanLogString(DEBUG_CONNECT_TO),\n+        cleanLogString(DEBUG_RETRY),\n+        cleanLogString(DEBUG_RETRY_IN_20),\n+        cleanLogString(`${DEBUG_CALL_NUMBER}1`),\n+        cleanLogString(`${DEBUG_CALL_NUMBER}2`),\n+        cleanLogString(`${DEBUG_CALL_NUMBER}3`),\n+        cleanLogString(`${DEBUG_CALL_NUMBER}4`),\n+      ])\n+    );\n+\n+    debugSpy.mockClear();\n+    errorSpy.mockClear();\n+\n+    const res = await provider.send(\"eth_call\", [nonceBitmapData, \"latest\"]);\n+    expect(res).toBeDefined();\n+    expect(res).toBe(\"0x\" + \"00\".repeat(32));",
+        "score": {
+          "reward": 0.828,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 80.78500000000003,
+            "syllables": 25,
+            "sentences": 1,
+            "score": 0.7921499999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2177047238,
+        "content": "@Keyrxng kindly fix all the run and jests on CI",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24#issuecomment-2177047238",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.609,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 103.625,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2177164084,
+        "content": "is the Jest fixing an issue?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24#issuecomment-2177164084",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.228,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 87.94500000000002,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.7205499999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2177275086,
+        "content": "there are opened PRs with CI running, i think we could ignore Knip as i guess there's been unsuccessful times with a proper fix, but why exactly the Jests are failing? & code looks good i don't think the issue comes from development branch, what do you suggest?, @rndquu do you think it's appropiate to merge this with failing CI?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24#issuecomment-2177275086",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.422,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 62,
+            "wordValue": 0.1,
+            "result": 2.54
+          },
+          "readability": {
+            "fleschKincaid": 76.69704301075271,
+            "syllables": 80,
+            "sentences": 3,
+            "score": 0.8330295698924729
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2195288592,
+        "content": "Squash and Merge, remove the comment, leave 1 comment commit, maybe try to do on a test repo",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24#issuecomment-2195288592",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.032,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 80.46500000000002,
+            "syllables": 23,
+            "sentences": 1,
+            "score": 0.7953499999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2195325703,
+        "content": "indeed",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24#issuecomment-2195325703",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.012,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": 36.62000000000003,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 0.7662000000000003
+          },
+          "multiplier": 0.25,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2104718303,
+            "effect": {
+              "addition": 1384,
+              "deletion": 129
+            },
+            "reward": 45.39,
+            "priority": 3
+          },
+          {
+            "reviewId": 2130801737,
+            "effect": {
+              "addition": 75,
+              "deletion": 57
+            },
+            "reward": 3.96,
+            "priority": 3
+          },
+          {
+            "reviewId": 2133891191,
+            "effect": {
+              "addition": 32071,
+              "deletion": 309
+            },
+            "reward": 971.4,
+            "priority": 3
+          },
+          {
+            "reviewId": 2136485318,
+            "effect": {
+              "addition": 3,
+              "deletion": 3
+            },
+            "reward": 0.18,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/rpc-handler/pull/24"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 600 XP ]</a>&nbsp;</h3><h6>@molecula451</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>4</td><td>1020.93</td></tr><tr><td>Review</td><td>Comment</td><td>11</td><td>5.805</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/rpc-handler/pull/24\" target=\"_blank\" rel=\"noopener\">#24</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+1384 -129</td><td>3</td><td>45.39</td></tr><tr><td>+75 -57</td><td>3</td><td>3.96</td></tr><tr><td>+32071 -309</td><td>3</td><td>971.4</td></tr><tr><td>+3 -3</td><td>3</td><td>0.18</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/24#pullrequestreview-2136485318\" target=\"_blank\" rel=\"noopener\">great improvement in all edges</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.4</td><td>3</td><td>0.204</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/24#discussion_r1631298236\" target=\"_blank\" rel=\"noopener\">hopfully</a></h6></td><td><details><summary>0.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.036</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/24#discussion_r1632120278\" target=\"_blank\" rel=\"noopener\">should we default to Ethereum Mainnet? why?</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.8</td><td>3</td><td>0.528</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/24#discussion_r1647794439\" target=\"_blank\" rel=\"noopener\">we need to ensure this is 32 bytes</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.9</td><td>3</td><td>0.675</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/24#discussion_r1649761758\" target=\"_blank\" rel=\"noopener\">ha! catch it!</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.7</td><td>3</td><td>0.231</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/24#discussion_r1649762009\" target=\"_blank\" rel=\"noopener\">i mean the last one was 32 bytes we could have done an assertion&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.6</td><td>3</td><td>0.828</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/24#issuecomment-2177047238\" target=\"_blank\" rel=\"noopener\">@Keyrxng kindly fix all the run and jests on CI</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.7</td><td>3</td><td>0.609</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/24#issuecomment-2177164084\" target=\"_blank\" rel=\"noopener\">is the Jest fixing an issue?</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.4</td><td>3</td><td>0.228</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/24#issuecomment-2177275086\" target=\"_blank\" rel=\"noopener\">there are opened PRs with CI running, i think we could ignore Kn&hellip;</a></h6></td><td><details><summary>2.54</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 62&#13;  wordValue: 0.1&#13;  result: 2.54&#13;</pre></details></td><td>0.6</td><td>3</td><td>1.422</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/24#issuecomment-2195288592\" target=\"_blank\" rel=\"noopener\">Squash and Merge, remove the comment, leave 1 comment commit, ma&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.032</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/24#issuecomment-2195325703\" target=\"_blank\" rel=\"noopener\">indeed</a></h6></td><td><details><summary>0.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.012</td></tr></tbody></table></details>"
+  }
+}

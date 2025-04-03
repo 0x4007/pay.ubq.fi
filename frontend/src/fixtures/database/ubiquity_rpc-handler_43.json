@@ -1,0 +1,335 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 104.68,
+    "task": {
+      "reward": 100,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2454987100,
+        "content": "Instead of trying to resolve all the promises to see which network is the fastest, it would be more efficient to return the first one that resolves the network call successfully as it is probably the fastest.\r\n              @Keyrxng @0x4007 I changed the logic a bit so instead of naively removing the first RPC of the list, the failing RPC is actually removed.\r\nThis also made me wonder, why do we test every endpoint when we are only interested in the fastest one, aka the first one to successfully fulfill the response? If we have to wait for slow RPCs, for example one that take 5 seconds to complete, doesn't it defeat the purpose of the function?\r\n_Originally posted by @gentlementlegen in https://github.com/ubiquity/rpc-handler/issues/33#issuecomment-2255230177_",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/43",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.68,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 97,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 57.818672897196265,
+            "syllables": 161,
+            "sentences": 5,
+            "score": 0.9781867289719627
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 104.68 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>100</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.68</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/43\" target=\"_blank\" rel=\"noopener\">Instead of trying to resolve all the promises to see which netwo&hellip;</a></h6></td><td><details><summary>3.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 97&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>1</td><td>1</td><td>4.68</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 5.154,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2292665905,
+        "content": "@gentlementlegen I added the labels for you 😄",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/43#issuecomment-2292665905",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.178,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 54.70142857142861,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.947014285714286
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1720978191,
+        "content": "Maybe also count the results, it should be one.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/45#discussion_r1720978191",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -191,4 +191,16 @@ describe(\"RPCHandler\", () => {\n       }, 10000);\n     }\n   });\n+\n+  it(\"Should return the first available RPC\", async () => {\n+    const module = await import(\"../types/rpc-handler\");\n+    const rpcHandler = new module.RPCHandler({\n+      ...testConfig,\n+      networkId: \"1\",\n+      rpcTimeout: 1000,\n+    });\n+\n+    const provider = await rpcHandler.getFirstAvailableRpcProvider();\n+    expect(provider).not.toBeNull();",
+        "score": {
+          "reward": 1.616,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 94.30000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.6569999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1720978352,
+        "content": "What's the purpose of shuffling the array?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/45#discussion_r1720978352",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -55,6 +62,27 @@ export class RPCHandler implements HandlerInterface {\n     this.testRpcPerformance.bind(this);\n   }\n \n+  /**\n+   * Loops through all RPCs for a given network id and returns a provider with the first successful network.\n+   */\n+  public async getFirstAvailableRpcProvider() {\n+    const rpcList = [...networkRpcs[this._networkId].rpcs];\n+    shuffleArray(rpcList);",
+        "score": {
+          "reward": 1.692,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 82.39000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.7760999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1720978455,
+        "content": "I wonder why two underscores.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/45#discussion_r1720978455",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -78,22 +80,9 @@ export class RPCService {\n \n     if (fastest.success) {\n       latencies[`${networkId}__${fastest.rpcUrl}`] = fastest.duration;",
+        "score": {
+          "reward": 0.408,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 66.40000000000003,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.9359999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2244311418,
+            "effect": {
+              "addition": 46,
+              "deletion": 17
+            },
+            "reward": 1.26,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity/rpc-handler/pull/45"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 5.154 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>1.26</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.178</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>3.716</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/rpc-handler/pull/45\" target=\"_blank\" rel=\"noopener\">#45</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+46 -17</td><td>2</td><td>1.26</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/43#issuecomment-2292665905\" target=\"_blank\" rel=\"noopener\">@gentlementlegen I added the labels for you 😄</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.1</td><td>2</td><td>0.178</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/45#discussion_r1720978191\" target=\"_blank\" rel=\"noopener\">Maybe also count the results, it should be one.</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.8</td><td>2</td><td>1.616</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/45#discussion_r1720978352\" target=\"_blank\" rel=\"noopener\">What's the purpose of shuffling the array?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.9</td><td>2</td><td>1.692</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/45#discussion_r1720978455\" target=\"_blank\" rel=\"noopener\">I wonder why two underscores.</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.3</td><td>2</td><td>0.408</td></tr></tbody></table></details>"
+  },
+  "Keyrxng": {
+    "total": 5.331,
+    "userId": 106303466,
+    "comments": [
+      {
+        "id": 2251888468,
+        "content": "Gave the function a try in `script-test.ts` and it looks good. All tests passing with no error, all good.\r\n![image](https://github.com/user-attachments/assets/67c05ae0-d5d5-4cc4-bd3b-52c851f50ae5)\r\nHmm idk if you mean after Anvil has spun up as it should just be a local network at that point so it shouldn't be affected by normal latency issues but I have noticed that it can take a while for it to spin up sometimes for sure.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/45#pullrequestreview-2251888468",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.12,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 67,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 79.36368159203982,
+            "syllables": 83,
+            "sentences": 3,
+            "score": 0.8063631840796017
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2295294547,
+        "content": "I like this idea we should have had something like this from the beginning for sure.\r\nI have two concerns with it though\r\n- We create and return a proxy provider although the internals of the Proxy call `handler.getLatencies` and as far as I understand there wouldn't be any so the retry logic is void essentially. Perhaps this function should return a non-Proxy provider? This solution was needed to prevent lots of cloudflare sub-requests I'm sure so this sort of makes sense to return a single and handle faults in the worker?\r\n- Jest workflow seems to have failed",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/45#issuecomment-2295294547",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.602,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 100,
+            "wordValue": 0.1,
+            "result": 2.6
+          },
+          "readability": {
+            "fleschKincaid": 70.63300000000002,
+            "syllables": 137,
+            "sentences": 5,
+            "score": 0.8936699999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2295335771,
+        "content": "I think it makes sense to have this return only a non-proxy since it's use-case is minimizing sub-requests which the retry logic would spam if it was able to run which it isn't in the first place.\r\nI can see scenarios where we might want to use the main entry and have a proxy provider but also be able to obtain a simple provider. If we rely on the config for this then both would have to be either-or.\r\nLooking at the run logs of Anvil firing up it seems like it only grabbed one provider. Likely because the `RPCService.testRpcPerformance()` function now no longer handles resolving all of the promises instead just the single fastest. Unsure if this is actually the cause or not but if that fn does only return one now instead of all then the main entry would be broken too I think\r\n```\r\nFastest: 100__https://rpc.ankr.com/gnosis (60.97463300000527ms)\r\nSlowest: 100__https://rpc.ankr.com/gnosis (60.97463300000527ms)\r\n```",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/45#issuecomment-2295335771",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.349,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 151,
+            "wordValue": 0.1,
+            "result": 2.22
+          },
+          "readability": {
+            "fleschKincaid": 68.11732339955853,
+            "syllables": 202,
+            "sentences": 6,
+            "score": 0.9188267660044147
+          },
+          "multiplier": 0.25,
+          "relevance": 0.95
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2251888468,
+            "effect": {
+              "addition": 41,
+              "deletion": 22
+            },
+            "reward": 1.26,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity/rpc-handler/pull/45"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 5.331 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>1.26</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>4.071</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/rpc-handler/pull/45\" target=\"_blank\" rel=\"noopener\">#45</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+41 -22</td><td>2</td><td>1.26</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/45#pullrequestreview-2251888468\" target=\"_blank\" rel=\"noopener\">Gave the function a try in &#96;script-test.ts&#96; and it looks&hellip;</a></h6></td><td><details><summary>2.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 67&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>0.7</td><td>2</td><td>1.12</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/45#issuecomment-2295294547\" target=\"_blank\" rel=\"noopener\">I like this idea we should have had something like this from the&hellip;</a></h6></td><td><details><summary>2.8</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 100&#13;  wordValue: 0.1&#13;  result: 2.6&#13;</pre></details></td><td>0.9</td><td>2</td><td>1.602</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/45#issuecomment-2295335771\" target=\"_blank\" rel=\"noopener\">I think it makes sense to have this return only a non-proxy sinc&hellip;</a></h6></td><td><details><summary>2.22</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 151&#13;  wordValue: 0.1&#13;  result: 2.22&#13;</pre></details></td><td>0.95</td><td>2</td><td>1.349</td></tr></tbody></table></details>"
+  }
+}

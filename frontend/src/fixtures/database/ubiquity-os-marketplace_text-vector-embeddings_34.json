@@ -1,0 +1,186 @@
+{
+  "shiv810": {
+    "userId": 53160903,
+    "total": 12,
+    "task": {
+      "reward": 6,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2587794725,
+        "content": "@sshivaditya2019 it is \"editing\" the spec even without posting relevance. This should not occur.\r\n_Originally posted by @0x4007 in https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/43#issuecomment-2411241509_",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/34",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.02,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 40.684879032258095,
+            "syllables": 58,
+            "sentences": 4,
+            "score": 0.8068487903225809
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2124469884,
+        "content": "Resolves #34 \r\n- Does not edit the comment, if there are no similarity\r\n- If there was similarity and the comment was updated \r\nQA:\r\n[Issue not being edited by the bot](https://github.com/sshivaditya2019/test-public/issues/150)\r\n[Issue working as expected by adding the footnotes](https://github.com/sshivaditya2019/test-public/issues/150)",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/35",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 3.468,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 37,
+            "wordValue": 0.1,
+            "result": 2.1
+          },
+          "readability": {
+            "fleschKincaid": 38.950270270270266,
+            "syllables": 57,
+            "sentences": 1,
+            "score": 0.7895027027027026
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 12 XP ]</a>&nbsp;</h3><h6>@shiv810</h6></b></summary><h6>⚠️ Your rewards have been limited to the task price of 6 XP.</h6><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>6</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.02</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>3.468</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/34\" target=\"_blank\" rel=\"noopener\">@sshivaditya2019 it is \"editing\" the spec even without posting r&hellip;</a></h6></td><td><details><summary>2.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>1</td><td>1</td><td>3.02</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/35\" target=\"_blank\" rel=\"noopener\">Resolves #34 - Does not edit the comment, if there are no simi&hellip;</a></h6></td><td><details><summary>3.3</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.2&#13;regex:&#13;  wordCount: 37&#13;  wordValue: 0.1&#13;  result: 2.1&#13;</pre></details></td><td>0.85</td><td>1</td><td>3.468</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 2.3,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1801383919,
+        "content": "Seems that it would be more efficient to just modify the existing entry?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/35#discussion_r1801383919",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,32 @@\n+import { Context } from \"../types\";\n+import { IssueTransferPayload } from \"../types/payload\";\n+\n+export async function issueTransfer(context: Context) {\n+  const {\n+    logger,\n+    adapters: { supabase },\n+  } = context;\n+  const { changes, issue } = (context as { payload: IssueTransferPayload }).payload;\n+  const nodeId = issue.node_id;\n+  const { new_issue, new_repository } = changes;\n+  //Fetch the new details of the issue\n+  const newIssueNodeId = new_issue.node_id;\n+  const markdown = new_issue.body + \" \" + new_issue.title || null;\n+  const authorId = new_issue.user?.id || -1;\n+  const isPrivate = new_repository.private;\n+\n+  //Delete the issue from the old repository\n+  //Create the new issue in the new repository\n+  try {\n+    await supabase.issue.deleteIssue(nodeId);\n+    await supabase.issue.createIssue(newIssueNodeId, new_issue, isPrivate, markdown, authorId);",
+        "score": {
+          "reward": 1.136,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 63.486153846153854,
+            "syllables": 20,
+            "sentences": 1,
+            "score": 0.9651384615384615
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2414216803,
+        "content": "Both links are the same. Can you review?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/35#issuecomment-2414216803",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.594,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 107.60000000000001,
+            "syllables": 9,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2369695839,
+            "effect": {
+              "addition": 49,
+              "deletion": 8
+            },
+            "reward": 0.57,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/35"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 2.3 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>0.57</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>1.73</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/35\" target=\"_blank\" rel=\"noopener\">#35</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+49 -8</td><td>1</td><td>0.57</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/35#discussion_r1801383919\" target=\"_blank\" rel=\"noopener\">Seems that it would be more efficient to just modify the existin&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.136</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/35#issuecomment-2414216803\" target=\"_blank\" rel=\"noopener\">Both links are the same. Can you review?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.594</td></tr></tbody></table></details>"
+  }
+}

@@ -1,0 +1,412 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 27.84,
+    "task": {
+      "reward": 25,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2334999207,
+        "content": "@Keyrxng this is not implemented and definitely needed since we had weird bots and comments lately. Would there be other cases except than hidden? I don't know what happens for deleted comments.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/110#issuecomment-2334999207",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.62,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 72.61545454545457,
+            "syllables": 48,
+            "sentences": 3,
+            "score": 0.8738454545454544
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2349091252,
+        "content": "I went through the REST API from top to bottom and it seems that there is not way to know if a comment was minimized through the REST API but only through GraphQl calls, see also: https://github.com/orgs/community/discussions/9175\r\nSadly this will imply more complex changes: either we create a GraphQl query that we run for each comment, which is slow and network intensive but would require least changes, or instead we switch the whole fetching to GraphQl which is way cleaner and more efficient but requires heavy code modifications.\r\nGraphQl reference:\r\n```gql\r\nquery commentDetails($owner: String!, $repo: String!, $issue_number: Int!) {\r\n  repository(owner: $owner, name: $repo) {\r\n    issueOrPullRequest(number: $issue_number) {\r\n      ... on Issue {\r\n        comments(first: 100) {\r\n          nodes {\r\n            id\r\n            isMinimized\r\n          }\r\n        }\r\n      }\r\n      ... on PullRequest {\r\n        comments(first: 100) {\r\n          nodes {\r\n            id\r\n            isMinimized\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/110#issuecomment-2349091252",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.17,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 89,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 58.03000000000003,
+            "syllables": 132,
+            "sentences": 3,
+            "score": 0.9803000000000003
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2349209812,
+        "content": "It appears so, also GraphQl allows for much more complex queries which I believe is the reason why they don't try to implement it back in REST. We might benefit from using GraphQl more often in our plugins I guess.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/110#issuecomment-2349209812",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.552,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 41,
+            "wordValue": 0.1,
+            "result": 2.2
+          },
+          "readability": {
+            "fleschKincaid": 72.53969512195123,
+            "syllables": 55,
+            "sentences": 2,
+            "score": 0.8746030487804878
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2071175517,
+        "content": "Resolves #110 \r\nQA: https://github.com/Meniole/conversation-rewards/issues/13#issuecomment-2349298501",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/119",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 0.498,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 37.54519230769233,
+            "syllables": 25,
+            "sentences": 2,
+            "score": 0.7754519230769233
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 27.84 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>25</td></tr><tr><td>Issue</td><td>Comment</td><td>3</td><td>2.342</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>0.498</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/110#issuecomment-2334999207\" target=\"_blank\" rel=\"noopener\">@Keyrxng this is not implemented and definitely needed since we &hellip;</a></h6></td><td><details><summary>1.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>1</td><td>1</td><td>0.62</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/110#issuecomment-2349091252\" target=\"_blank\" rel=\"noopener\">I went through the REST API from top to bottom and it seems that&hellip;</a></h6></td><td><details><summary>3.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 89&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>1</td><td>1</td><td>1.17</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/110#issuecomment-2349209812\" target=\"_blank\" rel=\"noopener\">It appears so, also GraphQl allows for much more complex queries&hellip;</a></h6></td><td><details><summary>2.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 41&#13;  wordValue: 0.1&#13;  result: 2.2&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.552</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/119\" target=\"_blank\" rel=\"noopener\">Resolves #110 QA: https://github.com/Meniole/conversation-rewa&hellip;</a></h6></td><td><details><summary>1.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.498</td></tr></tbody></table></details>"
+  },
+  "Keyrxng": {
+    "total": 6.296,
+    "userId": 106303466,
+    "comments": [
+      {
+        "id": 2335000437,
+        "content": "Lmao I wrote about deleted comments at first too and thought nah that's stupid. But yeah for sure a simple test that after a comment is posted then deleted that it is actually removed from the API results is a good thing to check, I'm glad you brought it up.\r\nI think all of the reasons you can hide a comment might be grouped under `hidden` which would make things easier",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/110#issuecomment-2335000437",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.916,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 72,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 79.07500000000002,
+            "syllables": 88,
+            "sentences": 3,
+            "score": 0.8092499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2503066132,
+        "content": "As the title states, we need to ensure that any comments which are marked as `hidden` should be deemed as not suitable for rewards.\r\nThis is because there will be scenarios where a comment is posted and for a number of reasons it would be marked as hidden symbolizing that it's irrelevant in some way to the discussion at hand.\r\nI am uncertain if this is implemented at the moment, @gentlementlegen you would know best",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/110",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.38,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 75,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 63.020000000000024,
+            "syllables": 105,
+            "sentences": 3,
+            "score": 0.9697999999999998
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/119"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 6.296 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.38</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>2.916</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/110\" target=\"_blank\" rel=\"noopener\">As the title states, we need to ensure that any comments which a&hellip;</a></h6></td><td><details><summary>2.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 75&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>1</td><td>1</td><td>3.38</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/110#issuecomment-2335000437\" target=\"_blank\" rel=\"noopener\">Lmao I wrote about deleted comments at first too and thought nah&hellip;</a></h6></td><td><details><summary>2.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 72&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.9</td><td>1</td><td>2.916</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 19.028,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2349200782,
+        "content": "It feels like the GitHub team gave up on REST and left it in production for backwards compatibility now that we are getting into the more esoteric features.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/110#issuecomment-2349200782",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.603,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 48.49357142857144,
+            "syllables": 43,
+            "sentences": 1,
+            "score": 0.8849357142857144
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1759675896,
+        "content": "I'm surprised its not included in some type. Perhaps you can find the correct type?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/119#discussion_r1759675896",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -2,7 +2,9 @@ import { RestEndpointMethodTypes } from \"@octokit/rest\";\n \n export type GitHubIssue = RestEndpointMethodTypes[\"issues\"][\"get\"][\"response\"][\"data\"];\n export type GitHubPullRequest = RestEndpointMethodTypes[\"pulls\"][\"get\"][\"response\"][\"data\"];\n-export type GitHubIssueComment = RestEndpointMethodTypes[\"issues\"][\"listComments\"][\"response\"][\"data\"][0];\n+export type GitHubIssueComment = RestEndpointMethodTypes[\"issues\"][\"listComments\"][\"response\"][\"data\"][0] & {\n+  isMinimized?: boolean;",
+        "score": {
+          "reward": 1.377,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 92.965,
+            "syllables": 20,
+            "sentences": 2,
+            "score": 0.67035
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1759676473,
+        "content": "Why not make these single line functions? \r\n```typescript\r\n http.get(\"https://api.github.com/repos/ubiquibot/comment-incentives/issues/22/timeline\", () => HttpResponse.json(issueTimelineGet)\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/119#discussion_r1759676473",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -38,12 +44,18 @@ export const handlers = [\n   http.get(\"https://api.github.com/repos/ubiquibot/comment-incentives/issues/22/comments\", () => {\n     return HttpResponse.json(issue22CommentsGet);\n   }),\n+  http.get(\"https://api.github.com/repos/Meniole/conversation-rewards/issues/13/events\", () => {\n+    return HttpResponse.json(issue13EventsGet);\n+  }),\n   http.get(\"https://api.github.com/repos/ubiquity/work.ubq.fi/issues/69/comments\", () => {\n     return HttpResponse.json(issue69CommentsGet);\n   }),\n   http.get(\"https://api.github.com/repos/ubiquibot/comment-incentives/issues/25/comments\", () => {\n     return HttpResponse.json(issue25CommentsGet);\n   }),\n+  http.get(\"https://api.github.com/repos/Meniole/conversation-rewards/issues/13/comments\", () => {\n+    return HttpResponse.json(issue13CommentsGet);\n+  }),\n   http.get(\"https://api.github.com/repos/ubiquibot/comment-incentives/issues/22/timeline\", () => {\n     return HttpResponse.json(issueTimelineGet);\n   }),",
+        "score": {
+          "reward": 0.498,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 90.95857142857145,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.6904142857142855
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2304387099,
+            "effect": {
+              "addition": 1552,
+              "deletion": 3
+            },
+            "reward": 15.55,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/119"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 19.028 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>15.55</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.603</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>1.875</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/119\" target=\"_blank\" rel=\"noopener\">#119</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+1552 -3</td><td>1</td><td>15.55</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/110#issuecomment-2349200782\" target=\"_blank\" rel=\"noopener\">It feels like the GitHub team gave up on REST and left it in pro&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.603</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/119#discussion_r1759675896\" target=\"_blank\" rel=\"noopener\">I'm surprised its not included in some type. Perhaps you can fin&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.377</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/119#discussion_r1759676473\" target=\"_blank\" rel=\"noopener\">Why not make these single line functions? &#96;&#96;&#96;types&hellip;</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.498</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 16.84,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 1759730655,
+        "content": "Is it not possible to query all comments at once for isMinimized?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/119#discussion_r1759730655",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,18 @@\n+import { GitHubIssueComment } from \"../github-types\";\n+import { getOctokitInstance } from \"../octokit\";\n+import { IssueComment } from \"@octokit/graphql-schema\";\n+import { QUERY_COMMENT_DETAILS } from \"../types/requests\";\n+\n+export async function getMinimizedCommentStatus(comments: GitHubIssueComment[]) {\n+  const octokit = getOctokitInstance();\n+\n+  for (const comment of comments) {\n+    const commentData = await octokit.graphql<{ node?: IssueComment }>(QUERY_COMMENT_DETAILS, {\n+      node_id: comment.node_id,\n+    });\n+    // For each comment we add the 'isMinimized' info, which corresponds to a collapsed comment\n+    if (commentData.node) {\n+      comment.isMinimized = commentData.node.isMinimized;\n+    }\n+  }",
+        "score": {
+          "reward": 1.08,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 60.70500000000001,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.9929499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2304439835,
+            "effect": {
+              "addition": 1552,
+              "deletion": 3
+            },
+            "reward": 15.55,
+            "priority": 1
+          },
+          {
+            "reviewId": 2310121756,
+            "effect": {
+              "addition": 12,
+              "deletion": 9
+            },
+            "reward": 0.21,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/119"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 16.84 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>15.76</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>1.08</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/119\" target=\"_blank\" rel=\"noopener\">#119</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+1552 -3</td><td>1</td><td>15.55</td></tr><tr><td>+12 -9</td><td>1</td><td>0.21</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/119#discussion_r1759730655\" target=\"_blank\" rel=\"noopener\">Is it not possible to query all comments at once for isMinimized?</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.08</td></tr></tbody></table></details>"
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "gitcoindev": {
+    "userId": 88761781,
+    "total": 100,
+    "task": {
+      "reward": 100,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 100 XP ]</a>&nbsp;</h3><h6>@gitcoindev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>100</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 10.35,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 1704227406,
+        "content": "What should be done:\r\n1. Partner should be able to add a `category` field to his project [here](https://github.com/ubiquity/devpool-directory/blob/development/projects.json)\r\n2. If a new issue is created from a partner's repository then if the `category` field exists then it should be added as a label to the issue\r\nDon't forget to handle edge cases: \r\n1. If partner already has \"synced\" issues in the https://github.com/ubiquity/devpool-directory/issues those issues should also be labeled with the `category` field.\r\n2. If the `category` field is updated or deleted the partner's issues \"category\" label should also be updated \r\n3. The `category` field can be empty (not set)\r\n### Discussed in https://github.com/ubiquity/devpool-directory/discussions/476\r\n<div type='discussions-op-text'>\r\n<sup>Originally posted by **pavlovcik** May  1, 2023</sup>\r\nWe started experimenting with using the DevPool system for roles beyond software development. \r\n- https://github.com/ubiquity/grants is a good example of our initiative for grant writing. \r\n- We also have a miscellaneous tasks repo at https://github.com/ubiquity/.github \r\nPerhaps in the pull request to monitor the repository, we should add a property, e.g. \"category\" that will automatically tag those issues with a certain customizable label. \r\nFor every repository added so far, the category can be \"Development\". Perhaps we could also populate all of the extra labels for extra metadata as we sometimes label bounties as \"CI/CD\" or \"Solidity\" or \"UI/UX\"\r\n---\r\nUltimately we want to allow non developers to contribute to DAOs and I think we might be able to get it to work with this current infrastructure. </div>",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/2",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 10.35,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 15
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 7
+              },
+              "h3": {
+                "score": 1,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 5
+              }
+            },
+            "result": 6.7
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 230,
+            "wordValue": 0.1,
+            "result": 1.44
+          },
+          "readability": {
+            "fleschKincaid": 50.333382352941186,
+            "syllables": 416,
+            "sentences": 14,
+            "score": 0.9033338235294118
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/devpool-directory/pull/980"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 10.35 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>10.35</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/2\" target=\"_blank\" rel=\"noopener\">What should be done:1. Partner should be able to add a &#96;ca&hellip;</a></h6></td><td><details><summary>8.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 15&#13;    ol:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 7&#13;    h3:&#13;      score: 1&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 5&#13;  result: 6.7&#13;regex:&#13;  wordCount: 230&#13;  wordValue: 0.1&#13;  result: 1.44&#13;</pre></details></td><td>1</td><td>1</td><td>10.35</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 1.141,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1820236608,
+        "content": "I realized that the opposite ordering probably makes more sense. For example:\r\n```json\r\n{\r\n    \"category\": {\r\n        \"research\": [\r\n            \"https://github.com/ubiquity/research\",\r\n            \"https://github.com/ubiquity/card-issuance\"\r\n        ],\r\n        \"typescript\": [\r\n            \"https://github.com/ubiquity/ubiquibot\"\r\n        ],\r\n        \"solidity\": [\r\n            \"https://github.com/ubiquity/ubiquity-dollar\"\r\n        ]\r\n    }\r\n}\r\n```",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/980#issuecomment-1820236608",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.931,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 52.69500000000002,
+            "syllables": 21,
+            "sentences": 2,
+            "score": 0.9269500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1715808890,
+            "effect": {
+              "addition": 16,
+              "deletion": 5
+            },
+            "reward": 0.21,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/devpool-directory/pull/980"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 1.141 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>0.21</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>0.931</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/devpool-directory/pull/980\" target=\"_blank\" rel=\"noopener\">#980</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+16 -5</td><td>1</td><td>0.21</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/980#issuecomment-1820236608\" target=\"_blank\" rel=\"noopener\">I realized that the opposite ordering probably makes more sense.&hellip;</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.931</td></tr></tbody></table></details>"
+  }
+}

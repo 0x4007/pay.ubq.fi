@@ -1,0 +1,183 @@
+{
+  "hhio618": {
+    "userId": 1272158,
+    "total": 160.98,
+    "task": {
+      "reward": 150,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2643545809,
+        "content": "## Root cause\nIt turns out that these permits, along with a few others, were generated before the fix in [this commit](https://github.com/ubiquity-os/permit-generation/commit/e4e8eaef1d065cffdcb379b001c62d0fa971010e):\nThe issue was originally fixed in this diff:\n```diff\n const { domain, types, values } = SignatureTransfer.getPermitData(permitTransferFromData, PERMIT2_ADDRESS, evmNetworkId);\n-  const domainData = {\n-    name: domain.name,\n-    version: domain.version || \"1\", //  default to 1 if it's undefined\n-    chainId: domain.chainId,\n-    verifyingContract: domain.verifyingContract,\n-  };\n  try {\n-    const signature = await adminWallet._signTypedData(domainData, types, values);\n+    const signature = await adminWallet._signTypedData(domain, types, values);\n    const erc20Permit: PermitReward = {\n      tokenType: TokenType.ERC20,\n```\n## Description\nThe Permit2 contract utilizes EIP-712 [Domain Separators](https://eips.ethereum.org/EIPS/eip-712#definition-of-domainseparator) to mitigate replay attacks.\nThe above `domainData` used to generate these permits included a `version` field, which is optional in the EIP-712 standard. This field was not used in the Permit2 protocol, as seen in its [implementation](https://github.com/Uniswap/permit2/blob/main/src/EIP712.sol) and the [deployed version](https://gnosisscan.io/address/0x000000000022d473030f116ddee9f6b43ac78ba3#code#F10#L1).  \nAttempting to claim these invalid permits leads to an `UNPREDICTABLE_GAS_LIMIT` error, which is ultimately caused by a revert due to an InvalidSigner error. This behavior can be observed in the following Tenderly simulation:\nhttps://www.tdly.co/shared/simulation/4b7c7025-1e4c-404d-a1f9-d38596afad9b. \nThe invalid permit used in this scenario was sourced from [this GitHub issue](https://github.com/ubiquity/devpool-directory-tasks/issues/32#issuecomment-2423670546).\n## Proof\nAs a result, signatures become invalid due to differences in the `DOMAIN_SEPARATOR()`. So, the original Permit2 EIP-712 implementation verifies signature data using a domain separator different from what we expected for those permits.\nHere is a test for one of these invalid permits obtained from [here](https://github.com/ubiquity/devpool-directory-tasks/issues/32#issuecomment-2423670546):\n```sh\ngit clone https://github.com/hhio618/permit2\ngit checkout pay.ubq.fi/issues/363\nforge test --match-test testSignatureWithDifferentDomainSeperators -vvv\n```\nThe signature fails with the original `DOMAIN_SEPARATOR()` but works correctly with `DOMAIN_SEPARATOR_WITH_VERSION_HASH()`, which includes the `versionHash`.\n## Mitigation\nPerhaps the original author could resolve this by running a script to fetch these permits from the database, regenerate the correct signature, and update the relevant sections in the GitHub commit.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/363#issuecomment-2643545809",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 10.98,
+          "formatting": {
+            "content": {
+              "h2": {
+                "score": 1,
+                "elementCount": 4
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "br": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 6
+              }
+            },
+            "result": 10
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 215,
+            "wordValue": 0.1,
+            "result": 1.58
+          },
+          "readability": {
+            "fleschKincaid": 48.09173303834808,
+            "syllables": 373,
+            "sentences": 12,
+            "score": 0.8809173303834809
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 160.98 XP ]</a>&nbsp;</h3><h6>@hhio618</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>150</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>10.98</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/363#issuecomment-2643545809\" target=\"_blank\" rel=\"noopener\">## Root causeIt turns out that these permits, along with a few &hellip;</a></h6></td><td><details><summary>11.58</summary><pre>content:&#13;  content:&#13;    h2:&#13;      score: 1&#13;      elementCount: 4&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    br:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 6&#13;  result: 10&#13;regex:&#13;  wordCount: 215&#13;  wordValue: 0.1&#13;  result: 1.58&#13;</pre></details></td><td>1</td><td>3</td><td>10.98</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 17.482,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2645952040,
+        "content": "@rndquu @whilefoo  can you confirm the findings?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/363#issuecomment-2645952040",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.112,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 66.7871428571429,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.9321285714285711
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2731517883,
+        "content": "# Can not estimate gas\r\nI tried claiming my old permits and noticed a handful would consistently fail with this message. There is a chance that those are not properly encoded permits but definitely worth checking. \r\n```\r\nerc20-permit.ts:93 Error in permitTransferFrom: Error: cannot estimate gas; transaction may fail or may require manual gas limit [ See: https://links.ethers.org/v5-errors-UNPREDICTABLE_GAS_LIMIT ] (reason=\"execution reverted\", method=\"estimateGas\", transaction={\"from\":\"0x4007CE2083c7F3E18097aeB3A39bb8eC149a341d\",\"to\":\"0x000000000022D473030F116dDEE9F6B43aC78BA3\",\"data\":\"0x30f28b7a000000000000000000000000e91d153e0b41518a2ce8dd3d7944fa863463a97d000000000000000000000000000000000000000000000009841b5bf300120000cc8ed968f5af88520dba9aaa366793e240ae7f8971ed75800bab1883645cf6f3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0000000000000000000000004007ce2083c7f3e18097aeb3a39bb8ec149a341d000000000000000000000000000000000000000000000009841b5bf3001200000000000000000000000000009051eda96db419c967189f4ac303a290f33276800000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000004151868b47cdf9e9f778e29addccb82c5fe060bb422f7ab25c83fcc5e6981a75ce03dd4f666abace6f4774050bae739aa7d5b35a0aed7281c2e02f2d0f8c7ef6a61b00000000000000000000000000000000000000000000000000000000000000\",\"accessList\":null}, error={\"code\":-32603,\"message\":\"Internal JSON-RPC error.\",\"data\":{\"code\":3,\"message\":\"execution reverted\",\"data\":\"0x815e1d64\",\"cause\":null},\"stack\":\"{\\n  \\\"code\\\": -32603,\\n  \\\"message\\\": \\\"Internal JSON-RPC error.\\\",\\n  \\\"data\\\": {\\n    \\\"code\\\": 3,\\n    \\\"message\\\": \\\"execution reverted\\\",\\n    \\\"data\\\": \\\"0x815e1d64\\\",\\n    \\\"cause\\\": null\\n  },\\n  \\\"stack\\\": \\\"Error: Internal JSON-RPC error.\\\\n    at new o (chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/common-1.js:1:282928)\\\\n    at a (chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/common-1.js:1:286161)\\\\n    at Object.internal (chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/common-1.js:1:286770)\\\\n    at c (chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/common-1.js:1:221863)\\\\n    at chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/common-1.js:1:222865\\\\n    at async chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/common-1.js:1:278266\\\"\\n}\\n  at new o (chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/common-1.js:1:282928)\\n  at a (chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/common-1.js:1:286161)\\n  at Object.internal (chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/common-1.js:1:286770)\\n  at c (chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/common-1.js:1:221863)\\n  at chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/common-1.js:1:222865\\n  at async chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/common-1.js:1:278266\"}, code=UNPREDICTABLE_GAS_LIMIT, version=providers/5.7.2)\r\n    at Logger23.makeError (index.ts:269:28)\r\n    at Logger23.throwError (index.ts:281:20)\r\n    at checkError2 (json-rpc-provider.ts:78:20)\r\n    at Web3Provider.<anonymous> (json-rpc-provider.ts:642:20)\r\n    at Generator.throw (<anonymous>)\r\n    at rejected (json-rpc-provider.ts:16:24)\r\n```\r\n- https://github.com/ubiquity/devpool-directory-tasks/issues/45#issuecomment-2420924756\r\n- https://github.com/ubiquity/devpool-directory-tasks/issues/52#issuecomment-2420966601\r\n- https://github.com/ubiquity/devpool-directory-tasks/issues/51#issuecomment-2420924678\r\n- https://github.com/ubiquity/devpool-directory-tasks/issues/50#issuecomment-2420924733\r\n- https://github.com/ubiquity/work.ubq.fi/issues/125#issuecomment-2414591971\r\n- https://github.com/ubiquity/devpool-directory-tasks/issues/32#issuecomment-2423670546\r\n# Already claimed indicator\r\nIt shows the view claim button as well as the loading icon. This should be fixed. \r\n<img width=\"649\" alt=\"image\" src=\"https://github.com/user-attachments/assets/6e53fbaf-6b25-42cb-847f-b21944562771\">",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/363",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 15.37,
+          "formatting": {
+            "content": {
+              "h1": {
+                "score": 1,
+                "elementCount": 2
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 9
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 6
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 7
+              }
+            },
+            "result": 9.6
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 60,
+            "wordValue": 0.1,
+            "result": 2.52
+          },
+          "readability": {
+            "fleschKincaid": 49.31563868613139,
+            "syllables": 239,
+            "sentences": 14,
+            "score": 0.8931563868613139
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 17.482 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>15.37</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>2.112</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/363\" target=\"_blank\" rel=\"noopener\"># Can not estimate gasI tried claiming my old permits and noti&hellip;</a></h6></td><td><details><summary>12.12</summary><pre>content:&#13;  content:&#13;    h1:&#13;      score: 1&#13;      elementCount: 2&#13;    p:&#13;      score: 0&#13;      elementCount: 9&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 6&#13;    a:&#13;      score: 1&#13;      elementCount: 7&#13;  result: 9.6&#13;regex:&#13;  wordCount: 60&#13;  wordValue: 0.1&#13;  result: 2.52&#13;</pre></details></td><td>1</td><td>1</td><td>15.37</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/363#issuecomment-2645952040\" target=\"_blank\" rel=\"noopener\">@rndquu @whilefoo  can you confirm the findings?</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.8</td><td>3</td><td>2.112</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 6.24,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2646470892,
+        "content": "As far as I remember this is already fixed, if you regenerate rewards for those issues and you should be able to claim",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/363#issuecomment-2646470892",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 6.24,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 62.10739130434784,
+            "syllables": 33,
+            "sentences": 1,
+            "score": 0.9789260869565216
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 6.24 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>6.24</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/363#issuecomment-2646470892\" target=\"_blank\" rel=\"noopener\">As far as I remember this is already fixed, if you regenerate re&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>1</td><td>3</td><td>6.24</td></tr></tbody></table></details>"
+  }
+}

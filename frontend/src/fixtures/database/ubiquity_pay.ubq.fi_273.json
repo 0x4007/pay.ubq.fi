@@ -1,0 +1,1062 @@
+{
+  "EresDev": {
+    "userId": 11886219,
+    "total": 817.588,
+    "task": {
+      "reward": 800,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2272853742,
+        "content": "The initial setup was easier. Reloadly API was doing most of the things for us. This is going to take a little more time. 2-3 days I estimate as we are using a custom formula pick a card and data source isn't just the API anymore. We have to read these files or turn them into json.  \r\nFree free to adjust the estimate of the initial setup or this, and let me know if I should label the time differently.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/273#issuecomment-2272853742",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 5.886,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 82,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 79.47552845528456,
+            "syllables": 110,
+            "sentences": 6,
+            "score": 0.8052447154471544
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2273015600,
+        "content": "I see this is the step where we would need to fetch the product list. This step will be unnecessary because there wouldn't be any card for a country that is not in the allow list. We are not offering visa, we are offering only mastercard. But even if we were offering visa, the allowed country list for mastercard and visa contains exactly the same countries. \r\nOnly case I can think this would be useful is when the mastercard is out of stock for user and we offer them another non-tokenized mastercard or visa with limitations. Here, we also have another problem of again picking a card from this list. We don't have solid rules to pick one. Maybe choose randomly? I don't plan to support this. Let me know if you think we should support this.\r\nAlso, please note that I will need product details and for that I am thinking to use single product details API route. But if I find loading product list to be more useful, I will go with that. So, it is not a final decision to not load product list.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/273#issuecomment-2273015600",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 4.332,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 191,
+            "wordValue": 0.1,
+            "result": 1.82
+          },
+          "readability": {
+            "fleschKincaid": 74.98827627869515,
+            "syllables": 264,
+            "sentences": 13,
+            "score": 0.8501172372130484
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2451553165,
+        "content": "Currently, the virtual card feature is offering all visa & mastercard to users based on their location. \r\nAs discussed in https://github.com/ubiquity/pay.ubq.fi/issues/259#issuecomment-2252453717 and https://github.com/ubiquity/pay.ubq.fi/issues/259#issuecomment-2266190734, pick and offer only single virtual card to the user. \r\nImportant files\r\n- [MasterCard International.xlsx](https://github.com/user-attachments/files/16514698/MasterCard.International.xlsx)\r\n- [MC allow list 3052024.xlsx](https://github.com/user-attachments/files/16514700/MC.allow.list.3052024.xlsx)\r\nHow to pick the best card for a user? \r\n- offer only mastercard from `MasterCard International.xlsx` because they are tokenized.\r\n- pick the card SKU based on user's location.\r\n- offer mastercard SKU 18597 to users who are not in the `MasterCard International.xlsx`, but present in the `MC allow list 3052024.xlsx`.\r\n- We probably will not fetch a product list from Reloadly anymore. Presence of this previously was taking care of not offering card to users out of `MC allow list 3052024.xlsx`. If so, make sure user's country is in the `MC allow list 3052024.xlsx` before offering them a mastercard.\r\nPlease note that the virtual cards feature is present in `beta` branch at the moment. But it can move to `development` branch anytime. So, keep an eye on that and open a PR accordingly.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/273",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 7.37,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 11
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 6
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.6
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 154,
+            "wordValue": 0.1,
+            "result": 2.19
+          },
+          "readability": {
+            "fleschKincaid": 69.08027272727276,
+            "syllables": 268,
+            "sentences": 20,
+            "score": 0.9091972727272725
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 817.588 XP ]</a>&nbsp;</h3><h6>@EresDev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>800</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>7.37</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>10.218</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/273\" target=\"_blank\" rel=\"noopener\">Currently, the virtual card feature is offering all visa &amp; m&hellip;</a></h6></td><td><details><summary>5.79</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 11&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 6&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.6&#13;regex:&#13;  wordCount: 154&#13;  wordValue: 0.1&#13;  result: 2.19&#13;</pre></details></td><td>1</td><td>1</td><td>7.37</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/273#issuecomment-2272853742\" target=\"_blank\" rel=\"noopener\">The initial setup was easier. Reloadly API was doing most of the&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 82&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.9</td><td>2</td><td>5.886</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/273#issuecomment-2273015600\" target=\"_blank\" rel=\"noopener\">I see this is the step where we would need to fetch the product &hellip;</a></h6></td><td><details><summary>1.82</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 191&#13;  wordValue: 0.1&#13;  result: 1.82&#13;</pre></details></td><td>0.95</td><td>2</td><td>4.332</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 81.687,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2272293077,
+        "content": "I imagine that the initial set up would have taken longer, how come this iterative feature is estimated to take a week compared to a day?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/273#issuecomment-2272293077",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.338,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 53.54500000000003,
+            "syllables": 39,
+            "sentences": 1,
+            "score": 0.9354500000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2274975320,
+        "content": "I like fallbacks and redundancies to make our system more resilient. I imagine it will boost confidence in our brand with our end users.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/273#issuecomment-2274975320",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 3.392,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 67.75500000000001,
+            "syllables": 36,
+            "sentences": 2,
+            "score": 0.9224499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2290732910,
+        "content": "There's some minor stuff. Once addressed you can merge.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#pullrequestreview-2290732910",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.17,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 100.24000000000002,
+            "syllables": 12,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1737615527,
+        "content": "Can you elaborate on what the purpose is of this",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1737615527",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,109 @@\n+import { ethers } from \"ethers\";\n+import { giftCardTreasuryAddress, permit2Address } from \"../../../../../shared/constants\";\n+import { isClaimableForAmount } from \"../../../../../shared/pricing\";\n+import { GiftCard, OrderRequestParams } from \"../../../../../shared/types\";\n+import { permit2Abi } from \"../../abis\";\n+import { AppState } from \"../../app-state\";\n+import { isErc20Permit } from \"../../render-transaction/render-transaction\";\n+import { toaster } from \"../../toaster\";\n+import { checkPermitClaimable, transferFromPermit, waitForTransaction } from \"../../web3/erc20-permit\";\n+import { getApiBaseUrl, getUserCountryCode } from \"../helpers\";\n+import { initClaimGiftCard } from \"../index\";\n+import { getGiftCardOrderId } from \"../../../../../shared/helpers\";\n+\n+export function attachMintAction(giftCard: GiftCard, app: AppState) {\n+  const mintBtn: HTMLElement | null = document.getElementById(\"mint\");\n+\n+  mintBtn?.addEventListener(\"click\", async () => {\n+    mintBtn.setAttribute(\"data-loading\", \"true\");\n+    const productId = Number(document.getElementById(\"offered-card\")?.getAttribute(\"data-product-id\"));\n+\n+    if (!isErc20Permit(app.reward)) {\n+      toaster.create(\"error\", \"Only ERC20 permits are allowed to claim a card.\");\n+    } else if (!isClaimableForAmount(giftCard, app.reward.amount)) {\n+      toaster.create(\"error\", \"Your reward amount is not equal to the price of available card.\");\n+    } else {\n+      await mintGiftCard(productId, app);\n+    }\n+\n+    mintBtn.setAttribute(\"data-loading\", \"false\");\n+  });\n+}\n+\n+async function mintGiftCard(productId: number, app: AppState) {\n+  if (app.signer) {\n+    const country = await getUserCountryCode();\n+    if (!country) {\n+      toaster.create(\"error\", \"Failed to detect your location to pick a suitable card for you.\");\n+      return;\n+    }\n+\n+    const isClaimable = await checkPermitClaimable(app);\n+    if (isClaimable) {\n+      const permit2Contract = new ethers.Contract(permit2Address, permit2Abi, app.signer);\n+      if (!permit2Contract) return;\n+\n+      const reward = {\n+        ...app.reward,\n+      };\n+      reward.beneficiary = giftCardTreasuryAddress;\n+\n+      const tx = await transferFromPermit(permit2Contract, reward, \"Processing... Please wait. Do not close this page.\");\n+      if (!tx) return;\n+      await waitForTransaction(tx, `Transaction confirmed. Minting your card now.`);\n+\n+      const url = `${getApiBaseUrl()}/post-order`;\n+\n+      const orderParams: OrderRequestParams = {\n+        chainId: app.signer.provider.network.chainId,\n+        txHash: tx.hash,\n+        productId,\n+        country: country,\n+      };\n+      const response = await fetch(url, {\n+        method: \"POST\",\n+        headers: {\n+          Accept: \"application/json\",\n+        },\n+        body: JSON.stringify(orderParams),\n+      });\n+\n+      if (response.status != 200) {\n+        toaster.create(\"error\", \"Order failed. Try again later.\");\n+        return;\n+      }\n+\n+      await checkForMintingDelay(app);",
+        "score": {
+          "reward": 1.568,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 78.24500000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.8175499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1737617856,
+        "content": "I think this might be wrong. You might need to put dark mode themes as default and the build script will generate light mode styles automatically.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1737617856",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,193 +1,178 @@\n-.heading-gift-card {\n+.card-heading {\n   font-size: 16px;\n   text-align: center;\n   position: absolute;\n   margin-top: -30px;\n+  display: flex;\n+  align-items: center;\n }\n+\n #gift-cards {\n   padding-top: 44px;\n   display: flex;\n   flex-direction: column;\n+  max-width: 563px;\n+  width: 100vw;\n   align-items: center;\n+  row-gap: 12px;\n+  position: relative;\n }\n \n-#gift-cards p.list-error {\n+.card-section {\n+  overflow-wrap: break-word;\n+  text-transform: none;\n+  background-color: var(--background-color-default);\n+  padding: 24px;\n+  width: 100%;\n   text-align: center;\n+  box-sizing: border-box;\n+  box-shadow: inset 0 0 96px #00bfff10;\n }\n \n-.redeem-info-wrapper[data-show=\"false\"] {\n-  display: none;\n+.card-error {\n+  text-align: center;\n+  padding: 0 12px;\n }\n \n-.gift-cards-wrapper {\n+#offered-card {\n   display: flex;\n-  flex-direction: row;\n-  overflow-x: auto;\n-  max-width: 563px;\n-  width: 100vw;\n-  transform: rotateX(180deg);\n-  /* Because of rotateX, some properties like padding-bottom, align-items work in reverse. */\n-  align-items: end;\n-  padding-bottom: 12px;\n-}\n-.gift-cards-wrapper.center {\n-  justify-content: center;\n-}\n-.gift-cards-wrapper .gift-card {\n-  transform: rotateX(180deg);\n }\n \n-.purchased {\n-  flex-direction: column;\n-  align-items: center;\n+@media screen and (max-width: 640px) {\n+  .card-section {\n+    flex-direction: column;\n+    text-align: center;\n+  }\n+  .card-section .details {\n+    margin-left: 0;\n+  }\n }\n \n-.gift-card {\n-  background-color: var(--background-color-default);\n-  margin-right: 10px;\n-  padding: 12px 6px;\n-  text-align: center;\n-  min-width: 168px;\n-  width: 168px;\n-  height: fit-content;\n-}\n-.redeem-code {\n-  width: 160px;\n-  overflow-wrap: break-word;\n-  text-transform: none;\n-}\n-.redeem-code p {\n+#redeem-code p {\n   text-transform: none;\n+  margin: 2px 0;\n }\n \n-.gift-card h3 {\n-  color: #fff;\n+.card-section h3 {\n+  padding: 8px;\n+  text-align: center;\n }\n \n-.gift-card div.buttons {\n-  display: flex;\n-  flex-direction: row;\n-  justify-content: space-evenly;\n-  margin: 10px 0;\n-}\n-.gift-card div.buttons span {\n+.card-section .details {\n   display: flex;\n   flex-direction: column;\n-  align-items: center;\n-  justify-content: center;\n-  padding: 6px;\n+  margin-left: 24px;\n+  row-gap: 12px;\n+  flex: 1;\n }\n \n-.gift-card div.buttons button {\n-  background-color: #80808020;\n-  border: none;\n-  color: #fff;\n-  cursor: pointer;\n-}\n-.gift-card img {\n+.card-section img {\n   box-sizing: border-box;\n   width: 100%;\n   height: auto;\n   border: 2px solid #80808020;\n-  max-width: 168px;\n-  height: 110px;\n+  max-width: 200px;\n }\n \n-.gift-card .pricing {\n+.card-section .pricing {\n   display: flex;\n   flex-direction: column;\n }\n-.gift-card .pricing .available {\n-  color: #fff;\n+.card-section .pricing .available {\n+  display: flex;\n+  flex-direction: row;\n+  justify-content: space-evenly;\n }\n-.gift-card .pricing div {\n+.card-section .pricing .available div .currency {\n   display: flex;\n   flex-direction: row;\n-  justify-content: space-between;\n+  justify-content: center;\n }\n-.redeem-info-wrapper {\n-  position: absolute;\n-  z-index: 1000;\n-  top: 0;\n-  left: 0;\n-  width: 100%;\n-  height: 100%;\n-  background-color: var(--background-color-default);\n+.card-section .pricing .available div .currency div {\n+  font-size: 8px;\n+}\n+.card-section .pricing .available div .amount {\n+  font-size: 24px;\n+  color: #fff;\n }\n .redeem-info {\n-  position: fixed;\n-  top: 50%;\n-  left: 50%;\n-  transform: translate(-50%, -50%);\n-  max-width: 563px;\n-  padding: 24px;\n-  border-collapse: collapse;\n-  border-color: gray;\n-  overflow-y: auto;\n-  z-index: 1;\n+  border-color: var(--light-mode-border-color);",
+        "score": {
+          "reward": 3.456,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 79.75538461538463,
+            "syllables": 35,
+            "sentences": 2,
+            "score": 0.8024461538461537
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1737618615,
+        "content": "Same with this variable",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1737618615",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,193 +1,178 @@\n-.heading-gift-card {\n+.card-heading {\n   font-size: 16px;\n   text-align: center;\n   position: absolute;\n   margin-top: -30px;\n+  display: flex;\n+  align-items: center;\n }\n+\n #gift-cards {\n   padding-top: 44px;\n   display: flex;\n   flex-direction: column;\n+  max-width: 563px;\n+  width: 100vw;\n   align-items: center;\n+  row-gap: 12px;\n+  position: relative;\n }\n \n-#gift-cards p.list-error {\n+.card-section {\n+  overflow-wrap: break-word;\n+  text-transform: none;\n+  background-color: var(--background-color-default);\n+  padding: 24px;\n+  width: 100%;\n   text-align: center;\n+  box-sizing: border-box;\n+  box-shadow: inset 0 0 96px #00bfff10;\n }\n \n-.redeem-info-wrapper[data-show=\"false\"] {\n-  display: none;\n+.card-error {\n+  text-align: center;\n+  padding: 0 12px;\n }\n \n-.gift-cards-wrapper {\n+#offered-card {\n   display: flex;\n-  flex-direction: row;\n-  overflow-x: auto;\n-  max-width: 563px;\n-  width: 100vw;\n-  transform: rotateX(180deg);\n-  /* Because of rotateX, some properties like padding-bottom, align-items work in reverse. */\n-  align-items: end;\n-  padding-bottom: 12px;\n-}\n-.gift-cards-wrapper.center {\n-  justify-content: center;\n-}\n-.gift-cards-wrapper .gift-card {\n-  transform: rotateX(180deg);\n }\n \n-.purchased {\n-  flex-direction: column;\n-  align-items: center;\n+@media screen and (max-width: 640px) {\n+  .card-section {\n+    flex-direction: column;\n+    text-align: center;\n+  }\n+  .card-section .details {\n+    margin-left: 0;\n+  }\n }\n \n-.gift-card {\n-  background-color: var(--background-color-default);\n-  margin-right: 10px;\n-  padding: 12px 6px;\n-  text-align: center;\n-  min-width: 168px;\n-  width: 168px;\n-  height: fit-content;\n-}\n-.redeem-code {\n-  width: 160px;\n-  overflow-wrap: break-word;\n-  text-transform: none;\n-}\n-.redeem-code p {\n+#redeem-code p {\n   text-transform: none;\n+  margin: 2px 0;\n }\n \n-.gift-card h3 {\n-  color: #fff;\n+.card-section h3 {\n+  padding: 8px;\n+  text-align: center;\n }\n \n-.gift-card div.buttons {\n-  display: flex;\n-  flex-direction: row;\n-  justify-content: space-evenly;\n-  margin: 10px 0;\n-}\n-.gift-card div.buttons span {\n+.card-section .details {\n   display: flex;\n   flex-direction: column;\n-  align-items: center;\n-  justify-content: center;\n-  padding: 6px;\n+  margin-left: 24px;\n+  row-gap: 12px;\n+  flex: 1;\n }\n \n-.gift-card div.buttons button {\n-  background-color: #80808020;\n-  border: none;\n-  color: #fff;\n-  cursor: pointer;\n-}\n-.gift-card img {\n+.card-section img {\n   box-sizing: border-box;\n   width: 100%;\n   height: auto;\n   border: 2px solid #80808020;\n-  max-width: 168px;\n-  height: 110px;\n+  max-width: 200px;\n }\n \n-.gift-card .pricing {\n+.card-section .pricing {\n   display: flex;\n   flex-direction: column;\n }\n-.gift-card .pricing .available {\n-  color: #fff;\n+.card-section .pricing .available {\n+  display: flex;\n+  flex-direction: row;\n+  justify-content: space-evenly;\n }\n-.gift-card .pricing div {\n+.card-section .pricing .available div .currency {\n   display: flex;\n   flex-direction: row;\n-  justify-content: space-between;\n+  justify-content: center;\n }\n-.redeem-info-wrapper {\n-  position: absolute;\n-  z-index: 1000;\n-  top: 0;\n-  left: 0;\n-  width: 100%;\n-  height: 100%;\n-  background-color: var(--background-color-default);\n+.card-section .pricing .available div .currency div {\n+  font-size: 8px;\n+}\n+.card-section .pricing .available div .amount {\n+  font-size: 24px;\n+  color: #fff;\n }\n .redeem-info {\n-  position: fixed;\n-  top: 50%;\n-  left: 50%;\n-  transform: translate(-50%, -50%);\n-  max-width: 563px;\n-  padding: 24px;\n-  border-collapse: collapse;\n-  border-color: gray;\n-  overflow-y: auto;\n-  z-index: 1;\n+  border-color: var(--light-mode-border-color);\n }\n-\n-.close-btn {\n-  position: absolute;\n-  top: 0;\n-  right: 0;\n-  cursor: pointer;\n-  color: #fff;\n+.redeem-info p {\n+  text-transform: none;\n+}\n+.redeem-info fieldset legend {\n+  text-align: center;\n+  padding: 0 4px;\n+}\n+.redeem-info fieldset .instructions {\n+  padding: 12px;\n }\n \n-.claim-gift-card-btn[data-loading=\"true\"] > span.action {\n+.btn[data-loading=\"true\"] > .icon {\n   display: none;\n }\n-.claim-gift-card-btn[data-loading=\"true\"] > span.loading {\n-  display: flex;\n+.btn[data-loading=\"true\"] > .action {\n+  display: none;\n }\n-.claim-gift-card-btn[data-loading=\"true\"] > span.loading svg {\n-  animation: rotate 1s linear infinite;\n+.btn[data-loading=\"true\"] > .loader {\n+  display: block;\n }\n-.claim-gift-card-btn[data-loading=\"false\"] > span.action {\n-  display: flex;\n+.btn[data-loading=\"true\"] > .loader svg {\n+  animation: rotate 1s linear infinite;\n }\n-.claim-gift-card-btn[data-loading=\"false\"] > span.loading {\n-  display: none;\n+.btn[data-loading=\"false\"] > .icon {\n+  display: block;\n }\n-.gift-cards-wrapper.purchased .claim-gift-card-btn {\n+.btn[data-loading=\"false\"]:hover > .icon {\n   display: none;\n }\n-\n-#reveal-btn[data-loading-reveal=\"false\"] .loading {\n+.btn[data-loading=\"false\"] > .action {\n   display: none;\n }\n-#reveal-btn[data-loading-reveal=\"false\"] .action {\n+.btn[data-loading=\"false\"]:hover > .action {\n   display: block;\n }\n-\n-#reveal-btn[data-loading-reveal=\"true\"] .loading {\n-  display: block;\n+.btn[data-loading=\"false\"] > .loader {\n+  display: none;\n }\n-#reveal-btn[data-loading-reveal=\"true\"] .loading svg {\n-  animation: rotate 1s linear infinite;\n+\n+.btn {\n+  width: 100%;\n+  border: none;\n+  color: #808080;\n+  cursor: pointer;\n+  height: 48px;\n+  background: 0 0;\n }\n \n-#reveal-btn[data-loading-reveal=\"true\"] .action {\n-  display: none;\n+.btn:hover {\n+  cursor: pointer;\n+  background-color: #80808020;\n+  color: #fff;\n }\n+\n .disclaimer {\n   text-align: center;\n-  padding-top: 24px;\n+  padding: 24px 12px;\n }\n \n @media (prefers-color-scheme: light) {\n-  .gift-card,\n-  .redeem-info-wrapper {\n+  .card-section {\n     background-color: #fff;\n+    box-shadow: inset 0 0 96px #00000008;\n   }\n-  .gift-card h3,\n-  .gift-card .pricing .available,\n-  .gift-card div.buttons button,\n-  .close-btn {\n+\n+  .card-section img {\n+    border-color: var(--light-mode-border-color);",
+        "score": {
+          "reward": 0.88,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 75.87500000000001,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 0.8412499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1739996098,
+        "content": "I remember making a build script to dynamically generate the light mode styles based on the dark mode styles. \nBasically only dark mode styles should be authored and then the rest is generated. So I think that using this light mode variable might be wrong. \nIt's a bit hard to properly review without being on the computer. I generally review from mobile these days.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1739996098",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,193 +1,178 @@\n-.heading-gift-card {\n+.card-heading {\n   font-size: 16px;\n   text-align: center;\n   position: absolute;\n   margin-top: -30px;\n+  display: flex;\n+  align-items: center;\n }\n+\n #gift-cards {\n   padding-top: 44px;\n   display: flex;\n   flex-direction: column;\n+  max-width: 563px;\n+  width: 100vw;\n   align-items: center;\n+  row-gap: 12px;\n+  position: relative;\n }\n \n-#gift-cards p.list-error {\n+.card-section {\n+  overflow-wrap: break-word;\n+  text-transform: none;\n+  background-color: var(--background-color-default);\n+  padding: 24px;\n+  width: 100%;\n   text-align: center;\n+  box-sizing: border-box;\n+  box-shadow: inset 0 0 96px #00bfff10;\n }\n \n-.redeem-info-wrapper[data-show=\"false\"] {\n-  display: none;\n+.card-error {\n+  text-align: center;\n+  padding: 0 12px;\n }\n \n-.gift-cards-wrapper {\n+#offered-card {\n   display: flex;\n-  flex-direction: row;\n-  overflow-x: auto;\n-  max-width: 563px;\n-  width: 100vw;\n-  transform: rotateX(180deg);\n-  /* Because of rotateX, some properties like padding-bottom, align-items work in reverse. */\n-  align-items: end;\n-  padding-bottom: 12px;\n-}\n-.gift-cards-wrapper.center {\n-  justify-content: center;\n-}\n-.gift-cards-wrapper .gift-card {\n-  transform: rotateX(180deg);\n }\n \n-.purchased {\n-  flex-direction: column;\n-  align-items: center;\n+@media screen and (max-width: 640px) {\n+  .card-section {\n+    flex-direction: column;\n+    text-align: center;\n+  }\n+  .card-section .details {\n+    margin-left: 0;\n+  }\n }\n \n-.gift-card {\n-  background-color: var(--background-color-default);\n-  margin-right: 10px;\n-  padding: 12px 6px;\n-  text-align: center;\n-  min-width: 168px;\n-  width: 168px;\n-  height: fit-content;\n-}\n-.redeem-code {\n-  width: 160px;\n-  overflow-wrap: break-word;\n-  text-transform: none;\n-}\n-.redeem-code p {\n+#redeem-code p {\n   text-transform: none;\n+  margin: 2px 0;\n }\n \n-.gift-card h3 {\n-  color: #fff;\n+.card-section h3 {\n+  padding: 8px;\n+  text-align: center;\n }\n \n-.gift-card div.buttons {\n-  display: flex;\n-  flex-direction: row;\n-  justify-content: space-evenly;\n-  margin: 10px 0;\n-}\n-.gift-card div.buttons span {\n+.card-section .details {\n   display: flex;\n   flex-direction: column;\n-  align-items: center;\n-  justify-content: center;\n-  padding: 6px;\n+  margin-left: 24px;\n+  row-gap: 12px;\n+  flex: 1;\n }\n \n-.gift-card div.buttons button {\n-  background-color: #80808020;\n-  border: none;\n-  color: #fff;\n-  cursor: pointer;\n-}\n-.gift-card img {\n+.card-section img {\n   box-sizing: border-box;\n   width: 100%;\n   height: auto;\n   border: 2px solid #80808020;\n-  max-width: 168px;\n-  height: 110px;\n+  max-width: 200px;\n }\n \n-.gift-card .pricing {\n+.card-section .pricing {\n   display: flex;\n   flex-direction: column;\n }\n-.gift-card .pricing .available {\n-  color: #fff;\n+.card-section .pricing .available {\n+  display: flex;\n+  flex-direction: row;\n+  justify-content: space-evenly;\n }\n-.gift-card .pricing div {\n+.card-section .pricing .available div .currency {\n   display: flex;\n   flex-direction: row;\n-  justify-content: space-between;\n+  justify-content: center;\n }\n-.redeem-info-wrapper {\n-  position: absolute;\n-  z-index: 1000;\n-  top: 0;\n-  left: 0;\n-  width: 100%;\n-  height: 100%;\n-  background-color: var(--background-color-default);\n+.card-section .pricing .available div .currency div {\n+  font-size: 8px;\n+}\n+.card-section .pricing .available div .amount {\n+  font-size: 24px;\n+  color: #fff;\n }\n .redeem-info {\n-  position: fixed;\n-  top: 50%;\n-  left: 50%;\n-  transform: translate(-50%, -50%);\n-  max-width: 563px;\n-  padding: 24px;\n-  border-collapse: collapse;\n-  border-color: gray;\n-  overflow-y: auto;\n-  z-index: 1;\n+  border-color: var(--light-mode-border-color);\n }\n-\n-.close-btn {\n-  position: absolute;\n-  top: 0;\n-  right: 0;\n-  cursor: pointer;\n-  color: #fff;\n+.redeem-info p {\n+  text-transform: none;\n+}\n+.redeem-info fieldset legend {\n+  text-align: center;\n+  padding: 0 4px;\n+}\n+.redeem-info fieldset .instructions {\n+  padding: 12px;\n }\n \n-.claim-gift-card-btn[data-loading=\"true\"] > span.action {\n+.btn[data-loading=\"true\"] > .icon {\n   display: none;\n }\n-.claim-gift-card-btn[data-loading=\"true\"] > span.loading {\n-  display: flex;\n+.btn[data-loading=\"true\"] > .action {\n+  display: none;\n }\n-.claim-gift-card-btn[data-loading=\"true\"] > span.loading svg {\n-  animation: rotate 1s linear infinite;\n+.btn[data-loading=\"true\"] > .loader {\n+  display: block;\n }\n-.claim-gift-card-btn[data-loading=\"false\"] > span.action {\n-  display: flex;\n+.btn[data-loading=\"true\"] > .loader svg {\n+  animation: rotate 1s linear infinite;\n }\n-.claim-gift-card-btn[data-loading=\"false\"] > span.loading {\n-  display: none;\n+.btn[data-loading=\"false\"] > .icon {\n+  display: block;\n }\n-.gift-cards-wrapper.purchased .claim-gift-card-btn {\n+.btn[data-loading=\"false\"]:hover > .icon {\n   display: none;\n }\n-\n-#reveal-btn[data-loading-reveal=\"false\"] .loading {\n+.btn[data-loading=\"false\"] > .action {\n   display: none;\n }\n-#reveal-btn[data-loading-reveal=\"false\"] .action {\n+.btn[data-loading=\"false\"]:hover > .action {\n   display: block;\n }\n-\n-#reveal-btn[data-loading-reveal=\"true\"] .loading {\n-  display: block;\n+.btn[data-loading=\"false\"] > .loader {\n+  display: none;\n }\n-#reveal-btn[data-loading-reveal=\"true\"] .loading svg {\n-  animation: rotate 1s linear infinite;\n+\n+.btn {\n+  width: 100%;\n+  border: none;\n+  color: #808080;\n+  cursor: pointer;\n+  height: 48px;\n+  background: 0 0;\n }\n \n-#reveal-btn[data-loading-reveal=\"true\"] .action {\n-  display: none;\n+.btn:hover {\n+  cursor: pointer;\n+  background-color: #80808020;\n+  color: #fff;\n }\n+\n .disclaimer {\n   text-align: center;\n-  padding-top: 24px;\n+  padding: 24px 12px;\n }\n \n @media (prefers-color-scheme: light) {\n-  .gift-card,\n-  .redeem-info-wrapper {\n+  .card-section {\n     background-color: #fff;\n+    box-shadow: inset 0 0 96px #00000008;\n   }\n-  .gift-card h3,\n-  .gift-card .pricing .available,\n-  .gift-card div.buttons button,\n-  .close-btn {\n+\n+  .card-section img {\n+    border-color: var(--light-mode-border-color);",
+        "score": {
+          "reward": 5.593,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 65,
+            "wordValue": 0.1,
+            "result": 2.56
+          },
+          "readability": {
+            "fleschKincaid": 64.78769230769234,
+            "syllables": 99,
+            "sentences": 5,
+            "score": 0.9521230769230766
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1741241902,
+        "content": "Oh interesting. Perhaps we should implement it. It should cut styling work in half.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1741241902",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,193 +1,178 @@\n-.heading-gift-card {\n+.card-heading {\n   font-size: 16px;\n   text-align: center;\n   position: absolute;\n   margin-top: -30px;\n+  display: flex;\n+  align-items: center;\n }\n+\n #gift-cards {\n   padding-top: 44px;\n   display: flex;\n   flex-direction: column;\n+  max-width: 563px;\n+  width: 100vw;\n   align-items: center;\n+  row-gap: 12px;\n+  position: relative;\n }\n \n-#gift-cards p.list-error {\n+.card-section {\n+  overflow-wrap: break-word;\n+  text-transform: none;\n+  background-color: var(--background-color-default);\n+  padding: 24px;\n+  width: 100%;\n   text-align: center;\n+  box-sizing: border-box;\n+  box-shadow: inset 0 0 96px #00bfff10;\n }\n \n-.redeem-info-wrapper[data-show=\"false\"] {\n-  display: none;\n+.card-error {\n+  text-align: center;\n+  padding: 0 12px;\n }\n \n-.gift-cards-wrapper {\n+#offered-card {\n   display: flex;\n-  flex-direction: row;\n-  overflow-x: auto;\n-  max-width: 563px;\n-  width: 100vw;\n-  transform: rotateX(180deg);\n-  /* Because of rotateX, some properties like padding-bottom, align-items work in reverse. */\n-  align-items: end;\n-  padding-bottom: 12px;\n-}\n-.gift-cards-wrapper.center {\n-  justify-content: center;\n-}\n-.gift-cards-wrapper .gift-card {\n-  transform: rotateX(180deg);\n }\n \n-.purchased {\n-  flex-direction: column;\n-  align-items: center;\n+@media screen and (max-width: 640px) {\n+  .card-section {\n+    flex-direction: column;\n+    text-align: center;\n+  }\n+  .card-section .details {\n+    margin-left: 0;\n+  }\n }\n \n-.gift-card {\n-  background-color: var(--background-color-default);\n-  margin-right: 10px;\n-  padding: 12px 6px;\n-  text-align: center;\n-  min-width: 168px;\n-  width: 168px;\n-  height: fit-content;\n-}\n-.redeem-code {\n-  width: 160px;\n-  overflow-wrap: break-word;\n-  text-transform: none;\n-}\n-.redeem-code p {\n+#redeem-code p {\n   text-transform: none;\n+  margin: 2px 0;\n }\n \n-.gift-card h3 {\n-  color: #fff;\n+.card-section h3 {\n+  padding: 8px;\n+  text-align: center;\n }\n \n-.gift-card div.buttons {\n-  display: flex;\n-  flex-direction: row;\n-  justify-content: space-evenly;\n-  margin: 10px 0;\n-}\n-.gift-card div.buttons span {\n+.card-section .details {\n   display: flex;\n   flex-direction: column;\n-  align-items: center;\n-  justify-content: center;\n-  padding: 6px;\n+  margin-left: 24px;\n+  row-gap: 12px;\n+  flex: 1;\n }\n \n-.gift-card div.buttons button {\n-  background-color: #80808020;\n-  border: none;\n-  color: #fff;\n-  cursor: pointer;\n-}\n-.gift-card img {\n+.card-section img {\n   box-sizing: border-box;\n   width: 100%;\n   height: auto;\n   border: 2px solid #80808020;\n-  max-width: 168px;\n-  height: 110px;\n+  max-width: 200px;\n }\n \n-.gift-card .pricing {\n+.card-section .pricing {\n   display: flex;\n   flex-direction: column;\n }\n-.gift-card .pricing .available {\n-  color: #fff;\n+.card-section .pricing .available {\n+  display: flex;\n+  flex-direction: row;\n+  justify-content: space-evenly;\n }\n-.gift-card .pricing div {\n+.card-section .pricing .available div .currency {\n   display: flex;\n   flex-direction: row;\n-  justify-content: space-between;\n+  justify-content: center;\n }\n-.redeem-info-wrapper {\n-  position: absolute;\n-  z-index: 1000;\n-  top: 0;\n-  left: 0;\n-  width: 100%;\n-  height: 100%;\n-  background-color: var(--background-color-default);\n+.card-section .pricing .available div .currency div {\n+  font-size: 8px;\n+}\n+.card-section .pricing .available div .amount {\n+  font-size: 24px;\n+  color: #fff;\n }\n .redeem-info {\n-  position: fixed;\n-  top: 50%;\n-  left: 50%;\n-  transform: translate(-50%, -50%);\n-  max-width: 563px;\n-  padding: 24px;\n-  border-collapse: collapse;\n-  border-color: gray;\n-  overflow-y: auto;\n-  z-index: 1;\n+  border-color: var(--light-mode-border-color);\n }\n-\n-.close-btn {\n-  position: absolute;\n-  top: 0;\n-  right: 0;\n-  cursor: pointer;\n-  color: #fff;\n+.redeem-info p {\n+  text-transform: none;\n+}\n+.redeem-info fieldset legend {\n+  text-align: center;\n+  padding: 0 4px;\n+}\n+.redeem-info fieldset .instructions {\n+  padding: 12px;\n }\n \n-.claim-gift-card-btn[data-loading=\"true\"] > span.action {\n+.btn[data-loading=\"true\"] > .icon {\n   display: none;\n }\n-.claim-gift-card-btn[data-loading=\"true\"] > span.loading {\n-  display: flex;\n+.btn[data-loading=\"true\"] > .action {\n+  display: none;\n }\n-.claim-gift-card-btn[data-loading=\"true\"] > span.loading svg {\n-  animation: rotate 1s linear infinite;\n+.btn[data-loading=\"true\"] > .loader {\n+  display: block;\n }\n-.claim-gift-card-btn[data-loading=\"false\"] > span.action {\n-  display: flex;\n+.btn[data-loading=\"true\"] > .loader svg {\n+  animation: rotate 1s linear infinite;\n }\n-.claim-gift-card-btn[data-loading=\"false\"] > span.loading {\n-  display: none;\n+.btn[data-loading=\"false\"] > .icon {\n+  display: block;\n }\n-.gift-cards-wrapper.purchased .claim-gift-card-btn {\n+.btn[data-loading=\"false\"]:hover > .icon {\n   display: none;\n }\n-\n-#reveal-btn[data-loading-reveal=\"false\"] .loading {\n+.btn[data-loading=\"false\"] > .action {\n   display: none;\n }\n-#reveal-btn[data-loading-reveal=\"false\"] .action {\n+.btn[data-loading=\"false\"]:hover > .action {\n   display: block;\n }\n-\n-#reveal-btn[data-loading-reveal=\"true\"] .loading {\n-  display: block;\n+.btn[data-loading=\"false\"] > .loader {\n+  display: none;\n }\n-#reveal-btn[data-loading-reveal=\"true\"] .loading svg {\n-  animation: rotate 1s linear infinite;\n+\n+.btn {\n+  width: 100%;\n+  border: none;\n+  color: #808080;\n+  cursor: pointer;\n+  height: 48px;\n+  background: 0 0;\n }\n \n-#reveal-btn[data-loading-reveal=\"true\"] .action {\n-  display: none;\n+.btn:hover {\n+  cursor: pointer;\n+  background-color: #80808020;\n+  color: #fff;\n }\n+\n .disclaimer {\n   text-align: center;\n-  padding-top: 24px;\n+  padding: 24px 12px;\n }\n \n @media (prefers-color-scheme: light) {\n-  .gift-card,\n-  .redeem-info-wrapper {\n+  .card-section {\n     background-color: #fff;\n+    box-shadow: inset 0 0 96px #00000008;\n   }\n-  .gift-card h3,\n-  .gift-card .pricing .available,\n-  .gift-card div.buttons button,\n-  .close-btn {\n+\n+  .card-section img {\n+    border-color: var(--light-mode-border-color);",
+        "score": {
+          "reward": 0.876,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 75.19833333333334,
+            "syllables": 21,
+            "sentences": 3,
+            "score": 0.8480166666666666
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1750768371,
+        "content": "Curaçao?\r\n```suggestion\r\n    CW: \"Curaçao\",\r\n```",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1750768371",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,153 @@\n+export function isAllowed(countryCode: string): boolean {\n+  /**\n+   * There are separate allow list for visa & mastercard\n+   * But right now, both lists contain same countries\n+   */\n+  const allowedCountries: Record<string, string> = {\n+    GP: \"Guadeloupe\",\n+    AO: \"Angola\",\n+    KI: \"Kiribati\",\n+    CA: \"Canada\",\n+    CM: \"Cameroon\",\n+    QA: \"Qatar\",\n+    VU: \"Vanuatu\",\n+    EC: \"Ecuador\",\n+    AE: \"United Arab Emirates\",\n+    KZ: \"Kazakhstan\",\n+    GI: \"Gibraltar\",\n+    ID: \"Indonesia\",\n+    BG: \"Bulgaria\",\n+    BE: \"Belgium\",\n+    CO: \"Colombia\",\n+    BR: \"Brazil\",\n+    IT: \"Italy\",\n+    EG: \"Egypt\",\n+    KR: \"South Korea\",\n+    ZA: \"South Africa\",\n+    OM: \"Oman\",\n+    NF: \"Norfolk Island\",\n+    SK: \"Slovak Republic\",\n+    SB: \"Solomon Islands\",\n+    LU: \"Luxembourg\",\n+    //cspell:disable-next-line\n+    BV: \"Bouvet Island\",\n+    GG: \"Guernsey\",\n+    GD: \"Grenada\",\n+    AW: \"Aruba\",\n+    JM: \"Jamaica\",\n+    GF: \"French Guiana\",\n+    NO: \"Norway\",\n+    LI: \"Liechtenstein\",\n+    HK: \"Hong Kong\",\n+    HU: \"Hungary\",\n+    PE: \"Peru\",\n+    AM: \"Armenia\",\n+    NL: \"Netherlands\",\n+    BN: \"Brunei Darussalam\",\n+    BM: \"Bermuda\",\n+    VI: \"Virgin Islands (U.S.)\",\n+    MS: \"Montserrat\",\n+    GY: \"Guyana\",\n+    DJ: \"Djibouti\",\n+    PL: \"Poland\",\n+    DK: \"Denmark\",\n+    FM: \"Federated States of Micronesia\",\n+    GH: \"Ghana\",\n+    AD: \"Andorra\",\n+    PF: \"French Polynesia\",\n+    LV: \"Latvia\",\n+    AZ: \"Azerbaijan\",\n+    TO: \"Tonga\",\n+    CC: \"Cocos (Keeling) Islands\",\n+    MR: \"Mauritania\",\n+    IL: \"Israel\",\n+    GB: \"UK\",\n+    LT: \"Lithuania\",\n+    CL: \"Chile\",\n+    DE: \"Germany\",\n+    IN: \"India\",\n+    BW: \"Botswana\",\n+    IS: \"Iceland\",\n+    FI: \"Finland\",\n+    BH: \"Bahrain\",\n+    US: \"USA\",\n+    AI: \"Anguilla\",\n+    CZ: \"Czech Republic\",\n+    ES: \"Spain\",\n+    MT: \"Malta\",\n+    SG: \"Singapore\",\n+    DZ: \"Algeria\",\n+    CY: \"Cyprus\",\n+    YT: \"Mayotte\",\n+    MP: \"Northern Mariana Islands\",\n+    HR: \"Croatia\",\n+    CK: \"Cook Islands\",\n+    GL: \"Greenland\",\n+    SA: \"Saudi Arabia\",\n+    GT: \"Guatemala\",\n+    MY: \"Malaysia\",\n+    JO: \"Jordan\",\n+    IE: \"Ireland\",\n+    CX: \"Christmas Island\",\n+    RO: \"Romania\",\n+    NZ: \"New Zealand\",\n+    SV: \"El Salvador\",\n+    FR: \"France\",\n+    KE: \"Kenya\",\n+    DM: \"Dominica\",\n+    MA: \"Morocco\",\n+    TW: \"Taiwan\",\n+    NU: \"Niue\",\n+    JP: \"Japan\",\n+    PH: \"Philippines\",\n+    GE: \"Georgia\",\n+    GU: \"Guam\",\n+    PW: \"Palau\",\n+    AU: \"Australia\",\n+    AS: \"American Samoa\",\n+    //cspell:disable-next-line\n+    CR: \"Costa Rica\",\n+    GM: \"Gambia\",\n+    TH: \"Thailand\",\n+    //cspell:disable-next-line\n+    CW: \"Cura√ßao\",",
+        "score": {
+          "reward": 0.558,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 77.90500000000002,
+            "syllables": 3,
+            "sentences": 1,
+            "score": 0.8209499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1750769741,
+        "content": "```suggestion\r\n    _html += html`<div class=\"available\">\r\n```",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1750769741",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -82,14 +82,14 @@ function getRangePricesHtml(giftCard: GiftCard, rewardAmount: BigNumberish) {\n   const giftCardValue = getGiftCardValue(giftCard, rewardAmount);\n   const isAvailable = isRangePriceGiftCardClaimable(giftCard, rewardAmount);\n   if (isAvailable) {\n-    _html += html` <div>\n-        <div>Price</div>\n-        <div>Value</div>\n+    _html += html` <div class=\"available\">",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1750770698,
+        "content": "```suggestion\r\n    giftCardsSection.innerHTML = \"<p class='card-error'>There are no card available to claim at the moment.</p>\";\r\n```",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1750770698",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,85 @@\n+import { isAllowed } from \"../../../../shared/allowed-country-list\";\n+import { getGiftCardOrderId, isGiftCardAvailable } from \"../../../../shared/helpers\";\n+import { GiftCard, OrderTransaction } from \"../../../../shared/types\";\n+import { AppState } from \"../app-state\";\n+import { getGiftCardHtml } from \"./gift-card\";\n+import { getApiBaseUrl, getUserCountryCode } from \"./helpers\";\n+import { attachMintAction } from \"./mint/mint-action\";\n+import { getRedeemCodeHtml } from \"./reveal/redeem-code-html\";\n+import { attachRevealAction } from \"./reveal/reveal-action\";\n+\n+export async function initClaimGiftCard(app: AppState) {\n+  const giftCardsSection = document.getElementById(\"gift-cards\");\n+  if (!giftCardsSection) {\n+    console.error(\"Missing gift cards section #gift-cards\");\n+    return;\n+  }\n+  giftCardsSection.innerHTML = \"Loading...\";\n+\n+  const countryCode = await getUserCountryCode();\n+  if (!countryCode) {\n+    giftCardsSection.innerHTML = `<p class=\"card-error\">Failed to load suitable virtual cards for you. Refresh or try disabling adblocker.</p>`;\n+    return;\n+  }\n+\n+  if (!isAllowed(countryCode)) {\n+    giftCardsSection.innerHTML = `<p class=\"card-error\">Virtual cards are not available for your location. Use other methods to claim your reward.</p>`;\n+    return;\n+  }\n+\n+  const retrieveOrderUrl = `${getApiBaseUrl()}/get-order?orderId=${getGiftCardOrderId(app.reward.beneficiary, app.reward.signature)}`;\n+  const bestCardUrl = `${getApiBaseUrl()}/get-best-card?country=${countryCode}&amount=${app.reward.amount}`;\n+\n+  const requestInit = {\n+    method: \"GET\",\n+    headers: {\n+      Accept: \"application/json\",\n+    },\n+  };\n+\n+  const [orderResponse, bestCardResponse] = await Promise.all([fetch(retrieveOrderUrl, requestInit), fetch(bestCardUrl, requestInit)]);\n+\n+  const giftCard = (await bestCardResponse.json()) as GiftCard;\n+\n+  if (orderResponse.status == 200) {\n+    const { transaction, product } = (await orderResponse.json()) as {\n+      transaction: OrderTransaction;\n+      product: GiftCard | null;\n+    };\n+\n+    addPurchasedCardHtml(product, transaction, app, giftCardsSection);\n+  } else if (bestCardResponse.status == 200) {\n+    const availableGiftCard = isGiftCardAvailable(giftCard, app.reward.amount) ? giftCard : null;\n+\n+    addAvailableCardsHtml(availableGiftCard, app, giftCardsSection);\n+  } else if (bestCardResponse.status == 404) {\n+    giftCardsSection.innerHTML = \"<p class='card-error'>There are no Visa/Mastercard available to claim at the moment.</p>\";",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.75
+        }
+      },
+      {
+        "id": 1750771390,
+        "content": "```suggestion\r\n    giftCardsSection.innerHTML = \"<p class='card-error'>There was a problem in fetching gift cards. Please try again later.</p>\";\r\n```",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1750771390",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,85 @@\n+import { isAllowed } from \"../../../../shared/allowed-country-list\";\n+import { getGiftCardOrderId, isGiftCardAvailable } from \"../../../../shared/helpers\";\n+import { GiftCard, OrderTransaction } from \"../../../../shared/types\";\n+import { AppState } from \"../app-state\";\n+import { getGiftCardHtml } from \"./gift-card\";\n+import { getApiBaseUrl, getUserCountryCode } from \"./helpers\";\n+import { attachMintAction } from \"./mint/mint-action\";\n+import { getRedeemCodeHtml } from \"./reveal/redeem-code-html\";\n+import { attachRevealAction } from \"./reveal/reveal-action\";\n+\n+export async function initClaimGiftCard(app: AppState) {\n+  const giftCardsSection = document.getElementById(\"gift-cards\");\n+  if (!giftCardsSection) {\n+    console.error(\"Missing gift cards section #gift-cards\");\n+    return;\n+  }\n+  giftCardsSection.innerHTML = \"Loading...\";\n+\n+  const countryCode = await getUserCountryCode();\n+  if (!countryCode) {\n+    giftCardsSection.innerHTML = `<p class=\"card-error\">Failed to load suitable virtual cards for you. Refresh or try disabling adblocker.</p>`;\n+    return;\n+  }\n+\n+  if (!isAllowed(countryCode)) {\n+    giftCardsSection.innerHTML = `<p class=\"card-error\">Virtual cards are not available for your location. Use other methods to claim your reward.</p>`;\n+    return;\n+  }\n+\n+  const retrieveOrderUrl = `${getApiBaseUrl()}/get-order?orderId=${getGiftCardOrderId(app.reward.beneficiary, app.reward.signature)}`;\n+  const bestCardUrl = `${getApiBaseUrl()}/get-best-card?country=${countryCode}&amount=${app.reward.amount}`;\n+\n+  const requestInit = {\n+    method: \"GET\",\n+    headers: {\n+      Accept: \"application/json\",\n+    },\n+  };\n+\n+  const [orderResponse, bestCardResponse] = await Promise.all([fetch(retrieveOrderUrl, requestInit), fetch(bestCardUrl, requestInit)]);\n+\n+  const giftCard = (await bestCardResponse.json()) as GiftCard;\n+\n+  if (orderResponse.status == 200) {\n+    const { transaction, product } = (await orderResponse.json()) as {\n+      transaction: OrderTransaction;\n+      product: GiftCard | null;\n+    };\n+\n+    addPurchasedCardHtml(product, transaction, app, giftCardsSection);\n+  } else if (bestCardResponse.status == 200) {\n+    const availableGiftCard = isGiftCardAvailable(giftCard, app.reward.amount) ? giftCard : null;\n+\n+    addAvailableCardsHtml(availableGiftCard, app, giftCardsSection);\n+  } else if (bestCardResponse.status == 404) {\n+    giftCardsSection.innerHTML = \"<p class='card-error'>There are no Visa/Mastercard available to claim at the moment.</p>\";\n+  } else {\n+    giftCardsSection.innerHTML = \"<p class='card-error'>There was a problem in fetching gift cards. Try again later.</p>\";",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.75
+        }
+      },
+      {
+        "id": 1750771886,
+        "content": "```suggestion\r\n  htmlParts.push(`<h2 class=\"card-heading\">Your virtual card</h2>`);\r\n```",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1750771886",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,85 @@\n+import { isAllowed } from \"../../../../shared/allowed-country-list\";\n+import { getGiftCardOrderId, isGiftCardAvailable } from \"../../../../shared/helpers\";\n+import { GiftCard, OrderTransaction } from \"../../../../shared/types\";\n+import { AppState } from \"../app-state\";\n+import { getGiftCardHtml } from \"./gift-card\";\n+import { getApiBaseUrl, getUserCountryCode } from \"./helpers\";\n+import { attachMintAction } from \"./mint/mint-action\";\n+import { getRedeemCodeHtml } from \"./reveal/redeem-code-html\";\n+import { attachRevealAction } from \"./reveal/reveal-action\";\n+\n+export async function initClaimGiftCard(app: AppState) {\n+  const giftCardsSection = document.getElementById(\"gift-cards\");\n+  if (!giftCardsSection) {\n+    console.error(\"Missing gift cards section #gift-cards\");\n+    return;\n+  }\n+  giftCardsSection.innerHTML = \"Loading...\";\n+\n+  const countryCode = await getUserCountryCode();\n+  if (!countryCode) {\n+    giftCardsSection.innerHTML = `<p class=\"card-error\">Failed to load suitable virtual cards for you. Refresh or try disabling adblocker.</p>`;\n+    return;\n+  }\n+\n+  if (!isAllowed(countryCode)) {\n+    giftCardsSection.innerHTML = `<p class=\"card-error\">Virtual cards are not available for your location. Use other methods to claim your reward.</p>`;\n+    return;\n+  }\n+\n+  const retrieveOrderUrl = `${getApiBaseUrl()}/get-order?orderId=${getGiftCardOrderId(app.reward.beneficiary, app.reward.signature)}`;\n+  const bestCardUrl = `${getApiBaseUrl()}/get-best-card?country=${countryCode}&amount=${app.reward.amount}`;\n+\n+  const requestInit = {\n+    method: \"GET\",\n+    headers: {\n+      Accept: \"application/json\",\n+    },\n+  };\n+\n+  const [orderResponse, bestCardResponse] = await Promise.all([fetch(retrieveOrderUrl, requestInit), fetch(bestCardUrl, requestInit)]);\n+\n+  const giftCard = (await bestCardResponse.json()) as GiftCard;\n+\n+  if (orderResponse.status == 200) {\n+    const { transaction, product } = (await orderResponse.json()) as {\n+      transaction: OrderTransaction;\n+      product: GiftCard | null;\n+    };\n+\n+    addPurchasedCardHtml(product, transaction, app, giftCardsSection);\n+  } else if (bestCardResponse.status == 200) {\n+    const availableGiftCard = isGiftCardAvailable(giftCard, app.reward.amount) ? giftCard : null;\n+\n+    addAvailableCardsHtml(availableGiftCard, app, giftCardsSection);\n+  } else if (bestCardResponse.status == 404) {\n+    giftCardsSection.innerHTML = \"<p class='card-error'>There are no Visa/Mastercard available to claim at the moment.</p>\";\n+  } else {\n+    giftCardsSection.innerHTML = \"<p class='card-error'>There was a problem in fetching gift cards. Try again later.</p>\";\n+  }\n+}\n+\n+function addPurchasedCardHtml(giftCard: GiftCard | null, transaction: OrderTransaction, app: AppState, giftCardsSection: HTMLElement) {\n+  const htmlParts: string[] = [];\n+  htmlParts.push(`<h2 class=\"card-heading\">Your virtual visa/mastercard</h2>`);",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1750772386,
+        "content": "```suggestion\r\n  htmlParts.push(`<h2 class=\"card-heading\">Or mint a payment card</h2>`);\r\n```",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1750772386",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,85 @@\n+import { isAllowed } from \"../../../../shared/allowed-country-list\";\n+import { getGiftCardOrderId, isGiftCardAvailable } from \"../../../../shared/helpers\";\n+import { GiftCard, OrderTransaction } from \"../../../../shared/types\";\n+import { AppState } from \"../app-state\";\n+import { getGiftCardHtml } from \"./gift-card\";\n+import { getApiBaseUrl, getUserCountryCode } from \"./helpers\";\n+import { attachMintAction } from \"./mint/mint-action\";\n+import { getRedeemCodeHtml } from \"./reveal/redeem-code-html\";\n+import { attachRevealAction } from \"./reveal/reveal-action\";\n+\n+export async function initClaimGiftCard(app: AppState) {\n+  const giftCardsSection = document.getElementById(\"gift-cards\");\n+  if (!giftCardsSection) {\n+    console.error(\"Missing gift cards section #gift-cards\");\n+    return;\n+  }\n+  giftCardsSection.innerHTML = \"Loading...\";\n+\n+  const countryCode = await getUserCountryCode();\n+  if (!countryCode) {\n+    giftCardsSection.innerHTML = `<p class=\"card-error\">Failed to load suitable virtual cards for you. Refresh or try disabling adblocker.</p>`;\n+    return;\n+  }\n+\n+  if (!isAllowed(countryCode)) {\n+    giftCardsSection.innerHTML = `<p class=\"card-error\">Virtual cards are not available for your location. Use other methods to claim your reward.</p>`;\n+    return;\n+  }\n+\n+  const retrieveOrderUrl = `${getApiBaseUrl()}/get-order?orderId=${getGiftCardOrderId(app.reward.beneficiary, app.reward.signature)}`;\n+  const bestCardUrl = `${getApiBaseUrl()}/get-best-card?country=${countryCode}&amount=${app.reward.amount}`;\n+\n+  const requestInit = {\n+    method: \"GET\",\n+    headers: {\n+      Accept: \"application/json\",\n+    },\n+  };\n+\n+  const [orderResponse, bestCardResponse] = await Promise.all([fetch(retrieveOrderUrl, requestInit), fetch(bestCardUrl, requestInit)]);\n+\n+  const giftCard = (await bestCardResponse.json()) as GiftCard;\n+\n+  if (orderResponse.status == 200) {\n+    const { transaction, product } = (await orderResponse.json()) as {\n+      transaction: OrderTransaction;\n+      product: GiftCard | null;\n+    };\n+\n+    addPurchasedCardHtml(product, transaction, app, giftCardsSection);\n+  } else if (bestCardResponse.status == 200) {\n+    const availableGiftCard = isGiftCardAvailable(giftCard, app.reward.amount) ? giftCard : null;\n+\n+    addAvailableCardsHtml(availableGiftCard, app, giftCardsSection);\n+  } else if (bestCardResponse.status == 404) {\n+    giftCardsSection.innerHTML = \"<p class='card-error'>There are no Visa/Mastercard available to claim at the moment.</p>\";\n+  } else {\n+    giftCardsSection.innerHTML = \"<p class='card-error'>There was a problem in fetching gift cards. Try again later.</p>\";\n+  }\n+}\n+\n+function addPurchasedCardHtml(giftCard: GiftCard | null, transaction: OrderTransaction, app: AppState, giftCardsSection: HTMLElement) {\n+  const htmlParts: string[] = [];\n+  htmlParts.push(`<h2 class=\"card-heading\">Your virtual visa/mastercard</h2>`);\n+  htmlParts.push(getRedeemCodeHtml(transaction));\n+  if (giftCard) {\n+    htmlParts.push(getGiftCardHtml(giftCard, app.reward.amount));\n+  }\n+  giftCardsSection.innerHTML = htmlParts.join(\"\");\n+  attachRevealAction(transaction, app);\n+}\n+\n+function addAvailableCardsHtml(giftCard: GiftCard | null, app: AppState, giftCardsSection: HTMLElement) {\n+  const htmlParts: string[] = [];\n+\n+  htmlParts.push(`<h2 class=\"card-heading\">Or mint a virtual visa/mastercard</h2>`);",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1750772610,
+        "content": "```suggestion\r\n    htmlParts.push(`<p class=\"card-error\">There are no cards available to mint at the moment.</p>`);\r\n```",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1750772610",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,85 @@\n+import { isAllowed } from \"../../../../shared/allowed-country-list\";\n+import { getGiftCardOrderId, isGiftCardAvailable } from \"../../../../shared/helpers\";\n+import { GiftCard, OrderTransaction } from \"../../../../shared/types\";\n+import { AppState } from \"../app-state\";\n+import { getGiftCardHtml } from \"./gift-card\";\n+import { getApiBaseUrl, getUserCountryCode } from \"./helpers\";\n+import { attachMintAction } from \"./mint/mint-action\";\n+import { getRedeemCodeHtml } from \"./reveal/redeem-code-html\";\n+import { attachRevealAction } from \"./reveal/reveal-action\";\n+\n+export async function initClaimGiftCard(app: AppState) {\n+  const giftCardsSection = document.getElementById(\"gift-cards\");\n+  if (!giftCardsSection) {\n+    console.error(\"Missing gift cards section #gift-cards\");\n+    return;\n+  }\n+  giftCardsSection.innerHTML = \"Loading...\";\n+\n+  const countryCode = await getUserCountryCode();\n+  if (!countryCode) {\n+    giftCardsSection.innerHTML = `<p class=\"card-error\">Failed to load suitable virtual cards for you. Refresh or try disabling adblocker.</p>`;\n+    return;\n+  }\n+\n+  if (!isAllowed(countryCode)) {\n+    giftCardsSection.innerHTML = `<p class=\"card-error\">Virtual cards are not available for your location. Use other methods to claim your reward.</p>`;\n+    return;\n+  }\n+\n+  const retrieveOrderUrl = `${getApiBaseUrl()}/get-order?orderId=${getGiftCardOrderId(app.reward.beneficiary, app.reward.signature)}`;\n+  const bestCardUrl = `${getApiBaseUrl()}/get-best-card?country=${countryCode}&amount=${app.reward.amount}`;\n+\n+  const requestInit = {\n+    method: \"GET\",\n+    headers: {\n+      Accept: \"application/json\",\n+    },\n+  };\n+\n+  const [orderResponse, bestCardResponse] = await Promise.all([fetch(retrieveOrderUrl, requestInit), fetch(bestCardUrl, requestInit)]);\n+\n+  const giftCard = (await bestCardResponse.json()) as GiftCard;\n+\n+  if (orderResponse.status == 200) {\n+    const { transaction, product } = (await orderResponse.json()) as {\n+      transaction: OrderTransaction;\n+      product: GiftCard | null;\n+    };\n+\n+    addPurchasedCardHtml(product, transaction, app, giftCardsSection);\n+  } else if (bestCardResponse.status == 200) {\n+    const availableGiftCard = isGiftCardAvailable(giftCard, app.reward.amount) ? giftCard : null;\n+\n+    addAvailableCardsHtml(availableGiftCard, app, giftCardsSection);\n+  } else if (bestCardResponse.status == 404) {\n+    giftCardsSection.innerHTML = \"<p class='card-error'>There are no Visa/Mastercard available to claim at the moment.</p>\";\n+  } else {\n+    giftCardsSection.innerHTML = \"<p class='card-error'>There was a problem in fetching gift cards. Try again later.</p>\";\n+  }\n+}\n+\n+function addPurchasedCardHtml(giftCard: GiftCard | null, transaction: OrderTransaction, app: AppState, giftCardsSection: HTMLElement) {\n+  const htmlParts: string[] = [];\n+  htmlParts.push(`<h2 class=\"card-heading\">Your virtual visa/mastercard</h2>`);\n+  htmlParts.push(getRedeemCodeHtml(transaction));\n+  if (giftCard) {\n+    htmlParts.push(getGiftCardHtml(giftCard, app.reward.amount));\n+  }\n+  giftCardsSection.innerHTML = htmlParts.join(\"\");\n+  attachRevealAction(transaction, app);\n+}\n+\n+function addAvailableCardsHtml(giftCard: GiftCard | null, app: AppState, giftCardsSection: HTMLElement) {\n+  const htmlParts: string[] = [];\n+\n+  htmlParts.push(`<h2 class=\"card-heading\">Or mint a virtual visa/mastercard</h2>`);\n+  if (giftCard) {\n+    htmlParts.push(getGiftCardHtml(giftCard, app.reward.amount));\n+    giftCardsSection.innerHTML = htmlParts.join(\"\");\n+    attachMintAction(giftCard, app);\n+  } else {\n+    htmlParts.push(`<p class=\"card-error\">There are no Visa/Mastercard available to claim at the moment.</p>`);",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1750779270,
+        "content": "It would be nice to use \"mint\" terminology over \"claim\" if it makes sense in this context.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1750779270",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,85 @@\n+import { isAllowed } from \"../../../../shared/allowed-country-list\";\n+import { getGiftCardOrderId, isGiftCardAvailable } from \"../../../../shared/helpers\";\n+import { GiftCard, OrderTransaction } from \"../../../../shared/types\";\n+import { AppState } from \"../app-state\";\n+import { getGiftCardHtml } from \"./gift-card\";\n+import { getApiBaseUrl, getUserCountryCode } from \"./helpers\";\n+import { attachMintAction } from \"./mint/mint-action\";\n+import { getRedeemCodeHtml } from \"./reveal/redeem-code-html\";\n+import { attachRevealAction } from \"./reveal/reveal-action\";\n+\n+export async function initClaimGiftCard(app: AppState) {\n+  const giftCardsSection = document.getElementById(\"gift-cards\");\n+  if (!giftCardsSection) {\n+    console.error(\"Missing gift cards section #gift-cards\");\n+    return;\n+  }\n+  giftCardsSection.innerHTML = \"Loading...\";\n+\n+  const countryCode = await getUserCountryCode();\n+  if (!countryCode) {\n+    giftCardsSection.innerHTML = `<p class=\"card-error\">Failed to load suitable virtual cards for you. Refresh or try disabling adblocker.</p>`;\n+    return;\n+  }\n+\n+  if (!isAllowed(countryCode)) {\n+    giftCardsSection.innerHTML = `<p class=\"card-error\">Virtual cards are not available for your location. Use other methods to claim your reward.</p>`;\n+    return;\n+  }\n+\n+  const retrieveOrderUrl = `${getApiBaseUrl()}/get-order?orderId=${getGiftCardOrderId(app.reward.beneficiary, app.reward.signature)}`;\n+  const bestCardUrl = `${getApiBaseUrl()}/get-best-card?country=${countryCode}&amount=${app.reward.amount}`;\n+\n+  const requestInit = {\n+    method: \"GET\",\n+    headers: {\n+      Accept: \"application/json\",\n+    },\n+  };\n+\n+  const [orderResponse, bestCardResponse] = await Promise.all([fetch(retrieveOrderUrl, requestInit), fetch(bestCardUrl, requestInit)]);\n+\n+  const giftCard = (await bestCardResponse.json()) as GiftCard;\n+\n+  if (orderResponse.status == 200) {\n+    const { transaction, product } = (await orderResponse.json()) as {\n+      transaction: OrderTransaction;\n+      product: GiftCard | null;\n+    };\n+\n+    addPurchasedCardHtml(product, transaction, app, giftCardsSection);\n+  } else if (bestCardResponse.status == 200) {\n+    const availableGiftCard = isGiftCardAvailable(giftCard, app.reward.amount) ? giftCard : null;\n+\n+    addAvailableCardsHtml(availableGiftCard, app, giftCardsSection);\n+  } else if (bestCardResponse.status == 404) {\n+    giftCardsSection.innerHTML = \"<p class='card-error'>There are no Visa/Mastercard available to claim at the moment.</p>\";",
+        "score": {
+          "reward": 2.158,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 75.12117647058825,
+            "syllables": 23,
+            "sentences": 1,
+            "score": 0.8487882352941175
+          },
+          "multiplier": 1,
+          "relevance": 0.65
+        }
+      },
+      {
+        "id": 1750784922,
+        "content": "These `xxx` seem strange. What are they for?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1750784922",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -4,31 +4,41 @@ const html = String.raw;\n \n export function getRedeemCodeHtml(transaction: OrderTransaction) {\n   return html`\n-    <div class=\"gift-card redeem-code\" data-transactionId=\"${transaction.transactionId}\">\n-      <h3>Your redeem code</h3>\n+    <div class=\"card-section\" id=\"redeem-code\" data-transaction-id=\"${transaction.transactionId}\">\n+      <h3>Redeem code</h3>\n       <p>xxxxxxxxxxxx</p>\n       <p>xxxxxxxxxxxx</p>\n       <p>xxxxxxxxxxxx</p>",
+        "score": {
+          "reward": 1.08,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 118.6825,
+            "syllables": 7,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2311452414,
+        "content": "Hey there, curious to know if you have any remarks on this project, and if there is anything we can do to speed things along? The development velocity is a bit slower than expected.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#issuecomment-2311452414",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.028,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 34,
+            "wordValue": 0.1,
+            "result": 2.01
+          },
+          "readability": {
+            "fleschKincaid": 67.65647058823532,
+            "syllables": 49,
+            "sentences": 2,
+            "score": 0.9234352941176468
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2312101674,
+        "content": "Lets definitely just make a page on [dao.ubq.fi/card-minting](https://dao.ubq.fi/card-minting) to host all this information. Can you post the text here? I can make the page in a couple of minutes.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#issuecomment-2312101674",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.61,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 89.89963636363638,
+            "syllables": 43,
+            "sentences": 5,
+            "score": 0.7010036363636363
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2338981985,
+        "content": "QA video looks pretty solid. Just minor cosmetic improvements I see I will need to address at some point after trying it out in production. \nWhen can we start using?\nAlso soon we should only support ubiquity dollars for card minting to boost its utility.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#issuecomment-2338981985",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.36,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 45,
+            "wordValue": 0.1,
+            "result": 2.29
+          },
+          "readability": {
+            "fleschKincaid": 63.816250000000025,
+            "syllables": 70,
+            "sentences": 4,
+            "score": 0.9618374999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2270767351,
+            "effect": {
+              "addition": 1609,
+              "deletion": 253
+            },
+            "reward": 37.24,
+            "priority": 2
+          },
+          {
+            "reviewId": 2274230692,
+            "effect": {
+              "addition": 1,
+              "deletion": 5
+            },
+            "reward": 0.12,
+            "priority": 2
+          },
+          {
+            "reviewId": 2290709153,
+            "effect": {
+              "addition": 189,
+              "deletion": 574
+            },
+            "reward": 15.26,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 81.687 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>52.62</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>4.73</td></tr><tr><td>Review</td><td>Comment</td><td>18</td><td>24.337</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277\" target=\"_blank\" rel=\"noopener\">#277</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+1609 -253</td><td>2</td><td>37.24</td></tr><tr><td>+1 -5</td><td>2</td><td>0.12</td></tr><tr><td>+189 -574</td><td>2</td><td>15.26</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/273#issuecomment-2272293077\" target=\"_blank\" rel=\"noopener\">I imagine that the initial set up would have taken longer, how c&hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.3</td><td>2</td><td>1.338</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/273#issuecomment-2274975320\" target=\"_blank\" rel=\"noopener\">I like fallbacks and redundancies to make our system more resili&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.8</td><td>2</td><td>3.392</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#pullrequestreview-2290732910\" target=\"_blank\" rel=\"noopener\">There's some minor stuff. Once addressed you can merge.</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.5</td><td>2</td><td>1.17</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1737615527\" target=\"_blank\" rel=\"noopener\">Can you elaborate on what the purpose is of this</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.7</td><td>2</td><td>1.568</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1737617856\" target=\"_blank\" rel=\"noopener\">I think this might be wrong. You might need to put dark mode the&hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.8</td><td>2</td><td>3.456</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1737618615\" target=\"_blank\" rel=\"noopener\">Same with this variable</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.8</td><td>2</td><td>0.88</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1739996098\" target=\"_blank\" rel=\"noopener\">I remember making a build script to dynamically generate the lig&hellip;</a></h6></td><td><details><summary>2.56</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 65&#13;  wordValue: 0.1&#13;  result: 2.56&#13;</pre></details></td><td>0.85</td><td>2</td><td>5.593</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1741241902\" target=\"_blank\" rel=\"noopener\">Oh interesting. Perhaps we should implement it. It should cut st&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.3</td><td>2</td><td>0.876</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1750768371\" target=\"_blank\" rel=\"noopener\">Curaçao?&#96;&#96;&#96;suggestionCW: \"Curaçao\",&#96;&#&hellip;</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.9</td><td>2</td><td>0.558</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1750769741\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion_html += html&#96;&lt;div class=\"&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1750770698\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestiongiftCardsSection.innerHTML = \"&lt&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.75</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1750771390\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestiongiftCardsSection.innerHTML = \"&lt&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.75</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1750771886\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionhtmlParts.push(&#96;&lt;h2 class=\"c&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1750772386\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionhtmlParts.push(&#96;&lt;h2 class=\"c&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1750772610\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionhtmlParts.push(&#96;&lt;p class=\"&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1750779270\" target=\"_blank\" rel=\"noopener\">It would be nice to use \"mint\" terminology over \"claim\" if it ma&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.65</td><td>2</td><td>2.158</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1750784922\" target=\"_blank\" rel=\"noopener\">These &#96;xxx&#96; seem strange. What are they for?</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.6</td><td>2</td><td>1.08</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#issuecomment-2311452414\" target=\"_blank\" rel=\"noopener\">Hey there, curious to know if you have any remarks on this proje&hellip;</a></h6></td><td><details><summary>2.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 34&#13;  wordValue: 0.1&#13;  result: 2.01&#13;</pre></details></td><td>0.2</td><td>2</td><td>1.028</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#issuecomment-2312101674\" target=\"_blank\" rel=\"noopener\">Lets definitely just make a page on [dao.ubq.fi/card-minting](ht&hellip;</a></h6></td><td><details><summary>2.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.5</td><td>2</td><td>3.61</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#issuecomment-2338981985\" target=\"_blank\" rel=\"noopener\">QA video looks pretty solid. Just minor cosmetic improvements I &hellip;</a></h6></td><td><details><summary>2.29</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 45&#13;  wordValue: 0.1&#13;  result: 2.29&#13;</pre></details></td><td>0.4</td><td>2</td><td>2.36</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 10.347,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2272935580,
+        "content": "Why not? I mean the flow for picking up the \"best\" card could be:\r\n1. Fetch user country\r\n2. If user country is in `MasterCard International.xlsx` then use card from that list\r\n3. If user country is in `MC allow list 3052024.xlsx` the use card `18597`\r\n4. Otherwise use reloadly API to fetch available range cards",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/273#issuecomment-2272935580",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 6.441,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              }
+            },
+            "result": 0.4
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 45,
+            "wordValue": 0.1,
+            "result": 2.29
+          },
+          "readability": {
+            "fleschKincaid": 73.07750000000001,
+            "syllables": 59,
+            "sentences": 2,
+            "score": 0.8692249999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2273282490,
+        "content": "So the `4. Otherwise use reloadly API to fetch available range cards` step is really useful for non-tokenized or visa cards. I would implement this feature because it serves as kind of a fallback. @0x4007",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/273#issuecomment-2273282490",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 3.906,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 77.64602564102567,
+            "syllables": 37,
+            "sentences": 3,
+            "score": 0.8235397435897432
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 10.347 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>2</td><td>10.347</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/273#issuecomment-2272935580\" target=\"_blank\" rel=\"noopener\">Why not? I mean the flow for picking up the \"best\" card could be&hellip;</a></h6></td><td><details><summary>2.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;  result: 0.4&#13;regex:&#13;  wordCount: 45&#13;  wordValue: 0.1&#13;  result: 2.29&#13;</pre></details></td><td>0.95</td><td>2</td><td>6.441</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/273#issuecomment-2273282490\" target=\"_blank\" rel=\"noopener\">So the &#96;4. Otherwise use reloadly API to fetch available ran&hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.9</td><td>2</td><td>3.906</td></tr></tbody></table></details>"
+  },
+  "Keyrxng": {
+    "total": 41.376,
+    "userId": 106303466,
+    "comments": [
+      {
+        "id": 2278512418,
+        "content": "I attempted to QA the logic locally but I wasn't able to get past the loading screen for some reason despite having QA'd the feature in the past.\r\nThe worker was repeatedly spamming two functions and I wasn't able to debug why I couldn't progress further after trying both the sandbox and production APIs and checking the original setup instructions I can only add a couple minor comments.\r\nIt would be awesome if you could setup a dedicated README or add a section to the main one with any setup that is different from `development` and anything else that is relevant please, I don't feel as sure-footed about what to expect and I expect new contributors will feel the same.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#pullrequestreview-2278512418",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.912,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 125,
+            "wordValue": 0.1,
+            "result": 2.45
+          },
+          "readability": {
+            "fleschKincaid": 42.71933333333337,
+            "syllables": 180,
+            "sentences": 3,
+            "score": 0.8271933333333337
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1742699373,
+        "content": "Is seems strange to return a `200` status if we have no product to return but the `reloadlyTransaction` was successful, why do we do this?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1742699373",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -22,7 +23,12 @@ export async function onRequest(ctx: Context): Promise<Response> {\n     if (!reloadlyTransaction) {\n       return Response.json(\"Order not found.\", { status: 404 });\n     } else if (reloadlyTransaction.status && reloadlyTransaction.status == \"SUCCESSFUL\") {\n-      return Response.json(reloadlyTransaction, { status: 200 });\n+      try {\n+        const product = await getGiftCardById(reloadlyTransaction.product.productId, accessToken);\n+        return Response.json({ transaction: reloadlyTransaction, product: product }, { status: 200 });\n+      } catch (error) {\n+        return Response.json({ transaction: reloadlyTransaction, product: null }, { status: 200 });",
+        "score": {
+          "reward": 0.8,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 76.82043478260871,
+            "syllables": 29,
+            "sentences": 1,
+            "score": 0.8317956521739128
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1742712112,
+        "content": "product is nullable here following a successful order response, how can that be?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1742712112",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -0,0 +1,85 @@\n+import { allowedCountries } from \"../../../../shared/allowed-country-list\";\n+import { getGiftCardOrderId, isGiftCardAvailable } from \"../../../../shared/helpers\";\n+import { GiftCard, OrderTransaction } from \"../../../../shared/types\";\n+import { AppState } from \"../app-state\";\n+import { getGiftCardHtml } from \"./gift-card\";\n+import { getApiBaseUrl, getUserCountryCode } from \"./helpers\";\n+import { attachMintAction } from \"./mint/mint-action\";\n+import { getRedeemCodeHtml } from \"./reveal/redeem-code-html\";\n+import { attachRevealAction } from \"./reveal/reveal-action\";\n+\n+export async function initClaimGiftCard(app: AppState) {\n+  const giftCardsSection = document.getElementById(\"gift-cards\");\n+  if (!giftCardsSection) {\n+    console.error(\"Missing gift cards section #gift-cards\");\n+    return;\n+  }\n+  giftCardsSection.innerHTML = \"Loading...\";\n+\n+  const country = await getUserCountryCode();\n+  if (!country) {\n+    giftCardsSection.innerHTML = `<p class=\"card-error\">Failed to load suitable virtual cards for you. Refresh or try disabling adblocker.</p>`;\n+    return;\n+  }\n+\n+  if (!allowedCountries.find((allowedCountry) => allowedCountry.code == country)) {\n+    giftCardsSection.innerHTML = `<p class=\"card-error\">Virtual cards are not available for your location. Use other methods to claim your reward.</p>`;\n+    return;\n+  }\n+\n+  const retrieveOrderUrl = `${getApiBaseUrl()}/get-order?orderId=${getGiftCardOrderId(app.reward.beneficiary, app.reward.signature)}`;\n+  const bestCardUrl = `${getApiBaseUrl()}/get-best-card?country=${country}&amount=${app.reward.amount}`;\n+\n+  const requestInit = {\n+    method: \"GET\",\n+    headers: {\n+      Accept: \"application/json\",\n+    },\n+  };\n+\n+  const [orderResponse, bestCardResponse] = await Promise.all([fetch(retrieveOrderUrl, requestInit), fetch(bestCardUrl, requestInit)]);\n+\n+  const giftCard = (await bestCardResponse.json()) as GiftCard;\n+\n+  if (orderResponse.status == 200) {\n+    const { transaction, product } = (await orderResponse.json()) as {\n+      transaction: OrderTransaction;\n+      product: GiftCard | null;",
+        "score": {
+          "reward": 0.63,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 50.470769230769264,
+            "syllables": 22,
+            "sentences": 1,
+            "score": 0.9047076923076927
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1742725823,
+        "content": "Have you considered exporting `Map`s for `allowedCountries` and the skus instead of arrays and replacing `find()` usage?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1742725823",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -52,3 +58,146 @@ export function getBaseUrl(isSandbox: boolean): string {\n   }\n   return \"https://giftcards-sandbox.reloadly.com\";\n }\n+\n+export async function findBestCard(countryCode: string, amount: BigNumberish, accessToken: AccessToken): Promise<GiftCard> {\n+  const supportedCountry = allowedCountries.find((listItem) => listItem.code == countryCode);",
+        "score": {
+          "reward": 0.546,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 56.25000000000003,
+            "syllables": 24,
+            "sentences": 1,
+            "score": 0.9625000000000002
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1743633860,
+        "content": "That makes sense I guess. And in this rare scenario where the product is null but we have a redeem code at that point it's the responsibility of the card provider? or are we technically still in control i.e can we revert everything or is it the case the redeem code once minted there's no going back?\r\nAs you say rare, but in the case it happens and we give a redeem code with no product, would the user still receive everything as normal and it would be a valid card, yeah? I'd have thought no product means there is nothing to redeem so even with a redeem code, what product are they redeeming sort of thing.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1743633860",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -22,7 +23,12 @@ export async function onRequest(ctx: Context): Promise<Response> {\n     if (!reloadlyTransaction) {\n       return Response.json(\"Order not found.\", { status: 404 });\n     } else if (reloadlyTransaction.status && reloadlyTransaction.status == \"SUCCESSFUL\") {\n-      return Response.json(reloadlyTransaction, { status: 200 });\n+      try {\n+        const product = await getGiftCardById(reloadlyTransaction.product.productId, accessToken);\n+        return Response.json({ transaction: reloadlyTransaction, product: product }, { status: 200 });\n+      } catch (error) {\n+        return Response.json({ transaction: reloadlyTransaction, product: null }, { status: 200 });",
+        "score": {
+          "reward": 1.248,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 121,
+            "wordValue": 0.1,
+            "result": 2.48
+          },
+          "readability": {
+            "fleschKincaid": 75.19723829201104,
+            "syllables": 159,
+            "sentences": 6,
+            "score": 0.8480276170798896
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2278512418,
+            "effect": {
+              "addition": 1607,
+              "deletion": 255
+            },
+            "reward": 37.24,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/277"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 41.376 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>37.24</td></tr><tr><td>Review</td><td>Comment</td><td>5</td><td>4.136</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277\" target=\"_blank\" rel=\"noopener\">#277</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+1607 -255</td><td>2</td><td>37.24</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#pullrequestreview-2278512418\" target=\"_blank\" rel=\"noopener\">I attempted to QA the logic locally but I wasn't able to get pas&hellip;</a></h6></td><td><details><summary>2.45</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 125&#13;  wordValue: 0.1&#13;  result: 2.45&#13;</pre></details></td><td>0.6</td><td>2</td><td>0.912</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1742699373\" target=\"_blank\" rel=\"noopener\">Is seems strange to return a &#96;200&#96; status if we have no &hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.8</td><td>2</td><td>0.8</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1742712112\" target=\"_blank\" rel=\"noopener\">product is nullable here following a successful order response, &hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.9</td><td>2</td><td>0.63</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1742725823\" target=\"_blank\" rel=\"noopener\">Have you considered exporting &#96;Map&#96;s for &#96;allowedCou&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.7</td><td>2</td><td>0.546</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/277#discussion_r1743633860\" target=\"_blank\" rel=\"noopener\">That makes sense I guess. And in this rare scenario where the pr&hellip;</a></h6></td><td><details><summary>2.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 121&#13;  wordValue: 0.1&#13;  result: 2.48&#13;</pre></details></td><td>0.8</td><td>2</td><td>1.248</td></tr></tbody></table></details>"
+  }
+}

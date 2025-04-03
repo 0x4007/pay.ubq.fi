@@ -1,0 +1,874 @@
+{
+  "seprintour": {
+    "userId": 51956013,
+    "total": 600,
+    "task": {
+      "reward": 600,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 600 XP ]</a>&nbsp;</h3><h6>@seprintour</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>600</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 121.418,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1712897838,
+        "content": "@seprintour curious to know your input on the proposed solution. I didn't do research on this and I am not confident that it is the best approach.\r\nrfc @ubiquity/software-development",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1712897838",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 8.096,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 61.17708333333337,
+            "syllables": 51,
+            "sentences": 3,
+            "score": 0.9882291666666663
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1714381721,
+        "content": "@seprintour I think we should figure out a good strategy before you start coding.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1714381721",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 4.768,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 65.72500000000001,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 0.9427499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1718129967,
+        "content": "I temporarily added @seprintour as a collaborator on that specific repo to push some hotfixes to the CI on `development` directly. \r\nAlthough collaborators are more trusted positions, projects should still be able to set fine grained permissions i.e. like our `/allow` command; but that as we see can be easily circumvented.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1718129967",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 11.016,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 50,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 55.40350000000004,
+            "syllables": 82,
+            "sentences": 4,
+            "score": 0.9540350000000004
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1730442688,
+        "content": "https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1718129967\r\nThis doesn't seem like a very elegant solution, but it is fairly secure:\r\nAll future permits on that repository will throw an error explaining the situation, ideally explaining that the collaborator changed from X to Y label (only concerning pricing related labels defined in our config) and require some type of manual approval (i.e. command invocation) from an admin. `/allow-edit-labels @seprintour true` \r\nIn this scenario, if it is still not authorized, then the admin should change the label back from Y to X and the bot should re-allow permits to be generated.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1730442688",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 16.488,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 92,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 47.28645544554459,
+            "syllables": 166,
+            "sentences": 5,
+            "score": 0.8728645544554459
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1732337575,
+        "content": "Well I was thinking that the bot will check the last updated time of a dependent label and if it was between the time the issue was started and completed. This implies that one of the dependent labels was tampered with while a task was being worked on. \r\nExample:\r\n- Issue has `Priority: 4 (Urgent)` and `Time: <1 Hour`\r\n- In our database we have the `updated` column for `Priority: 4 (Urgent)` (or can we just query this directly from the GitHub API?)\r\n- The issue was started on by an assignee on 1 October. \r\n- The `Priority: 4 (Urgent)` label was last modified, by an unauthorized contributor, on 2 October. \r\n- The issue is marked as complete\r\n- Due to the dependent label `Priority: 4 (Urgent)` being modified after the task was started, the bot refuses to generate the permit and explains the situation.\r\n---\r\nI just asked [ChatGPT](https://chat.openai.com/share/628c3776-dda9-48ae-acb4-cb061af4914e) and we might be able to leverage the audit log. \r\n- Requires it to be an org not personal repo.\r\n- Required permissions\r\nBut I have a feeling we will need to manually track these things with our bot and the database.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1732337575",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 19.72,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 12
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 8
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.8
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 167,
+            "wordValue": 0.1,
+            "result": 2.06
+          },
+          "readability": {
+            "fleschKincaid": 67.43344644045246,
+            "syllables": 238,
+            "sentences": 9,
+            "score": 0.9256655355954755
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1732990158,
+        "content": "Default state is `declined` so I don't see the need to specify state if it's a one bit operation. \n`Admin` and `billing_manager` are both responsible for finances by default. \nAlso for the access control we should let those with delegated access change the types of labels. See point 4 under **Notes**\nNormal users aren't meant to have access to the database so I don't see how they can find out the id of the change",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1732990158",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 11.844,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 75,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 75.00375000000003,
+            "syllables": 100,
+            "sentences": 4,
+            "score": 0.8499624999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1734089829,
+        "content": "Just needs to check at permit generation time inside of the issue for any unauthorized changes. \nWhen an issue is closed as complete inside of that closed event context we have the labels and the issue. \nFrom there we check the labels and see if any were tampered with.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1734089829",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 10.728,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 49,
+            "wordValue": 0.1,
+            "result": 2.37
+          },
+          "readability": {
+            "fleschKincaid": 74.57911564625854,
+            "syllables": 67,
+            "sentences": 3,
+            "score": 0.8542088435374146
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1889261863,
+        "content": "The bot clearly states that the assignee does not have access to set the `Priority` label, thus funding the bounty. However, it appears that they were able to edit an invalid label that was already on the issue, and rename it to a valid label to generate a payment permit.  \r\n## Proposed Solution\r\n- If anybody but an `admin` or `billing_manager` updates pricing related labels, then an `admin` or `billing_manager` must manually re-allow automatic payment permit generation. This state should be saved in our database. \r\n- The bot will check the last updated time of a dependent (pricing related) label and if it was between the time the issue was started and completed. This implies that one of the dependent labels was tampered with while a task was being worked on. \r\n### Example:\r\n- Issue has `Priority: 4 (Urgent)` and `Time: <1 Hour`\r\n- In our database we have the `updated` column for `Priority: 4 (Urgent)`\r\n- The issue was started on by an assignee on 1 October. \r\n- The `Priority: 4 (Urgent)` label was last modified, by an unauthorized contributor, on 2 October. \r\n- The issue is marked as complete.\r\n- Due to the dependent label `Priority: 4 (Urgent)` being modified after the task was started, the bot refuses to generate the permit and explains the situation.\r\n### Notes\r\n- this should only be concerned with pricing related labels defined in our config \r\n- In this scenario, if it is still not authorized, then the `admin` or `billing_manager` should change the label back from Y to X and the bot should re-allow permits to be generated. \r\n- when it is authorized, perhaps we should make a command like `/approve` for `admins`, and `billing_managers` which will \"approve\" in the database see below.\r\n- Our access control should accomodate for these as well. For example if I wrote `/allow set-priority @seprintour true` and if seprintour changed the priority label, it should be approved implicitly. \r\n### Unauthorized label changes table\r\n1. id, int8\r\n2. created, timestamptz\r\n3. updated, timestamptz\r\n4. user id, int8\r\n5. repository id, int8\r\n6. label from, string\r\n7. label to, string\r\n8. authorized, bool\r\n_Originally posted by @ubiquibot[bot] in https://github.com/ubiquity/telegram-ubiquibot/issues/4#issuecomment-1710631705_\r\n### Task checklist\r\n1. create \"label changes\" table\r\n2. intercept label change event and log if they dont have appropriate permissions\r\n3. create `/approve` command (i feel like this part of the proposal can be refined... rfc!)",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/743",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 11.53,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 25
+              },
+              "h2": {
+                "score": 1,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 23
+              },
+              "h3": {
+                "score": 1,
+                "elementCount": 4
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 8.3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 342,
+            "wordValue": 0.1,
+            "result": 0.66
+          },
+          "readability": {
+            "fleschKincaid": 55.75997474747476,
+            "syllables": 546,
+            "sentences": 18,
+            "score": 0.9575997474747475
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1335421698,
+        "content": "@0xcodercrane is this file still needed or is it an artifact from when this used to run entirely as a GitHub action?",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/829#discussion_r1335421698",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 2.436,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 61.45045454545455,
+            "syllables": 32,
+            "sentences": 1,
+            "score": 0.9854954545454545
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1336243331,
+        "content": "```suggestion\r\n      throw new Error(`Permit generation disabled because label \"${labelChanges.label_to}\" was modified by an unauthorized user`);\r\n```",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/829#discussion_r1336243331",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -194,6 +194,17 @@ export const incentivesCalculation = async (): Promise<IncentivesCalculationResu\n     throw new Error(`Permit generation disabled because this issue didn't qualify as bounty.`);\n   }\n \n+  // check for label altering here\n+  const labelChanges = await getLabelChanges(repository.full_name, [issueDetailed.priceLabel, issueDetailed.priorityLabel, issueDetailed.timelabel]);\n+\n+  if (labelChanges) {\n+    // if approved is still false, it means user was certainly not authorized for that edit\n+    if (!labelChanges.approved) {\n+      logger.info(`Skipping... label was changed by unauthorized user`);\n+      throw new Error(`Permit generation disabled because this label: ${labelChanges.label_to} on this issue was edited by an authorized user`);",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1336244301,
+        "content": "I think we will also need a command to approve.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/829#discussion_r1336244301",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,10 @@\n+CREATE TABLE IF NOT EXISTS label_changes (\n+    id serial PRIMARY KEY,\n+    created_at timestamptz NOT NULL,\n+    updated_at timestamptz NOT NULL,\n+    username text NOT NULL,\n+    repository text NOT NULL,\n+    label_from text NOT NULL,\n+    label_to text NOT NULL,\n+    approved boolean NOT NULL",
+        "score": {
+          "reward": 3.08,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 86.70500000000001,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.7329499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1336405929,
+        "content": "```suggestion\r\n  return `Label change has been approved, permit can now be generated`;\r\n```",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/829#discussion_r1336405929",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,45 @@\n+import { _approveLabelChange, getLabelChanges } from \"../../../adapters/supabase\";\n+import { getBotContext, getLogger } from \"../../../bindings\";\n+import { getUserPermission } from \"../../../helpers\";\n+import { Payload } from \"../../../types\";\n+import { ErrorDiff } from \"../../../utils/helpers\";\n+import { bountyInfo } from \"../../wildcard\";\n+\n+export const approveLabelChange = async () => {\n+  const context = getBotContext();\n+  const logger = getLogger();\n+  const payload = context.payload as Payload;\n+  const sender = payload.sender.login;\n+\n+  logger.info(`Received '/approve' command from user: ${sender}`);\n+\n+  const { issue, repository } = payload;\n+  if (!issue) {\n+    logger.info(`Skipping '/approve' because of no issue instance`);\n+    return;\n+  }\n+\n+  // check if sender is admin\n+  // passing in context so we don't have to make another request to get the user\n+  const permissionLevel = await getUserPermission(sender, context);\n+\n+  // if sender is not admin, return\n+  if (permissionLevel !== \"admin\" && permissionLevel !== \"billing_manager\") {\n+    logger.info(`User ${sender} is not an admin/billing_manager`);\n+    return ErrorDiff(`You are not an admin/billing_manager and do not have the required permissions to access this function.`);\n+  }\n+\n+  const issueDetailed = bountyInfo(issue);\n+\n+  if (!issueDetailed.priceLabel || !issueDetailed.priorityLabel || !issueDetailed.timelabel) {\n+    logger.info(`Skipping... its not a bounty`);\n+    return ErrorDiff(`No valid bounty label on this issue`);\n+  }\n+\n+  // check for label altering here\n+  const labelChanges = await getLabelChanges(repository.full_name, [issueDetailed.priceLabel, issueDetailed.priorityLabel, issueDetailed.timelabel]);\n+\n+  await _approveLabelChange(labelChanges.id);\n+\n+  return `Label change have been approved, permit can now be generated`;",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1336407393,
+        "content": "```suggestion\r\n      description: `Approve a label change. Superuser only.`,\r\n```",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/829#discussion_r1336407393",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -304,6 +306,12 @@ export const userCommands = (): UserCommands[] => {\n       handler: setAccess,\n       callback: commandCallback,\n     },\n+    {\n+      id: IssueCommentCommands.APPROVE,\n+      description: `Approve a label change. (Admin Only)`,",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1336407883,
+        "content": "```suggestion\r\n    authorized boolean NOT NULL\r\n```\r\n@seprintour lets change everything to `authorized` instead of `approved` and `authorize` instead of `approve`. It's important to use unique terms. Approved can refer to pull request related matters.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/829#discussion_r1336407883",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,10 @@\n+CREATE TABLE IF NOT EXISTS label_changes (\n+    id serial PRIMARY KEY,\n+    created timestamptz NOT NULL,\n+    updated timestamptz NOT NULL,\n+    username text NOT NULL,\n+    repository text NOT NULL,\n+    label_from text NOT NULL,\n+    label_to text NOT NULL,\n+    approved boolean NOT NULL",
+        "score": {
+          "reward": 7.956,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 59.632666666666694,
+            "syllables": 41,
+            "sentences": 3,
+            "score": 0.9963266666666669
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1336464880,
+        "content": "Whats this for?",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/829#discussion_r1336464880",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1 @@\n+ALTER TABLE label_changes ENABLE ROW LEVEL SECURITY",
+        "score": {
+          "reward": 0.736,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 119.19000000000003,
+            "syllables": 3,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1336478557,
+        "content": "Right but why are we only now adding this?",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/829#discussion_r1336478557",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1 @@\n+ALTER TABLE label_changes ENABLE ROW LEVEL SECURITY",
+        "score": {
+          "reward": 2.02,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 94.30000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.6569999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1641388611,
+            "effect": {
+              "addition": 77,
+              "deletion": 1
+            },
+            "reward": 3.12,
+            "priority": 4
+          },
+          {
+            "reviewId": 1642758071,
+            "effect": {
+              "addition": 65,
+              "deletion": 4
+            },
+            "reward": 2.76,
+            "priority": 4
+          },
+          {
+            "reviewId": 1642759641,
+            "effect": {
+              "addition": 16,
+              "deletion": 9
+            },
+            "reward": 1,
+            "priority": 4
+          },
+          {
+            "reviewId": 1643014491,
+            "effect": {
+              "addition": 72,
+              "deletion": 7
+            },
+            "reward": 3.16,
+            "priority": 4
+          },
+          {
+            "reviewId": 1643016795,
+            "effect": {
+              "addition": 1,
+              "deletion": 1
+            },
+            "reward": 0.08,
+            "priority": 4
+          },
+          {
+            "reviewId": 1643017548,
+            "effect": {
+              "addition": 1,
+              "deletion": 1
+            },
+            "reward": 0.08,
+            "priority": 4
+          },
+          {
+            "reviewId": 1643102127,
+            "effect": {
+              "addition": 10,
+              "deletion": 10
+            },
+            "reward": 0.8,
+            "priority": 4
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquibot/pull/829"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 121.418 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>7</td><td>11</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>11.53</td></tr><tr><td>Issue</td><td>Comment</td><td>7</td><td>82.66</td></tr><tr><td>Review</td><td>Comment</td><td>8</td><td>16.228</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquibot/pull/829\" target=\"_blank\" rel=\"noopener\">#829</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+77 -1</td><td>4</td><td>3.12</td></tr><tr><td>+65 -4</td><td>4</td><td>2.76</td></tr><tr><td>+16 -9</td><td>4</td><td>1</td></tr><tr><td>+72 -7</td><td>4</td><td>3.16</td></tr><tr><td>+1 -1</td><td>4</td><td>0.08</td></tr><tr><td>+1 -1</td><td>4</td><td>0.08</td></tr><tr><td>+10 -10</td><td>4</td><td>0.8</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/743\" target=\"_blank\" rel=\"noopener\">The bot clearly states that the assignee does not have access to&hellip;</a></h6></td><td><details><summary>8.96</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 25&#13;    h2:&#13;      score: 1&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 3&#13;    li:&#13;      score: 0.1&#13;      elementCount: 23&#13;    h3:&#13;      score: 1&#13;      elementCount: 4&#13;    ol:&#13;      score: 0&#13;      elementCount: 2&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 8.3&#13;regex:&#13;  wordCount: 342&#13;  wordValue: 0.1&#13;  result: 0.66&#13;</pre></details></td><td>1</td><td>1</td><td>11.53</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1712897838\" target=\"_blank\" rel=\"noopener\">@seprintour curious to know your input on the proposed solution.&hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.8</td><td>4</td><td>8.096</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1714381721\" target=\"_blank\" rel=\"noopener\">@seprintour I think we should figure out a good strategy before &hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.8</td><td>4</td><td>4.768</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1718129967\" target=\"_blank\" rel=\"noopener\">I temporarily added @seprintour as a collaborator on that specif&hellip;</a></h6></td><td><details><summary>2.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 50&#13;  wordValue: 0.1&#13;  result: 2.38&#13;</pre></details></td><td>0.9</td><td>4</td><td>11.016</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1730442688\" target=\"_blank\" rel=\"noopener\">https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-17&hellip;</a></h6></td><td><details><summary>3.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 92&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.9</td><td>4</td><td>16.488</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1732337575\" target=\"_blank\" rel=\"noopener\">Well I was thinking that the bot will check the last updated tim&hellip;</a></h6></td><td><details><summary>3.86</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 12&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 8&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.8&#13;regex:&#13;  wordCount: 167&#13;  wordValue: 0.1&#13;  result: 2.06&#13;</pre></details></td><td>1</td><td>4</td><td>19.72</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1732990158\" target=\"_blank\" rel=\"noopener\">Default state is &#96;declined&#96; so I don't see the need to s&hellip;</a></h6></td><td><details><summary>2.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 75&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.9</td><td>4</td><td>11.844</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1734089829\" target=\"_blank\" rel=\"noopener\">Just needs to check at permit generation time inside of the issu&hellip;</a></h6></td><td><details><summary>2.37</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 49&#13;  wordValue: 0.1&#13;  result: 2.37&#13;</pre></details></td><td>0.9</td><td>4</td><td>10.728</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/829#discussion_r1335421698\" target=\"_blank\" rel=\"noopener\">@0xcodercrane is this file still needed or is it an artifact fro&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.3</td><td>4</td><td>2.436</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/829#discussion_r1336243331\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionthrow new Error(&#96;Permit gen&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/829#discussion_r1336244301\" target=\"_blank\" rel=\"noopener\">I think we will also need a command to approve.</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.7</td><td>4</td><td>3.08</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/829#discussion_r1336405929\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionreturn &#96;Label change has been a&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/829#discussion_r1336407393\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestiondescription: &#96;Approve a lab&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/829#discussion_r1336407883\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionauthorized boolean NOT NULL&#96&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.9</td><td>4</td><td>7.956</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/829#discussion_r1336464880\" target=\"_blank\" rel=\"noopener\">Whats this for?</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.4</td><td>4</td><td>0.736</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/829#discussion_r1336478557\" target=\"_blank\" rel=\"noopener\">Right but why are we only now adding this?</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.5</td><td>4</td><td>2.02</td></tr></tbody></table></details>"
+  },
+  "kamaalsultan": {
+    "total": 1.088,
+    "userId": 103924884,
+    "comments": [
+      {
+        "id": 1713251471,
+        "content": "I wonder if the bot should automatically resets non-admin's label update.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1713251471",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 1.088,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 43.963076923076954,
+            "syllables": 23,
+            "sentences": 1,
+            "score": 0.8396307692307695
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/ubiquibot/pull/829"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 1.088 XP ]</a>&nbsp;</h3><h6>@kamaalsultan</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.088</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1713251471\" target=\"_blank\" rel=\"noopener\">I wonder if the bot should automatically resets non-admin's labe&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.8</td><td>4</td><td>1.088</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 46.068,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 1715816443,
+        "content": "1. Could somebody explain to me how is [this](https://github.com/ubiquity/ubiquibot-telegram/issues/4#issuecomment-1710654289) possible? There is a special [condition](https://github.com/ubiquity/ubiquibot/blob/4c666eb2a5ac7d810bebb93d4a9adee3b7ae4ca3/src/handlers/payout/action.ts#L40) that checks who can generate permits when issue is closed: \r\n- repository collaborators\r\n- organization members\r\n- users with `admin` or `billing_manager` organization roles\r\nI haven't found @seprintour to be in any of them.\r\n2. @seprintour How come that you can [edit labels](https://github.com/ubiquity/ubiquibot-telegram/issues/4#issuecomment-1712895793) if you don't have any permissions in the repo or org?",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1715816443",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 22.824,
+          "formatting": {
+            "content": {
+              "ol": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.5
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 64,
+            "wordValue": 0.1,
+            "result": 2.55
+          },
+          "readability": {
+            "fleschKincaid": 45.062916666666695,
+            "syllables": 106,
+            "sentences": 3,
+            "score": 0.850629166666667
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1729835329,
+        "content": "Can't we simply reject editing labels for all roles unless the role is:\r\n- `admin`\r\n- `billing_manager`\r\n- explicitly allowed to edit labels via the `/allow` command (we don't have this permission right now)\r\n?",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1729835329",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 8.736,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              }
+            },
+            "result": 0.3
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 43.84500000000003,
+            "syllables": 47,
+            "sentences": 1,
+            "score": 0.8384500000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1729871632,
+        "content": "I still don't understand what exactly you edited [here](https://github.com/ubiquity/ubiquibot-telegram/issues/4#issuecomment-1710631705)\r\nAs far as I understand here is what happened:\r\n1. You removed the `Priority: 3 (High)` label from the issue and added it again\r\n2. The bot removed the `Priority: 3 (High)` label (because you don't have \"set priority\" permission) which you added and added it back\r\n3. You reopened and closed the issue\r\n4. Permit was generated because at that time pavlovcik added you to the repo's collaborators (which is an expected behavior)\r\nCould you describe what label exactly did you edit and what was the exact flow?",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1729871632",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 14.508,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 7
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.4
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 91,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": -8.246483516483494,
+            "syllables": 132,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/ubiquibot/pull/829"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 46.068 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>3</td><td>46.068</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1715816443\" target=\"_blank\" rel=\"noopener\">1. Could somebody explain to me how is [this](https://github.com&hellip;</a></h6></td><td><details><summary>5.05</summary><pre>content:&#13;  content:&#13;    ol:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.5&#13;regex:&#13;  wordCount: 64&#13;  wordValue: 0.1&#13;  result: 2.55&#13;</pre></details></td><td>0.9</td><td>4</td><td>22.824</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1729835329\" target=\"_blank\" rel=\"noopener\">Can't we simply reject editing labels for all roles unless the r&hellip;</a></h6></td><td><details><summary>2.18</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;  result: 0.3&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.8</td><td>4</td><td>8.736</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1729871632\" target=\"_blank\" rel=\"noopener\">I still don't understand what exactly you edited [here](https://&hellip;</a></h6></td><td><details><summary>4.03</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 7&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.4&#13;regex:&#13;  wordCount: 91&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.9</td><td>4</td><td>14.508</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 6.692,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 1730302628,
+        "content": "This is possible only if you're a member or collaborator, so this is not that big of an issue I guess. Normally we should be able to trust members.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1730302628",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 6.692,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 70.35000000000002,
+            "syllables": 43,
+            "sentences": 2,
+            "score": 0.8964999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/ubiquibot/pull/829"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 6.692 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>6.692</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/743#issuecomment-1730302628\" target=\"_blank\" rel=\"noopener\">This is possible only if you're a member or collaborator, so thi&hellip;</a></h6></td><td><details><summary>1.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.7</td><td>4</td><td>6.692</td></tr></tbody></table></details>"
+  }
+}

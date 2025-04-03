@@ -1,0 +1,493 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 300,
+    "task": {
+      "reward": 300,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 300 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>300</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 58.191,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2666920507,
+        "content": "We don't reward assignees for their comments because it's too easy to game this. \nWe need to be more precise (right now we allow for rewards on the issue, just not on pull) and check the timestamp of the comments they made. \nThey should receive rewards for their comments while they are not the assignee, and should not receive rewards while they are the assignee. \nWe should cross reference the assignment events (and their associated unassigned events) and then measure every comment and determine whether it was while they are the assignee and while they are not. We should then credit accordingly. \nThis should support the edge case of being assigned and unassigned multiple times. \nI wonder if it makes sense to blanket and just check for the first assignment time and the last unassignment time and exclude rewarding comments from between. It would simplify logic and it may also prevent gamification. \nhttps://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/175#issuecomment-2481300459_",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/191",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.14,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 154,
+            "wordValue": 0.1,
+            "result": 2.19
+          },
+          "readability": {
+            "fleschKincaid": 59.69168562874253,
+            "syllables": 257,
+            "sentences": 10,
+            "score": 0.9969168562874253
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1862275220,
+        "content": "```suggestion\r\n                    \"description\": \"Skip comments posted by a user while they are assigned to the issue\",\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#discussion_r1862275220",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -263,7 +263,13 @@\n             \"anyOf\": [\n               {\n                 \"type\": \"object\",\n-                \"properties\": {}\n+                \"properties\": {\n+                  \"skipCommentsWhileAssigned\": {\n+                    \"default\": true,\n+                    \"description\": \"Skip comments posted by a user while it is assigned to the issue\",",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1863360473,
+        "content": "```suggestion\r\n    description: \"Do not offer credit to comments posted by a user between the time they were first assigned and last unassigned from the task.\",\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#discussion_r1863360473",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,5 +1,10 @@\n import { Type, Static } from \"@sinclair/typebox\";\n \n-export const dataPurgeConfigurationType = Type.Object({});\n+export const dataPurgeConfigurationType = Type.Object({\n+  skipCommentsWhileAssigned: Type.Boolean({\n+    default: true,\n+    description: \"Skip comments posted by a user while they are assigned to the issue\",",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1863364399,
+        "content": "This logic isn't clear to me. \r\n- I see if it doesn't find an unassign event at the end that it will use the last assigned event as the timestamp (which doesn't make sense to me) \r\n- How do we derive the unassign timestamp? \r\n- What if they make it to completion of the task? \r\n- What if their assignment is toggled multiple times? Are we excluding all comments between?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#discussion_r1863364399",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,67 @@\n+import { IssueParams } from \"../start\";\n+import { ContextPlugin } from \"../types/plugin-input\";\n+import { IssueActivity } from \"../issue-activity\";\n+\n+export interface AssignmentPeriod {\n+  assignedAt: string;\n+  unassignedAt: string | null;\n+}\n+\n+export interface UserAssignments {\n+  [username: string]: AssignmentPeriod[];\n+}\n+\n+/*\n+ * Returns the list of assignment periods per user for a given issue.\n+ */\n+export async function getAssignmentPeriods(octokit: ContextPlugin[\"octokit\"], issueParams: IssueParams) {\n+  const events = await octokit.paginate(octokit.rest.issues.listEvents, {\n+    ...issueParams,\n+    per_page: 100,\n+  });\n+\n+  const userAssignments: UserAssignments = {};\n+\n+  events\n+    .filter((event) => [\"assigned\", \"unassigned\"].includes(event.event))\n+    .forEach((event) => {\n+      const username = \"assignee\" in event ? event.assignee?.login : null;\n+      if (!username) return;\n+\n+      if (!userAssignments[username]) {\n+        userAssignments[username] = [];\n+      }\n+\n+      const lastPeriod = userAssignments[username][userAssignments[username].length - 1];\n+\n+      if (event.event === \"assigned\") {\n+        userAssignments[username].push({\n+          assignedAt: event.created_at,\n+          unassignedAt: null,\n+        });\n+      } else if (event.event === \"unassigned\" && lastPeriod && lastPeriod.unassignedAt === null) {\n+        lastPeriod.unassignedAt = event.created_at;",
+        "score": {
+          "reward": 10.017,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              }
+            },
+            "result": 0.4
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 69,
+            "wordValue": 0.1,
+            "result": 2.59
+          },
+          "readability": {
+            "fleschKincaid": 80.02800000000002,
+            "syllables": 92,
+            "sentences": 5,
+            "score": 0.7997199999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1863366742,
+        "content": "We could use linguist-generated to ignore `dist/`",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#discussion_r1863366742",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 1.056,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 66.7871428571429,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.9321285714285711
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1865519376,
+        "content": "```suggestion\r\ndist/ linguist-generated\r\n```\r\nIt uses the same syntax as .gitignore which I think that implies only the direct children inside of the directory. I targeted the entire directory instead.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#discussion_r1865519376",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1 @@\n+dist/* linguist-generated",
+        "score": {
+          "reward": 3.375,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 58.12294871794876,
+            "syllables": 43,
+            "sentences": 3,
+            "score": 0.9812294871794875
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1865519975,
+        "content": "```suggestion\r\n      skipCommentsWhileAssigned: all\r\n```\r\nThis is valid right?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#discussion_r1865519975",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -99,7 +99,8 @@ with:\n           relevance: 1\n     userExtractor:\n       redeemTask: true\n-    dataPurge: {}\n+    dataPurge:\n+      skipCommentsWhileAssigned: \"all\"",
+        "score": {
+          "reward": 0.936,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 97.025,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.6297499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1865520656,
+        "content": "The description probably should explain the difference between all of the options for the LLM.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#discussion_r1865520656",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -270,9 +270,23 @@\n                 \"type\": \"object\",\n                 \"properties\": {\n                   \"skipCommentsWhileAssigned\": {\n-                    \"default\": true,\n-                    \"description\": \"Skip comments posted by a user while they are assigned to the issue\",\n-                    \"type\": \"boolean\"\n+                    \"default\": \"all\",\n+                    \"description\": \"Do not offer credit to comments posted by a user between the time they were first assigned and last unassigned from the task.\",",
+        "score": {
+          "reward": 3.276,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 56.25000000000003,
+            "syllables": 24,
+            "sentences": 1,
+            "score": 0.9625000000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1865524720,
+        "content": "According to the example, you should do double star\r\n```suggestion\r\ndist/** linguist-generated\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#discussion_r1865524720",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1 @@\n+dist/* linguist-generated",
+        "score": {
+          "reward": 1.62,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 66.10000000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.9389999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1865545903,
+        "content": "```\r\ndescription:\r\n  \"Configures how user comments are included in the rewards calculation when they are assigned to a GitHub issue:\r\n  - 'all': Excludes all comments made between the first assignment start and the last assignment end, discouraging gaming by unassigning and commenting for rewards.\r\n  - 'exact': Excludes only comments made during precise assignment periods, targeting times when the user is actively assigned.\r\n  - 'none': Includes all comments, regardless of assignment status or timing.\"\r\n```\r\n  chatgpt version",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#discussion_r1865545903",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -4,7 +4,7 @@ export const dataPurgeConfigurationType = Type.Object({\n   skipCommentsWhileAssigned: Type.Union([Type.Literal(\"all\"), Type.Literal(\"exact\"), Type.Literal(\"none\")], {\n     default: \"all\",\n     description:\n-      \"Do not offer credit to comments posted by a user between the time they were first assigned and last unassigned from the task.\",\n+      \"Determines the comments posted by a user to include in the final rewards. 'all': excludes comments between first and last assignment. 'exact': excludes comments during the exact assignment periods. 'none': includes every comment.\",",
+        "score": {
+          "reward": 0.744,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 77.90500000000002,
+            "syllables": 3,
+            "sentences": 1,
+            "score": 0.8209499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2506228522,
+        "content": "@gentlementlegen how is this looking? This is really useful for non coding related tasks so I would like to use this soon.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#issuecomment-2506228522",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.782,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 72.61545454545457,
+            "syllables": 32,
+            "sentences": 2,
+            "score": 0.8738454545454544
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2507603177,
+        "content": "I just saw QA and I think that we should not credit [this middle one](https://github.com/Meniole/text-conversation-rewards/issues/31#issuecomment-2490447996). \r\nI think as per the spec, it can incentivize gaming the system. We should just consider the first assign and last unassign and then any comments in the middle we can exclude. Perhaps this can be in the config if its not too complicated, with this behavior being on by default. \r\nI can also imagine situations where contributors complain about being disqualified and then get reassigned and are credited for complaining, even if a small amount (due to relevance) it seems wrong.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#issuecomment-2507603177",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 12.555,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 97,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 65.04090721649486,
+            "syllables": 140,
+            "sentences": 5,
+            "score": 0.9495909278350514
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2507800964,
+        "content": "Can you make a toggle for it? If it's simple then it would be nice to have. But if it's not simple then it's not essential.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#issuecomment-2507800964",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.3,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 97.83712643678163,
+            "syllables": 34,
+            "sentences": 3,
+            "score": 0.6216287356321837
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2468291680,
+            "effect": {
+              "addition": 106,
+              "deletion": 5
+            },
+            "reward": 3.33,
+            "priority": 3
+          },
+          {
+            "reviewId": 2469677159,
+            "effect": {
+              "addition": 195,
+              "deletion": 143
+            },
+            "reward": 10.14,
+            "priority": 3
+          },
+          {
+            "reviewId": 2472186370,
+            "effect": {
+              "addition": 46,
+              "deletion": 12
+            },
+            "reward": 1.74,
+            "priority": 3
+          },
+          {
+            "reviewId": 2472226453,
+            "effect": {
+              "addition": 3,
+              "deletion": 3
+            },
+            "reward": 0.18,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 58.191 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>4</td><td>15.39</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.14</td></tr><tr><td>Review</td><td>Comment</td><td>12</td><td>38.661</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199\" target=\"_blank\" rel=\"noopener\">#199</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+106 -5</td><td>3</td><td>3.33</td></tr><tr><td>+195 -143</td><td>3</td><td>10.14</td></tr><tr><td>+46 -12</td><td>3</td><td>1.74</td></tr><tr><td>+3 -3</td><td>3</td><td>0.18</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/191\" target=\"_blank\" rel=\"noopener\">We don't reward assignees for their comments because it's too ea&hellip;</a></h6></td><td><details><summary>3.19</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 154&#13;  wordValue: 0.1&#13;  result: 2.19&#13;</pre></details></td><td>1</td><td>1</td><td>4.14</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#discussion_r1862275220\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion\"description\": \"S&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#discussion_r1863360473\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestiondescription: \"Do not offer credit&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#discussion_r1863364399\" target=\"_blank\" rel=\"noopener\">This logic isn't clear to me. - I see if it doesn't find an un&hellip;</a></h6></td><td><details><summary>2.99</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;  result: 0.4&#13;regex:&#13;  wordCount: 69&#13;  wordValue: 0.1&#13;  result: 2.59&#13;</pre></details></td><td>0.9</td><td>3</td><td>10.017</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#discussion_r1863366742\" target=\"_blank\" rel=\"noopener\">We could use linguist-generated to ignore &#96;dist/&#96;</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.4</td><td>3</td><td>1.056</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#discussion_r1865519376\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestiondist/ linguist-generated&#96;&#96;&&hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.5</td><td>3</td><td>3.375</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#discussion_r1865519975\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionskipCommentsWhileAssigned: all&hellip;</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.6</td><td>3</td><td>0.936</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#discussion_r1865520656\" target=\"_blank\" rel=\"noopener\">The description probably should explain the difference between a&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.7</td><td>3</td><td>3.276</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#discussion_r1865524720\" target=\"_blank\" rel=\"noopener\">According to the example, you should do double star&#96;&#96;&&hellip;</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.5</td><td>3</td><td>1.62</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#discussion_r1865545903\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;description:\"Configures how user comments a&hellip;</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.8</td><td>3</td><td>0.744</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#issuecomment-2506228522\" target=\"_blank\" rel=\"noopener\">@gentlementlegen how is this looking? This is really useful for &hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.782</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#issuecomment-2507603177\" target=\"_blank\" rel=\"noopener\">I just saw QA and I think that we should not credit [this middle&hellip;</a></h6></td><td><details><summary>3.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 97&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.9</td><td>3</td><td>12.555</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/199#issuecomment-2507800964\" target=\"_blank\" rel=\"noopener\">Can you make a toggle for it? If it's simple then it would be ni&hellip;</a></h6></td><td><details><summary>1.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.5</td><td>3</td><td>3.3</td></tr></tbody></table></details>"
+  }
+}

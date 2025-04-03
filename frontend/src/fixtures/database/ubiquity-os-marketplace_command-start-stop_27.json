@@ -1,0 +1,167 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 152.23,
+    "task": {
+      "reward": 150,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2489108053,
+        "content": "The v1 of the bot would close the linked pull-requests if a user stops working on the task, or if the user manually unassigns itself.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/27",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 2.23,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 66.56038461538463,
+            "syllables": 35,
+            "sentences": 1,
+            "score": 0.9343961538461536
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 152.23 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>150</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>2.23</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/27\" target=\"_blank\" rel=\"noopener\">The v1 of the bot would close the linked pull-requests if a user&hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>1</td><td>1</td><td>2.23</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 10.744,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 1758620086,
+        "content": "```suggestion\r\nexport function isIssueEvent(context: Context): context is Context<\"issues.opened\"> {\r\n```\r\nI feel like `issue_comment.created` could lead to bugs because it would make types seem like there is a comment present even though you don't know if it is.\r\nEven more type safe would be to have a type guard for every event type.\r\nBut if a function is shared for many events and you want to simply know if issue is present in the payload you can just use if statement and typescript will automatically infer it",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/46#discussion_r1758620086",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -6,14 +6,14 @@ import { createAdapters } from \"../adapters\";\n import { Env } from \"./env\";\n import { Logs } from \"@ubiquity-dao/ubiquibot-logger\";\n \n-export type SupportedEventsU = \"issue_comment.created\" | \"issues.assigned\" | \"pull_request.opened\";\n+export type SupportedEventsU = \"issue_comment.created\" | \"issues.assigned\" | \"pull_request.opened\" | \"issues.unassigned\";\n \n export type SupportedEvents = {\n   [K in SupportedEventsU]: K extends WebhookEventName ? WebhookEvent<K> : never;\n };\n \n export function isContextCommentCreated(context: Context): context is Context<\"issue_comment.created\"> {",
+        "score": {
+          "reward": 5.344,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 77,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 68.71580086580087,
+            "syllables": 102,
+            "sentences": 3,
+            "score": 0.9128419913419913
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2302768854,
+            "effect": {
+              "addition": 40,
+              "deletion": 7
+            },
+            "reward": 0.94,
+            "priority": 2
+          },
+          {
+            "reviewId": 2303128033,
+            "effect": {
+              "addition": 159,
+              "deletion": 64
+            },
+            "reward": 4.46,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/46"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 10.744 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>5.4</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>5.344</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/46\" target=\"_blank\" rel=\"noopener\">#46</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+40 -7</td><td>2</td><td>0.94</td></tr><tr><td>+159 -64</td><td>2</td><td>4.46</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/46#discussion_r1758620086\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionexport function isIssueEvent(context:&hellip;</a></h6></td><td><details><summary>2.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 77&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.8</td><td>2</td><td>5.344</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 9.008,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1759727990,
+        "content": "I think this message is unnecessary. Please remove and then you can merge this. You can make it a debug log so that it doesn't comment too, thats fine.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/46#discussion_r1759727990",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -112,6 +112,26 @@ describe(\"User start/stop\", () => {\n     );\n   });\n \n+  test(\"Author's manual unassign should close linked issue\", async () => {\n+    const infoSpy = jest.spyOn(console, \"info\").mockImplementation(() => {});\n+    const issue = db.issue.findFirst({ where: { id: { equals: 2 } } }) as unknown as Issue;\n+    const sender = db.users.findFirst({ where: { id: { equals: 2 } } }) as unknown as PayloadSender;\n+    const context = createContext(issue, sender, \"\") as Context<\"issues.unassigned\">;\n+\n+    context.adapters = createAdapters(getSupabase(), context);\n+\n+    const { content } = await userUnassigned(context);\n+\n+    expect(content).toEqual(\"Linked pull-requests closed.\");\n+    const logs = infoSpy.mock.calls.flat();\n+    expect(logs[0]).toMatch(/Opened prs/);\n+    expect(cleanLogString(logs[3])).toMatch(\n+      cleanLogString(\n+        \" › ```diff# These linked pull requests are closed:  http://github.com/ubiquity/test-repo/pull/2  http://github.com/ubiquity/test-repo/pull/3\"",
+        "score": {
+          "reward": 3.648,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 89.52500000000002,
+            "syllables": 38,
+            "sentences": 3,
+            "score": 0.7047499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2304437397,
+            "effect": {
+              "addition": 198,
+              "deletion": 70
+            },
+            "reward": 5.36,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/46"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 9.008 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>5.36</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>3.648</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/46\" target=\"_blank\" rel=\"noopener\">#46</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+198 -70</td><td>2</td><td>5.36</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/46#discussion_r1759727990\" target=\"_blank\" rel=\"noopener\">I think this message is unnecessary. Please remove and then you &hellip;</a></h6></td><td><details><summary>1.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.8</td><td>2</td><td>3.648</td></tr></tbody></table></details>"
+  }
+}

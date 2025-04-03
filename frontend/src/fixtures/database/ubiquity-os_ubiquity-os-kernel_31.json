@@ -1,0 +1,997 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 211.651,
+    "task": {
+      "reward": 200,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2119288902,
+        "content": "Spent an hour or so on this and the below approach solves things as far as I can tell, unsure how relevant this still is tho considering it's age but I enjoy a TS challenge me\r\nPlugin side:\r\nloose auto-complete stops `string is not assignable to <union type>`\r\nbasically plucks the events matching only those keys `Context` generic accepts only those events as `T` and then grabs the matching event with `TU` then extract payload via `TU[\"payload\"]` \r\n```ts\r\nexport type SupportedEventsU = \"issues.labeled\"\r\n | \"issues.unlabeled\"\r\n | \"label.edited\"\r\n | \"issues.reopened\"\r\n | \"push\"\r\n | \"issue_comment.created\"\r\n | (string & {}); // this allows for loose auto-complete \r\nexport type SupportedEvents = {\r\n  [K in SupportedEventsU]: K extends WebhookEventName ? WebhookEvent<K> : never;\r\n};\r\nexport interface Context<T extends SupportedEventsU = SupportedEventsU, TU extends SupportedEvents[T] = SupportedEvents[T]> {\r\n  eventName: T;\r\n  payload: TU[\"payload\"];\r\n  ...\r\n  }\r\n```\r\nKernel side:\r\nThe errors kernel side seem to have been resolved/worked-around, but from what I can tell this resolves it kernel side too trying against `repo_dispatch` specifically and checking whether TS IDE errors were thrown for the rest.\r\nI updated below, `GithubContext` and turned `handleEvent` and `tryCatchWrapper` into generics using `SupportedEvents[T]` and where needed assigning `T` using `SupportedEvents<typeof event[\"name\"]>`\r\n```ts\r\nexport type SupportedEvents<T extends EmitterWebhookEventName = EmitterWebhookEventName> = {\r\n  [K in EmitterWebhookEventName]: T extends K ? EmitterWebhookEvent<T> : never;\r\n};\r\nexport class DelegatedComputeInputs<T extends keyof SupportedEvents = keyof SupportedEvents, TU extends SupportedEvents[T] = SupportedEvents[T]> {\r\n  public stateId: string;\r\n  public eventName: T;\r\n  public eventPayload: TU[\"payload\"];\r\n```",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2119288902",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.96,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 7
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 121,
+            "wordValue": 0.1,
+            "result": 2.48
+          },
+          "readability": {
+            "fleschKincaid": 24.470475206611596,
+            "syllables": 173,
+            "sentences": 2,
+            "score": 0.644704752066116
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2160332558,
+        "content": "ayyy I'm two for two with these tricky type tasks now\r\nthere was no price label set for the [last one](https://github.com/ubiquity/ubiquibot-kernel/issues/19) either, could this be priced and permit generated?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2160332558",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.092,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 72.04500000000002,
+            "syllables": 37,
+            "sentences": 1,
+            "score": 0.8795499999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2161252091,
+        "content": "There is a larger explanation in the PR I think covers things better but here is the boiled down solution:\r\n```ts\r\npublic payload: {\r\n    [K in TSupportedEvents]: K extends WebhookEventName ? WebhookEvent<K> : never;\r\n  }[TSupportedEvents][\"payload\"];\r\n```\r\nA mapped type to help with the heavy lifting by creating a more efficient path for TS to find the underlying type as opposed to it trying to infer all combinations of the variance in `payload` between events when using `WebhookEvent<T>` (when `WebhookEvent` itself is a complicated type). Now it accesses a straightforward type that returns the `baseWebhookEvent` for any given `T` which is expected to always be a `WebhookEventName`.\r\n<hr/>\r\nThis one took me about an hour the first one took a couple of hours but whatever is thought to be fair enough is fine.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2161252091",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 3.28,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 110,
+            "wordValue": 0.1,
+            "result": 2.56
+          },
+          "readability": {
+            "fleschKincaid": 55.0237878787879,
+            "syllables": 149,
+            "sentences": 3,
+            "score": 0.950237878787879
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1911762126,
+        "content": "Resolves #31 \r\nUsing the same type setup I've used in https://github.com/ubiquibot/plugin-template\r\n- https://github.com/ubiquity/ubiquibot-kernel/issues/31#issuecomment-2119288902 you don't need the additional stuff I mentioned just the updated context type.\r\nhttps://github.com/ubiquity/ubiquibot-kernel/assets/106303466/e04d59f7-e720-439a-874a-84440138288b",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 4.319,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 54.87300000000002,
+            "syllables": 90,
+            "sentences": 5,
+            "score": 0.9487300000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2158041305,
+        "content": "Believe me so was I for this very same reason but I went through the files looking for other ts errors and couldn't find any. Checked the `tsserver` logged types, used `twoslash` etc and confirmed the output types look the same as they did before.\r\n<hr/>\r\nThis is building a mapped type which is basically an object using the keys of the `WebhookEventName` union type and assigning the underlying `BaseWebhookEvent` as the values of those keys. We know that `K` will always extend `WebhookEventName`, so we are basically removing the conditionals from the Octokit types.\r\n```ts\r\nexport type SupportedEvents = {\r\n  [K in SupportedEventsU]: K extends WebhookEventName ? WebhookEvent<K> : never;\r\n};\r\n```\r\nThis is saying `\"context takes a key, any key of the union type. Use that key to index the type object which will return only the webhook event for that key\"`\r\n`T` remains the string to index by and `TU` becomes a single object using that key by indexing a type which is straightforward.\r\n```ts\r\nGitHubContext<T extends SupportedEventsU = SupportedEventsU, TU extends SupportedEvents[T] = SupportedEvents[T]>\r\n```\r\n`TU[\"payload\"]` can only be the payload assignable to that specific key as `TU` is only possible through `T`\r\n```ts\r\nTU[\"payload\"];\r\n```\r\n<hr/>\r\nIf I show you the difference between the two types as the `tsserver` sees it.\r\nOriginal\r\n```txt\r\n\"(alias) getDefaultBranch(\r\n    context: GitHubContext<\\\r\n    \"branch_protection_configuration\\\" | \\\"branch_protection_rule.disabled\\\" \r\n    | \\\"branch_protection_rule.enabled\\\" | \\\"branch_protection_rule\\\" \r\n    | \\\"branch_protection_rule.created\\\" | ... 270 more ... \r\n    | \\\"workflow_run.requested\\\">, owner: string, repository: string): Promise<...>\\n\r\n    import getDefaultBranch\"\r\n```\r\nNew\r\n```txt\r\n\"(alias) getDefaultBranch(\r\n    context: GitHubContext<\\\r\n    \"branch_protection_configuration\\\" | \\\"branch_protection_rule.disabled\\\" \r\n    | \\\"branch_protection_rule.enabled\\\" | \\\"branch_protection_rule\\\" \r\n    | \\\"branch_protection_rule.created\\\" | ... 270 more ... \r\n    | \\\"workflow_run.requested\\\", BaseWebhookEvent<...> | ... 274 more ... \r\n    | (BaseWebhookEvent<...> & {\\n    ...;\\n})>, owner: string, repository: string): Promise<...>\\n\r\n    import getDefaultBranch\"\r\n```\r\nYou see here that despite it actually being more verbose and includes another whole type, it's less work for TS because we've constrained things, so rather than TS trying to produce options through inference for all possible combinations of the union type when saying `WebhookEvent<T>[\"payload\"]` it's now only having to index a typed object with `T` that'll return the event or `never`, there is no inference involved for it beyond identifying which key of the union it is.\r\n<hr/>\r\nThis is how I understand the problem and how it looks in my head",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52#issuecomment-2158041305",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 13
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 240,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 56.535000000000025,
+            "syllables": 340,
+            "sentences": 8,
+            "score": 0.9653500000000003
+          },
+          "multiplier": 0,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2158194659,
+        "content": "I didn't really touch on why I think this resolves the underlying issue\r\nWe are abstracting inference logic into types which are basically TS functions. So rather than TS trying to do some wizard shit, the path for it to find the underlying webhook event is cut short because we are building a `Record` of `EventName:Event` which is more efficient than the Octokit type which has many conditionals and lots of variances in payload etc. \r\nSo I think it's just a more direct and efficient path to the underlying type taking some of the burden off of the TS server that allows it to infer easier or that it's due to the generic `TU` being explicitly defined which is carrying some of the load.\r\nThis is just my opinion tho I don't have anything to support this really beyond what I've shared.\r\n<hr/>\r\nUsing the below approach throws this error, which is pretty much how it was being used before with `WebhookEvent<T>[\"payload\"]` and I expect that is because WebhookEvent wants a specific key of the union and it's being passed a type which is the whole union which is just a guess but logically you'd expect this to work looking at it.\r\n```ts\r\nGitHubContext<T extends WebhookEventName = WebhookEventName, TU extends WebhookEvent[T] = WebhookEvent[T]>\r\n```\r\n```txt\r\nType 'T' cannot be used to index type 'EmitterWebhookEvent'.ts(2536)\r\n```",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52#issuecomment-2158194659",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 205,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 48.018048780487845,
+            "syllables": 284,
+            "sentences": 5,
+            "score": 0.8801804878048785
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2158406344,
+        "content": "A much cleaner way to represent it for sure @whilefoo \r\nI wasn't sure I knew the various edge cases to try that you'll have worked around or whatever but I'm happy it's working",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52#issuecomment-2158406344",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 37,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 57.242162162162174,
+            "syllables": 49,
+            "sentences": 1,
+            "score": 0.9724216216216217
+          },
+          "multiplier": 0,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2158520161,
+        "content": "@whilefoo I'm unsure whether to make those changes or if you are going to PR/commit against this or just close as completed and use the new approach, lmk if there is something I need to do.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52#issuecomment-2158520161",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 61.401842105263185,
+            "syllables": 48,
+            "sentences": 1,
+            "score": 0.9859815789473682
+          },
+          "multiplier": 0,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2159917773,
+        "content": "I think you commented in the same sec that I pushed the change 😂",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52#issuecomment-2159917773",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 102.53230769230771,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 211.651 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>200</td></tr><tr><td>Issue</td><td>Comment</td><td>3</td><td>7.332</td></tr><tr><td>Review</td><td>Comment</td><td>6</td><td>4.319</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2119288902\" target=\"_blank\" rel=\"noopener\">Spent an hour or so on this and the below approach solves things&hellip;</a></h6></td><td><details><summary>2.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 7&#13;  result: 0&#13;regex:&#13;  wordCount: 121&#13;  wordValue: 0.1&#13;  result: 2.48&#13;</pre></details></td><td>1</td><td>4</td><td>2.96</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2160332558\" target=\"_blank\" rel=\"noopener\">ayyy I'm two for two with these tricky type tasks nowthere was&hellip;</a></h6></td><td><details><summary>2.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.3</td><td>4</td><td>1.092</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2161252091\" target=\"_blank\" rel=\"noopener\">There is a larger explanation in the PR I think covers things be&hellip;</a></h6></td><td><details><summary>2.56</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 110&#13;  wordValue: 0.1&#13;  result: 2.56&#13;</pre></details></td><td>1</td><td>4</td><td>3.28</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52\" target=\"_blank\" rel=\"noopener\">Resolves #31 Using the same type setup I've used in https://gi&hellip;</a></h6></td><td><details><summary>4.8</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.1&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.7</td><td>1</td><td>4.319</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52#issuecomment-2158041305\" target=\"_blank\" rel=\"noopener\">Believe me so was I for this very same reason but I went through&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 13&#13;  result: 0&#13;regex:&#13;  wordCount: 240&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52#issuecomment-2158194659\" target=\"_blank\" rel=\"noopener\">I didn't really touch on why I think this resolves the underlyin&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;  result: 0&#13;regex:&#13;  wordCount: 205&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52#issuecomment-2158406344\" target=\"_blank\" rel=\"noopener\">A much cleaner way to represent it for sure @whilefoo I wasn't&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 37&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52#issuecomment-2158520161\" target=\"_blank\" rel=\"noopener\">@whilefoo I'm unsure whether to make those changes or if you are&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.2</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52#issuecomment-2159917773\" target=\"_blank\" rel=\"noopener\">I think you commented in the same sec that I pushed the change 😂</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.1</td><td>4</td><td>0</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 54.964,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1987444013,
+        "content": "![image](https://github.com/ubiquity/ubiquibot-kernel/assets/4975670/4417a5bc-5f84-4ad8-acad-765046d9deda)\n@FernandVEYRIER you said you wanted to try your hand at this. Both whilefoo and I gave it our attempts but no luck. If you can't figure it out we will probably need to proceed with the method I proposed in our private messages, which would make the code not elegant and add a lot of bloat.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-1987444013",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 9.856,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 57,
+            "wordValue": 0.1,
+            "result": 2.48
+          },
+          "readability": {
+            "fleschKincaid": 79.20263157894739,
+            "syllables": 73,
+            "sentences": 3,
+            "score": 0.8079736842105261
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1990086073,
+        "content": "I think we should type guard every webhook event. Then we can have auto completion. \nThis means a dedicated function for every webhook event (there's over 50)\nWe could start by trying the generic event first ex: `issues_comment` instead of the specific event ex: `issues_comment.created`",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-1990086073",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 10.512,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 44,
+            "wordValue": 0.1,
+            "result": 2.27
+          },
+          "readability": {
+            "fleschKincaid": 65.04833333333336,
+            "syllables": 66,
+            "sentences": 3,
+            "score": 0.9495166666666663
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1990520618,
+        "content": "I assume it's fine but @whilefoo would know best.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-1990520618",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.88,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 86.70500000000001,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.7329499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2007566356,
+        "content": "The kernel doesn't use probot. Its a ground-up implementation to cut the bloat and work in Cloudflare Workers.\r\n1. casting as `any` is a bad idea. It kills the point of type safety.\r\n2. yes I suggested we typeguard at the webhook event handler function level. This will introduce a lot of type guards (one for every webhook type) but this is the only viable way I see to handle this with type safety.\r\n3. refer to 1\r\n4. we don't use probot so not sure if `context` is applicable here.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2007566356",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 12.16,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              }
+            },
+            "result": 0.4
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 88,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 75.82727272727276,
+            "syllables": 123,
+            "sentences": 7,
+            "score": 0.8417272727272724
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2008188212,
+        "content": "Maybe, somehow generate simplified types based on the corresponding real type and cast to use those?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2008188212",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 3.936,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 58.4075,
+            "syllables": 25,
+            "sentences": 1,
+            "score": 0.984075
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2157458834,
+        "content": "I am assuming that we need to typeguard like a whitelist. Basically we can not have an `else` conditional block for \"everything else.\" We can only have `if` blocks with the type-guards we are supporting @whilefoo",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2157458834",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 7.392,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 62.05047619047622,
+            "syllables": 55,
+            "sentences": 3,
+            "score": 0.9794952380952379
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2161075748,
+        "content": "The header is `diff` not `text` @gentlementlegen",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2161075748",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.26,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 32.56000000000003,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.7256000000000004
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2161077533,
+        "content": "Sure although you should write the solution here so we can include it in the spec before you complete the task. \nThen we can provide a time estimate and price it. \nWhat time label are we adding? How long did it take you?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2161077533",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 5.44,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 43,
+            "wordValue": 0.1,
+            "result": 2.25
+          },
+          "readability": {
+            "fleschKincaid": 89.68188953488374,
+            "syllables": 54,
+            "sentences": 4,
+            "score": 0.7031811046511627
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2107310962,
+        "content": "I am skeptical here because the whole team tried and nobody could figure it out. \nCan you explain what exactly the trade off is here with your adjustment? We need to preserve type safety",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52#pullrequestreview-2107310962",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.048,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 34,
+            "wordValue": 0.1,
+            "result": 2.01
+          },
+          "readability": {
+            "fleschKincaid": 73.40813725490199,
+            "syllables": 49,
+            "sentences": 3,
+            "score": 0.8659186274509801
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2107310962,
+            "effect": {
+              "addition": 9,
+              "deletion": 3
+            },
+            "reward": 0.48,
+            "priority": 4
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 54.964 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>0.48</td></tr><tr><td>Issue</td><td>Comment</td><td>8</td><td>50.436</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>4.048</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52\" target=\"_blank\" rel=\"noopener\">#52</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+9 -3</td><td>4</td><td>0.48</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-1987444013\" target=\"_blank\" rel=\"noopener\">![image](https://github.com/ubiquity/ubiquibot-kernel/assets/497&hellip;</a></h6></td><td><details><summary>2.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 57&#13;  wordValue: 0.1&#13;  result: 2.48&#13;</pre></details></td><td>0.8</td><td>4</td><td>9.856</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-1990086073\" target=\"_blank\" rel=\"noopener\">I think we should type guard every webhook event. Then we can ha&hellip;</a></h6></td><td><details><summary>2.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 44&#13;  wordValue: 0.1&#13;  result: 2.27&#13;</pre></details></td><td>0.9</td><td>4</td><td>10.512</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-1990520618\" target=\"_blank\" rel=\"noopener\">I assume it's fine but @whilefoo would know best.</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.2</td><td>4</td><td>0.88</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2007566356\" target=\"_blank\" rel=\"noopener\">The kernel doesn't use probot. Its a ground-up implementation to&hellip;</a></h6></td><td><details><summary>3.03</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;  result: 0.4&#13;regex:&#13;  wordCount: 88&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.8</td><td>4</td><td>12.16</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2008188212\" target=\"_blank\" rel=\"noopener\">Maybe, somehow generate simplified types based on the correspond&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.6</td><td>4</td><td>3.936</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2157458834\" target=\"_blank\" rel=\"noopener\">I am assuming that we need to typeguard like a whitelist. Basica&hellip;</a></h6></td><td><details><summary>2.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>0.7</td><td>4</td><td>7.392</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2161075748\" target=\"_blank\" rel=\"noopener\">The header is &#96;diff&#96; not &#96;text&#96; @gentlementlegen</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.1</td><td>4</td><td>0.26</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2161077533\" target=\"_blank\" rel=\"noopener\">Sure although you should write the solution here so we can inclu&hellip;</a></h6></td><td><details><summary>2.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 43&#13;  wordValue: 0.1&#13;  result: 2.25&#13;</pre></details></td><td>0.5</td><td>4</td><td>5.44</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52#pullrequestreview-2107310962\" target=\"_blank\" rel=\"noopener\">I am skeptical here because the whole team tried and nobody coul&hellip;</a></h6></td><td><details><summary>2.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 34&#13;  wordValue: 0.1&#13;  result: 2.01&#13;</pre></details></td><td>0.4</td><td>4</td><td>4.048</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 30.744,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 1989853627,
+        "content": "To follow up on the research, I tried:\r\n- updating TS version to the latest\r\n- downgrading TS version < 5.x\r\n- change rules in the tsconfig to use `esnext`\r\n- use yarn / npm instead of bun\r\nand none of this was successful either. Every code change attempt led me to what @whilefoo has already covered. There is a very few results about this error, and it seems to be more of a TypeScript limitation that an actual code issue. Maybe we could also consider just silencing the error, as the IDE properly resolves the types, and it would be quite a loss to not have proper auto complete there (works fine in Webstorm as well).\r\nThere seem to be more errors on the typings as well, c.f. screenshot\r\n![image](https://github.com/ubiquity/ubiquibot-kernel/assets/9807008/a0a126e6-e181-4ab5-920a-de5aa40ed7a5)",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-1989853627",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 12.96,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 8
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              }
+            },
+            "result": 0.4
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 125,
+            "wordValue": 0.1,
+            "result": 2.45
+          },
+          "readability": {
+            "fleschKincaid": 72.53562500000002,
+            "syllables": 175,
+            "sentences": 8,
+            "score": 0.8746437499999997
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1990170537,
+        "content": "Well that's the thing, we already have access to full auto-completion, just TypeScript compiler doesn't understand it, so is it really worth it to spend all that time rewriting everything?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-1990170537",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 7.904,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 42.59454545454548,
+            "syllables": 51,
+            "sentences": 1,
+            "score": 0.8259454545454549
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1990421358,
+        "content": "Another approach that works, and keeps a very similar design:\r\n```TypeScript\r\nimport { EmitterWebhookEvent as WebhookEvent, EmitterWebhookEventName as WebhookEventName } from \"@octokit/webhooks\";\r\nimport { customOctokit } from \"./github-client\";\r\nimport { GitHubEventHandler } from \"./github-event-handler\";\r\nexport class GitHubContext {\r\n  public key: WebhookEventName;\r\n  public name: WebhookEventName;\r\n  public id: string;\r\n  private readonly _payload: WebhookEvent<typeof this.key>[\"payload\"];\r\n  public octokit: InstanceType<typeof customOctokit>;\r\n  public eventHandler: InstanceType<typeof GitHubEventHandler>;\r\n  constructor(eventHandler: InstanceType<typeof GitHubEventHandler>, event: WebhookEvent, octokit: InstanceType<typeof customOctokit>) {\r\n    this.eventHandler = eventHandler;\r\n    this.name = event.name;\r\n    this.id = event.id;\r\n    this._payload = event.payload;\r\n    if (\"action\" in this._payload) {\r\n      this.key = `${this.name}.${this._payload.action}` as WebhookEventName;\r\n    } else {\r\n      this.key = this.name;\r\n    }\r\n    this.octokit = octokit;\r\n  }\r\n   getPayload<T extends WebhookEventName>(): WebhookEvent<T>[\"payload\"] {\r\n    return this._payload;\r\n  }\r\n}\r\nexport type SimplifiedContext = Omit<GitHubContext, keyof WebhookEventName>;\r\n```\r\nThis does not throw complexity errors. It changes the use from\r\n```TypeScript\r\ncontext: GitHubContext<\"repository_dispatch\">\r\ncontext.payload\r\n// To\r\ncontext: GitHubContext\r\ncontext.getPayload<\"repository_dispatch\">()\r\n```\r\nI don't know if this is viable for our design.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-1990421358",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 9.88,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 71.62625000000001,
+            "syllables": 45,
+            "sentences": 2,
+            "score": 0.8837374999999998
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 30.744 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>3</td><td>30.744</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-1989853627\" target=\"_blank\" rel=\"noopener\">To follow up on the research, I tried:- updating TS version to&hellip;</a></h6></td><td><details><summary>2.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 8&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;  result: 0.4&#13;regex:&#13;  wordCount: 125&#13;  wordValue: 0.1&#13;  result: 2.45&#13;</pre></details></td><td>0.9</td><td>4</td><td>12.96</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-1990170537\" target=\"_blank\" rel=\"noopener\">Well that's the thing, we already have access to full auto-compl&hellip;</a></h6></td><td><details><summary>1.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.8</td><td>4</td><td>7.904</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-1990421358\" target=\"_blank\" rel=\"noopener\">Another approach that works, and keeps a very similar design:&&hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>1</td><td>4</td><td>9.88</td></tr></tbody></table></details>"
+  },
+  "gitcoindev": {
+    "total": 11.96,
+    "userId": 88761781,
+    "comments": [
+      {
+        "id": 2006239796,
+        "content": "I spent a few hours on this being curious about the root cause and in the end found out this error is not so scary:\r\nhttps://github.com/probot/probot/issues/1680\r\nhttps://github.com/probot/probot/issues/1968\r\nhttps://github.com/probot/probot/discussions/1966\r\nTherefore, this is a known issue and the only workaround so far has been to narrow down context type or use context payload only. \r\nBasically there are several options to avoid this Typescript compiler error:\r\n1) Cast context argument to 'any' a.k.a. I am giving you noodles or sushi for dinner, you have to consume it. Example: Microsoft's fluentui https://github.com/microsoft/fluentui/blob/5e690201797c6b1ce34ac59638fd4a77a0f5a2b3/packages/fluentui/react-northstar-emotion-renderer/src/invokeKeyframes.ts#L50\r\n2) Narrow down types or pass only payload of certain type. I am close to conclude that it complains about incompatibility between \"repository_dispatch\" vs \"workflow_dispatch\" context, so this would need need to be handled.\r\n3) Add ts-ignore, an example https://github.com/taiga-family/argus/blob/d32d3f7d1d62d34c1e404e2fea24b94f1e7fcf51/src/selectors/workflow-run.selectors.ts#L59 \r\n4) Use a wrapper around context, example https://github.com/advanced-security/probot-security-alerts/blob/e7c7f636ab5593b33e79327be1b1589b44bdf13a/src/events/approvingTeam.ts#L6",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2006239796",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 11.24,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 10
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 6
+              }
+            },
+            "result": 6.4
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 130,
+            "wordValue": 0.1,
+            "result": 2.41
+          },
+          "readability": {
+            "fleschKincaid": 52.53363636363639,
+            "syllables": 335,
+            "sentences": 18,
+            "score": 0.9253363636363638
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2161054204,
+        "content": "I think this is a reasonable request. I looked into this before and confirm it was tricky to solve.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2161054204",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.72,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 76.97144736842105,
+            "syllables": 27,
+            "sentences": 2,
+            "score": 0.8302855263157894
+          },
+          "multiplier": 0.25,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 11.96 XP ]</a>&nbsp;</h3><h6>@gitcoindev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>2</td><td>11.96</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2006239796\" target=\"_blank\" rel=\"noopener\">I spent a few hours on this being curious about the root cause a&hellip;</a></h6></td><td><details><summary>8.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 10&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 6&#13;  result: 6.4&#13;regex:&#13;  wordCount: 130&#13;  wordValue: 0.1&#13;  result: 2.41&#13;</pre></details></td><td>1</td><td>4</td><td>11.24</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2161054204\" target=\"_blank\" rel=\"noopener\">I think this is a reasonable request. I looked into this before &hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.4</td><td>4</td><td>0.72</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 21.842,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 2008070074,
+        "content": "Even typeguards don't work. For example:\r\n```js\r\nexport function isRepositoryDispatchEvent(context: GitHubContext): context is GitHubContext<\"repository_dispatch\"> {\r\n  return context.key === \"repository_dispatch\";\r\n}\r\nexport async function repositoryDispatch(context: GitHubContext) {\r\n  if (!isRepositoryDispatchEvent(context)) {\r\n    console.error(\"Wrong event type\");\r\n    return;\r\n  }\r\n  console.log(context);\r\n}\r\n```\r\n`console.log(context)` triggers the error",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2008070074",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 4.64,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 57.940000000000026,
+            "syllables": 17,
+            "sentences": 2,
+            "score": 0.9794000000000003
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2177915477,
+        "content": "We need to fix a Typescript [issue](https://github.com/ubiquity/ubiquibot-kernel/blob/c000369cb11cdcf67e1ac6678df403149e699f43/src/github/handlers/repository-dispatch.ts#L52): `Expression produces a union type that is too complex to represent.`\r\nI've tried multiple things:\r\n- function only accepting context of certain events\r\n```js\r\nexport async function getDefaultBranch(context: GitHubContext<\"repository_dispatch\">, owner: string, repository: string)\r\n```\r\n- making the function generic\r\n```js\r\nexport async function getDefaultBranch<T extends EmitterWebhookEventName>(context: GitHubContext<T>, owner: string, repository: string)\r\n```\r\n- casting a Context<\"repository_dispatch\"> to Context<T> - it seems to work in my IDE but fails in CI but it's also a real solution\r\n```js\r\nconst defaultBranch = await getDefaultBranch(context as GitHubContext, nextPlugin.plugin.owner, nextPlugin.plugin.repo);\r\n```\r\n---\r\nI've also got this problem when developing [assistive-pricing](https://github.com/ubiquibot/assistive-pricing) plugin. I was trying to create typeguards like this:\r\n```js\r\nexport function isIssueCommentCreatedEvent(context: Context): context is Context<\"issue_comment.created\"> {\r\n  return context.eventName === \"issue_comment.created\";\r\n}\r\n```\r\n`context is Context<\"issue_comment.created\">` triggers the error",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 6.03,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 70,
+            "wordValue": 0.1,
+            "result": 2.6
+          },
+          "readability": {
+            "fleschKincaid": 37.158571428571435,
+            "syllables": 111,
+            "sentences": 2,
+            "score": 0.7715857142857143
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2158375360,
+        "content": "This looks promising, I tried it and it works. I can also see why it's easier for TS to resolve a mapped type instead of trying to infer so many combinations.\r\nI've used your example and removed `TU` so we only need to provide one type and it looks it's working\r\n```js\r\nexport class GitHubContext<TSupportedEvents extends WebhookEventName = WebhookEventName> {\r\n  public key: WebhookEventName;\r\n  public name: WebhookEventName;\r\n  public id: string;\r\n  public payload: {\r\n    [K in TSupportedEvents]: K extends WebhookEventName ? WebhookEvent<K> : never;\r\n  }[TSupportedEvents][\"payload\"];\r\n  public octokit: InstanceType<typeof customOctokit>;\r\n  public eventHandler: InstanceType<typeof GitHubEventHandler>;\r\n```\r\n@Keyrxng what do you think?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52#issuecomment-2158375360",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 10.54,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 58,
+            "wordValue": 0.1,
+            "result": 2.49
+          },
+          "readability": {
+            "fleschKincaid": 77.81511494252875,
+            "syllables": 75,
+            "sentences": 3,
+            "score": 0.8218488505747125
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2159916334,
+        "content": "@Keyrxng you can make the change",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52#issuecomment-2159916334",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.632,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 116.14500000000001,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 21.842 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>6.03</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>4.64</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>11.172</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31\" target=\"_blank\" rel=\"noopener\">We need to fix a Typescript [issue](https://github.com/ubiquity/&hellip;</a></h6></td><td><details><summary>4.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ul:&#13;      score: 0&#13;      elementCount: 3&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.3&#13;regex:&#13;  wordCount: 70&#13;  wordValue: 0.1&#13;  result: 2.6&#13;</pre></details></td><td>1</td><td>1</td><td>6.03</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/31#issuecomment-2008070074\" target=\"_blank\" rel=\"noopener\">Even typeguards don't work. For example:&#96;&#96;&#96;jsexp&hellip;</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>1</td><td>4</td><td>4.64</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52#issuecomment-2158375360\" target=\"_blank\" rel=\"noopener\">This looks promising, I tried it and it works. I can also see wh&hellip;</a></h6></td><td><details><summary>2.49</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 58&#13;  wordValue: 0.1&#13;  result: 2.49&#13;</pre></details></td><td>0.85</td><td>4</td><td>10.54</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/52#issuecomment-2159916334\" target=\"_blank\" rel=\"noopener\">@Keyrxng you can make the change</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.2</td><td>4</td><td>0.632</td></tr></tbody></table></details>"
+  }
+}

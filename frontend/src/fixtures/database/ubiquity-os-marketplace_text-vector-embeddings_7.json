@@ -1,0 +1,1149 @@
+{
+  "shiv810": {
+    "userId": 53160903,
+    "total": 604.577,
+    "task": {
+      "reward": 600,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2354196472,
+        "content": "@0x4007 So to sum up:\r\n- `Issues` Database, would have the tasks completed. Using assignees we should be able to find who completed the task.\r\n- Then we need to run a similarity search with issues and the new task.\r\nSo, to find the who completed the task. Should `assignees` be used or is there a better way to do this ? I think theres a `pull request` field in the payload object.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/7#issuecomment-2354196472",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.268,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 66,
+            "wordValue": 0.1,
+            "result": 2.57
+          },
+          "readability": {
+            "fleschKincaid": 89.27909090909094,
+            "syllables": 83,
+            "sentences": 6,
+            "score": 0.7072090909090906
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2357424642,
+        "content": "Is scraper a part of this ticket ? If so, could you add more details about it to the issue spec.\r\nSo, we would run a similarity search against the issues. Return the username of the issues.assignees  which most similar (More than 75% threshold) in descending order. Is that right ?\r\nSo, right now `issue-dedup` would send a comment if its more than 75% similar. So is it supposed to be in the same comment ? Or Like how is it supposed to work ? Should there be two comments ?\r\nAlso, `Another configuration of this idea could be to recommend the contributor in the organization with the highest match, even if it doesn't hit the threshold`. So the 75% threshold is only for task similarity ?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/7#issuecomment-2357424642",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.309,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 96,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 81.50875,
+            "syllables": 133,
+            "sentences": 12,
+            "score": 0.7849124999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.95
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 604.577 XP ]</a>&nbsp;</h3><h6>@shiv810</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>600</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>4.577</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/7#issuecomment-2354196472\" target=\"_blank\" rel=\"noopener\">@0x4007 So to sum up:- &#96;Issues&#96; Database, would have t&hellip;</a></h6></td><td><details><summary>2.77</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 66&#13;  wordValue: 0.1&#13;  result: 2.57&#13;</pre></details></td><td>0.9</td><td>3</td><td>2.268</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/7#issuecomment-2357424642\" target=\"_blank\" rel=\"noopener\">Is scraper a part of this ticket ? If so, could you add more det&hellip;</a></h6></td><td><details><summary>2.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 96&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.95</td><td>3</td><td>2.309</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 93.58,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2354520283,
+        "content": "First use assignees and fallback to pull author since many organizations are not as strict about assignment. \nThe plan is to separately build a scraper basically so when a new person joins our DevPool we can scrape all the public data on their profile to know what types of projects they completed.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/7#issuecomment-2354520283",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 8.262,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 52,
+            "wordValue": 0.1,
+            "result": 2.41
+          },
+          "readability": {
+            "fleschKincaid": 50.29115384615386,
+            "syllables": 80,
+            "sentences": 2,
+            "score": 0.9029115384615386
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2357434557,
+        "content": "Different project. Can make the spec later. I imagine we could ask them to install UbiquityOS and then we can read all the issues from their private repositories. \nYes\nMultiple comments isn't preferred. If we can edit the single comment it would look better. For issues similarity we can also consider editing the specification and adding a footer regarding similarities. \nThis can be handled in a separate task",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/7#issuecomment-2357434557",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 8.466,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 69,
+            "wordValue": 0.1,
+            "result": 2.59
+          },
+          "readability": {
+            "fleschKincaid": 53.37782608695653,
+            "syllables": 117,
+            "sentences": 7,
+            "score": 0.9337782608695653
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2370882520,
+        "content": "`issues.label_added` is certainly supported. That is how our [pricing is set](https://github.com/ubiquity-os/generate-vector-embeddings/issues/7#event-14173355238) based on the `priority` and `time` labels.\r\nWe do want to decrease coupling but at this point I am leaning towards stacking tech debt so that we can ship more capabilities faster. We had quite a lull in the last couple of months and I want to speed things along. So do what you think is faster to ship and we can clean tech debt later. \r\nYou are also free to create a separate plugin if you think that makes sense! Perhaps @gentlementlegen can provide some advice on how to chain outputs together?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/7#issuecomment-2370882520",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 10.704,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 101,
+            "wordValue": 0.1,
+            "result": 2.6
+          },
+          "readability": {
+            "fleschKincaid": 79.94841584158416,
+            "syllables": 134,
+            "sentences": 7,
+            "score": 0.8005158415841583
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2374828906,
+        "content": "Are you using your own GitHub App? Have you correctly set the permissions? If you are using our kernel, the official instance, it definitely relays label events.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/7#issuecomment-2374828906",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 4.83,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 56.70000000000002,
+            "syllables": 45,
+            "sentences": 3,
+            "score": 0.9670000000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2512219502,
+        "content": "When a new task is posted to our network, UbiquityOS should recommend qualified contributors. \r\n- The system must understand the \"closed as complete\" project specifications. \r\n- this should run when \r\n   - an issue is priced, so I believe on `issues.label_added`\r\n   - issue created `issues.created`\r\n   - task specification has been edited `issues.edited `\r\n- if the new task is 75% similar or greater (configurable) it should post a comment with a list of those issues in order of percentage match. This comment SHOULD NOT tag the users. Instead this is intended for a human to check their work, and tag them in as needed. \r\n- Be sure to add the `www.` prefix on the github href so that it does not register as a \"link back\" on the GitHub UI over on their issue.  \r\nFor example it should look something like:\r\n```\r\n### 0x4007\r\n- ubiquity/ubiquity-dollar#123 87% match. \r\n### rndquu\r\n- ubiquity/ubiquity-dollar#250 77% match. \r\n```\r\n- if the search results comment exists, target and edit it instead of reposting. This is relevant when editing the specification. \r\nEventually this may be configurable to be network wide (global) organization wide, or repository wide. But for this first version, we will do network wide.\r\n---\r\nAnother configuration of this idea could be to recommend the contributor in the organization with the highest match, even if it doesn't hit the threshold. If within the organization, perhaps tagging is appropriate. Perhaps it makes sense to handle this in a separate task.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/7",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.04,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 11
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 8
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0.8
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 218,
+            "wordValue": 0.1,
+            "result": 1.55
+          },
+          "readability": {
+            "fleschKincaid": 57.481203246295024,
+            "syllables": 341,
+            "sentences": 13,
+            "score": 0.9748120324629502
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2335710895,
+        "content": "Did you test this? The syntax doesn't look correct. Pretty sure all quotes need the space to avoid problems",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#pullrequestreview-2335710895",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.248,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 94.31833333333333,
+            "syllables": 25,
+            "sentences": 3,
+            "score": 0.6568166666666667
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1779924312,
+        "content": "```suggestion\n  const commentLines: string[] = [\"> [!NOTE]\", \"> The following contributors may be suitable for this task:\"];\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#discussion_r1779924312",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,150 @@\n+import { Context } from \"../types\";\n+import { IssuePayload } from \"../types/payload\";\n+\n+export interface IssueGraphqlResponse {\n+  node: {\n+    title: string;\n+    url: string;\n+    state: string;\n+    stateReason: string;\n+    closed: boolean;\n+    repository: {\n+      owner: {\n+        login: string;\n+      };\n+      name: string;\n+    };\n+    assignees: {\n+      nodes: Array<{\n+        login: string;\n+        url: string;\n+      }>;\n+    };\n+  };\n+  similarity: number;\n+}\n+\n+const commentBuilder = (matchResultArray: Map<string, Array<string>>): string => {\n+  const commentLines: string[] = [\">[!NOTE]\", \">The following contributors may be suitable for this task:\"];",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1779924489,
+        "content": "```suggestion\n    commentLines.push(`> ### [${assignee}](https://www.github.com/${assignee})`);\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#discussion_r1779924489",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,150 @@\n+import { Context } from \"../types\";\n+import { IssuePayload } from \"../types/payload\";\n+\n+export interface IssueGraphqlResponse {\n+  node: {\n+    title: string;\n+    url: string;\n+    state: string;\n+    stateReason: string;\n+    closed: boolean;\n+    repository: {\n+      owner: {\n+        login: string;\n+      };\n+      name: string;\n+    };\n+    assignees: {\n+      nodes: Array<{\n+        login: string;\n+        url: string;\n+      }>;\n+    };\n+  };\n+  similarity: number;\n+}\n+\n+const commentBuilder = (matchResultArray: Map<string, Array<string>>): string => {\n+  const commentLines: string[] = [\">[!NOTE]\", \">The following contributors may be suitable for this task:\"];\n+  matchResultArray.forEach((issues, assignee) => {\n+    commentLines.push(`>### [${assignee}](https://www.github.com/${assignee})`);",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2374841981,
+        "content": "I don't understand what you mean by this.\r\nOnly closed as completed issues. This proves that they were able to accomplish the task. \r\nI don't understand. No webhooks are applicable here. You use GraphQL to search all the \"closed as complete\" issues that are assigned to the contributor.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2374841981",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 6.195,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 50,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 79.93666666666668,
+            "syllables": 70,
+            "sentences": 6,
+            "score": 0.8006333333333332
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2375036927,
+        "content": "I'm sorry but I have little context on the \"payload object\" I haven't worked on any plugins officially. Feel free to ask me clarifications on the spec.\r\nPerhaps @gentlementlegen might know what you're talking about",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2375036927",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.3,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 62.625701754386,
+            "syllables": 59,
+            "sentences": 3,
+            "score": 0.97374298245614
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2380558262,
+        "content": "QA looking good. Please check my comment under \"old issue\" regarding formatting! Once thats in I would like to merge.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2380558262",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.392,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 81.62833333333334,
+            "syllables": 28,
+            "sentences": 3,
+            "score": 0.7837166666666665
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2381301876,
+        "content": "@gentlementlegen can you install this plugin",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381301876",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.666,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 31.545000000000016,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.7154500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2381394602,
+        "content": "You can make a separate database. We can clean house another week",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381394602",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.572,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 73.84500000000001,
+            "syllables": 18,
+            "sentences": 2,
+            "score": 0.8615499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2381437158,
+        "content": "I think just make one ubiquity-os project on your Supabase and then make new tables with the names of the plugins I guess.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381437158",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.165,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 69.67500000000004,
+            "syllables": 32,
+            "sentences": 1,
+            "score": 0.9032499999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2381439725,
+        "content": "I prefer figuring out git based storage as a \"final\" storage solution. Let's make do in a janky way with Supabase for the short term. \nIt would be extremely convenient if the plugin repositories themselves can handle everything: runtime/hosting (GitHub actions) and storage. \nMaybe some day in the future we can optimize the cold start times (i.e. compile to something that runs natively without node) to use GitHub actions in place of workers.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381439725",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 6.12,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 76,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 59.28622807017547,
+            "syllables": 121,
+            "sentences": 6,
+            "score": 0.9928622807017546
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2382155673,
+        "content": "Maybe we shouldn't redact comments in the near future. And instead have a switch for it later when/if partners ever ask. I feel like most people won't care and it will give us more data to work with for research purposes in the near future.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2382155673",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 6.048,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 48,
+            "wordValue": 0.1,
+            "result": 2.35
+          },
+          "readability": {
+            "fleschKincaid": 84.845,
+            "syllables": 60,
+            "sentences": 3,
+            "score": 0.75155
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2382242243,
+        "content": "@sshivaditya2019 do you think we should make a new task to create a script to populate our database with the issues? We have a ton of old data we can benefit from.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2382242243",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.392,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 76.91375000000001,
+            "syllables": 43,
+            "sentences": 2,
+            "score": 0.8308625
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2335710895,
+            "effect": {
+              "addition": 599,
+              "deletion": 7
+            },
+            "reward": 18.18,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 93.58 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>18.18</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.04</td></tr><tr><td>Issue</td><td>Comment</td><td>4</td><td>32.262</td></tr><tr><td>Review</td><td>Comment</td><td>12</td><td>40.098</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20\" target=\"_blank\" rel=\"noopener\">#20</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+599 -7</td><td>3</td><td>18.18</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/7\" target=\"_blank\" rel=\"noopener\">When a new task is posted to our network, UbiquityOS should reco&hellip;</a></h6></td><td><details><summary>2.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 11&#13;    ul:&#13;      score: 0&#13;      elementCount: 3&#13;    li:&#13;      score: 0.1&#13;      elementCount: 8&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0.8&#13;regex:&#13;  wordCount: 218&#13;  wordValue: 0.1&#13;  result: 1.55&#13;</pre></details></td><td>1</td><td>1</td><td>3.04</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/7#issuecomment-2354520283\" target=\"_blank\" rel=\"noopener\">First use assignees and fallback to pull author since many organ&hellip;</a></h6></td><td><details><summary>2.41</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 52&#13;  wordValue: 0.1&#13;  result: 2.41&#13;</pre></details></td><td>0.9</td><td>3</td><td>8.262</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/7#issuecomment-2357434557\" target=\"_blank\" rel=\"noopener\">Different project. Can make the spec later. I imagine we could a&hellip;</a></h6></td><td><details><summary>2.59</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 69&#13;  wordValue: 0.1&#13;  result: 2.59&#13;</pre></details></td><td>0.85</td><td>3</td><td>8.466</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/7#issuecomment-2370882520\" target=\"_blank\" rel=\"noopener\">&#96;issues.label_added&#96; is certainly supported. That is how&hellip;</a></h6></td><td><details><summary>3.6</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 101&#13;  wordValue: 0.1&#13;  result: 2.6&#13;</pre></details></td><td>0.8</td><td>3</td><td>10.704</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/7#issuecomment-2374828906\" target=\"_blank\" rel=\"noopener\">Are you using your own GitHub App? Have you correctly set the pe&hellip;</a></h6></td><td><details><summary>1.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>0.7</td><td>3</td><td>4.83</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#pullrequestreview-2335710895\" target=\"_blank\" rel=\"noopener\">Did you test this? The syntax doesn't look correct. Pretty sure &hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.248</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#discussion_r1779924312\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionconst commentLines: string[] = [\"&gt&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#discussion_r1779924489\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestioncommentLines.push(&#96;&gt; ### [$&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2374841981\" target=\"_blank\" rel=\"noopener\">I don't understand what you mean by this.Only closed as comple&hellip;</a></h6></td><td><details><summary>2.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 50&#13;  wordValue: 0.1&#13;  result: 2.38&#13;</pre></details></td><td>0.7</td><td>3</td><td>6.195</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2375036927\" target=\"_blank\" rel=\"noopener\">I'm sorry but I have little context on the \"payload object\" I ha&hellip;</a></h6></td><td><details><summary>2.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.4</td><td>3</td><td>3.3</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2380558262\" target=\"_blank\" rel=\"noopener\">QA looking good. Please check my comment under \"old issue\" regar&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.392</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381301876\" target=\"_blank\" rel=\"noopener\">@gentlementlegen can you install this plugin</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.666</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381394602\" target=\"_blank\" rel=\"noopener\">You can make a separate database. We can clean house another week</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.4</td><td>3</td><td>1.572</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381437158\" target=\"_blank\" rel=\"noopener\">I think just make one ubiquity-os project on your Supabase and t&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.5</td><td>3</td><td>3.165</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381439725\" target=\"_blank\" rel=\"noopener\">I prefer figuring out git based storage as a \"final\" storage sol&hellip;</a></h6></td><td><details><summary>2.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 76&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.6</td><td>3</td><td>6.12</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2382155673\" target=\"_blank\" rel=\"noopener\">Maybe we shouldn't redact comments in the near future. And inste&hellip;</a></h6></td><td><details><summary>2.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 48&#13;  wordValue: 0.1&#13;  result: 2.35&#13;</pre></details></td><td>0.7</td><td>3</td><td>6.048</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2382242243\" target=\"_blank\" rel=\"noopener\">@sshivaditya2019 do you think we should make a new task to creat&hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.6</td><td>3</td><td>4.392</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 84.596,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2373931399,
+        "content": "When multiple plugins are specified under a `uses` key, they will run sequentially and send their output to the following plugin.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/7#issuecomment-2373931399",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.805,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 46.94500000000005,
+            "syllables": 33,
+            "sentences": 1,
+            "score": 0.8694500000000005
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2381368988,
+        "content": "@0x4007 Is this plugin supposed to be a worker or an action? According to the readme it should be an action but no deployment script has been added here.\r\n---\r\nSince I was not sure in the meantime I set it as an Actions and I fixed the [run crashing](https://github.com/ubiquity-os-marketplace/generate-vector-embeddings/actions/runs/11093302250) [here](https://github.com/ubiquity-os-marketplace/generate-vector-embeddings/commit/3f6f5260ba1461a6456dfa2e1e0bf5d9b70b8f0c).",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381368988",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 13.694,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 50,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 85.01433333333335,
+            "syllables": 62,
+            "sentences": 3,
+            "score": 0.7498566666666665
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2381380805,
+        "content": "Added deployment scripts, last run [here](https://github.com/ubiquity-os-marketplace/generate-vector-embeddings/actions/runs/11093488654), will change to a worker in the configuration. Also fixed default values for the configuration and modified the description in the manifest to remove a reference to `ubiquibot`.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381380805",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 10.125,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 46.52386363636364,
+            "syllables": 56,
+            "sentences": 2,
+            "score": 0.8652386363636364
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2381381930,
+        "content": "Another question, I am confused by [these logs](https://github.com/ubiquity-os-marketplace/generate-vector-embeddings/actions/runs/11093507537/job/30819872800#step:5:9). Does it mean it is running properly?\r\n---\r\nError `PGRST204` seems to indicate that a column is missing, so my guess is that it is not pointing to the right database, will have a look.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381381930",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 9.576,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 41,
+            "wordValue": 0.1,
+            "result": 2.2
+          },
+          "readability": {
+            "fleschKincaid": 77.41211382113822,
+            "syllables": 56,
+            "sentences": 3,
+            "score": 0.8258788617886178
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2381384268,
+        "content": "@0x4007 I do not see a database set up on Supabase for this. Could you create an instance? I do not have the permissions to do so.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381384268",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.838,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 91.16666666666669,
+            "syllables": 34,
+            "sentences": 3,
+            "score": 0.6883333333333331
+          },
+          "multiplier": 1,
+          "relevance": 0.75
+        }
+      },
+      {
+        "id": 2381395582,
+        "content": "You mean that I should use my own credentials / API keys for this db?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381395582",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.07,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 95.93928571428573,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.6406071428571427
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2381435206,
+        "content": "I upgraded with my own credentials. Heads up that now it seems you're limited to two projects on Supabase.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381435206",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.276,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 82.47500000000001,
+            "syllables": 27,
+            "sentences": 2,
+            "score": 0.7752499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2381437685,
+        "content": "This would need a centralized migration file to keep the db up to date. Projects with dbs already have their own migration files so all projects should be merged.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381437685",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.914,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 72.51060344827589,
+            "syllables": 41,
+            "sentences": 2,
+            "score": 0.8748939655172411
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2381446174,
+        "content": "If there is an efficient way to store, access, sort and join millions of items based on a git system, this can be replaced. Vector embeddings should have a consequent size quickly. I think in the meantime each project should use their own db when possible.\r\n---\r\nThe project seems properly set up although it always fails to create entries, see this run. @sshivaditya2019 Am I doing something wrong?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381446174",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 6.338,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 68,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 73.59570588235295,
+            "syllables": 96,
+            "sentences": 5,
+            "score": 0.8640429411764705
+          },
+          "multiplier": 1,
+          "relevance": 0.65
+        }
+      },
+      {
+        "id": 2381911691,
+        "content": "So how is an issue created?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381911691",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.948,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 102.045,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2382040112,
+        "content": "Okay it does work when an issue is created, I do get new entries in the `issue_comments` table. Is `plaintext` always supposed to be `NULL`?\r\n<img width=\"289\" alt=\"image\" src=\"https://github.com/user-attachments/assets/95c86da7-f544-482a-a81d-cbd5000c9828\">\r\n<img width=\"1316\" alt=\"image\" src=\"https://github.com/user-attachments/assets/54d2df91-96b4-4c54-ab5b-659d50d602ea\">",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2382040112",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 12.572,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 34,
+            "wordValue": 0.1,
+            "result": 2.01
+          },
+          "readability": {
+            "fleschKincaid": 83.67414285714288,
+            "syllables": 74,
+            "sentences": 5,
+            "score": 0.7632585714285711
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2382122985,
+        "content": "@sshivaditya2019 It is currently running within `Workers` since I know it runs properly now, so I don't think that is the reason.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2382122985",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.045,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 61.45045454545455,
+            "syllables": 32,
+            "sentences": 1,
+            "score": 0.9854954545454545
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2382152155,
+        "content": "@sshivaditya2019 It is a private repository indeed, I forgot about the redacting of the comments, it makes sense now. I will try with a public repo.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2382152155",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.725,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 56.97846153846157,
+            "syllables": 42,
+            "sentences": 2,
+            "score": 0.9697846153846157
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2382245540,
+        "content": "I guess it would be fine to have it as an option in the configuration, because as long as not everybody can access the DB the content of private repositories cannot be read by outsiders.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2382245540",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.67,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 38.36714285714288,
+            "syllables": 55,
+            "sentences": 1,
+            "score": 0.7836714285714288
+          },
+          "multiplier": 1,
+          "relevance": 0.75
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 84.596 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>2.805</td></tr><tr><td>Review</td><td>Comment</td><td>13</td><td>81.791</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/7#issuecomment-2373931399\" target=\"_blank\" rel=\"noopener\">When multiple plugins are specified under a &#96;uses&#96; key, &hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.5</td><td>3</td><td>2.805</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381368988\" target=\"_blank\" rel=\"noopener\">@0x4007 Is this plugin supposed to be a worker or an action? Acc&hellip;</a></h6></td><td><details><summary>4.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 50&#13;  wordValue: 0.1&#13;  result: 2.38&#13;</pre></details></td><td>0.85</td><td>3</td><td>13.694</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381380805\" target=\"_blank\" rel=\"noopener\">Added deployment scripts, last run [here](https://github.com/ubi&hellip;</a></h6></td><td><details><summary>2.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.9</td><td>3</td><td>10.125</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381381930\" target=\"_blank\" rel=\"noopener\">Another question, I am confused by [these logs](https://github.c&hellip;</a></h6></td><td><details><summary>3.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 41&#13;  wordValue: 0.1&#13;  result: 2.2&#13;</pre></details></td><td>0.8</td><td>3</td><td>9.576</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381384268\" target=\"_blank\" rel=\"noopener\">@0x4007 I do not see a database set up on Supabase for this. Cou&hellip;</a></h6></td><td><details><summary>1.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>0.75</td><td>3</td><td>4.838</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381395582\" target=\"_blank\" rel=\"noopener\">You mean that I should use my own credentials / API keys for thi&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.5</td><td>3</td><td>2.07</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381435206\" target=\"_blank\" rel=\"noopener\">I upgraded with my own credentials. Heads up that now it seems y&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.6</td><td>3</td><td>3.276</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381437685\" target=\"_blank\" rel=\"noopener\">This would need a centralized migration file to keep the db up t&hellip;</a></h6></td><td><details><summary>1.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.7</td><td>3</td><td>4.914</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381446174\" target=\"_blank\" rel=\"noopener\">If there is an efficient way to store, access, sort and join mil&hellip;</a></h6></td><td><details><summary>2.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 68&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>0.65</td><td>3</td><td>6.338</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2381911691\" target=\"_blank\" rel=\"noopener\">So how is an issue created?</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.4</td><td>3</td><td>0.948</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2382040112\" target=\"_blank\" rel=\"noopener\">Okay it does work when an issue is created, I do get new entries&hellip;</a></h6></td><td><details><summary>4.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 34&#13;  wordValue: 0.1&#13;  result: 2.01&#13;</pre></details></td><td>0.85</td><td>3</td><td>12.572</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2382122985\" target=\"_blank\" rel=\"noopener\">@sshivaditya2019 It is currently running within &#96;Workers&#96&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.5</td><td>3</td><td>3.045</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2382152155\" target=\"_blank\" rel=\"noopener\">@sshivaditya2019 It is a private repository indeed, I forgot abo&hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.7</td><td>3</td><td>4.725</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/20#issuecomment-2382245540\" target=\"_blank\" rel=\"noopener\">I guess it would be fine to have it as an option in the configur&hellip;</a></h6></td><td><details><summary>2.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>0.75</td><td>3</td><td>5.67</td></tr></tbody></table></details>"
+  }
+}

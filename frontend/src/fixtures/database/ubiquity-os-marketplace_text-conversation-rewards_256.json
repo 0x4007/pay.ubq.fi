@@ -1,0 +1,359 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 16.95,
+    "task": {
+      "reward": 12,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2825507120,
+        "content": "_Originally posted by @0x4007 in [#249](https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/249#issuecomment-2629097797)_\n## Task\nWe should add some feedback in the message that a human actor should be closing the task in order to generate rewards.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/256",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.95,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "h2": {
+                "score": 1,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 54.87586206896553,
+            "syllables": 42,
+            "sentences": 1,
+            "score": 0.9487586206896553
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 16.95 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>12</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.95</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/256\" target=\"_blank\" rel=\"noopener\">_Originally posted by @0x4007 in [#249](https://github.com/ubiqu&hellip;</a></h6></td><td><details><summary>3.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    h2:&#13;      score: 1&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 2&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>1</td><td>1</td><td>4.95</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 12,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2598339629,
+        "content": "Renaming permits to rewards because we may enable automatic transfers soon, which means no more permits.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/259#pullrequestreview-2598339629",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.528,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 42.545000000000016,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.8254500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1944526220,
+        "content": "```suggestion\r\n        ? logger.warn(\"Bots can not generate rewards.\")\r\n        : logger.error(\"You are not allowed to generate rewards.\");\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/259#discussion_r1944526220",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -26,7 +26,10 @@ export async function run(context: ContextPlugin) {\n   }\n \n   if (config.incentives.collaboratorOnlyPaymentInvocation && !(await isUserAllowedToGeneratePermits(context))) {\n-    const result = logger.error(\"You are not allowed to generate permits.\");\n+    const result =\n+      payload.sender.type === \"Bot\"\n+        ? logger.warn(\"Bots can not generate permits.\")\n+        : logger.error(\"You are not allowed to generate permits.\");",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 1944526617,
+        "content": "```suggestion\r\n    expect(result).toEqual(\"Bots can not generate rewards.\");\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/259#discussion_r1944526617",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -178,6 +178,62 @@ describe(\"Pre-check tests\", () => {\n     expect(result).toEqual(\"You are not allowed to generate permits.\");\n   });\n \n+  it(\"Should post a warning message that bots cannot trigger permit generation\", async () => {\n+    jest.unstable_mockModule(\"../src/data-collection/collect-linked-pulls\", () => ({\n+      collectLinkedMergedPulls: jest.fn(() => []),\n+    }));\n+    jest.unstable_mockModule(\"@ubiquity-os/plugin-sdk\", () => ({\n+      postComment: jest.fn(),\n+    }));\n+    const { run } = await import(\"../src/run\");\n+\n+    const result = await run({\n+      eventName: \"issues.closed\",\n+      payload: {\n+        issue: {\n+          html_url: issueUrl,\n+          number: 1,\n+          state_reason: \"completed\",\n+          assignees: [\n+            {\n+              id: 1,\n+              login: \"ubiquity-os\",\n+            },\n+          ],\n+        },\n+        repository: {\n+          name: \"conversation-rewards\",\n+          owner: {\n+            login: \"ubiquity-os\",\n+            id: 76412717,\n+          },\n+        },\n+        sender: {\n+          login: \"bot-user\",\n+          type: \"Bot\",\n+        },\n+      },\n+      config: cfg,\n+      logger: new Logs(\"debug\"),\n+      octokit: {\n+        rest: {\n+          orgs: {\n+            getMembershipForUser: jest.fn(() => {\n+              throw new Error();\n+            }),\n+          },\n+          repos: {\n+            getCollaboratorPermissionLevel: jest.fn(() => {\n+              return { data: { role_name: \"read\" } };\n+            }),\n+          },\n+        },\n+      },\n+    } as unknown as ContextPlugin);\n+\n+    expect(result).toEqual(\"Bots can not generate permits.\");",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1944527033,
+        "content": "```suggestion\r\n    expect(result).toEqual(\"You are not allowed to generate rewards.\");\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/259#discussion_r1944527033",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -178,6 +178,62 @@ describe(\"Pre-check tests\", () => {\n     expect(result).toEqual(\"You are not allowed to generate permits.\");",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1944527270,
+        "content": "```suggestion\r\n  it(\"Should post a warning message that bots cannot trigger reward generation\", async () => {\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/259#discussion_r1944527270",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -178,6 +178,62 @@ describe(\"Pre-check tests\", () => {\n     expect(result).toEqual(\"You are not allowed to generate permits.\");\n   });\n \n+  it(\"Should post a warning message that bots cannot trigger permit generation\", async () => {",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1944527569,
+        "content": "```suggestion\r\n  it(\"Should deny a user to generate rewards if non-admin and allow admins\", async () => {\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/259#discussion_r1944527569",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -178,6 +178,62 @@ describe(\"Pre-check tests\", () => {\n     expect(result).toEqual(\"You are not allowed to generate permits.\");\n   });\n \n+  it(\"Should post a warning message that bots cannot trigger permit generation\", async () => {\n+    jest.unstable_mockModule(\"../src/data-collection/collect-linked-pulls\", () => ({\n+      collectLinkedMergedPulls: jest.fn(() => []),\n+    }));\n+    jest.unstable_mockModule(\"@ubiquity-os/plugin-sdk\", () => ({\n+      postComment: jest.fn(),\n+    }));\n+    const { run } = await import(\"../src/run\");\n+\n+    const result = await run({\n+      eventName: \"issues.closed\",\n+      payload: {\n+        issue: {\n+          html_url: issueUrl,\n+          number: 1,\n+          state_reason: \"completed\",\n+          assignees: [\n+            {\n+              id: 1,\n+              login: \"ubiquity-os\",\n+            },\n+          ],\n+        },\n+        repository: {\n+          name: \"conversation-rewards\",\n+          owner: {\n+            login: \"ubiquity-os\",\n+            id: 76412717,\n+          },\n+        },\n+        sender: {\n+          login: \"bot-user\",\n+          type: \"Bot\",\n+        },\n+      },\n+      config: cfg,\n+      logger: new Logs(\"debug\"),\n+      octokit: {\n+        rest: {\n+          orgs: {\n+            getMembershipForUser: jest.fn(() => {\n+              throw new Error();\n+            }),\n+          },\n+          repos: {\n+            getCollaboratorPermissionLevel: jest.fn(() => {\n+              return { data: { role_name: \"read\" } };\n+            }),\n+          },\n+        },\n+      },\n+    } as unknown as ContextPlugin);\n+\n+    expect(result).toEqual(\"Bots can not generate permits.\");\n+  });\n+\n   it(\"Should deny a user to generate permits if non-admin and allow admins\", async () => {",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1944530412,
+        "content": "It might be worth renaming our methods to rewards instead of permits if we actually do end up changing to \"transfer first\" style reward distribution.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/259#discussion_r1944530412",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -26,7 +26,10 @@ export async function run(context: ContextPlugin) {\n   }\n \n   if (config.incentives.collaboratorOnlyPaymentInvocation && !(await isUserAllowedToGeneratePermits(context))) {",
+        "score": {
+          "reward": 3.638,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 46.10000000000002,
+            "syllables": 40,
+            "sentences": 1,
+            "score": 0.8610000000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2636943731,
+        "content": "Why a note and not a warning? Is this a strict adherence to the 1xx, 2xx, ..., 5xx error code methodology?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/259#issuecomment-2636943731",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.196,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 81.62833333333334,
+            "syllables": 28,
+            "sentences": 3,
+            "score": 0.7837166666666665
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2637816295,
+        "content": "Maybe a 4xx class error. Whatever we decided to use for that. It's almost like a 403 forbidden perhaps.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/259#issuecomment-2637816295",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.562,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 81.62833333333334,
+            "syllables": 28,
+            "sentences": 3,
+            "score": 0.7837166666666665
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2598339629,
+            "effect": {
+              "addition": 64,
+              "deletion": 5
+            },
+            "reward": 1.38,
+            "priority": 2
+          },
+          {
+            "reviewId": 2598346244,
+            "effect": {
+              "addition": 6,
+              "deletion": 6
+            },
+            "reward": 0.24,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/259"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 12 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>1.62</td></tr><tr><td>Review</td><td>Comment</td><td>9</td><td>10.924</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/259\" target=\"_blank\" rel=\"noopener\">#259</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+64 -5</td><td>2</td><td>1.38</td></tr><tr><td>+6 -6</td><td>2</td><td>0.24</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/259#pullrequestreview-2598339629\" target=\"_blank\" rel=\"noopener\">Renaming permits to rewards because we may enable automatic tran&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.8</td><td>2</td><td>2.528</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/259#discussion_r1944526220\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion? logger.warn(\"Bots can not g&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.95</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/259#discussion_r1944526617\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionexpect(result).toEqual(\"Bots can &hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.85</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/259#discussion_r1944527033\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionexpect(result).toEqual(\"You are n&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/259#discussion_r1944527270\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionit(\"Should post a warning message t&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/259#discussion_r1944527569\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionit(\"Should deny a user to generate &hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/259#discussion_r1944530412\" target=\"_blank\" rel=\"noopener\">It might be worth renaming our methods to rewards instead of per&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.85</td><td>2</td><td>3.638</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/259#issuecomment-2636943731\" target=\"_blank\" rel=\"noopener\">Why a note and not a warning? Is this a strict adherence to the &hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.6</td><td>2</td><td>2.196</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/259#issuecomment-2637816295\" target=\"_blank\" rel=\"noopener\">Maybe a 4xx class error. Whatever we decided to use for that. It&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.7</td><td>2</td><td>2.562</td></tr></tbody></table></details>"
+  }
+}

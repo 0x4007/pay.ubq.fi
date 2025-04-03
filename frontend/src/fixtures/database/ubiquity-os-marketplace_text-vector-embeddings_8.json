@@ -1,0 +1,2445 @@
+{
+  "shiv810": {
+    "userId": 53160903,
+    "total": 241.623,
+    "task": {
+      "reward": 200,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2336919238,
+        "content": "@0x4007 would plaintext include issue body as well or would it just be comment body?\nSo, right now if there's a private repository then the plaintext would become 'CENSORED'. Is that fine?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2336919238",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.232,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 75.17909090909093,
+            "syllables": 47,
+            "sentences": 3,
+            "score": 0.8482090909090907
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2337212031,
+        "content": "So, plaintext's value would issue body + comment body, or do we require a separate column, if that's the case then how should the embedding value be found? Is it just comment body or is it comment body + issue body.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2337212031",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.698,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 41,
+            "wordValue": 0.1,
+            "result": 2.2
+          },
+          "readability": {
+            "fleschKincaid": 62.22262195121952,
+            "syllables": 60,
+            "sentences": 2,
+            "score": 0.9777737804878047
+          },
+          "multiplier": 0.25,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2337324156,
+        "content": "Case 1: Issue Body + Comment Body:\r\n- Only one vector index for `Issue Body + Comment Body`\r\n- Might support vector search if we want to search for comments or issues alone.\r\n- Uses: Relevance of the comment to the issue body, Text Based Searching using LIKE\r\nCase 2: Issue Body and Comment Body Separate columns:\r\n- Multiple Vector index required for vector search, as we want to support vector search by issue and comment text\r\n- Multiple Columns (Might not be bad?)\r\n- Uses: TLDR comments, comments/issue based vector search\r\nIf having two separate embeddings is acceptable, then that's fine. According to the issue's specification, the desired schema was `id, created_at, modified_at, author_id, plaintext, embedding`.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2337324156",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 3.636,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 9
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 6
+              }
+            },
+            "result": 0.6
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 102,
+            "wordValue": 0.1,
+            "result": 2.6
+          },
+          "readability": {
+            "fleschKincaid": 46.58779411764709,
+            "syllables": 162,
+            "sentences": 4,
+            "score": 0.8658779411764709
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2337437016,
+        "content": "Just to be clear, what is plaintext in your schema ?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2337437016",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.918,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 95.165,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.64835
+          },
+          "multiplier": 0.25,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2338271917,
+        "content": "I'll give an example of plaintext let me know if this right ?\r\n```\r\n## Issue #1: Sample Issue with Replies\r\nThis is the body of the first issue.\r\n### Comment by user1:\r\nThis is the first comment on issue #1.\r\n#### Reply by user2:\r\nThis is a reply to the first comment by user1.\r\n#### Reply by user3:\r\nThis is another reply to the first comment by user1.\r\n### Comment by user4:\r\nThis is a second comment on issue #1.\r\n```\r\nIs this right ? If not could you please give an example. I am not sure what you mean by ` source code of the markdown of the comments`.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2338271917",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.016,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 100.89625000000001,
+            "syllables": 37,
+            "sentences": 4,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2338352210,
+        "content": "To clarify, the example I shared involves a single embedding/vector. Currently, this means that a new text corpus(markdown I shared before) will be created for each new issue, and additional comments will be added to that corpus.\r\nCurrently, we create a new record for each comment and generate an embedding for each one. This approach won't work with the issuededup or Assistant plan you have.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2338352210",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.49,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 68,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 62.68000000000002,
+            "syllables": 102,
+            "sentences": 4,
+            "score": 0.9731999999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.75
+        }
+      },
+      {
+        "id": 2338358655,
+        "content": "So, to clarify, should the embedding be created per comment while the plaintext contains the entire markdown syntax I mentioned earlier? Is that the correct approach?\r\nI don't think this will work as intended. We need either the comments with their embeddings or the text corpus (markdown) with its embeddings. Please let me know if I've misunderstood anything.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2338358655",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.56,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 60,
+            "wordValue": 0.1,
+            "result": 2.52
+          },
+          "readability": {
+            "fleschKincaid": 69.165,
+            "syllables": 89,
+            "sentences": 5,
+            "score": 0.90835
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2338378668,
+        "content": "An alternative approach would be to store each piece of text from issues/comments as separate entities and associate them with their respective node IDs. This would create a large text corpus containing all the content from the organization, which could be identified by a global node ID or by using a type column in the schema.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2338378668",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.686,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 57,
+            "wordValue": 0.1,
+            "result": 2.48
+          },
+          "readability": {
+            "fleschKincaid": 50.26539473684211,
+            "syllables": 86,
+            "sentences": 2,
+            "score": 0.9026539473684211
+          },
+          "multiplier": 0.25,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2338382209,
+        "content": "To clarify, we don’t provide embeddings directly to the LLM. Instead, we perform a vector or similarity search, apply a ranking technique, and then extract text values that are most relevant to the search subject. This extracted text is then used as context for the LLM.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2338382209",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.4,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 47,
+            "wordValue": 0.1,
+            "result": 2.33
+          },
+          "readability": {
+            "fleschKincaid": 61.33333333333334,
+            "syllables": 72,
+            "sentences": 3,
+            "score": 0.9866666666666666
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2340949138,
+        "content": "@0x4007 \r\nHi, could you update me on the final database schema? I believe that the global node ID and type should be sufficient. Other parameters might not be relevant to the embedding text corpus and could end up being more of a log dump.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2340949138",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.592,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 44,
+            "wordValue": 0.1,
+            "result": 2.27
+          },
+          "readability": {
+            "fleschKincaid": 72.73924242424245,
+            "syllables": 62,
+            "sentences": 3,
+            "score": 0.8726075757575755
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2340955981,
+        "content": "I can probably write a new adapter for them, but I think their free tier has only 3 RPM (Request per minute), but offer 50M free tokens for new accounts to use ?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2340955981",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.512,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 63.317500000000024,
+            "syllables": 42,
+            "sentences": 1,
+            "score": 0.9668249999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2341577340,
+        "content": "So, if we add a payment method, the requests per minute can be increased. I have updated the plugin for support with voyageai",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2341577340",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.224,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 70.10163043478265,
+            "syllables": 34,
+            "sentences": 2,
+            "score": 0.8989836956521735
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2342399738,
+        "content": "@0x4007 \r\nI've added my payment method. Please delete this information immediately just to be safe or share it through another platform, like Telegram.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342399738",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.648,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 57.18000000000001,
+            "syllables": 39,
+            "sentences": 2,
+            "score": 0.9718000000000001
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2342408725,
+        "content": "So, the final schema would be `Id (GlobalNodeId), plaintext(text from the comment),createdAt, ModifiedAt, embedding`\r\nand this entire thing as a serialized object\r\n```typescript \r\ntype Comment = {\r\n        /**\r\n         * AuthorAssociation\r\n         * @description How the author is associated with the repository.\r\n         * @enum {string}\r\n         */\r\n        author_association:\r\n          | \"COLLABORATOR\"\r\n          | \"CONTRIBUTOR\"\r\n          | \"FIRST_TIMER\"\r\n          | \"FIRST_TIME_CONTRIBUTOR\"\r\n          | \"MANNEQUIN\"\r\n          | \"MEMBER\"\r\n          | \"NONE\"\r\n          | \"OWNER\";\r\n        /** @description Contents of the issue comment */\r\n        body: string;\r\n        /** Format: date-time */\r\n        created_at: string;\r\n        /** Format: uri */\r\n        html_url: string;\r\n        /**\r\n         * Format: int64\r\n         * @description Unique identifier of the issue comment\r\n         */\r\n        id: number;\r\n        /** Format: uri */\r\n        issue_url: string;\r\n        node_id: string;\r\n        performed_via_github_app: null | components[\"schemas\"][\"integration\"];\r\n        /** Reactions */\r\n        reactions: {\r\n          \"+1\": number;\r\n          \"-1\": number;\r\n          confused: number;\r\n          eyes: number;\r\n          heart: number;\r\n          hooray: number;\r\n          laugh: number;\r\n          rocket: number;\r\n          total_count: number;\r\n          /** Format: uri */\r\n          url: string;\r\n        };\r\n        /** Format: date-time */\r\n        updated_at: string;\r\n        /**\r\n         * Format: uri\r\n         * @description URL for the issue comment\r\n         */\r\n        url: string;\r\n        /** User */\r\n        user: {\r\n          /** Format: uri */\r\n          avatar_url?: string;\r\n          deleted?: boolean;\r\n          email?: string | null;\r\n          /** Format: uri-template */\r\n          events_url?: string;\r\n          /** Format: uri */\r\n          followers_url?: string;\r\n          /** Format: uri-template */\r\n          following_url?: string;\r\n          /** Format: uri-template */\r\n          gists_url?: string;\r\n          gravatar_id?: string;\r\n          /** Format: uri */\r\n          html_url?: string;\r\n          id: number;\r\n          login: string;\r\n          name?: string;\r\n          node_id?: string;\r\n          /** Format: uri */\r\n          organizations_url?: string;\r\n          /** Format: uri */\r\n          received_events_url?: string;\r\n          /** Format: uri */\r\n          repos_url?: string;\r\n          site_admin?: boolean;\r\n          /** Format: uri-template */\r\n          starred_url?: string;\r\n          /** Format: uri */\r\n          subscriptions_url?: string;\r\n          /** @enum {string} */\r\n          type?: \"Bot\" | \"User\" | \"Organization\";\r\n          /** Format: uri */\r\n          url?: string;\r\n        } | null;\r\n      };\r\n```\r\nIs this schema fine, or is there anything else to be added or removed ?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342408725",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.204,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 63.600714285714304,
+            "syllables": 38,
+            "sentences": 1,
+            "score": 0.963992857142857
+          },
+          "multiplier": 0.25,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2342418843,
+        "content": "I took this from octokit's type definition. I think reactions should be kept, as it could be a metric of engagement for comments with abnormally low relevance.\r\nAlso, should the created_at in the schema be referenced from the comment or when the actual record was created.\r\nThis is the entire dump of the webhook event\r\n```\r\n/** issue_comment created event */\r\n    \"webhook-issue-comment-created\": {\r\n      /** @enum {string} */\r\n      action: \"created\";\r\n      /**\r\n       * issue comment\r\n       * @description The [comment](https://docs.github.com/rest/issues/comments#get-an-issue-comment) itself.\r\n       */\r\n      comment: {\r\n        /**\r\n         * AuthorAssociation\r\n         * @description How the author is associated with the repository.\r\n         * @enum {string}\r\n         */\r\n        author_association:\r\n          | \"COLLABORATOR\"\r\n          | \"CONTRIBUTOR\"\r\n          | \"FIRST_TIMER\"\r\n          | \"FIRST_TIME_CONTRIBUTOR\"\r\n          | \"MANNEQUIN\"\r\n          | \"MEMBER\"\r\n          | \"NONE\"\r\n          | \"OWNER\";\r\n        /** @description Contents of the issue comment */\r\n        body: string;\r\n        /** Format: date-time */\r\n        created_at: string;\r\n        /** Format: uri */\r\n        html_url: string;\r\n        /**\r\n         * Format: int64\r\n         * @description Unique identifier of the issue comment\r\n         */\r\n        id: number;\r\n        /** Format: uri */\r\n        issue_url: string;\r\n        node_id: string;\r\n        performed_via_github_app: null | components[\"schemas\"][\"integration\"];\r\n        /** Reactions */\r\n        reactions: {\r\n          \"+1\": number;\r\n          \"-1\": number;\r\n          confused: number;\r\n          eyes: number;\r\n          heart: number;\r\n          hooray: number;\r\n          laugh: number;\r\n          rocket: number;\r\n          total_count: number;\r\n          /** Format: uri */\r\n          url: string;\r\n        };\r\n        /** Format: date-time */\r\n        updated_at: string;\r\n        /**\r\n         * Format: uri\r\n         * @description URL for the issue comment\r\n         */\r\n        url: string;\r\n        /** User */\r\n        user: {\r\n          /** Format: uri */\r\n          avatar_url?: string;\r\n          deleted?: boolean;\r\n          email?: string | null;\r\n          /** Format: uri-template */\r\n          events_url?: string;\r\n          /** Format: uri */\r\n          followers_url?: string;\r\n          /** Format: uri-template */\r\n          following_url?: string;\r\n          /** Format: uri-template */\r\n          gists_url?: string;\r\n          gravatar_id?: string;\r\n          /** Format: uri */\r\n          html_url?: string;\r\n          id: number;\r\n          login: string;\r\n          name?: string;\r\n          node_id?: string;\r\n          /** Format: uri */\r\n          organizations_url?: string;\r\n          /** Format: uri */\r\n          received_events_url?: string;\r\n          /** Format: uri */\r\n          repos_url?: string;\r\n          site_admin?: boolean;\r\n          /** Format: uri-template */\r\n          starred_url?: string;\r\n          /** Format: uri */\r\n          subscriptions_url?: string;\r\n          /** @enum {string} */\r\n          type?: \"Bot\" | \"User\" | \"Organization\";\r\n          /** Format: uri */\r\n          url?: string;\r\n        } | null;\r\n      };\r\n      installation?: components[\"schemas\"][\"simple-installation\"];\r\n      /** @description The [issue](https://docs.github.com/rest/issues/issues#get-an-issue) the comment belongs to. */\r\n      issue: {\r\n        /** @enum {string|null} */\r\n        active_lock_reason:\r\n          | \"resolved\"\r\n          | \"off-topic\"\r\n          | \"too heated\"\r\n          | \"spam\"\r\n          | null;\r\n        /** User */\r\n        assignee?: {\r\n          /** Format: uri */\r\n          avatar_url?: string;\r\n          deleted?: boolean;\r\n          email?: string | null;\r\n          /** Format: uri-template */\r\n          events_url?: string;\r\n          /** Format: uri */\r\n          followers_url?: string;\r\n          /** Format: uri-template */\r\n          following_url?: string;\r\n          /** Format: uri-template */\r\n          gists_url?: string;\r\n          gravatar_id?: string;\r\n          /** Format: uri */\r\n          html_url?: string;\r\n          id: number;\r\n          login: string;\r\n          name?: string;\r\n          node_id?: string;\r\n          /** Format: uri */\r\n          organizations_url?: string;\r\n          /** Format: uri */\r\n          received_events_url?: string;\r\n          /** Format: uri */\r\n          repos_url?: string;\r\n          site_admin?: boolean;\r\n          /** Format: uri-template */\r\n          starred_url?: string;\r\n          /** Format: uri */\r\n          subscriptions_url?: string;\r\n          /** @enum {string} */\r\n          type?: \"Bot\" | \"User\" | \"Organization\" | \"Mannequin\";\r\n          /** Format: uri */\r\n          url?: string;\r\n        } | null;\r\n        assignees: ({\r\n          /** Format: uri */\r\n          avatar_url?: string;\r\n          deleted?: boolean;\r\n          email?: string | null;\r\n          /** Format: uri-template */\r\n          events_url?: string;\r\n          /** Format: uri */\r\n          followers_url?: string;\r\n          /** Format: uri-template */\r\n          following_url?: string;\r\n          /** Format: uri-template */\r\n          gists_url?: string;\r\n          gravatar_id?: string;\r\n          /** Format: uri */\r\n          html_url?: string;\r\n          id: number;\r\n          login: string;\r\n          name?: string;\r\n          node_id?: string;\r\n          /** Format: uri */\r\n          organizations_url?: string;\r\n          /** Format: uri */\r\n          received_events_url?: string;\r\n          /** Format: uri */\r\n          repos_url?: string;\r\n          site_admin?: boolean;\r\n          /** Format: uri-template */\r\n          starred_url?: string;\r\n          /** Format: uri */\r\n          subscriptions_url?: string;\r\n          /** @enum {string} */\r\n          type?: \"Bot\" | \"User\" | \"Organization\" | \"Mannequin\";\r\n          /** Format: uri */\r\n          url?: string;\r\n        } | null)[];\r\n        /**\r\n         * AuthorAssociation\r\n         * @description How the author is associated with the repository.\r\n         * @enum {string}\r\n         */\r\n        author_association:\r\n          | \"COLLABORATOR\"\r\n          | \"CONTRIBUTOR\"\r\n          | \"FIRST_TIMER\"\r\n          | \"FIRST_TIME_CONTRIBUTOR\"\r\n          | \"MANNEQUIN\"\r\n          | \"MEMBER\"\r\n          | \"NONE\"\r\n          | \"OWNER\";\r\n        /** @description Contents of the issue */\r\n        body: string | null;\r\n        /** Format: date-time */\r\n        closed_at: string | null;\r\n        comments: number;\r\n        /** Format: uri */\r\n        comments_url: string;\r\n        /** Format: date-time */\r\n        created_at: string;\r\n        draft?: boolean;\r\n        /** Format: uri */\r\n        events_url: string;\r\n        /** Format: uri */\r\n        html_url: string;\r\n        /** Format: int64 */\r\n        id: number;\r\n        labels?: {\r\n          /** @description 6-character hex code, without the leading #, identifying the color */\r\n          color: string;\r\n          default: boolean;\r\n          description: string | null;\r\n          id: number;\r\n          /** @description The name of the label. */\r\n          name: string;\r\n          node_id: string;\r\n          /**\r\n           * Format: uri\r\n           * @description URL for the label\r\n           */\r\n          url: string;\r\n        }[];\r\n        /** Format: uri-template */\r\n        labels_url: string;\r\n        locked?: boolean;\r\n        /**\r\n         * Milestone\r\n         * @description A collection of related issues and pull requests.\r\n         */\r\n        milestone: {\r\n          /** Format: date-time */\r\n          closed_at: string | null;\r\n          closed_issues: number;\r\n          /** Format: date-time */\r\n          created_at: string;\r\n          /** User */\r\n          creator: {\r\n            /** Format: uri */\r\n            avatar_url?: string;\r\n            deleted?: boolean;\r\n            email?: string | null;\r\n            /** Format: uri-template */\r\n            events_url?: string;\r\n            /** Format: uri */\r\n            followers_url?: string;\r\n            /** Format: uri-template */\r\n            following_url?: string;\r\n            /** Format: uri-template */\r\n            gists_url?: string;\r\n            gravatar_id?: string;\r\n            /** Format: uri */\r\n            html_url?: string;\r\n            id: number;\r\n            login: string;\r\n            name?: string;\r\n            node_id?: string;\r\n            /** Format: uri */\r\n            organizations_url?: string;\r\n            /** Format: uri */\r\n            received_events_url?: string;\r\n            /** Format: uri */\r\n            repos_url?: string;\r\n            site_admin?: boolean;\r\n            /** Format: uri-template */\r\n            starred_url?: string;\r\n            /** Format: uri */\r\n            subscriptions_url?: string;\r\n            /** @enum {string} */\r\n            type?: \"Bot\" | \"User\" | \"Organization\" | \"Mannequin\";\r\n            /** Format: uri */\r\n            url?: string;\r\n          } | null;\r\n          description: string | null;\r\n          /** Format: date-time */\r\n          due_on: string | null;\r\n          /** Format: uri */\r\n          html_url: string;\r\n          id: number;\r\n          /** Format: uri */\r\n          labels_url: string;\r\n          node_id: string;\r\n          /** @description The number of the milestone. */\r\n          number: number;\r\n          open_issues: number;\r\n          /**\r\n           * @description The state of the milestone.\r\n           * @enum {string}\r\n           */\r\n          state: \"open\" | \"closed\";\r\n          /** @description The title of the milestone. */\r\n          title: string;\r\n          /** Format: date-time */\r\n          updated_at: string;\r\n          /** Format: uri */\r\n          url: string;\r\n        } | null;\r\n        node_id: string;\r\n        number: number;\r\n        /**\r\n         * App\r\n         * @description GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.\r\n         */\r\n        performed_via_github_app?: {\r\n          /** Format: date-time */\r\n          created_at: string | null;\r\n          description: string | null;\r\n          /** @description The list of events for the GitHub app */\r\n          events?: (\r\n            | \"branch_protection_rule\"\r\n            | \"check_run\"\r\n            | \"check_suite\"\r\n            | \"code_scanning_alert\"\r\n            | \"commit_comment\"\r\n            | \"content_reference\"\r\n            | \"create\"\r\n            | \"delete\"\r\n            | \"deployment\"\r\n            | \"deployment_review\"\r\n            | \"deployment_status\"\r\n            | \"deploy_key\"\r\n            | \"discussion\"\r\n            | \"discussion_comment\"\r\n            | \"fork\"\r\n            | \"gollum\"\r\n            | \"issues\"\r\n            | \"issue_comment\"\r\n            | \"label\"\r\n            | \"member\"\r\n            | \"membership\"\r\n            | \"milestone\"\r\n            | \"organization\"\r\n            | \"org_block\"\r\n            | \"page_build\"\r\n            | \"project\"\r\n            | \"project_card\"\r\n            | \"project_column\"\r\n            | \"public\"\r\n            | \"pull_request\"\r\n            | \"pull_request_review\"\r\n            | \"pull_request_review_comment\"\r\n            | \"push\"\r\n            | \"registry_package\"\r\n            | \"release\"\r\n            | \"repository\"\r\n            | \"repository_dispatch\"\r\n            | \"secret_scanning_alert\"\r\n            | \"star\"\r\n            | \"status\"\r\n            | \"team\"\r\n            | \"team_add\"\r\n            | \"watch\"\r\n            | \"workflow_dispatch\"\r\n            | \"workflow_run\"\r\n            | \"reminder\"\r\n            | \"pull_request_review_thread\"\r\n          )[];\r\n          /** Format: uri */\r\n          external_url: string | null;\r\n          /** Format: uri */\r\n          html_url: string;\r\n          /** @description Unique identifier of the GitHub app */\r\n          id: number | null;\r\n          /** @description The name of the GitHub app */\r\n          name: string;\r\n          node_id: string;\r\n          /** User */\r\n          owner: {\r\n            /** Format: uri */\r\n            avatar_url?: string;\r\n            deleted?: boolean;\r\n            email?: string | null;\r\n            /** Format: uri-template */\r\n            events_url?: string;\r\n            /** Format: uri */\r\n            followers_url?: string;\r\n            /** Format: uri-template */\r\n            following_url?: string;\r\n            /** Format: uri-template */\r\n            gists_url?: string;\r\n            gravatar_id?: string;\r\n            /** Format: uri */\r\n            html_url?: string;\r\n            id: number;\r\n            login: string;\r\n            name?: string;\r\n            node_id?: string;\r\n            /** Format: uri */\r\n            organizations_url?: string;\r\n            /** Format: uri */\r\n            received_events_url?: string;\r\n            /** Format: uri */\r\n            repos_url?: string;\r\n            site_admin?: boolean;\r\n            /** Format: uri-template */\r\n            starred_url?: string;\r\n            /** Format: uri */\r\n            subscriptions_url?: string;\r\n            /** @enum {string} */\r\n            type?: \"Bot\" | \"User\" | \"Organization\";\r\n            /** Format: uri */\r\n            url?: string;\r\n          } | null;\r\n          /** @description The set of permissions for the GitHub app */\r\n          permissions?: {\r\n            /** @enum {string} */\r\n            actions?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            administration?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            checks?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            content_references?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            contents?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            deployments?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            discussions?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            emails?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            environments?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            issues?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            keys?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            members?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            metadata?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            organization_administration?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            organization_hooks?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            organization_packages?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            organization_plan?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            organization_projects?: \"read\" | \"write\" | \"admin\";\r\n            /** @enum {string} */\r\n            organization_secrets?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            organization_self_hosted_runners?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            organization_user_blocking?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            packages?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            pages?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            pull_requests?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            repository_hooks?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            repository_projects?: \"read\" | \"write\" | \"admin\";\r\n            /** @enum {string} */\r\n            secret_scanning_alerts?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            secrets?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            security_events?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            security_scanning_alert?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            single_file?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            statuses?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            team_discussions?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            vulnerability_alerts?: \"read\" | \"write\";\r\n            /** @enum {string} */\r\n            workflows?: \"read\" | \"write\";\r\n          };\r\n          /** @description The slug name of the GitHub app */\r\n          slug?: string;\r\n          /** Format: date-time */\r\n          updated_at: string | null;\r\n        } | null;\r\n        pull_request?: {\r\n          /** Format: uri */\r\n          diff_url?: string;\r\n          /** Format: uri */\r\n          html_url?: string;\r\n          /** Format: date-time */\r\n          merged_at?: string | null;\r\n          /** Format: uri */\r\n          patch_url?: string;\r\n          /** Format: uri */\r\n          url?: string;\r\n        };\r\n        /** Reactions */\r\n        reactions: {\r\n          \"+1\": number;\r\n          \"-1\": number;\r\n          confused: number;\r\n          eyes: number;\r\n          heart: number;\r\n          hooray: number;\r\n          laugh: number;\r\n          rocket: number;\r\n          total_count: number;\r\n          /** Format: uri */\r\n          url: string;\r\n        };\r\n        /** Format: uri */\r\n        repository_url: string;\r\n        /**\r\n         * @description State of the issue; either 'open' or 'closed'\r\n         * @enum {string}\r\n         */\r\n        state?: \"open\" | \"closed\";\r\n        state_reason?: string | null;\r\n        /** Format: uri */\r\n        timeline_url?: string;\r\n        /** @description Title of the issue */\r\n        title: string;\r\n        /** Format: date-time */\r\n        updated_at: string;\r\n        /**\r\n         * Format: uri\r\n         * @description URL for the issue\r\n         */\r\n        url: string;\r\n        /** User */\r\n        user: {\r\n          /** Format: uri */\r\n          avatar_url?: string;\r\n          deleted?: boolean;\r\n          email?: string | null;\r\n          /** Format: uri-template */\r\n          events_url?: string;\r\n          /** Format: uri */\r\n          followers_url?: string;\r\n          /** Format: uri-template */\r\n          following_url?: string;\r\n          /** Format: uri-template */\r\n          gists_url?: string;\r\n          gravatar_id?: string;\r\n          /** Format: uri */\r\n          html_url?: string;\r\n          id: number;\r\n          login: string;\r\n          name?: string;\r\n          node_id?: string;\r\n          /** Format: uri */\r\n          organizations_url?: string;\r\n          /** Format: uri */\r\n          received_events_url?: string;\r\n          /** Format: uri */\r\n          repos_url?: string;\r\n          site_admin?: boolean;\r\n          /** Format: uri-template */\r\n          starred_url?: string;\r\n          /** Format: uri */\r\n          subscriptions_url?: string;\r\n          /** @enum {string} */\r\n          type?: \"Bot\" | \"User\" | \"Organization\" | \"Mannequin\";\r\n          /** Format: uri */\r\n          url?: string;\r\n        } | null;\r\n      } & {\r\n        active_lock_reason?: string | null;\r\n        /** User */\r\n        assignee: {\r\n          /** Format: uri */\r\n          avatar_url?: string;\r\n          deleted?: boolean;\r\n          email?: string | null;\r\n          /** Format: uri-template */\r\n          events_url?: string;\r\n          /** Format: uri */\r\n          followers_url?: string;\r\n          /** Format: uri-template */\r\n          following_url?: string;\r\n          /** Format: uri-template */\r\n          gists_url?: string;\r\n          gravatar_id?: string;\r\n          /** Format: uri */\r\n          html_url?: string;\r\n          id: number;\r\n          login: string;\r\n          name?: string;\r\n          node_id?: string;\r\n          /** Format: uri */\r\n          organizations_url?: string;\r\n          /** Format: uri */\r\n          received_events_url?: string;\r\n          /** Format: uri */\r\n          repos_url?: string;\r\n          site_admin?: boolean;\r\n          /** Format: uri-template */\r\n          starred_url?: string;\r\n          /** Format: uri */\r\n          subscriptions_url?: string;\r\n          /** @enum {string} */\r\n          type?: \"Bot\" | \"User\" | \"Organization\" | \"Mannequin\";\r\n          /** Format: uri */\r\n          url?: string;\r\n        } | null;\r\n        assignees?: (Record<string, never> | null)[];\r\n        author_association?: string;\r\n        body?: string | null;\r\n        closed_at?: string | null;\r\n        comments?: number;\r\n        comments_url?: string;\r\n        created_at?: string;\r\n        events_url?: string;\r\n        html_url?: string;\r\n        id?: number;\r\n        labels: {\r\n          /** @description 6-character hex code, without the leading #, identifying the color */\r\n          color: string;\r\n          default: boolean;\r\n          description: string | null;\r\n          id: number;\r\n          /** @description The name of the label. */\r\n          name: string;\r\n          node_id: string;\r\n          /**\r\n           * Format: uri\r\n           * @description URL for the label\r\n           */\r\n          url: string;\r\n        }[];\r\n        labels_url?: string;\r\n        locked: boolean;\r\n        milestone?: Record<string, never> | null;\r\n        node_id?: string;\r\n        number?: number;\r\n        performed_via_github_app?: Record<string, never> | null;\r\n        reactions?: {\r\n          \"+1\"?: number;\r\n          \"-1\"?: number;\r\n          confused?: number;\r\n          eyes?: number;\r\n          heart?: number;\r\n          hooray?: number;\r\n          laugh?: number;\r\n          rocket?: number;\r\n          total_count?: number;\r\n          url?: string;\r\n        };\r\n        repository_url?: string;\r\n        /**\r\n         * @description State of the issue; either 'open' or 'closed'\r\n         * @enum {string}\r\n         */\r\n        state: \"open\" | \"closed\";\r\n        timeline_url?: string;\r\n        title?: string;\r\n        updated_at?: string;\r\n        url?: string;\r\n        user?: {\r\n          avatar_url?: string;\r\n          events_url?: string;\r\n          followers_url?: string;\r\n          following_url?: string;\r\n          gists_url?: string;\r\n          gravatar_id?: string;\r\n          html_url?: string;\r\n          id?: number;\r\n          login?: string;\r\n          node_id?: string;\r\n          organizations_url?: string;\r\n          received_events_url?: string;\r\n          repos_url?: string;\r\n          site_admin?: boolean;\r\n          starred_url?: string;\r\n          subscriptions_url?: string;\r\n          type?: string;\r\n          url?: string;\r\n        };\r\n      };\r\n      organization?: components[\"schemas\"][\"organization-simple-webhooks\"];\r\n      repository: components[\"schemas\"][\"repository-webhooks\"];\r\n      sender: components[\"schemas\"][\"simple-user-webhooks\"];\r\n    };\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342418843",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.686,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 56,
+            "wordValue": 0.1,
+            "result": 2.47
+          },
+          "readability": {
+            "fleschKincaid": 65.72500000000001,
+            "syllables": 84,
+            "sentences": 4,
+            "score": 0.9427499999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2342425654,
+        "content": "If we are not going to be using relations and other sql things, we can try with mongoDB or any other document based db ?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342425654",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.378,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 69.67500000000004,
+            "syllables": 32,
+            "sentences": 1,
+            "score": 0.9032499999999996
+          },
+          "multiplier": 0.25,
+          "relevance": 0.65
+        }
+      },
+      {
+        "id": 2342463922,
+        "content": "It should be better. I am skeptical about storing serialized comment objects in Postgres database. It should not affect the performance though.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342463922",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.224,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 60.95530303030304,
+            "syllables": 36,
+            "sentences": 3,
+            "score": 0.9904469696969695
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2342644702,
+        "content": "that would depend on the onboarding, if onboarding involves explaining the current tickets and comments and the work that's going on, this schema would be enough.\r\nIf we want to explain the code and other things, for them we do not need embeddings. For General Q&A this should be enough. We could further expand this by adding OpenAI functions, to query the repo based on the serialized object retrieved using vector search.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342644702",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.352,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 74,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 64.58722972972974,
+            "syllables": 108,
+            "sentences": 4,
+            "score": 0.9541277027027025
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2060189666,
+        "content": "Resolves [#8](https://github.com/ubiquibot/issue-comment-embeddings/issues/8)\r\n- Updated migrations for the database\r\n- Supports `NULL` comment body for private repository.\r\n- Has timestamps now for creation and modification.\r\n- PKey is Github's global node id. No need for Organization or Repo Name for referencing it.\r\n- Schema has `author_id` now.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 4.167,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.5
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 40,
+            "wordValue": 0.1,
+            "result": 2.18
+          },
+          "readability": {
+            "fleschKincaid": 46.435,
+            "syllables": 72,
+            "sentences": 5,
+            "score": 0.8643500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1749731381,
+        "content": "This is according to the schema mentioned in the issue spec, could you please be more specific with what needs to be synced ?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1749731381",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -30,22 +30,28 @@ export type Database = {\n     Tables: {\n       issue_comments: {\n         Row: {\n-          commentbody: string;\n+          author_id: string;\n+          created_at: string;\n           embedding: string;\n-          id: number;\n-          issuebody: string | null;\n+          id: string;\n+          modified_at: string;\n+          plaintext: string;\n         };\n         Insert: {\n-          commentbody: string;\n+          author_id: string;\n+          created_at?: string;",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 73.1421739130435,
+            "syllables": 30,
+            "sentences": 1,
+            "score": 0.868578260869565
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1753347205,
+        "content": "I’ve retained it in case it can be expanded to support OpenAI's chat APIs. I believe this could be useful, even if it's not currently in use.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1753347205",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -11,15 +11,19 @@ export class Embedding extends SuperOpenAi {\n     this.context = context;\n   }\n \n-  async createEmbedding(text: string): Promise<number[]> {\n-    const params: OpenAI.EmbeddingCreateParams = {\n-      model: \"text-embedding-3-large\",\n-      input: text,\n-      dimensions: VECTOR_SIZE,\n-    };\n-    const response = await this.client.embeddings.create({\n-      ...params,\n-    });\n-    return response.data[0]?.embedding;\n+  async createEmbedding(text: string | null): Promise<number[]> {\n+    if (text === null) {\n+      return new Array(VECTOR_SIZE).fill(0);\n+    } else {\n+      const params: OpenAI.EmbeddingCreateParams = {\n+        model: \"text-embedding-3-large\",",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 73.17000000000003,
+            "syllables": 42,
+            "sentences": 2,
+            "score": 0.8682999999999997
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1753348195,
+        "content": "This is the maximum possible length. Even if we switch providers in the future, we can pad with zeros to accommodate the change. It would be much more challenging to do the opposite.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1753348195",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -25,10 +28,18 @@ export class Comment extends SuperSupabase {\n       return;\n     } else {\n       //Create the embedding for this comment\n-      const embedding = await this.context.adapters.openai.embedding.createEmbedding(commentBody);\n+      const embedding = await this.context.adapters.voyage.embedding.createEmbedding(plaintext);\n+      //If embedding is smaller than 3072, pad it with 0s",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 70.0518181818182,
+            "syllables": 49,
+            "sentences": 3,
+            "score": 0.8994818181818179
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1753349328,
+        "content": "I wanted to keep it consistent with the DB schema. This passed the cspell check because I had added it to the ignore list.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1753349328",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -4,47 +4,56 @@ import { Embedding } from \"../../src/adapters/openai/helpers/embedding\";\n import { STRINGS } from \"./strings\";\n \n export interface CommentMock {\n-  id: number;\n-  commentbody: string;\n-  issuebody: string;\n+  id: string;\n+  plaintext: string | null;\n+  author_id: number;\n+  commentobject?: Record<string, unknown> | null;",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 92.43000000000002,
+            "syllables": 29,
+            "sentences": 2,
+            "score": 0.6756999999999997
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2337325595,
+        "content": "Fixed",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2337325595",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 121.22000000000003,
+            "syllables": 1,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2342686865,
+        "content": "@0x4007 Updated the schema, comments use `voyageai` for embeddings now.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2342686865",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 66.10000000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.9389999999999997
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2344061053,
+        "content": "@0x4007 Could you please check the updated changes ? Have removed `OpenAI` adapter, corrected the syntax and updated the dimension for the `embedding` column ?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2344061053",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 71.29178571428572,
+            "syllables": 31,
+            "sentences": 2,
+            "score": 0.8870821428571428
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2346293338,
+        "content": "I have removed the changes for the other task. CI Should be passing now. \r\nhttps://github.com/user-attachments/assets/b79bdf2b-58eb-4618-b9eb-ce2376dcf313",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2346293338",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 88.81925000000001,
+            "syllables": 33,
+            "sentences": 4,
+            "score": 0.7118074999999999
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 241.623 XP ]</a>&nbsp;</h3><h6>@shiv810</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>200</td></tr><tr><td>Issue</td><td>Comment</td><td>18</td><td>37.456</td></tr><tr><td>Review</td><td>Comment</td><td>9</td><td>4.167</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2336919238\" target=\"_blank\" rel=\"noopener\">@0x4007 would plaintext include issue body as well or would it j&hellip;</a></h6></td><td><details><summary>1.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.9</td><td>4</td><td>2.232</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2337212031\" target=\"_blank\" rel=\"noopener\">So, plaintext's value would issue body + comment body, or do we &hellip;</a></h6></td><td><details><summary>2.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 41&#13;  wordValue: 0.1&#13;  result: 2.2&#13;</pre></details></td><td>0.95</td><td>4</td><td>2.698</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2337324156\" target=\"_blank\" rel=\"noopener\">Case 1: Issue Body + Comment Body:- Only one vector index for &hellip;</a></h6></td><td><details><summary>3.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 9&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 6&#13;  result: 0.6&#13;regex:&#13;  wordCount: 102&#13;  wordValue: 0.1&#13;  result: 2.6&#13;</pre></details></td><td>0.9</td><td>4</td><td>3.636</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2337437016\" target=\"_blank\" rel=\"noopener\">Just to be clear, what is plaintext in your schema ?</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.85</td><td>4</td><td>0.918</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2338271917\" target=\"_blank\" rel=\"noopener\">I'll give an example of plaintext let me know if this right ?&&hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.8</td><td>4</td><td>2.016</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2338352210\" target=\"_blank\" rel=\"noopener\">To clarify, the example I shared involves a single embedding/vec&hellip;</a></h6></td><td><details><summary>2.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 68&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>0.75</td><td>4</td><td>2.49</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2338358655\" target=\"_blank\" rel=\"noopener\">So, to clarify, should the embedding be created per comment whil&hellip;</a></h6></td><td><details><summary>2.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 60&#13;  wordValue: 0.1&#13;  result: 2.52&#13;</pre></details></td><td>0.8</td><td>4</td><td>2.56</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2338378668\" target=\"_blank\" rel=\"noopener\">An alternative approach would be to store each piece of text fro&hellip;</a></h6></td><td><details><summary>2.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 57&#13;  wordValue: 0.1&#13;  result: 2.48&#13;</pre></details></td><td>0.85</td><td>4</td><td>2.686</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2338382209\" target=\"_blank\" rel=\"noopener\">To clarify, we don’t provide embeddings directly to the LLM. Ins&hellip;</a></h6></td><td><details><summary>2.33</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 47&#13;  wordValue: 0.1&#13;  result: 2.33&#13;</pre></details></td><td>0.8</td><td>4</td><td>2.4</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2340949138\" target=\"_blank\" rel=\"noopener\">@0x4007 Hi, could you update me on the final database schema? &hellip;</a></h6></td><td><details><summary>2.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 44&#13;  wordValue: 0.1&#13;  result: 2.27&#13;</pre></details></td><td>0.9</td><td>4</td><td>2.592</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2340955981\" target=\"_blank\" rel=\"noopener\">I can probably write a new adapter for them, but I think their f&hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.6</td><td>4</td><td>1.512</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2341577340\" target=\"_blank\" rel=\"noopener\">So, if we add a payment method, the requests per minute can be i&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.6</td><td>4</td><td>1.224</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342399738\" target=\"_blank\" rel=\"noopener\">@0x4007 I've added my payment method. Please delete this infor&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.3</td><td>4</td><td>0.648</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342408725\" target=\"_blank\" rel=\"noopener\">So, the final schema would be &#96;Id (GlobalNodeId), plaintext(&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.95</td><td>4</td><td>2.204</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342418843\" target=\"_blank\" rel=\"noopener\">I took this from octokit's type definition. I think reactions sh&hellip;</a></h6></td><td><details><summary>2.47</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 56&#13;  wordValue: 0.1&#13;  result: 2.47&#13;</pre></details></td><td>0.85</td><td>4</td><td>2.686</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342425654\" target=\"_blank\" rel=\"noopener\">If we are not going to be using relations and other sql things, &hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.65</td><td>4</td><td>1.378</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342463922\" target=\"_blank\" rel=\"noopener\">It should be better. I am skeptical about storing serialized com&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.6</td><td>4</td><td>1.224</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342644702\" target=\"_blank\" rel=\"noopener\">that would depend on the onboarding, if onboarding involves expl&hellip;</a></h6></td><td><details><summary>2.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 74&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.7</td><td>4</td><td>2.352</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9\" target=\"_blank\" rel=\"noopener\">Resolves [#8](https://github.com/ubiquibot/issue-comment-embeddi&hellip;</a></h6></td><td><details><summary>3.68</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.5&#13;regex:&#13;  wordCount: 40&#13;  wordValue: 0.1&#13;  result: 2.18&#13;</pre></details></td><td>0.9</td><td>1</td><td>4.167</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1749731381\" target=\"_blank\" rel=\"noopener\">This is according to the schema mentioned in the issue spec, cou&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1753347205\" target=\"_blank\" rel=\"noopener\">I’ve retained it in case it can be expanded to support OpenAI's &hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1753348195\" target=\"_blank\" rel=\"noopener\">This is the maximum possible length. Even if we switch providers&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1753349328\" target=\"_blank\" rel=\"noopener\">I wanted to keep it consistent with the DB schema. This passed t&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2337325595\" target=\"_blank\" rel=\"noopener\">Fixed</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2342686865\" target=\"_blank\" rel=\"noopener\">@0x4007 Updated the schema, comments use &#96;voyageai&#96; for &hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2344061053\" target=\"_blank\" rel=\"noopener\">@0x4007 Could you please check the updated changes ? Have remove&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2346293338\" target=\"_blank\" rel=\"noopener\">I have removed the changes for the other task. CI Should be pass&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>4</td><td>0</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 200,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2337189870,
+        "content": "Issue body as well and no leave null",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2337189870",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 3.458,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 92.965,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.67035
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2337217170,
+        "content": "Why do you want to associate and/or combine the embedding of the issue body and the comment body?\nCan you provide some examples of applications that would require this?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2337217170",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 8.748,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 61.890000000000015,
+            "syllables": 46,
+            "sentences": 2,
+            "score": 0.9810999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2337418142,
+        "content": "I don't understand your explanation. \nAnyways would be great if we can make the following applications:\n1. Issue deduplication.\n2. Assistant to answer questions specifically related to our DAO and products here on github and telegram in plain English \nAs I understand with my proposed schema, these applications are possible. \nI wonder if it makes sense simply to capture every property, excluding the URL properties from the issue and comment objects on GitHub",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2337418142",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 13.224,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 72,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 39.34,
+            "syllables": 127,
+            "sentences": 4,
+            "score": 0.7934
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2337531525,
+        "content": "The source code of the markdown of the comments. \nI hope that the mark down syntax doesn't negatively affect the LLM's ability to understand. \nI know that I always must clarify with ChatGPT that the right arrow bracket means it's a block quote from another comment. \nI suppose we'll need to compare performance of raw marked down source code and something preprocessed/more similar to how we perceive it",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2337531525",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 12.024,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 73,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 66.62631849315069,
+            "syllables": 105,
+            "sentences": 4,
+            "score": 0.933736815068493
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2338291796,
+        "content": "I am not an expert working with embeddings but as I understand we need to generate a single embedding per corpus of text (comment)\nOtherwise yes you included the markdown syntax which is what I said.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2338291796",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 8.806,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 43.395000000000024,
+            "syllables": 54,
+            "sentences": 1,
+            "score": 0.8339500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2338368420,
+        "content": "So then if we are clobbering a single embedding to represent an entire issue (and pull) won't the costs increase exponentially? Can't we feed multiple embeddings to an LLM to work with? \nIt doesn't seem like a good approach to clobber",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2338368420",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 9.248,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 44,
+            "wordValue": 0.1,
+            "result": 2.27
+          },
+          "readability": {
+            "fleschKincaid": 68.8937878787879,
+            "syllables": 64,
+            "sentences": 3,
+            "score": 0.9110621212121209
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2338406298,
+        "content": "@gentlementlegen im assuming storing node id won't be sufficient for us to determine which embeddings are associated with eachother. I'm assuming we need to also store the issue id\nAnyways at this point im starting to think we should just store everything besides the _url properties and then we can optimize later since we seem to not know for sure what to do now.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2338406298",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 11.664,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 66,
+            "wordValue": 0.1,
+            "result": 2.57
+          },
+          "readability": {
+            "fleschKincaid": 46.44000000000001,
+            "syllables": 99,
+            "sentences": 2,
+            "score": 0.8644000000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2338875005,
+        "content": "OpenAI’s text embeddings measure the relatedness of text strings. Embeddings are commonly used for:\r\nClustering (where text strings are grouped by similarity)\r\nRecommendations (where items with related text strings are recommended)\r\nAnomaly detection (where outliers with little relatedness are identified)\r\nDiversity measurement (where similarity distributions are analyzed)\r\nClassification (where text strings are classified by their most similar label)\r\n---\r\nChatGPT: Here are additional use cases for embeddings:\r\n---\r\nReviewing the [leaderboard](https://huggingface.co/spaces/mteb/leaderboard) and I realize that STS (Semantic Textual Similarity) is the most important for depuplication and task matchmaking. Check the STS tab. `voyage-lite-02-instruct` looks promising (the first ranked seems specifically designed for English-French translations?)\r\nSeems significantly better than OpenAI's offering.\r\nWe may also be able to make a feature that allows contributors to ask product/strategic direction questions to the bot. It can link back to comments that answer their question. \r\nText summarization might be able to improve our relevance scoring of comments (verbose and concise comments may be able to receive similar \"quantitative scoring\" credit)",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2338875005",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 13.284,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 11
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 166,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 27.276159638554248,
+            "syllables": 311,
+            "sentences": 8,
+            "score": 0.6727615963855424
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2341268090,
+        "content": "Three requests per minute seems acceptable as long as we can have some type of buffer or queue. I believe we had plans to do this anyways with the OpenAI embeddings because it's significantly cheaper. \nHowever, can we generate multiple embeddings per request? If not then I imagine this can get more complicated than a cron job. \nAs for schema, I think it's simpler to dump everything and optimize later. This is because we don't know what the next plugins will need and this gives us more flexibility for research. To me it's only a priority to optimize when we start hitting free tier limits.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2341268090",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 11.22,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 109,
+            "wordValue": 0.1,
+            "result": 2.56
+          },
+          "readability": {
+            "fleschKincaid": 63.74192660550459,
+            "syllables": 164,
+            "sentences": 7,
+            "score": 0.9625807339449541
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2342397615,
+        "content": "![image](https://github.com/user-attachments/assets/eaf5c732-5c86-415b-9a70-b5b46069cc72)\nAny name and zip code should work",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342397615",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.16,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 115.13000000000002,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2342401648,
+        "content": "It's merchant locked for up to $1",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342401648",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.772,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 103.54,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2342416249,
+        "content": "Looks like there isn't a lot to save from there if we remove the URLs, nested objects like reactions and user details.  \nI'm surprised that's all that's there. \nPerformed via GitHub app should also be removed because we shouldn't be generating embeddings for bot comments. \nSo after all of that, looks like basically we might only be adding author association.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342416249",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 11.7,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "br": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 65,
+            "wordValue": 0.1,
+            "result": 2.56
+          },
+          "readability": {
+            "fleschKincaid": 70.59971153846155,
+            "syllables": 92,
+            "sentences": 4,
+            "score": 0.8940028846153845
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2342424239,
+        "content": "My concern is that I feel we should make everything into its own column. However, for simplicity, we could just save the full reaction object in a single column.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342424239",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 7.616,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 63.75887931034484,
+            "syllables": 44,
+            "sentences": 2,
+            "score": 0.9624112068965516
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2342433563,
+        "content": "I think Supabase is probably fine because there are no planned features for reactions. We unlikely need the performance for querying for a long time. Even if or when we do, we can consider adding those columns later. \nTo be honest I'm not a database expert but seems like Supabase should handle our needs. It has a nice UI which is convenient for debugging",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342433563",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 10.4,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 65,
+            "wordValue": 0.1,
+            "result": 2.56
+          },
+          "readability": {
+            "fleschKincaid": 69.99384615384618,
+            "syllables": 95,
+            "sentences": 5,
+            "score": 0.9000615384615382
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2342632738,
+        "content": "I asked ChatGPT for a new feature: onboarding new developers, via plaintext q&a. It said we should generate embeddings of an entire repository. How does this affect our schema? Perhaps we should generalize further? Or we can make a new table? \nPerhaps a new table per GitHub object type is the most manageable.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342632738",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 10.676,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 54,
+            "wordValue": 0.1,
+            "result": 2.44
+          },
+          "readability": {
+            "fleschKincaid": 64.53333333333336,
+            "syllables": 85,
+            "sentences": 6,
+            "score": 0.9546666666666664
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2348364067,
+        "content": "I'll need to top up the wallet soon",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2348364067",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.616,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 103.70000000000002,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2512376975,
+        "content": "This requires changes to the plugin that captures the data, as well as the database itself. \r\n![2024-09-08 21 54 35](https://github.com/user-attachments/assets/b6885a88-accb-4349-bf39-bb96b890488c)\r\nThis must capture issue bodies. \n---\nPerhaps I wasn't explicit with my vision for the database schema, but this needs adjustments.\r\nWe only need: \r\n```\r\nid, created_at, modified_at, author_id, plaintext, embedding\r\n```\r\n- The `plaintext` should only save if its a public repo, otherwise we have liabilities on our hands storing company private data. \r\n- We can make a separate table for when we start capturing messages from Telegram and other platforms. No concerns for now. \r\n- ID might need to be the GraphQL node id, because, as I understand, the GitHub REST API will not allow us to query the comment with only the numerical ID. We would need to store the organization name, and the repository name, before we can query the comment based on its ID. \r\n- Dates: the reason for capturing the dates is because I envision that we can make a Telegram chatbot that will allow anybody to query anything about the organization's latest projects in plain English. This is useful for onboarding (new team member has some questions about our infrastructure/products) and investors wanting an update. We need to give less weight to older comments. \n- author id: for onboarding developers especially, it would be useful to target specific contributors' inputs. Mine for final decisions, and others who may be the primary contributors to specific repos, compared to other contributors etc.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.74,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 9
+              },
+              "h2": {
+                "score": 1,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              }
+            },
+            "result": 1.5
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 231,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 52.194035964035976,
+            "syllables": 373,
+            "sentences": 13,
+            "score": 0.9219403596403598
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2295801673,
+        "content": "Seems generally okay. Let me see how your database looks",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#pullrequestreview-2295801673",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.92,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 66.40000000000003,
+            "syllables": 16,
+            "sentences": 2,
+            "score": 0.9359999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1749610016,
+        "content": "```suggestion\n  const authorId = payload.comment.user?.id || -1;\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1749610016",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -6,20 +6,14 @@ export async function addComments(context: Context) {\n     payload,\n     adapters: { supabase },\n   } = context;\n-\n-  const sender = payload.comment.user?.login;\n-  const repo = payload.repository.name;\n-  const issueNumber = payload.issue.number;\n-  const issueBody = payload.issue.body || \"\";\n-  const owner = payload.repository.owner.login;\n-  const body = payload.comment.body;\n-\n-  // Log the payload\n-  logger.info(`Executing addComments:`, { sender, repo, issueNumber, owner });\n+  const plaintext = payload.comment.body;\n+  const authorId = payload.comment.user?.id || 0;",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1749610931,
+        "content": "Sync with the GitHub metadata of the comment or issue",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1749610931",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -30,22 +30,28 @@ export type Database = {\n     Tables: {\n       issue_comments: {\n         Row: {\n-          commentbody: string;\n+          author_id: string;\n+          created_at: string;\n           embedding: string;\n-          id: number;\n-          issuebody: string | null;\n+          id: string;\n+          modified_at: string;\n+          plaintext: string;\n         };\n         Insert: {\n-          commentbody: string;\n+          author_id: string;\n+          created_at?: string;",
+        "score": {
+          "reward": 3.276,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 61.32500000000002,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.9867499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1749611574,
+        "content": "```suggestion\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1749611574",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -15,4 +15,5 @@ export const STRINGS = {\n   CONFIGURABLE_RESPONSE: \"Hello, Code Reviewers!\",\n   INVALID_COMMAND: \"/Goodbye\",\n   COMMENT_DOES_NOT_EXIST: \"Comment does not exist\",\n+  CENSORED: \"[CENSORED]\",",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1749612010,
+        "content": "```suggestion\n        plaintext = null;\n```\nShould be initialized as null though.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1749612010",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -25,10 +28,11 @@ export class Comment extends SuperSupabase {\n       return;\n     } else {\n       //Create the embedding for this comment\n-      const embedding = await this.context.adapters.openai.embedding.createEmbedding(commentBody);\n-      const { error } = await this.supabase\n-        .from(\"issue_comments\")\n-        .insert([{ id: commentId, commentbody: commentBody, issuebody: issueBody, embedding: embedding }]);\n+      const embedding = await this.context.adapters.openai.embedding.createEmbedding(plaintext);\n+      if (isPrivate) {\n+        plaintext = \"CENSORED\";",
+        "score": {
+          "reward": 2.464,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 73.84500000000001,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.8615499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1749612688,
+        "content": "```suggestion\n      plaintext = null;\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1749612688",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -37,25 +41,28 @@ export class Comment extends SuperSupabase {\n     this.context.logger.info(\"Comment created successfully\");\n   }\n \n-  async updateComment(commentBody: string, commentId: number) {\n+  async updateComment(plaintext: string, commentNodeId: string, isPrivate: boolean) {\n     //Create the embedding for this comment\n-    const embedding = Array.from(await this.context.adapters.openai.embedding.createEmbedding(commentBody));\n-    const { error } = await this.supabase.from(\"issue_comments\").update({ commentbody: commentBody, embedding: embedding }).eq(\"id\", commentId);\n+    const embedding = Array.from(await this.context.adapters.openai.embedding.createEmbedding(plaintext));\n+    if (isPrivate) {\n+      plaintext = \"CENSORED\";",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1753231609,
+        "content": "Should this file be deleted or something?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1753231609",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -11,15 +11,19 @@ export class Embedding extends SuperOpenAi {\n     this.context = context;\n   }\n \n-  async createEmbedding(text: string): Promise<number[]> {\n-    const params: OpenAI.EmbeddingCreateParams = {\n-      model: \"text-embedding-3-large\",\n-      input: text,\n-      dimensions: VECTOR_SIZE,\n-    };\n-    const response = await this.client.embeddings.create({\n-      ...params,\n-    });\n-    return response.data[0]?.embedding;\n+  async createEmbedding(text: string | null): Promise<number[]> {\n+    if (text === null) {\n+      return new Array(VECTOR_SIZE).fill(0);\n+    } else {\n+      const params: OpenAI.EmbeddingCreateParams = {\n+        model: \"text-embedding-3-large\",",
+        "score": {
+          "reward": 2.112,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 66.7871428571429,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.9321285714285711
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1753233127,
+        "content": "Why does it have to be this exact length?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1753233127",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -25,10 +28,18 @@ export class Comment extends SuperSupabase {\n       return;\n     } else {\n       //Create the embedding for this comment\n-      const embedding = await this.context.adapters.openai.embedding.createEmbedding(commentBody);\n+      const embedding = await this.context.adapters.voyage.embedding.createEmbedding(plaintext);\n+      //If embedding is smaller than 3072, pad it with 0s",
+        "score": {
+          "reward": 3.052,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 103.70000000000002,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1753239088,
+        "content": "```suggestion\n  commentObject?: Record<string, unknown> | null;\n```\nOur commit hook shouldn't have let this pass because we have strict pascal case and cspell",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1753239088",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -4,47 +4,56 @@ import { Embedding } from \"../../src/adapters/openai/helpers/embedding\";\n import { STRINGS } from \"./strings\";\n \n export interface CommentMock {\n-  id: number;\n-  commentbody: string;\n-  issuebody: string;\n+  id: string;\n+  plaintext: string | null;\n+  author_id: number;\n+  commentobject?: Record<string, unknown> | null;",
+        "score": {
+          "reward": 4.48,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 90.05058823529413,
+            "syllables": 20,
+            "sentences": 1,
+            "score": 0.6994941176470587
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1753454405,
+        "content": "Seems unnecessary. \r\nJust delete the trailing zeros.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1753454405",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -25,10 +28,18 @@ export class Comment extends SuperSupabase {\n       return;\n     } else {\n       //Create the embedding for this comment\n-      const embedding = await this.context.adapters.openai.embedding.createEmbedding(commentBody);\n+      const embedding = await this.context.adapters.voyage.embedding.createEmbedding(plaintext);\n+      //If embedding is smaller than 3072, pad it with 0s",
+        "score": {
+          "reward": 2.688,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 34.08250000000001,
+            "syllables": 14,
+            "sentences": 2,
+            "score": 0.7408250000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1753456640,
+        "content": "We can restore from git history if needed. Its not in use so it should be deleted.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1753456640",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -11,15 +11,19 @@ export class Embedding extends SuperOpenAi {\n     this.context = context;\n   }\n \n-  async createEmbedding(text: string): Promise<number[]> {\n-    const params: OpenAI.EmbeddingCreateParams = {\n-      model: \"text-embedding-3-large\",\n-      input: text,\n-      dimensions: VECTOR_SIZE,\n-    };\n-    const response = await this.client.embeddings.create({\n-      ...params,\n-    });\n-    return response.data[0]?.embedding;\n+  async createEmbedding(text: string | null): Promise<number[]> {\n+    if (text === null) {\n+      return new Array(VECTOR_SIZE).fill(0);\n+    } else {\n+      const params: OpenAI.EmbeddingCreateParams = {\n+        model: \"text-embedding-3-large\",",
+        "score": {
+          "reward": 4.424,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 93.70161764705884,
+            "syllables": 21,
+            "sentences": 2,
+            "score": 0.6629838235294117
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1753458809,
+        "content": "If you defined it, then its wrong. If its from another database that we can't change, then we can add to the ignore list.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1753458809",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -4,47 +4,56 @@ import { Embedding } from \"../../src/adapters/openai/helpers/embedding\";\n import { STRINGS } from \"./strings\";\n \n export interface CommentMock {\n-  id: number;\n-  commentbody: string;\n-  issuebody: string;\n+  id: string;\n+  plaintext: string | null;\n+  author_id: number;\n+  commentobject?: Record<string, unknown> | null;",
+        "score": {
+          "reward": 5.768,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 89.24350000000001,
+            "syllables": 31,
+            "sentences": 2,
+            "score": 0.7075649999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1758224825,
+        "content": "Why is the default issue on the comments table? Why even add the type column if it's in the comments table?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1758224825",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,21 @@\n+ALTER TABLE vectordump\n+RENAME TO issue_comments;\n+\n+CREATE TABLE IF NOT EXISTS issues (\n+    id VARCHAR primary key,\n+    plaintext text,\n+    embedding Vector(1024) not null,\n+    payload jsonb,\n+    author_id VARCHAR not null,\n+    type text not null default 'issue',",
+        "score": {
+          "reward": 6.24,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 80.30636363636367,
+            "syllables": 30,
+            "sentences": 2,
+            "score": 0.7969363636363633
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1758335057,
+        "content": "This seems very error prone. Why dont you use some virtual DOM (jsdom, mdast) and then just query `element.textContent` ?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1758335057",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 5.94,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 94.30000000000001,
+            "syllables": 22,
+            "sentences": 2,
+            "score": 0.6569999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1758337344,
+        "content": "```suggestion\r\n        model: \"voyage-large-2-instruct\",\r\n```\r\nShould be using the best model. \r\n[Source](https://docs.voyageai.com/docs/embeddings)",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1758337344",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,25 @@\n+import { VoyageAIClient } from \"voyageai\";\n+import { Context } from \"../../../types\";\n+import { SuperVoyage } from \"./voyage\";\n+const VECTOR_SIZE = 1024;\n+\n+export class Embedding extends SuperVoyage {\n+  protected context: Context;\n+\n+  constructor(client: VoyageAIClient, context: Context) {\n+    super(client, context);\n+    this.context = context;\n+  }\n+\n+  async createEmbedding(text: string | null): Promise<number[]> {\n+    if (text === null) {\n+      return new Array(VECTOR_SIZE).fill(0);\n+    } else {\n+      const response = await this.client.embed({\n+        input: text,\n+        model: \"voyage-2\",",
+        "score": {
+          "reward": 7.272,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 94.51107142857143,
+            "syllables": 9,
+            "sentences": 2,
+            "score": 0.6548892857142857
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1758338427,
+        "content": "```suggestion\r\n  const markdown = payload.issue.body + \" \" + payload.issue.title || null;\r\n```\r\nEmpty string seems like an impossibility. You can't post empty comments so this actually should probably throw an error.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1758338427",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,29 @@\n+import { Context } from \"../types\";\n+import { IssuePayload } from \"../types/payload\";\n+\n+export async function addIssue(context: Context) {\n+  const {\n+    logger,\n+    adapters: { supabase },\n+  } = context;\n+  const { payload } = context as { payload: IssuePayload };\n+  const markdown = payload.issue.body + \" \" + payload.issue.title || \"\";",
+        "score": {
+          "reward": 6.112,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 57.09500000000003,
+            "syllables": 33,
+            "sentences": 2,
+            "score": 0.9709500000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1758339170,
+        "content": "```suggestion\r\n  logger.debug(`Exiting addIssue`);\r\n```\r\nI think we have a debug method which might be more appropriate for these sort of messages in the future for you.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1758339170",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,29 @@\n+import { Context } from \"../types\";\n+import { IssuePayload } from \"../types/payload\";\n+\n+export async function addIssue(context: Context) {\n+  const {\n+    logger,\n+    adapters: { supabase },\n+  } = context;\n+  const { payload } = context as { payload: IssuePayload };\n+  const markdown = payload.issue.body + \" \" + payload.issue.title || \"\";\n+  const authorId = payload.issue.user?.id || -1;\n+  const nodeId = payload.issue.node_id;\n+  const isPrivate = payload.repository.private;\n+\n+  try {\n+    await supabase.issue.createIssue(nodeId, payload, isPrivate, markdown, authorId);\n+  } catch (error) {\n+    if (error instanceof Error) {\n+      logger.error(`Error creating issue:`, { error: error, stack: error.stack });\n+      throw error;\n+    } else {\n+      logger.error(`Error creating issue:`, { err: error, error: new Error() });\n+      throw error;\n+    }\n+  }\n+\n+  logger.ok(`Successfully created issue!`);\n+  logger.verbose(`Exiting addIssue`);",
+        "score": {
+          "reward": 4.704,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 76.83227272727274,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.8316772727272727
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1758413123,
+        "content": "This seems out of scope?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1758413123",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,88 @@\n+import { SupabaseClient } from \"@supabase/supabase-js\";\n+import { SuperSupabase } from \"./supabase\";\n+import { Context } from \"../../../types/context\";\n+import { markdownToPlainText } from \"../../utils/markdown-to-plaintext\";\n+\n+export interface IssueType {\n+  id: string;\n+  markdown?: string;\n+  author_id: number;\n+  created_at: string;\n+  modified_at: string;\n+  payloadObject: Record<string, unknown> | null;\n+  embedding: number[];\n+}\n+\n+export class Issues extends SuperSupabase {\n+  constructor(supabase: SupabaseClient, context: Context) {\n+    super(supabase, context);\n+  }\n+\n+  async createIssue(issueNodeId: string, payload: Record<string, unknown> | null, isPrivate: boolean, markdown: string | null, authorId: number) {\n+    //First Check if the issue already exists\n+    const { data, error } = await this.supabase.from(\"issues\").select(\"*\").eq(\"id\", issueNodeId);\n+    if (error) {\n+      this.context.logger.error(\"Error creating issue\", error);\n+      return;\n+    }\n+    if (data && data.length > 0) {\n+      this.context.logger.info(\"Issue already exists\");\n+      return;\n+    } else {\n+      const embedding = await this.context.adapters.voyage.embedding.createEmbedding(markdown);\n+      let plaintext: string | null = markdownToPlainText(markdown || \"\");\n+      if (isPrivate) {\n+        payload = null;\n+        markdown = null;\n+        plaintext = null;\n+      }\n+      const { error } = await this.supabase.from(\"issues\").insert([{ id: issueNodeId, payload, markdown, plaintext, author_id: authorId, embedding }]);\n+      if (error) {\n+        this.context.logger.error(\"Error creating issue\", error);\n+        return;\n+      }\n+    }\n+    this.context.logger.info(\"Issue created successfully\");\n+  }\n+\n+  async updateIssue(markdown: string | null, issueNodeId: string, payload: Record<string, unknown> | null, isPrivate: boolean) {\n+    //Create the embedding for this comment\n+    const embedding = Array.from(await this.context.adapters.voyage.embedding.createEmbedding(markdown));\n+    let plaintext: string | null = markdownToPlainText(markdown || \"\");\n+    if (isPrivate) {\n+      markdown = null as string | null;\n+      payload = null as Record<string, unknown> | null;\n+      plaintext = null as string | null;\n+    }\n+    const { error } = await this.supabase\n+      .from(\"issues\")\n+      .update({ markdown, plaintext, embedding: embedding, payload, modified_at: new Date() })\n+      .eq(\"id\", issueNodeId);\n+    if (error) {\n+      this.context.logger.error(\"Error updating comment\", error);\n+    }\n+  }\n+\n+  async deleteIssue(issueNodeId: string) {\n+    const { error } = await this.supabase.from(\"issues\").delete().eq(\"id\", issueNodeId);\n+    if (error) {\n+      this.context.logger.error(\"Error deleting comment\", error);\n+    }\n+  }\n+\n+  async findSimilarIssues(markdown: string, threshold: number): Promise<IssueType[] | null> {\n+    const embedding = await this.context.adapters.voyage.embedding.createEmbedding(markdown);\n+    const { data, error } = await this.supabase\n+      .from(\"issues\")\n+      .select(\"*\")\n+      .eq(\"type\", \"issue\")\n+      .textSearch(\"embedding\", embedding.join(\",\"))\n+      .order(\"embedding\", { foreignTable: \"issues\", ascending: false })\n+      .lte(\"embedding\", threshold);\n+    if (error) {\n+      this.context.logger.error(\"Error finding similar issues\", error);\n+      return [];\n+    }\n+    return data;\n+  }\n+}",
+        "score": {
+          "reward": 1.932,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 117.16000000000003,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1758413856,
+        "content": "Still confused about this fill stuff",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1758413856",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,25 @@\n+import { VoyageAIClient } from \"voyageai\";\n+import { Context } from \"../../../types\";\n+import { SuperVoyage } from \"./voyage\";\n+const VECTOR_SIZE = 1024;\n+\n+export class Embedding extends SuperVoyage {\n+  protected context: Context;\n+\n+  constructor(client: VoyageAIClient, context: Context) {\n+    super(client, context);\n+    this.context = context;\n+  }\n+\n+  async createEmbedding(text: string | null): Promise<number[]> {\n+    if (text === null) {\n+      return new Array(VECTOR_SIZE).fill(0);",
+        "score": {
+          "reward": 2.072,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 87.94500000000002,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.7205499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1758911096,
+        "content": "Disagree but no need to slow down this pull further.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1758911096",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,88 @@\n+import { SupabaseClient } from \"@supabase/supabase-js\";\n+import { SuperSupabase } from \"./supabase\";\n+import { Context } from \"../../../types/context\";\n+import { markdownToPlainText } from \"../../utils/markdown-to-plaintext\";\n+\n+export interface IssueType {\n+  id: string;\n+  markdown?: string;\n+  author_id: number;\n+  created_at: string;\n+  modified_at: string;\n+  payloadObject: Record<string, unknown> | null;\n+  embedding: number[];\n+}\n+\n+export class Issues extends SuperSupabase {\n+  constructor(supabase: SupabaseClient, context: Context) {\n+    super(supabase, context);\n+  }\n+\n+  async createIssue(issueNodeId: string, payload: Record<string, unknown> | null, isPrivate: boolean, markdown: string | null, authorId: number) {\n+    //First Check if the issue already exists\n+    const { data, error } = await this.supabase.from(\"issues\").select(\"*\").eq(\"id\", issueNodeId);\n+    if (error) {\n+      this.context.logger.error(\"Error creating issue\", error);\n+      return;\n+    }\n+    if (data && data.length > 0) {\n+      this.context.logger.info(\"Issue already exists\");\n+      return;\n+    } else {\n+      const embedding = await this.context.adapters.voyage.embedding.createEmbedding(markdown);\n+      let plaintext: string | null = markdownToPlainText(markdown || \"\");\n+      if (isPrivate) {\n+        payload = null;\n+        markdown = null;\n+        plaintext = null;\n+      }\n+      const { error } = await this.supabase.from(\"issues\").insert([{ id: issueNodeId, payload, markdown, plaintext, author_id: authorId, embedding }]);\n+      if (error) {\n+        this.context.logger.error(\"Error creating issue\", error);\n+        return;\n+      }\n+    }\n+    this.context.logger.info(\"Issue created successfully\");\n+  }\n+\n+  async updateIssue(markdown: string | null, issueNodeId: string, payload: Record<string, unknown> | null, isPrivate: boolean) {\n+    //Create the embedding for this comment\n+    const embedding = Array.from(await this.context.adapters.voyage.embedding.createEmbedding(markdown));\n+    let plaintext: string | null = markdownToPlainText(markdown || \"\");\n+    if (isPrivate) {\n+      markdown = null as string | null;\n+      payload = null as Record<string, unknown> | null;\n+      plaintext = null as string | null;\n+    }\n+    const { error } = await this.supabase\n+      .from(\"issues\")\n+      .update({ markdown, plaintext, embedding: embedding, payload, modified_at: new Date() })\n+      .eq(\"id\", issueNodeId);\n+    if (error) {\n+      this.context.logger.error(\"Error updating comment\", error);\n+    }\n+  }\n+\n+  async deleteIssue(issueNodeId: string) {\n+    const { error } = await this.supabase.from(\"issues\").delete().eq(\"id\", issueNodeId);\n+    if (error) {\n+      this.context.logger.error(\"Error deleting comment\", error);\n+    }\n+  }\n+\n+  async findSimilarIssues(markdown: string, threshold: number): Promise<IssueType[] | null> {\n+    const embedding = await this.context.adapters.voyage.embedding.createEmbedding(markdown);\n+    const { data, error } = await this.supabase\n+      .from(\"issues\")\n+      .select(\"*\")\n+      .eq(\"type\", \"issue\")\n+      .textSearch(\"embedding\", embedding.join(\",\"))\n+      .order(\"embedding\", { foreignTable: \"issues\", ascending: false })\n+      .lte(\"embedding\", threshold);\n+    if (error) {\n+      this.context.logger.error(\"Error finding similar issues\", error);\n+      return [];\n+    }\n+    return data;\n+  }\n+}",
+        "score": {
+          "reward": 2.2,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 86.70500000000001,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.7329499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2337198710,
+        "content": "Why did you switch to main from development that doesn't seem right",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2337198710",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.256,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 89.51692307692309,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.704830769230769
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2345255375,
+        "content": "You'll need to cherry pick changes (easy to do with a git UI) and deliver to each task separately. The reason why we do this is for audits and review. When there is a problem some time in the future, the developers git blame and review the full conversation and pull for context on debugging. Combining multiple deliverables in a single pull complicates this process and is forbidden. \nMake sure your CI is passing and make sure to post QA links (show it working on your own org/repos)",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2345255375",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 12.132,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 90,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 66.36500000000001,
+            "syllables": 130,
+            "sentences": 5,
+            "score": 0.9363499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2346911933,
+        "content": "Where's the issue body? You should probably make another table and capture them there. Also might need to associate the comment to the issue with a foreign key",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2346911933",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 8.424,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 71.58195402298851,
+            "syllables": 43,
+            "sentences": 3,
+            "score": 0.8841804597701148
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2347343325,
+        "content": "I'm bad at deciding this sort of thing. Let's go with your suggestion for now except the column should be renamed just to payload or context",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2347343325",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.376,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 80.83214285714287,
+            "syllables": 37,
+            "sentences": 2,
+            "score": 0.7916785714285713
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2348091696,
+        "content": "Seems mostly good but I didn't see all the headers on the first table. Does it have the payload? Just try and normalize the columns as much as you can. \nOtherwise not sure why you added the type column if they are separated by type per table.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2348091696",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 9.152,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 48,
+            "wordValue": 0.1,
+            "result": 2.35
+          },
+          "readability": {
+            "fleschKincaid": 87.14250000000001,
+            "syllables": 61,
+            "sentences": 4,
+            "score": 0.7285749999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2348128784,
+        "content": "Yes I think its unnecessary if they are separated by type on different tables.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2348128784",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.172,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 53.639285714285734,
+            "syllables": 23,
+            "sentences": 1,
+            "score": 0.9363928571428574
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2348158066,
+        "content": "Thanks for the thorough QA. You don't need to make a new video on every change! But generally when opening a pull or making major changes a video is useful. \r\nThe last idea I have (sorry for the last second changes) is to have two columns for the text `plaintext` and `markdown`\r\nThis is so we can easily do testing in the near future to compare the performance of the plaintext and markdown versions of each comment when reasoning with the LLMs. However the new ChatGPT model `o1` just came out today and is supposed to be very good at reasoning, with built-in chain-of-thought reasoning capabilities. This makes me more optimistic about working with the raw markdown source code, as it provides more context (i.e. blockquotes)\r\nOnce that is implemented, you don't need to make a QA video. Just let me know and we can merge. Do that for both tables please.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2348158066",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 9.864,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 155,
+            "wordValue": 0.1,
+            "result": 2.18
+          },
+          "readability": {
+            "fleschKincaid": 74.84572580645164,
+            "syllables": 213,
+            "sentences": 10,
+            "score": 0.8515427419354836
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2348241713,
+        "content": "I think that only tier5 subscribers can use right now via API. I believe that we are tier4.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2348241713",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.96,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 94.30000000000001,
+            "syllables": 22,
+            "sentences": 2,
+            "score": 0.6569999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2288884474,
+            "effect": {
+              "addition": 139,
+              "deletion": 94
+            },
+            "reward": 9.32,
+            "priority": 4
+          },
+          {
+            "reviewId": 2295801673,
+            "effect": {
+              "addition": 352,
+              "deletion": 93
+            },
+            "reward": 17.8,
+            "priority": 4
+          },
+          {
+            "reviewId": 2302177261,
+            "effect": {
+              "addition": 292,
+              "deletion": 70
+            },
+            "reward": 14.48,
+            "priority": 4
+          },
+          {
+            "reviewId": 2302334927,
+            "effect": {
+              "addition": 67,
+              "deletion": 27
+            },
+            "reward": 3.76,
+            "priority": 4
+          },
+          {
+            "reviewId": 2302454195,
+            "effect": {
+              "addition": 41,
+              "deletion": 27
+            },
+            "reward": 2.72,
+            "priority": 4
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 200 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>⚠️ Your rewards have been limited to the task price of 200 XP.</h6><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>5</td><td>48.08</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.74</td></tr><tr><td>Issue</td><td>Comment</td><td>16</td><td>139.616</td></tr><tr><td>Review</td><td>Comment</td><td>28</td><td>122.992</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9\" target=\"_blank\" rel=\"noopener\">#9</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+139 -94</td><td>4</td><td>9.32</td></tr><tr><td>+352 -93</td><td>4</td><td>17.8</td></tr><tr><td>+292 -70</td><td>4</td><td>14.48</td></tr><tr><td>+67 -27</td><td>4</td><td>3.76</td></tr><tr><td>+41 -27</td><td>4</td><td>2.72</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8\" target=\"_blank\" rel=\"noopener\">This requires changes to the plugin that captures the data, as w&hellip;</a></h6></td><td><details><summary>2.93</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 9&#13;    h2:&#13;      score: 1&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;  result: 1.5&#13;regex:&#13;  wordCount: 231&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>1</td><td>1</td><td>3.74</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2337189870\" target=\"_blank\" rel=\"noopener\">Issue body as well and no leave null</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.95</td><td>4</td><td>3.458</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2337217170\" target=\"_blank\" rel=\"noopener\">Why do you want to associate and/or combine the embedding of the&hellip;</a></h6></td><td><details><summary>1.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.9</td><td>4</td><td>8.748</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2337418142\" target=\"_blank\" rel=\"noopener\">I don't understand your explanation. Anyways would be great if &hellip;</a></h6></td><td><details><summary>2.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 72&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.95</td><td>4</td><td>13.224</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2337531525\" target=\"_blank\" rel=\"noopener\">The source code of the markdown of the comments. I hope that th&hellip;</a></h6></td><td><details><summary>2.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 73&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.9</td><td>4</td><td>12.024</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2338291796\" target=\"_blank\" rel=\"noopener\">I am not an expert working with embeddings but as I understand w&hellip;</a></h6></td><td><details><summary>2.07</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.85</td><td>4</td><td>8.806</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2338368420\" target=\"_blank\" rel=\"noopener\">So then if we are clobbering a single embedding to represent an &hellip;</a></h6></td><td><details><summary>2.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 44&#13;  wordValue: 0.1&#13;  result: 2.27&#13;</pre></details></td><td>0.8</td><td>4</td><td>9.248</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2338406298\" target=\"_blank\" rel=\"noopener\">@gentlementlegen im assuming storing node id won't be sufficient&hellip;</a></h6></td><td><details><summary>2.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 66&#13;  wordValue: 0.1&#13;  result: 2.57&#13;</pre></details></td><td>0.9</td><td>4</td><td>11.664</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2338875005\" target=\"_blank\" rel=\"noopener\">OpenAI’s text embeddings measure the relatedness of text strings&hellip;</a></h6></td><td><details><summary>3.07</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 11&#13;    hr:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 166&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.9</td><td>4</td><td>13.284</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2341268090\" target=\"_blank\" rel=\"noopener\">Three requests per minute seems acceptable as long as we can hav&hellip;</a></h6></td><td><details><summary>2.56</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 109&#13;  wordValue: 0.1&#13;  result: 2.56&#13;</pre></details></td><td>0.85</td><td>4</td><td>11.22</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342397615\" target=\"_blank\" rel=\"noopener\">![image](https://github.com/user-attachments/assets/eaf5c732-5c8&hellip;</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.6</td><td>4</td><td>2.16</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342401648\" target=\"_blank\" rel=\"noopener\">It's merchant locked for up to $1</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.7</td><td>4</td><td>2.772</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342416249\" target=\"_blank\" rel=\"noopener\">Looks like there isn't a lot to save from there if we remove the&hellip;</a></h6></td><td><details><summary>2.56</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    br:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 65&#13;  wordValue: 0.1&#13;  result: 2.56&#13;</pre></details></td><td>0.9</td><td>4</td><td>11.7</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342424239\" target=\"_blank\" rel=\"noopener\">My concern is that I feel we should make everything into its own&hellip;</a></h6></td><td><details><summary>1.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.8</td><td>4</td><td>7.616</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342433563\" target=\"_blank\" rel=\"noopener\">I think Supabase is probably fine because there are no planned f&hellip;</a></h6></td><td><details><summary>2.56</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 65&#13;  wordValue: 0.1&#13;  result: 2.56&#13;</pre></details></td><td>0.8</td><td>4</td><td>10.4</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2342632738\" target=\"_blank\" rel=\"noopener\">I asked ChatGPT for a new feature: onboarding new developers, vi&hellip;</a></h6></td><td><details><summary>2.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 54&#13;  wordValue: 0.1&#13;  result: 2.44&#13;</pre></details></td><td>0.85</td><td>4</td><td>10.676</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/8#issuecomment-2348364067\" target=\"_blank\" rel=\"noopener\">I'll need to top up the wallet soon</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.6</td><td>4</td><td>2.616</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#pullrequestreview-2295801673\" target=\"_blank\" rel=\"noopener\">Seems generally okay. Let me see how your database looks</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.2</td><td>4</td><td>0.92</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1749610016\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionconst authorId = payload.comment.use&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1749610931\" target=\"_blank\" rel=\"noopener\">Sync with the GitHub metadata of the comment or issue</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.7</td><td>4</td><td>3.276</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1749611574\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion&#96;&#96;&#96;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1749612010\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionplaintext = null;&#96;&#96;&#&hellip;</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.8</td><td>4</td><td>2.464</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1749612688\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionplaintext = null;&#96;&#96;&#96;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1753231609\" target=\"_blank\" rel=\"noopener\">Should this file be deleted or something?</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.6</td><td>4</td><td>2.112</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1753233127\" target=\"_blank\" rel=\"noopener\">Why does it have to be this exact length?</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.7</td><td>4</td><td>3.052</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1753239088\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestioncommentObject?: Record&lt;string, un&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.7</td><td>4</td><td>4.48</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1753454405\" target=\"_blank\" rel=\"noopener\">Seems unnecessary. Just delete the trailing zeros.</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.8</td><td>4</td><td>2.688</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1753456640\" target=\"_blank\" rel=\"noopener\">We can restore from git history if needed. Its not in use so it &hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.7</td><td>4</td><td>4.424</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1753458809\" target=\"_blank\" rel=\"noopener\">If you defined it, then its wrong. If its from another database &hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.7</td><td>4</td><td>5.768</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1758224825\" target=\"_blank\" rel=\"noopener\">Why is the default issue on the comments table? Why even add the&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.8</td><td>4</td><td>6.24</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1758335057\" target=\"_blank\" rel=\"noopener\">This seems very error prone. Why dont you use some virtual DOM (&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.9</td><td>4</td><td>5.94</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1758337344\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionmodel: \"voyage-large-2-instru&hellip;</a></h6></td><td><details><summary>1.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.9</td><td>4</td><td>7.272</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1758338427\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionconst markdown = payload.issue.body&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.8</td><td>4</td><td>6.112</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1758339170\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionlogger.debug(&#96;Exiting addIssue&&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.6</td><td>4</td><td>4.704</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1758413123\" target=\"_blank\" rel=\"noopener\">This seems out of scope?</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.7</td><td>4</td><td>1.932</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1758413856\" target=\"_blank\" rel=\"noopener\">Still confused about this fill stuff</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.7</td><td>4</td><td>2.072</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#discussion_r1758911096\" target=\"_blank\" rel=\"noopener\">Disagree but no need to slow down this pull further.</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.5</td><td>4</td><td>2.2</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2337198710\" target=\"_blank\" rel=\"noopener\">Why did you switch to main from development that doesn't seem ri&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.8</td><td>4</td><td>4.256</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2345255375\" target=\"_blank\" rel=\"noopener\">You'll need to cherry pick changes (easy to do with a git UI) an&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 90&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.9</td><td>4</td><td>12.132</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2346911933\" target=\"_blank\" rel=\"noopener\">Where's the issue body? You should probably make another table a&hellip;</a></h6></td><td><details><summary>1.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.9</td><td>4</td><td>8.424</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2347343325\" target=\"_blank\" rel=\"noopener\">I'm bad at deciding this sort of thing. Let's go with your sugge&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.6</td><td>4</td><td>5.376</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2348091696\" target=\"_blank\" rel=\"noopener\">Seems mostly good but I didn't see all the headers on the first &hellip;</a></h6></td><td><details><summary>2.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 48&#13;  wordValue: 0.1&#13;  result: 2.35&#13;</pre></details></td><td>0.8</td><td>4</td><td>9.152</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2348128784\" target=\"_blank\" rel=\"noopener\">Yes I think its unnecessary if they are separated by type on dif&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.7</td><td>4</td><td>4.172</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2348158066\" target=\"_blank\" rel=\"noopener\">Thanks for the thorough QA. You don't need to make a new video o&hellip;</a></h6></td><td><details><summary>2.18</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 155&#13;  wordValue: 0.1&#13;  result: 2.18&#13;</pre></details></td><td>0.9</td><td>4</td><td>9.864</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/9#issuecomment-2348241713\" target=\"_blank\" rel=\"noopener\">I think that only tier5 subscribers can use right now via API. I&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.6</td><td>4</td><td>3.96</td></tr></tbody></table></details>"
+  }
+}

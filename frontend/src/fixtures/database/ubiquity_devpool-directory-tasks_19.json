@@ -1,0 +1,218 @@
+{
+  "devpanther": {
+    "userId": 42383942,
+    "total": 300,
+    "task": {
+      "reward": 300,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 300 XP ]</a>&nbsp;</h3><h6>@devpanther</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>300</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 14.65,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1984959020,
+        "content": "One is referring to the dollar amount, one is referring to the amount of issues.",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/19#issuecomment-1984959020",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.826,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 61.890000000000015,
+            "syllables": 23,
+            "sentences": 1,
+            "score": 0.9810999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2175088412,
+        "content": "I just realized that if we remove the assigned tasks, then it messes with the stats. How can we preserve the stats for marketing purposes? It would be great to write a JSON object with the following:\r\n```typescript\r\ntype Statistics = {\r\n  rewards: {\r\n    notAssigned: number;\r\n    assigned: number;\r\n    completed: number;\r\n    total: number;\r\n  },\r\n  tasks: {\r\n    notAssigned: number;\r\n    assigned: number;\r\n    completed: number;\r\n    total: number;\r\n  }\r\n}\r\n```\r\nPerhaps this feature needs to be reimplemented? Its already in use on ubq.fi and I have ideas for how to use it on Twitter too.\r\n_Originally posted by @pavlovcik in https://github.com/ubiquity/devpool-directory/pull/1102#discussion_r1516366949_",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/19",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.51,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 68,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 73.71415584415587,
+            "syllables": 111,
+            "sentences": 7,
+            "score": 0.8628584415584413
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1930200121,
+        "content": "Code looks good. Would like to see a successful test run, and its results.",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1129#pullrequestreview-1930200121",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.242,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 97.0014285714286,
+            "syllables": 17,
+            "sentences": 2,
+            "score": 0.6299857142857139
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1520916936,
+        "content": "Does this have proper error handling for NaN etc?",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1129#discussion_r1520916936",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -251,28 +252,74 @@ export async function getProjectUrls() {\n   return projectUrls;\n }\n \n-// Function to calculate total rewards from open issues\n-export async function calculateTotalRewards(issues: GitHubIssue[]) {\n-  let totalRewards = 0;\n+// Function to calculate total rewards and tasks statistics\n+export async function calculateStatistics(issues: GitHubIssue[]) {\n+  const rewards = {\n+    notAssigned: 0,\n+    assigned: 0,\n+    completed: 0,\n+    total: 0,\n+  };\n+\n+  const tasks = {\n+    notAssigned: 0,\n+    assigned: 0,\n+    completed: 0,\n+    total: 0,\n+  };\n+\n   await issues.forEach((issue) => {\n     const labels = issue.labels as GitHubLabel[];\n-    if (issue.state === \"open\" && labels.some((label) => label.name as string)) {\n+    const isAssigned = labels.find((label) => (label.name as string).includes(LABELS.UNAVAILABLE));\n+    const isCompleted = issue.state === \"closed\";\n+\n+    // Increment tasks statistics\n+    tasks.total++;\n+    if (isAssigned) {\n+      tasks.assigned++;\n+    } else {\n+      tasks.notAssigned++;\n+    }\n+\n+    if (labels.some((label) => label.name as string)) {\n       const priceLabel = labels.find((label) => (label.name as string).includes(\"Pricing\"));\n       if (priceLabel) {\n+        // ignore pricing not set\n+        if (priceLabel.name === \"Pricing: not set\") return;\n+\n         const price = parseInt((priceLabel.name as string).split(\":\")[1].trim(), 10);\n-        totalRewards += price;\n+\n+        // Increment rewards statistics, if it is assigned but not completed\n+        if (isAssigned && !isCompleted) {\n+          rewards.assigned += price;",
+        "score": {
+          "reward": 2.472,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 84.90000000000003,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.7509999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1520917037,
+        "content": "```suggestion\r\n        // Increment completed rewards statistics\r\n```",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1129#discussion_r1520917037",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -251,28 +252,74 @@ export async function getProjectUrls() {\n   return projectUrls;\n }\n \n-// Function to calculate total rewards from open issues\n-export async function calculateTotalRewards(issues: GitHubIssue[]) {\n-  let totalRewards = 0;\n+// Function to calculate total rewards and tasks statistics\n+export async function calculateStatistics(issues: GitHubIssue[]) {\n+  const rewards = {\n+    notAssigned: 0,\n+    assigned: 0,\n+    completed: 0,\n+    total: 0,\n+  };\n+\n+  const tasks = {\n+    notAssigned: 0,\n+    assigned: 0,\n+    completed: 0,\n+    total: 0,\n+  };\n+\n   await issues.forEach((issue) => {\n     const labels = issue.labels as GitHubLabel[];\n-    if (issue.state === \"open\" && labels.some((label) => label.name as string)) {\n+    const isAssigned = labels.find((label) => (label.name as string).includes(LABELS.UNAVAILABLE));\n+    const isCompleted = issue.state === \"closed\";\n+\n+    // Increment tasks statistics\n+    tasks.total++;\n+    if (isAssigned) {\n+      tasks.assigned++;\n+    } else {\n+      tasks.notAssigned++;\n+    }\n+\n+    if (labels.some((label) => label.name as string)) {\n       const priceLabel = labels.find((label) => (label.name as string).includes(\"Pricing\"));\n       if (priceLabel) {\n+        // ignore pricing not set\n+        if (priceLabel.name === \"Pricing: not set\") return;\n+\n         const price = parseInt((priceLabel.name as string).split(\":\")[1].trim(), 10);\n-        totalRewards += price;\n+\n+        // Increment rewards statistics, if it is assigned but not completed\n+        if (isAssigned && !isCompleted) {\n+          rewards.assigned += price;\n+        } else if (!isAssigned && !isCompleted) {\n+          rewards.notAssigned += price;\n+        }\n+\n+        //Increment completed rewards statistics",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1930199223,
+            "effect": {
+              "addition": 77,
+              "deletion": 13
+            },
+            "reward": 2.7,
+            "priority": 3
+          },
+          {
+            "reviewId": 1930200121,
+            "effect": {
+              "addition": 1,
+              "deletion": 1
+            },
+            "reward": 0.06,
+            "priority": 3
+          },
+          {
+            "reviewId": 1930235758,
+            "effect": {
+              "addition": 16,
+              "deletion": 12
+            },
+            "reward": 0.84,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1129"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 14.65 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>3.6</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.51</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>2.826</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>3.714</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/devpool-directory/pull/1129\" target=\"_blank\" rel=\"noopener\">#1129</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+77 -13</td><td>3</td><td>2.7</td></tr><tr><td>+1 -1</td><td>3</td><td>0.06</td></tr><tr><td>+16 -12</td><td>3</td><td>0.84</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/19\" target=\"_blank\" rel=\"noopener\">I just realized that if we remove the assigned tasks, then it me&hellip;</a></h6></td><td><details><summary>3.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 68&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>1</td><td>1</td><td>4.51</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/19#issuecomment-1984959020\" target=\"_blank\" rel=\"noopener\">One is referring to the dollar amount, one is referring to the a&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.6</td><td>3</td><td>2.826</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1129#pullrequestreview-1930200121\" target=\"_blank\" rel=\"noopener\">Code looks good. Would like to see a successful test run, and it&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.242</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1129#discussion_r1520916936\" target=\"_blank\" rel=\"noopener\">Does this have proper error handling for NaN etc?</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.8</td><td>3</td><td>2.472</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1129#discussion_r1520917037\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion// Increment completed reward&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr></tbody></table></details>"
+  }
+}

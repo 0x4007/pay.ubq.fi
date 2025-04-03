@@ -1,0 +1,255 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 25,
+    "task": {
+      "reward": 25,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 25 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>25</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 13.274,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1712809624,
+        "content": "In the future it's better to link the original comments here on GitHub so we can see. It's a bit inconvenient looking at screenshots from my phone. \nWe should always display the deadline, and we should have the warning be the first visible row. Making it bold could be a good idea. \nThe additional space is an artifact of wrapping the table with the `code` element in order to render the text all monospace. This was intentional to display in monospace but the artifact we never found a solution for. Please let the table continue to render in monospace. \nLastly do not use the headers because apparently the text is center aligned. It should all be left aligned.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/632#issuecomment-1712809624",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.96,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 119,
+            "wordValue": 0.1,
+            "result": 2.5
+          },
+          "readability": {
+            "fleschKincaid": 66.86990662931841,
+            "syllables": 178,
+            "sentences": 9,
+            "score": 0.9313009337068159
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1712905419,
+        "content": "That's cool to see!\nUnfortunately in my experimentation I could not figure out how to monospace everything inside of the table with markdown. \nThe best I could do is individually wrap each sentence in the back ticks, but then it adds a background around just the words and looks bad. \nSo instead we now use the html\n```html\n<code>\n   <table>\n      ...\n   </table>\n</code>\n```\nElement which wraps the entire table and does not cause the backgrounds behind every word. \nIf you can solve that monospace problem with pure markdown then please feel free to use markdown.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/632#issuecomment-1712905419",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.674,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 90,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 66.36500000000001,
+            "syllables": 130,
+            "sentences": 5,
+            "score": 0.9363499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1855669932,
+        "content": "1. Error messages should be written as a comment leveraging `diff` and not prefix \"Error: \" because \"Error: \" recurses.\r\n```diff\r\n- My error message\r\n```\r\nMarkdown source code for reference:\r\n<img width=\"149\" alt=\"Screenshot 2023-08-18 at 05 33 46\" src=\"https://github.com/ubiquibot/staging/assets/4975670/43950b0d-07ac-4b55-ac32-5c155bd68ba0\">\r\n2. Permits valued at 0 should be skipped for commenting out or logged as debt. \r\n_Originally posted by @pavlovcik in https://github.com/ubiquibot/staging/issues/80#issuecomment-1676941586_",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/632",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 6.01,
+          "formatting": {
+            "content": {
+              "ol": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 53,
+            "wordValue": 0.1,
+            "result": 2.43
+          },
+          "readability": {
+            "fleschKincaid": 60.34002702702705,
+            "syllables": 115,
+            "sentences": 5,
+            "score": 0.9965997297297295
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1320767480,
+        "content": "I wonder if this is the most robust way to handle this. I don't have any other suggestions at this time.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/736#discussion_r1320767480",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -176,20 +177,24 @@ export const issueReopenedCallback = async (): Promise<void> => {\n     }\n     const assignee = events[0].assignee.login;\n \n-    // write penalty to db\n-    try {\n-      await addPenalty(assignee, repository.full_name, tokenAddress, networkId.toString(), amount);\n-    } catch (err) {\n-      logger.error(`Error writing penalty to db: ${err}`);\n-      return;\n-    }\n+    if (formattedAmount != \"0.0\") {",
+        "score": {
+          "reward": 1.146,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 87.99727272727276,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.7200272727272724
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1320767648,
+        "content": "This was intentional to display the table in monospace.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/736#discussion_r1320767648",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -16,24 +16,23 @@ export const tableComment = ({\n   days?: number;\n }) => {\n   return `\n-<code>",
+        "score": {
+          "reward": 0.424,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 47.30000000000004,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.8730000000000004
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1320767800,
+        "content": "This is a neat implementation thanks for this. Would you happen to have an example comment of this error rendering?",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/736#discussion_r1320767800",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -20,3 +20,7 @@ export const getNumericLevel = (level: Level) => {\n       return -1; // Invalid level\n   }\n };\n+\n+export const ErrorDiff = (message: unknown) => {\n+  return \"```diff\\n- \" + message + \"\\n```\";",
+        "score": {
+          "reward": 1.52,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 65.555,
+            "syllables": 31,
+            "sentences": 2,
+            "score": 0.9444499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1618824791,
+            "effect": {
+              "addition": 82,
+              "deletion": 45
+            },
+            "reward": 1.27,
+            "priority": 1
+          },
+          {
+            "reviewId": 1618925282,
+            "effect": {
+              "addition": 75,
+              "deletion": 52
+            },
+            "reward": 1.27,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquibot/pull/736"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 13.274 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>2.54</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>6.01</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>1.634</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>3.09</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquibot/pull/736\" target=\"_blank\" rel=\"noopener\">#736</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+82 -45</td><td>1</td><td>1.27</td></tr><tr><td>+75 -52</td><td>1</td><td>1.27</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/632\" target=\"_blank\" rel=\"noopener\">1. Error messages should be written as a comment leveraging &#96&hellip;</a></h6></td><td><details><summary>4.63</summary><pre>content:&#13;  content:&#13;    ol:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.2&#13;regex:&#13;  wordCount: 53&#13;  wordValue: 0.1&#13;  result: 2.43&#13;</pre></details></td><td>1</td><td>1</td><td>6.01</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/632#issuecomment-1712809624\" target=\"_blank\" rel=\"noopener\">In the future it's better to link the original comments here on &hellip;</a></h6></td><td><details><summary>2.5</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 119&#13;  wordValue: 0.1&#13;  result: 2.5&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.96</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/632#issuecomment-1712905419\" target=\"_blank\" rel=\"noopener\">That's cool to see!Unfortunately in my experimentation I could &hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 90&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.674</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/736#discussion_r1320767480\" target=\"_blank\" rel=\"noopener\">I wonder if this is the most robust way to handle this. I don't &hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.6</td><td>1</td><td>1.146</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/736#discussion_r1320767648\" target=\"_blank\" rel=\"noopener\">This was intentional to display the table in monospace.</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.424</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/736#discussion_r1320767800\" target=\"_blank\" rel=\"noopener\">This is a neat implementation thanks for this. Would you happen &hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.52</td></tr></tbody></table></details>"
+  }
+}

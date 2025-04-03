@@ -1,0 +1,482 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 101.505,
+    "task": {
+      "reward": 100,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 1879113022,
+        "content": "Resolves https://github.com/ubiquity/rpc-handler/issues/16\r\nSplit from #6 \r\nRequired by #14",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/15",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 1.505,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 69.5025,
+            "syllables": 23,
+            "sentences": 2,
+            "score": 0.904975
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2121366502,
+        "content": "the jest workflow shouldn't run `yarn build` only `yarn test` which builds for testing",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2121366502",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 87.99727272727276,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.7200272727272724
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2121457371,
+        "content": "CI is failing here because it's using workflows from `development` I'm sure\r\n![image](https://github.com/ubiquity/rpc-handler/assets/106303466/7dc05d25-428a-4bb2-bd2a-e68367baeed4)\r\nTesting it myself my CI keeps throwing this below but as you can see above all test cases are passing, I just need to figure out why my CI seems to be busted. Lots of related gh issues for it, tried a fair few solutions to no avail, yet.\r\n![image](https://github.com/ubiquity/rpc-handler/assets/106303466/33c4fc28-4a88-4516-a639-5f0743b5acfa)",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2121457371",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 62,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 68.93774193548388,
+            "syllables": 78,
+            "sentences": 2,
+            "score": 0.9106225806451611
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2122078421,
+        "content": "You should only need to fill in the required config props and your golden. I fresh installed, tried both build envs with your script and with `tests/script-test.ts`\r\n```ts\r\nconst config: HandlerConstructorConfig = {\r\n  networkId: 1,\r\n  rpcTimeout: 1500,\r\n  autoStorage: false,\r\n  cacheRefreshCycles: 10,\r\n  networkName: null,\r\n  networkRpcs: null,\r\n  runtimeRpcs: null,\r\n};\r\n```",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2122078421",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 92.77076923076925,
+            "syllables": 31,
+            "sentences": 2,
+            "score": 0.6722923076923075
+          },
+          "multiplier": 0,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2122168572,
+        "content": "because of the CI errors I was having seeing as the fresh lock didn't change anything and typically no lock is committed. \r\nThink it's best to add it back?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2122168572",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 79.21217741935487,
+            "syllables": 41,
+            "sentences": 2,
+            "score": 0.8078782258064513
+          },
+          "multiplier": 0,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2122195626,
+        "content": "- improve package exports reducing import path down to `@packageName`\r\n- fix latency naming convention\r\n- add configurable and default rpcTimeout\r\n- refactor tests\r\n- create test specific esbuild env\r\ntime 2-4 hrs \r\n@rndquu\r\nThe task I'd say is making the package polymorphic, the latency and timeout fix happening over the course of review. Tests needed refactored because of how the way the build output was changed in improving exports.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2122195626",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 8
+              }
+            },
+            "result": 0.5
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 66,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 33.621818181818185,
+            "syllables": 109,
+            "sentences": 2,
+            "score": 0.7362181818181819
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 101.505 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>100</td></tr><tr><td>Review</td><td>Comment</td><td>6</td><td>1.505</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/15\" target=\"_blank\" rel=\"noopener\">Resolves https://github.com/ubiquity/rpc-handler/issues/16Spli&hellip;</a></h6></td><td><details><summary>1.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.505</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2121366502\" target=\"_blank\" rel=\"noopener\">the jest workflow shouldn't run &#96;yarn build&#96; only &#96;y&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2121457371\" target=\"_blank\" rel=\"noopener\">CI is failing here because it's using workflows from &#96;develo&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 62&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2122078421\" target=\"_blank\" rel=\"noopener\">You should only need to fill in the required config props and yo&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2122168572\" target=\"_blank\" rel=\"noopener\">because of the CI errors I was having seeing as the fresh lock d&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2122195626\" target=\"_blank\" rel=\"noopener\">- improve package exports reducing import path down to &#96;@pac&hellip;</a></h6></td><td><details><summary>0.5</summary><pre>content:&#13;  content:&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;    p:&#13;      score: 0&#13;      elementCount: 8&#13;  result: 0.5&#13;regex:&#13;  wordCount: 66&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>1</td><td>0</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 10.075,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2307837083,
+        "content": "What should be done:\r\n- improve package exports reducing import path down to @packageName\r\n- fix latency naming convention\r\n- add configurable and default rpcTimeout\r\n- refactor tests\r\n- create test specific esbuild env",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/16",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 2.75,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              }
+            },
+            "result": 0.5
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 16.951724137931052,
+            "syllables": 55,
+            "sentences": 1,
+            "score": 0.5695172413793105
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2122045024,
+        "content": "@Keyrxng \r\n1. Pls update readme\r\n2. Check this code:\r\n```\r\nimport { HandlerConstructorConfig } from \"./dist\";\r\nimport { RPCHandler } from \"./dist\";\r\nconst config: HandlerConstructorConfig = {\r\n    networkId: 1,\r\n    autoStorage: false,\r\n  };\r\nasync function main() {\r\n    const handler = new RPCHandler(config);\r\n    const provider = await handler.getFastestRpcProvider();\r\n    console.log(provider.connection);\r\n    console.log('success');\r\n}\r\nmain();\r\n```\r\nThe code above produces this error:\r\n```\r\n(node:14881) TimeoutOverflowWarning: 1.7976931348623157e+308 does not fit into a 32-bit signed integer.\r\nTimeout duration was set to 1.\r\n[RPCService] Failed to find fastest RPC\r\n/Users/rndquu/Public/projects/backend/rpc-handler/dist/index.js:17021\r\n      throw new Error(\"Failed to find fastest RPC\");\r\n            ^\r\nError: Failed to find fastest RPC\r\n    at _RPCHandler.testRpcPerformance (/Users/rndquu/Public/projects/backend/rpc-handler/dist/index.js:17021:13)\r\n    at async _RPCHandler.getFastestRpcProvider (/Users/rndquu/Public/projects/backend/rpc-handler/dist/index.js:17001:24)\r\n    at main (/Users/rndquu/Public/projects/backend/rpc-handler/my.ts:11:22)\r\n```\r\nPls fix",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2122045024",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.644,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 84.45000000000003,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.7554999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2122160971,
+        "content": "@Keyrxng Why did you remove `yarn.lock` completely?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2122160971",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.514,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 59.745000000000005,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.9974500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.65
+        }
+      },
+      {
+        "id": 2122167583,
+        "content": "@Keyrxng Could you merge https://github.com/Keyrxng/web3-rpc-racer-1/pull/3 ?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2122167583",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.309,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 103.04428571428575,
+            "syllables": 16,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2122186515,
+        "content": "@Keyrxng Could you describe the main code changes of this exact PR and provide a time estimate for it?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2122186515",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.416,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 80.68684210526318,
+            "syllables": 24,
+            "sentences": 1,
+            "score": 0.7931315789473682
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2122187822,
+        "content": "P.S. [Tests](https://github.com/ubiquity/rpc-handler/actions/runs/9172207708/job/25218203769?pr=15) seems to be passing + the package works fine",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2122187822",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.92,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 103.13151515151516,
+            "syllables": 13,
+            "sentences": 3,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.75
+        }
+      },
+      {
+        "id": 2122200901,
+        "content": "Pls self assign https://github.com/ubiquity/rpc-handler/issues/16",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2122200901",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.522,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 62.81613636363636,
+            "syllables": 18,
+            "sentences": 2,
+            "score": 0.9718386363636364
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/rpc-handler/pull/15"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 10.075 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>2.75</td></tr><tr><td>Review</td><td>Comment</td><td>6</td><td>7.325</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/16\" target=\"_blank\" rel=\"noopener\">What should be done:- improve package exports reducing import &hellip;</a></h6></td><td><details><summary>2.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;  result: 0.5&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>1</td><td>1</td><td>2.75</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2122045024\" target=\"_blank\" rel=\"noopener\">@Keyrxng 1. Pls update readme2. Check this code:&#96;&#96;&hellip;</a></h6></td><td><details><summary>1.41</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.95</td><td>1</td><td>1.644</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2122160971\" target=\"_blank\" rel=\"noopener\">@Keyrxng Why did you remove &#96;yarn.lock&#96; completely?</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.65</td><td>1</td><td>0.514</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2122167583\" target=\"_blank\" rel=\"noopener\">@Keyrxng Could you merge https://github.com/Keyrxng/web3-rpc-rac&hellip;</a></h6></td><td><details><summary>1.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.309</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2122186515\" target=\"_blank\" rel=\"noopener\">@Keyrxng Could you describe the main code changes of this exact &hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.416</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2122187822\" target=\"_blank\" rel=\"noopener\">P.S. [Tests](https://github.com/ubiquity/rpc-handler/actions/run&hellip;</a></h6></td><td><details><summary>1.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.75</td><td>1</td><td>1.92</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/15#issuecomment-2122200901\" target=\"_blank\" rel=\"noopener\">Pls self assign https://github.com/ubiquity/rpc-handler/issues/16</a></h6></td><td><details><summary>1.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.522</td></tr></tbody></table></details>"
+  }
+}

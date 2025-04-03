@@ -1,0 +1,2140 @@
+{
+  "shiv810": {
+    "userId": 53160903,
+    "total": 611.894,
+    "task": {
+      "reward": 600,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2563217361,
+        "content": "@0x4007 @zugdev, could you add the `VOYAGEAI_API_KEY` to the repo secrets ?",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/187#issuecomment-2563217361",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.97,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 86.70500000000001,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.7329499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2606216793,
+        "content": "@0x4007 @zugdev , could you assign this issue to me and add a time estimate for this?",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/187#issuecomment-2606216793",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 3.792,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 79.5575,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 0.804425
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2753675233,
+        "content": "- [x]  Get User Access Token (Update OAuth permissions ?)\r\n- [x]  Add the new issues for the user using the token\r\n```\r\nWe need to populate our matchmaking database. We \"register\" users in our system when they \"Sign in with GitHub\" on https://devpool.directory/\r\n```\r\n_Originally posted by @0x4007  in [#56](https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/56#issue-2717054509)_",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/187",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.76,
+          "formatting": {
+            "content": {
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 58.78750000000002,
+            "syllables": 40,
+            "sentences": 2,
+            "score": 0.9878750000000003
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2252864990,
+        "content": "Resolves #187 \r\n- Adds the scraper logic\r\n- Fetches if the data in the DB is older than 24 hrs",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 1.372,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 80.46500000000002,
+            "syllables": 23,
+            "sentences": 1,
+            "score": 0.7953499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1904559592,
+        "content": "The `issues` table has two columns, `plaintext` and `markdown`. I think it would be a good idea to store the raw data and process it on the fly instead.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1904559592",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -0,0 +1,351 @@\n+import { Context } from \"./types\";\n+import { SupabaseClient } from \"@supabase/supabase-js\";\n+import { VoyageAIClient } from \"voyageai\";\n+import { Octokit } from \"@octokit/rest\";\n+import markdownit from \"markdown-it\";\n+import plainTextPlugin from \"markdown-it-plain-text\";\n+import { validatePOST } from \"./validators\";\n+\n+const VECTOR_SIZE = 1024;\n+\n+interface MarkdownItWithPlainText extends markdownit {\n+  plainText: string;\n+}\n+\n+interface PayloadType {\n+  issue: {\n+    nodeId: string;\n+    number: number;\n+    title: string;\n+    body: string;\n+    state: string;\n+    stateReason: string | null;\n+    repositoryName: string;\n+    repositoryId: number;\n+    assignees: string[];\n+    createdAt: string;\n+    closedAt: string | null;\n+    updatedAt: string;\n+  };\n+  action: string;\n+  sender: {\n+    login: string;\n+  };\n+  repository: {\n+    id: number;\n+    node_id: string;\n+    name: string;\n+    full_name: string;\n+    owner: {\n+      login: string;\n+      id: number;\n+      type: string;\n+      site_admin: boolean;\n+    };\n+  };\n+}\n+\n+interface IssueNode {\n+  id: string;\n+  number: number;\n+  title: string;\n+  body: string;\n+  state: string;\n+  stateReason: string | null;\n+  createdAt: string;\n+  updatedAt: string;\n+  closedAt: string | null;\n+  author: {\n+    login: string;\n+  } | null;\n+  assignees: {\n+    nodes: Array<{\n+      login: string;\n+    }>;\n+  };\n+  repository: {\n+    id: string;\n+    name: string;\n+    owner: {\n+      login: string;\n+    };\n+  };\n+}\n+\n+interface GraphQlSearchResponse {\n+  search: {\n+    pageInfo: {\n+      hasNextPage: boolean;\n+      endCursor: string | null;\n+    };\n+    nodes: Array<IssueNode>;\n+  };\n+}\n+\n+export const corsHeaders = {\n+  \"Access-Control-Allow-Origin\": \"*\",\n+  \"Access-Control-Allow-Methods\": \"GET\",\n+  \"Access-Control-Allow-Headers\": \"Content-Type\",\n+};\n+\n+export async function onRequest(ctx: Context): Promise<Response> {\n+  const { request, env } = ctx;\n+  try {\n+    switch (request.method) {\n+      case \"POST\": {\n+        const result = await validatePOST(request);\n+        if (!result.isValid || !result.gitHubUser) {\n+          return new Response(\"Unauthorized\", {\n+            headers: corsHeaders,\n+            status: 400,\n+          });\n+        }\n+        const githubUserName = result.gitHubUser.login;\n+        const timestamp = result.timestamp; // Unix timestamp in milliseconds\n+\n+        try {\n+          const supabase = new SupabaseClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n+          const response = await issueScraper(githubUserName, supabase, env.VOYAGEAI_API_KEY, result.authToken, timestamp);\n+          return new Response(response, {\n+            headers: corsHeaders,\n+            status: 200,\n+          });\n+        } catch (error) {\n+          console.error(\"Error processing request:\", error);\n+          return new Response(\"Internal Server Error\", {\n+            headers: corsHeaders,\n+            status: 500,\n+          });\n+        }\n+      }\n+\n+      default:\n+        return new Response(\"Method Not Allowed\", {\n+          headers: corsHeaders,\n+          status: 405,\n+        });\n+    }\n+  } catch (error) {\n+    console.error(\"Error processing request:\", error);\n+    return new Response(\"Internal Server Error\", {\n+      headers: corsHeaders,\n+      status: 500,\n+    });\n+  }\n+}\n+\n+function markdownToPlainText(markdown: string | null): string | null {",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 89.51692307692309,
+            "syllables": 32,
+            "sentences": 2,
+            "score": 0.704830769230769
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1904560882,
+        "content": "It should be possible to implement, but if a request fails and we retry multiple times, the entire request will eventually be terminated once it hits the maximum CPU wall time.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1904560882",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -0,0 +1,351 @@\n+import { Context } from \"./types\";\n+import { SupabaseClient } from \"@supabase/supabase-js\";\n+import { VoyageAIClient } from \"voyageai\";\n+import { Octokit } from \"@octokit/rest\";\n+import markdownit from \"markdown-it\";\n+import plainTextPlugin from \"markdown-it-plain-text\";\n+import { validatePOST } from \"./validators\";\n+\n+const VECTOR_SIZE = 1024;\n+\n+interface MarkdownItWithPlainText extends markdownit {\n+  plainText: string;\n+}\n+\n+interface PayloadType {\n+  issue: {\n+    nodeId: string;\n+    number: number;\n+    title: string;\n+    body: string;\n+    state: string;\n+    stateReason: string | null;\n+    repositoryName: string;\n+    repositoryId: number;\n+    assignees: string[];\n+    createdAt: string;\n+    closedAt: string | null;\n+    updatedAt: string;\n+  };\n+  action: string;\n+  sender: {\n+    login: string;\n+  };\n+  repository: {\n+    id: number;\n+    node_id: string;\n+    name: string;\n+    full_name: string;\n+    owner: {\n+      login: string;\n+      id: number;\n+      type: string;\n+      site_admin: boolean;\n+    };\n+  };\n+}\n+\n+interface IssueNode {\n+  id: string;\n+  number: number;\n+  title: string;\n+  body: string;\n+  state: string;\n+  stateReason: string | null;\n+  createdAt: string;\n+  updatedAt: string;\n+  closedAt: string | null;\n+  author: {\n+    login: string;\n+  } | null;\n+  assignees: {\n+    nodes: Array<{\n+      login: string;\n+    }>;\n+  };\n+  repository: {\n+    id: string;\n+    name: string;\n+    owner: {\n+      login: string;\n+    };\n+  };\n+}\n+\n+interface GraphQlSearchResponse {\n+  search: {\n+    pageInfo: {\n+      hasNextPage: boolean;\n+      endCursor: string | null;\n+    };\n+    nodes: Array<IssueNode>;\n+  };\n+}\n+\n+export const corsHeaders = {\n+  \"Access-Control-Allow-Origin\": \"*\",\n+  \"Access-Control-Allow-Methods\": \"GET\",\n+  \"Access-Control-Allow-Headers\": \"Content-Type\",\n+};\n+\n+export async function onRequest(ctx: Context): Promise<Response> {\n+  const { request, env } = ctx;\n+  try {\n+    switch (request.method) {\n+      case \"POST\": {\n+        const result = await validatePOST(request);\n+        if (!result.isValid || !result.gitHubUser) {\n+          return new Response(\"Unauthorized\", {\n+            headers: corsHeaders,\n+            status: 400,\n+          });\n+        }\n+        const githubUserName = result.gitHubUser.login;\n+        const timestamp = result.timestamp; // Unix timestamp in milliseconds\n+\n+        try {\n+          const supabase = new SupabaseClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n+          const response = await issueScraper(githubUserName, supabase, env.VOYAGEAI_API_KEY, result.authToken, timestamp);\n+          return new Response(response, {\n+            headers: corsHeaders,\n+            status: 200,\n+          });\n+        } catch (error) {\n+          console.error(\"Error processing request:\", error);\n+          return new Response(\"Internal Server Error\", {\n+            headers: corsHeaders,\n+            status: 500,\n+          });\n+        }\n+      }\n+\n+      default:\n+        return new Response(\"Method Not Allowed\", {\n+          headers: corsHeaders,\n+          status: 405,\n+        });\n+    }\n+  } catch (error) {\n+    console.error(\"Error processing request:\", error);\n+    return new Response(\"Internal Server Error\", {\n+      headers: corsHeaders,\n+      status: 500,\n+    });\n+  }\n+}\n+\n+function markdownToPlainText(markdown: string | null): string | null {\n+  if (!markdown) return markdown;\n+  const md = markdownit() as MarkdownItWithPlainText;\n+  md.use(plainTextPlugin);\n+  md.render(markdown);\n+  return md.plainText;\n+}\n+\n+const SEARCH_ISSUES_QUERY = `\n+  query SearchIssues($searchText: String!, $after: String) {\n+    search(\n+      query: $searchText,\n+      type: ISSUE,\n+      first: 100,\n+      after: $after\n+    ) {\n+      pageInfo {\n+        hasNextPage\n+        endCursor\n+      }\n+      nodes {\n+        ... on Issue {\n+          id\n+          number\n+          title\n+          body\n+          state\n+          stateReason\n+          createdAt\n+          updatedAt\n+          closedAt\n+          author {\n+            login\n+          }\n+          assignees(first: 10) {\n+            nodes {\n+              login\n+            }\n+          }\n+          repository {\n+            id\n+            name\n+            owner {\n+              login\n+            }\n+          }\n+        }\n+      }\n+    }\n+  }\n+`;\n+\n+async function fetchUserIssuesBatch(octokit: InstanceType<typeof Octokit>, username: string, lastScraped?: number): Promise<IssueNode[]> {\n+  const allIssues: IssueNode[] = [];\n+  let hasNextPage = true;\n+  let cursor: string | null = null;\n+\n+  // Construct the query with the lastScraped timestamp\n+  const searchText = `assignee:${username} is:issue is:closed reason:completed ${lastScraped ? `closed:>${new Date(lastScraped).toISOString()}` : \"\"}`;\n+\n+  while (hasNextPage) {\n+    const variables: { searchText: string; after?: string } = { searchText };\n+    if (cursor) {\n+      variables.after = cursor;\n+    }\n+\n+    const response: GraphQlSearchResponse = await octokit.graphql<GraphQlSearchResponse>(SEARCH_ISSUES_QUERY, variables);\n+\n+    allIssues.push(...response.search.nodes);\n+\n+    hasNextPage = response.search.pageInfo.hasNextPage;\n+    cursor = response.search.pageInfo.endCursor;\n+  }\n+\n+  return allIssues;\n+}\n+\n+async function batchEmbeddings(voyageClient: VoyageAIClient, texts: string[]): Promise<(number[] | undefined)[]> {\n+  try {\n+    const embeddingResponse = await voyageClient.embed({\n+      input: texts,\n+      model: \"voyage-large-2-instruct\",\n+      inputType: \"document\",\n+    });\n+    return embeddingResponse.data?.map((item) => item.embedding) || [];\n+  } catch (error) {\n+    console.error(\"Error batching embeddings:\", error);\n+    throw error;\n+  }\n+}\n+\n+async function batchUpsertIssues(\n+  supabase: SupabaseClient,\n+  issues: Array<{\n+    id: string;\n+    markdown: string;\n+    plaintext: string;\n+    embedding: string;\n+    author_id: number;\n+    payload: PayloadType;\n+  }>\n+): Promise<void> {\n+  const { error } = await supabase.from(\"issues\").upsert(issues);\n+  if (error) {\n+    throw new Error(`Error during batch upsert: ${error.message}`);",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 44.37645161290325,
+            "syllables": 48,
+            "sentences": 1,
+            "score": 0.8437645161290326
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1904573079,
+        "content": "Currently, when issues are marked as completed, a flag is set in the local storage, but it is not cleared upon logout. When the user logs in again, if the flag is older than 24 hours, its value is used to retrieve any recently closed issues.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1904573079",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -0,0 +1,49 @@\n+import { checkSupabaseSession } from \"../rendering/render-github-login-button\";\n+\n+export async function startIssueScraper(username: string) {\n+  const supabaseAuth = await checkSupabaseSession();\n+\n+  // Get the last fetch timestamp\n+  const lastFetchKey = `lastFetch_${username}`;\n+  const lastFetch = localStorage.getItem(lastFetchKey);\n+  const now = Date.now();\n+\n+  // Prepare the request payload\n+  const requestBody: { authToken: string; timestamp?: number } = {\n+    authToken: supabaseAuth.provider_token,\n+  };\n+\n+  if (lastFetch) {\n+    const lastFetchTimestamp = Number(lastFetch);\n+    if (now - lastFetchTimestamp < 24 * 60 * 60 * 1000) {\n+      return JSON.stringify({\n+        success: true,\n+        message: \"Skipping fetch - last fetch was less than 24 hours ago\",",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 46,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 69.46391304347827,
+            "syllables": 62,
+            "sentences": 2,
+            "score": 0.9053608695652173
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1904638267,
+        "content": "It could be anything; it's just a directory name. Changed this back to the original value.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1904638267",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -18,12 +18,33 @@ jobs:\n         with:\n           repository: ${{ github.repository }}\n           production_branch: ${{ github.event.repository.default_branch }}\n-          build_artifact_name: \"static\"\n-          output_directory: \"static\"\n+          build_artifact_name: \"full-stack-app\"\n+          output_directory: \"full-stack-app\"",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 68.81926470588238,
+            "syllables": 26,
+            "sentences": 2,
+            "score": 0.9118073529411762
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1905985872,
+        "content": "Yes, this would work with private profile, as we are querying with user's GitHub token.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1905985872",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -0,0 +1,368 @@\n+import { Context } from \"./types\";\n+import { SupabaseClient } from \"@supabase/supabase-js\";\n+import { VoyageAIClient } from \"voyageai\";\n+import { Octokit } from \"@octokit/rest\";\n+import markdownit from \"markdown-it\";\n+import plainTextPlugin from \"markdown-it-plain-text\";\n+import { validatePOST } from \"./validators\";\n+\n+const VECTOR_SIZE = 1024;\n+\n+interface MarkdownItWithPlainText extends markdownit {\n+  plainText: string;\n+}\n+\n+interface PayloadType {\n+  issue: {\n+    nodeId: string;\n+    number: number;\n+    title: string;\n+    body: string;\n+    state: string;\n+    stateReason: string | null;\n+    repositoryName: string;\n+    repositoryId: number;\n+    assignees: string[];\n+    createdAt: string;\n+    closedAt: string | null;\n+    updatedAt: string;\n+  };\n+  action: string;\n+  sender: {\n+    login: string;\n+  };\n+  repository: {\n+    id: number;\n+    node_id: string;\n+    name: string;\n+    full_name: string;\n+    owner: {\n+      login: string;\n+      id: number;\n+      type: string;\n+      site_admin: boolean;\n+    };\n+  };\n+}\n+\n+interface IssueNode {\n+  id: string;\n+  number: number;\n+  title: string;\n+  body: string;\n+  state: string;\n+  stateReason: string | null;\n+  createdAt: string;\n+  updatedAt: string;\n+  closedAt: string | null;\n+  author: {\n+    login: string;\n+  } | null;\n+  assignees: {\n+    nodes: Array<{\n+      login: string;\n+    }>;\n+  };\n+  repository: {\n+    id: string;\n+    name: string;\n+    owner: {\n+      login: string;\n+    };\n+  };\n+}\n+\n+interface GraphQlSearchResponse {\n+  search: {\n+    pageInfo: {\n+      hasNextPage: boolean;\n+      endCursor: string | null;\n+    };\n+    nodes: Array<IssueNode>;\n+  };\n+}\n+\n+export const corsHeaders = {\n+  \"Access-Control-Allow-Origin\": \"*\",\n+  \"Access-Control-Allow-Methods\": \"GET\",\n+  \"Access-Control-Allow-Headers\": \"Content-Type\",\n+};\n+\n+export async function onRequest(ctx: Context): Promise<Response> {\n+  const { request, env } = ctx;\n+  try {\n+    switch (request.method) {\n+      case \"POST\": {\n+        const result = await validatePOST(request);\n+        if (!result.isValid || !result.gitHubUser) {\n+          return new Response(\"Unauthorized\", {\n+            headers: corsHeaders,\n+            status: 400,\n+          });\n+        }\n+        const githubUserName = result.gitHubUser.login;\n+        const timestamp = result.timestamp; // Unix timestamp in milliseconds\n+\n+        try {\n+          const supabase = new SupabaseClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n+          const response = await issueScraper(githubUserName, supabase, env.VOYAGEAI_API_KEY, result.authToken, timestamp);\n+          return new Response(response, {\n+            headers: corsHeaders,\n+            status: 200,\n+          });\n+        } catch (error) {\n+          console.error(\"Error processing request:\", error);\n+          return new Response(\"Internal Server Error\", {\n+            headers: corsHeaders,\n+            status: 500,\n+          });\n+        }\n+      }\n+\n+      default:\n+        return new Response(\"Method Not Allowed\", {\n+          headers: corsHeaders,\n+          status: 405,\n+        });\n+    }\n+  } catch (error) {\n+    console.error(\"Error processing request:\", error);\n+    return new Response(\"Internal Server Error\", {\n+      headers: corsHeaders,\n+      status: 500,\n+    });\n+  }\n+}\n+\n+function markdownToPlainText(markdown: string | null): string | null {\n+  if (!markdown) return markdown;\n+  const md = markdownit() as MarkdownItWithPlainText;\n+  md.use(plainTextPlugin);\n+  md.render(markdown);\n+  return md.plainText;\n+}\n+\n+const SEARCH_ISSUES_QUERY = `\n+  query SearchIssues($searchText: String!, $after: String) {\n+    search(\n+      query: $searchText,\n+      type: ISSUE,\n+      first: 100,\n+      after: $after\n+    ) {\n+      pageInfo {\n+        hasNextPage\n+        endCursor\n+      }\n+      nodes {\n+        ... on Issue {\n+          id\n+          number\n+          title\n+          body\n+          state\n+          stateReason\n+          createdAt\n+          updatedAt\n+          closedAt\n+          author {\n+            login\n+          }\n+          assignees(first: 10) {\n+            nodes {\n+              login\n+            }\n+          }\n+          repository {\n+            id\n+            name\n+            owner {\n+              login\n+            }\n+          }\n+        }\n+      }\n+    }\n+  }\n+`;\n+\n+async function fetchUserIssuesBatch(octokit: InstanceType<typeof Octokit>, username: string, lastScraped?: number): Promise<IssueNode[]> {\n+  const allIssues: IssueNode[] = [];\n+  let hasNextPage = true;\n+  let cursor: string | null = null;\n+\n+  // Construct the query with the lastScraped timestamp\n+  const searchText = `assignee:${username} is:issue is:closed reason:completed ${lastScraped ? `closed:>${new Date(lastScraped).toISOString()}` : \"\"}`;",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 68.9825,
+            "syllables": 23,
+            "sentences": 1,
+            "score": 0.910175
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1905988591,
+        "content": "I'm not entirely sure about this. @zugdev mentioned that Bun is related to Cloudflare, while Yarn is the main one.So, I've reverted the `bun.lockb` to match the repo version and added the dependencies to the `yarn.lock`.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1905988591",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 37,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 75.41936936936936,
+            "syllables": 52,
+            "sentences": 3,
+            "score": 0.8458063063063064
+          },
+          "multiplier": 0,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1912751868,
+        "content": "Should the retries be handled in this task? I think the error for this function should be very rare.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1912751868",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -0,0 +1,351 @@\n+import { Context } from \"./types\";\n+import { SupabaseClient } from \"@supabase/supabase-js\";\n+import { VoyageAIClient } from \"voyageai\";\n+import { Octokit } from \"@octokit/rest\";\n+import markdownit from \"markdown-it\";\n+import plainTextPlugin from \"markdown-it-plain-text\";\n+import { validatePOST } from \"./validators\";\n+\n+const VECTOR_SIZE = 1024;\n+\n+interface MarkdownItWithPlainText extends markdownit {\n+  plainText: string;\n+}\n+\n+interface PayloadType {\n+  issue: {\n+    nodeId: string;\n+    number: number;\n+    title: string;\n+    body: string;\n+    state: string;\n+    stateReason: string | null;\n+    repositoryName: string;\n+    repositoryId: number;\n+    assignees: string[];\n+    createdAt: string;\n+    closedAt: string | null;\n+    updatedAt: string;\n+  };\n+  action: string;\n+  sender: {\n+    login: string;\n+  };\n+  repository: {\n+    id: number;\n+    node_id: string;\n+    name: string;\n+    full_name: string;\n+    owner: {\n+      login: string;\n+      id: number;\n+      type: string;\n+      site_admin: boolean;\n+    };\n+  };\n+}\n+\n+interface IssueNode {\n+  id: string;\n+  number: number;\n+  title: string;\n+  body: string;\n+  state: string;\n+  stateReason: string | null;\n+  createdAt: string;\n+  updatedAt: string;\n+  closedAt: string | null;\n+  author: {\n+    login: string;\n+  } | null;\n+  assignees: {\n+    nodes: Array<{\n+      login: string;\n+    }>;\n+  };\n+  repository: {\n+    id: string;\n+    name: string;\n+    owner: {\n+      login: string;\n+    };\n+  };\n+}\n+\n+interface GraphQlSearchResponse {\n+  search: {\n+    pageInfo: {\n+      hasNextPage: boolean;\n+      endCursor: string | null;\n+    };\n+    nodes: Array<IssueNode>;\n+  };\n+}\n+\n+export const corsHeaders = {\n+  \"Access-Control-Allow-Origin\": \"*\",\n+  \"Access-Control-Allow-Methods\": \"GET\",\n+  \"Access-Control-Allow-Headers\": \"Content-Type\",\n+};\n+\n+export async function onRequest(ctx: Context): Promise<Response> {\n+  const { request, env } = ctx;\n+  try {\n+    switch (request.method) {\n+      case \"POST\": {\n+        const result = await validatePOST(request);\n+        if (!result.isValid || !result.gitHubUser) {\n+          return new Response(\"Unauthorized\", {\n+            headers: corsHeaders,\n+            status: 400,\n+          });\n+        }\n+        const githubUserName = result.gitHubUser.login;\n+        const timestamp = result.timestamp; // Unix timestamp in milliseconds\n+\n+        try {\n+          const supabase = new SupabaseClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n+          const response = await issueScraper(githubUserName, supabase, env.VOYAGEAI_API_KEY, result.authToken, timestamp);\n+          return new Response(response, {\n+            headers: corsHeaders,\n+            status: 200,\n+          });\n+        } catch (error) {\n+          console.error(\"Error processing request:\", error);\n+          return new Response(\"Internal Server Error\", {\n+            headers: corsHeaders,\n+            status: 500,\n+          });\n+        }\n+      }\n+\n+      default:\n+        return new Response(\"Method Not Allowed\", {\n+          headers: corsHeaders,\n+          status: 405,\n+        });\n+    }\n+  } catch (error) {\n+    console.error(\"Error processing request:\", error);\n+    return new Response(\"Internal Server Error\", {\n+      headers: corsHeaders,\n+      status: 500,\n+    });\n+  }\n+}\n+\n+function markdownToPlainText(markdown: string | null): string | null {\n+  if (!markdown) return markdown;\n+  const md = markdownit() as MarkdownItWithPlainText;\n+  md.use(plainTextPlugin);\n+  md.render(markdown);\n+  return md.plainText;\n+}\n+\n+const SEARCH_ISSUES_QUERY = `\n+  query SearchIssues($searchText: String!, $after: String) {\n+    search(\n+      query: $searchText,\n+      type: ISSUE,\n+      first: 100,\n+      after: $after\n+    ) {\n+      pageInfo {\n+        hasNextPage\n+        endCursor\n+      }\n+      nodes {\n+        ... on Issue {\n+          id\n+          number\n+          title\n+          body\n+          state\n+          stateReason\n+          createdAt\n+          updatedAt\n+          closedAt\n+          author {\n+            login\n+          }\n+          assignees(first: 10) {\n+            nodes {\n+              login\n+            }\n+          }\n+          repository {\n+            id\n+            name\n+            owner {\n+              login\n+            }\n+          }\n+        }\n+      }\n+    }\n+  }\n+`;\n+\n+async function fetchUserIssuesBatch(octokit: InstanceType<typeof Octokit>, username: string, lastScraped?: number): Promise<IssueNode[]> {\n+  const allIssues: IssueNode[] = [];\n+  let hasNextPage = true;\n+  let cursor: string | null = null;\n+\n+  // Construct the query with the lastScraped timestamp\n+  const searchText = `assignee:${username} is:issue is:closed reason:completed ${lastScraped ? `closed:>${new Date(lastScraped).toISOString()}` : \"\"}`;\n+\n+  while (hasNextPage) {\n+    const variables: { searchText: string; after?: string } = { searchText };\n+    if (cursor) {\n+      variables.after = cursor;\n+    }\n+\n+    const response: GraphQlSearchResponse = await octokit.graphql<GraphQlSearchResponse>(SEARCH_ISSUES_QUERY, variables);\n+\n+    allIssues.push(...response.search.nodes);\n+\n+    hasNextPage = response.search.pageInfo.hasNextPage;\n+    cursor = response.search.pageInfo.endCursor;\n+  }\n+\n+  return allIssues;\n+}\n+\n+async function batchEmbeddings(voyageClient: VoyageAIClient, texts: string[]): Promise<(number[] | undefined)[]> {\n+  try {\n+    const embeddingResponse = await voyageClient.embed({\n+      input: texts,\n+      model: \"voyage-large-2-instruct\",\n+      inputType: \"document\",\n+    });\n+    return embeddingResponse.data?.map((item) => item.embedding) || [];\n+  } catch (error) {\n+    console.error(\"Error batching embeddings:\", error);\n+    throw error;\n+  }\n+}\n+\n+async function batchUpsertIssues(\n+  supabase: SupabaseClient,\n+  issues: Array<{\n+    id: string;\n+    markdown: string;\n+    plaintext: string;\n+    embedding: string;\n+    author_id: number;\n+    payload: PayloadType;\n+  }>\n+): Promise<void> {\n+  const { error } = await supabase.from(\"issues\").upsert(issues);\n+  if (error) {\n+    throw new Error(`Error during batch upsert: ${error.message}`);",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 94.78197368421053,
+            "syllables": 23,
+            "sentences": 2,
+            "score": 0.6521802631578947
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1921139281,
+        "content": "Added, a exponential backoff, the function endpoint forwards the x-rate-limit attributes if present in the header from the request, and the client retries based on that.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1921139281",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -0,0 +1,351 @@\n+import { Context } from \"./types\";\n+import { SupabaseClient } from \"@supabase/supabase-js\";\n+import { VoyageAIClient } from \"voyageai\";\n+import { Octokit } from \"@octokit/rest\";\n+import markdownit from \"markdown-it\";\n+import plainTextPlugin from \"markdown-it-plain-text\";\n+import { validatePOST } from \"./validators\";\n+\n+const VECTOR_SIZE = 1024;\n+\n+interface MarkdownItWithPlainText extends markdownit {\n+  plainText: string;\n+}\n+\n+interface PayloadType {\n+  issue: {\n+    nodeId: string;\n+    number: number;\n+    title: string;\n+    body: string;\n+    state: string;\n+    stateReason: string | null;\n+    repositoryName: string;\n+    repositoryId: number;\n+    assignees: string[];\n+    createdAt: string;\n+    closedAt: string | null;\n+    updatedAt: string;\n+  };\n+  action: string;\n+  sender: {\n+    login: string;\n+  };\n+  repository: {\n+    id: number;\n+    node_id: string;\n+    name: string;\n+    full_name: string;\n+    owner: {\n+      login: string;\n+      id: number;\n+      type: string;\n+      site_admin: boolean;\n+    };\n+  };\n+}\n+\n+interface IssueNode {\n+  id: string;\n+  number: number;\n+  title: string;\n+  body: string;\n+  state: string;\n+  stateReason: string | null;\n+  createdAt: string;\n+  updatedAt: string;\n+  closedAt: string | null;\n+  author: {\n+    login: string;\n+  } | null;\n+  assignees: {\n+    nodes: Array<{\n+      login: string;\n+    }>;\n+  };\n+  repository: {\n+    id: string;\n+    name: string;\n+    owner: {\n+      login: string;\n+    };\n+  };\n+}\n+\n+interface GraphQlSearchResponse {\n+  search: {\n+    pageInfo: {\n+      hasNextPage: boolean;\n+      endCursor: string | null;\n+    };\n+    nodes: Array<IssueNode>;\n+  };\n+}\n+\n+export const corsHeaders = {\n+  \"Access-Control-Allow-Origin\": \"*\",\n+  \"Access-Control-Allow-Methods\": \"GET\",\n+  \"Access-Control-Allow-Headers\": \"Content-Type\",\n+};\n+\n+export async function onRequest(ctx: Context): Promise<Response> {\n+  const { request, env } = ctx;\n+  try {\n+    switch (request.method) {\n+      case \"POST\": {\n+        const result = await validatePOST(request);\n+        if (!result.isValid || !result.gitHubUser) {\n+          return new Response(\"Unauthorized\", {\n+            headers: corsHeaders,\n+            status: 400,\n+          });\n+        }\n+        const githubUserName = result.gitHubUser.login;\n+        const timestamp = result.timestamp; // Unix timestamp in milliseconds\n+\n+        try {\n+          const supabase = new SupabaseClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n+          const response = await issueScraper(githubUserName, supabase, env.VOYAGEAI_API_KEY, result.authToken, timestamp);\n+          return new Response(response, {\n+            headers: corsHeaders,\n+            status: 200,\n+          });\n+        } catch (error) {\n+          console.error(\"Error processing request:\", error);\n+          return new Response(\"Internal Server Error\", {\n+            headers: corsHeaders,\n+            status: 500,\n+          });\n+        }\n+      }\n+\n+      default:\n+        return new Response(\"Method Not Allowed\", {\n+          headers: corsHeaders,\n+          status: 405,\n+        });\n+    }\n+  } catch (error) {\n+    console.error(\"Error processing request:\", error);\n+    return new Response(\"Internal Server Error\", {\n+      headers: corsHeaders,\n+      status: 500,\n+    });\n+  }\n+}\n+\n+function markdownToPlainText(markdown: string | null): string | null {\n+  if (!markdown) return markdown;\n+  const md = markdownit() as MarkdownItWithPlainText;\n+  md.use(plainTextPlugin);\n+  md.render(markdown);\n+  return md.plainText;\n+}\n+\n+const SEARCH_ISSUES_QUERY = `\n+  query SearchIssues($searchText: String!, $after: String) {\n+    search(\n+      query: $searchText,\n+      type: ISSUE,\n+      first: 100,\n+      after: $after\n+    ) {\n+      pageInfo {\n+        hasNextPage\n+        endCursor\n+      }\n+      nodes {\n+        ... on Issue {\n+          id\n+          number\n+          title\n+          body\n+          state\n+          stateReason\n+          createdAt\n+          updatedAt\n+          closedAt\n+          author {\n+            login\n+          }\n+          assignees(first: 10) {\n+            nodes {\n+              login\n+            }\n+          }\n+          repository {\n+            id\n+            name\n+            owner {\n+              login\n+            }\n+          }\n+        }\n+      }\n+    }\n+  }\n+`;\n+\n+async function fetchUserIssuesBatch(octokit: InstanceType<typeof Octokit>, username: string, lastScraped?: number): Promise<IssueNode[]> {\n+  const allIssues: IssueNode[] = [];\n+  let hasNextPage = true;\n+  let cursor: string | null = null;\n+\n+  // Construct the query with the lastScraped timestamp\n+  const searchText = `assignee:${username} is:issue is:closed reason:completed ${lastScraped ? `closed:>${new Date(lastScraped).toISOString()}` : \"\"}`;\n+\n+  while (hasNextPage) {\n+    const variables: { searchText: string; after?: string } = { searchText };\n+    if (cursor) {\n+      variables.after = cursor;\n+    }\n+\n+    const response: GraphQlSearchResponse = await octokit.graphql<GraphQlSearchResponse>(SEARCH_ISSUES_QUERY, variables);\n+\n+    allIssues.push(...response.search.nodes);\n+\n+    hasNextPage = response.search.pageInfo.hasNextPage;\n+    cursor = response.search.pageInfo.endCursor;\n+  }\n+\n+  return allIssues;\n+}\n+\n+async function batchEmbeddings(voyageClient: VoyageAIClient, texts: string[]): Promise<(number[] | undefined)[]> {\n+  try {\n+    const embeddingResponse = await voyageClient.embed({\n+      input: texts,\n+      model: \"voyage-large-2-instruct\",\n+      inputType: \"document\",\n+    });\n+    return embeddingResponse.data?.map((item) => item.embedding) || [];\n+  } catch (error) {\n+    console.error(\"Error batching embeddings:\", error);\n+    throw error;\n+  }\n+}\n+\n+async function batchUpsertIssues(\n+  supabase: SupabaseClient,\n+  issues: Array<{\n+    id: string;\n+    markdown: string;\n+    plaintext: string;\n+    embedding: string;\n+    author_id: number;\n+    payload: PayloadType;\n+  }>\n+): Promise<void> {\n+  const { error } = await supabase.from(\"issues\").upsert(issues);\n+  if (error) {\n+    throw new Error(`Error during batch upsert: ${error.message}`);",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 51.51500000000003,
+            "syllables": 42,
+            "sentences": 1,
+            "score": 0.9151500000000002
+          },
+          "multiplier": 0,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1921139565,
+        "content": "I think using timing would be the best approach, as it would allow us to selectively identify closed issues after a certain point. This way, we can be sure that we’ve already scraped everything up until the timestamp provided.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1921139565",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -0,0 +1,49 @@\n+import { checkSupabaseSession } from \"../rendering/render-github-login-button\";\n+\n+export async function startIssueScraper(username: string) {\n+  const supabaseAuth = await checkSupabaseSession();\n+\n+  // Get the last fetch timestamp\n+  const lastFetchKey = `lastFetch_${username}`;\n+  const lastFetch = localStorage.getItem(lastFetchKey);\n+  const now = Date.now();\n+\n+  // Prepare the request payload\n+  const requestBody: { authToken: string; timestamp?: number } = {\n+    authToken: supabaseAuth.provider_token,\n+  };\n+\n+  if (lastFetch) {\n+    const lastFetchTimestamp = Number(lastFetch);\n+    if (now - lastFetchTimestamp < 24 * 60 * 60 * 1000) {",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 40,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 53.29000000000005,
+            "syllables": 63,
+            "sentences": 2,
+            "score": 0.9329000000000005
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2564558087,
+        "content": "@zugdev There are two locksfiles `bun.lockdb` and `yarn.lock`, is that intended, which one is suppoed to be used ?",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2564558087",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 79.5575,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 0.804425
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2564558191,
+        "content": "I'll create a demo video to walk through the flows.\r\nRight now, we store the timestamp of the last scrape for the user, I think it should be possible to use this timestamp as a filter to check for any newly closed issues marked as completed. If there are any, we can proceed with the scrape; otherwise, we can skip the process for that user.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2564558191",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 66,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 76.83227272727274,
+            "syllables": 84,
+            "sentences": 3,
+            "score": 0.8316772727272727
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2565038331,
+        "content": "Is there a way to add secrets in the final build without exposing them in `dist`? I’m thinking of creating a pg function to handle this or using Cloudflare KV.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565038331",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 75.99000000000002,
+            "syllables": 41,
+            "sentences": 2,
+            "score": 0.8400999999999997
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2565067163,
+        "content": "You’ll still be able to view the values in the `home.js` file after the final build. Is that fine? I think it’s fine for the `SUPABASE URL` and `ANON KEY`, but storing the `VOYAGE API KEY` in plain text doesn’t seem secure.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565067163",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 37,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 93.71126126126126,
+            "syllables": 44,
+            "sentences": 3,
+            "score": 0.6628873873873874
+          },
+          "multiplier": 0,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2565086782,
+        "content": "The scraper logic is executed when a user logs in on the client side. So, we will need voyage API key for embeddings.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565086782",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 81.13641304347829,
+            "syllables": 31,
+            "sentences": 2,
+            "score": 0.7886358695652171
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2565874835,
+        "content": "We can store API keys in Cloudflare KV, but I don't think this is the best approach, as we could quickly hit the read limit. A better option might be [Supabase Functions](https://supabase.com/docs/guides/functions/quickstart), which would allow us to read directly from the Supabase Vault.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565874835",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 44,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 72.9868181818182,
+            "syllables": 58,
+            "sentences": 2,
+            "score": 0.8701318181818181
+          },
+          "multiplier": 0,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2571354156,
+        "content": "QA:\r\n<img width=\"1792\" alt=\"Screenshot 2025-01-04 at 11 51 53 AM\" src=\"https://github.com/user-attachments/assets/a0ffb228-ad5f-4a59-ac59-837d897b0313\" />\r\nMean Stats:\r\n- CPU Wall time: 3.2ms\r\n- Sub Requests: 16 (For About 61 Issues)\r\n@zugdev could you add the supabase service role key to the secrets under `SUPABASE_KEY` ? That's need for adding the scraped results back to the table. Please ping me in telegram for the value.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2571354156",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 62,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 81.92010958904112,
+            "syllables": 95,
+            "sentences": 5,
+            "score": 0.7807989041095889
+          },
+          "multiplier": 0,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2572238962,
+        "content": "@0x4007 \r\nQA:\r\nhttps://scraperui.work-ubq-fi-50d.pages.dev/\r\nYou should be able to see the scraper function request, in the Network Tab of the Inspect Window.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2572238962",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 87.93714285714289,
+            "syllables": 37,
+            "sentences": 4,
+            "score": 0.7206285714285712
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2603614791,
+        "content": "@gentlementlegen @0x4007  Is there anything pending for this issue ?",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2603614791",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 37.900000000000034,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0.7790000000000004
+          },
+          "multiplier": 0,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2603629945,
+        "content": "you would need to add these three env variables  in cloudflare dashbaord/locally\r\n<img width=\"359\" alt=\"Screenshot 2025-01-20 at 11 23 46 PM\" src=\"https://github.com/user-attachments/assets/843bddf6-b633-40df-a0c1-ed3dad21211f\" />\r\nIn this case, it would be the supabase db for the text-embedding repo.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2603629945",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 41,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 66.56038461538463,
+            "syllables": 70,
+            "sentences": 2,
+            "score": 0.9343961538461536
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2603665514,
+        "content": "I can, but I would need to refactor the cypress tests. I think they're broken, as per this [issue](https://github.com/ubiquity/work.ubq.fi/issues/109).",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2603665514",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 90.935,
+            "syllables": 25,
+            "sentences": 2,
+            "score": 0.69065
+          },
+          "multiplier": 0,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2606217177,
+        "content": "@zugdev @0x4007 or anyone with write access please merge this",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2606217177",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 86.70500000000001,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.7329499999999999
+          },
+          "multiplier": 0,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 611.894 XP ]</a>&nbsp;</h3><h6>@shiv810</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>600</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.76</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>6.762</td></tr><tr><td>Review</td><td>Comment</td><td>22</td><td>1.372</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/187\" target=\"_blank\" rel=\"noopener\">- [x]  Get User Access Token (Update OAuth permissions ?)- [x]&hellip;</a></h6></td><td><details><summary>2.9</summary><pre>content:&#13;  content:&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.2&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>1</td><td>1</td><td>3.76</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/187#issuecomment-2563217361\" target=\"_blank\" rel=\"noopener\">@0x4007 @zugdev, could you add the &#96;VOYAGEAI_API_KEY&#96; to&hellip;</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.9</td><td>3</td><td>2.97</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/187#issuecomment-2606216793\" target=\"_blank\" rel=\"noopener\">@0x4007 @zugdev , could you assign this issue to me and add a ti&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.8</td><td>3</td><td>3.792</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190\" target=\"_blank\" rel=\"noopener\">Resolves #187 - Adds the scraper logic- Fetches if the data &hellip;</a></h6></td><td><details><summary>1.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.372</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1904559592\" target=\"_blank\" rel=\"noopener\">The &#96;issues&#96; table has two columns, &#96;plaintext&#96; &hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1904560882\" target=\"_blank\" rel=\"noopener\">It should be possible to implement, but if a request fails and w&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1904573079\" target=\"_blank\" rel=\"noopener\">Currently, when issues are marked as completed, a flag is set in&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 46&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1904638267\" target=\"_blank\" rel=\"noopener\">It could be anything; it's just a directory name. Changed this b&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1905985872\" target=\"_blank\" rel=\"noopener\">Yes, this would work with private profile, as we are querying wi&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1905988591\" target=\"_blank\" rel=\"noopener\">I'm not entirely sure about this. @zugdev mentioned that Bun is &hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 37&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1912751868\" target=\"_blank\" rel=\"noopener\">Should the retries be handled in this task? I think the error fo&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1921139281\" target=\"_blank\" rel=\"noopener\">Added, a exponential backoff, the function endpoint forwards the&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1921139565\" target=\"_blank\" rel=\"noopener\">I think using timing would be the best approach, as it would all&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 40&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2564558087\" target=\"_blank\" rel=\"noopener\">@zugdev There are two locksfiles &#96;bun.lockdb&#96; and &#96;y&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2564558191\" target=\"_blank\" rel=\"noopener\">I'll create a demo video to walk through the flows.Right now, &hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 66&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565038331\" target=\"_blank\" rel=\"noopener\">Is there a way to add secrets in the final build without exposin&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565067163\" target=\"_blank\" rel=\"noopener\">You’ll still be able to view the values in the &#96;home.js&#96;&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 37&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565086782\" target=\"_blank\" rel=\"noopener\">The scraper logic is executed when a user logs in on the client &hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565874835\" target=\"_blank\" rel=\"noopener\">We can store API keys in Cloudflare KV, but I don't think this i&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 44&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2571354156\" target=\"_blank\" rel=\"noopener\">QA:&lt;img width=\"1792\" alt=\"Screenshot 2025-01-04 at 11 51 53&hellip;</a></h6></td><td><details><summary>1.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.2&#13;regex:&#13;  wordCount: 62&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2572238962\" target=\"_blank\" rel=\"noopener\">@0x4007 QA:https://scraperui.work-ubq-fi-50d.pages.dev/You&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2603614791\" target=\"_blank\" rel=\"noopener\">@gentlementlegen @0x4007  Is there anything pending for this iss&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.4</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2603629945\" target=\"_blank\" rel=\"noopener\">you would need to add these three env variables  in cloudflare d&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 41&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2603665514\" target=\"_blank\" rel=\"noopener\">I can, but I would need to refactor the cypress tests. I think t&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2606217177\" target=\"_blank\" rel=\"noopener\">@zugdev @0x4007 or anyone with write access please merge this</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>3</td><td>0</td></tr></tbody></table></details>"
+  },
+  "zugdev": {
+    "total": 3.855,
+    "userId": 155616000,
+    "comments": [
+      {
+        "id": 2564005532,
+        "content": "done",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/187#issuecomment-2564005532",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.432,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": 121.22000000000003,
+            "syllables": 1,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2564754525,
+        "content": "The bun.lockb one is related to Cloudflare Wrangler, the main one is yarn.lock. Use the later.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2564754525",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.423,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 98.8675,
+            "syllables": 22,
+            "sentences": 4,
+            "score": 0.6113249999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 3.855 XP ]</a>&nbsp;</h3><h6>@zugdev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.432</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>3.423</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/187#issuecomment-2564005532\" target=\"_blank\" rel=\"noopener\">done</a></h6></td><td><details><summary>0.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>0.8</td><td>3</td><td>0.432</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2564754525\" target=\"_blank\" rel=\"noopener\">The bun.lockb one is related to Cloudflare Wrangler, the main on&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.7</td><td>3</td><td>3.423</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 93.252,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2608643747,
+        "content": "A new policy I've been working on rolling out but issue authors are responsible for putting time labels on new issues. Admins/managers set priority. I think it's the simplest way to get pricing done.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/187#issuecomment-2608643747",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.614,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 37,
+            "wordValue": 0.1,
+            "result": 2.1
+          },
+          "readability": {
+            "fleschKincaid": 66.27342342342342,
+            "syllables": 56,
+            "sentences": 3,
+            "score": 0.9372657657657658
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2524863370,
+        "content": "Seems generally fine changes not sure how can be QA'd\nWas wondering if another approach makes sense such as only copying with high precision based on when an issue is closed as complete and only that is copied over for example. But if we are hunting down historical issues then obviously this isn't a solution\nMy concern is redundantly finding the same historical issues and doing the same redundant search and scrape work. I am wondering if there is a better approach to this problem.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#pullrequestreview-2524863370",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.994,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 87,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 49.04137931034484,
+            "syllables": 132,
+            "sentences": 3,
+            "score": 0.8904137931034484
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2563526686,
+        "content": "I've had inconsistent problems with cypress so I'm inclined to let it slide.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#pullrequestreview-2563526686",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.918,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 73.17000000000003,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 0.8682999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1903644941,
+        "content": "Full stack app, is this right? Why was this change introduced?",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1903644941",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -18,12 +18,33 @@ jobs:\n         with:\n           repository: ${{ github.repository }}\n           production_branch: ${{ github.event.repository.default_branch }}\n-          build_artifact_name: \"static\"\n-          output_directory: \"static\"\n+          build_artifact_name: \"full-stack-app\"\n+          output_directory: \"full-stack-app\"",
+        "score": {
+          "reward": 2.646,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 101.27068181818181,
+            "syllables": 13,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1903646402,
+        "content": "Why do you do this conversion?",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1903646402",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,351 @@\n+import { Context } from \"./types\";\n+import { SupabaseClient } from \"@supabase/supabase-js\";\n+import { VoyageAIClient } from \"voyageai\";\n+import { Octokit } from \"@octokit/rest\";\n+import markdownit from \"markdown-it\";\n+import plainTextPlugin from \"markdown-it-plain-text\";\n+import { validatePOST } from \"./validators\";\n+\n+const VECTOR_SIZE = 1024;\n+\n+interface MarkdownItWithPlainText extends markdownit {\n+  plainText: string;\n+}\n+\n+interface PayloadType {\n+  issue: {\n+    nodeId: string;\n+    number: number;\n+    title: string;\n+    body: string;\n+    state: string;\n+    stateReason: string | null;\n+    repositoryName: string;\n+    repositoryId: number;\n+    assignees: string[];\n+    createdAt: string;\n+    closedAt: string | null;\n+    updatedAt: string;\n+  };\n+  action: string;\n+  sender: {\n+    login: string;\n+  };\n+  repository: {\n+    id: number;\n+    node_id: string;\n+    name: string;\n+    full_name: string;\n+    owner: {\n+      login: string;\n+      id: number;\n+      type: string;\n+      site_admin: boolean;\n+    };\n+  };\n+}\n+\n+interface IssueNode {\n+  id: string;\n+  number: number;\n+  title: string;\n+  body: string;\n+  state: string;\n+  stateReason: string | null;\n+  createdAt: string;\n+  updatedAt: string;\n+  closedAt: string | null;\n+  author: {\n+    login: string;\n+  } | null;\n+  assignees: {\n+    nodes: Array<{\n+      login: string;\n+    }>;\n+  };\n+  repository: {\n+    id: string;\n+    name: string;\n+    owner: {\n+      login: string;\n+    };\n+  };\n+}\n+\n+interface GraphQlSearchResponse {\n+  search: {\n+    pageInfo: {\n+      hasNextPage: boolean;\n+      endCursor: string | null;\n+    };\n+    nodes: Array<IssueNode>;\n+  };\n+}\n+\n+export const corsHeaders = {\n+  \"Access-Control-Allow-Origin\": \"*\",\n+  \"Access-Control-Allow-Methods\": \"GET\",\n+  \"Access-Control-Allow-Headers\": \"Content-Type\",\n+};\n+\n+export async function onRequest(ctx: Context): Promise<Response> {\n+  const { request, env } = ctx;\n+  try {\n+    switch (request.method) {\n+      case \"POST\": {\n+        const result = await validatePOST(request);\n+        if (!result.isValid || !result.gitHubUser) {\n+          return new Response(\"Unauthorized\", {\n+            headers: corsHeaders,\n+            status: 400,\n+          });\n+        }\n+        const githubUserName = result.gitHubUser.login;\n+        const timestamp = result.timestamp; // Unix timestamp in milliseconds\n+\n+        try {\n+          const supabase = new SupabaseClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n+          const response = await issueScraper(githubUserName, supabase, env.VOYAGEAI_API_KEY, result.authToken, timestamp);\n+          return new Response(response, {\n+            headers: corsHeaders,\n+            status: 200,\n+          });\n+        } catch (error) {\n+          console.error(\"Error processing request:\", error);\n+          return new Response(\"Internal Server Error\", {\n+            headers: corsHeaders,\n+            status: 500,\n+          });\n+        }\n+      }\n+\n+      default:\n+        return new Response(\"Method Not Allowed\", {\n+          headers: corsHeaders,\n+          status: 405,\n+        });\n+    }\n+  } catch (error) {\n+    console.error(\"Error processing request:\", error);\n+    return new Response(\"Internal Server Error\", {\n+      headers: corsHeaders,\n+      status: 500,\n+    });\n+  }\n+}\n+\n+function markdownToPlainText(markdown: string | null): string | null {",
+        "score": {
+          "reward": 1.776,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 87.94500000000002,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.7205499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1903647145,
+        "content": "Perhaps we can try an exponential backoff? I wonder if this is worth implementing to make this more robust although I imagine that errors are quite rare for this.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1903647145",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,351 @@\n+import { Context } from \"./types\";\n+import { SupabaseClient } from \"@supabase/supabase-js\";\n+import { VoyageAIClient } from \"voyageai\";\n+import { Octokit } from \"@octokit/rest\";\n+import markdownit from \"markdown-it\";\n+import plainTextPlugin from \"markdown-it-plain-text\";\n+import { validatePOST } from \"./validators\";\n+\n+const VECTOR_SIZE = 1024;\n+\n+interface MarkdownItWithPlainText extends markdownit {\n+  plainText: string;\n+}\n+\n+interface PayloadType {\n+  issue: {\n+    nodeId: string;\n+    number: number;\n+    title: string;\n+    body: string;\n+    state: string;\n+    stateReason: string | null;\n+    repositoryName: string;\n+    repositoryId: number;\n+    assignees: string[];\n+    createdAt: string;\n+    closedAt: string | null;\n+    updatedAt: string;\n+  };\n+  action: string;\n+  sender: {\n+    login: string;\n+  };\n+  repository: {\n+    id: number;\n+    node_id: string;\n+    name: string;\n+    full_name: string;\n+    owner: {\n+      login: string;\n+      id: number;\n+      type: string;\n+      site_admin: boolean;\n+    };\n+  };\n+}\n+\n+interface IssueNode {\n+  id: string;\n+  number: number;\n+  title: string;\n+  body: string;\n+  state: string;\n+  stateReason: string | null;\n+  createdAt: string;\n+  updatedAt: string;\n+  closedAt: string | null;\n+  author: {\n+    login: string;\n+  } | null;\n+  assignees: {\n+    nodes: Array<{\n+      login: string;\n+    }>;\n+  };\n+  repository: {\n+    id: string;\n+    name: string;\n+    owner: {\n+      login: string;\n+    };\n+  };\n+}\n+\n+interface GraphQlSearchResponse {\n+  search: {\n+    pageInfo: {\n+      hasNextPage: boolean;\n+      endCursor: string | null;\n+    };\n+    nodes: Array<IssueNode>;\n+  };\n+}\n+\n+export const corsHeaders = {\n+  \"Access-Control-Allow-Origin\": \"*\",\n+  \"Access-Control-Allow-Methods\": \"GET\",\n+  \"Access-Control-Allow-Headers\": \"Content-Type\",\n+};\n+\n+export async function onRequest(ctx: Context): Promise<Response> {\n+  const { request, env } = ctx;\n+  try {\n+    switch (request.method) {\n+      case \"POST\": {\n+        const result = await validatePOST(request);\n+        if (!result.isValid || !result.gitHubUser) {\n+          return new Response(\"Unauthorized\", {\n+            headers: corsHeaders,\n+            status: 400,\n+          });\n+        }\n+        const githubUserName = result.gitHubUser.login;\n+        const timestamp = result.timestamp; // Unix timestamp in milliseconds\n+\n+        try {\n+          const supabase = new SupabaseClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n+          const response = await issueScraper(githubUserName, supabase, env.VOYAGEAI_API_KEY, result.authToken, timestamp);\n+          return new Response(response, {\n+            headers: corsHeaders,\n+            status: 200,\n+          });\n+        } catch (error) {\n+          console.error(\"Error processing request:\", error);\n+          return new Response(\"Internal Server Error\", {\n+            headers: corsHeaders,\n+            status: 500,\n+          });\n+        }\n+      }\n+\n+      default:\n+        return new Response(\"Method Not Allowed\", {\n+          headers: corsHeaders,\n+          status: 405,\n+        });\n+    }\n+  } catch (error) {\n+    console.error(\"Error processing request:\", error);\n+    return new Response(\"Internal Server Error\", {\n+      headers: corsHeaders,\n+      status: 500,\n+    });\n+  }\n+}\n+\n+function markdownToPlainText(markdown: string | null): string | null {\n+  if (!markdown) return markdown;\n+  const md = markdownit() as MarkdownItWithPlainText;\n+  md.use(plainTextPlugin);\n+  md.render(markdown);\n+  return md.plainText;\n+}\n+\n+const SEARCH_ISSUES_QUERY = `\n+  query SearchIssues($searchText: String!, $after: String) {\n+    search(\n+      query: $searchText,\n+      type: ISSUE,\n+      first: 100,\n+      after: $after\n+    ) {\n+      pageInfo {\n+        hasNextPage\n+        endCursor\n+      }\n+      nodes {\n+        ... on Issue {\n+          id\n+          number\n+          title\n+          body\n+          state\n+          stateReason\n+          createdAt\n+          updatedAt\n+          closedAt\n+          author {\n+            login\n+          }\n+          assignees(first: 10) {\n+            nodes {\n+              login\n+            }\n+          }\n+          repository {\n+            id\n+            name\n+            owner {\n+              login\n+            }\n+          }\n+        }\n+      }\n+    }\n+  }\n+`;\n+\n+async function fetchUserIssuesBatch(octokit: InstanceType<typeof Octokit>, username: string, lastScraped?: number): Promise<IssueNode[]> {\n+  const allIssues: IssueNode[] = [];\n+  let hasNextPage = true;\n+  let cursor: string | null = null;\n+\n+  // Construct the query with the lastScraped timestamp\n+  const searchText = `assignee:${username} is:issue is:closed reason:completed ${lastScraped ? `closed:>${new Date(lastScraped).toISOString()}` : \"\"}`;\n+\n+  while (hasNextPage) {\n+    const variables: { searchText: string; after?: string } = { searchText };\n+    if (cursor) {\n+      variables.after = cursor;\n+    }\n+\n+    const response: GraphQlSearchResponse = await octokit.graphql<GraphQlSearchResponse>(SEARCH_ISSUES_QUERY, variables);\n+\n+    allIssues.push(...response.search.nodes);\n+\n+    hasNextPage = response.search.pageInfo.hasNextPage;\n+    cursor = response.search.pageInfo.endCursor;\n+  }\n+\n+  return allIssues;\n+}\n+\n+async function batchEmbeddings(voyageClient: VoyageAIClient, texts: string[]): Promise<(number[] | undefined)[]> {\n+  try {\n+    const embeddingResponse = await voyageClient.embed({\n+      input: texts,\n+      model: \"voyage-large-2-instruct\",\n+      inputType: \"document\",\n+    });\n+    return embeddingResponse.data?.map((item) => item.embedding) || [];\n+  } catch (error) {\n+    console.error(\"Error batching embeddings:\", error);\n+    throw error;\n+  }\n+}\n+\n+async function batchUpsertIssues(\n+  supabase: SupabaseClient,\n+  issues: Array<{\n+    id: string;\n+    markdown: string;\n+    plaintext: string;\n+    embedding: string;\n+    author_id: number;\n+    payload: PayloadType;\n+  }>\n+): Promise<void> {\n+  const { error } = await supabase.from(\"issues\").upsert(issues);\n+  if (error) {\n+    throw new Error(`Error during batch upsert: ${error.message}`);",
+        "score": {
+          "reward": 6.399,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 66.67612068965518,
+            "syllables": 43,
+            "sentences": 2,
+            "score": 0.9332387931034483
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1903647602,
+        "content": "I think that titles can NOT be empty so this should throw an error.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1903647602",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,351 @@\n+import { Context } from \"./types\";\n+import { SupabaseClient } from \"@supabase/supabase-js\";\n+import { VoyageAIClient } from \"voyageai\";\n+import { Octokit } from \"@octokit/rest\";\n+import markdownit from \"markdown-it\";\n+import plainTextPlugin from \"markdown-it-plain-text\";\n+import { validatePOST } from \"./validators\";\n+\n+const VECTOR_SIZE = 1024;\n+\n+interface MarkdownItWithPlainText extends markdownit {\n+  plainText: string;\n+}\n+\n+interface PayloadType {\n+  issue: {\n+    nodeId: string;\n+    number: number;\n+    title: string;\n+    body: string;\n+    state: string;\n+    stateReason: string | null;\n+    repositoryName: string;\n+    repositoryId: number;\n+    assignees: string[];\n+    createdAt: string;\n+    closedAt: string | null;\n+    updatedAt: string;\n+  };\n+  action: string;\n+  sender: {\n+    login: string;\n+  };\n+  repository: {\n+    id: number;\n+    node_id: string;\n+    name: string;\n+    full_name: string;\n+    owner: {\n+      login: string;\n+      id: number;\n+      type: string;\n+      site_admin: boolean;\n+    };\n+  };\n+}\n+\n+interface IssueNode {\n+  id: string;\n+  number: number;\n+  title: string;\n+  body: string;\n+  state: string;\n+  stateReason: string | null;\n+  createdAt: string;\n+  updatedAt: string;\n+  closedAt: string | null;\n+  author: {\n+    login: string;\n+  } | null;\n+  assignees: {\n+    nodes: Array<{\n+      login: string;\n+    }>;\n+  };\n+  repository: {\n+    id: string;\n+    name: string;\n+    owner: {\n+      login: string;\n+    };\n+  };\n+}\n+\n+interface GraphQlSearchResponse {\n+  search: {\n+    pageInfo: {\n+      hasNextPage: boolean;\n+      endCursor: string | null;\n+    };\n+    nodes: Array<IssueNode>;\n+  };\n+}\n+\n+export const corsHeaders = {\n+  \"Access-Control-Allow-Origin\": \"*\",\n+  \"Access-Control-Allow-Methods\": \"GET\",\n+  \"Access-Control-Allow-Headers\": \"Content-Type\",\n+};\n+\n+export async function onRequest(ctx: Context): Promise<Response> {\n+  const { request, env } = ctx;\n+  try {\n+    switch (request.method) {\n+      case \"POST\": {\n+        const result = await validatePOST(request);\n+        if (!result.isValid || !result.gitHubUser) {\n+          return new Response(\"Unauthorized\", {\n+            headers: corsHeaders,\n+            status: 400,\n+          });\n+        }\n+        const githubUserName = result.gitHubUser.login;\n+        const timestamp = result.timestamp; // Unix timestamp in milliseconds\n+\n+        try {\n+          const supabase = new SupabaseClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n+          const response = await issueScraper(githubUserName, supabase, env.VOYAGEAI_API_KEY, result.authToken, timestamp);\n+          return new Response(response, {\n+            headers: corsHeaders,\n+            status: 200,\n+          });\n+        } catch (error) {\n+          console.error(\"Error processing request:\", error);\n+          return new Response(\"Internal Server Error\", {\n+            headers: corsHeaders,\n+            status: 500,\n+          });\n+        }\n+      }\n+\n+      default:\n+        return new Response(\"Method Not Allowed\", {\n+          headers: corsHeaders,\n+          status: 405,\n+        });\n+    }\n+  } catch (error) {\n+    console.error(\"Error processing request:\", error);\n+    return new Response(\"Internal Server Error\", {\n+      headers: corsHeaders,\n+      status: 500,\n+    });\n+  }\n+}\n+\n+function markdownToPlainText(markdown: string | null): string | null {\n+  if (!markdown) return markdown;\n+  const md = markdownit() as MarkdownItWithPlainText;\n+  md.use(plainTextPlugin);\n+  md.render(markdown);\n+  return md.plainText;\n+}\n+\n+const SEARCH_ISSUES_QUERY = `\n+  query SearchIssues($searchText: String!, $after: String) {\n+    search(\n+      query: $searchText,\n+      type: ISSUE,\n+      first: 100,\n+      after: $after\n+    ) {\n+      pageInfo {\n+        hasNextPage\n+        endCursor\n+      }\n+      nodes {\n+        ... on Issue {\n+          id\n+          number\n+          title\n+          body\n+          state\n+          stateReason\n+          createdAt\n+          updatedAt\n+          closedAt\n+          author {\n+            login\n+          }\n+          assignees(first: 10) {\n+            nodes {\n+              login\n+            }\n+          }\n+          repository {\n+            id\n+            name\n+            owner {\n+              login\n+            }\n+          }\n+        }\n+      }\n+    }\n+  }\n+`;\n+\n+async function fetchUserIssuesBatch(octokit: InstanceType<typeof Octokit>, username: string, lastScraped?: number): Promise<IssueNode[]> {\n+  const allIssues: IssueNode[] = [];\n+  let hasNextPage = true;\n+  let cursor: string | null = null;\n+\n+  // Construct the query with the lastScraped timestamp\n+  const searchText = `assignee:${username} is:issue is:closed reason:completed ${lastScraped ? `closed:>${new Date(lastScraped).toISOString()}` : \"\"}`;\n+\n+  while (hasNextPage) {\n+    const variables: { searchText: string; after?: string } = { searchText };\n+    if (cursor) {\n+      variables.after = cursor;\n+    }\n+\n+    const response: GraphQlSearchResponse = await octokit.graphql<GraphQlSearchResponse>(SEARCH_ISSUES_QUERY, variables);\n+\n+    allIssues.push(...response.search.nodes);\n+\n+    hasNextPage = response.search.pageInfo.hasNextPage;\n+    cursor = response.search.pageInfo.endCursor;\n+  }\n+\n+  return allIssues;\n+}\n+\n+async function batchEmbeddings(voyageClient: VoyageAIClient, texts: string[]): Promise<(number[] | undefined)[]> {\n+  try {\n+    const embeddingResponse = await voyageClient.embed({\n+      input: texts,\n+      model: \"voyage-large-2-instruct\",\n+      inputType: \"document\",\n+    });\n+    return embeddingResponse.data?.map((item) => item.embedding) || [];\n+  } catch (error) {\n+    console.error(\"Error batching embeddings:\", error);\n+    throw error;\n+  }\n+}\n+\n+async function batchUpsertIssues(\n+  supabase: SupabaseClient,\n+  issues: Array<{\n+    id: string;\n+    markdown: string;\n+    plaintext: string;\n+    embedding: string;\n+    author_id: number;\n+    payload: PayloadType;\n+  }>\n+): Promise<void> {\n+  const { error } = await supabase.from(\"issues\").upsert(issues);\n+  if (error) {\n+    throw new Error(`Error during batch upsert: ${error.message}`);\n+  }\n+}\n+\n+async function batchFetchAuthorIds(octokit: InstanceType<typeof Octokit>, logins: string[]): Promise<Record<string, number>> {\n+  const authorIdMap: Record<string, number> = {};\n+  const BATCH_SIZE = 20;\n+  for (let i = 0; i < logins.length; i += BATCH_SIZE) {\n+    const batch = logins.slice(i, i + BATCH_SIZE);\n+    const promises = batch.map(async (login) => {\n+      try {\n+        const response = await octokit.rest.users.getByUsername({ username: login });\n+        return { login, id: response.data.id };\n+      } catch (error) {\n+        console.error(`Error fetching author ID for ${login}:`, error);\n+        return { login, id: -1 };\n+      }\n+    });\n+    const results = await Promise.all(promises);\n+    results.forEach(({ login, id }) => {\n+      authorIdMap[login] = id;\n+    });\n+  }\n+  return authorIdMap;\n+}\n+\n+async function issueScraper(username: string, supabase: SupabaseClient, voyageApiKey: string, token?: string, timestamp?: number): Promise<string> {\n+  try {\n+    if (!username) {\n+      throw new Error(\"Username is required\");\n+    }\n+\n+    const octokit = new Octokit(token ? { auth: token } : {});\n+    const voyageClient = new VoyageAIClient({ apiKey: voyageApiKey });\n+\n+    const issues = await fetchUserIssuesBatch(octokit, username, timestamp);\n+\n+    const uniqueAuthors = Array.from(new Set(issues.map((issue) => issue.author?.login).filter((login): login is string => !!login)));\n+\n+    const authorIdMap = await batchFetchAuthorIds(octokit, uniqueAuthors);\n+\n+    const markdowns = issues.map((issue) => `${issue.body || \"\"} ${issue.title || \"\"}`);",
+        "score": {
+          "reward": 3.36,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 89.89642857142859,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0.7010357142857141
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1903647818,
+        "content": "This can not be empty",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1903647818",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,351 @@\n+import { Context } from \"./types\";\n+import { SupabaseClient } from \"@supabase/supabase-js\";\n+import { VoyageAIClient } from \"voyageai\";\n+import { Octokit } from \"@octokit/rest\";\n+import markdownit from \"markdown-it\";\n+import plainTextPlugin from \"markdown-it-plain-text\";\n+import { validatePOST } from \"./validators\";\n+\n+const VECTOR_SIZE = 1024;\n+\n+interface MarkdownItWithPlainText extends markdownit {\n+  plainText: string;\n+}\n+\n+interface PayloadType {\n+  issue: {\n+    nodeId: string;\n+    number: number;\n+    title: string;\n+    body: string;\n+    state: string;\n+    stateReason: string | null;\n+    repositoryName: string;\n+    repositoryId: number;\n+    assignees: string[];\n+    createdAt: string;\n+    closedAt: string | null;\n+    updatedAt: string;\n+  };\n+  action: string;\n+  sender: {\n+    login: string;\n+  };\n+  repository: {\n+    id: number;\n+    node_id: string;\n+    name: string;\n+    full_name: string;\n+    owner: {\n+      login: string;\n+      id: number;\n+      type: string;\n+      site_admin: boolean;\n+    };\n+  };\n+}\n+\n+interface IssueNode {\n+  id: string;\n+  number: number;\n+  title: string;\n+  body: string;\n+  state: string;\n+  stateReason: string | null;\n+  createdAt: string;\n+  updatedAt: string;\n+  closedAt: string | null;\n+  author: {\n+    login: string;\n+  } | null;\n+  assignees: {\n+    nodes: Array<{\n+      login: string;\n+    }>;\n+  };\n+  repository: {\n+    id: string;\n+    name: string;\n+    owner: {\n+      login: string;\n+    };\n+  };\n+}\n+\n+interface GraphQlSearchResponse {\n+  search: {\n+    pageInfo: {\n+      hasNextPage: boolean;\n+      endCursor: string | null;\n+    };\n+    nodes: Array<IssueNode>;\n+  };\n+}\n+\n+export const corsHeaders = {\n+  \"Access-Control-Allow-Origin\": \"*\",\n+  \"Access-Control-Allow-Methods\": \"GET\",\n+  \"Access-Control-Allow-Headers\": \"Content-Type\",\n+};\n+\n+export async function onRequest(ctx: Context): Promise<Response> {\n+  const { request, env } = ctx;\n+  try {\n+    switch (request.method) {\n+      case \"POST\": {\n+        const result = await validatePOST(request);\n+        if (!result.isValid || !result.gitHubUser) {\n+          return new Response(\"Unauthorized\", {\n+            headers: corsHeaders,\n+            status: 400,\n+          });\n+        }\n+        const githubUserName = result.gitHubUser.login;\n+        const timestamp = result.timestamp; // Unix timestamp in milliseconds\n+\n+        try {\n+          const supabase = new SupabaseClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n+          const response = await issueScraper(githubUserName, supabase, env.VOYAGEAI_API_KEY, result.authToken, timestamp);\n+          return new Response(response, {\n+            headers: corsHeaders,\n+            status: 200,\n+          });\n+        } catch (error) {\n+          console.error(\"Error processing request:\", error);\n+          return new Response(\"Internal Server Error\", {\n+            headers: corsHeaders,\n+            status: 500,\n+          });\n+        }\n+      }\n+\n+      default:\n+        return new Response(\"Method Not Allowed\", {\n+          headers: corsHeaders,\n+          status: 405,\n+        });\n+    }\n+  } catch (error) {\n+    console.error(\"Error processing request:\", error);\n+    return new Response(\"Internal Server Error\", {\n+      headers: corsHeaders,\n+      status: 500,\n+    });\n+  }\n+}\n+\n+function markdownToPlainText(markdown: string | null): string | null {\n+  if (!markdown) return markdown;\n+  const md = markdownit() as MarkdownItWithPlainText;\n+  md.use(plainTextPlugin);\n+  md.render(markdown);\n+  return md.plainText;\n+}\n+\n+const SEARCH_ISSUES_QUERY = `\n+  query SearchIssues($searchText: String!, $after: String) {\n+    search(\n+      query: $searchText,\n+      type: ISSUE,\n+      first: 100,\n+      after: $after\n+    ) {\n+      pageInfo {\n+        hasNextPage\n+        endCursor\n+      }\n+      nodes {\n+        ... on Issue {\n+          id\n+          number\n+          title\n+          body\n+          state\n+          stateReason\n+          createdAt\n+          updatedAt\n+          closedAt\n+          author {\n+            login\n+          }\n+          assignees(first: 10) {\n+            nodes {\n+              login\n+            }\n+          }\n+          repository {\n+            id\n+            name\n+            owner {\n+              login\n+            }\n+          }\n+        }\n+      }\n+    }\n+  }\n+`;\n+\n+async function fetchUserIssuesBatch(octokit: InstanceType<typeof Octokit>, username: string, lastScraped?: number): Promise<IssueNode[]> {\n+  const allIssues: IssueNode[] = [];\n+  let hasNextPage = true;\n+  let cursor: string | null = null;\n+\n+  // Construct the query with the lastScraped timestamp\n+  const searchText = `assignee:${username} is:issue is:closed reason:completed ${lastScraped ? `closed:>${new Date(lastScraped).toISOString()}` : \"\"}`;\n+\n+  while (hasNextPage) {\n+    const variables: { searchText: string; after?: string } = { searchText };\n+    if (cursor) {\n+      variables.after = cursor;\n+    }\n+\n+    const response: GraphQlSearchResponse = await octokit.graphql<GraphQlSearchResponse>(SEARCH_ISSUES_QUERY, variables);\n+\n+    allIssues.push(...response.search.nodes);\n+\n+    hasNextPage = response.search.pageInfo.hasNextPage;\n+    cursor = response.search.pageInfo.endCursor;\n+  }\n+\n+  return allIssues;\n+}\n+\n+async function batchEmbeddings(voyageClient: VoyageAIClient, texts: string[]): Promise<(number[] | undefined)[]> {\n+  try {\n+    const embeddingResponse = await voyageClient.embed({\n+      input: texts,\n+      model: \"voyage-large-2-instruct\",\n+      inputType: \"document\",\n+    });\n+    return embeddingResponse.data?.map((item) => item.embedding) || [];\n+  } catch (error) {\n+    console.error(\"Error batching embeddings:\", error);\n+    throw error;\n+  }\n+}\n+\n+async function batchUpsertIssues(\n+  supabase: SupabaseClient,\n+  issues: Array<{\n+    id: string;\n+    markdown: string;\n+    plaintext: string;\n+    embedding: string;\n+    author_id: number;\n+    payload: PayloadType;\n+  }>\n+): Promise<void> {\n+  const { error } = await supabase.from(\"issues\").upsert(issues);\n+  if (error) {\n+    throw new Error(`Error during batch upsert: ${error.message}`);\n+  }\n+}\n+\n+async function batchFetchAuthorIds(octokit: InstanceType<typeof Octokit>, logins: string[]): Promise<Record<string, number>> {\n+  const authorIdMap: Record<string, number> = {};\n+  const BATCH_SIZE = 20;\n+  for (let i = 0; i < logins.length; i += BATCH_SIZE) {\n+    const batch = logins.slice(i, i + BATCH_SIZE);\n+    const promises = batch.map(async (login) => {\n+      try {\n+        const response = await octokit.rest.users.getByUsername({ username: login });\n+        return { login, id: response.data.id };\n+      } catch (error) {\n+        console.error(`Error fetching author ID for ${login}:`, error);\n+        return { login, id: -1 };\n+      }\n+    });\n+    const results = await Promise.all(promises);\n+    results.forEach(({ login, id }) => {\n+      authorIdMap[login] = id;\n+    });\n+  }\n+  return authorIdMap;\n+}\n+\n+async function issueScraper(username: string, supabase: SupabaseClient, voyageApiKey: string, token?: string, timestamp?: number): Promise<string> {\n+  try {\n+    if (!username) {\n+      throw new Error(\"Username is required\");\n+    }\n+\n+    const octokit = new Octokit(token ? { auth: token } : {});\n+    const voyageClient = new VoyageAIClient({ apiKey: voyageApiKey });\n+\n+    const issues = await fetchUserIssuesBatch(octokit, username, timestamp);\n+\n+    const uniqueAuthors = Array.from(new Set(issues.map((issue) => issue.author?.login).filter((login): login is string => !!login)));\n+\n+    const authorIdMap = await batchFetchAuthorIds(octokit, uniqueAuthors);\n+\n+    const markdowns = issues.map((issue) => `${issue.body || \"\"} ${issue.title || \"\"}`);\n+    const plainTexts = markdowns.map(markdownToPlainText);\n+    const embeddings = await batchEmbeddings(voyageClient, markdowns);\n+\n+    const upsertData = issues.map((issue, index) => {\n+      const authorId = issue.author?.login ? authorIdMap[issue.author.login] || -1 : -1;\n+      const repoOwner = issue.repository.owner.login;\n+\n+      return {\n+        id: issue.id,\n+        markdown: markdowns[index],\n+        plaintext: plainTexts[index] ?? \"\",\n+        embedding: JSON.stringify(embeddings[index] || Array(VECTOR_SIZE).fill(0)),\n+        author_id: authorId,\n+        payload: {\n+          issue: {\n+            nodeId: issue.id,\n+            number: issue.number,\n+            title: issue.title || \"\",",
+        "score": {
+          "reward": 1.656,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 100.24000000000002,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1903648126,
+        "content": "```suggestion\n```",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1903648126",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -4,6 +4,8 @@ import { GitHubUser } from \"./github-types\";\n import { trackReferralCode } from \"./register-referral\";\n import { displayGitHubUserInformation } from \"./rendering/display-github-user-information\";\n import { renderGitHubLoginButton } from \"./rendering/render-github-login-button\";\n+import { startIssueScraper } from \"./scraper/issue-scraper\";\n+// import { issueScraper } from \"./scraper/issue-scraper\";",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1903648272,
+        "content": "You can clean this file up more.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1903648272",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -20,5 +22,9 @@ export async function authentication() {\n   if (gitHubUser) {\n     await trackReferralCode();\n     await displayGitHubUserInformation(gitHubUser);\n+    // <-- Issue Scraper here -->\n+    // const supabase = getSupabase();",
+        "score": {
+          "reward": 1.35,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 103.04428571428575,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1903648785,
+        "content": "I wonder if there is a better way to implement this. For example, instead of by timing, we can do based on an event. \nAlthough I can't think of how it would be possible in outside organization contexts.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1903648785",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,49 @@\n+import { checkSupabaseSession } from \"../rendering/render-github-login-button\";\n+\n+export async function startIssueScraper(username: string) {\n+  const supabaseAuth = await checkSupabaseSession();\n+\n+  // Get the last fetch timestamp\n+  const lastFetchKey = `lastFetch_${username}`;\n+  const lastFetch = localStorage.getItem(lastFetchKey);\n+  const now = Date.now();\n+\n+  // Prepare the request payload\n+  const requestBody: { authToken: string; timestamp?: number } = {\n+    authToken: supabaseAuth.provider_token,\n+  };\n+\n+  if (lastFetch) {\n+    const lastFetchTimestamp = Number(lastFetch);\n+    if (now - lastFetchTimestamp < 24 * 60 * 60 * 1000) {",
+        "score": {
+          "reward": 5.733,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 39,
+            "wordValue": 0.1,
+            "result": 2.15
+          },
+          "readability": {
+            "fleschKincaid": 69.99384615384618,
+            "syllables": 57,
+            "sentences": 3,
+            "score": 0.9000615384615382
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1903649452,
+        "content": "The login timeout currently lasts for a day I think, meaning that for 99% of users, they wouldn't retrigger a scrape with a new login in less than 24 hours. Something to note. \nWe can also change this timeout in the supabase with settings. Any remarks on what to change it to or leave as is?",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1903649452",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,49 @@\n+import { checkSupabaseSession } from \"../rendering/render-github-login-button\";\n+\n+export async function startIssueScraper(username: string) {\n+  const supabaseAuth = await checkSupabaseSession();\n+\n+  // Get the last fetch timestamp\n+  const lastFetchKey = `lastFetch_${username}`;\n+  const lastFetch = localStorage.getItem(lastFetchKey);\n+  const now = Date.now();\n+\n+  // Prepare the request payload\n+  const requestBody: { authToken: string; timestamp?: number } = {\n+    authToken: supabaseAuth.provider_token,\n+  };\n+\n+  if (lastFetch) {\n+    const lastFetchTimestamp = Number(lastFetch);\n+    if (now - lastFetchTimestamp < 24 * 60 * 60 * 1000) {\n+      return JSON.stringify({\n+        success: true,\n+        message: \"Skipping fetch - last fetch was less than 24 hours ago\",",
+        "score": {
+          "reward": 6.468,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 57,
+            "wordValue": 0.1,
+            "result": 2.48
+          },
+          "readability": {
+            "fleschKincaid": 79.57125000000002,
+            "syllables": 76,
+            "sentences": 4,
+            "score": 0.8042874999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1904646064,
+        "content": "Retries should be handled from the client so no timeouts on the worker side should be relevant.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1904646064",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,351 @@\n+import { Context } from \"./types\";\n+import { SupabaseClient } from \"@supabase/supabase-js\";\n+import { VoyageAIClient } from \"voyageai\";\n+import { Octokit } from \"@octokit/rest\";\n+import markdownit from \"markdown-it\";\n+import plainTextPlugin from \"markdown-it-plain-text\";\n+import { validatePOST } from \"./validators\";\n+\n+const VECTOR_SIZE = 1024;\n+\n+interface MarkdownItWithPlainText extends markdownit {\n+  plainText: string;\n+}\n+\n+interface PayloadType {\n+  issue: {\n+    nodeId: string;\n+    number: number;\n+    title: string;\n+    body: string;\n+    state: string;\n+    stateReason: string | null;\n+    repositoryName: string;\n+    repositoryId: number;\n+    assignees: string[];\n+    createdAt: string;\n+    closedAt: string | null;\n+    updatedAt: string;\n+  };\n+  action: string;\n+  sender: {\n+    login: string;\n+  };\n+  repository: {\n+    id: number;\n+    node_id: string;\n+    name: string;\n+    full_name: string;\n+    owner: {\n+      login: string;\n+      id: number;\n+      type: string;\n+      site_admin: boolean;\n+    };\n+  };\n+}\n+\n+interface IssueNode {\n+  id: string;\n+  number: number;\n+  title: string;\n+  body: string;\n+  state: string;\n+  stateReason: string | null;\n+  createdAt: string;\n+  updatedAt: string;\n+  closedAt: string | null;\n+  author: {\n+    login: string;\n+  } | null;\n+  assignees: {\n+    nodes: Array<{\n+      login: string;\n+    }>;\n+  };\n+  repository: {\n+    id: string;\n+    name: string;\n+    owner: {\n+      login: string;\n+    };\n+  };\n+}\n+\n+interface GraphQlSearchResponse {\n+  search: {\n+    pageInfo: {\n+      hasNextPage: boolean;\n+      endCursor: string | null;\n+    };\n+    nodes: Array<IssueNode>;\n+  };\n+}\n+\n+export const corsHeaders = {\n+  \"Access-Control-Allow-Origin\": \"*\",\n+  \"Access-Control-Allow-Methods\": \"GET\",\n+  \"Access-Control-Allow-Headers\": \"Content-Type\",\n+};\n+\n+export async function onRequest(ctx: Context): Promise<Response> {\n+  const { request, env } = ctx;\n+  try {\n+    switch (request.method) {\n+      case \"POST\": {\n+        const result = await validatePOST(request);\n+        if (!result.isValid || !result.gitHubUser) {\n+          return new Response(\"Unauthorized\", {\n+            headers: corsHeaders,\n+            status: 400,\n+          });\n+        }\n+        const githubUserName = result.gitHubUser.login;\n+        const timestamp = result.timestamp; // Unix timestamp in milliseconds\n+\n+        try {\n+          const supabase = new SupabaseClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n+          const response = await issueScraper(githubUserName, supabase, env.VOYAGEAI_API_KEY, result.authToken, timestamp);\n+          return new Response(response, {\n+            headers: corsHeaders,\n+            status: 200,\n+          });\n+        } catch (error) {\n+          console.error(\"Error processing request:\", error);\n+          return new Response(\"Internal Server Error\", {\n+            headers: corsHeaders,\n+            status: 500,\n+          });\n+        }\n+      }\n+\n+      default:\n+        return new Response(\"Method Not Allowed\", {\n+          headers: corsHeaders,\n+          status: 405,\n+        });\n+    }\n+  } catch (error) {\n+    console.error(\"Error processing request:\", error);\n+    return new Response(\"Internal Server Error\", {\n+      headers: corsHeaders,\n+      status: 500,\n+    });\n+  }\n+}\n+\n+function markdownToPlainText(markdown: string | null): string | null {\n+  if (!markdown) return markdown;\n+  const md = markdownit() as MarkdownItWithPlainText;\n+  md.use(plainTextPlugin);\n+  md.render(markdown);\n+  return md.plainText;\n+}\n+\n+const SEARCH_ISSUES_QUERY = `\n+  query SearchIssues($searchText: String!, $after: String) {\n+    search(\n+      query: $searchText,\n+      type: ISSUE,\n+      first: 100,\n+      after: $after\n+    ) {\n+      pageInfo {\n+        hasNextPage\n+        endCursor\n+      }\n+      nodes {\n+        ... on Issue {\n+          id\n+          number\n+          title\n+          body\n+          state\n+          stateReason\n+          createdAt\n+          updatedAt\n+          closedAt\n+          author {\n+            login\n+          }\n+          assignees(first: 10) {\n+            nodes {\n+              login\n+            }\n+          }\n+          repository {\n+            id\n+            name\n+            owner {\n+              login\n+            }\n+          }\n+        }\n+      }\n+    }\n+  }\n+`;\n+\n+async function fetchUserIssuesBatch(octokit: InstanceType<typeof Octokit>, username: string, lastScraped?: number): Promise<IssueNode[]> {\n+  const allIssues: IssueNode[] = [];\n+  let hasNextPage = true;\n+  let cursor: string | null = null;\n+\n+  // Construct the query with the lastScraped timestamp\n+  const searchText = `assignee:${username} is:issue is:closed reason:completed ${lastScraped ? `closed:>${new Date(lastScraped).toISOString()}` : \"\"}`;\n+\n+  while (hasNextPage) {\n+    const variables: { searchText: string; after?: string } = { searchText };\n+    if (cursor) {\n+      variables.after = cursor;\n+    }\n+\n+    const response: GraphQlSearchResponse = await octokit.graphql<GraphQlSearchResponse>(SEARCH_ISSUES_QUERY, variables);\n+\n+    allIssues.push(...response.search.nodes);\n+\n+    hasNextPage = response.search.pageInfo.hasNextPage;\n+    cursor = response.search.pageInfo.endCursor;\n+  }\n+\n+  return allIssues;\n+}\n+\n+async function batchEmbeddings(voyageClient: VoyageAIClient, texts: string[]): Promise<(number[] | undefined)[]> {\n+  try {\n+    const embeddingResponse = await voyageClient.embed({\n+      input: texts,\n+      model: \"voyage-large-2-instruct\",\n+      inputType: \"document\",\n+    });\n+    return embeddingResponse.data?.map((item) => item.embedding) || [];\n+  } catch (error) {\n+    console.error(\"Error batching embeddings:\", error);\n+    throw error;\n+  }\n+}\n+\n+async function batchUpsertIssues(\n+  supabase: SupabaseClient,\n+  issues: Array<{\n+    id: string;\n+    markdown: string;\n+    plaintext: string;\n+    embedding: string;\n+    author_id: number;\n+    payload: PayloadType;\n+  }>\n+): Promise<void> {\n+  const { error } = await supabase.from(\"issues\").upsert(issues);\n+  if (error) {\n+    throw new Error(`Error during batch upsert: ${error.message}`);",
+        "score": {
+          "reward": 3.984,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 75.12117647058825,
+            "syllables": 23,
+            "sentences": 1,
+            "score": 0.8487882352941175
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1914260023,
+        "content": "That's what I would implement if I was working on this code yeah",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1914260023",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,351 @@\n+import { Context } from \"./types\";\n+import { SupabaseClient } from \"@supabase/supabase-js\";\n+import { VoyageAIClient } from \"voyageai\";\n+import { Octokit } from \"@octokit/rest\";\n+import markdownit from \"markdown-it\";\n+import plainTextPlugin from \"markdown-it-plain-text\";\n+import { validatePOST } from \"./validators\";\n+\n+const VECTOR_SIZE = 1024;\n+\n+interface MarkdownItWithPlainText extends markdownit {\n+  plainText: string;\n+}\n+\n+interface PayloadType {\n+  issue: {\n+    nodeId: string;\n+    number: number;\n+    title: string;\n+    body: string;\n+    state: string;\n+    stateReason: string | null;\n+    repositoryName: string;\n+    repositoryId: number;\n+    assignees: string[];\n+    createdAt: string;\n+    closedAt: string | null;\n+    updatedAt: string;\n+  };\n+  action: string;\n+  sender: {\n+    login: string;\n+  };\n+  repository: {\n+    id: number;\n+    node_id: string;\n+    name: string;\n+    full_name: string;\n+    owner: {\n+      login: string;\n+      id: number;\n+      type: string;\n+      site_admin: boolean;\n+    };\n+  };\n+}\n+\n+interface IssueNode {\n+  id: string;\n+  number: number;\n+  title: string;\n+  body: string;\n+  state: string;\n+  stateReason: string | null;\n+  createdAt: string;\n+  updatedAt: string;\n+  closedAt: string | null;\n+  author: {\n+    login: string;\n+  } | null;\n+  assignees: {\n+    nodes: Array<{\n+      login: string;\n+    }>;\n+  };\n+  repository: {\n+    id: string;\n+    name: string;\n+    owner: {\n+      login: string;\n+    };\n+  };\n+}\n+\n+interface GraphQlSearchResponse {\n+  search: {\n+    pageInfo: {\n+      hasNextPage: boolean;\n+      endCursor: string | null;\n+    };\n+    nodes: Array<IssueNode>;\n+  };\n+}\n+\n+export const corsHeaders = {\n+  \"Access-Control-Allow-Origin\": \"*\",\n+  \"Access-Control-Allow-Methods\": \"GET\",\n+  \"Access-Control-Allow-Headers\": \"Content-Type\",\n+};\n+\n+export async function onRequest(ctx: Context): Promise<Response> {\n+  const { request, env } = ctx;\n+  try {\n+    switch (request.method) {\n+      case \"POST\": {\n+        const result = await validatePOST(request);\n+        if (!result.isValid || !result.gitHubUser) {\n+          return new Response(\"Unauthorized\", {\n+            headers: corsHeaders,\n+            status: 400,\n+          });\n+        }\n+        const githubUserName = result.gitHubUser.login;\n+        const timestamp = result.timestamp; // Unix timestamp in milliseconds\n+\n+        try {\n+          const supabase = new SupabaseClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n+          const response = await issueScraper(githubUserName, supabase, env.VOYAGEAI_API_KEY, result.authToken, timestamp);\n+          return new Response(response, {\n+            headers: corsHeaders,\n+            status: 200,\n+          });\n+        } catch (error) {\n+          console.error(\"Error processing request:\", error);\n+          return new Response(\"Internal Server Error\", {\n+            headers: corsHeaders,\n+            status: 500,\n+          });\n+        }\n+      }\n+\n+      default:\n+        return new Response(\"Method Not Allowed\", {\n+          headers: corsHeaders,\n+          status: 405,\n+        });\n+    }\n+  } catch (error) {\n+    console.error(\"Error processing request:\", error);\n+    return new Response(\"Internal Server Error\", {\n+      headers: corsHeaders,\n+      status: 500,\n+    });\n+  }\n+}\n+\n+function markdownToPlainText(markdown: string | null): string | null {\n+  if (!markdown) return markdown;\n+  const md = markdownit() as MarkdownItWithPlainText;\n+  md.use(plainTextPlugin);\n+  md.render(markdown);\n+  return md.plainText;\n+}\n+\n+const SEARCH_ISSUES_QUERY = `\n+  query SearchIssues($searchText: String!, $after: String) {\n+    search(\n+      query: $searchText,\n+      type: ISSUE,\n+      first: 100,\n+      after: $after\n+    ) {\n+      pageInfo {\n+        hasNextPage\n+        endCursor\n+      }\n+      nodes {\n+        ... on Issue {\n+          id\n+          number\n+          title\n+          body\n+          state\n+          stateReason\n+          createdAt\n+          updatedAt\n+          closedAt\n+          author {\n+            login\n+          }\n+          assignees(first: 10) {\n+            nodes {\n+              login\n+            }\n+          }\n+          repository {\n+            id\n+            name\n+            owner {\n+              login\n+            }\n+          }\n+        }\n+      }\n+    }\n+  }\n+`;\n+\n+async function fetchUserIssuesBatch(octokit: InstanceType<typeof Octokit>, username: string, lastScraped?: number): Promise<IssueNode[]> {\n+  const allIssues: IssueNode[] = [];\n+  let hasNextPage = true;\n+  let cursor: string | null = null;\n+\n+  // Construct the query with the lastScraped timestamp\n+  const searchText = `assignee:${username} is:issue is:closed reason:completed ${lastScraped ? `closed:>${new Date(lastScraped).toISOString()}` : \"\"}`;\n+\n+  while (hasNextPage) {\n+    const variables: { searchText: string; after?: string } = { searchText };\n+    if (cursor) {\n+      variables.after = cursor;\n+    }\n+\n+    const response: GraphQlSearchResponse = await octokit.graphql<GraphQlSearchResponse>(SEARCH_ISSUES_QUERY, variables);\n+\n+    allIssues.push(...response.search.nodes);\n+\n+    hasNextPage = response.search.pageInfo.hasNextPage;\n+    cursor = response.search.pageInfo.endCursor;\n+  }\n+\n+  return allIssues;\n+}\n+\n+async function batchEmbeddings(voyageClient: VoyageAIClient, texts: string[]): Promise<(number[] | undefined)[]> {\n+  try {\n+    const embeddingResponse = await voyageClient.embed({\n+      input: texts,\n+      model: \"voyage-large-2-instruct\",\n+      inputType: \"document\",\n+    });\n+    return embeddingResponse.data?.map((item) => item.embedding) || [];\n+  } catch (error) {\n+    console.error(\"Error batching embeddings:\", error);\n+    throw error;\n+  }\n+}\n+\n+async function batchUpsertIssues(\n+  supabase: SupabaseClient,\n+  issues: Array<{\n+    id: string;\n+    markdown: string;\n+    plaintext: string;\n+    embedding: string;\n+    author_id: number;\n+    payload: PayloadType;\n+  }>\n+): Promise<void> {\n+  const { error } = await supabase.from(\"issues\").upsert(issues);\n+  if (error) {\n+    throw new Error(`Error during batch upsert: ${error.message}`);",
+        "score": {
+          "reward": 2.1,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 89.89642857142859,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0.7010357142857141
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2565011881,
+        "content": "Perhaps we should consolidate all to bun? @gentlementlegen rfc",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565011881",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.945,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 42.46750000000003,
+            "syllables": 17,
+            "sentences": 2,
+            "score": 0.8246750000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2565127028,
+        "content": "Make a worker endpoint. We have a setup like this for pay.ubq.fi that's related to the cards. Check its code. \n@EresDev rfc",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565127028",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.636,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 97.70183333333335,
+            "syllables": 31,
+            "sentences": 6,
+            "score": 0.6229816666666664
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2572263959,
+        "content": "I'm mobile these days so I don't want to hold up the review somebody else please check on their computer for me.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2572263959",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.633,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 69.67500000000004,
+            "syllables": 32,
+            "sentences": 1,
+            "score": 0.9032499999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2524863370,
+            "effect": {
+              "addition": 326,
+              "deletion": 1
+            },
+            "reward": 9.81,
+            "priority": 3
+          },
+          {
+            "reviewId": 2531314058,
+            "effect": {
+              "addition": 496,
+              "deletion": 321
+            },
+            "reward": 24.51,
+            "priority": 3
+          },
+          {
+            "reviewId": 2532986867,
+            "effect": {
+              "addition": 27,
+              "deletion": 17
+            },
+            "reward": 1.32,
+            "priority": 3
+          },
+          {
+            "reviewId": 2548832445,
+            "effect": {
+              "addition": 20,
+              "deletion": 12
+            },
+            "reward": 0.96,
+            "priority": 3
+          },
+          {
+            "reviewId": 2563526686,
+            "effect": {
+              "addition": 186,
+              "deletion": 62
+            },
+            "reward": 7.44,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 93.252 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>5</td><td>44.04</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.614</td></tr><tr><td>Review</td><td>Comment</td><td>16</td><td>47.598</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190\" target=\"_blank\" rel=\"noopener\">#190</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+326 -1</td><td>3</td><td>9.81</td></tr><tr><td>+496 -321</td><td>3</td><td>24.51</td></tr><tr><td>+27 -17</td><td>3</td><td>1.32</td></tr><tr><td>+20 -12</td><td>3</td><td>0.96</td></tr><tr><td>+186 -62</td><td>3</td><td>7.44</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/187#issuecomment-2608643747\" target=\"_blank\" rel=\"noopener\">A new policy I've been working on rolling out but issue authors &hellip;</a></h6></td><td><details><summary>2.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 37&#13;  wordValue: 0.1&#13;  result: 2.1&#13;</pre></details></td><td>0.2</td><td>3</td><td>1.614</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#pullrequestreview-2524863370\" target=\"_blank\" rel=\"noopener\">Seems generally fine changes not sure how can be QA'dWas wonder&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 87&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.6</td><td>3</td><td>5.994</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#pullrequestreview-2563526686\" target=\"_blank\" rel=\"noopener\">I've had inconsistent problems with cypress so I'm inclined to l&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.918</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1903644941\" target=\"_blank\" rel=\"noopener\">Full stack app, is this right? Why was this change introduced?</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.646</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1903646402\" target=\"_blank\" rel=\"noopener\">Why do you do this conversion?</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.776</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1903647145\" target=\"_blank\" rel=\"noopener\">Perhaps we can try an exponential backoff? I wonder if this is w&hellip;</a></h6></td><td><details><summary>1.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.9</td><td>3</td><td>6.399</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1903647602\" target=\"_blank\" rel=\"noopener\">I think that titles can NOT be empty so this should throw an err&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.8</td><td>3</td><td>3.36</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1903647818\" target=\"_blank\" rel=\"noopener\">This can not be empty</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.656</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1903648126\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion&#96;&#96;&#96;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.2</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1903648272\" target=\"_blank\" rel=\"noopener\">You can clean this file up more.</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.5</td><td>3</td><td>1.35</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1903648785\" target=\"_blank\" rel=\"noopener\">I wonder if there is a better way to implement this. For example&hellip;</a></h6></td><td><details><summary>2.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 39&#13;  wordValue: 0.1&#13;  result: 2.15&#13;</pre></details></td><td>0.7</td><td>3</td><td>5.733</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1903649452\" target=\"_blank\" rel=\"noopener\">The login timeout currently lasts for a day I think, meaning tha&hellip;</a></h6></td><td><details><summary>2.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 57&#13;  wordValue: 0.1&#13;  result: 2.48&#13;</pre></details></td><td>0.7</td><td>3</td><td>6.468</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1904646064\" target=\"_blank\" rel=\"noopener\">Retries should be handled from the client so no timeouts on the &hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.8</td><td>3</td><td>3.984</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1914260023\" target=\"_blank\" rel=\"noopener\">That's what I would implement if I was working on this code yeah</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.5</td><td>3</td><td>2.1</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565011881\" target=\"_blank\" rel=\"noopener\">Perhaps we should consolidate all to bun? @gentlementlegen rfc</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.945</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565127028\" target=\"_blank\" rel=\"noopener\">Make a worker endpoint. We have a setup like this for pay.ubq.fi&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.6</td><td>3</td><td>3.636</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2572263959\" target=\"_blank\" rel=\"noopener\">I'm mobile these days so I don't want to hold up the review some&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.633</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 73.89,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 1905087891,
+        "content": "You can add `/* GraphQL */` to help IDEs parse and format GraphQL queries.\r\n```suggestion\r\nconst SEARCH_ISSUES_QUERY = /* GraphQL */`\r\n```",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1905087891",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,368 @@\n+import { Context } from \"./types\";\n+import { SupabaseClient } from \"@supabase/supabase-js\";\n+import { VoyageAIClient } from \"voyageai\";\n+import { Octokit } from \"@octokit/rest\";\n+import markdownit from \"markdown-it\";\n+import plainTextPlugin from \"markdown-it-plain-text\";\n+import { validatePOST } from \"./validators\";\n+\n+const VECTOR_SIZE = 1024;\n+\n+interface MarkdownItWithPlainText extends markdownit {\n+  plainText: string;\n+}\n+\n+interface PayloadType {\n+  issue: {\n+    nodeId: string;\n+    number: number;\n+    title: string;\n+    body: string;\n+    state: string;\n+    stateReason: string | null;\n+    repositoryName: string;\n+    repositoryId: number;\n+    assignees: string[];\n+    createdAt: string;\n+    closedAt: string | null;\n+    updatedAt: string;\n+  };\n+  action: string;\n+  sender: {\n+    login: string;\n+  };\n+  repository: {\n+    id: number;\n+    node_id: string;\n+    name: string;\n+    full_name: string;\n+    owner: {\n+      login: string;\n+      id: number;\n+      type: string;\n+      site_admin: boolean;\n+    };\n+  };\n+}\n+\n+interface IssueNode {\n+  id: string;\n+  number: number;\n+  title: string;\n+  body: string;\n+  state: string;\n+  stateReason: string | null;\n+  createdAt: string;\n+  updatedAt: string;\n+  closedAt: string | null;\n+  author: {\n+    login: string;\n+  } | null;\n+  assignees: {\n+    nodes: Array<{\n+      login: string;\n+    }>;\n+  };\n+  repository: {\n+    id: string;\n+    name: string;\n+    owner: {\n+      login: string;\n+    };\n+  };\n+}\n+\n+interface GraphQlSearchResponse {\n+  search: {\n+    pageInfo: {\n+      hasNextPage: boolean;\n+      endCursor: string | null;\n+    };\n+    nodes: Array<IssueNode>;\n+  };\n+}\n+\n+export const corsHeaders = {\n+  \"Access-Control-Allow-Origin\": \"*\",\n+  \"Access-Control-Allow-Methods\": \"GET\",\n+  \"Access-Control-Allow-Headers\": \"Content-Type\",\n+};\n+\n+export async function onRequest(ctx: Context): Promise<Response> {\n+  const { request, env } = ctx;\n+  try {\n+    switch (request.method) {\n+      case \"POST\": {\n+        const result = await validatePOST(request);\n+        if (!result.isValid || !result.gitHubUser) {\n+          return new Response(\"Unauthorized\", {\n+            headers: corsHeaders,\n+            status: 400,\n+          });\n+        }\n+        const githubUserName = result.gitHubUser.login;\n+        const timestamp = result.timestamp; // Unix timestamp in milliseconds\n+\n+        try {\n+          const supabase = new SupabaseClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n+          const response = await issueScraper(githubUserName, supabase, env.VOYAGEAI_API_KEY, result.authToken, timestamp);\n+          return new Response(response, {\n+            headers: corsHeaders,\n+            status: 200,\n+          });\n+        } catch (error) {\n+          console.error(\"Error processing request:\", error);\n+          return new Response(\"Internal Server Error\", {\n+            headers: corsHeaders,\n+            status: 500,\n+          });\n+        }\n+      }\n+\n+      default:\n+        return new Response(\"Method Not Allowed\", {\n+          headers: corsHeaders,\n+          status: 405,\n+        });\n+    }\n+  } catch (error) {\n+    console.error(\"Error processing request:\", error);\n+    return new Response(\"Internal Server Error\", {\n+      headers: corsHeaders,\n+      status: 500,\n+    });\n+  }\n+}\n+\n+function markdownToPlainText(markdown: string | null): string | null {\n+  if (!markdown) return markdown;\n+  const md = markdownit() as MarkdownItWithPlainText;\n+  md.use(plainTextPlugin);\n+  md.render(markdown);\n+  return md.plainText;\n+}\n+\n+const SEARCH_ISSUES_QUERY = `",
+        "score": {
+          "reward": 2.784,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 95.68818181818183,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.6431181818181817
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1905089342,
+        "content": "Does this work if the user has a private profile?",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1905089342",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,368 @@\n+import { Context } from \"./types\";\n+import { SupabaseClient } from \"@supabase/supabase-js\";\n+import { VoyageAIClient } from \"voyageai\";\n+import { Octokit } from \"@octokit/rest\";\n+import markdownit from \"markdown-it\";\n+import plainTextPlugin from \"markdown-it-plain-text\";\n+import { validatePOST } from \"./validators\";\n+\n+const VECTOR_SIZE = 1024;\n+\n+interface MarkdownItWithPlainText extends markdownit {\n+  plainText: string;\n+}\n+\n+interface PayloadType {\n+  issue: {\n+    nodeId: string;\n+    number: number;\n+    title: string;\n+    body: string;\n+    state: string;\n+    stateReason: string | null;\n+    repositoryName: string;\n+    repositoryId: number;\n+    assignees: string[];\n+    createdAt: string;\n+    closedAt: string | null;\n+    updatedAt: string;\n+  };\n+  action: string;\n+  sender: {\n+    login: string;\n+  };\n+  repository: {\n+    id: number;\n+    node_id: string;\n+    name: string;\n+    full_name: string;\n+    owner: {\n+      login: string;\n+      id: number;\n+      type: string;\n+      site_admin: boolean;\n+    };\n+  };\n+}\n+\n+interface IssueNode {\n+  id: string;\n+  number: number;\n+  title: string;\n+  body: string;\n+  state: string;\n+  stateReason: string | null;\n+  createdAt: string;\n+  updatedAt: string;\n+  closedAt: string | null;\n+  author: {\n+    login: string;\n+  } | null;\n+  assignees: {\n+    nodes: Array<{\n+      login: string;\n+    }>;\n+  };\n+  repository: {\n+    id: string;\n+    name: string;\n+    owner: {\n+      login: string;\n+    };\n+  };\n+}\n+\n+interface GraphQlSearchResponse {\n+  search: {\n+    pageInfo: {\n+      hasNextPage: boolean;\n+      endCursor: string | null;\n+    };\n+    nodes: Array<IssueNode>;\n+  };\n+}\n+\n+export const corsHeaders = {\n+  \"Access-Control-Allow-Origin\": \"*\",\n+  \"Access-Control-Allow-Methods\": \"GET\",\n+  \"Access-Control-Allow-Headers\": \"Content-Type\",\n+};\n+\n+export async function onRequest(ctx: Context): Promise<Response> {\n+  const { request, env } = ctx;\n+  try {\n+    switch (request.method) {\n+      case \"POST\": {\n+        const result = await validatePOST(request);\n+        if (!result.isValid || !result.gitHubUser) {\n+          return new Response(\"Unauthorized\", {\n+            headers: corsHeaders,\n+            status: 400,\n+          });\n+        }\n+        const githubUserName = result.gitHubUser.login;\n+        const timestamp = result.timestamp; // Unix timestamp in milliseconds\n+\n+        try {\n+          const supabase = new SupabaseClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n+          const response = await issueScraper(githubUserName, supabase, env.VOYAGEAI_API_KEY, result.authToken, timestamp);\n+          return new Response(response, {\n+            headers: corsHeaders,\n+            status: 200,\n+          });\n+        } catch (error) {\n+          console.error(\"Error processing request:\", error);\n+          return new Response(\"Internal Server Error\", {\n+            headers: corsHeaders,\n+            status: 500,\n+          });\n+        }\n+      }\n+\n+      default:\n+        return new Response(\"Method Not Allowed\", {\n+          headers: corsHeaders,\n+          status: 405,\n+        });\n+    }\n+  } catch (error) {\n+    console.error(\"Error processing request:\", error);\n+    return new Response(\"Internal Server Error\", {\n+      headers: corsHeaders,\n+      status: 500,\n+    });\n+  }\n+}\n+\n+function markdownToPlainText(markdown: string | null): string | null {\n+  if (!markdown) return markdown;\n+  const md = markdownit() as MarkdownItWithPlainText;\n+  md.use(plainTextPlugin);\n+  md.render(markdown);\n+  return md.plainText;\n+}\n+\n+const SEARCH_ISSUES_QUERY = `\n+  query SearchIssues($searchText: String!, $after: String) {\n+    search(\n+      query: $searchText,\n+      type: ISSUE,\n+      first: 100,\n+      after: $after\n+    ) {\n+      pageInfo {\n+        hasNextPage\n+        endCursor\n+      }\n+      nodes {\n+        ... on Issue {\n+          id\n+          number\n+          title\n+          body\n+          state\n+          stateReason\n+          createdAt\n+          updatedAt\n+          closedAt\n+          author {\n+            login\n+          }\n+          assignees(first: 10) {\n+            nodes {\n+              login\n+            }\n+          }\n+          repository {\n+            id\n+            name\n+            owner {\n+              login\n+            }\n+          }\n+        }\n+      }\n+    }\n+  }\n+`;\n+\n+async function fetchUserIssuesBatch(octokit: InstanceType<typeof Octokit>, username: string, lastScraped?: number): Promise<IssueNode[]> {\n+  const allIssues: IssueNode[] = [];\n+  let hasNextPage = true;\n+  let cursor: string | null = null;\n+\n+  // Construct the query with the lastScraped timestamp\n+  const searchText = `assignee:${username} is:issue is:closed reason:completed ${lastScraped ? `closed:>${new Date(lastScraped).toISOString()}` : \"\"}`;",
+        "score": {
+          "reward": 3.024,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 78.24500000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.8175499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1905092654,
+        "content": "Should be in `devDependencies`",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1905092654",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -36,10 +36,14 @@\n     \"@octokit/request-error\": \"^6.1.0\",\n     \"@octokit/rest\": \"^20.0.2\",\n     \"@supabase/supabase-js\": \"^2.39.0\",\n+    \"@types/markdown-it\": \"^14.1.2\",",
+        "score": {
+          "reward": 0.966,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 119.19000000000003,
+            "syllables": 3,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1905093387,
+        "content": "Shouldn't this be deleted since you used `bun`?",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1905093387",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 1.782,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 103.54,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1906151223,
+        "content": "I suppose it's okay to use either because the frontend doesn't rely on plugins or the kernel, but having both lockfiles seems unnecessary, I would suggest removing one or the other 😄",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1906151223",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 5.166,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 40.03090909090912,
+            "syllables": 52,
+            "sentences": 1,
+            "score": 0.8003090909090912
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1923205199,
+        "content": "Wouldn't `'source' in error` be safer? or `instance of ApiError` ?",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1923205199",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,464 @@\n+import { Context } from \"./types\";\n+import { SupabaseClient } from \"@supabase/supabase-js\";\n+import { VoyageAIClient, VoyageAIError } from \"voyageai\";\n+import { Octokit } from \"@octokit/rest\";\n+import markdownit from \"markdown-it\";\n+import plainTextPlugin from \"markdown-it-plain-text\";\n+import { validatePOST } from \"./validators\";\n+import { RequestError } from \"@octokit/request-error\";\n+\n+\n+interface ApiError {\n+  source: 'github' | 'voyage' | 'supabase';\n+  status: number;\n+  retryAfter: number;\n+  isRateLimit: boolean;\n+  resetTime?: number;\n+}\n+\n+function createApiError(\n+  source: ApiError['source'], \n+  status: number, \n+  headers?: Record<string, string>\n+): ApiError {\n+  const retryAfter = headers?.['retry-after'] ? \n+    parseInt(headers['retry-after']) : \n+    60;\n+  \n+  const resetTime = headers?.['x-ratelimit-reset'] ? \n+    parseInt(headers['x-ratelimit-reset']) * 1000 : \n+    undefined;\n+\n+  const isRateLimit = headers?.['x-ratelimit-remaining'] === '0' || \n+    status === 429 || \n+    (status === 403 && resetTime !== undefined);\n+\n+  return {\n+    source,\n+    status,\n+    retryAfter,\n+    isRateLimit,\n+    resetTime\n+  };\n+}\n+\n+const VECTOR_SIZE = 1024;\n+\n+interface MarkdownItWithPlainText extends markdownit {\n+  plainText: string;\n+}\n+\n+interface PayloadType {\n+  issue: {\n+    nodeId: string;\n+    number: number;\n+    title: string;\n+    body: string;\n+    state: string;\n+    stateReason: string | null;\n+    repositoryName: string;\n+    repositoryId: number;\n+    assignees: string[];\n+    createdAt: string;\n+    closedAt: string | null;\n+    updatedAt: string;\n+  };\n+  action: string;\n+  sender: {\n+    login: string;\n+  };\n+  repository: {\n+    id: number;\n+    node_id: string;\n+    name: string;\n+    full_name: string;\n+    owner: {\n+      login: string;\n+      id: number;\n+      type: string;\n+      site_admin: boolean;\n+    };\n+  };\n+}\n+\n+interface IssueNode {\n+  id: string;\n+  number: number;\n+  title: string;\n+  body: string;\n+  state: string;\n+  stateReason: string | null;\n+  createdAt: string;\n+  updatedAt: string;\n+  closedAt: string | null;\n+  author: {\n+    login: string;\n+  } | null;\n+  assignees: {\n+    nodes: Array<{\n+      login: string;\n+    }>;\n+  };\n+  repository: {\n+    id: string;\n+    name: string;\n+    owner: {\n+      login: string;\n+    };\n+  };\n+}\n+\n+interface GraphQlSearchResponse {\n+  search: {\n+    pageInfo: {\n+      hasNextPage: boolean;\n+      endCursor: string | null;\n+    };\n+    nodes: Array<IssueNode>;\n+  };\n+}\n+\n+export const corsHeaders = {\n+  \"Access-Control-Allow-Origin\": \"*\",\n+  \"Access-Control-Allow-Methods\": \"GET\",\n+  \"Access-Control-Allow-Headers\": \"Content-Type\",\n+};\n+\n+export async function onRequest(ctx: Context): Promise<Response> {\n+  const { request, env } = ctx;\n+  try {\n+    switch (request.method) {\n+      case \"POST\": {\n+        const result = await validatePOST(request);\n+        if (!result.isValid || !result.gitHubUser) {\n+          return new Response(\"Unauthorized\", {\n+            headers: corsHeaders,\n+            status: 400,\n+          });\n+        }\n+        const githubUserName = result.gitHubUser.login;\n+        const timestamp = result.timestamp; // Unix timestamp in milliseconds\n+\n+        try {\n+          const supabase = new SupabaseClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n+          const response = await issueScraper(githubUserName, supabase, env.VOYAGEAI_API_KEY, result.authToken, timestamp);\n+          return new Response(response, {\n+            headers: corsHeaders,\n+            status: 200,\n+          });\n+        } catch (error) {\n+          console.error(\"Error processing request:\", error);\n+          return new Response(\"Internal Server Error\", {\n+            headers: corsHeaders,\n+            status: 500,\n+          });\n+        }\n+      }\n+\n+      default:\n+        return new Response(\"Method Not Allowed\", {\n+          headers: corsHeaders,\n+          status: 405,\n+        });\n+    }\n+  } catch (error) {\n+    console.error(\"Error processing request:\", error);\n+    return new Response(\"Internal Server Error\", {\n+      headers: corsHeaders,\n+      status: 500,\n+    });\n+  }\n+}\n+\n+function markdownToPlainText(markdown: string | null): string | null {\n+  if (!markdown) return markdown;\n+  const md = markdownit() as MarkdownItWithPlainText;\n+  md.use(plainTextPlugin);\n+  md.render(markdown);\n+  return md.plainText;\n+}\n+\n+const SEARCH_ISSUES_QUERY = /* GraphQL */ `\n+  query SearchIssues($searchText: String!, $after: String) {\n+    search(query: $searchText, type: ISSUE, first: 100, after: $after) {\n+      pageInfo {\n+        hasNextPage\n+        endCursor\n+      }\n+      nodes {\n+        ... on Issue {\n+          id\n+          number\n+          title\n+          body\n+          state\n+          stateReason\n+          createdAt\n+          updatedAt\n+          closedAt\n+          author {\n+            login\n+          }\n+          assignees(first: 10) {\n+            nodes {\n+              login\n+            }\n+          }\n+          repository {\n+            id\n+            name\n+            owner {\n+              login\n+            }\n+          }\n+        }\n+      }\n+    }\n+  }\n+`;\n+\n+async function fetchUserIssuesBatch(octokit: InstanceType<typeof Octokit>, username: string, lastScraped?: number): Promise<IssueNode[]> {\n+  const searchText = `assignee:${username} is:issue is:closed reason:completed ${\n+    lastScraped ? `closed:>${new Date(lastScraped).toISOString()}` : \"\"\n+  }`;\n+  const allIssues: IssueNode[] = [];\n+  let cursor: string | null = null;\n+\n+  let hasNextPage = true;\n+  while (hasNextPage) {\n+    try {\n+      const response = await octokit.graphql<GraphQlSearchResponse>(SEARCH_ISSUES_QUERY, {\n+        searchText,\n+        after: cursor\n+      });\n+\n+      allIssues.push(...response.search.nodes);\n+      \n+      hasNextPage = response.search.pageInfo.hasNextPage;\n+      \n+      cursor = response.search.pageInfo.endCursor;\n+    } catch (error: unknown) {\n+      if (error instanceof RequestError) {\n+        if (error.status === 403 || error.status === 429) {\n+            const headers: Record<string, string> = {};\n+            for (const [key, value] of Object.entries(error?.response?.headers || {})) {\n+              if (value) headers[key] = String(value);\n+            }\n+            throw createApiError('github', error.status, headers);\n+        }\n+      }\n+      throw error;\n+    }\n+  }\n+\n+  return allIssues;\n+}\n+\n+async function batchEmbeddings(voyageClient: VoyageAIClient, texts: string[]): Promise<(number[] | undefined)[]> {\n+  try {\n+    const response = await voyageClient.embed({\n+      input: texts,\n+      model: \"voyage-large-2-instruct\",\n+      inputType: \"document\",\n+    });\n+    return response.data?.map((item) => item.embedding) || [];\n+  } catch (error: unknown) {\n+    if (error instanceof VoyageAIError) {\n+      if (error.statusCode === 429 || error.statusCode === 403) {\n+        throw createApiError('voyage', error.statusCode);\n+      }\n+    }\n+    throw createApiError('voyage', 500);\n+  }\n+}\n+\n+async function batchUpsertIssues(supabase: SupabaseClient, issues: Array<{\n+  id: string;\n+  markdown: string;\n+  plaintext: string;\n+  embedding: string;\n+  author_id: number;\n+  payload: PayloadType;\n+}>): Promise<void> {\n+  try {\n+    const { error } = await supabase.from(\"issues\").upsert(issues);\n+    if (error?.message?.includes('429') || error?.message?.includes('rate limit')) {\n+      throw createApiError('supabase', 429, { 'retry-after': '60' });\n+    }\n+    if (error) throw error;\n+  } catch (error: unknown) {\n+    if (error instanceof Error && ('status' in error)) {\n+      const status = error.status as number;\n+      if (status === 429 || status === 403) {\n+        throw createApiError('supabase', status);\n+      }\n+    }\n+    throw error;\n+  }\n+}\n+\n+async function batchFetchAuthorIds(octokit: InstanceType<typeof Octokit>, logins: string[]): Promise<Record<string, number>> {\n+  const authorIdMap: Record<string, number> = {};\n+  const BATCH_SIZE = 20;\n+  for (let i = 0; i < logins.length; i += BATCH_SIZE) {\n+    const batch = logins.slice(i, i + BATCH_SIZE);\n+    const promises = batch.map(async (login) => {\n+      try {\n+        const response = await octokit.rest.users.getByUsername({ username: login });\n+        return { login, id: response.data.id };\n+      } catch (error) {\n+        console.error(`Error fetching author ID for ${login}:`, error);\n+        return { login, id: -1 };\n+      }\n+    });\n+    const results = await Promise.all(promises);\n+    results.forEach(({ login, id }) => {\n+      authorIdMap[login] = id;\n+    });\n+  }\n+  return authorIdMap;\n+}\n+\n+async function issueScraper(username: string, supabase: SupabaseClient, voyageApiKey: string, token?: string, timestamp?: number): Promise<string> {\n+  try {\n+    if (!username) {\n+      throw new Error(\"Username is required\");\n+    }\n+\n+    const storageFailed = [];\n+\n+    const octokit = new Octokit(token ? { auth: token } : {});\n+    const voyageClient = new VoyageAIClient({ apiKey: voyageApiKey });\n+\n+    let issues = await fetchUserIssuesBatch(octokit, username, timestamp);\n+\n+    const uniqueAuthors = Array.from(new Set(issues.map((issue) => issue.author?.login).filter((login): login is string => !!login)));\n+\n+    const authorIdMap = await batchFetchAuthorIds(octokit, uniqueAuthors);\n+\n+    // Filter the issues to include only those with a valid title\n+    issues = issues.filter((issue) => {\n+      if (!issue.title) {\n+        storageFailed.push({\n+          id: issue.id,\n+          reason: \"Issue does not have a title\",\n+        });\n+        return false;\n+      }\n+      return true;\n+    });\n+\n+    if (issues.length === 0) {\n+      return JSON.stringify(\n+        {\n+          success: false,\n+          stats: {\n+            storageSuccessful: 0,\n+            storageFailed: storageFailed.length,\n+          },\n+          issues: [],\n+          storageFailed: storageFailed,\n+          error: \"No valid issues found to process\",\n+        },\n+        null,\n+        2\n+      );\n+    }\n+\n+    const markdowns = issues.map((issue) => {\n+      return `${issue.body || \"\"} ${issue.title}`;\n+    });\n+    const plainTexts = markdowns.map(markdownToPlainText);\n+    const embeddings = await batchEmbeddings(voyageClient, markdowns);\n+\n+    const upsertData = issues.map((issue, index) => {\n+      const authorId = issue.author?.login ? authorIdMap[issue.author.login] || -1 : -1;\n+      const repoOwner = issue.repository.owner.login;\n+\n+      return {\n+        id: issue.id,\n+        markdown: markdowns[index],\n+        plaintext: plainTexts[index] ?? \"\",\n+        embedding: JSON.stringify(embeddings[index] || Array(VECTOR_SIZE).fill(0)),\n+        author_id: authorId,\n+        payload: {\n+          issue: {\n+            nodeId: issue.id,\n+            number: issue.number,\n+            title: issue.title,\n+            body: issue.body || \"\",\n+            state: issue.state,\n+            stateReason: issue.stateReason,\n+            repositoryName: issue.repository.name,\n+            repositoryId: parseInt(issue.repository.id),\n+            assignees: (issue.assignees?.nodes || []).map((a) => a.login),\n+            createdAt: issue.createdAt,\n+            closedAt: issue.closedAt,\n+            updatedAt: issue.updatedAt,\n+          },\n+          action: \"created\",\n+          sender: { login: username },\n+          repository: {\n+            id: parseInt(issue.repository.id),\n+            node_id: issue.repository.id,\n+            name: issue.repository.name,\n+            full_name: `${repoOwner}/${issue.repository.name}`,\n+            owner: {\n+              login: repoOwner,\n+              id: authorId,\n+              type: \"User\",\n+              site_admin: false,\n+            },\n+          },\n+        },\n+      };\n+    });\n+\n+    await batchUpsertIssues(supabase, upsertData);\n+\n+    return JSON.stringify(\n+      {\n+        success: true,\n+        stats: {\n+          storageSuccessful: upsertData.length,\n+          storageFailed: storageFailed.length,\n+        },\n+        issues: upsertData.map((issue) => ({\n+          id: issue.id,\n+          markdown: issue.markdown,\n+          plaintext: issue.plaintext,\n+        })),\n+        storageFailed: storageFailed,\n+      },\n+      null,\n+      2\n+    );\n+  } catch (error) {\n+    console.error(\"Error in issueScraper:\", error);\n+    \n+    if ((error as ApiError).source) {",
+        "score": {
+          "reward": 1.863,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 102.77750000000002,
+            "syllables": 6,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1924637009,
+        "content": "```suggestion\r\nFor deployment, you would need to add the secrets to the Cloudflare Dashboard, for the worker.\r\n```",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1924637009",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -14,6 +14,12 @@ yarn start\n open http://localhost:8080\n ```\n \n+## Setup Scraper Function\n+\n+For local development of the scraper function, you need to set up a `.dev.vars` file based on the `.dev.vars.example` file.\n+\n+For deplotment, you would need to add the secrets to the Cloudflare Dashboard, for the worker.",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2565014811,
+        "content": "Ideally we should use bun everywhere for consistency, except if there is a reason not to. It matters mostly because when testing packages locally, `bun link` and `yarn link` are not interchangeable (at least from my experience).",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565014811",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.229,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 46.52386363636364,
+            "syllables": 56,
+            "sentences": 2,
+            "score": 0.8652386363636364
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2565058619,
+        "content": "Yes, you can store and pull them from the GitHub Action environment during deployment.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565058619",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.718,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 59.68214285714288,
+            "syllables": 22,
+            "sentences": 1,
+            "score": 0.9968214285714287
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2565081699,
+        "content": "Why would it be in the final build? It should not be there.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565081699",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.861,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 109.12980769230771,
+            "syllables": 14,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2565112457,
+        "content": "Ha yes I see now, I was missing the context sorry. We should definitely not expose that API key on the client side. Sadly, we don't use SSR so I don't know how we can handle this except having some API pour that we host ourselves somewhere, or storing it in cookies?",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565112457",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.49,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 54,
+            "wordValue": 0.1,
+            "result": 2.44
+          },
+          "readability": {
+            "fleschKincaid": 77.33166666666666,
+            "syllables": 71,
+            "sentences": 3,
+            "score": 0.8266833333333333
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2565974271,
+        "content": "You can have environment secrets in cloud flare that do not count against any quota. We can upload then from Github environment secrets, like we do for most plug-ins.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565974271",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.688,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 73.17000000000003,
+            "syllables": 42,
+            "sentences": 2,
+            "score": 0.8682999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2603624830,
+        "content": "Let me give it a try locally, to get my own QA and should be ok for me.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2603624830",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.485,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 94.565,
+            "syllables": 20,
+            "sentences": 1,
+            "score": 0.65435
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2603649785,
+        "content": "Could you fix the Cypress as well?",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2603649785",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.89,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 103.04428571428575,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2603878980,
+        "content": "And could you add a `.dev.vars.example` for good measure? And probably a `.dev.vars` in the `.gitignore`.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2603878980",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.144,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 96.11442307692309,
+            "syllables": 16,
+            "sentences": 2,
+            "score": 0.6388557692307691
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2533685828,
+            "effect": {
+              "addition": 522,
+              "deletion": 12
+            },
+            "reward": 16.02,
+            "priority": 3
+          },
+          {
+            "reviewId": 2563695819,
+            "effect": {
+              "addition": 197,
+              "deletion": 65
+            },
+            "reward": 7.86,
+            "priority": 3
+          },
+          {
+            "reviewId": 2566103585,
+            "effect": {
+              "addition": 78,
+              "deletion": 84
+            },
+            "reward": 4.86,
+            "priority": 3
+          },
+          {
+            "reviewId": 2566104636,
+            "effect": {
+              "addition": 1,
+              "deletion": 1
+            },
+            "reward": 0.06,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 73.89 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>4</td><td>28.8</td></tr><tr><td>Review</td><td>Comment</td><td>15</td><td>45.09</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190\" target=\"_blank\" rel=\"noopener\">#190</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+522 -12</td><td>3</td><td>16.02</td></tr><tr><td>+197 -65</td><td>3</td><td>7.86</td></tr><tr><td>+78 -84</td><td>3</td><td>4.86</td></tr><tr><td>+1 -1</td><td>3</td><td>0.06</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1905087891\" target=\"_blank\" rel=\"noopener\">You can add &#96;/* GraphQL */&#96; to help IDEs parse and forma&hellip;</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.8</td><td>3</td><td>2.784</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1905089342\" target=\"_blank\" rel=\"noopener\">Does this work if the user has a private profile?</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.9</td><td>3</td><td>3.024</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1905092654\" target=\"_blank\" rel=\"noopener\">Should be in &#96;devDependencies&#96;</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.7</td><td>3</td><td>0.966</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1905093387\" target=\"_blank\" rel=\"noopener\">Shouldn't this be deleted since you used &#96;bun&#96;?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.6</td><td>3</td><td>1.782</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1906151223\" target=\"_blank\" rel=\"noopener\">I suppose it's okay to use either because the frontend doesn't r&hellip;</a></h6></td><td><details><summary>1.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.7</td><td>3</td><td>5.166</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1923205199\" target=\"_blank\" rel=\"noopener\">Wouldn't &#96;'source' in error&#96; be safer? or &#96;instance &hellip;</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.9</td><td>3</td><td>1.863</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#discussion_r1924637009\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionFor deployment, you would need to add&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565014811\" target=\"_blank\" rel=\"noopener\">Ideally we should use bun everywhere for consistency, except if &hellip;</a></h6></td><td><details><summary>1.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.7</td><td>3</td><td>5.229</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565058619\" target=\"_blank\" rel=\"noopener\">Yes, you can store and pull them from the GitHub Action environm&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.6</td><td>3</td><td>2.718</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565081699\" target=\"_blank\" rel=\"noopener\">Why would it be in the final build? It should not be there.</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.9</td><td>3</td><td>3.861</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565112457\" target=\"_blank\" rel=\"noopener\">Ha yes I see now, I was missing the context sorry. We should def&hellip;</a></h6></td><td><details><summary>2.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 54&#13;  wordValue: 0.1&#13;  result: 2.44&#13;</pre></details></td><td>0.6</td><td>3</td><td>5.49</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565974271\" target=\"_blank\" rel=\"noopener\">You can have environment secrets in cloud flare that do not coun&hellip;</a></h6></td><td><details><summary>1.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.8</td><td>3</td><td>5.688</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2603624830\" target=\"_blank\" rel=\"noopener\">Let me give it a try locally, to get my own QA and should be ok &hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.485</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2603649785\" target=\"_blank\" rel=\"noopener\">Could you fix the Cypress as well?</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.7</td><td>3</td><td>1.89</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2603878980\" target=\"_blank\" rel=\"noopener\">And could you add a &#96;.dev.vars.example&#96; for good measure&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.8</td><td>3</td><td>3.144</td></tr></tbody></table></details>"
+  },
+  "EresDev": {
+    "total": 3.528,
+    "userId": 11886219,
+    "comments": [
+      {
+        "id": 2565238785,
+        "content": "Yes, it looks like VOYAGEAI part needs a backend. You can [get started](https://developers.cloudflare.com/pages/functions/) with pages functions.  \r\nWe store API keys in cloudflare worker secrets. However, one similar thing that ubiquity-os-kernel [does differently](https://github.com/ubiquity-os/ubiquity-os-kernel/blob/bb72c0adf9da421cbe73a2a53efa31eb71140e2d/.github/workflows/worker-deploy.yml#L43) is store the API keys in Github, but pushing it to cloudflare during worker deployment. This helps with managing the secrets in one place (GitHub) and we probably will do the same soon in `pay.ubq.fi` if possible.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565238785",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 3.528,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 70,
+            "wordValue": 0.1,
+            "result": 2.6
+          },
+          "readability": {
+            "fleschKincaid": 66.93357142857143,
+            "syllables": 104,
+            "sentences": 5,
+            "score": 0.9306642857142857
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/190"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 3.528 XP ]</a>&nbsp;</h3><h6>@EresDev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>1</td><td>3.528</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/190#issuecomment-2565238785\" target=\"_blank\" rel=\"noopener\">Yes, it looks like VOYAGEAI part needs a backend. You can [get s&hellip;</a></h6></td><td><details><summary>4.6</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 70&#13;  wordValue: 0.1&#13;  result: 2.6&#13;</pre></details></td><td>0.8</td><td>3</td><td>3.528</td></tr></tbody></table></details>"
+  }
+}

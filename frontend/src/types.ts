@@ -48,4 +48,8 @@ export interface PermitData {
    // --- Fields for CowSwap Quote Estimation ---
    estimatedAmountOut?: string; // Store as string (wei) to handle large numbers
    quoteError?: string | null; // Error message if quote fetching fails for this permit's group
+
+   // --- Fields for Leaderboard Filtering ---
+   category?: string; // e.g., "ISSUE_SPECIFICATION", derived from metadata
+   repository?: string; // e.g., "ubiquity/pay.ubq.fi", derived from metadata
  }

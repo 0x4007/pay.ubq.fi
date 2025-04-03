@@ -1,0 +1,981 @@
+{
+  "gpylypchuk": {
+    "userId": 68362755,
+    "total": 105.039,
+    "task": {
+      "reward": 100,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 1933208359,
+        "content": "Hey should I use the [--triage-mode](https://github.com/crytic/slither/wiki/Usage#triage-mode)? or simply can I comment ```//slither-disable-next-line [DETECTOR]``` in the OZ contracts to disable the warnings?",
+        "url": "https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1933208359",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.608,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 86.70500000000001,
+            "syllables": 26,
+            "sentences": 2,
+            "score": 0.7329499999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1934229901,
+        "content": "But the thing is all warnings come from the openzeppelin libraries, is it correct refactoring audited code only to get all green? is not possible that they are false positives?",
+        "url": "https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1934229901",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.549,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 59.07000000000002,
+            "syllables": 47,
+            "sentences": 2,
+            "score": 0.9907000000000002
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1934394622,
+        "content": "Here there are the warnings.\r\n<img width=\"1365\" alt=\"Screenshot 2024-02-08 at 12 33 58\" src=\"https://github.com/ubiquity/nft-rewards/assets/68362755/fb23a956-04fc-4ed1-b2e2-e466e46ac1a0\">\r\n<img width=\"1377\" alt=\"Screenshot 2024-02-08 at 12 34 56\" src=\"https://github.com/ubiquity/nft-rewards/assets/68362755/622dd597-ab2f-48e1-8966-b847a06ac63e\">\r\n<img width=\"1365\" alt=\"Screenshot 2024-02-08 at 12 35 14\" src=\"https://github.com/ubiquity/nft-rewards/assets/68362755/2a16756d-593f-4542-ab3a-329f85e3a0b6\">",
+        "url": "https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1934394622",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.568,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 44,
+            "wordValue": 0.1,
+            "result": 2.27
+          },
+          "readability": {
+            "fleschKincaid": 76.84624096385545,
+            "syllables": 111,
+            "sentences": 5,
+            "score": 0.8315375903614455
+          },
+          "multiplier": 0.25,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 1936178195,
+        "content": "yep, but should we look at ```NftReward``` detections only, correct? I do not find useful refactoring audited code. Also the warnings at ```NftReward``` are only Low e.g. [Blocktimestamp](https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp) but here is used for a deadline not for randomness.",
+        "url": "https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1936178195",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.882,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 37,
+            "wordValue": 0.1,
+            "result": 2.1
+          },
+          "readability": {
+            "fleschKincaid": 71.28075675675677,
+            "syllables": 56,
+            "sentences": 5,
+            "score": 0.8871924324324323
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1936238269,
+        "content": "Well, I've been reviewing the code and I only found the cases of:\r\n1. Is safe adding requires of zero addresses where there are addresses as parameters.\r\n```solidity  \r\nrequire(initialOwner != address(0), \"Initial owner cannot be zero address\");\r\n```\r\n2. Renaming variables like ```_initialOwner``` to ```initialOwner``` as mixed Case.\r\n3. Use the versions as the same used in libraries ```pragma solidity ^0.8.20;```\r\nThen the other warnings come from OpenZeppelin libraries, but I don't find it necessary modifying them.",
+        "url": "https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1936238269",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.91,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              }
+            },
+            "result": 0.3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 60,
+            "wordValue": 0.1,
+            "result": 2.52
+          },
+          "readability": {
+            "fleschKincaid": 58.22500000000005,
+            "syllables": 91,
+            "sentences": 3,
+            "score": 0.9822500000000005
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1728135985,
+        "content": "Resolves [#3](https://github.com/ubiquity/nft-rewards/issues/3) issue.",
+        "url": "https://github.com/ubiquity/nft-rewards/pull/7",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 0.522,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 62.79000000000002,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.9720999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 105.039 XP ]</a>&nbsp;</h3><h6>@gpylypchuk</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>100</td></tr><tr><td>Issue</td><td>Comment</td><td>5</td><td>4.517</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>0.522</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1933208359\" target=\"_blank\" rel=\"noopener\">Hey should I use the [--triage-mode](https://github.com/crytic/s&hellip;</a></h6></td><td><details><summary>2.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.608</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1934229901\" target=\"_blank\" rel=\"noopener\">But the thing is all warnings come from the openzeppelin librari&hellip;</a></h6></td><td><details><summary>1.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.549</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1934394622\" target=\"_blank\" rel=\"noopener\">Here there are the warnings.&lt;img width=\"1365\" alt=\"Screensh&hellip;</a></h6></td><td><details><summary>5.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3&#13;regex:&#13;  wordCount: 44&#13;  wordValue: 0.1&#13;  result: 2.27&#13;</pre></details></td><td>0.95</td><td>1</td><td>1.568</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1936178195\" target=\"_blank\" rel=\"noopener\">yep, but should we look at &#96;&#96;&#96;NftReward&#96;&#96;&#9&hellip;</a></h6></td><td><details><summary>3.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 37&#13;  wordValue: 0.1&#13;  result: 2.1&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.882</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1936238269\" target=\"_blank\" rel=\"noopener\">Well, I've been reviewing the code and I only found the cases of&hellip;</a></h6></td><td><details><summary>2.82</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ol:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;  result: 0.3&#13;regex:&#13;  wordCount: 60&#13;  wordValue: 0.1&#13;  result: 2.52&#13;</pre></details></td><td>1</td><td>1</td><td>0.91</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/pull/7\" target=\"_blank\" rel=\"noopener\">Resolves [#3](https://github.com/ubiquity/nft-rewards/issues/3) &hellip;</a></h6></td><td><details><summary>1.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.522</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 33.551,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 1933452756,
+        "content": "This issue implies refactoring the code in a way that fixes warnings, we shouldn't disable detectors with `//slither-disable-next-line [DETECTOR]` unless there is a reason",
+        "url": "https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1933452756",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.07,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 54.750869565217414,
+            "syllables": 35,
+            "sentences": 1,
+            "score": 0.9475086956521741
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1934350960,
+        "content": "Could you show slither's output?",
+        "url": "https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1934350960",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.666,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 87.94500000000002,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.7205499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1936163662,
+        "content": "The `slither .` command does show some info warnings regarding the `NftReward` contract (I checked on the latest `development` branch, not on the current PR):\r\n```\r\nINFO:Detectors:\r\nMath.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#123-202) has bitwise-xor operator ^ instead of the exponentiation operator **: \r\n\t - inverse = (3 * denominator) ^ 2 (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#184)\r\nReference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-exponentiation\r\nINFO:Detectors:\r\nMath.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#123-202) performs a multiplication on the result of a division:\r\n\t- denominator = denominator / twos (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#169)\r\n\t- inverse = (3 * denominator) ^ 2 (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#184)\r\nMath.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#123-202) performs a multiplication on the result of a division:\r\n\t- denominator = denominator / twos (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#169)\r\n\t- inverse *= 2 - denominator * inverse (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#188)\r\nMath.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#123-202) performs a multiplication on the result of a division:\r\n\t- denominator = denominator / twos (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#169)\r\n\t- inverse *= 2 - denominator * inverse (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#189)\r\nMath.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#123-202) performs a multiplication on the result of a division:\r\n\t- denominator = denominator / twos (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#169)\r\n\t- inverse *= 2 - denominator * inverse (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#190)\r\nMath.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#123-202) performs a multiplication on the result of a division:\r\n\t- denominator = denominator / twos (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#169)\r\n\t- inverse *= 2 - denominator * inverse (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#191)\r\nMath.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#123-202) performs a multiplication on the result of a division:\r\n\t- denominator = denominator / twos (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#169)\r\n\t- inverse *= 2 - denominator * inverse (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#192)\r\nMath.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#123-202) performs a multiplication on the result of a division:\r\n\t- denominator = denominator / twos (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#169)\r\n\t- inverse *= 2 - denominator * inverse (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#193)\r\nMath.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#123-202) performs a multiplication on the result of a division:\r\n\t- prod0 = prod0 / twos (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#172)\r\n\t- result = prod0 * inverse (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#199)\r\nReference: https://github.com/crytic/slither/wiki/Detector-Documentation#divide-before-multiply\r\nINFO:Detectors:\r\nNftReward.constructor(string,string,address,address)._minter (src/NftReward.sol#62) lacks a zero-check on :\r\n\t\t- minter = _minter (src/NftReward.sol#68)\r\nNftReward.setMinter(address)._newMinter (src/NftReward.sol#185) lacks a zero-check on :\r\n\t\t- minter = _newMinter (src/NftReward.sol#186)\r\nReference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation\r\nINFO:Detectors:\r\nNftReward.safeMint(NftReward.MintRequest,bytes) (src/NftReward.sol#129-160) uses timestamp for comparisons\r\n\tDangerous comparisons:\r\n\t- require(bool,string)(block.timestamp < _mintRequest.deadline,Signature expired) (src/NftReward.sol#139)\r\nReference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp\r\nINFO:Detectors:\r\nERC721._checkOnERC721Received(address,address,uint256,bytes) (lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol#465-482) uses assembly\r\n\t- INLINE ASM (lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol#476-478)\r\nShortStrings.toString(ShortString) (lib/openzeppelin-contracts/contracts/utils/ShortStrings.sol#63-73) uses assembly\r\n\t- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/ShortStrings.sol#68-71)\r\nStorageSlot.getAddressSlot(bytes32) (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#59-64) uses assembly\r\n\t- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#61-63)\r\nStorageSlot.getBooleanSlot(bytes32) (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#69-74) uses assembly\r\n\t- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#71-73)\r\nStorageSlot.getBytes32Slot(bytes32) (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#79-84) uses assembly\r\n\t- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#81-83)\r\nStorageSlot.getUint256Slot(bytes32) (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#89-94) uses assembly\r\n\t- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#91-93)\r\nStorageSlot.getStringSlot(bytes32) (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#99-104) uses assembly\r\n\t- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#101-103)\r\nStorageSlot.getStringSlot(string) (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#109-114) uses assembly\r\n\t- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#111-113)\r\nStorageSlot.getBytesSlot(bytes32) (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#119-124) uses assembly\r\n\t- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#121-123)\r\nStorageSlot.getBytesSlot(bytes) (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#129-134) uses assembly\r\n\t- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#131-133)\r\nStrings.toString(uint256) (lib/openzeppelin-contracts/contracts/utils/Strings.sol#24-44) uses assembly\r\n\t- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/Strings.sol#30-32)\r\n\t- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/Strings.sol#36-38)\r\nECDSA.tryRecover(bytes32,bytes) (lib/openzeppelin-contracts/contracts/utils/cryptography/ECDSA.sol#56-73) uses assembly\r\n\t- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/cryptography/ECDSA.sol#64-68)\r\nMessageHashUtils.toEthSignedMessageHash(bytes32) (lib/openzeppelin-contracts/contracts/utils/cryptography/MessageHashUtils.sol#30-37) uses assembly\r\n\t- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/cryptography/MessageHashUtils.sol#32-36)\r\nMessageHashUtils.toTypedDataHash(bytes32,bytes32) (lib/openzeppelin-contracts/contracts/utils/cryptography/MessageHashUtils.sol#76-85) uses assembly\r\n\t- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/cryptography/MessageHashUtils.sol#78-84)\r\nMath.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#123-202) uses assembly\r\n\t- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#130-133)\r\n\t- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#154-161)\r\n\t- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#167-176)\r\nReference: https://github.com/crytic/slither/wiki/Detector-Documentation#assembly-usage\r\nINFO:Detectors:\r\nDifferent versions of Solidity are used:\r\n\t- Version used: ['^0.8.13', '^0.8.20']\r\n\t- ^0.8.13 (src/NftReward.sol#2)\r\n\t- ^0.8.20 (lib/openzeppelin-contracts/contracts/access/Ownable.sol#4)\r\n\t- ^0.8.20 (lib/openzeppelin-contracts/contracts/interfaces/IERC5267.sol#4)\r\n\t- ^0.8.20 (lib/openzeppelin-contracts/contracts/interfaces/draft-IERC6093.sol#3)\r\n\t- ^0.8.20 (lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol#4)\r\n\t- ^0.8.20 (lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol#4)\r\n\t- ^0.8.20 (lib/openzeppelin-contracts/contracts/token/ERC721/IERC721Receiver.sol#4)\r\n\t- ^0.8.20 (lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Metadata.sol#4)\r\n\t- ^0.8.20 (lib/openzeppelin-contracts/contracts/utils/Context.sol#4)\r\n\t- ^0.8.20 (lib/openzeppelin-contracts/contracts/utils/Pausable.sol#4)\r\n\t- ^0.8.20 (lib/openzeppelin-contracts/contracts/utils/ShortStrings.sol#4)\r\n\t- ^0.8.20 (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#5)\r\n\t- ^0.8.20 (lib/openzeppelin-contracts/contracts/utils/Strings.sol#4)\r\n\t- ^0.8.20 (lib/openzeppelin-contracts/contracts/utils/cryptography/ECDSA.sol#4)\r\n\t- ^0.8.20 (lib/openzeppelin-contracts/contracts/utils/cryptography/EIP712.sol#4)\r\n\t- ^0.8.20 (lib/openzeppelin-contracts/contracts/utils/cryptography/MessageHashUtils.sol#4)\r\n\t- ^0.8.20 (lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol#4)\r\n\t- ^0.8.20 (lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol#4)\r\n\t- ^0.8.20 (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#4)\r\n\t- ^0.8.20 (lib/openzeppelin-contracts/contracts/utils/math/SignedMath.sol#4)\r\nReference: https://github.com/crytic/slither/wiki/Detector-Documentation#different-pragma-directives-are-used\r\nINFO:Detectors:\r\nPragma version^0.8.20 (lib/openzeppelin-contracts/contracts/access/Ownable.sol#4) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.\r\nPragma version^0.8.20 (lib/openzeppelin-contracts/contracts/interfaces/IERC5267.sol#4) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.\r\nPragma version^0.8.20 (lib/openzeppelin-contracts/contracts/interfaces/draft-IERC6093.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.\r\nPragma version^0.8.20 (lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol#4) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.\r\nPragma version^0.8.20 (lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol#4) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.\r\nPragma version^0.8.20 (lib/openzeppelin-contracts/contracts/token/ERC721/IERC721Receiver.sol#4) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.\r\nPragma version^0.8.20 (lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Metadata.sol#4) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.\r\nPragma version^0.8.20 (lib/openzeppelin-contracts/contracts/utils/Context.sol#4) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.\r\nPragma version^0.8.20 (lib/openzeppelin-contracts/contracts/utils/Pausable.sol#4) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.\r\nPragma version^0.8.20 (lib/openzeppelin-contracts/contracts/utils/ShortStrings.sol#4) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.\r\nPragma version^0.8.20 (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#5) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.\r\nPragma version^0.8.20 (lib/openzeppelin-contracts/contracts/utils/Strings.sol#4) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.\r\nPragma version^0.8.20 (lib/openzeppelin-contracts/contracts/utils/cryptography/ECDSA.sol#4) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.\r\nPragma version^0.8.20 (lib/openzeppelin-contracts/contracts/utils/cryptography/EIP712.sol#4) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.\r\nPragma version^0.8.20 (lib/openzeppelin-contracts/contracts/utils/cryptography/MessageHashUtils.sol#4) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.\r\nPragma version^0.8.20 (lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol#4) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.\r\nPragma version^0.8.20 (lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol#4) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.\r\nPragma version^0.8.20 (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#4) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.\r\nPragma version^0.8.20 (lib/openzeppelin-contracts/contracts/utils/math/SignedMath.sol#4) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.\r\nPragma version^0.8.13 (src/NftReward.sol#2) allows old versions\r\nsolc-0.8.23 is not recommended for deployment\r\nReference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity\r\nINFO:Detectors:\r\nFunction EIP712._EIP712Name() (lib/openzeppelin-contracts/contracts/utils/cryptography/EIP712.sol#146-148) is not in mixedCase\r\nFunction EIP712._EIP712Version() (lib/openzeppelin-contracts/contracts/utils/cryptography/EIP712.sol#157-159) is not in mixedCase\r\nParameter NftReward.getMintRequestDigest(NftReward.MintRequest)._mintRequest (src/NftReward.sol#80) is not in mixedCase\r\nParameter NftReward.recover(NftReward.MintRequest,bytes)._mintRequest (src/NftReward.sol#112) is not in mixedCase\r\nParameter NftReward.recover(NftReward.MintRequest,bytes)._signature (src/NftReward.sol#113) is not in mixedCase\r\nParameter NftReward.safeMint(NftReward.MintRequest,bytes)._mintRequest (src/NftReward.sol#130) is not in mixedCase\r\nParameter NftReward.safeMint(NftReward.MintRequest,bytes)._signature (src/NftReward.sol#131) is not in mixedCase\r\nParameter NftReward.setBaseUri(string)._newBaseUri (src/NftReward.sol#177) is not in mixedCase\r\nParameter NftReward.setMinter(address)._newMinter (src/NftReward.sol#185) is not in mixedCase\r\nReference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions\r\nINFO:Detectors:\r\nShortStrings.slitherConstructorConstantVariables() (lib/openzeppelin-contracts/contracts/utils/ShortStrings.sol#40-123) uses literals with too many digits:\r\n\t- FALLBACK_SENTINEL = 0x00000000000000000000000000000000000000000000000000000000000000FF (lib/openzeppelin-contracts/contracts/utils/ShortStrings.sol#42)\r\nReference: https://github.com/crytic/slither/wiki/Detector-Documentation#too-many-digits\r\nINFO:Slither:. analyzed (22 contracts with 93 detectors), 59 result(s) found\r\n```",
+        "url": "https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1936163662",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.94,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 68.69142857142859,
+            "syllables": 29,
+            "sentences": 1,
+            "score": 0.9130857142857142
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1936239962,
+        "content": "Yes\r\nThis issue implied fixing low severity warnings (where it makes sense). Mixed case and `block.timestamp` detectors can be omitted while zero address checks and using the same solidity version related warnings could be fixed.",
+        "url": "https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1936239962",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.58,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 34,
+            "wordValue": 0.1,
+            "result": 2.01
+          },
+          "readability": {
+            "fleschKincaid": 55.21529411764709,
+            "syllables": 54,
+            "sentences": 2,
+            "score": 0.9521529411764709
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1959046343,
+        "content": "Hard to say, @pavlovcik might know better",
+        "url": "https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1959046343",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.258,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 78.87285714285717,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.8112714285714283
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2030430016,
+        "content": "What should be done:\r\n1. Fix all slither `info` warnings produced by `slither .`\r\n2. Setup a workflow that runs slither check on any PR and push to the `development` branch (make sure it fails if there are any warnings, [example](https://github.com/ubiquity/ubiquity-dollar/blob/8fd2ec2a608aded67238b17ce62e995e8f3deeb9/.github/workflows/slither-analysis.yml))",
+        "url": "https://github.com/ubiquity/nft-rewards/issues/3",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.16,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 64.9557142857143,
+            "syllables": 44,
+            "sentences": 1,
+            "score": 0.950442857142857
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1888233050,
+        "content": "1. There is still this warning:\r\n```\r\nNftReward.safeMint(NftReward.MintRequest,bytes) (src/NftReward.sol#145-176) uses timestamp for comparisons\r\n\tDangerous comparisons:\r\n\t- require(bool,string)(block.timestamp < _mintRequest.deadline,Signature expired) (src/NftReward.sol#155)\r\nReference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp\r\n```\r\nI think we can simply exclude the `block-timestamp` detector.\r\n2. There is still this warning:\r\n```\r\nPragma version^0.8.20 (src/NftReward.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.\r\nsolc-0.8.24 is not recommended for deployment\r\nReference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity\r\n```\r\nWhat if we use solidity v0.8.18?\r\n3. There is still this info warning:\r\n```\r\nParameter NftReward.invalidateNonce(uint256)._nonceValue (src/NftReward.sol#223) is not in mixedCase\r\nReference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions\r\n```\r\nEither exclude this detector either refactor the code.\r\n4. Pls make sure the slither check workflow fails on any warning in the `NftReward.sol` contract\r\n5. Pls update the slither worflow to run only when `*.sol` files are changed",
+        "url": "https://github.com/ubiquity/nft-rewards/pull/7#pullrequestreview-1888233050",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.456,
+          "formatting": {
+            "content": {
+              "ol": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              }
+            },
+            "result": 0.5
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 66,
+            "wordValue": 0.1,
+            "result": 2.57
+          },
+          "readability": {
+            "fleschKincaid": 76.46090909090911,
+            "syllables": 93,
+            "sentences": 6,
+            "score": 0.8353909090909089
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1492127888,
+        "content": "Pls add tests for all newly added `require()` statements",
+        "url": "https://github.com/ubiquity/nft-rewards/pull/7#discussion_r1492127888",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -197,6 +199,7 @@ contract NftReward is Initializable, ERC721Upgradeable, OwnableUpgradeable, Paus\n      * @param _newMinter New minter address\n      */\n     function setMinter(address _newMinter) external onlyOwner {\n+        require(_newMinter != address(0), \"Minter cannot be zero address\");",
+        "score": {
+          "reward": 0.752,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 82.39000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.7760999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1494957632,
+        "content": "Perhaps if https://github.com/crytic/slither-action targets only the https://github.com/ubiquity/nft-rewards/tree/development/src folder the OZ related warnings would be gone?",
+        "url": "https://github.com/ubiquity/nft-rewards/pull/7#discussion_r1494957632",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,5 +1,5 @@\n // SPDX-License-Identifier: MIT\n-pragma solidity ^0.8.13;\n+pragma solidity ^0.8.18;",
+        "score": {
+          "reward": 2.807,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 58.37595238095241,
+            "syllables": 46,
+            "sentences": 3,
+            "score": 0.9837595238095241
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1949375412,
+        "content": "Yes, you should merge the `development` branch because there are code conflicts which should be resolved",
+        "url": "https://github.com/ubiquity/nft-rewards/pull/7#issuecomment-1949375412",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.876,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 90.09000000000002,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.6990999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1952844676,
+        "content": "But there is no warning for `NftReward.sol` in this case, right?",
+        "url": "https://github.com/ubiquity/nft-rewards/pull/7#issuecomment-1952844676",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.585,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 103.625,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1953026917,
+        "content": "Then it makes sense to update `NftReward.sol` to use solidity `v0.8.18` since OZ contracts are not part of this project",
+        "url": "https://github.com/ubiquity/nft-rewards/pull/7#issuecomment-1953026917",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.384,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 75.76500000000001,
+            "syllables": 24,
+            "sentences": 1,
+            "score": 0.8423499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1953072447,
+        "content": "Yes, we use this strategy (fall on any slither warning or compiler warning) in our main repo https://github.com/ubiquity/ubiquity-dollar/\r\nNot all of the slither detectors are included in our main repo because it makes sense to be reasonable (for example, `block.timestamp` related warnings can be excluded)",
+        "url": "https://github.com/ubiquity/nft-rewards/pull/7#issuecomment-1953072447",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.856,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 43,
+            "wordValue": 0.1,
+            "result": 2.25
+          },
+          "readability": {
+            "fleschKincaid": 45.57158163265308,
+            "syllables": 79,
+            "sentences": 2,
+            "score": 0.8557158163265308
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1954285453,
+        "content": "If we remove the [exclude_informational](https://github.com/ubiquity/nft-rewards/pull/7/files#diff-959713dbf93e19e462fad9058feb6086c9c053d875e23c9ffc637ac12c26ea52R4) config the slither workflow still passes, right?",
+        "url": "https://github.com/ubiquity/nft-rewards/pull/7#issuecomment-1954285453",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.736,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 32.504999999999995,
+            "syllables": 23,
+            "sentences": 1,
+            "score": 0.72505
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1954591947,
+        "content": "I don't understand from the log output, what file causes the `solc-0.8.24 is not recommended for deployment` error?",
+        "url": "https://github.com/ubiquity/nft-rewards/pull/7#issuecomment-1954591947",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.828,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 76.50153846153849,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.8349846153846151
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1954636618,
+        "content": "But that doesn't solve the warning as far as I understand\r\nOverall we shouldn't exclude all low level issues. This is getting out of hand so lets:\r\n1. Remove `exclude_informational: true`\r\n2. Add the `solc-version` detector to exceptions. The only valid case I can think of is the usage of the `PUSH0` instruction which is mainly supported.",
+        "url": "https://github.com/ubiquity/nft-rewards/pull/7#issuecomment-1954636618",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.997,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 53,
+            "wordValue": 0.1,
+            "result": 2.43
+          },
+          "readability": {
+            "fleschKincaid": 70.78257861635223,
+            "syllables": 74,
+            "sentences": 3,
+            "score": 0.8921742138364778
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1884574019,
+            "effect": {
+              "addition": 36,
+              "deletion": 3
+            },
+            "reward": 0.39,
+            "priority": 1
+          },
+          {
+            "reviewId": 1888233050,
+            "effect": {
+              "addition": 138,
+              "deletion": 2
+            },
+            "reward": 1.4,
+            "priority": 1
+          },
+          {
+            "reviewId": 1889068546,
+            "effect": {
+              "addition": 59,
+              "deletion": 84
+            },
+            "reward": 1.43,
+            "priority": 1
+          },
+          {
+            "reviewId": 1893388030,
+            "effect": {
+              "addition": 35,
+              "deletion": 3
+            },
+            "reward": 0.38,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/nft-rewards/pull/7"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 33.551 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>4</td><td>3.6</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.16</td></tr><tr><td>Issue</td><td>Comment</td><td>5</td><td>7.514</td></tr><tr><td>Review</td><td>Comment</td><td>10</td><td>18.277</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/nft-rewards/pull/7\" target=\"_blank\" rel=\"noopener\">#7</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+36 -3</td><td>1</td><td>0.39</td></tr><tr><td>+138 -2</td><td>1</td><td>1.4</td></tr><tr><td>+59 -84</td><td>1</td><td>1.43</td></tr><tr><td>+35 -3</td><td>1</td><td>0.38</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/issues/3\" target=\"_blank\" rel=\"noopener\">What should be done:1. Fix all slither &#96;info&#96; warnings&hellip;</a></h6></td><td><details><summary>3.24</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.2&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>1</td><td>1</td><td>4.16</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1933452756\" target=\"_blank\" rel=\"noopener\">This issue implies refactoring the code in a way that fixes warn&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>1</td><td>1</td><td>2.07</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1934350960\" target=\"_blank\" rel=\"noopener\">Could you show slither's output?</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.666</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1936163662\" target=\"_blank\" rel=\"noopener\">The &#96;slither .&#96; command does show some info warnings reg&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>1</td><td>1</td><td>1.94</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1936239962\" target=\"_blank\" rel=\"noopener\">YesThis issue implied fixing low severity warnings (where it m&hellip;</a></h6></td><td><details><summary>2.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 34&#13;  wordValue: 0.1&#13;  result: 2.01&#13;</pre></details></td><td>1</td><td>1</td><td>2.58</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1959046343\" target=\"_blank\" rel=\"noopener\">Hard to say, @pavlovcik might know better</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.258</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/pull/7#pullrequestreview-1888233050\" target=\"_blank\" rel=\"noopener\">1. There is still this warning:&#96;&#96;&#96;NftReward.safe&hellip;</a></h6></td><td><details><summary>3.07</summary><pre>content:&#13;  content:&#13;    ol:&#13;      score: 0&#13;      elementCount: 4&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;  result: 0.5&#13;regex:&#13;  wordCount: 66&#13;  wordValue: 0.1&#13;  result: 2.57&#13;</pre></details></td><td>0.9</td><td>1</td><td>3.456</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/pull/7#discussion_r1492127888\" target=\"_blank\" rel=\"noopener\">Pls add tests for all newly added &#96;require()&#96; statements</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.752</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/pull/7#discussion_r1494957632\" target=\"_blank\" rel=\"noopener\">Perhaps if https://github.com/crytic/slither-action targets only&hellip;</a></h6></td><td><details><summary>3.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.7</td><td>1</td><td>2.807</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/pull/7#issuecomment-1949375412\" target=\"_blank\" rel=\"noopener\">Yes, you should merge the &#96;development&#96; branch because t&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.876</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/pull/7#issuecomment-1952844676\" target=\"_blank\" rel=\"noopener\">But there is no warning for &#96;NftReward.sol&#96; in this case&hellip;</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.585</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/pull/7#issuecomment-1953026917\" target=\"_blank\" rel=\"noopener\">Then it makes sense to update &#96;NftReward.sol&#96; to use sol&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.384</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/pull/7#issuecomment-1953072447\" target=\"_blank\" rel=\"noopener\">Yes, we use this strategy (fall on any slither warning or compil&hellip;</a></h6></td><td><details><summary>3.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 43&#13;  wordValue: 0.1&#13;  result: 2.25&#13;</pre></details></td><td>0.7</td><td>1</td><td>2.856</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/pull/7#issuecomment-1954285453\" target=\"_blank\" rel=\"noopener\">If we remove the [exclude_informational](https://github.com/ubiq&hellip;</a></h6></td><td><details><summary>2.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.736</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/pull/7#issuecomment-1954591947\" target=\"_blank\" rel=\"noopener\">I don't understand from the log output, what file causes the &#9&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.828</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/pull/7#issuecomment-1954636618\" target=\"_blank\" rel=\"noopener\">But that doesn't solve the warning as far as I understandOvera&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 53&#13;  wordValue: 0.1&#13;  result: 2.43&#13;</pre></details></td><td>0.9</td><td>1</td><td>2.997</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 0.498,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1959050983,
+        "content": "I've never seen this scenario before. But yesterday there was some strange behavior I think on GitHub's side with the pull request links. One of our contributors was unable to automatically link their pull request to the issue via `Resolves` closing keyword, which has nothing to do with our bot. \r\nThere's [another issue](https://github.com/ubiquibot/comment-incentives/actions/runs/8002349026/job/21855360540) I've never seen so I'll handle the payout manually.\r\nhttps://gnosisscan.io/tx/0xb245990569cebe0757c42d8d2ac29d284fc44484df0feea6e521b2b8533fedd5",
+        "url": "https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1959050983",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 66,
+            "wordValue": 0.1,
+            "result": 2.57
+          },
+          "readability": {
+            "fleschKincaid": 61.37064553990615,
+            "syllables": 112,
+            "sentences": 6,
+            "score": 0.9862935446009385
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 1491499554,
+        "content": "This is really interesting",
+        "url": "https://github.com/ubiquity/nft-rewards/pull/7#discussion_r1491499554",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,5 +1,5 @@\n // SPDX-License-Identifier: MIT\n-pragma solidity ^0.8.13;\n+pragma solidity ^0.8.20;",
+        "score": {
+          "reward": 0.108,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 33.57500000000002,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.7357500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1883623486,
+            "effect": {
+              "addition": 36,
+              "deletion": 3
+            },
+            "reward": 0.39,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/nft-rewards/pull/7"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 0.498 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>0.39</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>0.108</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/nft-rewards/pull/7\" target=\"_blank\" rel=\"noopener\">#7</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+36 -3</td><td>1</td><td>0.39</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/issues/3#issuecomment-1959050983\" target=\"_blank\" rel=\"noopener\">I've never seen this scenario before. But yesterday there was so&hellip;</a></h6></td><td><details><summary>4.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 66&#13;  wordValue: 0.1&#13;  result: 2.57&#13;</pre></details></td><td>0</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/pull/7#discussion_r1491499554\" target=\"_blank\" rel=\"noopener\">This is really interesting</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.108</td></tr></tbody></table></details>"
+  },
+  "gitcoindev": {
+    "total": 2.904,
+    "userId": 88761781,
+    "comments": [
+      {
+        "id": 1893620097,
+        "content": "Reviewed, read all comments and approving from my side, too!",
+        "url": "https://github.com/ubiquity/nft-rewards/pull/7#pullrequestreview-1893620097",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.084,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 78.24500000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.8175499999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1893620097,
+            "effect": {
+              "addition": 229,
+              "deletion": 53
+            },
+            "reward": 2.82,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/nft-rewards/pull/7"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 2.904 XP ]</a>&nbsp;</h3><h6>@gitcoindev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>2.82</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>0.084</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/nft-rewards/pull/7\" target=\"_blank\" rel=\"noopener\">#7</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+229 -53</td><td>1</td><td>2.82</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/nft-rewards/pull/7#pullrequestreview-1893620097\" target=\"_blank\" rel=\"noopener\">Reviewed, read all comments and approving from my side, too!</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.084</td></tr></tbody></table></details>"
+  }
+}

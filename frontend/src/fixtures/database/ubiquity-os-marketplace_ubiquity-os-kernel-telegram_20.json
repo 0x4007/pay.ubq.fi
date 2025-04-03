@@ -1,0 +1,1609 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 419.458,
+    "task": {
+      "reward": 400,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2556733989,
+        "content": "I cant assign labels\r\nProbs about a day to rewrite and test everything is working again",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/20#issuecomment-2556733989",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.968,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 58.4075,
+            "syllables": 25,
+            "sentences": 1,
+            "score": 0.984075
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2556857594,
+        "content": "@0x4007 I'm not free today to carry out work but will be over the next day or two as a heads up\r\nThanks for labeling for me.",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/20#issuecomment-2556857594",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.35,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 78.70785714285716,
+            "syllables": 33,
+            "sentences": 1,
+            "score": 0.8129214285714284
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2593849357,
+        "content": "Not as far as I'm aware @whilefoo no.\r\nWe need to set a delivery url for our BotFather bot updates and so we use our CF worker domain. What would we set it to if using actions? Afaik that's not possible but I'm no expert.  \r\n---\r\nI see recent discussion regarding \"hybrids\" and plugins being able to self-dispatch in [another task](https://github.com/ubiquity-os-marketplace/daemon-pricing/pull/72#issuecomment-2591918348).\r\nI don't feel the kernel needs to gatekeep the ability to dispatch workflows as it has other important jobs too but actually it's an improvement if plugins can self-dispatch for many reasons:\r\n1. Worker as P.O.E means we can detect no-op payloads and optimize our rate limit usage which seems to have been a problem as of recent.\r\n2. We have both instant and long-running capabilities for plugins.\r\n3. With [Tail Workers](https://developers.cloudflare.com/workers/observability/logs/tail-workers/) we could setup a decent redundancy system for all worker/hybrid plugins.\r\nSo if the kernel handles handshakes properly and the plugins are reviewed that self-dispatch and/or leverage `APP_ID` and `APP_PRIVATE_KEY` then it's safe, no?",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/20#issuecomment-2593849357",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 9.864,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 8
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.3
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 176,
+            "wordValue": 0.1,
+            "result": 1.97
+          },
+          "readability": {
+            "fleschKincaid": 65.61772727272728,
+            "syllables": 260,
+            "sentences": 11,
+            "score": 0.9438227272727272
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2639372885,
+        "content": "Should I proceed with this @0x4007? I'm assuming yeah, but just clarifying before I get stuck in.",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/20#issuecomment-2639372885",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.366,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 84.90000000000003,
+            "syllables": 24,
+            "sentences": 2,
+            "score": 0.7509999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2621484429,
+        "content": "Now that the kernel' `APP_ID` and `APP_PRIVATE_KEY` have been exposed as org secrets I think I should go back to my original implementation where the worker for this plugin controlled the dispatching of it's own workflows for MTProto API (workrooms, etc...) features.\r\n- with two config entries ubiquity-os kernel is dispatching tons of workflows for no reason which can be avoided\r\n- self-dispatched means we can validate no-op payloads first\r\n- it's cleaner and more efficient from a plugin standpoint\r\n- removes the need for two entries in the config\r\n- optimizes the github rate limit consumed by this plugin\r\n- it's no longer considered \"unsafe\" to do so or the secrets wouldn't be exposed",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/20",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.91,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 7
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 6
+              }
+            },
+            "result": 0.6
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 114,
+            "wordValue": 0.1,
+            "result": 2.53
+          },
+          "readability": {
+            "fleschKincaid": 43.59131578947371,
+            "syllables": 168,
+            "sentences": 3,
+            "score": 0.8359131578947371
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 419.458 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>400</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.91</td></tr><tr><td>Issue</td><td>Comment</td><td>4</td><td>15.548</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/20\" target=\"_blank\" rel=\"noopener\">Now that the kernel' &#96;APP_ID&#96; and &#96;APP_PRIVATE_KEY&#&hellip;</a></h6></td><td><details><summary>3.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 7&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 6&#13;  result: 0.6&#13;regex:&#13;  wordCount: 114&#13;  wordValue: 0.1&#13;  result: 2.53&#13;</pre></details></td><td>1</td><td>1</td><td>3.91</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/20#issuecomment-2556733989\" target=\"_blank\" rel=\"noopener\">I cant assign labelsProbs about a day to rewrite and test ever&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.6</td><td>2</td><td>1.968</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/20#issuecomment-2556857594\" target=\"_blank\" rel=\"noopener\">@0x4007 I'm not free today to carry out work but will be over th&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.3</td><td>2</td><td>1.35</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/20#issuecomment-2593849357\" target=\"_blank\" rel=\"noopener\">Not as far as I'm aware @whilefoo no.We need to set a delivery&hellip;</a></h6></td><td><details><summary>4.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 8&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.3&#13;regex:&#13;  wordCount: 176&#13;  wordValue: 0.1&#13;  result: 1.97&#13;</pre></details></td><td>0.9</td><td>2</td><td>9.864</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/20#issuecomment-2639372885\" target=\"_blank\" rel=\"noopener\">Should I proceed with this @0x4007? I'm assuming yeah, but just &hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.7</td><td>2</td><td>2.366</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 8.45,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2556730455,
+        "content": "This will need a time estimate as well.",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/20#issuecomment-2556730455",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.274,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 92.965,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.67035
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2651123565,
+        "content": "I need instructions on what to do\r\nhttps://t.me/ubiquityos and https://t.me/ubiquityos_bot are ready \r\n---\r\nWhy not run production off of your cloudflare until its stable?\r\nhttps://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/invitations",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#issuecomment-2651123565",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.75,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 50.66500000000002,
+            "syllables": 70,
+            "sentences": 5,
+            "score": 0.9066500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2651486998,
+        "content": "I sent all info from UbiquityOS telegram @Keyrxng",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#issuecomment-2651486998",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.582,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 50.66500000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.9066500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2652780669,
+        "content": "I sent both now",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#issuecomment-2652780669",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.228,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 118.17500000000001,
+            "syllables": 4,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2661245085,
+        "content": "@gentlementlegen  can you handle this pull",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#issuecomment-2661245085",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.616,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 45.64500000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.8564500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 8.45 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.274</td></tr><tr><td>Review</td><td>Comment</td><td>4</td><td>7.176</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/20#issuecomment-2556730455\" target=\"_blank\" rel=\"noopener\">This will need a time estimate as well.</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.7</td><td>2</td><td>1.274</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#issuecomment-2651123565\" target=\"_blank\" rel=\"noopener\">I need instructions on what to dohttps://t.me/ubiquityos and h&hellip;</a></h6></td><td><details><summary>4.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.5</td><td>2</td><td>5.75</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#issuecomment-2651486998\" target=\"_blank\" rel=\"noopener\">I sent all info from UbiquityOS telegram @Keyrxng</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.3</td><td>2</td><td>0.582</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#issuecomment-2652780669\" target=\"_blank\" rel=\"noopener\">I sent both now</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.2</td><td>2</td><td>0.228</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#issuecomment-2661245085\" target=\"_blank\" rel=\"noopener\">@gentlementlegen  can you handle this pull</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.4</td><td>2</td><td>0.616</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 116.446,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 2567120673,
+        "content": "A plugin should ideally not dispatch workflows on the behalf of the kernel as that is the job of the kernel. Can't we move everything to the workflow?",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/20#issuecomment-2567120673",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 4.212,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 72.51060344827589,
+            "syllables": 41,
+            "sentences": 2,
+            "score": 0.8748939655172411
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1959430021,
+        "content": "```suggestion\r\n   * which uses workflowDispatch to fire the workflows.\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1959430021",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -4,19 +4,21 @@ import { bubbleUpErrorComment } from \"../utils/errors\";\n import { notificationsRequiringComments } from \"./private-notifications/comment-triggers\";\n import { disqualificationNotification } from \"./private-notifications/disqualification-trigger\";\n import { reviewNotification } from \"./private-notifications/review-trigger\";\n+import { closeWorkroom, createWorkroom, reOpenWorkroom } from \"./workflow-functions\";\n \n-/**\n- * The `callbacks` object defines an array of callback functions for each supported event type.\n- *\n- * Since multiple callbacks might need to be executed for a single event, we store each\n- * callback in an array. This design allows for extensibility and flexibility, enabling\n- * us to add more callbacks for a particular event without modifying the core logic.\n- */\n const callbacks = {\n   \"issue_comment.created\": [notificationsRequiringComments],\n   \"issue_comment.edited\": [notificationsRequiringComments],\n   \"issues.unassigned\": [disqualificationNotification],\n   \"pull_request.review_requested\": [reviewNotification],\n+\n+  /**\n+   * Workflow functions below - first routed through the worker\n+   * which uses repositoryDispatch to fire the workflows.",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1959435169,
+        "content": "did you mean `workflowDispatch`? \r\n`workflow` parameter is only used in logger so what is the purpose of it?",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1959435169",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,45 @@\n+import { App } from \"octokit\";\n+import { Context } from \"../types\";\n+import { PluginContext } from \"../types/plugin-context-single\";\n+\n+export async function repositoryDispatch(context: Context, workflow: string) {\n+  const inputs = PluginContext.getInstance().getInputs();\n+  const { logger } = context;",
+        "score": {
+          "reward": 2.826,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 82.39000000000001,
+            "syllables": 22,
+            "sentences": 2,
+            "score": 0.7760999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1959437412,
+        "content": "If I fork this plugin, then it should call my fork's workflows, no?",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1959437412",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,45 @@\n+import { App } from \"octokit\";\n+import { Context } from \"../types\";\n+import { PluginContext } from \"../types/plugin-context-single\";\n+\n+export async function repositoryDispatch(context: Context, workflow: string) {\n+  const inputs = PluginContext.getInstance().getInputs();\n+  const { logger } = context;\n+\n+  /**\n+   * These should probably remain hardcoded so that it is not\n+   * possible to dispatch workflows to other repositories.\n+   */\n+  const repository = \"ubiquity-os-kernel-telegram\";\n+  const owner = \"ubiquity-os-marketplace\";\n+  const branch = \"development\";",
+        "score": {
+          "reward": 2.208,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 95.93928571428573,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.6406071428571427
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1959441919,
+        "content": "are you sure `Response` is correct? Shouldn't it be a response type from `hono` instead of default `Response` type although they might be compatible",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1959441919",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -32,7 +32,7 @@ export function cors(options = { origin: \"*\", methods: \"GET,POST,OPTIONS\", heade\n     c.res.headers.set(\"Access-Control-Allow-Methods\", options.methods);\n     c.res.headers.set(\"Access-Control-Allow-Headers\", options.headers);\n     if (c.req.method === \"OPTIONS\") {\n-      return c.text(\"\", 204);\n+      return new Response(null, { status: 204 });",
+        "score": {
+          "reward": 2.73,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 80.30636363636367,
+            "syllables": 30,
+            "sentences": 2,
+            "score": 0.7969363636363633
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1959478040,
+        "content": "what do you mean they don't match?",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1959478040",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,23 +1,18 @@\n-import { Octokit } from \"@octokit/rest\";\n import { EmitterWebhookEvent as WebhookEvent, EmitterWebhookEventName as WebhookEventName } from \"@octokit/webhooks\";\n-import { Env } from \"./env\";\n+import { Context as _Context } from \"@ubiquity-os/plugin-sdk\";\n import { PluginSettings } from \"./plugin-inputs\";\n-import { Logs } from \"@ubiquity-os/ubiquity-os-logger\";\n+import { Env } from \"./env\";\n import { createAdapters } from \"../adapters\";\n-import { Octokit as RestOctokitFromApp } from \"octokit\";\n \n export type SupportedEventsU = WebhookEventName;\n \n export type SupportedEvents = {\n   [K in SupportedEventsU]: K extends WebhookEventName ? WebhookEvent<K> : never;\n };\n \n-export interface Context<T extends SupportedEventsU = SupportedEventsU, TU extends SupportedEvents[T] = SupportedEvents[T]> {\n-  eventName: T;\n-  payload: TU[\"payload\"];\n-  octokit: Octokit | RestOctokitFromApp;\n-  config: PluginSettings;\n-  env: Env;\n-  logger: Logs;\n+// @ts-ignore - octokit type mismatch - doesn't affect runtime\n+interface ExtendedContext<T extends SupportedEventsU> extends _Context<PluginSettings, Env, null, T> {",
+        "score": {
+          "reward": 0.99,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 114.11500000000001,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1959479148,
+        "content": "this should be optional",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1959479148",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -130,6 +130,31 @@ class SetUpHandler {\n         },\n       ],\n     },\n+    {\n+      title: \"API keys\",\n+      questions: [\n+        {\n+          type: \"input\",\n+          name: \"VOYAGEAI_API_KEY\",\n+          message: \"Enter your Voyage AI API key. This can be obtained from the Voyage AI dashboard.\",\n+        },\n+        {\n+          type: \"input\",\n+          name: \"OPENAI_API_KEY\",\n+          message: \"Enter your OpenAI API key. This can be obtained from the OpenAI dashboard.\",\n+        },\n+        {\n+          type: \"input\",\n+          name: \"OPENROUTER_API_KEY\",\n+          message: \"Enter your OpenRouter API key. This can be obtained from the OpenRouter dashboard.\",\n+        },\n+        {\n+          type: \"input\",\n+          name: \"KERNEL_PUBLIC_KEY\",\n+          message: \"Enter your Kernel public key. This can be obtained from your Kernel private key.\",\n+        },",
+        "score": {
+          "reward": 0.825,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 75.87500000000001,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 0.8412499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.75
+        }
+      },
+      {
+        "id": 1959484812,
+        "content": "I realized that `PluginContext` is a global variable that's used in Workers but correct me if I'm wrong. Using global variables in Workers in not recommended and in this case will lead to bugs because one instance of a Worker can serve multiple requests. We had this issue in the SDK already.",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1959484812",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,72 +1,84 @@\n-import { Env, envValidator, PluginInputs } from \"./types\";\n-import { handleGithubWebhook } from \"./handlers/github-webhook\";\n+import { Context, Env, envValidator, PluginInputs, pluginSettingsValidator } from \"./types\";\n import { handleTelegramWebhook } from \"./handlers/telegram-webhook\";\n import manifest from \"../manifest.json\";\n-import { handleUncaughtError } from \"./utils/errors\";\n import { PluginContext } from \"./types/plugin-context-single\";\n-import { Value } from \"@sinclair/typebox/value\";\n+import { ExecutionContext } from \"hono\";\n+import { createPlugin } from \"@ubiquity-os/plugin-sdk\";\n+import { runPlugin } from \"./plugin\";\n+import { Manifest } from \"@ubiquity-os/plugin-sdk/manifest\";\n+import { decodeEnvSettings } from \"./utils/env-parsing\";\n import { logger } from \"./utils/logger\";\n+import { handleUncaughtError } from \"./utils/errors\";\n+import { createAdapters } from \"./adapters\";\n \n export default {\n-  async fetch(request: Request, env: Env): Promise<Response> {\n-    const url = new URL(request.url);\n-    const path = url.pathname;\n-    if (request.method === \"GET\") {\n-      if (path === \"/manifest.json\") {\n-        return new Response(JSON.stringify(manifest), {\n-          headers: { \"content-type\": \"application/json\" },\n-        });\n-      }\n-    }\n-\n-    const contentType = request.headers.get(\"content-type\");\n-    if (contentType !== \"application/json\") {\n-      logger.info(\"!application/json\", { contentType });\n-      return new Response(JSON.stringify({ error: `Error: ${contentType} is not a valid content type` }), {\n-        status: 400,\n-        headers: { \"content-type\": \"application/json\" },\n+  async fetch(request: Request, env: Env, executionCtx?: ExecutionContext) {\n+    // The SDK handles this but it's cleaner if we handle it here\n+    if (new URL(request.url).pathname === \"/manifest.json\") {\n+      return new Response(JSON.stringify(manifest), {\n+        headers: { \"Content-Type\": \"application/json\" },\n       });\n     }\n \n-    let envSettings;\n+    const payload = (await request.clone().json()) as PluginInputs; // required cast\n+    const envSettings = await initPluginContext(payload, env);\n \n-    try {\n-      envSettings = Value.Decode(envValidator.schema, Value.Default(envValidator.schema, env));\n-    } catch (err) {\n-      logger.error(\"Could not decode env\", { err });\n-      return new Response(JSON.stringify({ err, message: \"Invalid environment provided\" }), {\n-        status: 400,\n-        headers: { \"content-type\": \"application/json\" },\n-      });\n-    }\n+    await Promise.all([telegramRoute(request, envSettings), githubRoute(request, envSettings, executionCtx)]);\n \n-    const payload = (await request.clone().json()) as PluginInputs; // required cast\n-    Reflect.deleteProperty(payload, \"authToken\");\n-    try {\n-      PluginContext.initialize(payload, envSettings);\n-    } catch (er) {\n-      logger.error(\"Could not initialize PluginContext on fetch\", { er, payload });\n-      return new Response(JSON.stringify({ err: er, message: \"Invalid plugin context provided\" }), {\n-        status: 400,\n-        headers: { \"content-type\": \"application/json\" },\n-      });\n+    return new Response(\"OK\", { status: 200 });\n+  },\n+};\n+\n+async function initPluginContext(payload: PluginInputs, env: Env) {\n+  // the sdk parses the env but we need to pass it to the plugin context\n+  const envSettings = await decodeEnvSettings(env);\n+\n+  try {\n+    PluginContext.initialize(payload, envSettings);\n+  } catch (er) {\n+    throw handleUncaughtError(er);\n+  }",
+        "score": {
+          "reward": 5.871,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 53,
+            "wordValue": 0.1,
+            "result": 2.43
+          },
+          "readability": {
+            "fleschKincaid": 69.18635220125788,
+            "syllables": 75,
+            "sentences": 3,
+            "score": 0.9081364779874213
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 1959485981,
+        "content": "`createPlugin` returns a `hono` instance where you can attach additional routes `app.post(\"/telegram\")` and you can still access the body and parse env from there",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1959485981",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,72 +1,84 @@\n-import { Env, envValidator, PluginInputs } from \"./types\";\n-import { handleGithubWebhook } from \"./handlers/github-webhook\";\n+import { Context, Env, envValidator, PluginInputs, pluginSettingsValidator } from \"./types\";\n import { handleTelegramWebhook } from \"./handlers/telegram-webhook\";\n import manifest from \"../manifest.json\";\n-import { handleUncaughtError } from \"./utils/errors\";\n import { PluginContext } from \"./types/plugin-context-single\";\n-import { Value } from \"@sinclair/typebox/value\";\n+import { ExecutionContext } from \"hono\";\n+import { createPlugin } from \"@ubiquity-os/plugin-sdk\";\n+import { runPlugin } from \"./plugin\";\n+import { Manifest } from \"@ubiquity-os/plugin-sdk/manifest\";\n+import { decodeEnvSettings } from \"./utils/env-parsing\";\n import { logger } from \"./utils/logger\";\n+import { handleUncaughtError } from \"./utils/errors\";\n+import { createAdapters } from \"./adapters\";\n \n export default {\n-  async fetch(request: Request, env: Env): Promise<Response> {\n-    const url = new URL(request.url);\n-    const path = url.pathname;\n-    if (request.method === \"GET\") {\n-      if (path === \"/manifest.json\") {\n-        return new Response(JSON.stringify(manifest), {\n-          headers: { \"content-type\": \"application/json\" },\n-        });\n-      }\n-    }\n-\n-    const contentType = request.headers.get(\"content-type\");\n-    if (contentType !== \"application/json\") {\n-      logger.info(\"!application/json\", { contentType });\n-      return new Response(JSON.stringify({ error: `Error: ${contentType} is not a valid content type` }), {\n-        status: 400,\n-        headers: { \"content-type\": \"application/json\" },\n+  async fetch(request: Request, env: Env, executionCtx?: ExecutionContext) {\n+    // The SDK handles this but it's cleaner if we handle it here\n+    if (new URL(request.url).pathname === \"/manifest.json\") {\n+      return new Response(JSON.stringify(manifest), {\n+        headers: { \"Content-Type\": \"application/json\" },\n       });\n     }\n \n-    let envSettings;\n+    const payload = (await request.clone().json()) as PluginInputs; // required cast\n+    const envSettings = await initPluginContext(payload, env);\n \n-    try {\n-      envSettings = Value.Decode(envValidator.schema, Value.Default(envValidator.schema, env));\n-    } catch (err) {\n-      logger.error(\"Could not decode env\", { err });\n-      return new Response(JSON.stringify({ err, message: \"Invalid environment provided\" }), {\n-        status: 400,\n-        headers: { \"content-type\": \"application/json\" },\n-      });\n-    }\n+    await Promise.all([telegramRoute(request, envSettings), githubRoute(request, envSettings, executionCtx)]);\n \n-    const payload = (await request.clone().json()) as PluginInputs; // required cast\n-    Reflect.deleteProperty(payload, \"authToken\");\n-    try {\n-      PluginContext.initialize(payload, envSettings);\n-    } catch (er) {\n-      logger.error(\"Could not initialize PluginContext on fetch\", { er, payload });\n-      return new Response(JSON.stringify({ err: er, message: \"Invalid plugin context provided\" }), {\n-        status: 400,\n-        headers: { \"content-type\": \"application/json\" },\n-      });\n+    return new Response(\"OK\", { status: 200 });\n+  },\n+};\n+\n+async function initPluginContext(payload: PluginInputs, env: Env) {\n+  // the sdk parses the env but we need to pass it to the plugin context\n+  const envSettings = await decodeEnvSettings(env);\n+\n+  try {\n+    PluginContext.initialize(payload, envSettings);\n+  } catch (er) {\n+    throw handleUncaughtError(er);\n+  }\n+\n+  return envSettings;\n+}\n+\n+/**\n+ * Plugins are required (I think) to use the SDK to interact with the kernel.\n+ *\n+ * Handles any github-sided events.\n+ */\n+async function githubRoute(request: Request, env: Env, executionCtx?: ExecutionContext) {\n+  return createPlugin<Context>(\n+    (context) => {\n+      const ctx = context as unknown as Context;\n+      ctx.adapters = createAdapters(ctx);\n+      return runPlugin(ctx);\n+    },\n+    manifest as Manifest,\n+    {\n+      envSchema: envValidator.schema,\n+      postCommentOnError: true,\n+      settingsSchema: pluginSettingsValidator.schema,\n+      logLevel: \"debug\",\n+      kernelPublicKey: env.KERNEL_PUBLIC_KEY,\n+      bypassSignatureVerification: process.env.NODE_ENV === \"local\",\n     }\n+  ).fetch(request, env, executionCtx);\n+}\n \n-    if ([\"/telegram\", \"/telegram/\"].includes(path)) {\n-      try {\n-        logger.info(\"payload\", { payload });\n-        return await handleTelegramWebhook(request, envSettings);\n-      } catch (err) {\n-        logger.error(\"handleTelegramWebhook failed\", { err, path, content: payload });\n-        return handleUncaughtError(err);\n-      }\n-    } else {\n-      try {\n-        return await handleGithubWebhook(request, envSettings);\n-      } catch (err) {\n-        logger.error(\"handleGithubWebhook failed\", { err, path, content: payload });\n-        return handleUncaughtError(err);\n-      }\n+/**\n+ * Afaik, the sdk does not support route handling out of the box and\n+ * so hybrids are required to handle routes manually.\n+ *\n+ * This route handles any Telegram-sided updates.\n+ */\n+async function telegramRoute(request: Request, envSettings: Env) {",
+        "score": {
+          "reward": 3.298,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 68.69142857142859,
+            "syllables": 29,
+            "sentences": 1,
+            "score": 0.9130857142857142
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1959990162,
+        "content": "You can try using `customOctokit` from the SDK.",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1959990162",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,23 +1,18 @@\n-import { Octokit } from \"@octokit/rest\";\n import { EmitterWebhookEvent as WebhookEvent, EmitterWebhookEventName as WebhookEventName } from \"@octokit/webhooks\";\n-import { Env } from \"./env\";\n+import { Context as _Context } from \"@ubiquity-os/plugin-sdk\";\n import { PluginSettings } from \"./plugin-inputs\";\n-import { Logs } from \"@ubiquity-os/ubiquity-os-logger\";\n+import { Env } from \"./env\";\n import { createAdapters } from \"../adapters\";\n-import { Octokit as RestOctokitFromApp } from \"octokit\";\n \n export type SupportedEventsU = WebhookEventName;\n \n export type SupportedEvents = {\n   [K in SupportedEventsU]: K extends WebhookEventName ? WebhookEvent<K> : never;\n };\n \n-export interface Context<T extends SupportedEventsU = SupportedEventsU, TU extends SupportedEvents[T] = SupportedEvents[T]> {\n-  eventName: T;\n-  payload: TU[\"payload\"];\n-  octokit: Octokit | RestOctokitFromApp;\n-  config: PluginSettings;\n-  env: Env;\n-  logger: Logs;\n+// @ts-ignore - octokit type mismatch - doesn't affect runtime\n+interface ExtendedContext<T extends SupportedEventsU> extends _Context<PluginSettings, Env, null, T> {",
+        "score": {
+          "reward": 1.44,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 103.04428571428575,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1960014760,
+        "content": "is this another case of a global variable?",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1960014760",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -15,18 +15,23 @@ export class TelegramBotSingleton {\n   private static _instance: TelegramBotSingleton;",
+        "score": {
+          "reward": 1.584,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 61.24000000000001,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.9875999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1960149138,
+        "content": "I think these should be in the env",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1960149138",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -46,6 +52,17 @@ export const pluginSettingsSchema = T.Object({\n     ],\n     { default: { kind: \"OpenAi\", model: \"o1-mini\", baseUrl: \"https://api.openai.com/v1\" } }\n   ),\n+  workflowfunctions: T.Object(\n+    {\n+      sourceRepository: T.String({ description: \"The repository where the workflow functions are located.\" }),\n+      sourceRepoOwner: T.String({ description: \"The owner of the repository where the workflow functions are located.\" }),\n+      targetBranch: T.String({ description: \"The target branch for the workflow functions.\" }),\n+    },\n+    {\n+      description: \"Self-dispatched workflow settings. Forks need to target themselves.\",\n+      default: { sourceRepository: \"ubiquity-os-kernel-telegram\", sourceRepoOwner: \"ubiquity-os-marketplace\", targetBranch: \"development\" },\n+    }\n+  ),",
+        "score": {
+          "reward": 1.683,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 114.11500000000001,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1960158604,
+        "content": "why does the worker side of the plugin need additional `SharedCtx`? You can store everything in one context",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1960158604",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,11 +1,8 @@\n-import { Context, SupportedEvents } from \"../../types\";\n+import { Context, SharedCtx } from \"../../types\";\n import { CallbackResult } from \"../../types/proxy\";\n-import { TelegramBotSingleton } from \"../../types/telegram-bot-single\";\n import { logger } from \"../../utils/logger\";\n \n-export async function reviewNotification(\n-  context: Context<\"pull_request.review_requested\", SupportedEvents[\"pull_request.review_requested\"]>\n-): Promise<CallbackResult> {\n+export async function reviewNotification(context: Context<\"pull_request.review_requested\">, sharedCtx: SharedCtx): Promise<CallbackResult> {",
+        "score": {
+          "reward": 2.352,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 68.81926470588238,
+            "syllables": 26,
+            "sentences": 2,
+            "score": 0.9118073529411762
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1960165353,
+        "content": "what if `KERNEL_PUBLIC_KEY` was not filled?",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1960165353",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -275,10 +313,15 @@ class SetUpHandler {\n     const repositoryEnv = `TELEGRAM_BOT_REPOSITORY_FULL_NAME=${process.env.TELEGRAM_BOT_REPOSITORY_FULL_NAME}`;\n     const storageAppId = `APP_ID=${this.env.APP_ID}`;\n     const storageAppPrivateKey = `APP_PRIVATE_KEY=${this.env.APP_PRIVATE_KEY}`;\n+    const voyageaiApiKey = `VOYAGEAI_API_KEY=${this.env.VOYAGEAI_API_KEY}`;\n+    const openaiApiKey = `OPENAI_API_KEY=${this.env.OPENAI_API_KEY}`;\n+    const openrouterApiKey = `OPENROUTER_API_KEY=${this.env.OPENROUTER_API_KEY}`;\n+    const kernelPublicKey = `KERNEL_PUBLIC_KEY=${this.env.KERNEL_PUBLIC_KEY}`;",
+        "score": {
+          "reward": 1.173,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 117.16000000000003,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1964163966,
+        "content": "I see that it has a method `getInstance` which returns the global instance and it contains plugin context so when multiple requests are served, only one context will be used which is not correct. \r\nIs `TelegramBotSingleton` only used in telegram webhooks or also plugin worker/action? The separation is not clear to me",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1964163966",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -15,18 +15,23 @@ export class TelegramBotSingleton {\n   private static _instance: TelegramBotSingleton;",
+        "score": {
+          "reward": 5.544,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 51,
+            "wordValue": 0.1,
+            "result": 2.4
+          },
+          "readability": {
+            "fleschKincaid": 65.16823529411766,
+            "syllables": 75,
+            "sentences": 3,
+            "score": 0.9483176470588234
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1965048350,
+        "content": "I can't see where `_bot` gets assigned, is it even used?\r\nEDIT: I see it's assigned in `handleTelegramWebhook` however I don't get why the telegram webhook handler uses both `PluginContext` and `TelegramBotSingleton` when both have `_bot` and `TelegramBotSingleton` already has `pluginCtx`,",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1965048350",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -11,15 +11,13 @@ import { Logs } from \"@ubiquity-os/ubiquity-os-logger\";\n import { Bot } from \"../bot\";\n \n export class PluginContext {\n-  private static _instance: PluginContext;\n   public _config: Context[\"config\"];\n   public _bot: Bot | null = null;",
+        "score": {
+          "reward": 4.471,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 37,
+            "wordValue": 0.1,
+            "result": 2.1
+          },
+          "readability": {
+            "fleschKincaid": 76.01966216216218,
+            "syllables": 49,
+            "sentences": 2,
+            "score": 0.8398033783783783
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1965073670,
+        "content": "If this is used in telegram webhooks, how does it even get `pluginCtx` if it doesn't have github payload?",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1965073670",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -11,13 +11,16 @@ import { PluginContext } from \"./plugin-context-single\";\n  * This is for use with the BotFather bot and not the \"user\" account.\n  */\n export class TelegramBotSingleton {\n-  private static _instance: TelegramBotSingleton;\n-  private static _bot: Bot;\n-  private static _server: ReturnType<typeof createServer>;\n-  private static _pluginCtx: PluginContext;\n+  bot: Bot | null = null;\n+  server: ReturnType<typeof createServer> | null = null;\n+  pluginCtx: PluginContext | null = null;",
+        "score": {
+          "reward": 3.043,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 76.2342105263158,
+            "syllables": 25,
+            "sentences": 1,
+            "score": 0.8376578947368419
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1965205293,
+        "content": "I think the naming is misleading because it implies it has the whole context\r\nYeah this is my main concern right now because as someone who didn't write the code it's hard to understand what is used where and how is everything connected.\r\nI felt like the most clean way would be that each \"path\" would have it's own \"context\" - telegram path would have `BotFather` and env/config, Worker path would have extended context with `BotFather`, and Action path (that part I haven't looked so correct me if I'm wrong) would have extended context with `BotFather` and `MTProto`",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1965205293",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -11,15 +11,13 @@ import { Logs } from \"@ubiquity-os/ubiquity-os-logger\";\n import { Bot } from \"../bot\";\n \n export class PluginContext {\n-  private static _instance: PluginContext;\n   public _config: Context[\"config\"];\n   public _bot: Bot | null = null;",
+        "score": {
+          "reward": 5.94,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 99,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 48.06522727272731,
+            "syllables": 127,
+            "sentences": 2,
+            "score": 0.8806522727272731
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1968244883,
+        "content": "If you think it's gonna take more than a couple of hours then you can make a new spec",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1968244883",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -11,15 +11,13 @@ import { Logs } from \"@ubiquity-os/ubiquity-os-logger\";\n import { Bot } from \"../bot\";\n \n export class PluginContext {\n-  private static _instance: PluginContext;\n   public _config: Context[\"config\"];\n   public _bot: Bot | null = null;",
+        "score": {
+          "reward": 1.424,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 93.47500000000002,
+            "syllables": 22,
+            "sentences": 1,
+            "score": 0.6652499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1973571039,
+        "content": "```suggestion\r\nexport class SupabaseStorage extends StorageGetters implements Storage {\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1973571039",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -4,17 +4,17 @@ import { Context } from \"../../types\";\n import { ChatAction, HandleChatParams, RetrievalHelper, StorageTypes, UserBaseStorage } from \"../../types/storage\";\n import { StorageGetters } from \"./storage-getters\";\n import { isChatsStorage, isUserBaseStorage, isSingleChatStorage, isSessionStorage } from \"../storage-guards\";\n-import { Storage } from \"..\";\n+import { Storage } from \"../create-adapters\";\n \n export class SuperbaseStorage extends StorageGetters implements Storage {",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1973778322,
+        "content": "why decode in getter function instead of constructor?",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1973778322",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,131 @@\n+import { PluginInputs, pluginSettingsSchema } from \"./plugin-inputs\";\n+import { Env, envValidator } from \"./env\";\n+import { Context } from \"./context\";\n+import { App } from \"octokit\";\n+import { logger } from \"../utils/logger\";\n+import { Octokit } from \"@octokit/rest\";\n+import { Octokit as RestOctokitFromApp } from \"octokit\";\n+import { Value } from \"@sinclair/typebox/value\";\n+import { createAdapters } from \"../adapters/create-adapters\";\n+import { BotFatherInitializer } from \"./botfather-initializer\";\n+import { Bot } from \"../botfather-bot/create-bot\";\n+\n+export class PluginEnvContext {\n+  private _config: Context[\"config\"];\n+  private _botFatherHonoApp: BotFatherInitializer[\"_server\"] | null = null;\n+  private _botFatherBot: Bot | null = null;\n+\n+  constructor(\n+    private readonly _inputs: PluginInputs,\n+    private _env: Env\n+  ) {\n+    this._config = this.getPluginConfigSettings();\n+  }\n+\n+  async createFullPluginInputsContext(inputs?: PluginInputs): Promise<Context> {\n+    let payload: Context[\"payload\"];\n+\n+    // Using a ternary will produce a union too complex for TypeScript to understand\n+    if (inputs?.eventPayload) {\n+      payload = inputs.eventPayload;\n+    } else {\n+      payload = this._inputs.eventPayload;\n+    }\n+\n+    const ctx = {\n+      eventName: inputs?.eventName ?? this._inputs.eventName,\n+      payload,\n+      config: this._config,\n+      octokit: new Octokit({ auth: inputs?.authToken ?? this._inputs.authToken }),\n+      env: this._env,\n+      logger: logger,\n+      pluginEnvCtx: this,\n+    } as unknown as Context;\n+\n+    return {\n+      ...ctx,\n+      adapters: createAdapters(ctx),\n+    };\n+  }\n+\n+  setBotFatherContext({ bot, server }: { server: BotFatherInitializer[\"_server\"]; bot: Bot }) {\n+    this._botFatherBot = bot;\n+    this._botFatherHonoApp = server;\n+  }\n+\n+  getBotFatherHonoApp(): BotFatherInitializer[\"_server\"] {\n+    if (!this._botFatherHonoApp) {\n+      throw new Error(\"BotFatherHonoApp not initialized\");\n+    }\n+    return this._botFatherHonoApp;\n+  }\n+\n+  getBotFatherBot(): Bot {\n+    if (!this._botFatherBot) {\n+      throw new Error(\"BotFatherBot not initialized\");\n+    }\n+    return this._botFatherBot;\n+  }\n+\n+  getInputs(): PluginInputs {\n+    return this._inputs;\n+  }\n+\n+  getEnv(): Env {\n+    return Value.Decode(envValidator.schema, Value.Default(envValidator.schema, this._env));\n+  }\n+\n+  getPluginConfigSettings(): Context[\"config\"] {\n+    return Value.Decode(pluginSettingsSchema, Value.Default(pluginSettingsSchema, this._config ?? {}));\n+  }",
+        "score": {
+          "reward": 1.552,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 50.66500000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.9066500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1973802336,
+        "content": "I'm just thinking out loud but maybe we should have this standardized because in `daemon-pricing` where the worker also triggers an action, this is is stored in one variable: \r\nhttps://github.com/ubiquity-os-marketplace/daemon-pricing/blob/16b2c9e273241de64d2e10a1aa0de4b8067e26f8/src/worker.ts#L14",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1973802336",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -56,6 +56,18 @@ const mtProtoSettings = T.Object({\n   TELEGRAM_API_HASH: T.String(),\n });\n \n+const workflowFunctions = T.Object(\n+  {\n+    SOURCE_REPOSITORY: T.String({ description: \"The repository where the workflow functions are located.\" }),\n+    SOURCE_REPO_OWNER: T.String({ description: \"The owner of the repository where the workflow functions are located.\" }),\n+    TARGET_BRANCH: T.String({ description: \"The target branch for the workflow functions.\" }),\n+  },",
+        "score": {
+          "reward": 4.428,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 58.5006201550388,
+            "syllables": 68,
+            "sentences": 3,
+            "score": 0.985006201550388
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1973802502,
+        "content": "this is not used anymore, or is it?",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1973802502",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,23 +1,20 @@\n-import { Octokit } from \"@octokit/rest\";\n import { EmitterWebhookEvent as WebhookEvent, EmitterWebhookEventName as WebhookEventName } from \"@octokit/webhooks\";\n-import { Env } from \"./env\";\n+import { Context as _Context } from \"@ubiquity-os/plugin-sdk\";\n import { PluginSettings } from \"./plugin-inputs\";\n-import { Logs } from \"@ubiquity-os/ubiquity-os-logger\";\n-import { createAdapters } from \"../adapters\";\n-import { Octokit as RestOctokitFromApp } from \"octokit\";\n+import { Env } from \"./env\";\n+import { createAdapters } from \"../adapters/create-adapters\";\n+import { PluginEnvContext } from \"./plugin-env-context\";\n \n export type SupportedEventsU = WebhookEventName;\n \n export type SupportedEvents = {\n   [K in SupportedEventsU]: K extends WebhookEventName ? WebhookEvent<K> : never;\n };",
+        "score": {
+          "reward": 1.274,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 92.965,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.67035
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1976444007,
+        "content": "I'm not sure, let's leave it as it is for now",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1976444007",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -56,6 +56,18 @@ const mtProtoSettings = T.Object({\n   TELEGRAM_API_HASH: T.String(),\n });\n \n+const workflowFunctions = T.Object(\n+  {\n+    SOURCE_REPOSITORY: T.String({ description: \"The repository where the workflow functions are located.\" }),\n+    SOURCE_REPO_OWNER: T.String({ description: \"The owner of the repository where the workflow functions are located.\" }),\n+    TARGET_BRANCH: T.String({ description: \"The target branch for the workflow functions.\" }),\n+  },",
+        "score": {
+          "reward": 0.858,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 109.04000000000002,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2623031321,
+            "effect": {
+              "addition": 410,
+              "deletion": 147
+            },
+            "reward": 11.14,
+            "priority": 2
+          },
+          {
+            "reviewId": 2623122495,
+            "effect": {
+              "addition": 0,
+              "deletion": 0
+            },
+            "reward": 0,
+            "priority": 2
+          },
+          {
+            "reviewId": 2623999089,
+            "effect": {
+              "addition": 31,
+              "deletion": 55
+            },
+            "reward": 1.72,
+            "priority": 2
+          },
+          {
+            "reviewId": 2624048277,
+            "effect": {
+              "addition": 185,
+              "deletion": 146
+            },
+            "reward": 6.62,
+            "priority": 2
+          },
+          {
+            "reviewId": 2632313857,
+            "effect": {
+              "addition": 223,
+              "deletion": 229
+            },
+            "reward": 9.04,
+            "priority": 2
+          },
+          {
+            "reviewId": 2632573306,
+            "effect": {
+              "addition": 0,
+              "deletion": 0
+            },
+            "reward": 0,
+            "priority": 2
+          },
+          {
+            "reviewId": 2647762182,
+            "effect": {
+              "addition": 1117,
+              "deletion": 261
+            },
+            "reward": 27.56,
+            "priority": 2
+          },
+          {
+            "reviewId": 2652577003,
+            "effect": {
+              "addition": 17,
+              "deletion": 15
+            },
+            "reward": 0.64,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 116.446 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>8</td><td>56.72</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>4.212</td></tr><tr><td>Review</td><td>Comment</td><td>23</td><td>55.514</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48\" target=\"_blank\" rel=\"noopener\">#48</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+410 -147</td><td>2</td><td>11.14</td></tr><tr><td>+0 -0</td><td>2</td><td>0</td></tr><tr><td>+31 -55</td><td>2</td><td>1.72</td></tr><tr><td>+185 -146</td><td>2</td><td>6.62</td></tr><tr><td>+223 -229</td><td>2</td><td>9.04</td></tr><tr><td>+0 -0</td><td>2</td><td>0</td></tr><tr><td>+1117 -261</td><td>2</td><td>27.56</td></tr><tr><td>+17 -15</td><td>2</td><td>0.64</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/20#issuecomment-2567120673\" target=\"_blank\" rel=\"noopener\">A plugin should ideally not dispatch workflows on the behalf of &hellip;</a></h6></td><td><details><summary>1.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.9</td><td>2</td><td>4.212</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1959430021\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion* which uses workflowDispatch to f&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.85</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1959435169\" target=\"_blank\" rel=\"noopener\">did you mean &#96;workflowDispatch&#96;? &#96;workflow&#96; pa&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.9</td><td>2</td><td>2.826</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1959437412\" target=\"_blank\" rel=\"noopener\">If I fork this plugin, then it should call my fork's workflows, &hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.8</td><td>2</td><td>2.208</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1959441919\" target=\"_blank\" rel=\"noopener\">are you sure &#96;Response&#96; is correct? Shouldn't it be a re&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.7</td><td>2</td><td>2.73</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1959478040\" target=\"_blank\" rel=\"noopener\">what do you mean they don't match?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.5</td><td>2</td><td>0.99</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1959479148\" target=\"_blank\" rel=\"noopener\">this should be optional</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.75</td><td>2</td><td>0.825</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1959484812\" target=\"_blank\" rel=\"noopener\">I realized that &#96;PluginContext&#96; is a global variable tha&hellip;</a></h6></td><td><details><summary>2.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 53&#13;  wordValue: 0.1&#13;  result: 2.43&#13;</pre></details></td><td>0.95</td><td>2</td><td>5.871</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1959485981\" target=\"_blank\" rel=\"noopener\">&#96;createPlugin&#96; returns a &#96;hono&#96; instance where y&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.85</td><td>2</td><td>3.298</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1959990162\" target=\"_blank\" rel=\"noopener\">You can try using &#96;customOctokit&#96; from the SDK.</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.8</td><td>2</td><td>1.44</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1960014760\" target=\"_blank\" rel=\"noopener\">is this another case of a global variable?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.8</td><td>2</td><td>1.584</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1960149138\" target=\"_blank\" rel=\"noopener\">I think these should be in the env</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.85</td><td>2</td><td>1.683</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1960158604\" target=\"_blank\" rel=\"noopener\">why does the worker side of the plugin need additional &#96;Shar&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.7</td><td>2</td><td>2.352</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1960165353\" target=\"_blank\" rel=\"noopener\">what if &#96;KERNEL_PUBLIC_KEY&#96; was not filled?</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.85</td><td>2</td><td>1.173</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1964163966\" target=\"_blank\" rel=\"noopener\">I see that it has a method &#96;getInstance&#96; which returns t&hellip;</a></h6></td><td><details><summary>2.4</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 51&#13;  wordValue: 0.1&#13;  result: 2.4&#13;</pre></details></td><td>0.9</td><td>2</td><td>5.544</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1965048350\" target=\"_blank\" rel=\"noopener\">I can't see where &#96;_bot&#96; gets assigned, is it even used?&hellip;</a></h6></td><td><details><summary>2.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 37&#13;  wordValue: 0.1&#13;  result: 2.1&#13;</pre></details></td><td>0.85</td><td>2</td><td>4.471</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1965073670\" target=\"_blank\" rel=\"noopener\">If this is used in telegram webhooks, how does it even get &#96;&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.85</td><td>2</td><td>3.043</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1965205293\" target=\"_blank\" rel=\"noopener\">I think the naming is misleading because it implies it has the w&hellip;</a></h6></td><td><details><summary>2.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 99&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.9</td><td>2</td><td>5.94</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1968244883\" target=\"_blank\" rel=\"noopener\">If you think it's gonna take more than a couple of hours then yo&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.4</td><td>2</td><td>1.424</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1973571039\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionexport class SupabaseStorage extends &hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1973778322\" target=\"_blank\" rel=\"noopener\">why decode in getter function instead of constructor?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.8</td><td>2</td><td>1.552</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1973802336\" target=\"_blank\" rel=\"noopener\">I'm just thinking out loud but maybe we should have this standar&hellip;</a></h6></td><td><details><summary>2.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.6</td><td>2</td><td>4.428</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1973802502\" target=\"_blank\" rel=\"noopener\">this is not used anymore, or is it?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.7</td><td>2</td><td>1.274</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1976444007\" target=\"_blank\" rel=\"noopener\">I'm not sure, let's leave it as it is for now</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.3</td><td>2</td><td>0.858</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 61.056,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2697309607,
+        "content": "It is interesting that I didn't get any rewards for the review, I think this can be considered as a bug.\nI'll have a look and come back to you.",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/20#issuecomment-2697309607",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.474,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 87.48875000000001,
+            "syllables": 39,
+            "sentences": 2,
+            "score": 0.7251124999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2652729290,
+        "content": "Fine with the changes, what variables shall we add in the environment?",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#pullrequestreview-2652729290",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.31,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 74.805,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0.85195
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1951156418,
+        "content": "Remove or use the context logger",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1951156418",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,11 +1,14 @@\n-import { Context, SupportedEvents } from \"../../../types\";\n+import { Context } from \"../../../types\";\n import { CallbackResult } from \"../../../types/proxy\";\n import { addCommentToIssue } from \"../../../utils/add-comment-to-issues\";\n import { MtProto } from \"../bot/mtproto\";\n import bigInt from \"big-integer\";\n \n-export async function createChat(context: Context<\"issues.assigned\", SupportedEvents[\"issues.assigned\"]>): Promise<CallbackResult> {\n+export async function createChat(context: Context<\"issues.assigned\">): Promise<CallbackResult> {\n   const { payload, config, logger } = context;\n+\n+  console.log(\"createChat: \", payload);",
+        "score": {
+          "reward": 1.232,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 73.84500000000001,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.8615499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1951156814,
+        "content": "Probably want to remove this and `t.ts`",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1951156814",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -17,6 +17,7 @@ script.ts\n .wrangler\n test-dashboard.md\n t.ts\n+ncc-build",
+        "score": {
+          "reward": 1.078,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 73.84500000000001,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.8615499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1951157850,
+        "content": "We have `3.0.0` out, which fixes a problem with workers not posting messages properly if you can upgrade it, API changed a bit",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1951157850",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -41,7 +41,8 @@\n     \"@octokit/webhooks\": \"13.2.7\",\n     \"@sinclair/typebox\": \"0.32.33\",\n     \"@supabase/supabase-js\": \"^2.45.6\",\n-    \"@ubiquity-os/ubiquity-os-logger\": \"^1.3.2\",\n+    \"@ubiquity-os/plugin-sdk\": \"^2.0.6\",",
+        "score": {
+          "reward": 3.564,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 72.9868181818182,
+            "syllables": 29,
+            "sentences": 1,
+            "score": 0.8701318181818181
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1951158439,
+        "content": "To be removed?",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1951158439",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -77,3 +78,21 @@ run()\n \n     process.exit(0);\n   });\n+\n+// export default createActionsPlugin(",
+        "score": {
+          "reward": 0.588,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 90.99000000000004,
+            "syllables": 4,
+            "sentences": 1,
+            "score": 0.6900999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1951159361,
+        "content": "Can you add observability and version_metadata binding here please",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1951159361",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,7 +1,7 @@\n name = \"ubiquity-os-telegram-bridge\"\n main = \"src/worker.ts\"\n-compatibility_date = \"2024-08-26\"\n-node_compat = true\n+compatibility_date = \"2025-02-10\"\n+compatibility_flags = [\"nodejs_compat\"]",
+        "score": {
+          "reward": 1.746,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 9.700000000000017,
+            "syllables": 20,
+            "sentences": 1,
+            "score": 0.49700000000000016
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1951162178,
+        "content": "The SDK returns a `hono` instance, can't you happen the routes after? (I am not sure about this)",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1951162178",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,72 +1,84 @@\n-import { Env, envValidator, PluginInputs } from \"./types\";\n-import { handleGithubWebhook } from \"./handlers/github-webhook\";\n+import { Context, Env, envValidator, PluginInputs, pluginSettingsValidator } from \"./types\";\n import { handleTelegramWebhook } from \"./handlers/telegram-webhook\";\n import manifest from \"../manifest.json\";\n-import { handleUncaughtError } from \"./utils/errors\";\n import { PluginContext } from \"./types/plugin-context-single\";\n-import { Value } from \"@sinclair/typebox/value\";\n+import { ExecutionContext } from \"hono\";\n+import { createPlugin } from \"@ubiquity-os/plugin-sdk\";\n+import { runPlugin } from \"./plugin\";\n+import { Manifest } from \"@ubiquity-os/plugin-sdk/manifest\";\n+import { decodeEnvSettings } from \"./utils/env-parsing\";\n import { logger } from \"./utils/logger\";\n+import { handleUncaughtError } from \"./utils/errors\";\n+import { createAdapters } from \"./adapters\";\n \n export default {\n-  async fetch(request: Request, env: Env): Promise<Response> {\n-    const url = new URL(request.url);\n-    const path = url.pathname;\n-    if (request.method === \"GET\") {\n-      if (path === \"/manifest.json\") {\n-        return new Response(JSON.stringify(manifest), {\n-          headers: { \"content-type\": \"application/json\" },\n-        });\n-      }\n-    }\n-\n-    const contentType = request.headers.get(\"content-type\");\n-    if (contentType !== \"application/json\") {\n-      logger.info(\"!application/json\", { contentType });\n-      return new Response(JSON.stringify({ error: `Error: ${contentType} is not a valid content type` }), {\n-        status: 400,\n-        headers: { \"content-type\": \"application/json\" },\n+  async fetch(request: Request, env: Env, executionCtx?: ExecutionContext) {\n+    // The SDK handles this but it's cleaner if we handle it here\n+    if (new URL(request.url).pathname === \"/manifest.json\") {\n+      return new Response(JSON.stringify(manifest), {\n+        headers: { \"Content-Type\": \"application/json\" },\n       });\n     }\n \n-    let envSettings;\n+    const payload = (await request.clone().json()) as PluginInputs; // required cast\n+    const envSettings = await initPluginContext(payload, env);\n \n-    try {\n-      envSettings = Value.Decode(envValidator.schema, Value.Default(envValidator.schema, env));\n-    } catch (err) {\n-      logger.error(\"Could not decode env\", { err });\n-      return new Response(JSON.stringify({ err, message: \"Invalid environment provided\" }), {\n-        status: 400,\n-        headers: { \"content-type\": \"application/json\" },\n-      });\n-    }\n+    await Promise.all([telegramRoute(request, envSettings), githubRoute(request, envSettings, executionCtx)]);\n \n-    const payload = (await request.clone().json()) as PluginInputs; // required cast\n-    Reflect.deleteProperty(payload, \"authToken\");\n-    try {\n-      PluginContext.initialize(payload, envSettings);\n-    } catch (er) {\n-      logger.error(\"Could not initialize PluginContext on fetch\", { er, payload });\n-      return new Response(JSON.stringify({ err: er, message: \"Invalid plugin context provided\" }), {\n-        status: 400,\n-        headers: { \"content-type\": \"application/json\" },\n-      });\n+    return new Response(\"OK\", { status: 200 });\n+  },\n+};\n+\n+async function initPluginContext(payload: PluginInputs, env: Env) {\n+  // the sdk parses the env but we need to pass it to the plugin context\n+  const envSettings = await decodeEnvSettings(env);\n+\n+  try {\n+    PluginContext.initialize(payload, envSettings);\n+  } catch (er) {\n+    throw handleUncaughtError(er);\n+  }\n+\n+  return envSettings;\n+}\n+\n+/**\n+ * Plugins are required (I think) to use the SDK to interact with the kernel.\n+ *\n+ * Handles any github-sided events.\n+ */\n+async function githubRoute(request: Request, env: Env, executionCtx?: ExecutionContext) {\n+  return createPlugin<Context>(\n+    (context) => {\n+      const ctx = context as unknown as Context;\n+      ctx.adapters = createAdapters(ctx);\n+      return runPlugin(ctx);\n+    },\n+    manifest as Manifest,\n+    {\n+      envSchema: envValidator.schema,\n+      postCommentOnError: true,\n+      settingsSchema: pluginSettingsValidator.schema,\n+      logLevel: \"debug\",\n+      kernelPublicKey: env.KERNEL_PUBLIC_KEY,\n+      bypassSignatureVerification: process.env.NODE_ENV === \"local\",\n     }\n+  ).fetch(request, env, executionCtx);\n+}\n \n-    if ([\"/telegram\", \"/telegram/\"].includes(path)) {\n-      try {\n-        logger.info(\"payload\", { payload });\n-        return await handleTelegramWebhook(request, envSettings);\n-      } catch (err) {\n-        logger.error(\"handleTelegramWebhook failed\", { err, path, content: payload });\n-        return handleUncaughtError(err);\n-      }\n-    } else {\n-      try {\n-        return await handleGithubWebhook(request, envSettings);\n-      } catch (err) {\n-        logger.error(\"handleGithubWebhook failed\", { err, path, content: payload });\n-        return handleUncaughtError(err);\n-      }\n+/**\n+ * Afaik, the sdk does not support route handling out of the box and\n+ * so hybrids are required to handle routes manually.\n+ *\n+ * This route handles any Telegram-sided updates.\n+ */\n+async function telegramRoute(request: Request, envSettings: Env) {",
+        "score": {
+          "reward": 2.672,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 89.60000000000004,
+            "syllables": 23,
+            "sentences": 2,
+            "score": 0.7039999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1951162725,
+        "content": "Should be handled within the SDK",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1951162725",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,12 @@\n+import { Value } from \"@sinclair/typebox/value\";\n+import { Env, envValidator } from \"../types\";\n+import { logger } from \"./logger\";\n+\n+export async function decodeEnvSettings(env: Env): Promise<Env> {",
+        "score": {
+          "reward": 1.264,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 102.045,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1951995545,
+        "content": "Just trying to avoid having twice the same code (same for the env decode) since it is supposed to be handled within the SDK",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1951995545",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,72 +1,84 @@\n-import { Env, envValidator, PluginInputs } from \"./types\";\n-import { handleGithubWebhook } from \"./handlers/github-webhook\";\n+import { Context, Env, envValidator, PluginInputs, pluginSettingsValidator } from \"./types\";\n import { handleTelegramWebhook } from \"./handlers/telegram-webhook\";\n import manifest from \"../manifest.json\";\n-import { handleUncaughtError } from \"./utils/errors\";\n import { PluginContext } from \"./types/plugin-context-single\";\n-import { Value } from \"@sinclair/typebox/value\";\n+import { ExecutionContext } from \"hono\";\n+import { createPlugin } from \"@ubiquity-os/plugin-sdk\";\n+import { runPlugin } from \"./plugin\";\n+import { Manifest } from \"@ubiquity-os/plugin-sdk/manifest\";\n+import { decodeEnvSettings } from \"./utils/env-parsing\";\n import { logger } from \"./utils/logger\";\n+import { handleUncaughtError } from \"./utils/errors\";\n+import { createAdapters } from \"./adapters\";\n \n export default {\n-  async fetch(request: Request, env: Env): Promise<Response> {\n-    const url = new URL(request.url);\n-    const path = url.pathname;\n-    if (request.method === \"GET\") {\n-      if (path === \"/manifest.json\") {\n-        return new Response(JSON.stringify(manifest), {\n-          headers: { \"content-type\": \"application/json\" },\n-        });\n-      }\n-    }\n-\n-    const contentType = request.headers.get(\"content-type\");\n-    if (contentType !== \"application/json\") {\n-      logger.info(\"!application/json\", { contentType });\n-      return new Response(JSON.stringify({ error: `Error: ${contentType} is not a valid content type` }), {\n-        status: 400,\n-        headers: { \"content-type\": \"application/json\" },\n+  async fetch(request: Request, env: Env, executionCtx?: ExecutionContext) {\n+    // The SDK handles this but it's cleaner if we handle it here\n+    if (new URL(request.url).pathname === \"/manifest.json\") {\n+      return new Response(JSON.stringify(manifest), {\n+        headers: { \"Content-Type\": \"application/json\" },\n       });\n     }\n \n-    let envSettings;\n+    const payload = (await request.clone().json()) as PluginInputs; // required cast\n+    const envSettings = await initPluginContext(payload, env);\n \n-    try {\n-      envSettings = Value.Decode(envValidator.schema, Value.Default(envValidator.schema, env));\n-    } catch (err) {\n-      logger.error(\"Could not decode env\", { err });\n-      return new Response(JSON.stringify({ err, message: \"Invalid environment provided\" }), {\n-        status: 400,\n-        headers: { \"content-type\": \"application/json\" },\n-      });\n-    }\n+    await Promise.all([telegramRoute(request, envSettings), githubRoute(request, envSettings, executionCtx)]);\n \n-    const payload = (await request.clone().json()) as PluginInputs; // required cast\n-    Reflect.deleteProperty(payload, \"authToken\");\n-    try {\n-      PluginContext.initialize(payload, envSettings);\n-    } catch (er) {\n-      logger.error(\"Could not initialize PluginContext on fetch\", { er, payload });\n-      return new Response(JSON.stringify({ err: er, message: \"Invalid plugin context provided\" }), {\n-        status: 400,\n-        headers: { \"content-type\": \"application/json\" },\n-      });\n+    return new Response(\"OK\", { status: 200 });\n+  },\n+};\n+\n+async function initPluginContext(payload: PluginInputs, env: Env) {\n+  // the sdk parses the env but we need to pass it to the plugin context\n+  const envSettings = await decodeEnvSettings(env);\n+\n+  try {\n+    PluginContext.initialize(payload, envSettings);\n+  } catch (er) {\n+    throw handleUncaughtError(er);\n+  }\n+\n+  return envSettings;\n+}\n+\n+/**\n+ * Plugins are required (I think) to use the SDK to interact with the kernel.\n+ *\n+ * Handles any github-sided events.\n+ */\n+async function githubRoute(request: Request, env: Env, executionCtx?: ExecutionContext) {\n+  return createPlugin<Context>(\n+    (context) => {\n+      const ctx = context as unknown as Context;\n+      ctx.adapters = createAdapters(ctx);\n+      return runPlugin(ctx);\n+    },\n+    manifest as Manifest,\n+    {\n+      envSchema: envValidator.schema,\n+      postCommentOnError: true,\n+      settingsSchema: pluginSettingsValidator.schema,\n+      logLevel: \"debug\",\n+      kernelPublicKey: env.KERNEL_PUBLIC_KEY,\n+      bypassSignatureVerification: process.env.NODE_ENV === \"local\",\n     }\n+  ).fetch(request, env, executionCtx);\n+}\n \n-    if ([\"/telegram\", \"/telegram/\"].includes(path)) {\n-      try {\n-        logger.info(\"payload\", { payload });\n-        return await handleTelegramWebhook(request, envSettings);\n-      } catch (err) {\n-        logger.error(\"handleTelegramWebhook failed\", { err, path, content: payload });\n-        return handleUncaughtError(err);\n-      }\n-    } else {\n-      try {\n-        return await handleGithubWebhook(request, envSettings);\n-      } catch (err) {\n-        logger.error(\"handleGithubWebhook failed\", { err, path, content: payload });\n-        return handleUncaughtError(err);\n-      }\n+/**\n+ * Afaik, the sdk does not support route handling out of the box and\n+ * so hybrids are required to handle routes manually.\n+ *\n+ * This route handles any Telegram-sided updates.\n+ */\n+async function telegramRoute(request: Request, envSettings: Env) {",
+        "score": {
+          "reward": 3.708,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 80.25000000000004,
+            "syllables": 29,
+            "sentences": 1,
+            "score": 0.7974999999999995
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2609270952,
+            "effect": {
+              "addition": 415,
+              "deletion": 128
+            },
+            "reward": 10.86,
+            "priority": 2
+          },
+          {
+            "reviewId": 2652729290,
+            "effect": {
+              "addition": 1337,
+              "deletion": 291
+            },
+            "reward": 32.56,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 61.056 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>43.42</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.474</td></tr><tr><td>Review</td><td>Comment</td><td>9</td><td>17.162</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48\" target=\"_blank\" rel=\"noopener\">#48</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+415 -128</td><td>2</td><td>10.86</td></tr><tr><td>+1337 -291</td><td>2</td><td>32.56</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/20#issuecomment-2697309607\" target=\"_blank\" rel=\"noopener\">It is interesting that I didn't get any rewards for the review, &hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.1</td><td>2</td><td>0.474</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#pullrequestreview-2652729290\" target=\"_blank\" rel=\"noopener\">Fine with the changes, what variables shall we add in the enviro&hellip;</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.5</td><td>2</td><td>1.31</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1951156418\" target=\"_blank\" rel=\"noopener\">Remove or use the context logger</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.8</td><td>2</td><td>1.232</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1951156814\" target=\"_blank\" rel=\"noopener\">Probably want to remove this and &#96;t.ts&#96;</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.7</td><td>2</td><td>1.078</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1951157850\" target=\"_blank\" rel=\"noopener\">We have &#96;3.0.0&#96; out, which fixes a problem with workers &hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.9</td><td>2</td><td>3.564</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1951158439\" target=\"_blank\" rel=\"noopener\">To be removed?</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.7</td><td>2</td><td>0.588</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1951159361\" target=\"_blank\" rel=\"noopener\">Can you add observability and version_metadata binding here plea&hellip;</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.9</td><td>2</td><td>1.746</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1951162178\" target=\"_blank\" rel=\"noopener\">The SDK returns a &#96;hono&#96; instance, can't you happen the &hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.8</td><td>2</td><td>2.672</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1951162725\" target=\"_blank\" rel=\"noopener\">Should be handled within the SDK</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.8</td><td>2</td><td>1.264</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/48#discussion_r1951995545\" target=\"_blank\" rel=\"noopener\">Just trying to avoid having twice the same code (same for the en&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.9</td><td>2</td><td>3.708</td></tr></tbody></table></details>"
+  }
+}

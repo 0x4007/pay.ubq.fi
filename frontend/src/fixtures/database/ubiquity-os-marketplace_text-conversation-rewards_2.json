@@ -1,0 +1,2294 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 800,
+    "task": {
+      "reward": 800,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 800 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>800</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 298.546,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2002941620,
+        "content": "GPT-3.5 is sufficient. I run it 10x per comment and sample an average score. Its a lot cheaper too. Due to larger context lengths, I included fallbacks to use larger models but in an overwhelming majority of cases, it uses GPT-3.5.\r\nThe larger context length is necessary for long conversations. Perhaps it would be wiser to batch the conversation into separate jobs and always use GPT-3.5.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/2#issuecomment-2002941620",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 11.88,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 72,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 71.81500000000001,
+            "syllables": 108,
+            "sentences": 9,
+            "score": 0.8818499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2002991289,
+        "content": "I think this might need to be broken down into separate tasks. Let's see after you open your pull",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/2#issuecomment-2002991289",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 5.068,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 86.70500000000001,
+            "syllables": 26,
+            "sentences": 2,
+            "score": 0.7329499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2187753199,
+        "content": "## Context\r\nImplement a mechanism to reward contributors based on their comments by evaluating:\r\n- **Word count** as a `quantitative` metric, focusing on content formatting.\r\n- **Relevance** to the topic as outlined in the issue specification, marked as `qualitative`.\r\n- **Clarity** of articulation, ensuring comments are easily understandable.\r\nExclude:\r\n- Comments from bots.\r\n- Bot commands, identified by syntax like `/wallet 0x...`.\r\nDue to architectural changes, avoid generating permits in this module. Determine an appropriate return value to pass to the kernel for subsequent handling, aiming for:\r\n1. A final permit generation interface formatted as `Record<Username, string>`, e.g., `{ \"pavlovcik\": \"50\" }`.\r\n2. Inclusion of reward amount metadata to transparently explain the rationale behind each reward.\r\n## Score Calculation\r\nThe final score is a product of the three metrics: `quantitative (sum)` * `qualitative` * `clarity`. Word counts are adjusted by element type, excluding blockquotes.\r\n## Scope\r\nTransition from the monolithic `ubiquibot` to a kernel-plugin structure, addressing:\r\n- Migration and reimplementation of conversation rewards logic.\r\n- Integration of \"data aggregation\" for activity related to issues and pull requests.\r\n- Reward calculations based on `quantitative`, `qualitative`, and `clarity` evaluations.\r\n- Display of scoring metrics in a detailed manner as in the current [reward comment](https://github.com/ubiquity/work.ubq.fi/issues/26#issuecomment-1996890295).\r\n## Requirements\r\n- Achieve 80%+ code coverage with Jest tests.\r\n- Ensure scoring configurability, with initial hardcoding acceptable.\r\n- Define the kernel-plugin interface, focusing on core logic testing independently of the kernel.\r\n- Develop a method for returning structured data conducive to HTML table formatting by another plugin for comprehensive reward displays.\r\n## Remarks\r\n- Main entry point of old version. https://github.com/ubiquibot/comment-incentives/blob/main/src/handlers/issue/issue-closed.ts\r\n- You can see I tried classifying contributor types for the sake of our config. At a high level we had four contributor main types: assignee, issuer (the issue author) collaborator (somebody added to the team) and contributor (default)\r\n- We also need to be able to configure the scoring for all of those classes, and also, the scoring of commenting on the issue or the pull request. I think my mistake the first time around was collecting each of these individually then scoring. This time around I'm collecting everything at once, and then I think it makes sense to classify and score.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/2",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 11.87,
+          "formatting": {
+            "content": {
+              "h2": {
+                "score": 1,
+                "elementCount": 5
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 23
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 18
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 8.8
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 323,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 40.53068798769098,
+            "syllables": 612,
+            "sentences": 27,
+            "score": 0.8053068798769099
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1956386856,
+        "content": "I'm pretty much ready to test in production. We can set up another bot app and run two in parallel, but this kernel-plugin version will not need a funded wallet linked with it.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#pullrequestreview-1956386856",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.072,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 75.46678571428575,
+            "syllables": 47,
+            "sentences": 2,
+            "score": 0.8453321428571425
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1529629118,
+        "content": "Why?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529629118",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -3,7 +3,7 @@\n   \"tabWidth\": 2,\n   \"semi\": true,\n   \"singleQuote\": false,\n-  \"printWidth\": 160,\n+  \"printWidth\": 120,",
+        "score": {
+          "reward": 0.144,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": 121.22000000000003,
+            "syllables": 1,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1529629314,
+        "content": "How about `jest.config.ts` or json?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529629314",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 0.832,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 97.025,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.6297499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1529629742,
+        "content": "```suggestion\r\n  \"description\": \"Generate rewards for on topic conversation for closing issues as complete.\",\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529629742",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,7 +1,7 @@\n {\n   \"name\": \"@ubiquibot/conversation-rewards\",\n   \"version\": \"1.0.0\",\n-  \"description\": \"Template repository with TypeScript support.\",\n+  \"description\": \"Parse conversations in pull-request and issues a corresponding reward.\",",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1529630255,
+        "content": "Configuration should be handled in the upstream partner repo/org. If this is for testing, perhaps you should add `.test.` to the file name.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529630255",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 4.872,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 73.77989130434786,
+            "syllables": 33,
+            "sentences": 2,
+            "score": 0.8622010869565214
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1529630961,
+        "content": "Why are they called transformers? Is this a generative pre-training transformer? lol",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529630961",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,46 +1,56 @@\n-import { config } from \"dotenv\";\n import { GetActivity } from \"./get-activity\";\n+import { ContentEvaluatorTransformer } from \"./parser/content-evaluator-transformer\";\n+import { DataPurgeTransformer } from \"./parser/data-purge-transformer\";\n+import { FormattingEvaluatorTransformer } from \"./parser/formatting-evaluator-transformer\";\n+import { Processor } from \"./parser/processor\";\n+import { UserExtractorTransformer } from \"./parser/user-extractor-transformer\";\n import { parseGitHubUrl } from \"./start\";\n \n-config();\n-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;\n-if (!GITHUB_TOKEN) {\n-  console.warn(\"GITHUB_TOKEN is not set\");\n-}\n // Mock process.argv\n-process.argv = [\"path/to/node\", \"path/to/script\", `--auth=${GITHUB_TOKEN}`];\n const issueUrl = process.env.TEST_ISSUE_URL || \"https://github.com/ubiquibot/comment-incentives/issues/22\";\n \n describe(\"GetActivity class\", () => {\n   const issue = parseGitHubUrl(issueUrl);\n   const activity = new GetActivity(issue);\n-\n-  beforeAll(async () => await activity.init());\n+  beforeAll(async () => {\n+    await activity.init();\n+  });\n \n   it(\"should resolve all promises\", async () => {\n     expect(activity.self).toBeTruthy();\n     expect(activity.events).toBeTruthy();\n     expect(activity.comments).toBeTruthy();\n     expect(Array.isArray(activity.linkedReviews)).toBeTruthy();\n+    const processor = new Processor();\n+    processor\n+      .add(new UserExtractorTransformer())",
+        "score": {
+          "reward": 1.692,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 65.77512820512823,
+            "syllables": 21,
+            "sentences": 3,
+            "score": 0.9422487179487178
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1529793870,
+        "content": "Generally speaking, using `object` as a data type is considered bad practice. Instead you should define the object shape with something like `Record<string, unknown>` for something really generic and temporary, but the more specific, the better.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529793870",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,81 @@\n+import * as fs from \"fs\";\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import program from \"./command-line\";\n+\n+export class Processor {\n+  private _transformers: Array<Transformer> = [];\n+  private _result: Result = {};\n+  private readonly _configuration = configuration;\n+\n+  add(transformer: Transformer) {\n+    this._transformers.push(transformer);\n+    return this;\n+  }\n+  async run(data: Readonly<GetActivity>) {\n+    if (this._configuration.disabled) {\n+      console.log(\"Module is disabled. Skipping...\");\n+      return;\n+    }\n+    for (const transformer of this._transformers) {\n+      if (transformer.enabled) {\n+        this._result = await transformer.transform(data, this._result);\n+      }\n+    }\n+    // Aggregate total result\n+    for (const item of Object.keys(this._result)) {\n+      this._result[item].total = this._sumRewards(this._result[item]);\n+    }\n+    return this._result;\n+  }\n+  dump() {\n+    const { file } = program.opts();\n+    const result = JSON.stringify(this._result, undefined, 2);\n+    if (!file) {\n+      console.log(result);\n+    } else {\n+      fs.writeFileSync(file, result);\n+    }\n+  }\n+  _sumRewards(obj: Record<string, object | number>) {",
+        "score": {
+          "reward": 7.872,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 41.39659090909092,
+            "syllables": 58,
+            "sentences": 2,
+            "score": 0.8139659090909092
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1529794724,
+        "content": "Is it better to always return as a `Promise<Result>` instead?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529794724",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,81 @@\n+import * as fs from \"fs\";\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import program from \"./command-line\";\n+\n+export class Processor {\n+  private _transformers: Array<Transformer> = [];\n+  private _result: Result = {};\n+  private readonly _configuration = configuration;\n+\n+  add(transformer: Transformer) {\n+    this._transformers.push(transformer);\n+    return this;\n+  }\n+  async run(data: Readonly<GetActivity>) {\n+    if (this._configuration.disabled) {\n+      console.log(\"Module is disabled. Skipping...\");\n+      return;\n+    }\n+    for (const transformer of this._transformers) {\n+      if (transformer.enabled) {\n+        this._result = await transformer.transform(data, this._result);\n+      }\n+    }\n+    // Aggregate total result\n+    for (const item of Object.keys(this._result)) {\n+      this._result[item].total = this._sumRewards(this._result[item]);\n+    }\n+    return this._result;\n+  }\n+  dump() {\n+    const { file } = program.opts();\n+    const result = JSON.stringify(this._result, undefined, 2);\n+    if (!file) {\n+      console.log(result);\n+    } else {\n+      fs.writeFileSync(file, result);\n+    }\n+  }\n+  _sumRewards(obj: Record<string, object | number>) {\n+    let totalReward = 0;\n+\n+    for (const [key, value] of Object.entries(obj)) {\n+      if (Object.prototype.hasOwnProperty.call(obj, key)) {\n+        if (key === \"reward\" && typeof value === \"number\") {\n+          totalReward += value;\n+        } else if (typeof value === \"object\") {\n+          totalReward += this._sumRewards(value as Record<string, object>);\n+        }\n+      }\n+    }\n+\n+    return totalReward;\n+  }\n+}\n+\n+export interface Transformer {\n+  transform(data: Readonly<GetActivity>, result: Result): Result | Promise<Result>;",
+        "score": {
+          "reward": 2.94,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 75.50000000000003,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.8449999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1529795402,
+        "content": "Perhaps its best to initialize as an empty array instead?\r\n```suggestion\r\n    comments: Comment[];\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529795402",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,81 @@\n+import * as fs from \"fs\";\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import program from \"./command-line\";\n+\n+export class Processor {\n+  private _transformers: Array<Transformer> = [];\n+  private _result: Result = {};\n+  private readonly _configuration = configuration;\n+\n+  add(transformer: Transformer) {\n+    this._transformers.push(transformer);\n+    return this;\n+  }\n+  async run(data: Readonly<GetActivity>) {\n+    if (this._configuration.disabled) {\n+      console.log(\"Module is disabled. Skipping...\");\n+      return;\n+    }\n+    for (const transformer of this._transformers) {\n+      if (transformer.enabled) {\n+        this._result = await transformer.transform(data, this._result);\n+      }\n+    }\n+    // Aggregate total result\n+    for (const item of Object.keys(this._result)) {\n+      this._result[item].total = this._sumRewards(this._result[item]);\n+    }\n+    return this._result;\n+  }\n+  dump() {\n+    const { file } = program.opts();\n+    const result = JSON.stringify(this._result, undefined, 2);\n+    if (!file) {\n+      console.log(result);\n+    } else {\n+      fs.writeFileSync(file, result);\n+    }\n+  }\n+  _sumRewards(obj: Record<string, object | number>) {\n+    let totalReward = 0;\n+\n+    for (const [key, value] of Object.entries(obj)) {\n+      if (Object.prototype.hasOwnProperty.call(obj, key)) {\n+        if (key === \"reward\" && typeof value === \"number\") {\n+          totalReward += value;\n+        } else if (typeof value === \"object\") {\n+          totalReward += this._sumRewards(value as Record<string, object>);\n+        }\n+      }\n+    }\n+\n+    return totalReward;\n+  }\n+}\n+\n+export interface Transformer {\n+  transform(data: Readonly<GetActivity>, result: Result): Result | Promise<Result>;\n+  get enabled(): boolean;\n+}\n+\n+export interface Result {\n+  [k: string]: {\n+    comments?: Array<Comment>;",
+        "score": {
+          "reward": 2.76,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 52.86500000000001,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0.9286500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1529796156,
+        "content": "I think this might need to be a `string` (or `BigNumber`) due to the decimals.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529796156",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,81 @@\n+import * as fs from \"fs\";\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import program from \"./command-line\";\n+\n+export class Processor {\n+  private _transformers: Array<Transformer> = [];\n+  private _result: Result = {};\n+  private readonly _configuration = configuration;\n+\n+  add(transformer: Transformer) {\n+    this._transformers.push(transformer);\n+    return this;\n+  }\n+  async run(data: Readonly<GetActivity>) {\n+    if (this._configuration.disabled) {\n+      console.log(\"Module is disabled. Skipping...\");\n+      return;\n+    }\n+    for (const transformer of this._transformers) {\n+      if (transformer.enabled) {\n+        this._result = await transformer.transform(data, this._result);\n+      }\n+    }\n+    // Aggregate total result\n+    for (const item of Object.keys(this._result)) {\n+      this._result[item].total = this._sumRewards(this._result[item]);\n+    }\n+    return this._result;\n+  }\n+  dump() {\n+    const { file } = program.opts();\n+    const result = JSON.stringify(this._result, undefined, 2);\n+    if (!file) {\n+      console.log(result);\n+    } else {\n+      fs.writeFileSync(file, result);\n+    }\n+  }\n+  _sumRewards(obj: Record<string, object | number>) {\n+    let totalReward = 0;\n+\n+    for (const [key, value] of Object.entries(obj)) {\n+      if (Object.prototype.hasOwnProperty.call(obj, key)) {\n+        if (key === \"reward\" && typeof value === \"number\") {\n+          totalReward += value;\n+        } else if (typeof value === \"object\") {\n+          totalReward += this._sumRewards(value as Record<string, object>);\n+        }\n+      }\n+    }\n+\n+    return totalReward;\n+  }\n+}\n+\n+export interface Transformer {\n+  transform(data: Readonly<GetActivity>, result: Result): Result | Promise<Result>;\n+  get enabled(): boolean;\n+}\n+\n+export interface Result {\n+  [k: string]: {\n+    comments?: Array<Comment>;\n+    total: number;\n+    bounty?: {\n+      reward: number;\n+    };\n+  };\n+}\n+\n+export interface Comment {\n+  content: string;\n+  contentHtml?: string;\n+  url: string;\n+  score?: {\n+    formatting?: number;\n+    relevance?: number;\n+    reward: number;",
+        "score": {
+          "reward": 3.668,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 96.02461538461542,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.6397538461538459
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1529797204,
+        "content": "```suggestion\r\n    return comment.body && comment.user?.type === \"User\";\r\n```\r\nPerhaps that is more concise.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529797204",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,68 @@\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import { GitHubIssue, GitHubIssueComment } from \"../github-types\";\n+import { Result, Transformer } from \"./processor\";\n+\n+/**\n+ * Creates entries for each bounty hunter with its associated comments.\n+ */\n+export class UserExtractorTransformer implements Transformer {\n+  private readonly _configuration = configuration[\"user-extractor\"];\n+\n+  get enabled(): boolean {\n+    return true;\n+  }\n+\n+  /**\n+   * Checks if the comment is made by a human user, and if it not a command.\n+   * @param comment\n+   */\n+  _checkEntryValidity(comment: GitHubIssueComment) {\n+    return !!comment.user && !!comment.body && comment.user.type === \"User\";",
+        "score": {
+          "reward": 1.56,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 83.32000000000004,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 0.7667999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1529798453,
+        "content": "```suggestion\r\n```\r\nI feel that JSDoc is net negative in a TypeScript environment because its easy to update function signatures and forget to update the comments. Besides, the function signatures clearly define the data types and the parameters?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529798453",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,68 @@\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import { GitHubIssue, GitHubIssueComment } from \"../github-types\";\n+import { Result, Transformer } from \"./processor\";\n+\n+/**\n+ * Creates entries for each bounty hunter with its associated comments.\n+ */\n+export class UserExtractorTransformer implements Transformer {\n+  private readonly _configuration = configuration[\"user-extractor\"];\n+\n+  get enabled(): boolean {\n+    return true;\n+  }\n+\n+  /**\n+   * Checks if the comment is made by a human user, and if it not a command.\n+   * @param comment",
+        "score": {
+          "reward": 5.16,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 42.86500000000001,
+            "syllables": 62,
+            "sentences": 2,
+            "score": 0.8286500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1529799508,
+        "content": "The team had a whole debate on how the keys from the config should be camel cased in order to directly map to identifier names (like variables) @rndquu rfc",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529799508",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,68 @@\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import { GitHubIssue, GitHubIssueComment } from \"../github-types\";\n+import { Result, Transformer } from \"./processor\";\n+\n+/**\n+ * Creates entries for each bounty hunter with its associated comments.\n+ */\n+export class UserExtractorTransformer implements Transformer {\n+  private readonly _configuration = configuration[\"user-extractor\"];\n+\n+  get enabled(): boolean {\n+    return true;\n+  }\n+\n+  /**\n+   * Checks if the comment is made by a human user, and if it not a command.\n+   * @param comment\n+   */\n+  _checkEntryValidity(comment: GitHubIssueComment) {\n+    return !!comment.user && !!comment.body && comment.user.type === \"User\";\n+  }\n+\n+  _extractBountyPrice(issue: GitHubIssue) {\n+    if (this._configuration[\"redeem-bounty\"] === false) {",
+        "score": {
+          "reward": 3.824,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 57.793103448275886,
+            "syllables": 41,
+            "sentences": 1,
+            "score": 0.9779310344827589
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1529800446,
+        "content": "```suggestion\r\n      }, [] as number[])\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529800446",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,68 @@\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import { GitHubIssue, GitHubIssueComment } from \"../github-types\";\n+import { Result, Transformer } from \"./processor\";\n+\n+/**\n+ * Creates entries for each bounty hunter with its associated comments.\n+ */\n+export class UserExtractorTransformer implements Transformer {\n+  private readonly _configuration = configuration[\"user-extractor\"];\n+\n+  get enabled(): boolean {\n+    return true;\n+  }\n+\n+  /**\n+   * Checks if the comment is made by a human user, and if it not a command.\n+   * @param comment\n+   */\n+  _checkEntryValidity(comment: GitHubIssueComment) {\n+    return !!comment.user && !!comment.body && comment.user.type === \"User\";\n+  }\n+\n+  _extractBountyPrice(issue: GitHubIssue) {\n+    if (this._configuration[\"redeem-bounty\"] === false) {\n+      return 0;\n+    }\n+    const sortedPriceLabels = issue.labels\n+      .reduce((acc, label) => {\n+        const labelName = typeof label === \"string\" ? label : label.name;\n+        if (labelName?.startsWith(\"Price: \")) {\n+          const price = parseFloat(labelName.replace(\"Price: \", \"\"));\n+          if (!isNaN(price)) {\n+            acc.push(price);\n+          }\n+        }\n+        return acc;\n+      }, [] as Array<number>)",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1529800889,
+        "content": "```suggestion\r\n      .sort((a, b) => a - b);\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529800889",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,68 @@\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import { GitHubIssue, GitHubIssueComment } from \"../github-types\";\n+import { Result, Transformer } from \"./processor\";\n+\n+/**\n+ * Creates entries for each bounty hunter with its associated comments.\n+ */\n+export class UserExtractorTransformer implements Transformer {\n+  private readonly _configuration = configuration[\"user-extractor\"];\n+\n+  get enabled(): boolean {\n+    return true;\n+  }\n+\n+  /**\n+   * Checks if the comment is made by a human user, and if it not a command.\n+   * @param comment\n+   */\n+  _checkEntryValidity(comment: GitHubIssueComment) {\n+    return !!comment.user && !!comment.body && comment.user.type === \"User\";\n+  }\n+\n+  _extractBountyPrice(issue: GitHubIssue) {\n+    if (this._configuration[\"redeem-bounty\"] === false) {\n+      return 0;\n+    }\n+    const sortedPriceLabels = issue.labels\n+      .reduce((acc, label) => {\n+        const labelName = typeof label === \"string\" ? label : label.name;\n+        if (labelName?.startsWith(\"Price: \")) {\n+          const price = parseFloat(labelName.replace(\"Price: \", \"\"));\n+          if (!isNaN(price)) {\n+            acc.push(price);\n+          }\n+        }\n+        return acc;\n+      }, [] as Array<number>)\n+      .sort((a, b) => {\n+        return a - b;\n+      });",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1529803757,
+        "content": "I actually deliberately changed the \"bounty\" terminology to \"task\" (or \"tasks\") in order to appeal to a wider audience. \"Bounties\" is crypto audience focused, but I want our system to add value, and not alienate, non-crypto companies as well. \r\nThis makes sense to reflect this decision from our marketing materials down to our code so that there is no confusion within our organization. \r\nAlso I generally refer to them as tasks only after they are funded. Otherwise I just refer to them as GitHub issues (or issues.)\r\nAnd if there are any problems in the codebase etc I am deliberate to not use the term \"issue\" as it can be interpreted as a reference to a GitHub issue. Instead, I call them another synonym, like \"problem\"",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529803757",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,68 @@\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import { GitHubIssue, GitHubIssueComment } from \"../github-types\";\n+import { Result, Transformer } from \"./processor\";\n+\n+/**\n+ * Creates entries for each bounty hunter with its associated comments.\n+ */\n+export class UserExtractorTransformer implements Transformer {\n+  private readonly _configuration = configuration[\"user-extractor\"];\n+\n+  get enabled(): boolean {\n+    return true;\n+  }\n+\n+  /**\n+   * Checks if the comment is made by a human user, and if it not a command.\n+   * @param comment\n+   */\n+  _checkEntryValidity(comment: GitHubIssueComment) {\n+    return !!comment.user && !!comment.body && comment.user.type === \"User\";\n+  }\n+\n+  _extractBountyPrice(issue: GitHubIssue) {\n+    if (this._configuration[\"redeem-bounty\"] === false) {\n+      return 0;\n+    }\n+    const sortedPriceLabels = issue.labels\n+      .reduce((acc, label) => {\n+        const labelName = typeof label === \"string\" ? label : label.name;\n+        if (labelName?.startsWith(\"Price: \")) {\n+          const price = parseFloat(labelName.replace(\"Price: \", \"\"));\n+          if (!isNaN(price)) {\n+            acc.push(price);\n+          }\n+        }\n+        return acc;\n+      }, [] as Array<number>)\n+      .sort((a, b) => {\n+        return a - b;\n+      });\n+    if (!sortedPriceLabels.length) {\n+      console.warn(\"There are no price labels in this repository.\");\n+      return 0;\n+    }\n+    return sortedPriceLabels[0];\n+  }\n+\n+  transform(data: Readonly<GetActivity>, result: Result): Result {\n+    if (data.comments) {\n+      for (const comment of data.comments as GitHubIssueComment[]) {\n+        if (comment.user && comment.body && this._checkEntryValidity(comment)) {\n+          const bounty =",
+        "score": {
+          "reward": 8.792,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 127,
+            "wordValue": 0.1,
+            "result": 2.44
+          },
+          "readability": {
+            "fleschKincaid": 55.1916535433071,
+            "syllables": 200,
+            "sentences": 7,
+            "score": 0.951916535433071
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1529807009,
+        "content": "```suggestion\r\n              : void 0;\r\n```\r\nI heard this is considered more robust as it is possible for `undefined` to be defined in JavaScript. Not sure if this is too old school though, but thats what I would do in this situation.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529807009",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,68 @@\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import { GitHubIssue, GitHubIssueComment } from \"../github-types\";\n+import { Result, Transformer } from \"./processor\";\n+\n+/**\n+ * Creates entries for each bounty hunter with its associated comments.\n+ */\n+export class UserExtractorTransformer implements Transformer {\n+  private readonly _configuration = configuration[\"user-extractor\"];\n+\n+  get enabled(): boolean {\n+    return true;\n+  }\n+\n+  /**\n+   * Checks if the comment is made by a human user, and if it not a command.\n+   * @param comment\n+   */\n+  _checkEntryValidity(comment: GitHubIssueComment) {\n+    return !!comment.user && !!comment.body && comment.user.type === \"User\";\n+  }\n+\n+  _extractBountyPrice(issue: GitHubIssue) {\n+    if (this._configuration[\"redeem-bounty\"] === false) {\n+      return 0;\n+    }\n+    const sortedPriceLabels = issue.labels\n+      .reduce((acc, label) => {\n+        const labelName = typeof label === \"string\" ? label : label.name;\n+        if (labelName?.startsWith(\"Price: \")) {\n+          const price = parseFloat(labelName.replace(\"Price: \", \"\"));\n+          if (!isNaN(price)) {\n+            acc.push(price);\n+          }\n+        }\n+        return acc;\n+      }, [] as Array<number>)\n+      .sort((a, b) => {\n+        return a - b;\n+      });\n+    if (!sortedPriceLabels.length) {\n+      console.warn(\"There are no price labels in this repository.\");\n+      return 0;\n+    }\n+    return sortedPriceLabels[0];\n+  }\n+\n+  transform(data: Readonly<GetActivity>, result: Result): Result {\n+    if (data.comments) {\n+      for (const comment of data.comments as GitHubIssueComment[]) {\n+        if (comment.user && comment.body && this._checkEntryValidity(comment)) {\n+          const bounty =\n+            (data.self as GitHubIssue)?.assignee?.id === comment.user.id\n+              ? {\n+                  reward: this._extractBountyPrice(data.self as GitHubIssue),\n+                }\n+              : undefined;",
+        "score": {
+          "reward": 6.072,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 80.30107142857145,
+            "syllables": 45,
+            "sentences": 2,
+            "score": 0.7969892857142855
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1529813657,
+        "content": "It's fine as is but thinking its AI related is my bias.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529813657",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,46 +1,56 @@\n-import { config } from \"dotenv\";\n import { GetActivity } from \"./get-activity\";\n+import { ContentEvaluatorTransformer } from \"./parser/content-evaluator-transformer\";\n+import { DataPurgeTransformer } from \"./parser/data-purge-transformer\";\n+import { FormattingEvaluatorTransformer } from \"./parser/formatting-evaluator-transformer\";\n+import { Processor } from \"./parser/processor\";\n+import { UserExtractorTransformer } from \"./parser/user-extractor-transformer\";\n import { parseGitHubUrl } from \"./start\";\n \n-config();\n-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;\n-if (!GITHUB_TOKEN) {\n-  console.warn(\"GITHUB_TOKEN is not set\");\n-}\n // Mock process.argv\n-process.argv = [\"path/to/node\", \"path/to/script\", `--auth=${GITHUB_TOKEN}`];\n const issueUrl = process.env.TEST_ISSUE_URL || \"https://github.com/ubiquibot/comment-incentives/issues/22\";\n \n describe(\"GetActivity class\", () => {\n   const issue = parseGitHubUrl(issueUrl);\n   const activity = new GetActivity(issue);\n-\n-  beforeAll(async () => await activity.init());\n+  beforeAll(async () => {\n+    await activity.init();\n+  });\n \n   it(\"should resolve all promises\", async () => {\n     expect(activity.self).toBeTruthy();\n     expect(activity.events).toBeTruthy();\n     expect(activity.comments).toBeTruthy();\n     expect(Array.isArray(activity.linkedReviews)).toBeTruthy();\n+    const processor = new Processor();\n+    processor\n+      .add(new UserExtractorTransformer())",
+        "score": {
+          "reward": 1.572,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 96.02461538461542,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.6397538461538459
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1529826057,
+        "content": "This whole thing is the comment module. That may make sense only from the perspective of the kernel which is a separate codebase?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529826057",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,81 @@\n+import * as fs from \"fs\";\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import program from \"./command-line\";\n+\n+export class Processor {\n+  private _transformers: Array<Transformer> = [];\n+  private _result: Result = {};\n+  private readonly _configuration = configuration;\n+\n+  add(transformer: Transformer) {\n+    this._transformers.push(transformer);\n+    return this;\n+  }\n+  async run(data: Readonly<GetActivity>) {\n+    if (this._configuration.disabled) {\n+      console.log(\"Module is disabled. Skipping...\");\n+      return;\n+    }\n+    for (const transformer of this._transformers) {\n+      if (transformer.enabled) {\n+        this._result = await transformer.transform(data, this._result);\n+      }\n+    }\n+    // Aggregate total result\n+    for (const item of Object.keys(this._result)) {\n+      this._result[item].total = this._sumRewards(this._result[item]);\n+    }\n+    return this._result;\n+  }\n+  dump() {\n+    const { file } = program.opts();\n+    const result = JSON.stringify(this._result, undefined, 2);\n+    if (!file) {\n+      console.log(result);\n+    } else {\n+      fs.writeFileSync(file, result);\n+    }\n+  }\n+  _sumRewards(obj: Record<string, object | number>) {\n+    let totalReward = 0;\n+\n+    for (const [key, value] of Object.entries(obj)) {\n+      if (Object.prototype.hasOwnProperty.call(obj, key)) {\n+        if (key === \"reward\" && typeof value === \"number\") {\n+          totalReward += value;\n+        } else if (typeof value === \"object\") {\n+          totalReward += this._sumRewards(value as Record<string, object>);\n+        }\n+      }\n+    }\n+\n+    return totalReward;\n+  }\n+}\n+\n+export interface Transformer {\n+  transform(data: Readonly<GetActivity>, result: Result): Result | Promise<Result>;\n+  get enabled(): boolean;\n+}\n+\n+export interface Result {\n+  [k: string]: {\n+    comments?: Array<Comment>;",
+        "score": {
+          "reward": 4.12,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 66.42336956521743,
+            "syllables": 35,
+            "sentences": 2,
+            "score": 0.9357663043478257
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1529826658,
+        "content": "I'm not sure I think I was trained by some linters at some point. I think my bias may also stem from using `[]` to instantiate new arrays instead of `new Array()` due to v8 optimizations.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529826658",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,68 @@\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import { GitHubIssue, GitHubIssueComment } from \"../github-types\";\n+import { Result, Transformer } from \"./processor\";\n+\n+/**\n+ * Creates entries for each bounty hunter with its associated comments.\n+ */\n+export class UserExtractorTransformer implements Transformer {\n+  private readonly _configuration = configuration[\"user-extractor\"];\n+\n+  get enabled(): boolean {\n+    return true;\n+  }\n+\n+  /**\n+   * Checks if the comment is made by a human user, and if it not a command.\n+   * @param comment\n+   */\n+  _checkEntryValidity(comment: GitHubIssueComment) {\n+    return !!comment.user && !!comment.body && comment.user.type === \"User\";\n+  }\n+\n+  _extractBountyPrice(issue: GitHubIssue) {\n+    if (this._configuration[\"redeem-bounty\"] === false) {\n+      return 0;\n+    }\n+    const sortedPriceLabels = issue.labels\n+      .reduce((acc, label) => {\n+        const labelName = typeof label === \"string\" ? label : label.name;\n+        if (labelName?.startsWith(\"Price: \")) {\n+          const price = parseFloat(labelName.replace(\"Price: \", \"\"));\n+          if (!isNaN(price)) {\n+            acc.push(price);\n+          }\n+        }\n+        return acc;\n+      }, [] as Array<number>)",
+        "score": {
+          "reward": 3.012,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 34,
+            "wordValue": 0.1,
+            "result": 2.01
+          },
+          "readability": {
+            "fleschKincaid": 77.60941176470591,
+            "syllables": 45,
+            "sentences": 2,
+            "score": 0.8239058823529409
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1529827562,
+        "content": "---\r\nhttps://chat.openai.com/share/3206263b-ba8d-4c4c-9890-5264fd0bdb02",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529827562",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,68 @@\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import { GitHubIssue, GitHubIssueComment } from \"../github-types\";\n+import { Result, Transformer } from \"./processor\";\n+\n+/**\n+ * Creates entries for each bounty hunter with its associated comments.\n+ */\n+export class UserExtractorTransformer implements Transformer {\n+  private readonly _configuration = configuration[\"user-extractor\"];\n+\n+  get enabled(): boolean {\n+    return true;\n+  }\n+\n+  /**\n+   * Checks if the comment is made by a human user, and if it not a command.\n+   * @param comment\n+   */\n+  _checkEntryValidity(comment: GitHubIssueComment) {\n+    return !!comment.user && !!comment.body && comment.user.type === \"User\";\n+  }\n+\n+  _extractBountyPrice(issue: GitHubIssue) {\n+    if (this._configuration[\"redeem-bounty\"] === false) {\n+      return 0;\n+    }\n+    const sortedPriceLabels = issue.labels\n+      .reduce((acc, label) => {\n+        const labelName = typeof label === \"string\" ? label : label.name;\n+        if (labelName?.startsWith(\"Price: \")) {\n+          const price = parseFloat(labelName.replace(\"Price: \", \"\"));\n+          if (!isNaN(price)) {\n+            acc.push(price);\n+          }\n+        }\n+        return acc;\n+      }, [] as Array<number>)",
+        "score": {
+          "reward": 1.04,
+          "formatting": {
+            "content": {
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 101.93166666666669,
+            "syllables": 12,
+            "sentences": 3,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1529831471,
+        "content": "We only plan to support the latest Chrome browsers basically, or wherever Metamask is commonly used. Also only Node `20.10.0`",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529831471",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,68 @@\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import { GitHubIssue, GitHubIssueComment } from \"../github-types\";\n+import { Result, Transformer } from \"./processor\";\n+\n+/**\n+ * Creates entries for each bounty hunter with its associated comments.\n+ */\n+export class UserExtractorTransformer implements Transformer {\n+  private readonly _configuration = configuration[\"user-extractor\"];\n+\n+  get enabled(): boolean {\n+    return true;\n+  }\n+\n+  /**\n+   * Checks if the comment is made by a human user, and if it not a command.\n+   * @param comment\n+   */\n+  _checkEntryValidity(comment: GitHubIssueComment) {\n+    return !!comment.user && !!comment.body && comment.user.type === \"User\";\n+  }\n+\n+  _extractBountyPrice(issue: GitHubIssue) {\n+    if (this._configuration[\"redeem-bounty\"] === false) {\n+      return 0;\n+    }\n+    const sortedPriceLabels = issue.labels\n+      .reduce((acc, label) => {\n+        const labelName = typeof label === \"string\" ? label : label.name;\n+        if (labelName?.startsWith(\"Price: \")) {\n+          const price = parseFloat(labelName.replace(\"Price: \", \"\"));\n+          if (!isNaN(price)) {\n+            acc.push(price);\n+          }\n+        }\n+        return acc;\n+      }, [] as Array<number>)\n+      .sort((a, b) => {\n+        return a - b;\n+      });\n+    if (!sortedPriceLabels.length) {\n+      console.warn(\"There are no price labels in this repository.\");\n+      return 0;\n+    }\n+    return sortedPriceLabels[0];\n+  }\n+\n+  transform(data: Readonly<GetActivity>, result: Result): Result {\n+    if (data.comments) {\n+      for (const comment of data.comments as GitHubIssueComment[]) {\n+        if (comment.user && comment.body && this._checkEntryValidity(comment)) {\n+          const bounty =\n+            (data.self as GitHubIssue)?.assignee?.id === comment.user.id\n+              ? {\n+                  reward: this._extractBountyPrice(data.self as GitHubIssue),\n+                }\n+              : undefined;",
+        "score": {
+          "reward": 2.88,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 45.80302631578948,
+            "syllables": 34,
+            "sentences": 2,
+            "score": 0.8580302631578948
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1529848343,
+        "content": "Vscode doesn't do any of that by default so it seems to be a liability.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529848343",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,68 @@\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import { GitHubIssue, GitHubIssueComment } from \"../github-types\";\n+import { Result, Transformer } from \"./processor\";\n+\n+/**\n+ * Creates entries for each bounty hunter with its associated comments.\n+ */\n+export class UserExtractorTransformer implements Transformer {\n+  private readonly _configuration = configuration[\"user-extractor\"];\n+\n+  get enabled(): boolean {\n+    return true;\n+  }\n+\n+  /**\n+   * Checks if the comment is made by a human user, and if it not a command.\n+   * @param comment",
+        "score": {
+          "reward": 2.496,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 84.845,
+            "syllables": 20,
+            "sentences": 1,
+            "score": 0.75155
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1529849912,
+        "content": "Maybe that's true in your and my experience. But I was told otherwise from some other developers. Perhaps outside of gaming and crypto it's not a widely used term?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529849912",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,68 @@\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import { GitHubIssue, GitHubIssueComment } from \"../github-types\";\n+import { Result, Transformer } from \"./processor\";\n+\n+/**\n+ * Creates entries for each bounty hunter with its associated comments.\n+ */\n+export class UserExtractorTransformer implements Transformer {\n+  private readonly _configuration = configuration[\"user-extractor\"];\n+\n+  get enabled(): boolean {\n+    return true;\n+  }\n+\n+  /**\n+   * Checks if the comment is made by a human user, and if it not a command.\n+   * @param comment\n+   */\n+  _checkEntryValidity(comment: GitHubIssueComment) {\n+    return !!comment.user && !!comment.body && comment.user.type === \"User\";\n+  }\n+\n+  _extractBountyPrice(issue: GitHubIssue) {\n+    if (this._configuration[\"redeem-bounty\"] === false) {\n+      return 0;\n+    }\n+    const sortedPriceLabels = issue.labels\n+      .reduce((acc, label) => {\n+        const labelName = typeof label === \"string\" ? label : label.name;\n+        if (labelName?.startsWith(\"Price: \")) {\n+          const price = parseFloat(labelName.replace(\"Price: \", \"\"));\n+          if (!isNaN(price)) {\n+            acc.push(price);\n+          }\n+        }\n+        return acc;\n+      }, [] as Array<number>)\n+      .sort((a, b) => {\n+        return a - b;\n+      });\n+    if (!sortedPriceLabels.length) {\n+      console.warn(\"There are no price labels in this repository.\");\n+      return 0;\n+    }\n+    return sortedPriceLabels[0];\n+  }\n+\n+  transform(data: Readonly<GetActivity>, result: Result): Result {\n+    if (data.comments) {\n+      for (const comment of data.comments as GitHubIssueComment[]) {\n+        if (comment.user && comment.body && this._checkEntryValidity(comment)) {\n+          const bounty =",
+        "score": {
+          "reward": 2.904,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 73.54021505376345,
+            "syllables": 45,
+            "sentences": 3,
+            "score": 0.8645978494623655
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1529853505,
+        "content": "This doesn't seem right. \nIt should be 0 but it should count the words inside, unlike `blockquote` and `code`",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529853505",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,31 @@\n+content-evaluator:\n+  enabled: true\n+user-extractor:\n+  redeem-bounty: true\n+data-purge:\n+  enabled: true\n+#disabled: true\n+formatting-evaluator:\n+  enabled: true\n+  scores:\n+    br: 1\n+    code: 1\n+    p: 0.1",
+        "score": {
+          "reward": 5.012,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 103.70000000000002,
+            "syllables": 20,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1529855374,
+        "content": "I thought this was higher at 5 by default? I wonder if it makes sense to do 1 or 0 for default settings and then recommend ubiquity tested settings during onboarding. \nI also want to note that images are automatically wrapped inside of anchors so that's why images should be set to 0.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529855374",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,31 @@\n+content-evaluator:\n+  enabled: true\n+user-extractor:\n+  redeem-bounty: true\n+data-purge:\n+  enabled: true\n+#disabled: true\n+formatting-evaluator:\n+  enabled: true\n+  scores:\n+    br: 1\n+    code: 1\n+    p: 0.1\n+    em: 0\n+    img: 0\n+    strong: 0\n+    blockquote: 0\n+    h1: 1\n+    h2: 1\n+    h3: 1\n+    h4: 1\n+    h5: 1\n+    h6: 1\n+    a: 1",
+        "score": {
+          "reward": 7.512,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 54,
+            "wordValue": 0.1,
+            "result": 2.44
+          },
+          "readability": {
+            "fleschKincaid": 66.36500000000001,
+            "syllables": 78,
+            "sentences": 3,
+            "score": 0.9363499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1529857238,
+        "content": "Strong and italics seem to be recognized as the same item in my previous testing with the mdast library. \nThe reason why this is 0 by default is because the only time we normally see italics is when a new issue is automatically generated from a comment and GitHub adds the context at the end like \"written by X at Y issue\"\nI never seen contributors use bold either for comments or issue specifications.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529857238",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,31 @@\n+content-evaluator:\n+  enabled: true\n+user-extractor:\n+  redeem-bounty: true\n+data-purge:\n+  enabled: true\n+#disabled: true\n+formatting-evaluator:\n+  enabled: true\n+  scores:\n+    br: 1\n+    code: 1\n+    p: 0.1\n+    em: 0\n+    img: 0\n+    strong: 0",
+        "score": {
+          "reward": 6.42,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 74,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 36.6637837837838,
+            "syllables": 116,
+            "sentences": 2,
+            "score": 0.766637837837838
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1529858455,
+        "content": "```suggestion\n    br: 0\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529858455",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,31 @@\n+content-evaluator:\n+  enabled: true\n+user-extractor:\n+  redeem-bounty: true\n+data-purge:\n+  enabled: true\n+#disabled: true\n+formatting-evaluator:\n+  enabled: true\n+  scores:\n+    br: 1",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1529858816,
+        "content": "```suggestion\n    hr: 0\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529858816",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,31 @@\n+content-evaluator:\n+  enabled: true\n+user-extractor:\n+  redeem-bounty: true\n+data-purge:\n+  enabled: true\n+#disabled: true\n+formatting-evaluator:\n+  enabled: true\n+  scores:\n+    br: 1\n+    code: 1\n+    p: 0.1\n+    em: 0\n+    img: 0\n+    strong: 0\n+    blockquote: 0\n+    h1: 1\n+    h2: 1\n+    h3: 1\n+    h4: 1\n+    h5: 1\n+    h6: 1\n+    a: 1\n+    li: 1\n+    td: 1\n+    hr: 1",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1535132558,
+        "content": "I was looking through the GitHub Actions logs and couldn't understand this `type` property's purpose.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1535132558",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -7,3 +7,38 @@ As of 28 February: test driven development to aggregate all necessary informatio\n - most importantly: this can inherit bot authentication and link pull requests to issues in private repositories. \n \n Be sure to review all `*.test.*` files for implementation details. \n+\n+## Data structure\n+\n+```json\n+{\n+  \"userName\": {\n+    \"total\": 40.5,\n+    \"task\": {\n+      \"reward\": 37.5\n+    },\n+    \"comments\": [\n+      {\n+        \"content\": \"comment content\",\n+        \"url\": \"https://url-to-item\",\n+        \"type\": 18,",
+        "score": {
+          "reward": 3.936,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 63.69500000000001,
+            "syllables": 24,
+            "sentences": 1,
+            "score": 0.96305
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1535133359,
+        "content": "I was just providing you context for why they are set as 0. Its fine.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1535133359",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,31 @@\n+content-evaluator:\n+  enabled: true\n+user-extractor:\n+  redeem-bounty: true\n+data-purge:\n+  enabled: true\n+#disabled: true\n+formatting-evaluator:\n+  enabled: true\n+  scores:\n+    br: 1\n+    code: 1\n+    p: 0.1\n+    em: 0\n+    img: 0\n+    strong: 0",
+        "score": {
+          "reward": 1.152,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 97.7025,
+            "syllables": 18,
+            "sentences": 2,
+            "score": 0.622975
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1535169994,
+        "content": "A key might be useful to have for debugging purposes somewhere!",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1535169994",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -7,3 +7,38 @@ As of 28 February: test driven development to aggregate all necessary informatio\n - most importantly: this can inherit bot authentication and link pull requests to issues in private repositories. \n \n Be sure to review all `*.test.*` files for implementation details. \n+\n+## Data structure\n+\n+```json\n+{\n+  \"userName\": {\n+    \"total\": 40.5,\n+    \"task\": {\n+      \"reward\": 37.5\n+    },\n+    \"comments\": [\n+      {\n+        \"content\": \"comment content\",\n+        \"url\": \"https://url-to-item\",\n+        \"type\": 18,",
+        "score": {
+          "reward": 2.5,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 57.23363636363638,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.9723363636363638
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1536640111,
+        "content": "Can you make this identifier named something that will not collide with dealing with GitHub comments?\nI think it's important to be mindful of likely identifier collisions when exporting etc\n```suggestion\nexport interface GithubCommentScore {\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536640111",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,118 @@\n+import Decimal from \"decimal.js\";\n+import * as fs from \"fs\";\n+import configuration from \"../configuration/config-reader\";\n+import { CommentType, GetActivity } from \"../get-activity\";\n+import program from \"./command-line\";\n+import { ContentEvaluatorModule } from \"./content-evaluator-module\";\n+import { DataPurgeModule } from \"./data-purge-module\";\n+import { FormattingEvaluatorModule } from \"./formatting-evaluator-module\";\n+import { UserExtractorModule } from \"./user-extractor-module\";\n+\n+export class Processor {\n+  private _transformers: Module[] = [];\n+  private _result: Result = {};\n+  private readonly _configuration = configuration;\n+\n+  constructor() {\n+    this.add(new UserExtractorModule())\n+      .add(new DataPurgeModule())\n+      .add(new FormattingEvaluatorModule())\n+      .add(new ContentEvaluatorModule());\n+  }\n+\n+  add(transformer: Module) {\n+    this._transformers.push(transformer);\n+    return this;\n+  }\n+\n+  async run(data: Readonly<GetActivity>) {\n+    if (this._configuration.disabled) {\n+      console.log(\"Module is disabled. Skipping...\");\n+      return;\n+    }\n+    for (const transformer of this._transformers) {\n+      if (transformer.enabled) {\n+        this._result = await transformer.transform(data, this._result);\n+      }\n+    }\n+    // Aggregate total result\n+    for (const item of Object.keys(this._result)) {\n+      this._result[item].total = this._sumRewards(this._result[item]);\n+    }\n+    return this._result;\n+  }\n+\n+  dump() {\n+    const { file } = program.opts();\n+    const result = JSON.stringify(\n+      this._result,\n+      (key: string, value: string | number) => {\n+        // Changes \"type\" to be human-readable\n+        if (key === \"type\" && typeof value === \"number\") {\n+          const typeNames: string[] = [];\n+          const types = Object.values(CommentType) as number[];\n+          types.forEach((typeValue) => {\n+            if (value & typeValue) {\n+              typeNames.push(CommentType[typeValue]);\n+            }\n+          });\n+          return typeNames.join(\"|\");\n+        }\n+        return value;\n+      },\n+      2\n+    );\n+    if (!file) {\n+      console.log(result);\n+    } else {\n+      fs.writeFileSync(file, result);\n+    }\n+  }\n+\n+  _sumRewards(obj: Record<string, unknown>) {\n+    let totalReward = new Decimal(0);\n+\n+    for (const [key, value] of Object.entries(obj)) {\n+      if (Object.prototype.hasOwnProperty.call(obj, key)) {\n+        if (key === \"reward\" && typeof value === \"number\") {\n+          totalReward = totalReward.add(value);\n+        } else if (typeof value === \"object\") {\n+          totalReward = totalReward.add(this._sumRewards(value as Record<string, unknown>));\n+        }\n+      }\n+    }\n+\n+    return totalReward.toNumber();\n+  }\n+}\n+\n+export interface Module {\n+  transform(data: Readonly<GetActivity>, result: Result): Promise<Result>;\n+  get enabled(): boolean;\n+}\n+\n+export interface Result {\n+  [k: string]: {\n+    comments?: GithubComment[];\n+    total: number;\n+    task?: {\n+      reward: number;\n+    };\n+  };\n+}\n+\n+export interface GithubComment {",
+        "score": {
+          "reward": 6.804,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 49.192822580645185,
+            "syllables": 52,
+            "sentences": 2,
+            "score": 0.8919282258064518
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1536640313,
+        "content": "Not sure if we need to specify -32k",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536640313",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,141 @@\n+import Decimal from \"decimal.js\";\n+import { encodingForModel } from \"js-tiktoken\";\n+import OpenAI from \"openai\";\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import { GitHubIssue } from \"../github-types\";\n+import { GithubComment, Module, Result } from \"./processor\";\n+\n+/**\n+ * Evaluates and rates comments.\n+ */\n+export class ContentEvaluatorModule implements Module {\n+  readonly _openAi = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });\n+  readonly configuration = configuration.contentEvaluator;\n+\n+  get enabled(): boolean {\n+    return this.configuration.enabled;\n+  }\n+\n+  async transform(data: Readonly<GetActivity>, result: Result) {\n+    const promises: Promise<void>[] = [];\n+\n+    for (const key of Object.keys(result)) {\n+      const currentElement = result[key];\n+      const comments = currentElement.comments || [];\n+      const specificationBody = (data.self as GitHubIssue)?.body;\n+\n+      if (specificationBody && comments.length) {\n+        promises.push(\n+          this._processComment(\n+            comments,\n+            specificationBody,\n+            comments.map((comment) => comment.content)\n+          )\n+        );\n+      }\n+    }\n+\n+    await Promise.all(promises);\n+    return result;\n+  }\n+\n+  async _processComment(comments: GithubComment[], specificationBody: string, commentsBody: string[]) {\n+    const relevance = await this._sampleRelevanceScoreResults(specificationBody, commentsBody);\n+\n+    if (relevance.length !== comments.length) {\n+      console.error(\"Relevance / Comment length mismatch! Skipping.\");\n+      return;\n+    }\n+\n+    for (let i = 0; i < relevance.length; i++) {\n+      const currentComment = comments[i];\n+      const currentRelevance = relevance[i];\n+      const currentReward = new Decimal(currentComment.score?.reward ? currentComment.score.reward : 0);\n+      currentComment.score = {\n+        ...(currentComment.score || {}),\n+        relevance: currentRelevance.toNumber(),\n+        reward: currentReward.mul(currentRelevance).toNumber(),\n+      };\n+    }\n+  }\n+\n+  async _evaluateComments(specification: string, comments: string[]) {\n+    const prompt = this._generatePrompt(specification, comments);\n+\n+    try {\n+      const response: OpenAI.Chat.ChatCompletion = await this._openAi.chat.completions.create({\n+        model: this._getOptimalModel(prompt),\n+        messages: [\n+          {\n+            role: \"system\",\n+            content: prompt,\n+          },\n+        ],\n+        temperature: 1,\n+        max_tokens: 128,\n+        top_p: 1,\n+        frequency_penalty: 0,\n+        presence_penalty: 0,\n+      });\n+\n+      const rawResponse = String(response.choices[0].message.content);\n+      const parsedResponse = JSON.parse(rawResponse) as number[];\n+      return parsedResponse.map((o) => new Decimal(o));\n+    } catch (error) {\n+      console.error(`Failed to evaluate comment`, error);\n+      return [];\n+    }\n+  }\n+\n+  _getOptimalModel(prompt: string) {\n+    const encoder = encodingForModel(\"gpt-3.5-turbo\");\n+    const totalSumOfTokens = encoder.encode(prompt).length;\n+\n+    if (totalSumOfTokens <= 4097) {\n+      return \"gpt-3.5-turbo\";\n+    } else if (totalSumOfTokens <= 16385) {\n+      return \"gpt-3.5-turbo-16k\";\n+    } else {\n+      console.warn(\"Backup plan for development purposes only, but using gpt-4 due to huge context size\");\n+      return \"gpt-4\";",
+        "score": {
+          "reward": 1.82,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 92.965,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.67035
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1536640493,
+        "content": "How's progress on mapping every webhook event type to its own bit?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536640493",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -18,6 +18,15 @@ import {\n   getPullRequestReviews,\n } from \"./start\";\n \n+export enum CommentType {",
+        "score": {
+          "reward": 2.8,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 69.99384615384618,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.9000615384615382
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1536977274,
+        "content": "I guess my aspiration would be that we can handle situations where we fail to retrieve the data elegantly. What about an exponential back off? The GitHub action has the ability to run for six hours!\nOtherwise, if that's a bad idea then yes I agree with whilefoo that it should throw and exit the process. \nI'm still definitely leaning towards exponential backoff idea though, which implies that it should never be null, but instead perhaps, undefined.  \nThis can be addressed in another task",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536977274",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -18,6 +18,15 @@ import {\n   getPullRequestReviews,\n } from \"./start\";\n \n+export enum CommentType {\n+  REVIEW = 0b1,\n+  ISSUE = 0b10,\n+  ASSIGNEE = 0b100,\n+  ISSUER = 0b1000,\n+  COLLABORATOR = 0b10000,\n+  CONTRIBUTOR = 0b100000,\n+}\n+\n export class GetActivity {\n   constructor(private _issueParams: IssueParams) {}\n   self: Promise<GitHubIssue> | GitHubIssue | null = null;",
+        "score": {
+          "reward": 10.976,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "br": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 86,
+            "wordValue": 0.1,
+            "result": 2.64
+          },
+          "readability": {
+            "fleschKincaid": 60.468062015503904,
+            "syllables": 134,
+            "sentences": 6,
+            "score": 0.995319379844961
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2005603215,
+        "content": "I'll make a coffee and check on my computer. This deserves a proper review",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2005603215",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.6,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 80.78250000000001,
+            "syllables": 21,
+            "sentences": 2,
+            "score": 0.7921749999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2006017678,
+        "content": "Consider resolving conversations as you complete those.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2006017678",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.648,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 18.44428571428574,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.5844428571428574
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2011172588,
+        "content": "What's the best way to test? Maybe making a local development server is most efficient?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2011172588",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.576,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 71.81500000000001,
+            "syllables": 24,
+            "sentences": 2,
+            "score": 0.8818499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2011243903,
+        "content": "It probably would make sense to make an action to test. \nThen I can see from mobile",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2011243903",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.92,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 88.72514705882354,
+            "syllables": 22,
+            "sentences": 2,
+            "score": 0.7127485294117646
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2012368835,
+        "content": "https://github.com/FernandVEYRIER/conversation-rewards/actions/runs/8370670552/job/22918418831#step:5:16\nThis 0001 signals to me that you are not using BigNumber for your math operations. This is necessary for exactly this reason in javascript. \nOtherwise it looks great! Good work.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2012368835",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 11.904,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 63.312090909090955,
+            "syllables": 70,
+            "sentences": 5,
+            "score": 0.9668790909090904
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2014527120,
+        "content": "Reviewing the action run data again: I noticed that the relevance scores seem to be with only one significant digit. This expresses to me that you are not running multiple samples and averaging them. Please make sure to do that because ChatGPT returns outliers. \r\n```\r\n\"relevance\": 0.2\r\n\"relevance\": 0.1\r\n\"relevance\": 0.2\r\n\"relevance\": 0.8\r\n\"relevance\": 0.2\r\n\"relevance\": 0.1\r\n\"relevance\": 0.2\r\n\"relevance\": 0.2\r\n\"relevance\": 0.6\r\n\"relevance\": 0.1\r\n\"relevance\": 0.2\r\n\"relevance\": 0.2\r\n\"relevance\": 0.9\r\n\"relevance\": 0.4\r\n\"relevance\": 0.8\r\n```\r\nIn my implementation I run 10x samples per comment then return an average.\r\nThis approach is a bit janky but it seems the simplest to implement and fairly accurate.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2014527120",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 12.204,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 73,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 59.90093150684933,
+            "syllables": 114,
+            "sentences": 5,
+            "score": 0.9990093150684933
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2014672447,
+        "content": "I have no idea. For reference, previously we were averaging $5 a month with the old set up. This new setup implies 10x? So thats $50 a month which is quite steep for raw costs. \r\nI wonder if there is a more efficient approach to this. What about the old way of batching the entire conversation in one go?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2014672447",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 7.44,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 59,
+            "wordValue": 0.1,
+            "result": 2.51
+          },
+          "readability": {
+            "fleschKincaid": 82.14230225988703,
+            "syllables": 80,
+            "sentences": 6,
+            "score": 0.7785769774011296
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2014699270,
+        "content": "Let's aim to make the max increase for now to $10 a month and go from there. Take a best guess doesn't matter if it's totally accurate.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2014699270",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.54,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 90.09000000000002,
+            "syllables": 36,
+            "sentences": 2,
+            "score": 0.6990999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2016521915,
+        "content": "@whilefoo can you confirm that this is good to go and then we can merge",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2016521915",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.752,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 90.09000000000002,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.6990999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2017076781,
+        "content": "Thanks for the thorough review! However I was hoping you would be able to provide guidance on how the kernel will interface with this plugin @whilefoo or do you think this is pretty much ready for testing?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2017076781",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 6.48,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 37,
+            "wordValue": 0.1,
+            "result": 2.1
+          },
+          "readability": {
+            "fleschKincaid": 64.58722972972974,
+            "syllables": 54,
+            "sentences": 2,
+            "score": 0.9541277027027025
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2017522393,
+        "content": "@gentlementlegen just a heads up but your local git client seems out of sync with your GitHub profile somehow. There are no more avatars next to your commits.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2017522393",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.848,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 68.74642857142858,
+            "syllables": 41,
+            "sentences": 2,
+            "score": 0.9125357142857142
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1945074130,
+            "effect": {
+              "addition": 734,
+              "deletion": 266
+            },
+            "reward": 40,
+            "priority": 4
+          },
+          {
+            "reviewId": 1945376067,
+            "effect": {
+              "addition": 594,
+              "deletion": 42
+            },
+            "reward": 25.44,
+            "priority": 4
+          },
+          {
+            "reviewId": 1954071149,
+            "effect": {
+              "addition": 347,
+              "deletion": 136
+            },
+            "reward": 19.32,
+            "priority": 4
+          },
+          {
+            "reviewId": 1956386856,
+            "effect": {
+              "addition": 122,
+              "deletion": 29
+            },
+            "reward": 6.04,
+            "priority": 4
+          },
+          {
+            "reviewId": 1956754761,
+            "effect": {
+              "addition": 77,
+              "deletion": 93
+            },
+            "reward": 6.8,
+            "priority": 4
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 298.546 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>5</td><td>97.6</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>11.87</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>16.948</td></tr><tr><td>Review</td><td>Comment</td><td>47</td><td>172.128</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3\" target=\"_blank\" rel=\"noopener\">#3</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+734 -266</td><td>4</td><td>40</td></tr><tr><td>+594 -42</td><td>4</td><td>25.44</td></tr><tr><td>+347 -136</td><td>4</td><td>19.32</td></tr><tr><td>+122 -29</td><td>4</td><td>6.04</td></tr><tr><td>+77 -93</td><td>4</td><td>6.8</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/2\" target=\"_blank\" rel=\"noopener\">## ContextImplement a mechanism to reward contributors based o&hellip;</a></h6></td><td><details><summary>9.56</summary><pre>content:&#13;  content:&#13;    h2:&#13;      score: 1&#13;      elementCount: 5&#13;    p:&#13;      score: 0&#13;      elementCount: 23&#13;    ul:&#13;      score: 0&#13;      elementCount: 5&#13;    li:&#13;      score: 0.1&#13;      elementCount: 18&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 8.8&#13;regex:&#13;  wordCount: 323&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>1</td><td>1</td><td>11.87</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/2#issuecomment-2002941620\" target=\"_blank\" rel=\"noopener\">GPT-3.5 is sufficient. I run it 10x per comment and sample an av&hellip;</a></h6></td><td><details><summary>2.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 72&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.9</td><td>4</td><td>11.88</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/2#issuecomment-2002991289\" target=\"_blank\" rel=\"noopener\">I think this might need to be broken down into separate tasks. L&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.7</td><td>4</td><td>5.068</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#pullrequestreview-1956386856\" target=\"_blank\" rel=\"noopener\">I'm pretty much ready to test in production. We can set up anoth&hellip;</a></h6></td><td><details><summary>2.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>0.3</td><td>4</td><td>3.072</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529629118\" target=\"_blank\" rel=\"noopener\">Why?</a></h6></td><td><details><summary>0.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>0.2</td><td>4</td><td>0.144</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529629314\" target=\"_blank\" rel=\"noopener\">How about &#96;jest.config.ts&#96; or json?</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.4</td><td>4</td><td>0.832</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529629742\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion\"description\": \"Generate rewards fo&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529630255\" target=\"_blank\" rel=\"noopener\">Configuration should be handled in the upstream partner repo/org&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.6</td><td>4</td><td>4.872</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529630961\" target=\"_blank\" rel=\"noopener\">Why are they called transformers? Is this a generative pre-train&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.3</td><td>4</td><td>1.692</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529793870\" target=\"_blank\" rel=\"noopener\">Generally speaking, using &#96;object&#96; as a data type is con&hellip;</a></h6></td><td><details><summary>1.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.8</td><td>4</td><td>7.872</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529794724\" target=\"_blank\" rel=\"noopener\">Is it better to always return as a &#96;Promise&lt;Result&gt;&#9&hellip;</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.7</td><td>4</td><td>2.94</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529795402\" target=\"_blank\" rel=\"noopener\">Perhaps its best to initialize as an empty array instead?&#96;&hellip;</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.6</td><td>4</td><td>2.76</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529796156\" target=\"_blank\" rel=\"noopener\">I think this might need to be a &#96;string&#96; (or &#96;BigNum&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.7</td><td>4</td><td>3.668</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529797204\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionreturn comment.body &amp;&amp; co&hellip;</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.6</td><td>4</td><td>1.56</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529798453\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion&#96;&#96;&#96;I feel that JSDoc is&hellip;</a></h6></td><td><details><summary>2.07</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.5</td><td>4</td><td>5.16</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529799508\" target=\"_blank\" rel=\"noopener\">The team had a whole debate on how the keys from the config shou&hellip;</a></h6></td><td><details><summary>1.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.4</td><td>4</td><td>3.824</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529800446\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion}, [] as number[])&#96;&#96;&&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529800889\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion.sort((a, b) =&gt; a - b);&#9&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.4</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529803757\" target=\"_blank\" rel=\"noopener\">I actually deliberately changed the \"bounty\" terminology to \"tas&hellip;</a></h6></td><td><details><summary>2.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 127&#13;  wordValue: 0.1&#13;  result: 2.44&#13;</pre></details></td><td>0.7</td><td>4</td><td>8.792</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529807009\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion: void 0;&#96;&#96;&#&hellip;</a></h6></td><td><details><summary>2.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>0.6</td><td>4</td><td>6.072</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529813657\" target=\"_blank\" rel=\"noopener\">It's fine as is but thinking its AI related is my bias.</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.3</td><td>4</td><td>1.572</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529826057\" target=\"_blank\" rel=\"noopener\">This whole thing is the comment module. That may make sense only&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.5</td><td>4</td><td>4.12</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529826658\" target=\"_blank\" rel=\"noopener\">I'm not sure I think I was trained by some linters at some point&hellip;</a></h6></td><td><details><summary>2.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 34&#13;  wordValue: 0.1&#13;  result: 2.01&#13;</pre></details></td><td>0.3</td><td>4</td><td>3.012</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529827562\" target=\"_blank\" rel=\"noopener\">---https://chat.openai.com/share/3206263b-ba8d-4c4c-9890-5264f&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.2</td><td>4</td><td>1.04</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529831471\" target=\"_blank\" rel=\"noopener\">We only plan to support the latest Chrome browsers basically, or&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.4</td><td>4</td><td>2.88</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529848343\" target=\"_blank\" rel=\"noopener\">Vscode doesn't do any of that by default so it seems to be a lia&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.4</td><td>4</td><td>2.496</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529849912\" target=\"_blank\" rel=\"noopener\">Maybe that's true in your and my experience. But I was told othe&hellip;</a></h6></td><td><details><summary>1.92</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.3</td><td>4</td><td>2.904</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529853505\" target=\"_blank\" rel=\"noopener\">This doesn't seem right. It should be 0 but it should count the&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.7</td><td>4</td><td>5.012</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529855374\" target=\"_blank\" rel=\"noopener\">I thought this was higher at 5 by default? I wonder if it makes &hellip;</a></h6></td><td><details><summary>2.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 54&#13;  wordValue: 0.1&#13;  result: 2.44&#13;</pre></details></td><td>0.6</td><td>4</td><td>7.512</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529857238\" target=\"_blank\" rel=\"noopener\">Strong and italics seem to be recognized as the same item in my &hellip;</a></h6></td><td><details><summary>2.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 74&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.5</td><td>4</td><td>6.42</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529858455\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionbr: 0&#96;&#96;&#96;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1529858816\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionhr: 0&#96;&#96;&#96;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.4</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1535132558\" target=\"_blank\" rel=\"noopener\">I was looking through the GitHub Actions logs and couldn't under&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.6</td><td>4</td><td>3.936</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1535133359\" target=\"_blank\" rel=\"noopener\">I was just providing you context for why they are set as 0. Its &hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.2</td><td>4</td><td>1.152</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1535169994\" target=\"_blank\" rel=\"noopener\">A key might be useful to have for debugging purposes somewhere!</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.5</td><td>4</td><td>2.5</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536640111\" target=\"_blank\" rel=\"noopener\">Can you make this identifier named something that will not colli&hellip;</a></h6></td><td><details><summary>1.92</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.7</td><td>4</td><td>6.804</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536640313\" target=\"_blank\" rel=\"noopener\">Not sure if we need to specify -32k</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.5</td><td>4</td><td>1.82</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536640493\" target=\"_blank\" rel=\"noopener\">How's progress on mapping every webhook event type to its own bi&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.5</td><td>4</td><td>2.8</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536977274\" target=\"_blank\" rel=\"noopener\">I guess my aspiration would be that we can handle situations whe&hellip;</a></h6></td><td><details><summary>2.64</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    br:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 86&#13;  wordValue: 0.1&#13;  result: 2.64&#13;</pre></details></td><td>0.8</td><td>4</td><td>10.976</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2005603215\" target=\"_blank\" rel=\"noopener\">I'll make a coffee and check on my computer. This deserves a pro&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.1</td><td>4</td><td>0.6</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2006017678\" target=\"_blank\" rel=\"noopener\">Consider resolving conversations as you complete those.</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.2</td><td>4</td><td>0.648</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2011172588\" target=\"_blank\" rel=\"noopener\">What's the best way to test? Maybe making a local development se&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.4</td><td>4</td><td>2.576</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2011243903\" target=\"_blank\" rel=\"noopener\">It probably would make sense to make an action to test. Then I &hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.3</td><td>4</td><td>1.92</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2012368835\" target=\"_blank\" rel=\"noopener\">https://github.com/FernandVEYRIER/conversation-rewards/actions/r&hellip;</a></h6></td><td><details><summary>2.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.8</td><td>4</td><td>11.904</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2014527120\" target=\"_blank\" rel=\"noopener\">Reviewing the action run data again: I noticed that the relevanc&hellip;</a></h6></td><td><details><summary>2.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 73&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.9</td><td>4</td><td>12.204</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2014672447\" target=\"_blank\" rel=\"noopener\">I have no idea. For reference, previously we were averaging $5 a&hellip;</a></h6></td><td><details><summary>2.51</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 59&#13;  wordValue: 0.1&#13;  result: 2.51&#13;</pre></details></td><td>0.6</td><td>4</td><td>7.44</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2014699270\" target=\"_blank\" rel=\"noopener\">Let's aim to make the max increase for now to $10 a month and go&hellip;</a></h6></td><td><details><summary>1.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.5</td><td>4</td><td>4.54</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2016521915\" target=\"_blank\" rel=\"noopener\">@whilefoo can you confirm that this is good to go and then we ca&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.3</td><td>4</td><td>1.752</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2017076781\" target=\"_blank\" rel=\"noopener\">Thanks for the thorough review! However I was hoping you would b&hellip;</a></h6></td><td><details><summary>2.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 37&#13;  wordValue: 0.1&#13;  result: 2.1&#13;</pre></details></td><td>0.6</td><td>4</td><td>6.48</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#issuecomment-2017522393\" target=\"_blank\" rel=\"noopener\">@gentlementlegen just a heads up but your local git client seems&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.2</td><td>4</td><td>1.848</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 52,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 1531099567,
+        "content": "We decided to use camel cased parameters ([example](https://github.com/ubiquity/ubiquibot-config/blob/6f102946f0b511cbb7a53221d9230841fdc61642/.github/ubiquibot-config.yml)) for the bot's config on partners' side. I guess the same convention should be applied to plugin configs (if `redeem-bounty` refers to it).",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1531099567",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,68 @@\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import { GitHubIssue, GitHubIssueComment } from \"../github-types\";\n+import { Result, Transformer } from \"./processor\";\n+\n+/**\n+ * Creates entries for each bounty hunter with its associated comments.\n+ */\n+export class UserExtractorTransformer implements Transformer {\n+  private readonly _configuration = configuration[\"user-extractor\"];\n+\n+  get enabled(): boolean {\n+    return true;\n+  }\n+\n+  /**\n+   * Checks if the comment is made by a human user, and if it not a command.\n+   * @param comment\n+   */\n+  _checkEntryValidity(comment: GitHubIssueComment) {\n+    return !!comment.user && !!comment.body && comment.user.type === \"User\";\n+  }\n+\n+  _extractBountyPrice(issue: GitHubIssue) {\n+    if (this._configuration[\"redeem-bounty\"] === false) {",
+        "score": {
+          "reward": 12,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 65.56701612903228,
+            "syllables": 46,
+            "sentences": 2,
+            "score": 0.9443298387096771
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1947373653,
+            "effect": {
+              "addition": 734,
+              "deletion": 266
+            },
+            "reward": 40,
+            "priority": 4
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 52 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>40</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>12</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3\" target=\"_blank\" rel=\"noopener\">#3</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+734 -266</td><td>4</td><td>40</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1531099567\" target=\"_blank\" rel=\"noopener\">We decided to use camel cased parameters ([example](https://gith&hellip;</a></h6></td><td><details><summary>2.92</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.8</td><td>4</td><td>12</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 145.132,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 1536914897,
+        "content": "```suggestion\r\n    for (const comment of data.allComments) {\r\n```\r\ncould use better naming",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536914897",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,38 @@\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import { Module, Result } from \"./processor\";\n+\n+/**\n+ * Removes the data in the comments that we do not want to be processed.\n+ */\n+export class DataPurgeModule implements Module {\n+  readonly configuration = configuration.dataPurge;\n+\n+  get enabled(): boolean {\n+    return this.configuration.enabled;\n+  }\n+\n+  transform(data: Readonly<GetActivity>, result: Result) {\n+    for (const value of data.allComments) {",
+        "score": {
+          "reward": 1.76,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 75.87500000000001,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 0.8412499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1536915264,
+        "content": "won't this leave untransformed comments in the array?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536915264",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,38 @@\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import { Module, Result } from \"./processor\";\n+\n+/**\n+ * Removes the data in the comments that we do not want to be processed.\n+ */\n+export class DataPurgeModule implements Module {\n+  readonly configuration = configuration.dataPurge;\n+\n+  get enabled(): boolean {\n+    return this.configuration.enabled;\n+  }\n+\n+  transform(data: Readonly<GetActivity>, result: Result) {\n+    for (const value of data.allComments) {\n+      if (value.body && value.user?.login && result[value.user.login]) {\n+        const newContent = value.body\n+          .replace(/^>.*$/gm, \"\")\n+          .replace(/[\\r\\n]+/g, \" \")\n+          .replace(/\\[.*?\\]\\(.*?\\)/g, \"\")\n+          .replace(/^\\/\\S+/g, \"\")\n+          .trim();\n+        if (newContent.length) {\n+          result[value.user.login].comments = [\n+            ...(result[value.user.login].comments ?? []),",
+        "score": {
+          "reward": 3.78,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 75.50000000000003,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.8449999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1536916835,
+        "content": "```suggestion\r\n      const currentReward = new Decimal(currentComment.score?.reward || 0);\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536916835",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,141 @@\n+import Decimal from \"decimal.js\";\n+import { encodingForModel } from \"js-tiktoken\";\n+import OpenAI from \"openai\";\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import { GitHubIssue } from \"../github-types\";\n+import { GithubComment, Module, Result } from \"./processor\";\n+\n+/**\n+ * Evaluates and rates comments.\n+ */\n+export class ContentEvaluatorModule implements Module {\n+  readonly _openAi = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });\n+  readonly configuration = configuration.contentEvaluator;\n+\n+  get enabled(): boolean {\n+    return this.configuration.enabled;\n+  }\n+\n+  async transform(data: Readonly<GetActivity>, result: Result) {\n+    const promises: Promise<void>[] = [];\n+\n+    for (const key of Object.keys(result)) {\n+      const currentElement = result[key];\n+      const comments = currentElement.comments || [];\n+      const specificationBody = (data.self as GitHubIssue)?.body;\n+\n+      if (specificationBody && comments.length) {\n+        promises.push(\n+          this._processComment(\n+            comments,\n+            specificationBody,\n+            comments.map((comment) => comment.content)\n+          )\n+        );\n+      }\n+    }\n+\n+    await Promise.all(promises);\n+    return result;\n+  }\n+\n+  async _processComment(comments: GithubComment[], specificationBody: string, commentsBody: string[]) {\n+    const relevance = await this._sampleRelevanceScoreResults(specificationBody, commentsBody);\n+\n+    if (relevance.length !== comments.length) {\n+      console.error(\"Relevance / Comment length mismatch! Skipping.\");\n+      return;\n+    }\n+\n+    for (let i = 0; i < relevance.length; i++) {\n+      const currentComment = comments[i];\n+      const currentRelevance = relevance[i];\n+      const currentReward = new Decimal(currentComment.score?.reward ? currentComment.score.reward : 0);",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1536917017,
+        "content": "why pass `comments` and `commentsBody`? You can get `commentsBody` from `comments`",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536917017",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,141 @@\n+import Decimal from \"decimal.js\";\n+import { encodingForModel } from \"js-tiktoken\";\n+import OpenAI from \"openai\";\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import { GitHubIssue } from \"../github-types\";\n+import { GithubComment, Module, Result } from \"./processor\";\n+\n+/**\n+ * Evaluates and rates comments.\n+ */\n+export class ContentEvaluatorModule implements Module {\n+  readonly _openAi = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });\n+  readonly configuration = configuration.contentEvaluator;\n+\n+  get enabled(): boolean {\n+    return this.configuration.enabled;\n+  }\n+\n+  async transform(data: Readonly<GetActivity>, result: Result) {\n+    const promises: Promise<void>[] = [];\n+\n+    for (const key of Object.keys(result)) {\n+      const currentElement = result[key];\n+      const comments = currentElement.comments || [];\n+      const specificationBody = (data.self as GitHubIssue)?.body;\n+\n+      if (specificationBody && comments.length) {\n+        promises.push(\n+          this._processComment(\n+            comments,\n+            specificationBody,\n+            comments.map((comment) => comment.content)\n+          )\n+        );\n+      }\n+    }\n+\n+    await Promise.all(promises);\n+    return result;\n+  }\n+\n+  async _processComment(comments: GithubComment[], specificationBody: string, commentsBody: string[]) {",
+        "score": {
+          "reward": 2.88,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 118.6825,
+            "syllables": 7,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1536917263,
+        "content": "why is configuration read from a file and not from github action context?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536917263",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,20 @@\n+import { Command } from \"@commander-js/extra-typings\";\n+import { config } from \"dotenv\";\n+import packageJson from \"../../package.json\";\n+\n+if (process.env.NODE_ENV === \"test\") {\n+  config();\n+  const GITHUB_TOKEN = process.env.GITHUB_TOKEN;\n+  const OPENAI_API_KEY = process.env.OPENAI_API_KEY;\n+  process.argv = [\"path/to/node\", \"path/to/script\", `--auth`, `${GITHUB_TOKEN}`, \"--open-ai\", `${OPENAI_API_KEY}`];\n+}\n+\n+const program = new Command()\n+  .requiredOption(\"-a, --auth <token>\", \"GitHub authentication token\")\n+  .requiredOption(\"-o, --open-ai <token>\", \"OpenAi authentication token\")\n+  .option(\"-c, --config <path>\", \"The path to the desired configuration to use\", \"rewards-configuration.default.yml\")\n+  .option(\"-f, --file <file>\", \"The target file to store the results in\")\n+  .version(packageJson.version)\n+  .parse();\n+\n+export default program;",
+        "score": {
+          "reward": 3.408,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 56.97846153846157,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 0.9697846153846157
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1536917536,
+        "content": "OpenAI token will be read from env even in production",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536917536",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,20 @@\n+import { Command } from \"@commander-js/extra-typings\";\n+import { config } from \"dotenv\";\n+import packageJson from \"../../package.json\";\n+\n+if (process.env.NODE_ENV === \"test\") {",
+        "score": {
+          "reward": 3.276,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 61.32500000000002,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.9867499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1536918112,
+        "content": "```suggestion\r\nexport class IssueActivity {\r\n```\r\nGetActivity doesn't really make sense, maybe it'd better to name it IssueActivity",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536918112",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -18,6 +18,15 @@ import {\n   getPullRequestReviews,\n } from \"./start\";\n \n+export enum CommentType {\n+  REVIEW = 0b1,\n+  ISSUE = 0b10,\n+  ASSIGNEE = 0b100,\n+  ISSUER = 0b1000,\n+  COLLABORATOR = 0b10000,\n+  CONTRIBUTOR = 0b100000,\n+}\n+\n export class GetActivity {",
+        "score": {
+          "reward": 4.608,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 41.553571428571445,
+            "syllables": 25,
+            "sentences": 1,
+            "score": 0.8155357142857145
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1536918299,
+        "content": "```suggestion\r\n  if (path.length < 5) {\r\n```\r\nwe are accessing `path[4]` so length must be at least 5",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536918299",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -118,6 +118,9 @@ export async function getAllTimelineEvents(issueParams: IssueParams): Promise<Gi\n \n export function parseGitHubUrl(url: string): { owner: string; repo: string; issue_number: number } {\n   const path = new URL(url).pathname.split(\"/\");\n+  if (path.length < 4) {",
+        "score": {
+          "reward": 3.888,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 95.165,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.64835
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1536921560,
+        "content": "```suggestion\r\n      const score = this._configuration?.scores?.[tagName] || 1;\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536921560",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,108 @@\n+import Decimal from \"decimal.js\";\n+import { JSDOM } from \"jsdom\";\n+import MarkdownIt from \"markdown-it\";\n+import configuration from \"../configuration/config-reader\";\n+import { CommentType, GetActivity } from \"../get-activity\";\n+import { GithubComment, Module, Result } from \"./processor\";\n+\n+interface Multiplier {\n+  formattingMultiplier: number;\n+  wordValue: number;\n+}\n+\n+export class FormattingEvaluatorModule implements Module {\n+  private readonly _configuration: {\n+    enabled: boolean;\n+    multipliers: ({ type: (keyof typeof CommentType)[] } & Multiplier)[];\n+    scores: { [key: string]: number };\n+  } = configuration.formattingEvaluator;\n+  private readonly _md = new MarkdownIt();\n+  private readonly _multipliers: { [k: string]: Multiplier } = {};\n+\n+  constructor() {\n+    if (this._configuration.multipliers) {\n+      this._multipliers = this._configuration.multipliers.reduce((acc, curr) => {\n+        return {\n+          ...acc,\n+          [curr.type.reduce((a, b) => CommentType[b] | a, 0)]: {\n+            wordValue: curr.wordValue,\n+            formattingMultiplier: curr.formattingMultiplier,\n+          },\n+        };\n+      }, {});\n+    }\n+  }\n+\n+  transform(data: Readonly<GetActivity>, result: Result) {\n+    for (const key of Object.keys(result)) {\n+      const currentElement = result[key];\n+      const comments = currentElement.comments || [];\n+      for (let i = 0; i < comments.length; i++) {\n+        const comment = comments[i];\n+        // Count with html elements if any, otherwise just treat it as plain text\n+        const { formatting } = this._getFormattingScore(comment);\n+        const multiplierFactor = this._multipliers?.[comment.type] ?? { wordValue: 0, formattingMultiplier: 0 };\n+        const formattingTotal = formatting\n+          ? Object.values(formatting).reduce(\n+              (acc, curr) =>\n+                acc.add(\n+                  new Decimal(curr.score)\n+                    .mul(multiplierFactor.formattingMultiplier)\n+                    .mul(curr.count)\n+                    .mul(multiplierFactor.wordValue)\n+                ),\n+              new Decimal(0)\n+            )\n+          : new Decimal(0);\n+        comment.score = {\n+          ...comment.score,\n+          formatting: {\n+            content: formatting,\n+            ...multiplierFactor,\n+          },\n+          reward: (comment.score?.reward ? formattingTotal.add(comment.score.reward) : formattingTotal).toNumber(),\n+        };\n+      }\n+    }\n+    return Promise.resolve(result);\n+  }\n+\n+  get enabled(): boolean {\n+    return this._configuration?.enabled;\n+  }\n+\n+  _getFormattingScore(comment: GithubComment) {\n+    const html = this._md.render(comment.content);\n+    const temp = new JSDOM(html);\n+    if (temp.window.document.body) {\n+      const res = this.classifyTagsWithWordCount(temp.window.document.body);\n+      return { formatting: res };\n+    } else {\n+      throw new Error(`Could not create DOM for comment [${comment}]`);\n+    }\n+  }\n+\n+  _countWords(text: string): number {\n+    return text.trim().split(/\\s+/).length;\n+  }\n+\n+  classifyTagsWithWordCount(htmlElement: HTMLElement) {\n+    const tagWordCount: Record<string, { count: number; score: number }> = {};\n+    const elements = htmlElement.getElementsByTagName(\"*\");\n+\n+    for (const element of elements) {\n+      const tagName = element.tagName.toLowerCase();\n+      const wordCount = this._countWords(element.textContent || \"\");\n+      let score = 1;",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1536922715,
+        "content": "I see a lot of casts in this function, are they necessary?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536922715",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -30,31 +39,95 @@ export class GetActivity {\n     this.events = getIssueEvents(this._issueParams);\n     this.comments = getIssueComments(this._issueParams);\n     this.linkedReviews = this._getLinkedReviews();\n-    [this.self, this.events, this.comments, this.linkedReviews] = await Promise.all([this.self, this.events, this.comments, this.linkedReviews]);\n+    [this.self, this.events, this.comments, this.linkedReviews] = await Promise.all([\n+      this.self,\n+      this.events,\n+      this.comments,\n+      this.linkedReviews,\n+    ]);\n   }\n \n   private async _getLinkedReviews(): Promise<Review[]> {\n     const pulls = await collectLinkedMergedPulls(this._issueParams);\n-    const promises = pulls.map((pull) => {\n-      const repository = pull.source.issue.repository;\n+    const promises = pulls\n+      .map(async (pull) => {\n+        const repository = pull.source.issue.repository;\n \n-      if (!repository) {\n-        throw new Error(\"No repository found\");\n-      }\n-\n-      const pullParams = {\n-        owner: repository.owner.login,\n-        repo: repository.name,\n-        pull_number: pull.source.issue.number,\n-      };\n-      const review = new Review(pullParams);\n-      return review.init().then(() => review);\n-    });\n+        if (!repository) {\n+          console.error(`No repository found for [${pull.source.issue.repository}]`);\n+          return null;\n+        } else {\n+          const pullParams = {\n+            owner: repository.owner.login,\n+            repo: repository.name,\n+            pull_number: pull.source.issue.number,\n+          };\n+          const review = new Review(pullParams);\n+          await review.init();\n+          return review;\n+        }\n+      })\n+      .filter((o) => o !== null) as Promise<Review>[];\n     return Promise.all(promises);\n   }\n+\n+  _getTypeFromComment(\n+    comment: GitHubIssueComment | GitHubPullRequestReviewComment | GitHubIssue | GitHubPullRequest,\n+    self: GitHubPullRequest | GitHubIssue | null\n+  ) {\n+    let ret = 0;\n+    ret |= \"pull_request_review_id\" in comment ? CommentType.REVIEW : CommentType.ISSUE;\n+    if (comment.user?.id === self?.user?.id) {\n+      ret |= CommentType.ISSUER;\n+    } else if (comment.user?.id === self?.assignee?.id) {\n+      ret |= CommentType.ASSIGNEE;\n+    } else if (comment.author_association === \"MEMBER\") {\n+      ret |= CommentType.COLLABORATOR;\n+    } else if (comment.author_association === \"CONTRIBUTOR\") {\n+      ret |= CommentType.CONTRIBUTOR;\n+    }\n+    return ret;\n+  }\n+\n+  get allComments() {\n+    const comments: Array<\n+      (GitHubIssueComment | GitHubPullRequestReviewComment | GitHubIssue | GitHubPullRequest) & { type: CommentType }\n+    > = (this.comments as GitHubIssueComment[]).map((comment) => ({\n+      ...comment,\n+      type: this._getTypeFromComment(comment, this.self as GitHubIssue),\n+    }));\n+    if (this.self) {\n+      comments.push({\n+        ...(this.self as GitHubIssue),\n+        type: this._getTypeFromComment(this.self as GitHubIssue, this.self as GitHubIssue),\n+      });\n+    }\n+    if (this.linkedReviews) {\n+      for (const linkedReview of this.linkedReviews as Review[]) {\n+        if (linkedReview.self) {\n+          comments.push({\n+            ...(linkedReview.self as GitHubPullRequest),\n+            type: this._getTypeFromComment(\n+              linkedReview.self as GitHubPullRequest,\n+              linkedReview.self as GitHubPullRequest",
+        "score": {
+          "reward": 3.584,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 81.85500000000002,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.7814499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1536923315,
+        "content": "I think we can remove this `Promise<>` because its awaited.\r\nAlso does `null` here indicate that the request to get issue/comments/reviews failed? If so in that case it'd be better if the whole calculation failed because we don't have full data.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536923315",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -18,6 +18,15 @@ import {\n   getPullRequestReviews,\n } from \"./start\";\n \n+export enum CommentType {\n+  REVIEW = 0b1,\n+  ISSUE = 0b10,\n+  ASSIGNEE = 0b100,\n+  ISSUER = 0b1000,\n+  COLLABORATOR = 0b10000,\n+  CONTRIBUTOR = 0b100000,\n+}\n+\n export class GetActivity {\n   constructor(private _issueParams: IssueParams) {}\n   self: Promise<GitHubIssue> | GitHubIssue | null = null;",
+        "score": {
+          "reward": 6.792,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 43,
+            "wordValue": 0.1,
+            "result": 2.25
+          },
+          "readability": {
+            "fleschKincaid": 74.24015503875972,
+            "syllables": 60,
+            "sentences": 3,
+            "score": 0.8575984496124027
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1536926737,
+        "content": "`_processComment` will modify the comment instead of returning the comments which I think can be confusing. I saw this approach in this code multiple times for example Modules modify the result instead of returning a fresh result. While this is not wrong I'm not really a fan of functions modifying parameters because it can lead to bugs and it's not clear to the user of the function",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536926737",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,141 @@\n+import Decimal from \"decimal.js\";\n+import { encodingForModel } from \"js-tiktoken\";\n+import OpenAI from \"openai\";\n+import configuration from \"../configuration/config-reader\";\n+import { GetActivity } from \"../get-activity\";\n+import { GitHubIssue } from \"../github-types\";\n+import { GithubComment, Module, Result } from \"./processor\";\n+\n+/**\n+ * Evaluates and rates comments.\n+ */\n+export class ContentEvaluatorModule implements Module {\n+  readonly _openAi = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });\n+  readonly configuration = configuration.contentEvaluator;\n+\n+  get enabled(): boolean {\n+    return this.configuration.enabled;\n+  }\n+\n+  async transform(data: Readonly<GetActivity>, result: Result) {\n+    const promises: Promise<void>[] = [];\n+\n+    for (const key of Object.keys(result)) {\n+      const currentElement = result[key];\n+      const comments = currentElement.comments || [];\n+      const specificationBody = (data.self as GitHubIssue)?.body;\n+\n+      if (specificationBody && comments.length) {\n+        promises.push(\n+          this._processComment(\n+            comments,",
+        "score": {
+          "reward": 11.988,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 68,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 56.928333333333356,
+            "syllables": 102,
+            "sentences": 3,
+            "score": 0.9692833333333336
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1536927165,
+        "content": "It's not clear from Github but I'm guessing `configuration` is of type `any`? It'd be better to make types for the whole configuration using Typebox so you can also verify it in runtime when configuration gets loaded",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536927165",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,108 @@\n+import Decimal from \"decimal.js\";\n+import { JSDOM } from \"jsdom\";\n+import MarkdownIt from \"markdown-it\";\n+import configuration from \"../configuration/config-reader\";\n+import { CommentType, GetActivity } from \"../get-activity\";\n+import { GithubComment, Module, Result } from \"./processor\";\n+\n+interface Multiplier {\n+  formattingMultiplier: number;\n+  wordValue: number;\n+}\n+\n+export class FormattingEvaluatorModule implements Module {\n+  private readonly _configuration: {\n+    enabled: boolean;\n+    multipliers: ({ type: (keyof typeof CommentType)[] } & Multiplier)[];\n+    scores: { [key: string]: number };\n+  } = configuration.formattingEvaluator;",
+        "score": {
+          "reward": 8.832,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 60.65000000000002,
+            "syllables": 57,
+            "sentences": 2,
+            "score": 0.9934999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1536928542,
+        "content": "why do you check if `key` is property of `obj` if `Object.entries(obj)` gives you all properties?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536928542",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,118 @@\n+import Decimal from \"decimal.js\";\n+import * as fs from \"fs\";\n+import configuration from \"../configuration/config-reader\";\n+import { CommentType, GetActivity } from \"../get-activity\";\n+import program from \"./command-line\";\n+import { ContentEvaluatorModule } from \"./content-evaluator-module\";\n+import { DataPurgeModule } from \"./data-purge-module\";\n+import { FormattingEvaluatorModule } from \"./formatting-evaluator-module\";\n+import { UserExtractorModule } from \"./user-extractor-module\";\n+\n+export class Processor {\n+  private _transformers: Module[] = [];\n+  private _result: Result = {};\n+  private readonly _configuration = configuration;\n+\n+  constructor() {\n+    this.add(new UserExtractorModule())\n+      .add(new DataPurgeModule())\n+      .add(new FormattingEvaluatorModule())\n+      .add(new ContentEvaluatorModule());\n+  }\n+\n+  add(transformer: Module) {\n+    this._transformers.push(transformer);\n+    return this;\n+  }\n+\n+  async run(data: Readonly<GetActivity>) {\n+    if (this._configuration.disabled) {\n+      console.log(\"Module is disabled. Skipping...\");\n+      return;\n+    }\n+    for (const transformer of this._transformers) {\n+      if (transformer.enabled) {\n+        this._result = await transformer.transform(data, this._result);\n+      }\n+    }\n+    // Aggregate total result\n+    for (const item of Object.keys(this._result)) {\n+      this._result[item].total = this._sumRewards(this._result[item]);\n+    }\n+    return this._result;\n+  }\n+\n+  dump() {\n+    const { file } = program.opts();\n+    const result = JSON.stringify(\n+      this._result,\n+      (key: string, value: string | number) => {\n+        // Changes \"type\" to be human-readable\n+        if (key === \"type\" && typeof value === \"number\") {\n+          const typeNames: string[] = [];\n+          const types = Object.values(CommentType) as number[];\n+          types.forEach((typeValue) => {\n+            if (value & typeValue) {\n+              typeNames.push(CommentType[typeValue]);\n+            }\n+          });\n+          return typeNames.join(\"|\");\n+        }\n+        return value;\n+      },\n+      2\n+    );\n+    if (!file) {\n+      console.log(result);\n+    } else {\n+      fs.writeFileSync(file, result);\n+    }\n+  }\n+\n+  _sumRewards(obj: Record<string, unknown>) {\n+    let totalReward = new Decimal(0);\n+\n+    for (const [key, value] of Object.entries(obj)) {\n+      if (Object.prototype.hasOwnProperty.call(obj, key)) {",
+        "score": {
+          "reward": 4.32,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 83.0092307692308,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0.7699076923076921
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1537362644,
+        "content": "then you can use `??` which applies only if left side is undefined or null",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1537362644",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,108 @@\n+import Decimal from \"decimal.js\";\n+import { JSDOM } from \"jsdom\";\n+import MarkdownIt from \"markdown-it\";\n+import configuration from \"../configuration/config-reader\";\n+import { CommentType, GetActivity } from \"../get-activity\";\n+import { GithubComment, Module, Result } from \"./processor\";\n+\n+interface Multiplier {\n+  formattingMultiplier: number;\n+  wordValue: number;\n+}\n+\n+export class FormattingEvaluatorModule implements Module {\n+  private readonly _configuration: {\n+    enabled: boolean;\n+    multipliers: ({ type: (keyof typeof CommentType)[] } & Multiplier)[];\n+    scores: { [key: string]: number };\n+  } = configuration.formattingEvaluator;\n+  private readonly _md = new MarkdownIt();\n+  private readonly _multipliers: { [k: string]: Multiplier } = {};\n+\n+  constructor() {\n+    if (this._configuration.multipliers) {\n+      this._multipliers = this._configuration.multipliers.reduce((acc, curr) => {\n+        return {\n+          ...acc,\n+          [curr.type.reduce((a, b) => CommentType[b] | a, 0)]: {\n+            wordValue: curr.wordValue,\n+            formattingMultiplier: curr.formattingMultiplier,\n+          },\n+        };\n+      }, {});\n+    }\n+  }\n+\n+  transform(data: Readonly<GetActivity>, result: Result) {\n+    for (const key of Object.keys(result)) {\n+      const currentElement = result[key];\n+      const comments = currentElement.comments || [];\n+      for (let i = 0; i < comments.length; i++) {\n+        const comment = comments[i];\n+        // Count with html elements if any, otherwise just treat it as plain text\n+        const { formatting } = this._getFormattingScore(comment);\n+        const multiplierFactor = this._multipliers?.[comment.type] ?? { wordValue: 0, formattingMultiplier: 0 };\n+        const formattingTotal = formatting\n+          ? Object.values(formatting).reduce(\n+              (acc, curr) =>\n+                acc.add(\n+                  new Decimal(curr.score)\n+                    .mul(multiplierFactor.formattingMultiplier)\n+                    .mul(curr.count)\n+                    .mul(multiplierFactor.wordValue)\n+                ),\n+              new Decimal(0)\n+            )\n+          : new Decimal(0);\n+        comment.score = {\n+          ...comment.score,\n+          formatting: {\n+            content: formatting,\n+            ...multiplierFactor,\n+          },\n+          reward: (comment.score?.reward ? formattingTotal.add(comment.score.reward) : formattingTotal).toNumber(),\n+        };\n+      }\n+    }\n+    return Promise.resolve(result);\n+  }\n+\n+  get enabled(): boolean {\n+    return this._configuration?.enabled;\n+  }\n+\n+  _getFormattingScore(comment: GithubComment) {\n+    const html = this._md.render(comment.content);\n+    const temp = new JSDOM(html);\n+    if (temp.window.document.body) {\n+      const res = this.classifyTagsWithWordCount(temp.window.document.body);\n+      return { formatting: res };\n+    } else {\n+      throw new Error(`Could not create DOM for comment [${comment}]`);\n+    }\n+  }\n+\n+  _countWords(text: string): number {\n+    return text.trim().split(/\\s+/).length;\n+  }\n+\n+  classifyTagsWithWordCount(htmlElement: HTMLElement) {\n+    const tagWordCount: Record<string, { count: number; score: number }> = {};\n+    const elements = htmlElement.getElementsByTagName(\"*\");\n+\n+    for (const element of elements) {\n+      const tagName = element.tagName.toLowerCase();\n+      const wordCount = this._countWords(element.textContent || \"\");\n+      let score = 1;",
+        "score": {
+          "reward": 3.976,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 83.85357142857143,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.7614642857142857
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1956659024,
+            "effect": {
+              "addition": 1519,
+              "deletion": 266
+            },
+            "reward": 71.4,
+            "priority": 4
+          },
+          {
+            "reviewId": 1960946571,
+            "effect": {
+              "addition": 164,
+              "deletion": 102
+            },
+            "reward": 10.64,
+            "priority": 4
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 145.132 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>82.04</td></tr><tr><td>Review</td><td>Comment</td><td>15</td><td>63.092</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3\" target=\"_blank\" rel=\"noopener\">#3</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+1519 -266</td><td>4</td><td>71.4</td></tr><tr><td>+164 -102</td><td>4</td><td>10.64</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536914897\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionfor (const comment of data.allCom&hellip;</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.8</td><td>4</td><td>1.76</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536915264\" target=\"_blank\" rel=\"noopener\">won't this leave untransformed comments in the array?</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.9</td><td>4</td><td>3.78</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536916835\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionconst currentReward = new Decim&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536917017\" target=\"_blank\" rel=\"noopener\">why pass &#96;comments&#96; and &#96;commentsBody&#96;? You can &hellip;</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.8</td><td>4</td><td>2.88</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536917263\" target=\"_blank\" rel=\"noopener\">why is configuration read from a file and not from github action&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.6</td><td>4</td><td>3.408</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536917536\" target=\"_blank\" rel=\"noopener\">OpenAI token will be read from env even in production</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.7</td><td>4</td><td>3.276</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536918112\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionexport class IssueActivity {&#96;&#&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.8</td><td>4</td><td>4.608</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536918299\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionif (path.length &lt; 5) {&#96;&#9&hellip;</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.9</td><td>4</td><td>3.888</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536921560\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionconst score = this._configurati&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536922715\" target=\"_blank\" rel=\"noopener\">I see a lot of casts in this function, are they necessary?</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.7</td><td>4</td><td>3.584</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536923315\" target=\"_blank\" rel=\"noopener\">I think we can remove this &#96;Promise&lt;&gt;&#96; because its&hellip;</a></h6></td><td><details><summary>2.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 43&#13;  wordValue: 0.1&#13;  result: 2.25&#13;</pre></details></td><td>0.6</td><td>4</td><td>6.792</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536926737\" target=\"_blank\" rel=\"noopener\">&#96;_processComment&#96; will modify the comment instead of ret&hellip;</a></h6></td><td><details><summary>2.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 68&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>0.9</td><td>4</td><td>11.988</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536927165\" target=\"_blank\" rel=\"noopener\">It's not clear from Github but I'm guessing &#96;configuration&#&hellip;</a></h6></td><td><details><summary>2.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.8</td><td>4</td><td>8.832</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1536928542\" target=\"_blank\" rel=\"noopener\">why do you check if &#96;key&#96; is property of &#96;obj&#96; i&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.8</td><td>4</td><td>4.32</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/3#discussion_r1537362644\" target=\"_blank\" rel=\"noopener\">then you can use &#96;??&#96; which applies only if left side is&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.7</td><td>4</td><td>3.976</td></tr></tbody></table></details>"
+  }
+}

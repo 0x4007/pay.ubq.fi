@@ -1,0 +1,1753 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 605.34,
+    "task": {
+      "reward": 600,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2463322958,
+        "content": "starting this now and I'll just link the PR again, it'll be building on top of #12.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/3#issuecomment-2463322958",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.903,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 89.5921052631579,
+            "syllables": 22,
+            "sentences": 1,
+            "score": 0.7040789473684209
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2170784213,
+        "content": "Resolves https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/3\r\nRequires #11 and #12 (reviewing those could be skipped and focus placed just on this PR)\r\n- Listing all plugins from `ubiquity-os-marketplace` and grabbing manifests\r\n- Login with GitHub App: fetch user orgs with app installs.\r\n- Select org: Select config: Select Plugin\r\n- Update configuration based on manifest values\r\n- Save to local and optionally push to GitHub\r\n- Can build multiple plugins before pushing to GitHub\r\nStill buggy with some plugins I need to inspect the more complex ones and handle their configs better but this shows what it looks like with a plugin with a medium size config. It should be ready to over the next day.\r\n@zugdev Idk if you want to work your magic after this is merged, branch off and PR against dev or into this before that or just review and create a spec for what's needed? What do you think?\r\n---\r\nWe can still build this UI with the ability to read from a query param directly too but it's a cleaner approach housing them all imo.\r\n- I'm thinking pull the plugin README and display it beside the configuration?\r\n- breadcrumbs would be good to jump back and re-select plugin, config, org.\r\n- it's pretty verbose but additional details in the manifest for each prop. In `.ts` we use JSDoc comments on input props and it fills the IDE. This would be handy af if we had a workflow to parse these and write them to the manifest which could be read on this UI: e.g `requiredLabelsToStart` without defaults might be confusing to a partner\r\nQA:\r\nhttps://github.com/user-attachments/assets/6095919d-a491-45b1-a5c7-05d6215ac769",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 4.437,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 16
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 9
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.9
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 259,
+            "wordValue": 0.1,
+            "result": 1.19
+          },
+          "readability": {
+            "fleschKincaid": 67.54079181494663,
+            "syllables": 395,
+            "sentences": 14,
+            "score": 0.9245920818505337
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 605.34 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>600</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.903</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>4.437</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/3#issuecomment-2463322958\" target=\"_blank\" rel=\"noopener\">starting this now and I'll just link the PR again, it'll be buil&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.7</td><td>3</td><td>0.903</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13\" target=\"_blank\" rel=\"noopener\">Resolves https://github.com/ubiquity-os/ubiquity-os-plugin-insta&hellip;</a></h6></td><td><details><summary>4.09</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 16&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 9&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.9&#13;regex:&#13;  wordCount: 259&#13;  wordValue: 0.1&#13;  result: 1.19&#13;</pre></details></td><td>0.85</td><td>1</td><td>4.437</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 84.048,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2379125735,
+        "content": "@gentlementlegen  can you fix the double post?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/3#issuecomment-2379125735",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.267,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 54.70142857142861,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.947014285714286
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2527172531,
+        "content": "1. We need to be able to select which `ubiquibot-config.yml` to edit, so we at minimum need an organization picker after GitHub authentication. \r\n2. We need to parse the YML file, and target the config based on the plugin's URL/location. Then edit the YML file and push the commit using the user's credentials.\r\nMore thoughts on [the readme](https://github.com/Ubiquity-OS/ubiquity-os-plugin-installer?tab=readme-ov-file#add--remove-config).\r\n### LLM \r\nWithout research, the lazy answer is that LLMs can easily solve the problem. We could even consider passing in the most important/relevant files of the plugin so that the LLM can figure out all the default values and other miscellaneous details. \r\nBut it would certainly be preferred to implement this with traditional code. I think with a bit of research it can be pretty straightforward.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/3",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 6.03,
+          "formatting": {
+            "content": {
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "h3": {
+                "score": 1,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 2.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 125,
+            "wordValue": 0.1,
+            "result": 2.45
+          },
+          "readability": {
+            "fleschKincaid": 61.03002500000002,
+            "syllables": 192,
+            "sentences": 8,
+            "score": 0.9896997499999998
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1846055341,
+        "content": "cspell has weird bugs, I'm assuming there is no typo and its a false positive.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1846055341",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,12 @@\n+{\n+  \"$schema\": \"https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json\",\n+  \"version\": \"0.2\",\n+  \"ignorePaths\": [\"**/*.json\", \"**/*.css\", \"node_modules\", \"**/*.log\"],\n+  \"useGitignore\": true,\n+  \"language\": \"en\",\n+  \"words\": [\"dataurl\", \"devpool\", \"outdir\", \"servedir\"],\n+  \"dictionaries\": [\"typescript\", \"node\", \"software-terms\"],\n+  \"import\": [\"@cspell/dict-typescript/cspell-ext.json\", \"@cspell/dict-node/cspell-ext.json\", \"@cspell/dict-software-terms\"],\n+  \"ignoreRegExpList\": [\"[0-9a-fA-F]{6}\"],\n+  \"ignoreWords\": [\"ubiquibot\", \"issu\", \"Supabase\", \"supabase\", \"SUPABASE\"]",
+        "score": {
+          "reward": 0.948,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 79.5575,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 0.804425
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1846062079,
+        "content": "This should be a secret. Like the ANON KEY",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1846062079",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -54,7 +57,7 @@ function createEnvDefines(environmentVariables: string[], generatedAtBuild: Reco\n }\n \n export function generateSupabaseStorageKey(): string | null {\n-  const SUPABASE_URL = process.env.SUPABASE_URL;\n+  const SUPABASE_URL = \"https://wfzpewmlyiozupulbuur.supabase.co\";",
+        "score": {
+          "reward": 2.673,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 98.8675,
+            "syllables": 11,
+            "sentences": 2,
+            "score": 0.6113249999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1846064215,
+        "content": "```suggestion\r\n      sha: sha,\r\n```",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1846064215",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,159 @@\n+import YAML from \"yaml\";\n+import { Plugin, PluginConfig } from \"../types/plugins\";\n+import { Octokit } from \"@octokit/rest\";\n+const repo = \".ubiquity-os\";\n+const path = `.github/.ubiquity-os.config.yml`;\n+\n+export class ConfigParser {\n+  repoConfig: string | null = null;\n+  repoConfigSha: string | null = null;\n+  newConfigYml: string | null = null;\n+\n+  async fetchUserInstalledConfig(org: string, env: \"development\" | \"production\", octokit: Octokit) {\n+    const content = this.loadConfig();\n+    if (!content) {\n+      throw new Error(\"No content to push\");\n+    }\n+\n+    const existingConfig = await octokit.repos.getContent({\n+      owner: org,\n+      repo: repo,\n+      path: env === \"production\" ? path : path.replace(\".yml\", \".dev.yml\"),\n+    });\n+\n+    if (existingConfig && \"content\" in existingConfig.data) {\n+      this.repoConfigSha = existingConfig.data.sha;\n+      this.repoConfig = atob(existingConfig.data.content);\n+    } else {\n+      throw new Error(\"No existing config found\"); // todo create repo/dirs/files\n+    }\n+  }\n+\n+  parseConfig(config?: string | null): PluginConfig {\n+    if (config) {\n+      return YAML.parse(config);\n+    }\n+    if (!this.newConfigYml) {\n+      this.loadConfig();\n+    }\n+    return YAML.parse(`${this.newConfigYml}`);\n+  }\n+\n+  async updateConfig(org: string, env: \"development\" | \"production\", octokit: Octokit, option: \"add\" | \"remove\") {\n+    let repoPlugins = this.parseConfig(this.repoConfig).plugins;\n+    const newPlugins = this.parseConfig().plugins;\n+\n+    if (!newPlugins) {\n+      throw new Error(\"No plugins found in the config\");\n+    }\n+\n+    const newPluginNames = newPlugins.map((p) => p.uses[0].plugin);\n+    if (newPluginNames.length === 0) {\n+      throw new Error(\"No plugins found in the config\");\n+    }\n+\n+    if (option === \"add\") {\n+      // update if it exists, add if it doesn't\n+      newPlugins.forEach((newPlugin) => {\n+        const existingPlugin = repoPlugins.find((p) => p.uses[0].plugin === newPlugin.uses[0].plugin);\n+        if (existingPlugin) {\n+          existingPlugin.uses[0].with = newPlugin.uses[0].with;\n+        } else {\n+          repoPlugins.push(newPlugin);\n+        }\n+      });\n+\n+      this.newConfigYml = YAML.stringify({ plugins: repoPlugins });\n+    } else if (option === \"remove\") {\n+      // remove only this plugin, keep all others\n+      newPlugins.forEach((newPlugin) => {\n+        const existingPlugin = repoPlugins.find((p) => p.uses[0].plugin === newPlugin.uses[0].plugin);\n+        if (existingPlugin) {\n+          repoPlugins = repoPlugins.filter((p) => p.uses[0].plugin !== newPlugin.uses[0].plugin);\n+        }\n+      });\n+      this.newConfigYml = YAML.stringify({ plugins: newPlugins });\n+    }\n+\n+    this.saveConfig();\n+    return this.createOrUpdateFileContents(org, repo, path, env, octokit);\n+  }\n+\n+  async createOrUpdateFileContents(org: string, repo: string, path: string, env: \"development\" | \"production\", octokit: Octokit) {\n+    const recentSha = await octokit.repos.getContent({\n+      owner: org,\n+      repo: repo,\n+      path: env === \"production\" ? path : path.replace(\".yml\", \".dev.yml\"),\n+    });\n+\n+    const sha = \"sha\" in recentSha.data ? recentSha.data.sha : null;\n+\n+    return octokit.repos.createOrUpdateFileContents({\n+      owner: org,\n+      repo: repo,\n+      path: env === \"production\" ? path : path.replace(\".yml\", \".dev.yml\"),\n+      message: `chore: creating ${env} config`,\n+      content: btoa(`${this.newConfigYml}`),\n+      sha: `${sha}`,",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2441807513,
+            "effect": {
+              "addition": 1813,
+              "deletion": 233
+            },
+            "reward": 61.38,
+            "priority": 3
+          },
+          {
+            "reviewId": 2441819000,
+            "effect": {
+              "addition": 313,
+              "deletion": 112
+            },
+            "reward": 12.75,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 84.048 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>74.13</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>6.03</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.267</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>3.621</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13\" target=\"_blank\" rel=\"noopener\">#13</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+1813 -233</td><td>3</td><td>61.38</td></tr><tr><td>+313 -112</td><td>3</td><td>12.75</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/3\" target=\"_blank\" rel=\"noopener\">1. We need to be able to select which &#96;ubiquibot-config.yml&&hellip;</a></h6></td><td><details><summary>4.65</summary><pre>content:&#13;  content:&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    h3:&#13;      score: 1&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 2.2&#13;regex:&#13;  wordCount: 125&#13;  wordValue: 0.1&#13;  result: 2.45&#13;</pre></details></td><td>1</td><td>1</td><td>6.03</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/3#issuecomment-2379125735\" target=\"_blank\" rel=\"noopener\">@gentlementlegen  can you fix the double post?</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.267</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1846055341\" target=\"_blank\" rel=\"noopener\">cspell has weird bugs, I'm assuming there is no typo and its a f&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.948</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1846062079\" target=\"_blank\" rel=\"noopener\">This should be a secret. Like the ANON KEY</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.9</td><td>3</td><td>2.673</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1846064215\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionsha: sha,&#96;&#96;&#96;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 141.486,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2380400401,
+        "content": "@0x4007 Spec at https://github.com/ubiquity-os-marketplace/command-start-stop/issues/60",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/3#issuecomment-2380400401",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 4.152,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 66.7871428571429,
+            "syllables": 22,
+            "sentences": 2,
+            "score": 0.9321285714285711
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2466087327,
+        "content": "Funny, I had made a tool for my personal usage a while ago, I didn't remember this task.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/3#issuecomment-2466087327",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.629,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 71.78157894736843,
+            "syllables": 26,
+            "sentences": 1,
+            "score": 0.8821842105263157
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2466568554,
+        "content": "@Keyrxng It is a very different approach! At first it was just for editing the configuration files in situ. Also I used NextJs and Material which I don't think is welcome haha.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/3#issuecomment-2466568554",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 3.795,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 67.48818181818186,
+            "syllables": 50,
+            "sentences": 3,
+            "score": 0.9251181818181814
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2491843027,
+        "content": "@0x4007 that's one hell of a spec",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/3#issuecomment-2491843027",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.297,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 114.11500000000001,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1835570051,
+        "content": "Why is `issu` needed?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835570051",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,12 @@\n+{\n+  \"$schema\": \"https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json\",\n+  \"version\": \"0.2\",\n+  \"ignorePaths\": [\"**/*.json\", \"**/*.css\", \"node_modules\", \"**/*.log\"],\n+  \"useGitignore\": true,\n+  \"language\": \"en\",\n+  \"words\": [\"dataurl\", \"devpool\", \"outdir\", \"servedir\"],\n+  \"dictionaries\": [\"typescript\", \"node\", \"software-terms\"],\n+  \"import\": [\"@cspell/dict-typescript/cspell-ext.json\", \"@cspell/dict-node/cspell-ext.json\", \"@cspell/dict-software-terms\"],\n+  \"ignoreRegExpList\": [\"[0-9a-fA-F]{6}\"],\n+  \"ignoreWords\": [\"ubiquibot\", \"issu\", \"Supabase\", \"supabase\", \"SUPABASE\"]",
+        "score": {
+          "reward": 0.966,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 119.19000000000003,
+            "syllables": 3,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1835570072,
+        "content": "Wouldn't it be just `SUPABASE_KEY`",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835570072",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,2 @@\n+SUPABASE_URL=\n+SUPABASE_ANON_KEY=",
+        "score": {
+          "reward": 1.656,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 117.16000000000003,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1835570183,
+        "content": "Ideally I think we should use the latest version of eslint that provides better feedback: https://github.com/ubiquity-os/plugin-template/blob/development/eslint.config.mjs",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835570183",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 7.695,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 55.85041666666669,
+            "syllables": 46,
+            "sentences": 4,
+            "score": 0.9585041666666669
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1835570202,
+        "content": "@Keyrxng maybe you can add yourself 😄",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835570202",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1 @@\n+",
+        "score": {
+          "reward": 0.474,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 102.045,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1835570221,
+        "content": "```suggestion\r\n```",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835570221",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,129 @@\n+import * as core from \"@actions/core\";\n+import { Octokit } from \"@octokit/rest\";\n+import simpleGit from \"simple-git\";\n+\n+const token = process.env.GITHUB_TOKEN;\n+const [owner, repo] = process.env.GITHUB_REPOSITORY?.split(\"/\") || [];\n+const pullNumber = process.env.GITHUB_PR_NUMBER || process.env.PULL_REQUEST_NUMBER || \"0\";\n+const baseRef = process.env.GITHUB_BASE_REF;\n+\n+if (!token || !owner || !repo || pullNumber === \"0\" || !baseRef) {\n+  core.setFailed(\"Missing required environment variables.\");\n+  process.exit(1);\n+}\n+\n+const octokit = new Octokit({ auth: token });\n+const git = simpleGit();\n+\n+async function main() {\n+  try {\n+    const { data: pullRequest } = await octokit.pulls.get({\n+      owner,\n+      repo,\n+      pull_number: parseInt(pullNumber, 10),\n+    });\n+\n+    const baseSha = pullRequest.base.sha;\n+    const headSha = pullRequest.head.sha;\n+\n+    await git.fetch([\"origin\", baseSha, headSha]);\n+\n+    const diff = await git.diff([`${baseSha}...${headSha}`]);\n+\n+    core.info(\"Checking for empty strings...\");\n+    const violations = parseDiffForEmptyStrings(diff);\n+\n+    if (violations.length > 0) {\n+      violations.forEach(({ file, line, content }) => {\n+        core.warning(\n+          \"Detected an empty string.\\n\\nIf this is during variable initialization, consider using a different approach.\\nFor more information, visit: https://www.github.com/ubiquity/ts-template/issues/31\",\n+          {\n+            file,\n+            startLine: line,\n+          }\n+        );\n+      });\n+\n+      // core.setFailed(`${violations.length} empty string${violations.length > 1 ? \"s\" : \"\"} detected in the code.`);",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1835570269,
+        "content": "I think we just updated this template",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835570269",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 1.245,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 90.95857142857145,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.6904142857142855
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1835570450,
+        "content": "Would be better to run this on pull request events.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835570450",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,37 @@\n+name: Run Cypress testing suite\n+on:\n+  workflow_dispatch:\n+  workflow_run:",
+        "score": {
+          "reward": 2.64,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 86.70500000000001,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.7329499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1835570713,
+        "content": "This script will always fail, I made a correction to it: https://github.com/ubiquity/ts-template/pull/76",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835570713",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 6.642,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 76.97144736842105,
+            "syllables": 27,
+            "sentences": 2,
+            "score": 0.8302855263157894
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1835570780,
+        "content": "Please update the manifest accordingly.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835570780",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,91 @@\n+{\n+  \"name\": \"ts-template\",",
+        "score": {
+          "reward": 1.488,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 15.640000000000015,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.5564000000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1835666559,
+        "content": "If that is meant to be an anon key then this is fine.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835666559",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,2 @@\n+SUPABASE_URL=\n+SUPABASE_ANON_KEY=",
+        "score": {
+          "reward": 2.574,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 102.53230769230771,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1835666680,
+        "content": "Ah I see. Maybe you can fix the typo instead?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835666680",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,12 @@\n+{\n+  \"$schema\": \"https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json\",\n+  \"version\": \"0.2\",\n+  \"ignorePaths\": [\"**/*.json\", \"**/*.css\", \"node_modules\", \"**/*.log\"],\n+  \"useGitignore\": true,\n+  \"language\": \"en\",\n+  \"words\": [\"dataurl\", \"devpool\", \"outdir\", \"servedir\"],\n+  \"dictionaries\": [\"typescript\", \"node\", \"software-terms\"],\n+  \"import\": [\"@cspell/dict-typescript/cspell-ext.json\", \"@cspell/dict-node/cspell-ext.json\", \"@cspell/dict-software-terms\"],\n+  \"ignoreRegExpList\": [\"[0-9a-fA-F]{6}\"],\n+  \"ignoreWords\": [\"ubiquibot\", \"issu\", \"Supabase\", \"supabase\", \"SUPABASE\"]",
+        "score": {
+          "reward": 2.457,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 100.24000000000002,
+            "syllables": 12,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1848649285,
+        "content": "Wouldn't the error test be more relevant?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1848649285",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,12 +1,3 @@\n describe(\"Homepage tests\", () => {\n-  it(\"Console is cleared of errors and warnings\", () => {\n-    cy.visit(\"/\", {\n-      onBeforeLoad(win) {\n-        cy.stub(win.console, \"error\").as(\"consoleError\");\n-      },\n-    });\n-    cy.get(\"@consoleError\").should(\"not.be.called\");\n-    cy.get(\"body\").should(\"exist\");\n-    cy.get(\"h1\").should(\"exist\");\n-  });\n+  it(\"todo\", () => {});",
+        "score": {
+          "reward": 2.256,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 82.39000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.7760999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1848652271,
+        "content": "Maybe we could get these from the SDK?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1848652271",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,180 @@\n+import { Octokit } from \"@octokit/rest\";\n+import { ManifestDecoder } from \"./decode-manifest\";\n+import { ManifestPreDecode } from \"../types/plugins\";\n+\n+/**\n+ * Given a list of repositories, fetch the manifest for each repository.\n+ */\n+export class ManifestFetcher {\n+  private _orgs: string[];\n+  private _octokit: Octokit | null;\n+  private _decoder: ManifestDecoder;\n+\n+  workerUrlRegex = /https:\\/\\/([a-z0-9-]+)\\.ubiquity\\.workers\\.dev/g;\n+  actionUrlRegex = /[a-z0-9-]+\\/[a-z0-9-]+(?:\\/[^@]+)?@[a-z0-9-]+/g;\n+  workerUrls = new Set<string>();\n+  actionUrls = new Set<string>();\n+\n+  devYmlConfigPath = \".github/.ubiquity-os.config.dev.yml\";\n+  prodYmlConfigPath = \".github/.ubiquity-os.config.yml\";",
+        "score": {
+          "reward": 1.782,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 114.11500000000001,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1851837483,
+        "content": "Might want to rename this to element instead of ele?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1851837483",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 1.68,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 78.24500000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.8175499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2466718825,
+        "content": "@Keyrxng Yes it is, it means the module is disabled.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2466718825",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.31,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 86.70500000000001,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.7329499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2486134230,
+        "content": "Tested, works, that's cool.\r\nSome details that would be worth a change later:\r\n- the generated configuration for start | stop looked like this\r\n```\r\nplugins:\r\n  - uses:\r\n      - plugin: https://ubiquity-os-command-start-stop-development.ubiquity.workers.dev\r\n        with:\r\n          reviewDelayTolerance: 1 Day\r\n          taskStaleTimeoutDuration: 30 Days\r\n          startRequiresWallet: true\r\n          maxConcurrentTasks:\r\n            member: 10\r\n            contributor: 2\r\n          assignedIssueScope: org\r\n          emptyWalletText: Please set your wallet address with the /wallet command first\r\n            and try again.\r\n          rolesWithReviewAuthority:\r\n            - COLLABORATOR\r\n            - OWNER\r\n            - MEMBER\r\n            - ADMIN\r\n          requiredLabelsToStart: []\r\n```\r\nMaybe it would be safer to wrap string values with quotes\r\n- On a 32 inch screen, it feels like a lot of space is wasted (c.f. screenshot)\r\n<img width=\"1914\" alt=\"image\" src=\"https://github.com/user-attachments/assets/79679119-4f37-4115-8595-720ef9dd129e\">",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2486134230",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 12.096,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 57,
+            "wordValue": 0.1,
+            "result": 2.48
+          },
+          "readability": {
+            "fleschKincaid": 87.281,
+            "syllables": 85,
+            "sentences": 5,
+            "score": 0.7271899999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2490792616,
+        "content": "If that's not causing any issue then don't sweat on it, I just wanted to make sure. Got it, good to go.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2490792616",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.592,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 103.00500000000001,
+            "syllables": 26,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2425624853,
+            "effect": {
+              "addition": 1813,
+              "deletion": 233
+            },
+            "reward": 61.38,
+            "priority": 3
+          },
+          {
+            "reviewId": 2445944925,
+            "effect": {
+              "addition": 417,
+              "deletion": 177
+            },
+            "reward": 17.82,
+            "priority": 3
+          },
+          {
+            "reviewId": 2451022040,
+            "effect": {
+              "addition": 28,
+              "deletion": 30
+            },
+            "reward": 1.74,
+            "priority": 3
+          },
+          {
+            "reviewId": 2451041149,
+            "effect": {
+              "addition": 2,
+              "deletion": 2
+            },
+            "reward": 0.12,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 141.486 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>4</td><td>81.06</td></tr><tr><td>Issue</td><td>Comment</td><td>4</td><td>9.873</td></tr><tr><td>Review</td><td>Comment</td><td>17</td><td>50.553</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13\" target=\"_blank\" rel=\"noopener\">#13</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+1813 -233</td><td>3</td><td>61.38</td></tr><tr><td>+417 -177</td><td>3</td><td>17.82</td></tr><tr><td>+28 -30</td><td>3</td><td>1.74</td></tr><tr><td>+2 -2</td><td>3</td><td>0.12</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/3#issuecomment-2380400401\" target=\"_blank\" rel=\"noopener\">@0x4007 Spec at https://github.com/ubiquity-os-marketplace/comma&hellip;</a></h6></td><td><details><summary>1.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.152</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/3#issuecomment-2466087327\" target=\"_blank\" rel=\"noopener\">Funny, I had made a tool for my personal usage a while ago, I di&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.629</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/3#issuecomment-2466568554\" target=\"_blank\" rel=\"noopener\">@Keyrxng It is a very different approach! At first it was just f&hellip;</a></h6></td><td><details><summary>1.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.5</td><td>3</td><td>3.795</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/issues/3#issuecomment-2491843027\" target=\"_blank\" rel=\"noopener\">@0x4007 that's one hell of a spec</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.297</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835570051\" target=\"_blank\" rel=\"noopener\">Why is &#96;issu&#96; needed?</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.7</td><td>3</td><td>0.966</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835570072\" target=\"_blank\" rel=\"noopener\">Wouldn't it be just &#96;SUPABASE_KEY&#96;</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.656</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835570183\" target=\"_blank\" rel=\"noopener\">Ideally I think we should use the latest version of eslint that &hellip;</a></h6></td><td><details><summary>2.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.9</td><td>3</td><td>7.695</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835570202\" target=\"_blank\" rel=\"noopener\">@Keyrxng maybe you can add yourself 😄</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.474</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835570221\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion&#96;&#96;&#96;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835570269\" target=\"_blank\" rel=\"noopener\">I think we just updated this template</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.5</td><td>3</td><td>1.245</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835570450\" target=\"_blank\" rel=\"noopener\">Would be better to run this on pull request events.</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.8</td><td>3</td><td>2.64</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835570713\" target=\"_blank\" rel=\"noopener\">This script will always fail, I made a correction to it: https:/&hellip;</a></h6></td><td><details><summary>1.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.9</td><td>3</td><td>6.642</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835570780\" target=\"_blank\" rel=\"noopener\">Please update the manifest accordingly.</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.488</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835666559\" target=\"_blank\" rel=\"noopener\">If that is meant to be an anon key then this is fine.</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.6</td><td>3</td><td>2.574</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1835666680\" target=\"_blank\" rel=\"noopener\">Ah I see. Maybe you can fix the typo instead?</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.457</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1848649285\" target=\"_blank\" rel=\"noopener\">Wouldn't the error test be more relevant?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.8</td><td>3</td><td>2.256</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1848652271\" target=\"_blank\" rel=\"noopener\">Maybe we could get these from the SDK?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.6</td><td>3</td><td>1.782</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1851837483\" target=\"_blank\" rel=\"noopener\">Might want to rename this to element instead of ele?</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.5</td><td>3</td><td>1.68</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2466718825\" target=\"_blank\" rel=\"noopener\">@Keyrxng Yes it is, it means the module is disabled.</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.31</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2486134230\" target=\"_blank\" rel=\"noopener\">Tested, works, that's cool.Some details that would be worth a &hellip;</a></h6></td><td><details><summary>3.68</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.2&#13;regex:&#13;  wordCount: 57&#13;  wordValue: 0.1&#13;  result: 2.48&#13;</pre></details></td><td>0.9</td><td>3</td><td>12.096</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2490792616\" target=\"_blank\" rel=\"noopener\">If that's not causing any issue then don't sweat on it, I just w&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.4</td><td>3</td><td>2.592</td></tr></tbody></table></details>"
+  },
+  "zugdev": {
+    "total": 80.625,
+    "userId": 155616000,
+    "comments": [
+      {
+        "id": 2428501249,
+        "content": "Getting app installations is also failing, I can't seem to sign in with my org so I can't load this properly. \r\n![image](https://github.com/user-attachments/assets/08f2f149-d192-47d1-9159-bed0c777bb34)",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#pullrequestreview-2428501249",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.918,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 69.46391304347827,
+            "syllables": 31,
+            "sentences": 1,
+            "score": 0.9053608695652173
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1837440872,
+        "content": "Don't force a login, just display a default message",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1837440872",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -9,15 +11,56 @@ async function handleAuth() {\n   if (!token) {\n     // await auth.signInWithGithub(); force a login?",
+        "score": {
+          "reward": 0.588,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 78.24500000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.8175499999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1837440991,
+        "content": "This is failing, it seems that the correct endpoint for this request would be \"GET /organizations\", based on this piece of docs: https://docs.github.com/pt/rest/orgs/orgs?apiVersion=2022-11-28#list-organizations",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1837440991",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -112,4 +121,16 @@ export class AuthService {\n       return null;\n     }\n   }\n-}\n\\ No newline at end of file\n+\n+  public async getGitHubUserOrgs(): Promise<string[]> {\n+    const octokit = await this.getOctokit();\n+    const response = await octokit.request(\"GET /user/orgs\");",
+        "score": {
+          "reward": 2.187,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 75.50000000000003,
+            "syllables": 52,
+            "sentences": 4,
+            "score": 0.8449999999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1843012862,
+        "content": "What do you mean with this, exactly? Is it in a secrets format, or an oauth config perhaps?  Where do I set this up?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1843012862",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -112,4 +121,16 @@ export class AuthService {\n       return null;\n     }\n   }\n-}\n\\ No newline at end of file\n+\n+  public async getGitHubUserOrgs(): Promise<string[]> {\n+    const octokit = await this.getOctokit();\n+    const response = await octokit.request(\"GET /user/orgs\");",
+        "score": {
+          "reward": 0.75,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 89.44,
+            "syllables": 31,
+            "sentences": 3,
+            "score": 0.7056
+          },
+          "multiplier": 0.25,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2466593036,
+        "content": "I will review UI, yes. Regarding my contribution, I think it makes more sense for this to be merged first and only then implement styling.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2466593036",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.477,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 75.70750000000002,
+            "syllables": 35,
+            "sentences": 2,
+            "score": 0.8429249999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2466957919,
+        "content": "Actions doesn't seem to be building this PR and therefore no deployments are available. 0x4007 just merged template into this repo, so pulling from `main` should solve it, I want to help you QA it.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2466957919",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.536,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 73.04964285714289,
+            "syllables": 48,
+            "sentences": 2,
+            "score": 0.8695035714285712
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2467027060,
+        "content": "Yes, deployments are a mere facilitator, I understand the circumstances. I'll be testing it locally soon!",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2467027060",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.252,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 48.9133823529412,
+            "syllables": 30,
+            "sentences": 2,
+            "score": 0.889133823529412
+          },
+          "multiplier": 0.25,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2469506050,
+        "content": "If I sign in with an account that has nothing to show, we should tell that to the user.\r\n![image](https://github.com/user-attachments/assets/658c0cad-996c-41b6-bb51-df06c0572b44)\r\nThe auth token is not being cleared on sign out, the only way for me to currently logout is to clear my cookies manually.\r\nhttps://github.com/user-attachments/assets/15ab6e6a-ad30-4783-b4fd-6b0cf2069716\r\nAlso we have a scope error that is not allowing it to fetch my orgs correctly, I've pinpointed the issue in my review comments:\r\n![image](https://github.com/user-attachments/assets/3c07eec5-c5e9-4db6-8a3d-bdb1df6279da)",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2469506050",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 3.051,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 68,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 72.20393987341777,
+            "syllables": 107,
+            "sentences": 4,
+            "score": 0.8779606012658223
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2469527586,
+        "content": "I think you should try catch whatever can fail, that certainly includes HTTP requests. For instance, to get the list of app installations you need an authenticated GitHub app. I couldn't login with my org so I got deadlocked. We should at least show a message in those cases.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2469527586",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.554,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 50,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 80.7835,
+            "syllables": 67,
+            "sentences": 4,
+            "score": 0.792165
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2469529045,
+        "content": "Ignore what I previously said about auth, already hid my comments, my Supabase is set for OAuth - my bad. However I still believe there should be try catches.\r\nHow should I set this up? I don't see a way to do it in Supabase's dashboard. Or did you mean signing in with a GitHub app? If that's the case, I wasn't able to.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2469529045",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.185,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 67,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 85.64710199004976,
+            "syllables": 87,
+            "sentences": 6,
+            "score": 0.7435289800995024
+          },
+          "multiplier": 0.25,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2479311280,
+        "content": "Thanks for the guide, I'll QA it soon.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2479311280",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.081,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 113.10000000000002,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2479889467,
+        "content": "One feedback I'd give is since you initiated UI, you should add basic setup instructions in the README file. Not only yarn related, but also that we use GitHub App auth instead of OAuth App setup.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2479889467",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.608,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 37,
+            "wordValue": 0.1,
+            "result": 2.1
+          },
+          "readability": {
+            "fleschKincaid": 69.1602027027027,
+            "syllables": 52,
+            "sentences": 2,
+            "score": 0.908397972972973
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2479908408,
+        "content": "Quick question. The app in question was created by your personal account or your org? I have setup the auth with GitHub app but that app belongs to my org, I think therefore when I login as my user, I can't fetch properly. It's not a matter of permissions since I've enabled all.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2479908408",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.368,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 56,
+            "wordValue": 0.1,
+            "result": 2.47
+          },
+          "readability": {
+            "fleschKincaid": 80.83214285714287,
+            "syllables": 74,
+            "sentences": 4,
+            "score": 0.7916785714285713
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2428501249,
+            "effect": {
+              "addition": 1920,
+              "deletion": 249
+            },
+            "reward": 65.07,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 80.625 XP ]</a>&nbsp;</h3><h6>@zugdev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>65.07</td></tr><tr><td>Review</td><td>Comment</td><td>13</td><td>15.555</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13\" target=\"_blank\" rel=\"noopener\">#13</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+1920 -249</td><td>3</td><td>65.07</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#pullrequestreview-2428501249\" target=\"_blank\" rel=\"noopener\">Getting app installations is also failing, I can't seem to sign &hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.6</td><td>3</td><td>0.918</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1837440872\" target=\"_blank\" rel=\"noopener\">Don't force a login, just display a default message</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.7</td><td>3</td><td>0.588</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1837440991\" target=\"_blank\" rel=\"noopener\">This is failing, it seems that the correct endpoint for this req&hellip;</a></h6></td><td><details><summary>2.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.9</td><td>3</td><td>2.187</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#discussion_r1843012862\" target=\"_blank\" rel=\"noopener\">What do you mean with this, exactly? Is it in a secrets format, &hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.5</td><td>3</td><td>0.75</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2466593036\" target=\"_blank\" rel=\"noopener\">I will review UI, yes. Regarding my contribution, I think it mak&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.477</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2466957919\" target=\"_blank\" rel=\"noopener\">Actions doesn't seem to be building this PR and therefore no dep&hellip;</a></h6></td><td><details><summary>2.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.536</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2467027060\" target=\"_blank\" rel=\"noopener\">Yes, deployments are a mere facilitator, I understand the circum&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.252</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2469506050\" target=\"_blank\" rel=\"noopener\">If I sign in with an account that has nothing to show, we should&hellip;</a></h6></td><td><details><summary>3.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 68&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>0.9</td><td>3</td><td>3.051</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2469527586\" target=\"_blank\" rel=\"noopener\">I think you should try catch whatever can fail, that certainly i&hellip;</a></h6></td><td><details><summary>2.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 50&#13;  wordValue: 0.1&#13;  result: 2.38&#13;</pre></details></td><td>0.7</td><td>3</td><td>1.554</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2469529045\" target=\"_blank\" rel=\"noopener\">Ignore what I previously said about auth, already hid my comment&hellip;</a></h6></td><td><details><summary>2.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 67&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>0.5</td><td>3</td><td>1.185</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2479311280\" target=\"_blank\" rel=\"noopener\">Thanks for the guide, I'll QA it soon.</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.081</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2479889467\" target=\"_blank\" rel=\"noopener\">One feedback I'd give is since you initiated UI, you should add &hellip;</a></h6></td><td><details><summary>2.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 37&#13;  wordValue: 0.1&#13;  result: 2.1&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.608</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2479908408\" target=\"_blank\" rel=\"noopener\">Quick question. The app in question was created by your personal&hellip;</a></h6></td><td><details><summary>2.47</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 56&#13;  wordValue: 0.1&#13;  result: 2.47&#13;</pre></details></td><td>0.6</td><td>3</td><td>1.368</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 162.365,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2438355509,
+        "content": "1. Getting the `authentication.ts:127 GET https://api.github.com/user/orgs 403 (Forbidden)` on github auth:\r\n<img width=\"1511\" alt=\"Screenshot 2024-11-15 at 14 20 17\" src=\"https://github.com/user-attachments/assets/2e04f5ef-933d-4b06-bef5-6e55e46c751e\">\r\nPerhaps we should pass the `read:org` scope similarly to how it [works](https://github.com/ubiquity/work.ubq.fi/blob/d42ffd7dfdba16b4dc7a615bacf632087efafc69/src/home/rendering/render-github-login-button.ts#L36) in work.ubq.fi?\r\n2. Pls make all CI workflows passing:\r\n  a) For [failing build](https://github.com/ubiquity-os/ubiquity-os-plugin-installer/actions/runs/11770560357/job/32783164160?pr=13) you may hardcode [values](https://github.com/ubiquity/work.ubq.fi/blob/d42ffd7dfdba16b4dc7a615bacf632087efafc69/.github/workflows/build.yml#L31-L32)\r\n  b) For [failing empty strings](https://github.com/ubiquity-os/ubiquity-os-plugin-installer/actions/runs/11770560358/job/32783164244?pr=13) workflow you may refactor the code\r\n  c) For [failing knip](https://github.com/ubiquity-os/ubiquity-os-plugin-installer/actions/runs/11770560364/job/32783164156?pr=13) unused dependencies should be removed\r\n  d) For [failing cypress](https://github.com/ubiquity-os/ubiquity-os-plugin-installer/actions/runs/11770560368/job/32783164158?pr=13) values can be [hardcoded](https://github.com/ubiquity/work.ubq.fi/blob/d42ffd7dfdba16b4dc7a615bacf632087efafc69/.github/workflows/cypress-testing.yml#L25-L26)\r\n  e) For [failing jest](https://github.com/ubiquity-os/ubiquity-os-plugin-installer/actions/runs/11770560362/job/32783164174?pr=13) either remove the test either fix the octokit related error",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#pullrequestreview-2438355509",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 46.826,
+          "formatting": {
+            "content": {
+              "ol": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 7
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 10
+              }
+            },
+            "result": 10.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 89,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 66.40300000000003,
+            "syllables": 142,
+            "sentences": 5,
+            "score": 0.9359699999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2478616391,
+        "content": "@Keyrxng https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/12 is included in the current PR, correct?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2478616391",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.39,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 54.70828947368423,
+            "syllables": 32,
+            "sentences": 2,
+            "score": 0.9470828947368424
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2482477076,
+        "content": "@Keyrxng \r\nIf partner doesn't have the `UbiquityOS` app installed anywhere (which is true for new partners) then he will not be able to install the config, correct?\r\nOverall I still don't understand why we should mess with github app auth instead of oauth which is already working fine in `work.ubq.fi`.\r\n`work.ubq.fi` also has access to private repos with oauth",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2482477076",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 7.632,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 58,
+            "wordValue": 0.1,
+            "result": 2.49
+          },
+          "readability": {
+            "fleschKincaid": 67.60477011494255,
+            "syllables": 82,
+            "sentences": 3,
+            "score": 0.9239522988505745
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2484982794,
+        "content": "@Keyrxng Trying to add the https://github.com/ubiquity-os-marketplace/command-wallet plugin to [this](https://github.com/rndquu-org) organization. Getting the `Error pushing config to GitHub: TypeError: source is not a string` error:\r\n<img width=\"1511\" alt=\"Screenshot 2024-11-19 at 11 05 36\" src=\"https://github.com/user-attachments/assets/241bf54e-db4b-4e7a-af72-31c168d485d4\">\r\nDoes this PR create a new `.ubiquity-os` repository for new partners?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2484982794",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 17.442,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 66.23250000000003,
+            "syllables": 81,
+            "sentences": 4,
+            "score": 0.9376749999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2486044208,
+        "content": "Awesome, works fine.\r\n@Keyrxng Could you update the readme file and remove github app related setup instructions?\r\nThe `Empty String Check` workflow is [failing](https://github.com/ubiquity-os/ubiquity-os-plugin-installer/actions/runs/11914418242/job/33202289177?pr=13) but that's false positive, added https://github.com/ubiquity/ts-template/issues/82.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2486044208",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 10.935,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 65.01089285714289,
+            "syllables": 55,
+            "sentences": 4,
+            "score": 0.9498910714285711
+          },
+          "multiplier": 1,
+          "relevance": 0.75
+        }
+      },
+      {
+        "id": 2490747039,
+        "content": "Could you fix the failing knip ci?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2490747039",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.62,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 103.04428571428575,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2438355509,
+            "effect": {
+              "addition": 1920,
+              "deletion": 249
+            },
+            "reward": 65.07,
+            "priority": 3
+          },
+          {
+            "reviewId": 2450977768,
+            "effect": {
+              "addition": 183,
+              "deletion": 132
+            },
+            "reward": 9.45,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 162.365 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>74.52</td></tr><tr><td>Review</td><td>Comment</td><td>6</td><td>87.845</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13\" target=\"_blank\" rel=\"noopener\">#13</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+1920 -249</td><td>3</td><td>65.07</td></tr><tr><td>+183 -132</td><td>3</td><td>9.45</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#pullrequestreview-2438355509\" target=\"_blank\" rel=\"noopener\">1. Getting the &#96;authentication.ts:127 GET https://api.github&hellip;</a></h6></td><td><details><summary>12.83</summary><pre>content:&#13;  content:&#13;    ol:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    p:&#13;      score: 0&#13;      elementCount: 7&#13;    a:&#13;      score: 1&#13;      elementCount: 10&#13;  result: 10.2&#13;regex:&#13;  wordCount: 89&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.95</td><td>3</td><td>46.826</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2478616391\" target=\"_blank\" rel=\"noopener\">@Keyrxng https://github.com/ubiquity-os/ubiquity-os-plugin-insta&hellip;</a></h6></td><td><details><summary>1.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.5</td><td>3</td><td>3.39</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2482477076\" target=\"_blank\" rel=\"noopener\">@Keyrxng If partner doesn't have the &#96;UbiquityOS&#96; app &hellip;</a></h6></td><td><details><summary>2.49</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 58&#13;  wordValue: 0.1&#13;  result: 2.49&#13;</pre></details></td><td>0.8</td><td>3</td><td>7.632</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2484982794\" target=\"_blank\" rel=\"noopener\">@Keyrxng Trying to add the https://github.com/ubiquity-os-market&hellip;</a></h6></td><td><details><summary>5.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>0.9</td><td>3</td><td>17.442</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2486044208\" target=\"_blank\" rel=\"noopener\">Awesome, works fine.@Keyrxng Could you update the readme file &hellip;</a></h6></td><td><details><summary>3.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>0.75</td><td>3</td><td>10.935</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-plugin-installer/pull/13#issuecomment-2490747039\" target=\"_blank\" rel=\"noopener\">Could you fix the failing knip ci?</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.6</td><td>3</td><td>1.62</td></tr></tbody></table></details>"
+  }
+}

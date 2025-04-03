@@ -1,3 +1,4 @@
+import React from "react"; // Ensure React is imported
 import { LeaderboardEntry, useLeaderboardData } from "../hooks/use-leaderboard-data.ts";
 // Assuming app-styles.css or similar is imported globally (e.g., in main.tsx)
 // import "../app-styles.css"; // Import styles if needed locally
@@ -9,7 +10,17 @@ function formatXp(xp: number): string {
 }
 
 export function DeveloperLeaderboard() {
-  const { leaderboardData, isLoading, error } = useLeaderboardData();
+  const {
+    leaderboardData,
+    isLoading,
+    error,
+    availableCategories,
+    availableRepositories,
+    selectedCategory,
+    setSelectedCategory,
+    selectedRepository,
+    setSelectedRepository,
+  } = useLeaderboardData();
 
   // Add detailed logging for debugging
   console.log("DeveloperLeaderboard render state:", {
@@ -64,6 +75,39 @@ export function DeveloperLeaderboard() {
   return (
     <div className="leaderboard-container page-container"> {/* Reuse page-container if applicable */}
       <h2>Developer XP Leaderboard</h2>
+
+      {/* Filter Controls */}
+      <div className="filters-container">
+        <label>
+          Category:
+          <select
+            value={selectedCategory ?? ""}
+            // Explicitly type the event parameter
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedCategory(e.target.value || null)}
+            disabled={isLoading}
+          >
+            <option value="">All Categories</option>
+            {availableCategories.map(category => (
+              <option key={category} value={category}>{category}</option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Repository:
+          <select
+            value={selectedRepository ?? ""}
+            // Explicitly type the event parameter
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedRepository(e.target.value || null)}
+            disabled={isLoading}
+          >
+            <option value="">All Repositories</option>
+            {availableRepositories.map(repo => (
+              <option key={repo} value={repo}>{repo}</option>
+            ))}
+          </select>
+        </label>
+      </div>
+
       <table className="leaderboard-table"> {/* Add specific class for styling */}
         <thead>
           <tr>
@@ -73,6 +117,7 @@ export function DeveloperLeaderboard() {
             <th>Task XP</th>
             <th>Reviews XP</th>
             <th>Total XP</th>
+            <th>Permit Count</th> {/* Add Permit Count Header */}
           </tr>
         </thead>
         <tbody>
@@ -95,14 +140,32 @@ export function DeveloperLeaderboard() {
               <td>{formatXp(entry.xpByCategory?.task || 0)}</td>
               <td>{formatXp(entry.xpByCategory?.reviewRewards || 0)}</td>
               <td>{formatXp(entry.totalXp)}</td>
+              <td>{entry.permitCount}</td> {/* Display Permit Count */}
             </tr>
           ))}
         </tbody>
       </table>
-      {/* Basic styling (can be moved to CSS file) */}
+      {/* Basic styling (can be moved to CSS file) - Ensure this is correctly placed */}
       <style>{`
         .leaderboard-container {
           padding: 20px;
+        }
+        .filters-container {
+          margin-bottom: 15px;
+          display: flex;
+          gap: 15px;
+        }
+        .filters-container label {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+        }
+        .filters-container select {
+          padding: 5px 8px;
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 4px;
+          color: white;
         }
         .leaderboard-table {
           width: 100%;
@@ -166,6 +229,6 @@ export function DeveloperLeaderboard() {
           background: rgba(255, 255, 255, 0.2);
         }
       `}</style>
-    </div>
+    </div> // Ensure this is the closing tag for the main div
   );
 }

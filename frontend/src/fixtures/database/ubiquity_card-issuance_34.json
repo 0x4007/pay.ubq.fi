@@ -1,0 +1,2846 @@
+{
+  "EresDev": {
+    "userId": 11886219,
+    "total": 1615.448,
+    "task": {
+      "reward": 1600,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2037985693,
+        "content": "I am interested in working on this if it is not already planned to be handed over to someone else. Here is what I understand about the deliverables and my observations.\r\nThis is supposed to be an enhancement to https://pay.ubq.fi/ to include Reloadly Gift Cards as a payment method for contributors to claim their reward. It is only for this purpose, and we are not opening a gift card shop for the general public.  \r\nThe contributor has to go to a third-party website https://myprepaidcenter.com/ for card activation, and balance check. I am not sure yet if it can be done via API.\r\nI think it is a job mostly to be handled on ubiquibot side. One way is, when a permit is generated, the contributor can ask ubiquibot to convert it to a gift card. The bot talks to Reloadly API, and gives user the card. It posts the card details right there in GitHub comments but encrypted with the user's public key from his wallet. Now, the user can decrypt that message and get the card with links to the website to check the balance and activate it. \r\nSome changes like decrypting gift card info message on https://pay.ubq.fi/ would be cool but are not necessary.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2037985693",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 4.6,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 205,
+            "wordValue": 0.1,
+            "result": 1.68
+          },
+          "readability": {
+            "fleschKincaid": 74.87186274509804,
+            "syllables": 304,
+            "sentences": 17,
+            "score": 0.8512813725490196
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2039171112,
+        "content": "I see card activation is happening using email, or a website (not ours). Any other way you are aware of? I have not gone through documentation yet, but I will do so soon. I will lean toward the simplest and most private way possible at this stage. \r\nSounds much cleaner from a contributor's perspective but I see some extra challenges. Ubiquibot has backend, but pay.ubq.fi doesn't have a backend as far as I am aware. I think Reloadly API communication will also require a backend. \r\nHow will we know the permit is withdrawn specifically for this purpose and not some other. You probably withdraw for other purposes too? Do we track the withdraw reason somehow? If it is not already in place, then building it and handling the atomicity or at least tracking of operations: cancel permit > get gift card from API > maybe save card in db > present to user.\r\nDo you have any recommendations about the backend operations?",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2039171112",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.68,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 163,
+            "wordValue": 0.1,
+            "result": 2.1
+          },
+          "readability": {
+            "fleschKincaid": 66.81995398773009,
+            "syllables": 247,
+            "sentences": 14,
+            "score": 0.9318004601226991
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2045286580,
+        "content": "I have read the documentation now. Find below the description of the sequence that I see we are going to build.\r\nWhen the contributor selects to paid via Gift Card on `pay.ubq.fi`, a list of available gift cards is displayed to them. It could be visa, mastercard, and cards with limitations on usage (e.g. US only), so that the contributor can pick the cheapest and most useful option. \r\nOnce the user picks a gift card, we may have to ask for some more info from user. For example, to order a gift card, `senderName` is a required field. https://docs.reloadly.com/gift-cards/Orders/Order-Gift-Card Or optional email too if the user wants to receive card on the email. \r\nAfter getting this info, the permit of user is canceled and we look for ubiquity dollar transfer. When the event is received, a request is forwarded to our pay-backend. Pay-backend checks again for the validity of the transfer, our balance on Reloadly, and if all info is valid, send a request for the required gift card to Reloadly. \r\nWhen the card is received from Reloadly on pay-backend, it is sent to pay-frontend to display to the user. \r\nHere, I don't like the following: \r\nThis is okay if parts of it are already built. If it is not, then instead of cancelling the permit, we move the xdai signed by contributor to another wallet, and continue the gift card purchase. The permit is used instead of being canceled in this process. \r\nCanceling permits is back-and-forth communication with ubiquibot. It increases coupling.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2045286580",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.8,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 8
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 258,
+            "wordValue": 0.1,
+            "result": 1.2
+          },
+          "readability": {
+            "fleschKincaid": 70.75340298507464,
+            "syllables": 388,
+            "sentences": 20,
+            "score": 0.8924659701492536
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2045296900,
+        "content": "I see it is not letting me sign up with a normal email. I will need this info from you along with API access. I am going to send you a message on telegram. \r\n**Edit:** I guess you will be sending me DM on telegram first. It is not letting me send you a message. It is also @EresDev on telegram. I have also sent you request to grant me access to API on google drive.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2045296900",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.56,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 75,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 85.41600000000001,
+            "syllables": 98,
+            "sentences": 7,
+            "score": 0.7458399999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2046736984,
+        "content": "Sounds much simpler. I like it.  But is there a plan in place when a contributor asks for a refund or replacement of gift card because the one they got is not usable for them for some reason? \r\nI am a little worried about retriving card info later if a user couldn't see card info right after confirmation due to any failure like network failure. There is a way in API but I am not sure about that until I write code. If we can't retrive it from Reloadly API, then asking for email would be a good option. \r\nI see this is a plan for the future. For now, we are going to cancel the permit.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2046736984",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.808,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 119,
+            "wordValue": 0.1,
+            "result": 2.5
+          },
+          "readability": {
+            "fleschKincaid": 79.41082457983194,
+            "syllables": 158,
+            "sentences": 8,
+            "score": 0.8058917542016806
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 1615.448 XP ]</a>&nbsp;</h3><h6>@EresDev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>1600</td></tr><tr><td>Issue</td><td>Comment</td><td>5</td><td>15.448</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2037985693\" target=\"_blank\" rel=\"noopener\">I am interested in working on this if it is not already planned &hellip;</a></h6></td><td><details><summary>3.68</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 205&#13;  wordValue: 0.1&#13;  result: 1.68&#13;</pre></details></td><td>1</td><td>4</td><td>4.6</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2039171112\" target=\"_blank\" rel=\"noopener\">I see card activation is happening using email, or a website (no&hellip;</a></h6></td><td><details><summary>2.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 163&#13;  wordValue: 0.1&#13;  result: 2.1&#13;</pre></details></td><td>1</td><td>4</td><td>2.68</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2045286580\" target=\"_blank\" rel=\"noopener\">I have read the documentation now. Find below the description of&hellip;</a></h6></td><td><details><summary>2.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 8&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 258&#13;  wordValue: 0.1&#13;  result: 1.2&#13;</pre></details></td><td>1</td><td>4</td><td>2.8</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2045296900\" target=\"_blank\" rel=\"noopener\">I see it is not letting me sign up with a normal email. I will n&hellip;</a></h6></td><td><details><summary>2.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 75&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.8</td><td>4</td><td>2.56</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2046736984\" target=\"_blank\" rel=\"noopener\">Sounds much simpler. I like it.  But is there a plan in place wh&hellip;</a></h6></td><td><details><summary>2.5</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 119&#13;  wordValue: 0.1&#13;  result: 2.5&#13;</pre></details></td><td>0.9</td><td>4</td><td>2.808</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 590.988,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1905307430,
+        "content": "I'm very happy to see the \"Visa Prepaid Card USD US\" and Mastercard equivalents. Thanks for the proposal @sergfeldman!",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-1905307430",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 5.348,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 57.09500000000003,
+            "syllables": 33,
+            "sentences": 2,
+            "score": 0.9709500000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1905341032,
+        "content": "@wannacfuture did you handle this one as well?",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-1905341032",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.768,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 71.81500000000001,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.8818499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1905342648,
+        "content": "Looks like theres an issue with the wildcard handler @wannacfuture",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-1905342648",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.936,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 61.32500000000002,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.9867499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2038536858,
+        "content": "My vision was that there would be two \"claim\" buttons on pay.ubq.fi interface. \nOne is to claim to metamask (or connected wallet) and the other is to \"claim to card\"\nWhen the user \"claims to card\" the permit is withdrawn and then the user automatically transfers ubiquity dollars to ubq.eth (or some smart contract) \nNow ubiquity can take that money as credit to generate a new card of that amount and reveal it to the user on that interface. \nThe user can add to their mobile wallet for easy spend. We save the cards generated in their browser local storage to start.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2038536858",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 11.808,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 105,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 69.94714285714288,
+            "syllables": 151,
+            "sentences": 7,
+            "score": 0.9005285714285712
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2040545743,
+        "content": "It's simple. We watch ubiquity dollar deposits to a specific address and then expose the card details to the wallet that funded it. \nWe could even consider encrypting the card details and they can write their signature to decrypt maybe. I'm not sure if we can use signatures in this manner. \nThen we can use the blockchain as the backend purely.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2040545743",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 11.628,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 63,
+            "wordValue": 0.1,
+            "result": 2.55
+          },
+          "readability": {
+            "fleschKincaid": 70.50314285714289,
+            "syllables": 92,
+            "sentences": 5,
+            "score": 0.8949685714285711
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2045428896,
+        "content": "I think we should just pick visa for everybody by default, and present that as the only option. It seems to work everywhere, and I think offering more unnecessary options in the UI leads to a worse UX. Otherwise we should automatically determine the best option based on their geography (IP). \r\nI don't think we need any information to produce a digital card for them. We should not offer physical cards because it seems to not offer benefits over virtual cards. However I haven't been to every country in the world so please correct me if I'm wrong. \r\nCancelling permits is brittle and bad UX. I think we should always collect permits in the near future, and then transfer to a smart contract to mint the virtual card. We could possibly link/authenticate it with the permit payout with the wallet signature so that random people can't mint virtual cards. \r\nubq.eth should be able to withdraw the Ubiquity Dollars in the smart contract and redeem as needed to top up our fiat bank account that funds the virtual cards.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2045428896",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 8.748,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 184,
+            "wordValue": 0.1,
+            "result": 1.89
+          },
+          "readability": {
+            "fleschKincaid": 65.25573122529647,
+            "syllables": 271,
+            "sentences": 11,
+            "score": 0.9474426877470353
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2045459321,
+        "content": "I think that privacy is a meme with these cards because I presume that we are able to access all the transaction data. If the user is concerned about privacy, then they should only claim in crypto IMO",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2045459321",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 7.616,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 67.32894736842107,
+            "syllables": 54,
+            "sentences": 2,
+            "score": 0.9267105263157893
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2047053487,
+        "content": "No I guess we should eventually include a disclaimer that they take responsibility for any problems like that. \r\nPart of the reason why I want to use the blockchain as our backend, and use their signing key to decrypt the card information.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2047053487",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 9.248,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 42,
+            "wordValue": 0.1,
+            "result": 2.23
+          },
+          "readability": {
+            "fleschKincaid": 60.634285714285724,
+            "syllables": 62,
+            "sentences": 2,
+            "score": 0.9936571428571428
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2059996354,
+        "content": "What about Mastercard? Do you have any recommendations @sergfeldman @EresDev",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2059996354",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.568,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 24.100000000000023,
+            "syllables": 21,
+            "sentences": 2,
+            "score": 0.6410000000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2064813842,
+        "content": "Proposal: we make a standalone dry bones UI that allows them to choose to start. Later we improve it and handle choosing it for them automatically based on their location.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2064813842",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 6.804,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 61.890000000000015,
+            "syllables": 46,
+            "sentences": 2,
+            "score": 0.9810999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2067559845,
+        "content": "I agree about a totally separate page for the card related stuff. It's easier to implement. \nIn most cities I've been to (major financial centers/big cities) most businesses accept Visa/Mastercard. \nObviously can't say the same for rural areas of third world countries etc.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2067559845",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 9.76,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 48,
+            "wordValue": 0.1,
+            "result": 2.35
+          },
+          "readability": {
+            "fleschKincaid": 60.70500000000001,
+            "syllables": 76,
+            "sentences": 4,
+            "score": 0.9929499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2067560127,
+        "content": "Also for some reason my GitHub mobile won't let me edit my comment. Just wanted to add that I'm really excited to see this feature coming along. Do the cards actually work? Can we easily import into a mobile wallet like Apple Pay? This is the desired UX",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2067560127",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 9.6,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 50,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 73.16900000000001,
+            "syllables": 73,
+            "sentences": 5,
+            "score": 0.8683099999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2132547241,
+        "content": "This isn't auditable. The communications are to happen on GitHub under the project it's associated with so that information flows transparently through the organization, and so that the work is automatically compensated for when the project is complete.  \nThis shouldn't be news because we have been using this system for a couple of years now. \nI understand a lot of this involves credentials so we can consider an exception, but will require some more thought.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2132547241",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 8.064,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "br": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 78,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 52.550192307692356,
+            "syllables": 124,
+            "sentences": 4,
+            "score": 0.9255019230769236
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2174492278,
+        "content": "Oh, bad news is that the permit generation on the old bot still doesn't work with private repositories. I wonder what the best way to calculate the full rewards would be. I think its worth figuring out here because there was significant research and conversation done on here. \r\nYou guys should let me know what the miscellaneous costs are and what addresses to send them to. I will need to handle payments manually. \r\nhttps://github.com/ubiquibot/comment-incentives/actions/runs/9555255579/job/26338095493",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2174492278",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 9.16,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 74,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 70.09823529411767,
+            "syllables": 125,
+            "sentences": 7,
+            "score": 0.8990176470588233
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2192518325,
+        "content": "https://gnosisscan.io/tx/0x44a612815d59bcfa353428301d43b0cf0f432f08ec772e4d8c42b72c1c964114",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2192518325",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.968,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 35.097500000000025,
+            "syllables": 10,
+            "sentences": 2,
+            "score": 0.7509750000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2435276984,
+        "content": "https://gnosisscan.io/tx/0xf07eb7e9a569c92b5a2b4f9bb9e43b678b7adc31e9a6c3844b4d8821853ff3e2\r\nBase pay is designed to cover odds and ends like this.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2435276984",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 4.016,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 50.66500000000002,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.9066500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2079638170,
+        "content": "Code looks pretty good. Just concerned about if it actually makes sense to push 8000+ lines of code to this repo or if we should make a new UI to handle card minting? I'll know for sure after testing the UI/UX",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#pullrequestreview-2079638170",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 7.672,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 43,
+            "wordValue": 0.1,
+            "result": 2.25
+          },
+          "readability": {
+            "fleschKincaid": 88.01224806201553,
+            "syllables": 53,
+            "sentences": 3,
+            "score": 0.7198775193798447
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1615208148,
+        "content": "Arrow function syntax shouldn't pass linter rules. Please change to named functions!",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#discussion_r1615208148",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,93 @@\n+import { getGiftCardOrderId, getMessageToSign } from \"../shared/helpers\";\n+import { ReloadlyFailureResponse, ReloadlyRedeemCodeResponse } from \"./types\";\n+import { verifyMessage } from \"ethers/lib/utils\";\n+import { getTransactionFromOrderId } from \"./get-order\";\n+import { validateEnvVars, validateRequestMethod } from \"./validators\";\n+import { Env, getAccessToken, getBaseUrl, commonHeaders } from \"./helpers\";\n+import { AccessToken } from \"./types\";\n+\n+export const onRequest: PagesFunction<Env> = async (ctx) => {\n+  try {\n+    validateRequestMethod(ctx.request.method, \"GET\");\n+    validateEnvVars(ctx);\n+\n+    const accessToken = await getAccessToken(ctx.env);\n+\n+    const { searchParams } = new URL(ctx.request.url);\n+    const transactionId = Number(searchParams.get(\"transactionId\"));\n+    const signedMessage = searchParams.get(\"signedMessage\");\n+    const wallet = searchParams.get(\"wallet\");\n+    const permitSig = searchParams.get(\"permitSig\");\n+\n+    if (isNaN(transactionId) || !(transactionId && signedMessage && wallet && permitSig)) {\n+      throw new Error(\n+        `Invalid query parameters: ${{\n+          transactionId,\n+          signedMessage,\n+          wallet,\n+          permitSig,\n+        }}`\n+      );\n+    }\n+\n+    const errorResponse = Response.json({ message: \"Given details are not valid to redeem code.\" }, { status: 403 });\n+\n+    if (verifyMessage(getMessageToSign(transactionId), signedMessage) != wallet) {\n+      console.error(\n+        `Signed message verification failed: ${JSON.stringify({\n+          signedMessage,\n+          transactionId,\n+        })}`\n+      );\n+      return errorResponse;\n+    }\n+\n+    const orderId = getGiftCardOrderId(wallet, permitSig);\n+    const order = await getTransactionFromOrderId(orderId, accessToken);\n+\n+    if (order.transactionId != transactionId) {\n+      console.error(\n+        `Given transaction does not match with retrieved transactionId using generated orderId: ${JSON.stringify({\n+          transactionId,\n+          orderId,\n+          transactionIdFromOrder: order.transactionId,\n+        })}`\n+      );\n+      return errorResponse;\n+    }\n+\n+    const redeemCode = await getRedeemCode(transactionId, accessToken);\n+    return Response.json(redeemCode, { status: 200 });\n+  } catch (error) {\n+    console.error(\"There was an error while processing your request.\", error);\n+    return Response.json({ message: \"There was an error while processing your request.\" }, { status: 500 });\n+  }\n+};\n+\n+export const getRedeemCode = async (transactionId: number, accessToken: AccessToken) => {",
+        "score": {
+          "reward": 4.416,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 76.59134615384617,
+            "syllables": 19,
+            "sentences": 2,
+            "score": 0.8340865384615382
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1615208976,
+        "content": "Run-s allows you to chain these npm scripts together. \nI think it makes sense to add the && npx wrangler... etc in a separate \"npm script\" and then append the script name here instead to leverage run-s",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#discussion_r1615208976",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -9,7 +9,7 @@\n     \"node\": \">=20.10.0\"\n   },\n   \"scripts\": {\n-    \"start\": \"run-s start:sign start:ui\",\n+    \"start\": \"run-s start:sign && npx wrangler pages dev static --port 8080\",",
+        "score": {
+          "reward": 7.28,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 87.11517543859652,
+            "syllables": 48,
+            "sentences": 3,
+            "score": 0.7288482456140347
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1615209527,
+        "content": "String.raw is new for me. Is that essentially initializing a string buffer I.e. \"\" ?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#discussion_r1615209527",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,116 @@\n+import { BigNumberish } from \"ethers\";\n+import { GiftCard } from \"../../../../shared/types\";\n+import { getFixedPriceToValueMap, getGiftCardValue, getRangePriceToValueMap, isRangePriceGiftCardClaimable } from \"../../../../shared/pricing\";\n+import { formatEther } from \"ethers/lib/utils\";\n+\n+const html = String.raw;",
+        "score": {
+          "reward": 1.824,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 74.07000000000002,
+            "syllables": 23,
+            "sentences": 5,
+            "score": 0.8592999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1615209577,
+        "content": "This syntax is wild",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#discussion_r1615209577",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,116 @@\n+import { BigNumberish } from \"ethers\";\n+import { GiftCard } from \"../../../../shared/types\";\n+import { getFixedPriceToValueMap, getGiftCardValue, getRangePriceToValueMap, isRangePriceGiftCardClaimable } from \"../../../../shared/pricing\";\n+import { formatEther } from \"ethers/lib/utils\";\n+\n+const html = String.raw;\n+\n+export function getGiftCardHtml(giftCard: GiftCard, allowBuy: boolean, rewardAmount: BigNumberish) {\n+  return html`",
+        "score": {
+          "reward": 0.416,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 97.025,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.6297499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1615209811,
+        "content": "Better to push to an array of strings and then join at the end. += syntax is too prone to errors.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#discussion_r1615209811",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,99 @@\n+import { getGiftCardOrderId } from \"../../../../shared/helpers\";\n+import { GiftCard, OrderTransaction } from \"../../../../shared/types\";\n+import { AppState } from \"../app-state\";\n+import { attachActivateInfoAction } from \"./activate/activate-action\";\n+import { attachClaimAction } from \"./claim/claim-action\";\n+import { attachRevealAction } from \"./reveal/reveal-action\";\n+import { getApiBaseUrl } from \"./helpers\";\n+import { getGiftCardActivateInfoHtml } from \"./activate/activate-html\";\n+import { getGiftCardHtml } from \"./gift-card\";\n+import { getRedeemCodeHtml } from \"./reveal/redeem-code-html\";\n+\n+const html = String.raw;\n+\n+export async function initClaimGiftCard(app: AppState) {\n+  const giftCardsSection = document.getElementById(\"gift-cards\");\n+  if (!giftCardsSection) {\n+    console.error(\"Missing gift cards section #gift-cards\");\n+    return;\n+  }\n+  giftCardsSection.innerHTML = \"Loading...\";\n+\n+  const activateInfoSection = document.getElementById(\"activate-info\");\n+  if (!activateInfoSection) {\n+    console.error(\"Missing gift cards activate info section #activate-info\");\n+    return;\n+  }\n+  activateInfoSection.innerHTML = \"\";\n+\n+  const retrieveOrderUrl = `${getApiBaseUrl()}/get-order?orderId=${getGiftCardOrderId(app.reward.beneficiary, app.reward.signature)}`;\n+  const listGiftCardsUrl = `${getApiBaseUrl()}/list-gift-cards`;\n+\n+  const requestInit = {\n+    method: \"GET\",\n+    headers: {\n+      Accept: \"application/json\",\n+    },\n+  };\n+\n+  const [retrieveOrderResponse, retrieveGiftCardsResponse] = await Promise.all([fetch(retrieveOrderUrl, requestInit), fetch(listGiftCardsUrl, requestInit)]);\n+\n+  const transaction = (await retrieveOrderResponse.json()) as OrderTransaction;\n+  const giftCards = (await retrieveGiftCardsResponse.json()) as GiftCard[];\n+\n+  if (retrieveOrderResponse.status == 200) {\n+    const giftCard = giftCards.find((giftCard) => transaction.product.productId == giftCard.productId);\n+\n+    let giftCardsHtml = `<h2 class=\"heading-gift-card\">Your gift card</h2>`;\n+    giftCardsHtml += `<div class=\"gift-cards-wrapper purchased\">`;\n+    if (giftCard) {\n+      giftCardsHtml += getGiftCardHtml(giftCard, false, app.reward.amount);\n+    }\n+    giftCardsHtml += getRedeemCodeHtml(transaction);\n+    giftCardsHtml += `</div>`;\n+    giftCardsSection.innerHTML = giftCardsHtml;\n+\n+    let activateInfoHtml = \"\";\n+    if (giftCard) {\n+      activateInfoHtml += getGiftCardActivateInfoHtml(giftCard);\n+    }\n+\n+    activateInfoSection.innerHTML = activateInfoHtml;\n+\n+    attachRevealAction(transaction, app);\n+  } else if (retrieveGiftCardsResponse.status == 200) {\n+    let giftCardsHtml = `<h2 class=\"heading-gift-card\">Or claim in virtual visa/mastercard</h2>`;\n+    giftCardsHtml += `<div class=\"gift-cards-wrapper${giftCards.length < 3 ? \" center\" : \"\"}\">`;\n+    giftCards.forEach((giftCard: GiftCard) => {\n+      giftCardsHtml += getGiftCardHtml(giftCard, true, app.reward.amount);\n+    });\n+    giftCardsHtml += `</div><br />`;",
+        "score": {
+          "reward": 5.664,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 95.165,
+            "syllables": 24,
+            "sentences": 2,
+            "score": 0.64835
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2108907609,
+        "content": "I only had the chance to quickly look through the code from my phone. Are you using Cloudflare Pages Function due to authentication?\nOtherwise I'm curious why you couldn't run everything from the UI? \nTag my name when you reply so that I get a push notification. Thanks!",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2108907609",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 7.152,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 50,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 76.55300000000001,
+            "syllables": 71,
+            "sentences": 5,
+            "score": 0.8344699999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2112074193,
+        "content": "That's a shame. \nRegarding the card mint flow, my vision is to have a deposit contract for Ubiquity Dollars. We can use the blockchain as our database. Given the complications with the card amounts, we can do the math on the UI, and then have a button that says \"deposit $73\" etc or whatever is required, then the button will trigger a transfer of ubiquity dollars from the users wallet to the deposit contract. Once the transaction is complete, the UI can use a wallet signature to expose the card details to the user?\nWe should be leveraging the built-in security properties of web3 for authentication etc.  \nRegarding euros etc: let's only mint USD cards. No need to complicate things in euros? Or are you saying there is no USD option?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2112074193",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 11.016,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "br": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 134,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 65.45412106135988,
+            "syllables": 200,
+            "sentences": 9,
+            "score": 0.9454587893864012
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2114891119,
+        "content": "Yes we will want to provide incentives for our partners to settle in Ubiquity Dollars, such as the ability to mint payment cards!\nWhat about a wallet signature instead? Their public wallet address seems less secure because it's public information. \nI want to spend extra time thinking through the UI/UX so that the user is never bombarded with a view of tens of cards. We should do our best to abstract/hide this away. Perhaps we can check their balances and if they are too low then we automatically hide them and save the state in localStorage etc. \nAnother UX flow to consider: I imagine that as soon as I mint my cards, I will immediately add it to my Apple Pay wallet. After that I do not need to access the card details from the UI (unless if I can see balance details, then this is useful) otherwise I will only use the card from my Apple Pay wallet app and a copy will be saved there. \nAlso last thing that's really important: we should have the ability to \"roll up\" permits into a single card. For example, if I have five permits that total up to $900, it would be far better UX to mint a single $900 card instead of five small cards. Please let me know your plan for addressing this. \nI understand that USD cards can be spent anywhere. @sergfeldman minted me a $10 USD card and I spent it using Apple Pay in South Korea at a convenience store without a problem.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2114891119",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.4,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 261,
+            "wordValue": 0.1,
+            "result": 1.18
+          },
+          "readability": {
+            "fleschKincaid": 68.79485411140585,
+            "syllables": 363,
+            "sentences": 13,
+            "score": 0.9120514588859414
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2116026435,
+        "content": "Technically, any token should work, but yes, in the past when we first started the system we settled in DAI on mainnet",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2116026435",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.92,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 76.83227272727274,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.8316772727272727
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2117570681,
+        "content": "\"Purchases -$11,400\" is a hilarious glitch.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2117570681",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.352,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 66.7871428571429,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.9321285714285711
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2124684166,
+        "content": "Let's keep it simple and only show the USA Visa (or Mastercard) options if our collateral is USD pegged, and they work anywhere.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2124684166",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 6.02,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 59.10000000000004,
+            "syllables": 35,
+            "sentences": 1,
+            "score": 0.9910000000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2134112113,
+        "content": "@rndquu @gentlementlegen is our `@ubiquity-dao/rpc-manager` package usable?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2134112113",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.44,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 17.44500000000002,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.5744500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2134889882,
+        "content": "@EresDev https://www.npmjs.com/package/@ubiquity-dao/rpc-handler",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2134889882",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.552,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": 59.63166666666669,
+            "syllables": 17,
+            "sentences": 3,
+            "score": 0.9963166666666669
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2169228662,
+        "content": "Hi there @EresDev I noticed you started working on another task. Is this blocked right now? What is the latest status? Looking forward to trying this out in beta, perhaps on another domain like beta.pay.ubq.fi\r\n---\r\nFor some reason I can't select that branch from the Cloudflare Pages UI...will figure a workaround later!\r\n<img width=\"662\" alt=\"image\" src=\"https://github.com/ubiquity/pay.ubq.fi/assets/4975670/5d345180-452c-47ca-a17c-16f385caeed6\">",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2169228662",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 13.984,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 63,
+            "wordValue": 0.1,
+            "result": 2.55
+          },
+          "readability": {
+            "fleschKincaid": 82.7610443722944,
+            "syllables": 107,
+            "sentences": 12,
+            "score": 0.772389556277056
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2171427275,
+        "content": "Just merged the other pull. @Keyrxng can you try testing this? I will merge to that other branch so we can proceed with caution as there are a lot of changes here. \n@EresDev actually now that I merged the other pull there are some merge conflicts. I hope that you can resolve these and then you can merge it right after. Thank you.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2171427275",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 9.76,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 63,
+            "wordValue": 0.1,
+            "result": 2.55
+          },
+          "readability": {
+            "fleschKincaid": 94.12035714285716,
+            "syllables": 76,
+            "sentences": 6,
+            "score": 0.6587964285714284
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2174486264,
+        "content": "Missed opportunity here, but we should have made a card icon like so for card minting\r\n![card](https://private-user-images.githubusercontent.com/4975670/267067933-f335a3f9-4214-410c-8efc-c188ac525ef2.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTg2NjEwNDgsIm5iZiI6MTcxODY2MDc0OCwicGF0aCI6Ii80OTc1NjcwLzI2NzA2NzkzMy1mMzM1YTNmOS00MjE0LTQxMGMtOGVmYy1jMTg4YWM1MjVlZjIucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI0MDYxNyUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNDA2MTdUMjE0NTQ4WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9ZDdlMzQ3YjMzNDM0OTJhNzdhODU1Y2EzMjJjMDQ1YzJlNGM5NTljM2FjZGY1OWMxYmNhZThhY2ExNzRhYjU4ZSZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QmYWN0b3JfaWQ9MCZrZXlfaWQ9MCZyZXBvX2lkPTAifQ.L54o3YYRD4Om37jLwW8ryM7M4Dsa9alGWh_78KVV_rE)",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2174486264",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.92,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 74.27000000000001,
+            "syllables": 22,
+            "sentences": 1,
+            "score": 0.8573
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2174513041,
+        "content": "@rndquu is a super admin on the Ubiquity Workers Cloudflare account and should be able to address",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2174513041",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.4,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 55.21529411764709,
+            "syllables": 27,
+            "sentences": 1,
+            "score": 0.9521529411764709
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2174528872,
+        "content": "I will spend some time working on the UI/UX whenever its set up on beta.pay.ubq.fi etc\r\nVery excited to demo this.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2174528872",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.28,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 92.20325000000001,
+            "syllables": 32,
+            "sentences": 4,
+            "score": 0.6779674999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2176898776,
+        "content": "I plan to expose it at some subdomain or some other domain for testing purposes. Ultimately it is a convenience but either way, there will be a direct `*.pages.dev` link that we can access for testing. Let's focus on getting the `*.pages.dev` link up and running first, and worry about mapping it to some vanity domain like `beta.pay.ubq.fi` later.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2176898776",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 8.96,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 57,
+            "wordValue": 0.1,
+            "result": 2.48
+          },
+          "readability": {
+            "fleschKincaid": 62.87631578947371,
+            "syllables": 84,
+            "sentences": 3,
+            "score": 0.971236842105263
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2177170372,
+        "content": "I modified the global subdomain router to handle what we need, and it seems to be fine, except now the final problem is that somebody is using the `https://pay-ubq-fi.pages.dev/` namespace which we need for the router to dynamically map correctly. Right now we have a `-bxp` suffix that cloudflare automatically adds to avoid collision. Whoever owns the space please must release it. I am looking through my accounts now to see if I can release it.\r\nhttps://beta.pay-ubq-fi-bxp.pages.dev/",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2177170372",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 18.656,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 74,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 71.59466463414635,
+            "syllables": 121,
+            "sentences": 8,
+            "score": 0.8840533536585364
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2177205609,
+        "content": "Cloudflare support told me @Steveantor has it!",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2177205609",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.112,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 66.7871428571429,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.9321285714285711
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2177922196,
+        "content": "We may have to rebrand/use a different subdomain as I did not immediately hear back. \r\nIf this is the case, then we must change the bot permit generation code to reflect the new subdomain name @gentlementlegen \r\nPerhaps rewards.ubq.fi",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2177922196",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 7.896,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 41,
+            "wordValue": 0.1,
+            "result": 2.2
+          },
+          "readability": {
+            "fleschKincaid": 66.43612804878049,
+            "syllables": 63,
+            "sentences": 4,
+            "score": 0.9356387195121951
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2178141858,
+        "content": "Just got the namespace back!\r\n![photo_2024-06-19 17 57 51](https://github.com/ubiquity/pay.ubq.fi/assets/4975670/3a3f65be-8ecc-44bf-ac54-65d36e444b8e)",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2178141858",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.56,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 83.32000000000004,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 0.7667999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2178167818,
+        "content": "Couldn't figure out how to make my sub sub domain catch yet (beta.pay.ubq.fi.) Will work on it later. For now this is accessible at https://beta.pay-ubq-fi.pages.dev",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2178167818",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 9.296,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 98.95063492063493,
+            "syllables": 43,
+            "sentences": 9,
+            "score": 0.6104936507936507
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2079637420,
+            "effect": {
+              "addition": 8346,
+              "deletion": 54
+            },
+            "reward": 336,
+            "priority": 4
+          }
+        ],
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 590.988 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>336</td></tr><tr><td>Issue</td><td>Comment</td><td>16</td><td>108.04</td></tr><tr><td>Review</td><td>Comment</td><td>25</td><td>146.948</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226\" target=\"_blank\" rel=\"noopener\">#226</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+8346 -54</td><td>4</td><td>336</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-1905307430\" target=\"_blank\" rel=\"noopener\">I'm very happy to see the \"Visa Prepaid Card USD US\" and Masterc&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.7</td><td>4</td><td>5.348</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-1905341032\" target=\"_blank\" rel=\"noopener\">@wannacfuture did you handle this one as well?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.2</td><td>4</td><td>0.768</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-1905342648\" target=\"_blank\" rel=\"noopener\">Looks like theres an issue with the wildcard handler @wannacfutu&hellip;</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.2</td><td>4</td><td>0.936</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2038536858\" target=\"_blank\" rel=\"noopener\">My vision was that there would be two \"claim\" buttons on pay.ubq&hellip;</a></h6></td><td><details><summary>2.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 105&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>0.9</td><td>4</td><td>11.808</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2040545743\" target=\"_blank\" rel=\"noopener\">It's simple. We watch ubiquity dollar deposits to a specific add&hellip;</a></h6></td><td><details><summary>2.55</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 63&#13;  wordValue: 0.1&#13;  result: 2.55&#13;</pre></details></td><td>0.9</td><td>4</td><td>11.628</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2045428896\" target=\"_blank\" rel=\"noopener\">I think we should just pick visa for everybody by default, and p&hellip;</a></h6></td><td><details><summary>1.89</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 184&#13;  wordValue: 0.1&#13;  result: 1.89&#13;</pre></details></td><td>0.9</td><td>4</td><td>8.748</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2045459321\" target=\"_blank\" rel=\"noopener\">I think that privacy is a meme with these cards because I presum&hellip;</a></h6></td><td><details><summary>2.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.7</td><td>4</td><td>7.616</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2047053487\" target=\"_blank\" rel=\"noopener\">No I guess we should eventually include a disclaimer that they t&hellip;</a></h6></td><td><details><summary>2.23</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 42&#13;  wordValue: 0.1&#13;  result: 2.23&#13;</pre></details></td><td>0.8</td><td>4</td><td>9.248</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2059996354\" target=\"_blank\" rel=\"noopener\">What about Mastercard? Do you have any recommendations @sergfeld&hellip;</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.6</td><td>4</td><td>2.568</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2064813842\" target=\"_blank\" rel=\"noopener\">Proposal: we make a standalone dry bones UI that allows them to &hellip;</a></h6></td><td><details><summary>1.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.7</td><td>4</td><td>6.804</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2067559845\" target=\"_blank\" rel=\"noopener\">I agree about a totally separate page for the card related stuff&hellip;</a></h6></td><td><details><summary>2.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 48&#13;  wordValue: 0.1&#13;  result: 2.35&#13;</pre></details></td><td>0.8</td><td>4</td><td>9.76</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2067560127\" target=\"_blank\" rel=\"noopener\">Also for some reason my GitHub mobile won't let me edit my comme&hellip;</a></h6></td><td><details><summary>2.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 50&#13;  wordValue: 0.1&#13;  result: 2.38&#13;</pre></details></td><td>0.8</td><td>4</td><td>9.6</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2132547241\" target=\"_blank\" rel=\"noopener\">This isn't auditable. The communications are to happen on GitHub&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    br:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 78&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.6</td><td>4</td><td>8.064</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2174492278\" target=\"_blank\" rel=\"noopener\">Oh, bad news is that the permit generation on the old bot still &hellip;</a></h6></td><td><details><summary>3.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 74&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.5</td><td>4</td><td>9.16</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2192518325\" target=\"_blank\" rel=\"noopener\">https://gnosisscan.io/tx/0x44a612815d59bcfa353428301d43b0cf0f432&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.4</td><td>4</td><td>1.968</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2435276984\" target=\"_blank\" rel=\"noopener\">https://gnosisscan.io/tx/0xf07eb7e9a569c92b5a2b4f9bb9e43b678b7ad&hellip;</a></h6></td><td><details><summary>1.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.4</td><td>4</td><td>4.016</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#pullrequestreview-2079638170\" target=\"_blank\" rel=\"noopener\">Code looks pretty good. Just concerned about if it actually make&hellip;</a></h6></td><td><details><summary>2.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 43&#13;  wordValue: 0.1&#13;  result: 2.25&#13;</pre></details></td><td>0.7</td><td>4</td><td>7.672</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#discussion_r1615208148\" target=\"_blank\" rel=\"noopener\">Arrow function syntax shouldn't pass linter rules. Please change&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.8</td><td>4</td><td>4.416</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#discussion_r1615208976\" target=\"_blank\" rel=\"noopener\">Run-s allows you to chain these npm scripts together. I think i&hellip;</a></h6></td><td><details><summary>2.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.7</td><td>4</td><td>7.28</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#discussion_r1615209527\" target=\"_blank\" rel=\"noopener\">String.raw is new for me. Is that essentially initializing a str&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.3</td><td>4</td><td>1.824</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#discussion_r1615209577\" target=\"_blank\" rel=\"noopener\">This syntax is wild</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.2</td><td>4</td><td>0.416</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#discussion_r1615209811\" target=\"_blank\" rel=\"noopener\">Better to push to an array of strings and then join at the end. &hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.8</td><td>4</td><td>5.664</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2108907609\" target=\"_blank\" rel=\"noopener\">I only had the chance to quickly look through the code from my p&hellip;</a></h6></td><td><details><summary>2.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 50&#13;  wordValue: 0.1&#13;  result: 2.38&#13;</pre></details></td><td>0.6</td><td>4</td><td>7.152</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2112074193\" target=\"_blank\" rel=\"noopener\">That's a shame. Regarding the card mint flow, my vision is to h&hellip;</a></h6></td><td><details><summary>2.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    br:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 134&#13;  wordValue: 0.1&#13;  result: 2.38&#13;</pre></details></td><td>0.9</td><td>4</td><td>11.016</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2114891119\" target=\"_blank\" rel=\"noopener\">Yes we will want to provide incentives for our partners to settl&hellip;</a></h6></td><td><details><summary>1.18</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 261&#13;  wordValue: 0.1&#13;  result: 1.18&#13;</pre></details></td><td>0.9</td><td>4</td><td>5.4</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2116026435\" target=\"_blank\" rel=\"noopener\">Technically, any token should work, but yes, in the past when we&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.5</td><td>4</td><td>3.92</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2117570681\" target=\"_blank\" rel=\"noopener\">\"Purchases -$11,400\" is a hilarious glitch.</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.1</td><td>4</td><td>0.352</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2124684166\" target=\"_blank\" rel=\"noopener\">Let's keep it simple and only show the USA Visa (or Mastercard) &hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.7</td><td>4</td><td>6.02</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2134112113\" target=\"_blank\" rel=\"noopener\">@rndquu @gentlementlegen is our &#96;@ubiquity-dao/rpc-manager&#&hellip;</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.5</td><td>4</td><td>1.44</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2134889882\" target=\"_blank\" rel=\"noopener\">@EresDev https://www.npmjs.com/package/@ubiquity-dao/rpc-handler</a></h6></td><td><details><summary>1.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>0.6</td><td>4</td><td>3.552</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2169228662\" target=\"_blank\" rel=\"noopener\">Hi there @EresDev I noticed you started working on another task.&hellip;</a></h6></td><td><details><summary>3.55</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 63&#13;  wordValue: 0.1&#13;  result: 2.55&#13;</pre></details></td><td>0.8</td><td>4</td><td>13.984</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2171427275\" target=\"_blank\" rel=\"noopener\">Just merged the other pull. @Keyrxng can you try testing this? I&hellip;</a></h6></td><td><details><summary>2.55</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 63&#13;  wordValue: 0.1&#13;  result: 2.55&#13;</pre></details></td><td>0.8</td><td>4</td><td>9.76</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2174486264\" target=\"_blank\" rel=\"noopener\">Missed opportunity here, but we should have made a card icon lik&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.3</td><td>4</td><td>1.92</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2174513041\" target=\"_blank\" rel=\"noopener\">@rndquu is a super admin on the Ubiquity Workers Cloudflare acco&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.5</td><td>4</td><td>3.4</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2174528872\" target=\"_blank\" rel=\"noopener\">I will spend some time working on the UI/UX whenever its set up &hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.4</td><td>4</td><td>3.28</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2176898776\" target=\"_blank\" rel=\"noopener\">I plan to expose it at some subdomain or some other domain for t&hellip;</a></h6></td><td><details><summary>2.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 57&#13;  wordValue: 0.1&#13;  result: 2.48&#13;</pre></details></td><td>0.7</td><td>4</td><td>8.96</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2177170372\" target=\"_blank\" rel=\"noopener\">I modified the global subdomain router to handle what we need, a&hellip;</a></h6></td><td><details><summary>4.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 74&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.8</td><td>4</td><td>18.656</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2177205609\" target=\"_blank\" rel=\"noopener\">Cloudflare support told me @Steveantor has it!</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.6</td><td>4</td><td>2.112</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2177922196\" target=\"_blank\" rel=\"noopener\">We may have to rebrand/use a different subdomain as I did not im&hellip;</a></h6></td><td><details><summary>2.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 41&#13;  wordValue: 0.1&#13;  result: 2.2&#13;</pre></details></td><td>0.7</td><td>4</td><td>7.896</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2178141858\" target=\"_blank\" rel=\"noopener\">Just got the namespace back!![photo_2024-06-19 17 57 51](https&hellip;</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.6</td><td>4</td><td>1.56</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2178167818\" target=\"_blank\" rel=\"noopener\">Couldn't figure out how to make my sub sub domain catch yet (bet&hellip;</a></h6></td><td><details><summary>2.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.7</td><td>4</td><td>9.296</td></tr></tbody></table></details>"
+  },
+  "molecula451": {
+    "total": 5.244,
+    "userId": 41552663,
+    "comments": [
+      {
+        "id": 1906459844,
+        "content": "and Dollar (UBQ) Top-Up!",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-1906459844",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.204,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 100.24000000000002,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2045444805,
+        "content": "this realodly it's not available in some countries, the user should be able to check this accordingly while preserving using privacy. Or the user might feel it's entitled to rewards (in this method) without taking this in consideration",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2045444805",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 2.448,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 40,
+            "wordValue": 0.1,
+            "result": 2.18
+          },
+          "readability": {
+            "fleschKincaid": 44.83000000000004,
+            "syllables": 67,
+            "sentences": 2,
+            "score": 0.8483000000000004
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2045465684,
+        "content": "Yes, this is what i mean, maybe if someone tries to claim in card method, pop up a notification bar or something similar, \"that claimables avaiable in X countries, for more info check reloadly etc... if your concerned with privacy claim crypto\"",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2045465684",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 2.592,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 42,
+            "wordValue": 0.1,
+            "result": 2.23
+          },
+          "readability": {
+            "fleschKincaid": 54.591428571428594,
+            "syllables": 65,
+            "sentences": 2,
+            "score": 0.9459142857142859
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 5.244 XP ]</a>&nbsp;</h3><h6>@molecula451</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>3</td><td>5.244</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-1906459844\" target=\"_blank\" rel=\"noopener\">and Dollar (UBQ) Top-Up!</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.3</td><td>4</td><td>0.204</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2045444805\" target=\"_blank\" rel=\"noopener\">this realodly it's not available in some countries, the user sho&hellip;</a></h6></td><td><details><summary>2.18</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 40&#13;  wordValue: 0.1&#13;  result: 2.18&#13;</pre></details></td><td>0.9</td><td>4</td><td>2.448</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2045465684\" target=\"_blank\" rel=\"noopener\">Yes, this is what i mean, maybe if someone tries to claim in car&hellip;</a></h6></td><td><details><summary>2.23</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 42&#13;  wordValue: 0.1&#13;  result: 2.23&#13;</pre></details></td><td>0.9</td><td>4</td><td>2.592</td></tr></tbody></table></details>"
+  },
+  "sergfeldman": {
+    "total": 185.828,
+    "userId": 15567379,
+    "comments": [
+      {
+        "id": 2038076657,
+        "content": "@EresDev Thanks for your vision.\r\nSome details may be useful:\r\n- The site https://myprepaidcenter.com/ is used for those MasterCard cards that we tested. For other cards (for example Visa) the site may be different.\r\n- By default, Reloadly sends the activation code for the gift prepaid card to the user’s email address.\r\n![image](https://github.com/ubiquity/card-issuance/assets/15567379/335e12af-b98f-4a10-88a0-f070bcdab35e)",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2038076657",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 18.32,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.2
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 50,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 66.78166037735852,
+            "syllables": 81,
+            "sentences": 5,
+            "score": 0.9321833962264148
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2040413944,
+        "content": "@EresDev Since we plan to use the Reloadly API, it would be good to check API methods\r\nhttps://docs.reloadly.com/gift-cards/Orders/Order-Gift-Card\r\nhttps://docs.reloadly.com/gift-cards/Orders/Get-Redeem-Code",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2040413944",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 16.28,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 84.9996756756757,
+            "syllables": 50,
+            "sentences": 5,
+            "score": 0.750003243243243
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2061930835,
+        "content": "@EresDev Please, provide links to the sources of information regarding \r\n@0x4007 Information regarding the Mastercard that we tested:\r\nThere are no additional restrictions from Reloadly.\r\nThe restrictions for some countries set by the card vendor can be found here https://myprepaidcenter.com/prohibited-countries\r\nThe complete list of restricted countries contains 27 countries:\r\nAfghanistan (AF)\r\nAlbania (AL)\r\nBelarus (BY)\r\nCentral African Republic (CF)\r\nCuba (CU)\r\nDemocratic Republic Of The Congo (CD)\r\nEritrea (ER)\r\nEthiopia (ET)\r\nIran (Islamic Republic Of) (IR)\r\nIraq (IQ)\r\nLebanon (LB)\r\nLibyan Arab Jamahiriya (LY)\r\nMali (ML)\r\nMyanmar (Burma) (MM)\r\nNicaragua (NI)\r\nNorth Korea aka Democratic People’s Republic of Korea (KP)\r\nRussian Federation (RU)\r\nSomalia (SO)\r\nSouth Sudan (SS)\r\nSudan (SD)\r\nSyrian Arab Republic (SY)\r\nTunisia (TN)\r\nTurkey (TR)\r\nUkraine (UA)\r\nVenezuela (VE)\r\nYemen (YE)\r\nZimbabwe (ZW)\r\nAccording to Wikipedia, different calculation methodologies provide from 193 UN member states to 205 entities\r\nhttps://en.wikipedia.org/wiki/List_of_sovereign_states \r\nMastercard claims that it is available in 210 countries and territories\r\nhttps://www.mastercard.us/en-us/vision/who-we-are.html \r\nIf subtract the number of restricted countries from the total number of countries, Mastercard gift cards should be available in 160 - 180 countries and territories.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2061930835",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 23.8,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 37
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 177,
+            "wordValue": 0.1,
+            "result": 1.96
+          },
+          "readability": {
+            "fleschKincaid": 26.841146356783952,
+            "syllables": 364,
+            "sentences": 8,
+            "score": 0.6684114635678395
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2062190774,
+        "content": "@EresDev As far as I understand, you see limited number of cards searching on the Reloadly website.\r\nThe Reloadly website presents SKUs of different types of cards in different currencies, not all the countries. \r\nThat is, you can issue a card in USD for a resident of Malaysia, but you cannot issue a card in the local currency of Malaysia. \r\nIn order to remove all doubts, we can conduct an experiment with Visa like we did with Mastercard - issue a card for a resident of one of the countries we are interested in and he will pay with this card in his country.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2062190774",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 13.32,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 103,
+            "wordValue": 0.1,
+            "result": 2.59
+          },
+          "readability": {
+            "fleschKincaid": 55.85214805825245,
+            "syllables": 152,
+            "sentences": 4,
+            "score": 0.9585214805825245
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2073421146,
+        "content": "Yep, we experimented with Mastercard cards. \r\nIt was possible to issue a card to a non-existent person and pay for a purchase in South Korea using Apple Pay.\r\nDetails can be found https://github.com/ubiquity/card-issuance/issues/39#issuecomment-2005755056\r\nWe still have a few dollars on our Reloadly balance and can experiment with payment in another country.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2073421146",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 17.56,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 51,
+            "wordValue": 0.1,
+            "result": 2.4
+          },
+          "readability": {
+            "fleschKincaid": 56.82838114754102,
+            "syllables": 97,
+            "sentences": 4,
+            "score": 0.9682838114754102
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2096909929,
+        "content": "@EresDev Thank you for the update. Please, send me the Telegram DM with the redeem codes and more screens with errors if you have them.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2096909929",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 7.488,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 85.85950000000001,
+            "syllables": 32,
+            "sentences": 2,
+            "score": 0.7414049999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2097005438,
+        "content": "The update - we issued the Visa card for EresDev, the next testing step is making a purchase from this card.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2097005438",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 6.804,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 68.09500000000004,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.9190499999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2133701911,
+        "content": "@EresDev Thank you for the appreciation!\r\n@0x4007 Please, also think about compensating the costs for testing cards.\r\nI topped up the Reloadly account with 25 USD",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2133701911",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 7.104,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 67.8844871794872,
+            "syllables": 40,
+            "sentences": 3,
+            "score": 0.921155128205128
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2133870343,
+        "content": "We whitelisted new IPs.\r\nAlso, today we created 3 cards for testing purposes.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2133870343",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 4.968,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 76.59134615384617,
+            "syllables": 19,
+            "sentences": 2,
+            "score": 0.8340865384615382
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2143513847,
+        "content": "@EresDev After a brief research, I did not find a quick solution to this request.\r\n2FA is performed via Google Authenticator installed on the phone.\r\nI can provide a recovery code, but as far as I understand, it did not help rndquu to log in to the Reloadly account.\r\nAdding another email address with the same rights to the Reloadly account has not worked yet.\r\nIf this is a big problem, I can request a consultation from Reloadly Support.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2143513847",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 10.816,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 79,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 64.4334430379747,
+            "syllables": 118,
+            "sentences": 5,
+            "score": 0.9556655696202531
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2145904511,
+        "content": "@EresDev Thank you for the input. \r\nI will look for a solution.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2145904511",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 3.096,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 80.89500000000001,
+            "syllables": 17,
+            "sentences": 2,
+            "score": 0.7910499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2187150998,
+        "content": "@0x4007 \r\nIn the scope of this particular task, I helped with the implementation by providing accesses to developers, cards activating and testing, researching the issues, getting help from Reloadly support, etc.\r\nMost of this activity cannot be reflected on GitHub, but some activity is confirmed by the developers who performed this task.\r\nPlease, clarify how to get paid for helping to complete this task.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2187150998",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 8.96,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 64,
+            "wordValue": 0.1,
+            "result": 2.55
+          },
+          "readability": {
+            "fleschKincaid": 45.062916666666695,
+            "syllables": 106,
+            "sentences": 3,
+            "score": 0.850629166666667
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2190019116,
+        "content": "@EresDev Thank you for your desire to help",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2190019116",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.88,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 82.39000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.7760999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2194356358,
+        "content": "@0x4007 I topped up the Reloadly account with 25 USD from my card.\r\nYou were going to think about compensating the activity that can't be reflected on GitHub - providing accesses to developers, cards activating and testing, researching the issues and getting help from Reloadly support.\r\nIn the absence of base pay such compensation is critical.\r\nThis shouldn't be news because we have been using this system for a couple of years now.\r\nI understand a lot of this involves credentials so we can consider an exception, but will require some more thought.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2194356358",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 8.16,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 94,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 59.053000000000026,
+            "syllables": 143,
+            "sentences": 5,
+            "score": 0.9905300000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2435268236,
+        "content": "@0x4007 Hi, you promised earlier ^ to think and decide on compensation.\r\nCan you please \r\n- Compensate my costs for replenishing the Reloadly account with 25 USD from my card. These funds were used for testing, including purchases performed by you in Korea.\r\n- Additionally compensate for my support of the Reloadly integration, because a large part of the activity was not reflected in the GitHub comments to this task and was not compensated earlier.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2435268236",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 7.22,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 72,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 54.61500000000001,
+            "syllables": 114,
+            "sentences": 4,
+            "score": 0.94615
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2435318349,
+        "content": "@0x4007 Thank you.\r\nThis question arose because my base pay was stopped at the beginning of April 2024.\r\n@0x4007 Later you compensated me for 1 month of base pay, meaning the base pay was paid until the beginning of May 2024.\r\nThis Reloadly integration task was completed in mid-June 2024.\r\nThis means that from the beginning of May 2024 until this task was completed in mid-June 2024, I was not paid any base pay.",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2435318349",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 5.184,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 76,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 81.20436842105265,
+            "syllables": 99,
+            "sentences": 5,
+            "score": 0.7879563157894736
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2080253055,
+        "content": "### Reloadly documentation\r\nhttps://developers.reloadly.com/gift-cards/introduction Learn how to integrate Reloadly’s digital Gift Card API into your applications\r\nhttps://docs.reloadly.com/gift-cards API description \r\nhttps://www.youtube.com/playlist?list=PLHScUwVHI4TAV03VEtSWyiAp5IkIiBKSp Quick guide to get started with Reloadly’s API\r\nhttps://www.youtube.com/c/Reloadly\r\nhttps://github.com/Reloadly\r\nhttps://join.slack.com/t/reloadly-developers/shared_invite/zt-qflikche-fwiFA5Sxtst2mXzvJBPO3w Reloadly developers\r\n### Available prepaid cards \r\n![Visa](https://github.com/ubiquity/card-issuance/assets/15567379/5483ec7f-b5e4-4b39-92ff-2e324d29513b)\r\n![MasterCard](https://github.com/ubiquity/card-issuance/assets/15567379/64dc51b9-bb97-467f-8730-10b999438663)\r\n### Top-up in crypto\r\n![Crypto top-up](https://github.com/ubiquity/card-issuance/assets/15567379/055d711b-c33b-48a6-9576-af15398c4f4d)\r\n### Access\r\nhttps://dashboard.reloadly.com/\r\nTo get access to the Ubiquity account in the Reloadly admin panel, please contact @sergfeldman\r\nYou will need to use 2FA with Google Authenticator. \r\nAccess to the API is [here](https://drive.google.com/drive/folders/1u2_Hdeg1vxWhaYmP0uhDXbArAGQUUnso)\r\n### API setup \r\nWe should set up static IPs for requesting the Reloadly API\r\nhttps://dashboard.reloadly.com/security\r\nNote from the Support\r\n![Whitelist IP](https://github.com/ubiquity/card-issuance/assets/15567379/c33bc198-f86b-44d7-89bf-434a7b97befd)",
+        "url": "https://github.com/ubiquity/card-issuance/issues/34",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 21.18,
+          "formatting": {
+            "content": {
+              "h3": {
+                "score": 1,
+                "elementCount": 5
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 17
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 9
+              }
+            },
+            "result": 14
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 83,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 51.1262552213868,
+            "syllables": 233,
+            "sentences": 18,
+            "score": 0.911262552213868
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2116277458,
+        "content": "Yes, as far as I know, you can pay everywhere with a card in USD.\r\nThe foreign transaction fee is acceptable.\r\nFor example, from approximately 9 USD the fee of 0.17 USD was paid.\r\nMore details can be found in the card transaction history\r\n[TransactionHistory.pdf](https://github.com/ubiquity/pay.ubq.fi/files/15341442/TransactionHistory.pdf)",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2116277458",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 2.968,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 47,
+            "wordValue": 0.1,
+            "result": 2.33
+          },
+          "readability": {
+            "fleschKincaid": 67.48416666666671,
+            "syllables": 73,
+            "sentences": 6,
+            "score": 0.9251583333333329
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2172033744,
+        "content": "@Keyrxng I have provided access to the folder. Feel free to ask questions if any",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2172033744",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.72,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 92.06250000000001,
+            "syllables": 19,
+            "sentences": 2,
+            "score": 0.6793749999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 185.828 XP ]</a>&nbsp;</h3><h6>@sergfeldman</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>21.18</td></tr><tr><td>Issue</td><td>Comment</td><td>16</td><td>160.96</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>3.688</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34\" target=\"_blank\" rel=\"noopener\">### Reloadly documentationhttps://developers.reloadly.com/gift&hellip;</a></h6></td><td><details><summary>16.63</summary><pre>content:&#13;  content:&#13;    h3:&#13;      score: 1&#13;      elementCount: 5&#13;    p:&#13;      score: 0&#13;      elementCount: 17&#13;    a:&#13;      score: 1&#13;      elementCount: 9&#13;  result: 14&#13;regex:&#13;  wordCount: 83&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>1</td><td>1</td><td>21.18</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2038076657\" target=\"_blank\" rel=\"noopener\">@EresDev Thanks for your vision.Some details may be useful:-&hellip;</a></h6></td><td><details><summary>3.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.2&#13;regex:&#13;  wordCount: 50&#13;  wordValue: 0.1&#13;  result: 2.38&#13;</pre></details></td><td>1</td><td>4</td><td>18.32</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2040413944\" target=\"_blank\" rel=\"noopener\">@EresDev Since we plan to use the Reloadly API, it would be good&hellip;</a></h6></td><td><details><summary>3.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>1</td><td>4</td><td>16.28</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2061930835\" target=\"_blank\" rel=\"noopener\">@EresDev Please, provide links to the sources of information reg&hellip;</a></h6></td><td><details><summary>4.96</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 37&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3&#13;regex:&#13;  wordCount: 177&#13;  wordValue: 0.1&#13;  result: 1.96&#13;</pre></details></td><td>1</td><td>4</td><td>23.8</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2062190774\" target=\"_blank\" rel=\"noopener\">@EresDev As far as I understand, you see limited number of cards&hellip;</a></h6></td><td><details><summary>2.59</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 103&#13;  wordValue: 0.1&#13;  result: 2.59&#13;</pre></details></td><td>1</td><td>4</td><td>13.32</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2073421146\" target=\"_blank\" rel=\"noopener\">Yep, we experimented with Mastercard cards. It was possible to&hellip;</a></h6></td><td><details><summary>3.4</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 51&#13;  wordValue: 0.1&#13;  result: 2.4&#13;</pre></details></td><td>1</td><td>4</td><td>17.56</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2096909929\" target=\"_blank\" rel=\"noopener\">@EresDev Thank you for the update. Please, send me the Telegram &hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.9</td><td>4</td><td>7.488</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2097005438\" target=\"_blank\" rel=\"noopener\">The update - we issued the Visa card for EresDev, the next testi&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.9</td><td>4</td><td>6.804</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2133701911\" target=\"_blank\" rel=\"noopener\">@EresDev Thank you for the appreciation!@0x4007 Please, also t&hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.8</td><td>4</td><td>7.104</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2133870343\" target=\"_blank\" rel=\"noopener\">We whitelisted new IPs.Also, today we created 3 cards for test&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.9</td><td>4</td><td>4.968</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2143513847\" target=\"_blank\" rel=\"noopener\">@EresDev After a brief research, I did not find a quick solution&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;  result: 0&#13;regex:&#13;  wordCount: 79&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.8</td><td>4</td><td>10.816</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2145904511\" target=\"_blank\" rel=\"noopener\">@EresDev Thank you for the input. I will look for a solution.</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.6</td><td>4</td><td>3.096</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2187150998\" target=\"_blank\" rel=\"noopener\">@0x4007 In the scope of this particular task, I helped with th&hellip;</a></h6></td><td><details><summary>2.55</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 64&#13;  wordValue: 0.1&#13;  result: 2.55&#13;</pre></details></td><td>0.7</td><td>4</td><td>8.96</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2190019116\" target=\"_blank\" rel=\"noopener\">@EresDev Thank you for your desire to help</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.5</td><td>4</td><td>1.88</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2194356358\" target=\"_blank\" rel=\"noopener\">@0x4007 I topped up the Reloadly account with 25 USD from my car&hellip;</a></h6></td><td><details><summary>2.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;  result: 0&#13;regex:&#13;  wordCount: 94&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.6</td><td>4</td><td>8.16</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2435268236\" target=\"_blank\" rel=\"noopener\">@0x4007 Hi, you promised earlier ^ to think and decide on compen&hellip;</a></h6></td><td><details><summary>2.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 72&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.5</td><td>4</td><td>7.22</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/card-issuance/issues/34#issuecomment-2435318349\" target=\"_blank\" rel=\"noopener\">@0x4007 Thank you.This question arose because my base pay was &hellip;</a></h6></td><td><details><summary>2.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;  result: 0&#13;regex:&#13;  wordCount: 76&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.4</td><td>4</td><td>5.184</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2116277458\" target=\"_blank\" rel=\"noopener\">Yes, as far as I know, you can pay everywhere with a card in USD&hellip;</a></h6></td><td><details><summary>3.33</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 47&#13;  wordValue: 0.1&#13;  result: 2.33&#13;</pre></details></td><td>0.7</td><td>4</td><td>2.968</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2172033744\" target=\"_blank\" rel=\"noopener\">@Keyrxng I have provided access to the folder. Feel free to ask &hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.5</td><td>4</td><td>0.72</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 119.744,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2124156769,
+        "content": "@EresDev A few questions:\r\n1. When user claims a gift card instead of permit how permit is invalidated? I mean what stops user from claiming both gift card and our traditional permit?\r\n2. Isn't exposing [this](https://github.com/ubiquity/pay.ubq.fi/pull/226/files#diff-eb11d295c8ca21237dc1e00327762aa556a134cc486b06ae96001fea0d478f11R10) env variable a security issue since anybody would be able to [order gift cards](https://docs.reloadly.com/gift-cards/Orders/Order-Gift-Card) up to the ubiquity org balance in reloadly?\r\n3. Are gift cards shown based on user county/location? I mean is [this](https://docs.reloadly.com/gift-cards/Products/Get-Product-by-ISO-Code) API used to show available gift to the user?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2124156769",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 27.756,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.3
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 79,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 60.149898734177214,
+            "syllables": 122,
+            "sentences": 5,
+            "score": 0.9985010126582279
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2125028725,
+        "content": "@EresDev \r\nCould you provide an example of how it works exactly under the hood?\r\nCheck this example:\r\n1. User solves an issue for 100 USD\r\n2. Permit is posted in github comments\r\n3. User follows permit URL at `pay.ubq.fi`\r\n4. User claims a gift card for ~100 USD\r\nAt what point permit beneficiary is updated and what stops user from setting `permit.transferDetails.to` back to the user and claiming the permit?\r\nWhat stops any user from calling [/post-order](https://github.com/ubiquity/pay.ubq.fi/pull/226/files#diff-f8fe1b0fc5b4e444d589480e508aba99684c083dcc2af2198c46e89fd258987fR22)? Is there any auth?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2125028725",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 19.57,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 9
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.4
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 76,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 66.21578947368424,
+            "syllables": 109,
+            "sentences": 4,
+            "score": 0.9378421052631576
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2134437525,
+        "content": "Yes",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2134437525",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.072,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": 121.22000000000003,
+            "syllables": 1,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2146959509,
+        "content": "@EresDev I'm trying to check how it works locally and get an infinite \"Loading...\" label where cards are supposed to be rendered:\r\n<img width=\"1512\" alt=\"Screenshot 2024-06-04 at 11 44 43\" src=\"https://github.com/ubiquity/pay.ubq.fi/assets/119500907/2c80a755-d6df-4d50-850c-b21b425e1e14\">\r\nI tried to debug but [initClaimGiftCard](https://github.com/ubiquity/pay.ubq.fi/blob/222bd0c9319c17537f05a1658a53bc781ed9f40b/static/scripts/rewards/gift-cards/list-gift-cards.ts#L12) is not even called. What am I doing wrong?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2146959509",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 18.496,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 51,
+            "wordValue": 0.1,
+            "result": 2.4
+          },
+          "readability": {
+            "fleschKincaid": 81.30378205128206,
+            "syllables": 88,
+            "sentences": 6,
+            "score": 0.7869621794871794
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2175488193,
+        "content": "@EresDev So I should:\r\n1. Set `RELOADLY_API_CLIENT_ID`, `RELOADLY_API_CLIENT_SECRET` to production values in cloudflare env variables\r\n2. Set `USE_RELOADLY_SANDBOX=false` in cloudflare env variables\r\n3. Set `RELOADLY_SANDBOX_API_CLIENT_ID`, `RELOADLY_SANDBOX_API_CLIENT_SECRET` to sandbox values in github secrets for this repository\r\nFrontend + functions deployment will be handled by [deploy.yml](https://github.com/EresDevOrg/pay.ubq.fi/blob/c27597966c47ffee6ada7b7b47861941e2fe0e3b/.github/workflows/deploy.yml).\r\nCorrect?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2175488193",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 15.624,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.3
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 37,
+            "wordValue": 0.1,
+            "result": 2.1
+          },
+          "readability": {
+            "fleschKincaid": 52.55450450450451,
+            "syllables": 62,
+            "sentences": 3,
+            "score": 0.9255450450450451
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2175682145,
+        "content": "There is no `beta-pay-ubq-fi` project in cloudflare dashboard right now, probably because of the failed https://github.com/ubiquity/pay.ubq.fi/actions/runs/9555228242/job/26338006121 which, as far as I remember, should've created a new project\r\nCould you fix the deploy cloudflare CI and run it again so that a new project `beta-pay-ubq-fi` is created?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2175682145",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 12.96,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 44,
+            "wordValue": 0.1,
+            "result": 2.27
+          },
+          "readability": {
+            "fleschKincaid": 80.83214285714287,
+            "syllables": 74,
+            "sentences": 4,
+            "score": 0.7916785714285713
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2177102035,
+        "content": "@EresDev Right now the `beta` branch is deployed in a \"Preview\" environment. I've added `RELOADLY_API_CLIENT_ID`, `RELOADLY_API_CLIENT_SECRET` and `USE_RELOADLY_SANDBOX` to the \"Preview\" environment variables (and also set github secrets).\r\nThe latest deployment of the `beta` branch (with all env variables set) is available at https://c0c9d712.pay-ubq-fi-bxp.pages.dev/\r\n<img width=\"1512\" alt=\"Screenshot 2024-06-19 at 00 42 09\" src=\"https://github.com/ubiquity/pay.ubq.fi/assets/119500907/f47691ef-b525-4746-8787-56fff58d5bb5\">",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2177102035",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 16.41,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 52,
+            "wordValue": 0.1,
+            "result": 2.41
+          },
+          "readability": {
+            "fleschKincaid": 79.59214714714714,
+            "syllables": 104,
+            "sentences": 9,
+            "score": 0.8040785285285286
+          },
+          "multiplier": 1,
+          "relevance": 0.75
+        }
+      },
+      {
+        "id": 2177118616,
+        "content": "@0x4007 I have plain admin access to the \"Ubiquity DAO Workers\" project while editing DNS settings requires super admin.\r\n<img width=\"1512\" alt=\"Screenshot 2024-06-19 at 00 44 13\" src=\"https://github.com/ubiquity/pay.ubq.fi/assets/119500907/c5c28a84-8431-4b11-9e3d-cb42bd09efd3\">",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2177118616",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 8.856,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 76.11439130434785,
+            "syllables": 66,
+            "sentences": 5,
+            "score": 0.8388560869565215
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 119.744 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>8</td><td>119.744</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2124156769\" target=\"_blank\" rel=\"noopener\">@EresDev A few questions:1. When user claims a gift card inste&hellip;</a></h6></td><td><details><summary>5.93</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.3&#13;regex:&#13;  wordCount: 79&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.9</td><td>4</td><td>27.756</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2125028725\" target=\"_blank\" rel=\"noopener\">@EresDev Could you provide an example of how it works exactly &hellip;</a></h6></td><td><details><summary>4.02</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 9&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.4&#13;regex:&#13;  wordCount: 76&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.95</td><td>4</td><td>19.57</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2134437525\" target=\"_blank\" rel=\"noopener\">Yes</a></h6></td><td><details><summary>0.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>0.1</td><td>4</td><td>0.072</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2146959509\" target=\"_blank\" rel=\"noopener\">@EresDev I'm trying to check how it works locally and get an inf&hellip;</a></h6></td><td><details><summary>4.4</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 51&#13;  wordValue: 0.1&#13;  result: 2.4&#13;</pre></details></td><td>0.85</td><td>4</td><td>18.496</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2175488193\" target=\"_blank\" rel=\"noopener\">@EresDev So I should:1. Set &#96;RELOADLY_API_CLIENT_ID&#96;, &hellip;</a></h6></td><td><details><summary>3.4</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.3&#13;regex:&#13;  wordCount: 37&#13;  wordValue: 0.1&#13;  result: 2.1&#13;</pre></details></td><td>0.9</td><td>4</td><td>15.624</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2175682145\" target=\"_blank\" rel=\"noopener\">There is no &#96;beta-pay-ubq-fi&#96; project in cloudflare dash&hellip;</a></h6></td><td><details><summary>3.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 44&#13;  wordValue: 0.1&#13;  result: 2.27&#13;</pre></details></td><td>0.8</td><td>4</td><td>12.96</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2177102035\" target=\"_blank\" rel=\"noopener\">@EresDev Right now the &#96;beta&#96; branch is deployed in a \"P&hellip;</a></h6></td><td><details><summary>4.41</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 52&#13;  wordValue: 0.1&#13;  result: 2.41&#13;</pre></details></td><td>0.75</td><td>4</td><td>16.41</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2177118616\" target=\"_blank\" rel=\"noopener\">@0x4007 I have plain admin access to the \"Ubiquity DAO Workers\" &hellip;</a></h6></td><td><details><summary>2.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.6</td><td>4</td><td>8.856</td></tr></tbody></table></details>"
+  },
+  "Keyrxng": {
+    "total": 11.804,
+    "userId": 106303466,
+    "comments": [
+      {
+        "id": 2155869900,
+        "content": "This is awesome @EresDev.\r\nI was thinking at first what's to stop someone from watching hunter wallet addrs for txs and then being quicker than they are in using it but you cover this with checking that it's the original beneficiary before revealing anything\r\nI agree with this as it'll be a requirement for AA. My preference would be for NextJS\r\nI think code review is out of scope for me here but what I will say is with the new UI setup how does that impact https://github.com/ubiquity/pay.ubq.fi/issues/196, is the issue and spec still relevant @0x4007?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2155869900",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 2.736,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 98,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 70.92669003115266,
+            "syllables": 149,
+            "sentences": 6,
+            "score": 0.8907330996884734
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2171938611,
+        "content": "@sergfeldman can you give me access to the drive needed for reloadly access when you can, cheers\r\n- where the link to the drive is https://github.com/ubiquity/card-issuance/issues/34",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2171938611",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.044,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 74.27000000000001,
+            "syllables": 44,
+            "sentences": 2,
+            "score": 0.8573
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2174526679,
+        "content": "I have tested using polygon amoy and a WXDAI mock [deployment](https://amoy.polygonscan.com/token/0x54dca79d5f88e19261f06a647566def7765d1fce), claiming to my own [address](https://amoy.polygonscan.com/address/0xAe5D1F192013db889b1e2115A370aB133f359765) and signing using a vanity-eth [address](https://amoy.polygonscan.com/address/0x3Ed0B2A9d4d1B82C14a1A3c7e2DFE19e1e4e0965)\r\nI run it e2e on mobile and desktop without errors so everything appears to be working as expected. I did notice that on mobile the cards lose their background and are difficult to see. They appear this way without interaction I just killed two birds capturing the toast.\r\n![image](https://github.com/ubiquity/pay.ubq.fi/assets/106303466/1f270b00-5574-4db5-a0b3-0a8dbe651f3c)\r\n<hr/>\r\nI also think that the additional info is uneasy on the eyes\r\n![image](https://github.com/ubiquity/pay.ubq.fi/assets/106303466/4b3f8225-1d2b-4293-b328-9fa413e0ac7b)\r\n<hr/>\r\nI only tested with the sandbox creds but functionally things are working as expected and I think all of the angles have been covered in terms of it being exploitable, great work.\r\nIdk if it's due to my region or if everyone is only showed one card now I thought the intention was to show multiple but I was only able to see one so I'm unsure how multiple would look on mobile.\r\nI was testing from [68dfa23](https://github.com/ubiquity/pay.ubq.fi/pull/226/commits/68dfa237621935ed08906e4c2e2ca1f31465ee14)",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2174526679",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 7.056,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 10
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 4
+              }
+            },
+            "result": 4
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 165,
+            "wordValue": 0.1,
+            "result": 2.08
+          },
+          "readability": {
+            "fleschKincaid": 56.89340909090912,
+            "syllables": 238,
+            "sentences": 6,
+            "score": 0.9689340909090912
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2174548546,
+        "content": "The carousel looks and feels good on mobile as far as I can tell",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2174548546",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.72,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 83.85357142857143,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.7614642857142857
+          },
+          "multiplier": 0.25,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2177197555,
+        "content": "I may have had it but I spent like 10 mins clearing all of my workers/pages yesterday so if it was me I'd expect it to have propagated by now",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2177197555",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.248,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 71.24875000000003,
+            "syllables": 39,
+            "sentences": 1,
+            "score": 0.8875124999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/226"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 11.804 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>5</td><td>11.804</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2155869900\" target=\"_blank\" rel=\"noopener\">This is awesome @EresDev.I was thinking at first what's to sto&hellip;</a></h6></td><td><details><summary>3.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 98&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.6</td><td>4</td><td>2.736</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2171938611\" target=\"_blank\" rel=\"noopener\">@sergfeldman can you give me access to the drive needed for relo&hellip;</a></h6></td><td><details><summary>2.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.1&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.3</td><td>4</td><td>1.044</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2174526679\" target=\"_blank\" rel=\"noopener\">I have tested using polygon amoy and a WXDAI mock [deployment](h&hellip;</a></h6></td><td><details><summary>6.08</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 10&#13;    a:&#13;      score: 1&#13;      elementCount: 4&#13;  result: 4&#13;regex:&#13;  wordCount: 165&#13;  wordValue: 0.1&#13;  result: 2.08&#13;</pre></details></td><td>0.9</td><td>4</td><td>7.056</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2174548546\" target=\"_blank\" rel=\"noopener\">The carousel looks and feels good on mobile as far as I can tell</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.5</td><td>4</td><td>0.72</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/226#issuecomment-2177197555\" target=\"_blank\" rel=\"noopener\">I may have had it but I spent like 10 mins clearing all of my wo&hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.1</td><td>4</td><td>0.248</td></tr></tbody></table></details>"
+  }
+}

@@ -1,0 +1,992 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 300,
+    "task": {
+      "reward": 300,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 300 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>300</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 300,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2299560208,
+        "content": "Originally created at https://github.com/ubiquibot/conversation-rewards/issues/83",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92#issuecomment-2299560208",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.474,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 16.670681818181833,
+            "syllables": 24,
+            "sentences": 2,
+            "score": 0.5667068181818183
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2299587456,
+        "content": "Hope that you can prioritize this so that I can start fine tuning the incentives!",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92#issuecomment-2299587456",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.9,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 78.81000000000003,
+            "syllables": 20,
+            "sentences": 1,
+            "score": 0.8118999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2352088749,
+        "content": "Yes as I recall in the old implementation if it came across an \"ignored\" tag then it would count the total amount of words inside and then subtract from the net score.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92#issuecomment-2352088749",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 6.072,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 60.67375000000003,
+            "syllables": 43,
+            "sentences": 1,
+            "score": 0.9932624999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2352316207,
+        "content": "In normal front-end code I would express this logic as follows:\r\n```javascript\r\nconst codes = document.querySelectorAll(`code`);\r\nlet excludedWordCount = 0;\r\nfor (const code of codes){\r\n  excludedWordCount += getWordCount(code);\r\n}\r\n// ...\r\nconst netWordScore = totalWordCount - excludedWordCount;\r\nreturn netWordScore;\r\nfunction getWordCount(element) {\r\n  return element.textContent.split(\" \").length;\r\n}\r\n```\r\nBut ultimately it appears that we will scrap this word counting logic all together pretty soon. The more robust way to credit for productive contributions is via semantic understanding of the corpus. This will be handled by embeddings most likely. \r\nHowever I do want to retain the tag/element counter because there is definitely a high correlation with high quality comments and sample images, links, and code. \r\nSo definitely need to emphasize counting tags as per the original design. The word counting is an afterthought and will be removed when we figure out a good strategy with embeddings.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92#issuecomment-2352316207",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 9.75,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 110,
+            "wordValue": 0.1,
+            "result": 2.56
+          },
+          "readability": {
+            "fleschKincaid": 49.79030303030305,
+            "syllables": 180,
+            "sentences": 6,
+            "score": 0.8979030303030305
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2357720289,
+        "content": "Relevance should only apply to word count. \nTag count should remain unaffected. For example every image should guarantee $5",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92#issuecomment-2357720289",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 4.941,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 53.4698245614035,
+            "syllables": 33,
+            "sentences": 3,
+            "score": 0.934698245614035
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2360020719,
+        "content": "It's really hard to say from those results. It's always been difficult to understand the results based on the results table unfortunately",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92#issuecomment-2360020719",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.568,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 57.18000000000001,
+            "syllables": 39,
+            "sentences": 2,
+            "score": 0.9718000000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2360073706,
+        "content": "Sounds good to me!",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92#issuecomment-2360073706",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.342,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 118.17500000000001,
+            "syllables": 4,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2382179562,
+        "content": "Looks like the rewards count is broken",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92#issuecomment-2382179562",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.245,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 90.95857142857145,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.6904142857142855
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2382227483,
+        "content": "That's strange. It excludes the relevance column with truncated output.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92#issuecomment-2382227483",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.845,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 70.50704545454548,
+            "syllables": 17,
+            "sentences": 2,
+            "score": 0.8949295454545453
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2398972541,
+        "content": "I realize now its in the details table which is all excluded for truncated outputs so it makes sense. https://github.com/ubiquity/pay.ubq.fi/issues/287#issuecomment-2365437315\r\n<img width=\"1133\" alt=\"image\" src=\"https://github.com/user-attachments/assets/0dc9ef1f-e195-4ec2-868a-09011cc23da4\">",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92#issuecomment-2398972541",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 9.681,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 78.28416666666669,
+            "syllables": 67,
+            "sentences": 6,
+            "score": 0.8171583333333331
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2476338464,
+        "content": "I was reviewing this action run and its a lot more clear to me when looking at the clean JSON logs exactly whats going on here. I realized that the scoring is implemented incorrectly. The primary crediting strategy is supposed to be based on the amount of elements. The word counter is a separate scoring mechanism. This was added as an after thought in version one, but it seems that you prioritized word count over element count. \r\nThe problem is that the original emphasis on element count allows us to easily target and credit special and useful elements such as `<a>`, `<img>`, and `<code>`. Helpful comments generally have links, images and code samples. \r\n- With the following example, I would expect only one `<p>`\r\n- The comment word count is `7`\r\n- We also need the ability to ignore words inside of specific tags. For example, `<code>` \r\nNow you are keeping track of word count PER element which is more complex than it needs to be. Remember, the word count scoring strategy was added as an after thought for version one. Version one simply counts all the words in the comment (but also ignores words in specific elements, like `code`.) at the end of all the complex calculations.\r\nAside from the ignore capability, it doesn't care which element contains the words. \r\n```jsonc\r\n{\r\n  \"id\": 2014495969,\r\n  \"content\": \"Wouldn't solve scenarios requiring keys or credentials\",\r\n  \"url\": \"https://github.com/ubiquity/cloudflare-deploy-action/issues/6#issuecomment-2014495969\",\r\n  \"type\": \"ISSUE_ASSIGNEE\",\r\n  \"score\": {\r\n    \"formatting\": {\r\n      \"content\": {\r\n        \"p\": {\r\n          \"count\": 7, // should be changed to `wordCount` and you should correctly count the amount of `p` tags to be `elementCount`\r\n          \"score\": 1\r\n        }\r\n      },\r\n      \"wordValue\": 0,\r\n      \"formattingMultiplier\": 0\r\n    },\r\n    \"reward\": 0,\r\n    \"relevance\": 0.3\r\n  }\r\n}\r\n```\r\n- I would expect our `p` scoring to be `0` but our word scoring to be `0.1` for a grand total of `0.7`. \r\n- Because this is the assignee writing on the issue (not the pull) we can provide credit; so the multiplier should not be `0`. \r\n- Perhaps we could do a 4x multiplier, which yields `2.8` but then multiply by relevance to yield a sum of `0.84` for the comment.\r\n[Source](https://github.com/ubiquibot/conversation-rewards/actions/runs/10474375714/job/29008494818#step:7:527)",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.43,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 11
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 6
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.6
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 275,
+            "wordValue": 0.1,
+            "result": 1.07
+          },
+          "readability": {
+            "fleschKincaid": 65.20788235294121,
+            "syllables": 407,
+            "sentences": 17,
+            "score": 0.9479211764705879
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1769498289,
+        "content": "I'm assuming this was for testing. Let's default at 5 \nAs well as for code and links.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1769498289",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -18,7 +18,7 @@ const htmlType = Type.Record(Type.String(), Type.Number(), {\n     code: 1,\n     p: 1,\n     em: 0,\n-    img: 0,\n+    img: 1,",
+        "score": {
+          "reward": 4.104,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 94.78197368421053,
+            "syllables": 23,
+            "sentences": 2,
+            "score": 0.6521802631578947
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1769498369,
+        "content": "I would switch these args around and then make it \ncomment?:\nInstead of writing undefined as the type",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1769498369",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -74,6 +74,19 @@ export class ContentEvaluatorModule implements Module {\n     return result;\n   }\n \n+  _getRewardForComment(comment: GithubCommentScore | undefined, relevance: number) {",
+        "score": {
+          "reward": 3.549,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 84.90000000000003,
+            "syllables": 24,
+            "sentences": 2,
+            "score": 0.7509999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1769700991,
+        "content": "Then remove `| undefined`\nIt's logically the same",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1769700991",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -74,6 +74,19 @@ export class ContentEvaluatorModule implements Module {\n     return result;\n   }\n \n+  _getRewardForComment(comment: GithubCommentScore | undefined, relevance: number) {",
+        "score": {
+          "reward": 1.584,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 66.7871428571429,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.9321285714285711
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1771522860,
+        "content": "Where are the standardized headers? Body should be json compliant. \n This needs to be used across all plugins for a single parser to work",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1771522860",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -52,6 +52,9 @@ export class GithubCommentModule implements Module {\n         result[key].evaluationCommentHtml = await this._generateHtml(key, value, true);\n         strippedBody.push(result[key].evaluationCommentHtml);\n       }\n+      strippedBody.push(\"\\n<!--\");\n+      strippedBody.push(this._encodeHTML(`\\n${getGithubWorkflowRunUrl()}`));",
+        "score": {
+          "reward": 4.92,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 82.39000000000001,
+            "syllables": 33,
+            "sentences": 3,
+            "score": 0.7760999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1771527708,
+        "content": "Just use textContent from the top level parent element as we discussed several times. Copy my first implementation. The word counting was never complex.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1771527708",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -113,66 +114,83 @@ export class FormattingEvaluatorModule implements Module {\n     logger.debug(\"Will analyze formatting for the current content\", { comment: comment.content, html });\n     const temp = new JSDOM(html);\n     if (temp.window.document.body) {\n-      const res = this.classifyTagsWithWordCount(temp.window.document.body, comment.type);\n+      const res = this._classifyTagsWithWordCount(temp.window.document.body, comment.type);\n       return { formatting: res };\n     } else {\n       throw new Error(`Could not create DOM for comment [${comment}]`);\n     }\n   }\n \n-  _countSymbols(regexes: FormattingEvaluatorConfiguration[\"multipliers\"][0][\"rewards\"][\"regex\"], text: string) {\n-    const counts: { [p: string]: { count: number; multiplier: number } } = {};\n-    for (const [regex, multiplier] of Object.entries(regexes)) {\n+  _countSymbolsFromRegex(\n+    regexes: FormattingEvaluatorConfiguration[\"multipliers\"][0][\"rewards\"][\"regex\"],\n+    text: string\n+  ) {\n+    const counts: RegexCount = {};\n+    for (const [regex, wordValue] of Object.entries(regexes)) {\n       const match = text.trim().match(new RegExp(regex, \"g\"));\n       counts[regex] = {\n-        count: match?.length || 1,\n-        multiplier,\n+        wordCount: match?.length || 0,\n+        wordValue: wordValue,\n       };\n     }\n     return counts;\n   }\n \n-  classifyTagsWithWordCount(htmlElement: HTMLElement, commentType: GithubCommentScore[\"type\"]) {\n-    const tagWordCount: Record<\n-      string,\n-      { symbols: { [p: string]: { count: number; multiplier: number } }; score: number }\n-    > = {};\n+  _updateTagCount(\n+    tagCount: Record<string, { regex: RegexCount; score: number; elementCount: number }>,\n+    tagName: string,\n+    regexCount: RegexCount,\n+    score: number\n+  ) {\n+    // If we already had that tag included in the result, merge them and update total count\n+    if (Object.keys(tagCount).includes(tagName)) {\n+      for (const [k, v] of Object.entries(regexCount)) {\n+        if (Object.keys(tagCount[tagName].regex).includes(k)) {\n+          tagCount[tagName].regex[k] = {\n+            ...tagCount[tagName].regex[k],\n+            wordCount: tagCount[tagName].regex[k].wordCount + v.wordCount,\n+          };\n+          tagCount[tagName].elementCount += 1;\n+        }\n+      }\n+    } else {\n+      tagCount[tagName] = {\n+        regex: regexCount,\n+        score,\n+        elementCount: 1,\n+      };\n+    }\n+  }\n+\n+  _classifyTagsWithWordCount(htmlElement: HTMLElement, commentType: GithubCommentScore[\"type\"]) {\n+    const tagCount: Record<string, { regex: RegexCount; score: number; elementCount: number }> = {};\n     const elements = htmlElement.getElementsByTagName(\"*\");\n \n     for (const element of elements) {\n       const tagName = element.tagName.toLowerCase();\n-      // We cannot use textContent otherwise we would duplicate counts, so instead we extract text nodes\n-      const textNodes = Array.from(element?.childNodes || []).filter((node) => node.nodeType === 3);\n-      const innerText = textNodes\n-        .map((node) => node.nodeValue?.trim())\n-        .join(\" \")\n-        .trim();\n-      const symbols = this._countSymbols(this._multipliers[commentType].regex, innerText);\n       let score = 0;\n       if (this._multipliers[commentType]?.html[tagName] !== undefined) {\n         score = this._multipliers[commentType].html[tagName];\n-      } else {\n-        logger.error(`Could not find multiplier for comment [${commentType}], <${tagName}>`);\n-      }\n-      logger.debug(\"Tag content results\", { tagName, symbols, text: element.textContent });\n-      // If we already had that tag included in the result, merge them and update total count\n-      if (Object.keys(tagWordCount).includes(tagName)) {\n-        for (const [k, v] of Object.entries(symbols)) {\n-          if (Object.keys(tagWordCount[tagName].symbols).includes(k)) {\n-            tagWordCount[tagName].symbols[k] = {\n-              ...tagWordCount[tagName].symbols[k],\n-              count: tagWordCount[tagName].symbols[k].count + v.count,\n-            };\n-          }\n+        if (score === 0) {\n+          element.remove();\n+          continue;\n         }\n       } else {\n-        tagWordCount[tagName] = {\n-          symbols: symbols,\n-          score,\n-        };\n+        logger.error(`Could not find multiplier for element <${tagName}> in comment [${element.outerHTML}]`);\n+        element.remove();\n+        continue;\n       }\n-    }\n \n-    return tagWordCount;\n+      // We cannot use textContent otherwise we would duplicate counts, so instead we extract text nodes",
+        "score": {
+          "reward": 5.751,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 54.190000000000026,
+            "syllables": 41,
+            "sentences": 3,
+            "score": 0.9419000000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1771532629,
+        "content": "Is there another config to subtract words inside for this and block quote?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1771532629",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -15,10 +15,10 @@ const regexType = Type.Record(Type.String(), Type.Number(), { minProperties: 1 }\n const htmlType = Type.Record(Type.String(), Type.Number(), {\n   default: {\n     br: 0,\n-    code: 1,\n+    code: 5,",
+        "score": {
+          "reward": 2.898,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 76.50153846153849,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.8349846153846151
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1771604702,
+        "content": "We also discussed that several times. The scoring, which is all that really matters, was correct regarding word count. The analytics counter wasn't.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1771604702",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -113,66 +114,83 @@ export class FormattingEvaluatorModule implements Module {\n     logger.debug(\"Will analyze formatting for the current content\", { comment: comment.content, html });\n     const temp = new JSDOM(html);\n     if (temp.window.document.body) {\n-      const res = this.classifyTagsWithWordCount(temp.window.document.body, comment.type);\n+      const res = this._classifyTagsWithWordCount(temp.window.document.body, comment.type);\n       return { formatting: res };\n     } else {\n       throw new Error(`Could not create DOM for comment [${comment}]`);\n     }\n   }\n \n-  _countSymbols(regexes: FormattingEvaluatorConfiguration[\"multipliers\"][0][\"rewards\"][\"regex\"], text: string) {\n-    const counts: { [p: string]: { count: number; multiplier: number } } = {};\n-    for (const [regex, multiplier] of Object.entries(regexes)) {\n+  _countSymbolsFromRegex(\n+    regexes: FormattingEvaluatorConfiguration[\"multipliers\"][0][\"rewards\"][\"regex\"],\n+    text: string\n+  ) {\n+    const counts: RegexCount = {};\n+    for (const [regex, wordValue] of Object.entries(regexes)) {\n       const match = text.trim().match(new RegExp(regex, \"g\"));\n       counts[regex] = {\n-        count: match?.length || 1,\n-        multiplier,\n+        wordCount: match?.length || 0,\n+        wordValue: wordValue,\n       };\n     }\n     return counts;\n   }\n \n-  classifyTagsWithWordCount(htmlElement: HTMLElement, commentType: GithubCommentScore[\"type\"]) {\n-    const tagWordCount: Record<\n-      string,\n-      { symbols: { [p: string]: { count: number; multiplier: number } }; score: number }\n-    > = {};\n+  _updateTagCount(\n+    tagCount: Record<string, { regex: RegexCount; score: number; elementCount: number }>,\n+    tagName: string,\n+    regexCount: RegexCount,\n+    score: number\n+  ) {\n+    // If we already had that tag included in the result, merge them and update total count\n+    if (Object.keys(tagCount).includes(tagName)) {\n+      for (const [k, v] of Object.entries(regexCount)) {\n+        if (Object.keys(tagCount[tagName].regex).includes(k)) {\n+          tagCount[tagName].regex[k] = {\n+            ...tagCount[tagName].regex[k],\n+            wordCount: tagCount[tagName].regex[k].wordCount + v.wordCount,\n+          };\n+          tagCount[tagName].elementCount += 1;\n+        }\n+      }\n+    } else {\n+      tagCount[tagName] = {\n+        regex: regexCount,\n+        score,\n+        elementCount: 1,\n+      };\n+    }\n+  }\n+\n+  _classifyTagsWithWordCount(htmlElement: HTMLElement, commentType: GithubCommentScore[\"type\"]) {\n+    const tagCount: Record<string, { regex: RegexCount; score: number; elementCount: number }> = {};\n     const elements = htmlElement.getElementsByTagName(\"*\");\n \n     for (const element of elements) {\n       const tagName = element.tagName.toLowerCase();\n-      // We cannot use textContent otherwise we would duplicate counts, so instead we extract text nodes\n-      const textNodes = Array.from(element?.childNodes || []).filter((node) => node.nodeType === 3);\n-      const innerText = textNodes\n-        .map((node) => node.nodeValue?.trim())\n-        .join(\" \")\n-        .trim();\n-      const symbols = this._countSymbols(this._multipliers[commentType].regex, innerText);\n       let score = 0;\n       if (this._multipliers[commentType]?.html[tagName] !== undefined) {\n         score = this._multipliers[commentType].html[tagName];\n-      } else {\n-        logger.error(`Could not find multiplier for comment [${commentType}], <${tagName}>`);\n-      }\n-      logger.debug(\"Tag content results\", { tagName, symbols, text: element.textContent });\n-      // If we already had that tag included in the result, merge them and update total count\n-      if (Object.keys(tagWordCount).includes(tagName)) {\n-        for (const [k, v] of Object.entries(symbols)) {\n-          if (Object.keys(tagWordCount[tagName].symbols).includes(k)) {\n-            tagWordCount[tagName].symbols[k] = {\n-              ...tagWordCount[tagName].symbols[k],\n-              count: tagWordCount[tagName].symbols[k].count + v.count,\n-            };\n-          }\n+        if (score === 0) {\n+          element.remove();\n+          continue;\n         }\n       } else {\n-        tagWordCount[tagName] = {\n-          symbols: symbols,\n-          score,\n-        };\n+        logger.error(`Could not find multiplier for element <${tagName}> in comment [${element.outerHTML}]`);\n+        element.remove();\n+        continue;\n       }\n-    }\n \n-    return tagWordCount;\n+      // We cannot use textContent otherwise we would duplicate counts, so instead we extract text nodes",
+        "score": {
+          "reward": 5.112,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 64.76500000000001,
+            "syllables": 38,
+            "sentences": 3,
+            "score": 0.9523499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1771605099,
+        "content": "Yes",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1771605099",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -15,10 +15,10 @@ const regexType = Type.Record(Type.String(), Type.Number(), { minProperties: 1 }\n const htmlType = Type.Record(Type.String(), Type.Number(), {\n   default: {\n     br: 0,\n-    code: 1,\n+    code: 5,",
+        "score": {
+          "reward": 0.216,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": 121.22000000000003,
+            "syllables": 1,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1771607389,
+        "content": "Last time I coded for bot features was v1. You can check there. \nWe should have one function in our SDK and encourage use across plugins for any comments\n@whilefoo as I recall you were working on the SDK, perhaps you can prioritize making this.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1771607389",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -52,6 +52,9 @@ export class GithubCommentModule implements Module {\n         result[key].evaluationCommentHtml = await this._generateHtml(key, value, true);\n         strippedBody.push(result[key].evaluationCommentHtml);\n       }\n+      strippedBody.push(\"\\n<!--\");\n+      strippedBody.push(this._encodeHTML(`\\n${getGithubWorkflowRunUrl()}`));",
+        "score": {
+          "reward": 5.985,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 45,
+            "wordValue": 0.1,
+            "result": 2.29
+          },
+          "readability": {
+            "fleschKincaid": 78.81000000000003,
+            "syllables": 60,
+            "sentences": 3,
+            "score": 0.8118999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1772685213,
+        "content": "No. \r\nHowever we need to be able to exclude word count from `blockquote` and `code`.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1772685213",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -113,66 +114,83 @@ export class FormattingEvaluatorModule implements Module {\n     logger.debug(\"Will analyze formatting for the current content\", { comment: comment.content, html });\n     const temp = new JSDOM(html);\n     if (temp.window.document.body) {\n-      const res = this.classifyTagsWithWordCount(temp.window.document.body, comment.type);\n+      const res = this._classifyTagsWithWordCount(temp.window.document.body, comment.type);\n       return { formatting: res };\n     } else {\n       throw new Error(`Could not create DOM for comment [${comment}]`);\n     }\n   }\n \n-  _countSymbols(regexes: FormattingEvaluatorConfiguration[\"multipliers\"][0][\"rewards\"][\"regex\"], text: string) {\n-    const counts: { [p: string]: { count: number; multiplier: number } } = {};\n-    for (const [regex, multiplier] of Object.entries(regexes)) {\n+  _countSymbolsFromRegex(\n+    regexes: FormattingEvaluatorConfiguration[\"multipliers\"][0][\"rewards\"][\"regex\"],\n+    text: string\n+  ) {\n+    const counts: RegexCount = {};\n+    for (const [regex, wordValue] of Object.entries(regexes)) {\n       const match = text.trim().match(new RegExp(regex, \"g\"));\n       counts[regex] = {\n-        count: match?.length || 1,\n-        multiplier,\n+        wordCount: match?.length || 0,\n+        wordValue: wordValue,\n       };\n     }\n     return counts;\n   }\n \n-  classifyTagsWithWordCount(htmlElement: HTMLElement, commentType: GithubCommentScore[\"type\"]) {\n-    const tagWordCount: Record<\n-      string,\n-      { symbols: { [p: string]: { count: number; multiplier: number } }; score: number }\n-    > = {};\n+  _updateTagCount(\n+    tagCount: Record<string, { regex: RegexCount; score: number; elementCount: number }>,\n+    tagName: string,\n+    regexCount: RegexCount,\n+    score: number\n+  ) {\n+    // If we already had that tag included in the result, merge them and update total count\n+    if (Object.keys(tagCount).includes(tagName)) {\n+      for (const [k, v] of Object.entries(regexCount)) {\n+        if (Object.keys(tagCount[tagName].regex).includes(k)) {\n+          tagCount[tagName].regex[k] = {\n+            ...tagCount[tagName].regex[k],\n+            wordCount: tagCount[tagName].regex[k].wordCount + v.wordCount,\n+          };\n+          tagCount[tagName].elementCount += 1;\n+        }\n+      }\n+    } else {\n+      tagCount[tagName] = {\n+        regex: regexCount,\n+        score,\n+        elementCount: 1,\n+      };\n+    }\n+  }\n+\n+  _classifyTagsWithWordCount(htmlElement: HTMLElement, commentType: GithubCommentScore[\"type\"]) {\n+    const tagCount: Record<string, { regex: RegexCount; score: number; elementCount: number }> = {};\n     const elements = htmlElement.getElementsByTagName(\"*\");\n \n     for (const element of elements) {\n       const tagName = element.tagName.toLowerCase();\n-      // We cannot use textContent otherwise we would duplicate counts, so instead we extract text nodes\n-      const textNodes = Array.from(element?.childNodes || []).filter((node) => node.nodeType === 3);\n-      const innerText = textNodes\n-        .map((node) => node.nodeValue?.trim())\n-        .join(\" \")\n-        .trim();\n-      const symbols = this._countSymbols(this._multipliers[commentType].regex, innerText);\n       let score = 0;\n       if (this._multipliers[commentType]?.html[tagName] !== undefined) {\n         score = this._multipliers[commentType].html[tagName];\n-      } else {\n-        logger.error(`Could not find multiplier for comment [${commentType}], <${tagName}>`);\n-      }\n-      logger.debug(\"Tag content results\", { tagName, symbols, text: element.textContent });\n-      // If we already had that tag included in the result, merge them and update total count\n-      if (Object.keys(tagWordCount).includes(tagName)) {\n-        for (const [k, v] of Object.entries(symbols)) {\n-          if (Object.keys(tagWordCount[tagName].symbols).includes(k)) {\n-            tagWordCount[tagName].symbols[k] = {\n-              ...tagWordCount[tagName].symbols[k],\n-              count: tagWordCount[tagName].symbols[k].count + v.count,\n-            };\n-          }\n+        if (score === 0) {\n+          element.remove();\n+          continue;\n         }\n       } else {\n-        tagWordCount[tagName] = {\n-          symbols: symbols,\n-          score,\n-        };\n+        logger.error(`Could not find multiplier for element <${tagName}> in comment [${element.outerHTML}]`);\n+        element.remove();\n+        continue;\n       }\n-    }\n \n-    return tagWordCount;\n+      // We cannot use textContent otherwise we would duplicate counts, so instead we extract text nodes",
+        "score": {
+          "reward": 3.192,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 89.6067307692308,
+            "syllables": 17,
+            "sentences": 2,
+            "score": 0.7039326923076921
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1773100601,
+        "content": "Default to `true` \r\nThe only ones that don't count words are `code` and `blockquote`",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1773100601",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -15,10 +15,10 @@ const regexType = Type.Record(Type.String(), Type.Number(), { minProperties: 1 }\n const htmlType = Type.Record(Type.String(), Type.Number(), {\n   default: {\n     br: 0,\n-    code: 1,\n+    code: 5,",
+        "score": {
+          "reward": 2.604,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 95.955,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.64045
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1777701867,
+        "content": "We are currently only using it for word counting which I kind of hate. We should hardcode a word counter config property and then under the hood it just uses this regex. \nThe repeated regex declarations in our configs looks bad and can be easily replaced with something like \"word counter\"",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1777701867",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -110,69 +107,67 @@ export class FormattingEvaluatorModule implements Module {\n   _getFormattingScore(comment: GithubCommentScore) {\n     // Change the \\r to \\n to fix markup interpretation\n     const html = this._md.render(comment.content.replaceAll(\"\\r\", \"\\n\"));\n-    logger.debug(\"Will analyze formatting for the current content\", { comment: comment.content, html });\n+    logger.debug(\"Will analyze formatting for the current content:\", { comment: comment.content, html });\n     const temp = new JSDOM(html);\n     if (temp.window.document.body) {\n-      const res = this.classifyTagsWithWordCount(temp.window.document.body, comment.type);\n-      return { formatting: res };\n+      const res = this._classifyTagsWithWordCount(temp.window.document.body, comment.type);\n+      return { formatting: res.formatting, regex: res.regex };\n     } else {\n       throw new Error(`Could not create DOM for comment [${comment}]`);\n     }\n   }\n \n-  _countSymbols(regexes: FormattingEvaluatorConfiguration[\"multipliers\"][0][\"rewards\"][\"regex\"], text: string) {\n-    const counts: { [p: string]: { count: number; multiplier: number } } = {};\n-    for (const [regex, multiplier] of Object.entries(regexes)) {\n+  _countSymbolsFromRegex(\n+    regexes: FormattingEvaluatorConfiguration[\"multipliers\"][0][\"rewards\"][\"regex\"],\n+    text: string\n+  ) {\n+    const counts: RegexCount = {};\n+    for (const [regex, wordValue] of Object.entries(regexes)) {\n       const match = text.trim().match(new RegExp(regex, \"g\"));\n+      const wordCount = match?.length || 0;\n+      const result = new Decimal(wordCount).pow(this._wordCountExponent).mul(wordValue).toDecimalPlaces(2).toNumber();\n       counts[regex] = {\n-        count: match?.length || 1,\n-        multiplier,\n+        wordCount,\n+        wordValue,\n+        result,\n       };\n     }",
+        "score": {
+          "reward": 8.316,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 51,
+            "wordValue": 0.1,
+            "result": 2.4
+          },
+          "readability": {
+            "fleschKincaid": 65.16823529411766,
+            "syllables": 75,
+            "sentences": 3,
+            "score": 0.9483176470588234
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1778710740,
+        "content": "Can handle in a new pull but basically I'm suggesting to hard code this regex in place of a new config property so the config looks prettier.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1778710740",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -110,69 +107,67 @@ export class FormattingEvaluatorModule implements Module {\n   _getFormattingScore(comment: GithubCommentScore) {\n     // Change the \\r to \\n to fix markup interpretation\n     const html = this._md.render(comment.content.replaceAll(\"\\r\", \"\\n\"));\n-    logger.debug(\"Will analyze formatting for the current content\", { comment: comment.content, html });\n+    logger.debug(\"Will analyze formatting for the current content:\", { comment: comment.content, html });\n     const temp = new JSDOM(html);\n     if (temp.window.document.body) {\n-      const res = this.classifyTagsWithWordCount(temp.window.document.body, comment.type);\n-      return { formatting: res };\n+      const res = this._classifyTagsWithWordCount(temp.window.document.body, comment.type);\n+      return { formatting: res.formatting, regex: res.regex };\n     } else {\n       throw new Error(`Could not create DOM for comment [${comment}]`);\n     }\n   }\n \n-  _countSymbols(regexes: FormattingEvaluatorConfiguration[\"multipliers\"][0][\"rewards\"][\"regex\"], text: string) {\n-    const counts: { [p: string]: { count: number; multiplier: number } } = {};\n-    for (const [regex, multiplier] of Object.entries(regexes)) {\n+  _countSymbolsFromRegex(\n+    regexes: FormattingEvaluatorConfiguration[\"multipliers\"][0][\"rewards\"][\"regex\"],\n+    text: string\n+  ) {\n+    const counts: RegexCount = {};\n+    for (const [regex, wordValue] of Object.entries(regexes)) {\n       const match = text.trim().match(new RegExp(regex, \"g\"));\n+      const wordCount = match?.length || 0;\n+      const result = new Decimal(wordCount).pow(this._wordCountExponent).mul(wordValue).toDecimalPlaces(2).toNumber();\n       counts[regex] = {\n-        count: match?.length || 1,\n-        multiplier,\n+        wordCount,\n+        wordValue,\n+        result,\n       };\n     }",
+        "score": {
+          "reward": 4.212,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 57.55785714285717,
+            "syllables": 40,
+            "sentences": 1,
+            "score": 0.9755785714285717
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2377892909,
+        "content": "The permit link doesn't work. \nAlso I realize that most defaults should be set to 0 probably. It seems like your default scores are very high. \nOff hand what I recall from version one:\n$5: img, code, a\n$1: ol, ul, h1-6\n$0.5: li\n$0.1: word counter,\n$0: blockquote, bold \nPlease fix defaults and ensure permit links are working",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#issuecomment-2377892909",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 8.316,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 63,
+            "wordValue": 0.1,
+            "result": 2.55
+          },
+          "readability": {
+            "fleschKincaid": 90.09178571428573,
+            "syllables": 79,
+            "sentences": 6,
+            "score": 0.6990821428571427
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2379037086,
+        "content": "We should throw an error for this instead of generating a fake link.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#issuecomment-2379037086",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.898,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 76.50153846153849,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.8349846153846151
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2319676047,
+            "effect": {
+              "addition": 1672,
+              "deletion": 1443
+            },
+            "reward": 93.45,
+            "priority": 3
+          },
+          {
+            "reviewId": 2322379901,
+            "effect": {
+              "addition": 23645,
+              "deletion": 2049
+            },
+            "reward": 770.82,
+            "priority": 3
+          },
+          {
+            "reviewId": 2332295832,
+            "effect": {
+              "addition": 4041,
+              "deletion": 4476
+            },
+            "reward": 255.51,
+            "priority": 3
+          },
+          {
+            "reviewId": 2333889569,
+            "effect": {
+              "addition": 6,
+              "deletion": 6
+            },
+            "reward": 0.36,
+            "priority": 3
+          },
+          {
+            "reviewId": 2336429682,
+            "effect": {
+              "addition": 2056,
+              "deletion": 2781
+            },
+            "reward": 145.11,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 300 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>5</td><td>1265.25</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.43</td></tr><tr><td>Issue</td><td>Comment</td><td>10</td><td>37.818</td></tr><tr><td>Review</td><td>Comment</td><td>15</td><td>63.657</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121\" target=\"_blank\" rel=\"noopener\">#121</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+1672 -1443</td><td>3</td><td>93.45</td></tr><tr><td>+23645 -2049</td><td>3</td><td>770.82</td></tr><tr><td>+4041 -4476</td><td>3</td><td>255.51</td></tr><tr><td>+6 -6</td><td>3</td><td>0.36</td></tr><tr><td>+2056 -2781</td><td>3</td><td>145.11</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92\" target=\"_blank\" rel=\"noopener\">I was reviewing this action run and its a lot more clear to me w&hellip;</a></h6></td><td><details><summary>2.67</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 11&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 6&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.6&#13;regex:&#13;  wordCount: 275&#13;  wordValue: 0.1&#13;  result: 1.07&#13;</pre></details></td><td>1</td><td>1</td><td>3.43</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92#issuecomment-2299560208\" target=\"_blank\" rel=\"noopener\">Originally created at https://github.com/ubiquibot/conversation-&hellip;</a></h6></td><td><details><summary>1.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.474</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92#issuecomment-2299587456\" target=\"_blank\" rel=\"noopener\">Hope that you can prioritize this so that I can start fine tunin&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.9</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92#issuecomment-2352088749\" target=\"_blank\" rel=\"noopener\">Yes as I recall in the old implementation if it came across an \"&hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.8</td><td>3</td><td>6.072</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92#issuecomment-2352316207\" target=\"_blank\" rel=\"noopener\">In normal front-end code I would express this logic as follows:&hellip;</a></h6></td><td><details><summary>2.56</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 110&#13;  wordValue: 0.1&#13;  result: 2.56&#13;</pre></details></td><td>1</td><td>3</td><td>9.75</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92#issuecomment-2357720289\" target=\"_blank\" rel=\"noopener\">Relevance should only apply to word count. Tag count should rem&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.9</td><td>3</td><td>4.941</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92#issuecomment-2360020719\" target=\"_blank\" rel=\"noopener\">It's really hard to say from those results. It's always been dif&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.4</td><td>3</td><td>2.568</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92#issuecomment-2360073706\" target=\"_blank\" rel=\"noopener\">Sounds good to me!</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.342</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92#issuecomment-2382179562\" target=\"_blank\" rel=\"noopener\">Looks like the rewards count is broken</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.5</td><td>3</td><td>1.245</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92#issuecomment-2382227483\" target=\"_blank\" rel=\"noopener\">That's strange. It excludes the relevance column with truncated &hellip;</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.5</td><td>3</td><td>1.845</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/92#issuecomment-2398972541\" target=\"_blank\" rel=\"noopener\">I realize now its in the details table which is all excluded for&hellip;</a></h6></td><td><details><summary>3.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.7</td><td>3</td><td>9.681</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1769498289\" target=\"_blank\" rel=\"noopener\">I'm assuming this was for testing. Let's default at 5 As well a&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.104</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1769498369\" target=\"_blank\" rel=\"noopener\">I would switch these args around and then make it comment?:Ins&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.7</td><td>3</td><td>3.549</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1769700991\" target=\"_blank\" rel=\"noopener\">Then remove &#96;| undefined&#96;It's logically the same</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.6</td><td>3</td><td>1.584</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1771522860\" target=\"_blank\" rel=\"noopener\">Where are the standardized headers? Body should be json complian&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.92</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1771527708\" target=\"_blank\" rel=\"noopener\">Just use textContent from the top level parent element as we dis&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.9</td><td>3</td><td>5.751</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1771532629\" target=\"_blank\" rel=\"noopener\">Is there another config to subtract words inside for this and bl&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.898</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1771604702\" target=\"_blank\" rel=\"noopener\">We also discussed that several times. The scoring, which is all &hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.8</td><td>3</td><td>5.112</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1771605099\" target=\"_blank\" rel=\"noopener\">Yes</a></h6></td><td><details><summary>0.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>0.4</td><td>3</td><td>0.216</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1771607389\" target=\"_blank\" rel=\"noopener\">Last time I coded for bot features was v1. You can check there. &hellip;</a></h6></td><td><details><summary>2.29</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 45&#13;  wordValue: 0.1&#13;  result: 2.29&#13;</pre></details></td><td>0.7</td><td>3</td><td>5.985</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1772685213\" target=\"_blank\" rel=\"noopener\">No. However we need to be able to exclude word count from &#96&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.8</td><td>3</td><td>3.192</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1773100601\" target=\"_blank\" rel=\"noopener\">Default to &#96;true&#96; The only ones that don't count words&hellip;</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.604</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1777701867\" target=\"_blank\" rel=\"noopener\">We are currently only using it for word counting which I kind of&hellip;</a></h6></td><td><details><summary>2.4</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 51&#13;  wordValue: 0.1&#13;  result: 2.4&#13;</pre></details></td><td>0.9</td><td>3</td><td>8.316</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1778710740\" target=\"_blank\" rel=\"noopener\">Can handle in a new pull but basically I'm suggesting to hard co&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.6</td><td>3</td><td>4.212</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#issuecomment-2377892909\" target=\"_blank\" rel=\"noopener\">The permit link doesn't work. Also I realize that most defaults&hellip;</a></h6></td><td><details><summary>2.55</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 63&#13;  wordValue: 0.1&#13;  result: 2.55&#13;</pre></details></td><td>0.9</td><td>3</td><td>8.316</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#issuecomment-2379037086\" target=\"_blank\" rel=\"noopener\">We should throw an error for this instead of generating a fake l&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.898</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 300,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 1777696954,
+        "content": "regex doesn't necessarily mean words so this doesn't make sense to me",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1777696954",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -110,69 +107,67 @@ export class FormattingEvaluatorModule implements Module {\n   _getFormattingScore(comment: GithubCommentScore) {\n     // Change the \\r to \\n to fix markup interpretation\n     const html = this._md.render(comment.content.replaceAll(\"\\r\", \"\\n\"));\n-    logger.debug(\"Will analyze formatting for the current content\", { comment: comment.content, html });\n+    logger.debug(\"Will analyze formatting for the current content:\", { comment: comment.content, html });\n     const temp = new JSDOM(html);\n     if (temp.window.document.body) {\n-      const res = this.classifyTagsWithWordCount(temp.window.document.body, comment.type);\n-      return { formatting: res };\n+      const res = this._classifyTagsWithWordCount(temp.window.document.body, comment.type);\n+      return { formatting: res.formatting, regex: res.regex };\n     } else {\n       throw new Error(`Could not create DOM for comment [${comment}]`);\n     }\n   }\n \n-  _countSymbols(regexes: FormattingEvaluatorConfiguration[\"multipliers\"][0][\"rewards\"][\"regex\"], text: string) {\n-    const counts: { [p: string]: { count: number; multiplier: number } } = {};\n-    for (const [regex, multiplier] of Object.entries(regexes)) {\n+  _countSymbolsFromRegex(\n+    regexes: FormattingEvaluatorConfiguration[\"multipliers\"][0][\"rewards\"][\"regex\"],\n+    text: string\n+  ) {\n+    const counts: RegexCount = {};\n+    for (const [regex, wordValue] of Object.entries(regexes)) {\n       const match = text.trim().match(new RegExp(regex, \"g\"));\n+      const wordCount = match?.length || 0;\n+      const result = new Decimal(wordCount).pow(this._wordCountExponent).mul(wordValue).toDecimalPlaces(2).toNumber();\n       counts[regex] = {\n-        count: match?.length || 1,\n-        multiplier,\n+        wordCount,\n+        wordValue,\n+        result,\n       };\n     }",
+        "score": {
+          "reward": 2.175,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 77.81071428571428,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.8218928571428572
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2332288075,
+            "effect": {
+              "addition": 24635,
+              "deletion": 3245
+            },
+            "reward": 836.4,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 300 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>836.4</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>2.175</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121\" target=\"_blank\" rel=\"noopener\">#121</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+24635 -3245</td><td>3</td><td>836.4</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/121#discussion_r1777696954\" target=\"_blank\" rel=\"noopener\">regex doesn't necessarily mean words so this doesn't make sense &hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.5</td><td>3</td><td>2.175</td></tr></tbody></table></details>"
+  }
+}

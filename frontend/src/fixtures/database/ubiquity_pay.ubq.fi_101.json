@@ -1,0 +1,1128 @@
+{
+  "devpanther": {
+    "userId": 42383942,
+    "total": 200.812,
+    "task": {
+      "reward": 200,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 1654933613,
+        "content": "I think the bounties above are without price, once they all have prices on them they can be picked up and worked on before this issue can kick off",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1654933613",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.812,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 78.2137931034483,
+            "syllables": 34,
+            "sentences": 1,
+            "score": 0.817862068965517
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 200.812 XP ]</a>&nbsp;</h3><h6>@devpanther</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>200</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.812</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1654933613\" target=\"_blank\" rel=\"noopener\">I think the bounties above are without price, once they all have&hellip;</a></h6></td><td><details><summary>1.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.7</td><td>2</td><td>0.812</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 38.104,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1634200169,
+        "content": "I just realized that it would be way smarter to: \n1. store every permit generated for every bounty hunter in our database (also useful for our audits)\n2. Pull all of these into the dApp in a single database read call. \n3. Run every one of those through the already implemented function that checks if the permit is claimable\n@0xcodercrane what do you think about the database side?\n@whilefoo maybe it's best to hold off on this bounty until we figure that out. It might be much simpler (and superior) to implement it this way.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1634200169",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 7.56,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              }
+            },
+            "result": 0.3
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 93,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 56.79108870967744,
+            "syllables": 139,
+            "sentences": 4,
+            "score": 0.9679108870967744
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1640038112,
+        "content": "Looks like a new specification needs to be written, something like:\n1. When permits are generated they should be stored in the database. \n2. We should design and implement an API for the cash out dApp to read the permits of the beneficiary, not the connected wallet\n3. The permits should be tallied up on the UI as it reads the GitHub and checks the chain to see if they are claimable (this check if permit is claimable logic already exists in the UI code)\n4. The permits should be claimable with a \"claim all\" button that initiates a multicall claim. \n@rndquu please approve of this spec by editing this issue spec, or by creating a new bounty (or set of separate bounties) based on this information",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1640038112",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 7.18,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              }
+            },
+            "result": 0.4
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 123,
+            "wordValue": 0.1,
+            "result": 2.47
+          },
+          "readability": {
+            "fleschKincaid": 43.47853658536589,
+            "syllables": 177,
+            "sentences": 3,
+            "score": 0.8347853658536589
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1654070570,
+        "content": "Does this mean that you are waiting for the other bounties to be completed? Perhaps you can work on those bounties or unassign yourself from this one so that you won't keep getting follow ups?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1654070570",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.064,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 78.11500000000001,
+            "syllables": 47,
+            "sentences": 2,
+            "score": 0.8188499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1657142867,
+        "content": "I made sure they have prices now!",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1657142867",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.54,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 115.13000000000002,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1668446417,
+        "content": "Could be a good stop-gap measure until we figure a solution that doesn't require a custom deployment (because then we need to pay for an audit.)",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1668446417",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 3.178,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 74.78928571428573,
+            "syllables": 39,
+            "sentences": 2,
+            "score": 0.8521071428571427
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1671730278,
+        "content": "We don't want to aggregate into one because then we have to do invalidation transactions. \nPerhaps the best solution is to make a new smart contract that will execute a permit claim on all of the passed in permits. \nIf the contract does not require any token allowances, and does not carry any token balances, then audits might not be necessary. \n@rndquu",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1671730278",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 5.886,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 63,
+            "wordValue": 0.1,
+            "result": 2.55
+          },
+          "readability": {
+            "fleschKincaid": 65.96303571428571,
+            "syllables": 93,
+            "sentences": 4,
+            "score": 0.9403696428571429
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1672897484,
+        "content": "I like option `2`. \r\nIt is more work, but cluttering the UI with a ton of permits, and asking the user to click on each of those individually is pretty terrible UX. Our current setup works and we can take our time with option `2` No point in doing option `1` if it will be made obsolete soon.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1672897484",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 4.944,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 55,
+            "wordValue": 0.1,
+            "result": 2.46
+          },
+          "readability": {
+            "fleschKincaid": 74.40121212121215,
+            "syllables": 74,
+            "sentences": 3,
+            "score": 0.8559878787878784
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1673325079,
+        "content": "This is a bit beyond my depth but from a conceptual standpoint it should be possible. \n- I just checked the function and it seems to allow reentrancy. \n- we just loop and claim all the valid permits by passing them in one at a time?\nThe only thing that isn't clear to me is if we can't change the message sender parameter which is why it's difficult to customize or batch these claims.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1673325079",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 5.632,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 75,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 77.25975000000001,
+            "syllables": 98,
+            "sentences": 4,
+            "score": 0.8274024999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1684442659,
+        "content": "I wish we had a standard operating procedure to calculate how close the bounty hunter made it to the specification requirements compared to their current progress to pay what is owed. @devpanther do you have an estimate on percentage of current progress?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1684442659",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.12,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 42,
+            "wordValue": 0.1,
+            "result": 2.23
+          },
+          "readability": {
+            "fleschKincaid": 44.52000000000001,
+            "syllables": 70,
+            "sentences": 2,
+            "score": 0.8452000000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 38.104 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>9</td><td>38.104</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1634200169\" target=\"_blank\" rel=\"noopener\">I just realized that it would be way smarter to: 1. store every&hellip;</a></h6></td><td><details><summary>2.93</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;  result: 0.3&#13;regex:&#13;  wordCount: 93&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>1</td><td>2</td><td>7.56</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1640038112\" target=\"_blank\" rel=\"noopener\">Looks like a new specification needs to be written, something li&hellip;</a></h6></td><td><details><summary>2.87</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;  result: 0.4&#13;regex:&#13;  wordCount: 123&#13;  wordValue: 0.1&#13;  result: 2.47&#13;</pre></details></td><td>1</td><td>2</td><td>7.18</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1654070570\" target=\"_blank\" rel=\"noopener\">Does this mean that you are waiting for the other bounties to be&hellip;</a></h6></td><td><details><summary>2.07</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.4</td><td>2</td><td>2.064</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1657142867\" target=\"_blank\" rel=\"noopener\">I made sure they have prices now!</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.3</td><td>2</td><td>0.54</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1668446417\" target=\"_blank\" rel=\"noopener\">Could be a good stop-gap measure until we figure a solution that&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.7</td><td>2</td><td>3.178</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1671730278\" target=\"_blank\" rel=\"noopener\">We don't want to aggregate into one because then we have to do i&hellip;</a></h6></td><td><details><summary>2.55</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 63&#13;  wordValue: 0.1&#13;  result: 2.55&#13;</pre></details></td><td>0.9</td><td>2</td><td>5.886</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1672897484\" target=\"_blank\" rel=\"noopener\">I like option &#96;2&#96;. It is more work, but cluttering the&hellip;</a></h6></td><td><details><summary>2.46</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 55&#13;  wordValue: 0.1&#13;  result: 2.46&#13;</pre></details></td><td>0.8</td><td>2</td><td>4.944</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1673325079\" target=\"_blank\" rel=\"noopener\">This is a bit beyond my depth but from a conceptual standpoint i&hellip;</a></h6></td><td><details><summary>2.82</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 75&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.8</td><td>2</td><td>5.632</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1684442659\" target=\"_blank\" rel=\"noopener\">I wish we had a standard operating procedure to calculate how cl&hellip;</a></h6></td><td><details><summary>2.23</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 42&#13;  wordValue: 0.1&#13;  result: 2.23&#13;</pre></details></td><td>0.2</td><td>2</td><td>1.12</td></tr></tbody></table></details>"
+  },
+  "0xcodercrane": {
+    "total": 0.56,
+    "userId": 108444211,
+    "comments": [
+      {
+        "id": 1635535101,
+        "content": "Sounds smart to store them in a database and use it for further checks and analytics.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1635535101",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.56,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 74.27000000000001,
+            "syllables": 22,
+            "sentences": 1,
+            "score": 0.8573
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 0.56 XP ]</a>&nbsp;</h3><h6>@0xcodercrane</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.56</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1635535101\" target=\"_blank\" rel=\"noopener\">Sounds smart to store them in a database and use it for further &hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.7</td><td>2</td><td>0.56</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 6.972,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 1657265845,
+        "content": "I will first finish https://github.com/ubiquity/ubiquibot/issues/546 and then continue with this",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1657265845",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.944,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 55.952500000000015,
+            "syllables": 27,
+            "sentences": 2,
+            "score": 0.9595250000000002
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1673266075,
+        "content": "Based on my research option 2 is not feasible. If we declare Multicall contract address as `spender` in the permit signature then anyone can call a permit tx with Multicall contract and get access to the funds, because transfer details (recipient address and amount) can be customised.\r\nTo further demonstrate:\r\nThe permit signature itself contains token, maximum amount of token that can be spent, spender (aka the address who can call [permitTransferFrom](https://github.com/Uniswap/permit2/blob/576f549a7351814f112edcc42f3f8472d1712673/src/SignatureTransfer.sol#L22C19-L22C19)), nonce and deadline.\r\nIn `_permitTransferFrom` function only the first argument `permit` is checked that the signature is correct and that spender is equal to `msg.sender`.\r\nThe second argument `transferDetails` can be customised, which means that the bounty hunter can change the recipient address and amount they wish to claim.\r\nWhen you set Multicall contract as `spender`, anyone can send any unused permit signature with customised transfer details to access the funds.\r\n@rndquu am I missing something here?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1673266075",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 2.1,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 7
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 143,
+            "wordValue": 0.1,
+            "result": 2.3
+          },
+          "readability": {
+            "fleschKincaid": 52.39650349650353,
+            "syllables": 226,
+            "sentences": 7,
+            "score": 0.9239650349650352
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1673505115,
+        "content": "In the [code](https://github.com/Uniswap/permit2/blob/576f549a7351814f112edcc42f3f8472d1712673/src/SignatureTransfer.sol#L51C14-L51C33) I see only permit is verified but transferDetails can be changed",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1673505115",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 1.38,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 65.72500000000001,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 0.9427499999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1673515191,
+        "content": "`transferDetails` are not signed though, only the permit is",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1673515191",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.46,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 92.965,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.67035
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1676300936,
+        "content": "I'm not an expert on this but based on my research using `delegatecall` won't work, because when you use `delegatecall` the context doesn't change - that means that the called contract's code only has access to calling contract's storage and code and not called contract's storage and code.\r\nBasically `delegatecall` will execute the code of the function as if it was written in the contract itself.\r\nSource: https://medium.com/coinmonks/delegatecall-calling-another-contract-function-in-solidity-b579f804178c",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1676300936",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 2.088,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 69,
+            "wordValue": 0.1,
+            "result": 2.59
+          },
+          "readability": {
+            "fleschKincaid": 64.08125000000001,
+            "syllables": 117,
+            "sentences": 4,
+            "score": 0.9591874999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 6.972 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>5</td><td>6.972</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1657265845\" target=\"_blank\" rel=\"noopener\">I will first finish https://github.com/ubiquity/ubiquibot/issues&hellip;</a></h6></td><td><details><summary>1.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.8</td><td>2</td><td>0.944</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1673266075\" target=\"_blank\" rel=\"noopener\">Based on my research option 2 is not feasible. If we declare Mul&hellip;</a></h6></td><td><details><summary>3.3</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 7&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 143&#13;  wordValue: 0.1&#13;  result: 2.3&#13;</pre></details></td><td>1</td><td>2</td><td>2.1</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1673505115\" target=\"_blank\" rel=\"noopener\">In the [code](https://github.com/Uniswap/permit2/blob/576f549a73&hellip;</a></h6></td><td><details><summary>2.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>1</td><td>2</td><td>1.38</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1673515191\" target=\"_blank\" rel=\"noopener\">&#96;transferDetails&#96; are not signed though, only the permit&hellip;</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>1</td><td>2</td><td>0.46</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1676300936\" target=\"_blank\" rel=\"noopener\">I'm not an expert on this but based on my research using &#96;de&hellip;</a></h6></td><td><details><summary>3.59</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 69&#13;  wordValue: 0.1&#13;  result: 2.59&#13;</pre></details></td><td>0.9</td><td>2</td><td>2.088</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 82.576,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 1645345008,
+        "content": "- https://github.com/ubiquity/ubiquibot/issues/546\r\n- https://github.com/ubiquity/ubiquibot/issues/547\r\n- https://github.com/ubiquity/pay.ubq.fi/issues/110\r\n- https://github.com/ubiquity/pay.ubq.fi/issues/101",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1645345008",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 7.826,
+          "formatting": {
+            "content": {
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 4
+              }
+            },
+            "result": 4.4
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 49.888611111111146,
+            "syllables": 58,
+            "sentences": 9,
+            "score": 0.8988861111111115
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1659930935,
+        "content": "You're free to select any audited multicall implementation\r\nYes, we could use uniswap's [multicall](https://etherscan.io/address/0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696)",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1659930935",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 5.094,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 42.545000000000016,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.8254500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1659980744,
+        "content": "For gnosis you can use this package https://github.com/gnosis/ethers-multisend\r\nFor mainnet this one https://www.npmjs.com/package/@0xsequence/multicall\r\nOr find an npm package which supports both mainnet and gnosis",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1659980744",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 8.064,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 74.67946428571432,
+            "syllables": 51,
+            "sentences": 4,
+            "score": 0.8532053571428568
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1666254031,
+        "content": "There is gnosis's [multicall implementation](https://github.com/safe-global/safe-contracts/blob/main/contracts/libraries/MultiSend.sol) which supports delegatecalls. Why can't we use it?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1666254031",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 4.464,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 46.942499999999995,
+            "syllables": 27,
+            "sentences": 2,
+            "score": 0.869425
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1669437499,
+        "content": "Could you show in the [code](https://github.com/Uniswap/permit2/blob/main/src/SignatureTransfer.sol) where sender is required to be the permitted address?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1669437499",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 4.336,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 84.45000000000003,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.7554999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1669881062,
+        "content": "`signer` and `msg.sender` are different entities so I don't really understand why this [one](https://dashboard.tenderly.co/tx/mainnet/0x6c35f78b76620910beb35c0557eb638c44b53a6f934f1af447792f8a843fe329/debugger?trace=0) fails\r\nIn your provided example:\r\n1. [Here](https://dashboard.tenderly.co/tx/mainnet/0x6c35f78b76620910beb35c0557eb638c44b53a6f934f1af447792f8a843fe329/debugger?trace=0.0) `owner` passed to `permitTransferFrom()` is `0xf76f1acb66020f893c95371f740549f312dea3f1 `\r\n2. On the [next step](https://dashboard.tenderly.co/tx/mainnet/0x6c35f78b76620910beb35c0557eb638c44b53a6f934f1af447792f8a843fe329/debugger?trace=0.0.1) `owner` passed to `_permitTransferFrom` is `0x0000000000000000000000000000000000000124`\r\nWhy is it happening?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1669881062",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 5.754,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.2
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 57.97636363636366,
+            "syllables": 45,
+            "sentences": 1,
+            "score": 0.9797636363636366
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1670789017,
+        "content": "We could modify it but we prefer well audited solutions. Rewriting existing contracts should be the last step when there is nothing suitable for your needs.\r\nThank you, let's wait for more details",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1670789017",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 3.542,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 34,
+            "wordValue": 0.1,
+            "result": 2.01
+          },
+          "readability": {
+            "fleschKincaid": 73.40813725490199,
+            "syllables": 49,
+            "sentences": 3,
+            "score": 0.8659186274509801
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1672849679,
+        "content": "How it works right now:\r\n1. The bot signs a permit for a particular bounty hunter\r\n2. When a bounty hunter from step 1 claims the permit then the permit's hash (`permit.hash()`) is passed [here](https://github.com/Uniswap/permit2/blob/main/src/SignatureTransfer.sol#L28) which includes `msg.sender` [here](https://github.com/Uniswap/permit2/blob/main/src/libraries/PermitHash.sol#L62). \r\nSo if a permit is claimed by some other bounty hunter (which is not an initial permit spender) then [here](https://github.com/Uniswap/permit2/blob/main/src/libraries/SignatureVerification.sol#L39) incorrect signer's address is recovered (because data hash is for \"invalid\" bounty hunter which is the current `msg.sender`) hence this [revert](https://github.com/Uniswap/permit2/blob/main/src/libraries/SignatureVerification.sol#L41). \r\nWe have 2 options:\r\n1. Show all valid permits ready for claim in the UI\r\n2. Modify the bot to sign permits for the Multicall contract instead of a particular bounty hunter. This way when a bounty hunter claims a permit then he basically sends a single tx to the Multicall. If a bounty hunter wants to claim multiple permits then he sends multiple permit txs. \r\nThis option requires:\r\n  a) Creating PoC (as far as I understand it should work the way described above, but need further research)\r\n  b) Deploy Multicall contracts (or use existing ones) to mainnet and gnosis\r\n  c) Update the bot to sign permits for the Multicall contract\r\n  d) Update https://pay.ubq.fi to claim permits using the Multicall contract instead of uniswap's permit2\r\n  e) Update [docs](https://dao.ubq.fi/ubiquibot-setup) (as far as I understand the bot would need to set allowance for the Multicall contract instead of uniswap's permit2)\r\nSo basically our own custom contract (for handling multiple permits) is the same as the Multicall contract from option 2.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1672849679",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 17.02,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 14
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 5
+              }
+            },
+            "result": 5.4
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 244,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 48.81112903225808,
+            "syllables": 371,
+            "sentences": 8,
+            "score": 0.8881112903225808
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1674356940,
+        "content": "Yes, transfer details are not signed, hence we can't sign all permits for the Multicall contract\r\nThen we should think of some other solution",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1674356940",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 3.924,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 66.40400000000001,
+            "syllables": 34,
+            "sentences": 1,
+            "score": 0.9359599999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1683594751,
+        "content": "@pavlovcik \r\nI think we should close this issue as \"not planned\" because we [decided](https://github.com/ubiquity/ubiquibot/issues/589#issuecomment-1676486284) to tally up owed amounts for bounty hunters in a DB and update https://pay.ubq.fi to claim a single \"added up\" permit",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1683594751",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 8.892,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 34,
+            "wordValue": 0.1,
+            "result": 2.01
+          },
+          "readability": {
+            "fleschKincaid": 82.66254385964915,
+            "syllables": 50,
+            "sentences": 3,
+            "score": 0.7733745614035086
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1684898317,
+        "content": "Initially the current issue was dependent on this [one](https://github.com/ubiquity/pay.ubq.fi/issues/110) so there wasn't any sense in self assigning the current issue because reading from a DB was not yet implemented",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1684898317",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 5.84,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 49.48500000000003,
+            "syllables": 45,
+            "sentences": 1,
+            "score": 0.8948500000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1800537483,
+        "content": "- Depends on https://github.com/ubiquity/pay.ubq.fi/issues/110\r\nWhen bounty hunters solve multiple permits it is hard for them to:\r\n- find out unclaimed permits\r\n- claim permits one by one\r\nWe should add a \"Claim all\" button that consolidates all their unclaimed permits in a single [Multicall](https://docs.uniswap.org/contracts/v3/reference/periphery/base/Multicall) transaction.\r\nWhat should be done:\r\n1. Add the \"Claim all\" button\r\n2. On click bounty hunter should be authorized in metamask\r\n3. Then we should find out all bounty hunter's unclaimed permits (we know his address from authorized metamask), consolidate them in a single transaction and call [Multicall](https://docs.uniswap.org/contracts/v3/reference/periphery/base/Multicall)\r\nNotice that we support 2 networks: ethereum mainnet and gnosis so there could be unclaimed permits for both of the networks. We should somehow handle it, perhaps call 2 Multicall txs in a row. Perhaps there is a better solution.\r\nOriginal [discussion](https://github.com/ubiquity/pay.ubq.fi/issues/96)",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 7.82,
+          "formatting": {
+            "content": {
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 6
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 10
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.6
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 128,
+            "wordValue": 0.1,
+            "result": 2.43
+          },
+          "readability": {
+            "fleschKincaid": 59.1567746350365,
+            "syllables": 211,
+            "sentences": 8,
+            "score": 0.9915677463503649
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 82.576 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>7.82</td></tr><tr><td>Issue</td><td>Comment</td><td>11</td><td>74.756</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101\" target=\"_blank\" rel=\"noopener\">- Depends on https://github.com/ubiquity/pay.ubq.fi/issues/110&hellip;</a></h6></td><td><details><summary>6.03</summary><pre>content:&#13;  content:&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 6&#13;    p:&#13;      score: 0&#13;      elementCount: 10&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.6&#13;regex:&#13;  wordCount: 128&#13;  wordValue: 0.1&#13;  result: 2.43&#13;</pre></details></td><td>1</td><td>1</td><td>7.82</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1645345008\" target=\"_blank\" rel=\"noopener\">- https://github.com/ubiquity/ubiquibot/issues/546- https://gi&hellip;</a></h6></td><td><details><summary>4.4</summary><pre>content:&#13;  content:&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 4&#13;  result: 4.4&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>2</td><td>7.826</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1659930935\" target=\"_blank\" rel=\"noopener\">You're free to select any audited multicall implementationYes,&hellip;</a></h6></td><td><details><summary>2.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.9</td><td>2</td><td>5.094</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1659980744\" target=\"_blank\" rel=\"noopener\">For gnosis you can use this package https://github.com/gnosis/et&hellip;</a></h6></td><td><details><summary>3.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.9</td><td>2</td><td>8.064</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1666254031\" target=\"_blank\" rel=\"noopener\">There is gnosis's [multicall implementation](https://github.com/&hellip;</a></h6></td><td><details><summary>2.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.8</td><td>2</td><td>4.464</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1669437499\" target=\"_blank\" rel=\"noopener\">Could you show in the [code](https://github.com/Uniswap/permit2/&hellip;</a></h6></td><td><details><summary>2.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.8</td><td>2</td><td>4.336</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1669881062\" target=\"_blank\" rel=\"noopener\">&#96;signer&#96; and &#96;msg.sender&#96; are different entities&hellip;</a></h6></td><td><details><summary>3.18</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.2&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.7</td><td>2</td><td>5.754</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1670789017\" target=\"_blank\" rel=\"noopener\">We could modify it but we prefer well audited solutions. Rewriti&hellip;</a></h6></td><td><details><summary>2.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 34&#13;  wordValue: 0.1&#13;  result: 2.01&#13;</pre></details></td><td>0.7</td><td>2</td><td>3.542</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1672849679\" target=\"_blank\" rel=\"noopener\">How it works right now:1. The bot signs a permit for a particu&hellip;</a></h6></td><td><details><summary>6.72</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 14&#13;    ol:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 5&#13;  result: 5.4&#13;regex:&#13;  wordCount: 244&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>1</td><td>2</td><td>17.02</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1674356940\" target=\"_blank\" rel=\"noopener\">Yes, transfer details are not signed, hence we can't sign all pe&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.9</td><td>2</td><td>3.924</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1683594751\" target=\"_blank\" rel=\"noopener\">@pavlovcik I think we should close this issue as \"not planned\"&hellip;</a></h6></td><td><details><summary>4.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 34&#13;  wordValue: 0.1&#13;  result: 2.01&#13;</pre></details></td><td>0.9</td><td>2</td><td>8.892</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1684898317\" target=\"_blank\" rel=\"noopener\">Initially the current issue was dependent on this [one](https://&hellip;</a></h6></td><td><details><summary>2.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.8</td><td>2</td><td>5.84</td></tr></tbody></table></details>"
+  },
+  "zgorizzo69": {
+    "total": 2.596,
+    "userId": 16853695,
+    "comments": [
+      {
+        "id": 1671360256,
+        "content": "Just jumping in from the beach but did you approve the permit2 contract to transfer the token as described here https://docs.uniswap.org/contracts/permit2/overview#approving-permit2",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1671360256",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 1.12,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 65.74747126436785,
+            "syllables": 45,
+            "sentences": 3,
+            "score": 0.9425252873563216
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1671613764,
+        "content": "The multicall2 indeed uses call so as you described can't work with permit2.\r\nWould be better to aggregate the permits into one but we need to make sure that the previous permit can't be used anymore. \r\nFor instance we could let the hunter wait untill all the permits deadline are reached to create an aggregated version of the invalid (but not claimed yet) permits?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1671613764",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 1.476,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 66,
+            "wordValue": 0.1,
+            "result": 2.57
+          },
+          "readability": {
+            "fleschKincaid": 66.57772727272727,
+            "syllables": 92,
+            "sentences": 3,
+            "score": 0.9342227272727273
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 2.596 XP ]</a>&nbsp;</h3><h6>@zgorizzo69</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>2</td><td>2.596</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1671360256\" target=\"_blank\" rel=\"noopener\">Just jumping in from the beach but did you approve the permit2 c&hellip;</a></h6></td><td><details><summary>2.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.7</td><td>2</td><td>1.12</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/101#issuecomment-1671613764\" target=\"_blank\" rel=\"noopener\">The multicall2 indeed uses call so as you described can't work w&hellip;</a></h6></td><td><details><summary>2.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 66&#13;  wordValue: 0.1&#13;  result: 2.57&#13;</pre></details></td><td>0.9</td><td>2</td><td>1.476</td></tr></tbody></table></details>"
+  }
+}

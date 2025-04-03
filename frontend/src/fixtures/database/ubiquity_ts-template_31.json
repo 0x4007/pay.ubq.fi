@@ -1,0 +1,285 @@
+{
+  "0x4007": {
+    "userId": 4975670,
+    "total": 120.057,
+    "task": {
+      "reward": 100,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2177195849,
+        "content": "Annotate them with warnings in code review to more closely scrutinize the logic that interacts with the variable. \r\n### Rationale\r\nI see a lot of abuse for empty strings. It makes code logic sloppy and more error prone. But since there are some legitimate uses for empty strings, we will just set a warning instead of error?\r\n### Examples\r\n###### https://github.com/ubiquity/audit.ubq.fi/blob/08fba85a9a592ca2bda5eaeaa2ff3b9fdd4632be/static/scripts/audit-report/audit.ts#L26C1-L27C21\r\n- Should be unset (which implies `undefined`) instead of passing an empty string as a credential or URL. Then the code should check if the value is truthy before expecting authentication.\r\n```typescript\r\nlet REPOSITORY_URL;\r\nlet GITHUB_PAT;\r\n```\r\n###### https://github.com/ubiquity/ubiquibot-kernel/blame/c553d5a7866c1ef76d4f589d8095c8bb751cbd49/src/github/types/config.ts#L29\r\n- Should be `value.ref ?? \"@\" + value.ref` as I'm assuming the developer never expected the `\"\"` value to be returned there. \r\n###### https://github.com/ubiquity/pay.ubq.fi/pull/189/files#r1518549017\r\n- This shouldn't have been here at all. It's not a valid RPC endpoint.\r\n---\r\n###### From codebase search: https://github.com/search?q=org%3Aubiquity+%5C%22%5C%22+language%3ATypeScript&type=code",
+        "url": "https://github.com/ubiquity/ts-template/issues/31",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 16.38,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "h3": {
+                "score": 1,
+                "elementCount": 2
+              },
+              "h6": {
+                "score": 1,
+                "elementCount": 4
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 4
+              }
+            },
+            "result": 10.3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 120,
+            "wordValue": 0.1,
+            "result": 2.49
+          },
+          "readability": {
+            "fleschKincaid": 66.3613559322034,
+            "syllables": 276,
+            "sentences": 21,
+            "score": 0.9363864406779661
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2113923840,
+        "content": "Resolves #31",
+        "url": "https://github.com/ubiquity/ts-template/pull/62",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 0.093,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 77.90500000000002,
+            "syllables": 3,
+            "sentences": 1,
+            "score": 0.8209499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2114032914,
+        "content": "Resolves https://github.com/ubiquity/ts-template/issues/31\r\nCurrently matches any instance of `\"\"` but with regex can do more precise targeting (in the future if necessary) i.e. look for `const` or `let` in the same line to identify variable initializations, which is the primary suspect. \r\nWill leave it looser targeting for now as an open experiment to take note of other specific scenarios to focus on later",
+        "url": "https://github.com/ubiquity/ts-template/pull/66",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 3.584,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 59,
+            "wordValue": 0.1,
+            "result": 2.51
+          },
+          "readability": {
+            "fleschKincaid": 51.81310447761197,
+            "syllables": 112,
+            "sentences": 5,
+            "score": 0.9181310447761197
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2400981407,
+        "content": "I got annotations working on the files view but I can't get the line targeting to be accurate.",
+        "url": "https://github.com/ubiquity/ts-template/pull/66#issuecomment-2400981407",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 62.87631578947371,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.971236842105263
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2401014133,
+        "content": "Currently matches any instance of `\"\"` but with regex can do more precise targeting (in the future if necessary) i.e. look for `const` or `let` in the same line to identify variable initializations, which is the primary suspect. \r\nWill leave it looser targeting for now.",
+        "url": "https://github.com/ubiquity/ts-template/pull/66#issuecomment-2401014133",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 43,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 58.202819767441895,
+            "syllables": 70,
+            "sentences": 4,
+            "score": 0.982028197674419
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 120.057 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>100</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>16.38</td></tr><tr><td>Review</td><td>Comment</td><td>4</td><td>3.677</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ts-template/issues/31\" target=\"_blank\" rel=\"noopener\">Annotate them with warnings in code review to more closely scrut&hellip;</a></h6></td><td><details><summary>12.79</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    h3:&#13;      score: 1&#13;      elementCount: 2&#13;    h6:&#13;      score: 1&#13;      elementCount: 4&#13;    ul:&#13;      score: 0&#13;      elementCount: 3&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 4&#13;  result: 10.3&#13;regex:&#13;  wordCount: 120&#13;  wordValue: 0.1&#13;  result: 2.49&#13;</pre></details></td><td>1</td><td>1</td><td>16.38</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ts-template/pull/62\" target=\"_blank\" rel=\"noopener\">Resolves #31</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.093</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ts-template/pull/66\" target=\"_blank\" rel=\"noopener\">Resolves https://github.com/ubiquity/ts-template/issues/31Curr&hellip;</a></h6></td><td><details><summary>3.51</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 59&#13;  wordValue: 0.1&#13;  result: 2.51&#13;</pre></details></td><td>0.8</td><td>1</td><td>3.584</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ts-template/pull/66#issuecomment-2400981407\" target=\"_blank\" rel=\"noopener\">I got annotations working on the files view but I can't get the &hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ts-template/pull/66#issuecomment-2401014133\" target=\"_blank\" rel=\"noopener\">Currently matches any instance of &#96;\"\"&#96; but with regex ca&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 43&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>2</td><td>0</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 7.654,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2464146839,
+        "content": "@0x4007 I should have tested this, but it will always crash if a user opens a pull request because it uses variables from secrets that are not accessible, I will fix that.",
+        "url": "https://github.com/ubiquity/ts-template/issues/31#issuecomment-2464146839",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 3.542,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 60.67375000000003,
+            "syllables": 43,
+            "sentences": 1,
+            "score": 0.9932624999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2401514695,
+        "content": "@0x4007 It seems you merged this with empty strings: https://github.com/ubiquity/ts-template/actions/runs/11245674853/job/31266132517 could this be fixed?",
+        "url": "https://github.com/ubiquity/ts-template/pull/66#issuecomment-2401514695",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.112,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 85.38,
+            "syllables": 31,
+            "sentences": 2,
+            "score": 0.7462000000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/ts-template/pull/62"
+      },
+      {
+        "url": "https://github.com/ubiquity/ts-template/pull/66"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 7.654 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>3.542</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>4.112</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ts-template/issues/31#issuecomment-2464146839\" target=\"_blank\" rel=\"noopener\">@0x4007 I should have tested this, but it will always crash if a&hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.7</td><td>2</td><td>3.542</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ts-template/pull/66#issuecomment-2401514695\" target=\"_blank\" rel=\"noopener\">@0x4007 It seems you merged this with empty strings: https://git&hellip;</a></h6></td><td><details><summary>2.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.8</td><td>2</td><td>4.112</td></tr></tbody></table></details>"
+  }
+}

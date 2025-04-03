@@ -1,0 +1,1483 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 204.51,
+    "task": {
+      "reward": 200,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2415248691,
+        "content": "I am not sure what the clearest way to express this is, but the idea is that we have \"word count\" currently. I figured a generalized way to approach this was to target symbols instead. \r\nThe way that we count the amount of words is by counting the spaces. \r\nExtending this logic, I figured we could credit sentences by assigning value to punctuation (`!`, `.` etc)\r\nWe can credit paragraphs by assigning value to double line breaks (`\\n\\n`)\r\nDo you see where I am going with this?\r\n---\r\nPerhaps it makes sense to use regex notation instead in the config:\r\n```yml\r\n...\r\n  symbols:\r\n    \"\\s\": 0.1 # word counter\r\n    \"\\.\": 0.5 # sentence counter\r\n    \"!\": 0.5 # sentence counter\r\n    \"\\?\": 0.5 # sentence counter\r\n    \"\\n\\n\": 1 # paragraph counter\r\n```\r\n---\r\nI am mostly happy with this config syntax because it allows us to fairly clearly express, and finely adjust the incentives.\r\n```yml\r\nselect: [ PULL_AUTHOR, PULL_SPECIFICATION ]\r\n  html:\r\n    a: 5\r\n    h1: 1\r\n  symbols: \r\n    spaces: 0.1 # implies words?\r\nselect: [ ISSUE_AUTHOR, ISSUE_CONTRIBUTOR, PULL_CONTRIBUTOR ]\r\n  html:\r\n    a: 5\r\n    h1: 1\r\n  symbols: \r\n    \" \": 0.1 # implies words?\r\n    \".\": 0.5\r\n    \"!\": 0.5\r\n```\r\n_Originally posted by @0x4007 in https://github.com/ubiquity/ubiquibot-config/pull/18#discussion_r1680319560_",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/62",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.51,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 8
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 122,
+            "wordValue": 0.1,
+            "result": 2.47
+          },
+          "readability": {
+            "fleschKincaid": 59.971297709923675,
+            "syllables": 198,
+            "sentences": 7,
+            "score": 0.9997129770992368
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 204.51 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>200</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.51</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/62\" target=\"_blank\" rel=\"noopener\">I am not sure what the clearest way to express this is, but the &hellip;</a></h6></td><td><details><summary>3.47</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 8&#13;    hr:&#13;      score: 0&#13;      elementCount: 2&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 122&#13;  wordValue: 0.1&#13;  result: 2.47&#13;</pre></details></td><td>1</td><td>1</td><td>4.51</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 200,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2237061511,
+        "content": "Hey the regex needs to be improved for the sentences. \nFor example, look when I write \"i.e.\" this is credited as two sentences. \nWe must check for a letter, a period, and a space i guess. So something like `\\w\\.\\s` although I'm just winging it from my phone I'm sure this can be improved. \nIn addition, if there are excited contributors writing !! Then we should only credit it one time. Try and think of edge cases for the regexes. \nConsider that some old school users use double space after a sentence stop. Also we can consider looking for a capitalized character after to indicate a new sentence has started, although this seems less robust potentially in case there are lazy writers in all lowercase.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/62#issuecomment-2237061511",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 5.508,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 126,
+            "wordValue": 0.1,
+            "result": 2.44
+          },
+          "readability": {
+            "fleschKincaid": 75.69435064935065,
+            "syllables": 178,
+            "sentences": 11,
+            "score": 0.8430564935064935
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2237784791,
+        "content": "No definitely overkill. Just regex is sufficient.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/62#issuecomment-2237784791",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.106,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 9.91107142857146,
+            "syllables": 16,
+            "sentences": 2,
+            "score": 0.49911071428571463
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2237991994,
+        "content": "I think lets let the partners deal with that problem. For example, if they enable both then they need to do the math and figure out what rewards make sense with the double counting. I suggest that they should only use one or the other, but if they are really pro, they might figure a way to get them both enabled. Lets keep it simple. \r\nI'll probably try some experiments in the near future when its stable.\r\nBut the main benefit of implementing this \"symbols\" section is that we should be able to target any arbitrary pattern, which seems like a generally useful tool.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/62#issuecomment-2237991994",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 5.232,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 105,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 70.63250000000004,
+            "syllables": 147,
+            "sentences": 6,
+            "score": 0.8936749999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2239173732,
+        "content": "Definitely include in the reward total. Do a regex eval so the partner can pass in any arbitrary pattern.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/62#issuecomment-2239173732",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 3.276,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 50.25565789473683,
+            "syllables": 33,
+            "sentences": 2,
+            "score": 0.9025565789473683
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2309409783,
+        "content": "What does the personal access token for the directory have to do with the conversation rewards Open AI call?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/62#issuecomment-2309409783",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.086,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 49.518421052631595,
+            "syllables": 31,
+            "sentences": 1,
+            "score": 0.8951842105263159
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1689072355,
+        "content": "```suggestion\r\nHere is a possible valid configuration to enable this plugin. See [these files](./src/configuration/) for more details.\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1689072355",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -46,7 +46,7 @@ Reward formula: `((count * wordValue) * (score * formattingMultiplier) * n) * re\n \n ## Plugin configuration\n \n-Here is a possible valid configuration to enable this plugin.\n+Here is a possible valid configuration to enable this plugin. See [these files](./src/configuration) for more details.",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1689073633,
+        "content": "```suggestion\r\n  readonly _configuration: DataPurgeConfiguration | null = configuration.incentives.dataPurge;\r\n```\r\nBad practice. Should just return `null` on some type of failure.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1689073633",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -8,14 +8,14 @@ import { Module, Result } from \"./processor\";\n  * Removes the data in the comments that we do not want to be processed.\n  */\n export class DataPurgeModule implements Module {\n-  readonly _configuration: DataPurgeConfiguration = configuration.incentives.dataPurge;\n+  readonly _configuration: DataPurgeConfiguration | undefined | null = configuration.incentives.dataPurge;",
+        "score": {
+          "reward": 1.944,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 91.78000000000003,
+            "syllables": 13,
+            "sentences": 2,
+            "score": 0.6821999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1692502758,
+        "content": "This seems like an incomplete list of HTML entities. I assume that default is `0` so I suppose its fine.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1692502758",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -7,95 +7,100 @@ const type = Type.Union(\n   )\n );\n \n-export const formattingEvaluatorConfigurationType = Type.Object({\n-  /**\n-   * Multipliers applied to different parts of the comment body content\n-   */\n-  multipliers: Type.Array(\n-    Type.Object({\n-      select: Type.Array(type),\n-      formattingMultiplier: Type.Number(),\n-      wordValue: Type.Number(),\n-    }),\n-    {\n-      default: [\n-        {\n-          select: [\"ISSUE_SPECIFICATION\"],\n-          formattingMultiplier: 1,\n-          wordValue: 0.1,\n-        },\n-        {\n-          select: [\"ISSUE_AUTHOR\"],\n-          formattingMultiplier: 1,\n-          wordValue: 0.2,\n-        },\n-        {\n-          select: [\"ISSUE_ASSIGNEE\"],\n-          formattingMultiplier: 0,\n-          wordValue: 0,\n-        },\n-        {\n-          select: [\"ISSUE_COLLABORATOR\"],\n-          formattingMultiplier: 1,\n-          wordValue: 0.1,\n-        },\n-        {\n-          select: [\"ISSUE_CONTRIBUTOR\"],\n-          formattingMultiplier: 0.25,\n-          wordValue: 0.1,\n-        },\n-        {\n-          select: [\"PULL_SPECIFICATION\"],\n-          formattingMultiplier: 0,\n-          wordValue: 0,\n-        },\n-        {\n-          select: [\"PULL_AUTHOR\"],\n-          formattingMultiplier: 2,\n-          wordValue: 0.2,\n-        },\n-        {\n-          select: [\"PULL_ASSIGNEE\"],\n-          formattingMultiplier: 1,\n-          wordValue: 0.1,\n-        },\n-        {\n-          select: [\"PULL_COLLABORATOR\"],\n-          formattingMultiplier: 1,\n-          wordValue: 0.1,\n-        },\n-        {\n-          select: [\"PULL_CONTRIBUTOR\"],\n-          formattingMultiplier: 0.25,\n-          wordValue: 0.1,\n-        },\n-      ],\n-    }\n-  ),\n-  /**\n-   * Attributed score per HTML entity\n-   */\n-  scores: Type.Record(Type.String(), Type.Number(), {\n-    default: {\n-      br: 0,\n-      code: 1,\n-      p: 1,\n-      em: 0,\n-      img: 0,\n-      strong: 0,\n-      blockquote: 0,\n-      h1: 1,\n-      h2: 1,\n-      h3: 1,\n-      h4: 1,\n-      h5: 1,\n-      h6: 1,\n-      a: 1,\n-      li: 1,\n-      td: 1,\n-      hr: 0,\n-    },\n-  }),\n-});\n+const symbolsType = Type.Record(Type.String(), Type.Number(), { minProperties: 1 });\n+\n+export const formattingEvaluatorConfigurationType = Type.Object(\n+  {\n+    /**\n+     * Multipliers applied to different parts of the comment body content\n+     */\n+    multipliers: Type.Array(\n+      Type.Object({\n+        select: Type.Array(type),\n+        formattingMultiplier: Type.Number(),\n+        symbols: symbolsType,\n+        /**\n+         * Attributed score per HTML entity\n+         */\n+        scores: Type.Record(Type.String(), Type.Number(), {\n+          default: {\n+            br: 0,\n+            code: 1,\n+            p: 1,\n+            em: 0,\n+            img: 0,\n+            strong: 0,\n+            blockquote: 0,\n+            h1: 1,\n+            h2: 1,\n+            h3: 1,\n+            h4: 1,\n+            h5: 1,\n+            h6: 1,\n+            a: 1,\n+            li: 1,\n+            td: 1,\n+            hr: 0,",
+        "score": {
+          "reward": 1.77,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 81.42407894736841,
+            "syllables": 26,
+            "sentences": 2,
+            "score": 0.7857592105263158
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1692503153,
+        "content": "Might be useful to make special aliases for our config to make it more human readable. We can consider this as part of a new task i.e. \"`words`\" maps to \"`\\\\b\\\\w+\\\\b`\"",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1692503153",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -7,95 +7,100 @@ const type = Type.Union(\n   )\n );\n \n-export const formattingEvaluatorConfigurationType = Type.Object({\n-  /**\n-   * Multipliers applied to different parts of the comment body content\n-   */\n-  multipliers: Type.Array(\n-    Type.Object({\n-      select: Type.Array(type),\n-      formattingMultiplier: Type.Number(),\n-      wordValue: Type.Number(),\n-    }),\n-    {\n-      default: [\n-        {\n-          select: [\"ISSUE_SPECIFICATION\"],\n-          formattingMultiplier: 1,\n-          wordValue: 0.1,\n-        },\n-        {\n-          select: [\"ISSUE_AUTHOR\"],\n-          formattingMultiplier: 1,\n-          wordValue: 0.2,\n-        },\n-        {\n-          select: [\"ISSUE_ASSIGNEE\"],\n-          formattingMultiplier: 0,\n-          wordValue: 0,\n-        },\n-        {\n-          select: [\"ISSUE_COLLABORATOR\"],\n-          formattingMultiplier: 1,\n-          wordValue: 0.1,\n-        },\n-        {\n-          select: [\"ISSUE_CONTRIBUTOR\"],\n-          formattingMultiplier: 0.25,\n-          wordValue: 0.1,\n-        },\n-        {\n-          select: [\"PULL_SPECIFICATION\"],\n-          formattingMultiplier: 0,\n-          wordValue: 0,\n-        },\n-        {\n-          select: [\"PULL_AUTHOR\"],\n-          formattingMultiplier: 2,\n-          wordValue: 0.2,\n-        },\n-        {\n-          select: [\"PULL_ASSIGNEE\"],\n-          formattingMultiplier: 1,\n-          wordValue: 0.1,\n-        },\n-        {\n-          select: [\"PULL_COLLABORATOR\"],\n-          formattingMultiplier: 1,\n-          wordValue: 0.1,\n-        },\n-        {\n-          select: [\"PULL_CONTRIBUTOR\"],\n-          formattingMultiplier: 0.25,\n-          wordValue: 0.1,\n-        },\n-      ],\n-    }\n-  ),\n-  /**\n-   * Attributed score per HTML entity\n-   */\n-  scores: Type.Record(Type.String(), Type.Number(), {\n-    default: {\n-      br: 0,\n-      code: 1,\n-      p: 1,\n-      em: 0,\n-      img: 0,\n-      strong: 0,\n-      blockquote: 0,\n-      h1: 1,\n-      h2: 1,\n-      h3: 1,\n-      h4: 1,\n-      h5: 1,\n-      h6: 1,\n-      a: 1,\n-      li: 1,\n-      td: 1,\n-      hr: 0,\n-    },\n-  }),\n-});\n+const symbolsType = Type.Record(Type.String(), Type.Number(), { minProperties: 1 });\n+\n+export const formattingEvaluatorConfigurationType = Type.Object(\n+  {\n+    /**\n+     * Multipliers applied to different parts of the comment body content\n+     */\n+    multipliers: Type.Array(\n+      Type.Object({\n+        select: Type.Array(type),\n+        formattingMultiplier: Type.Number(),\n+        symbols: symbolsType,\n+        /**\n+         * Attributed score per HTML entity\n+         */\n+        scores: Type.Record(Type.String(), Type.Number(), {\n+          default: {\n+            br: 0,\n+            code: 1,\n+            p: 1,\n+            em: 0,\n+            img: 0,\n+            strong: 0,\n+            blockquote: 0,\n+            h1: 1,\n+            h2: 1,\n+            h3: 1,\n+            h4: 1,\n+            h5: 1,\n+            h6: 1,\n+            a: 1,\n+            li: 1,\n+            td: 1,\n+            hr: 0,\n+          },\n+        }),\n+      }),\n+      {\n+        default: [\n+          {\n+            select: [\"ISSUE_SPECIFICATION\"],\n+            formattingMultiplier: 1,\n+            symbols: { \"\\\\b\\\\w+\\\\b\": 0.1 },",
+        "score": {
+          "reward": 3.664,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 86.42250000000001,
+            "syllables": 40,
+            "sentences": 4,
+            "score": 0.7357749999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1692503579,
+        "content": "Default to `1` on failure?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1692503579",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -164,14 +164,7 @@ export class GithubCommentModule implements Module {\n             <td>\n             <details>\n               <summary>\n-                ${Object.values(commentScore.score?.formatting?.content || {}).reduce((acc, curr) => {\n-                  const multiplier = new Decimal(\n-                    commentScore.score?.formatting\n-                      ? commentScore.score.formatting.formattingMultiplier * commentScore.score.formatting.wordValue\n-                      : 0\n-                  );\n-                  return acc.add(multiplier.mul(curr.score * curr.count));\n-                }, new Decimal(0))}\n+                ${new Decimal(commentScore.score?.reward || 0).div(new Decimal(commentScore.score?.relevance || 0))}",
+        "score": {
+          "reward": 0.66,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 75.87500000000001,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 0.8412499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1696573858,
+        "content": "I suppose we can do a wildcard select first and then the later config settings can overwrite kind of like CSS behavior?\r\n```yml\r\n        multipliers:\r\n          - select: [ * ]\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696573858",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -65,55 +65,65 @@ with:\n         redeemTask: true\n       dataPurge:\n       formattingEvaluator:\n-        scores:\n-          br: 0\n-          code: 1\n-          p: 1\n-          em: 0\n-          img: 0\n-          strong: 0\n-          blockquote: 0\n-          h1: 1\n-          h2: 1\n-          h3: 1\n-          h4: 1\n-          h5: 1\n-          h6: 1\n-          a: 1\n-          li: 1\n-          td: 1\n-          hr: 0\n         multipliers:\n           - select: [ ISSUE_SPECIFICATION ]",
+        "score": {
+          "reward": 2.842,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 61.45045454545455,
+            "syllables": 32,
+            "sentences": 1,
+            "score": 0.9854954545454545
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1696576344,
+        "content": "I'm not sure. I'm reviewing all of the property names next to each other and maybe it makes sense to do:\r\n```yml\r\n          - role: [ ISSUE_SPECIFICATION ]\r\n            multiplier: 1\r\n            rewards:\r\n              components: \r\n                words: 0.1\r\n                paragraph: 1\r\n              html: \r\n                code: 5\r\n                img: 5\r\n                a: 5\r\n              regex:\r\n                \"\\\\b\\\\w+\\\\b\": 0.2 # I guess this would mean double crediting words in this example\r\n          - role: [ ISSUE_ASSIGNEE ]\r\n            multiplier: 0\r\n            rewards:\r\n              regex:\r\n                \"\\\\b\\\\w+\\\\b\": 0\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696576344",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -65,55 +65,65 @@ with:\n         redeemTask: true\n       dataPurge:\n       formattingEvaluator:\n-        scores:\n-          br: 0\n-          code: 1\n-          p: 1\n-          em: 0\n-          img: 0\n-          strong: 0\n-          blockquote: 0\n-          h1: 1\n-          h2: 1\n-          h3: 1\n-          h4: 1\n-          h5: 1\n-          h6: 1\n-          a: 1\n-          li: 1\n-          td: 1\n-          hr: 0\n         multipliers:\n           - select: [ ISSUE_SPECIFICATION ]\n             formattingMultiplier: 1\n-            wordValue: 0.1\n+            symbols:\n+              \"\\\\b\\\\w+\\\\b\": 0.1\n+            scores: # Scores can be set for each item differently",
+        "score": {
+          "reward": 3.492,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 92.17119565217394,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.6782880434782607
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1696581118,
+        "content": "I've never seen people writing html comments like this. I don't anticipate this scenario to happen normally.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696581118",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -91,30 +96,43 @@ export class FormattingEvaluatorModule implements Module {\n     const html = this._md.render(comment.content);\n     const temp = new JSDOM(html);\n     if (temp.window.document.body) {\n-      const res = this.classifyTagsWithWordCount(temp.window.document.body);\n+      const res = this.classifyTagsWithWordCount(temp.window.document.body, comment.type);\n       return { formatting: res };\n     } else {\n       throw new Error(`Could not create DOM for comment [${comment}]`);\n     }\n   }\n \n-  _countWords(text: string): number {\n-    return text.trim().split(/\\s+/).length;\n+  _countWords(symbols: FormattingEvaluatorConfiguration[\"multipliers\"][0][\"symbols\"], text: string) {\n+    const counts: { [p: string]: { count: number; multiplier: number } } = {};\n+    for (const [regex, multiplier] of Object.entries(symbols)) {\n+      const match = text.trim().match(new RegExp(regex, \"g\"));\n+      counts[regex] = {\n+        count: match?.length || 1,\n+        multiplier,\n+      };\n+    }\n+    return counts;\n   }\n \n-  classifyTagsWithWordCount(htmlElement: HTMLElement) {\n-    const tagWordCount: Record<string, { count: number; score: number }> = {};\n+  classifyTagsWithWordCount(htmlElement: HTMLElement, commentType: GithubCommentScore[\"type\"]) {\n+    const tagWordCount: Record<\n+      string,\n+      { symbols: { [p: string]: { count: number; multiplier: number } }; score: number }\n+    > = {};\n     const elements = htmlElement.getElementsByTagName(\"*\");\n \n     for (const element of elements) {\n       const tagName = element.tagName.toLowerCase();\n-      const wordCount = this._countWords(element.textContent || \"\");\n+      const wordCount = this._countWords(this._multipliers[commentType].symbols, element.textContent || \"\");",
+        "score": {
+          "reward": 1.488,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 59.16092105263158,
+            "syllables": 31,
+            "sentences": 2,
+            "score": 0.9916092105263158
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1696583718,
+        "content": "Not sure, perhaps `pattern: ` however I know I had another task somewhere for custom aliases to map to specific regexes so that its more readable in the config. Or we can consider hard coding these inside of the plugin. For example:\r\n```yml\r\nalias: \r\n   \"\\\\b\\\\w+\\\\b\": \"words\"\r\n```\r\nAnd then later in the config we can just do something like\r\n```yml\r\npattern: \r\n   words: 0.1\r\n```\r\nI have a feeling hard coding the common useful ones might be best",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696583718",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -65,55 +65,65 @@ with:\n         redeemTask: true\n       dataPurge:\n       formattingEvaluator:\n-        scores:\n-          br: 0\n-          code: 1\n-          p: 1\n-          em: 0\n-          img: 0\n-          strong: 0\n-          blockquote: 0\n-          h1: 1\n-          h2: 1\n-          h3: 1\n-          h4: 1\n-          h5: 1\n-          h6: 1\n-          a: 1\n-          li: 1\n-          td: 1\n-          hr: 0\n         multipliers:\n           - select: [ ISSUE_SPECIFICATION ]\n             formattingMultiplier: 1\n-            wordValue: 0.1\n+            symbols:",
+        "score": {
+          "reward": 5.328,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 65,
+            "wordValue": 0.1,
+            "result": 2.56
+          },
+          "readability": {
+            "fleschKincaid": 59.89564102564103,
+            "syllables": 96,
+            "sentences": 3,
+            "score": 0.9989564102564102
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1696609369,
+        "content": "I didn't see this when I authored the first version",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696609369",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -91,30 +96,43 @@ export class FormattingEvaluatorModule implements Module {\n     const html = this._md.render(comment.content);\n     const temp = new JSDOM(html);\n     if (temp.window.document.body) {\n-      const res = this.classifyTagsWithWordCount(temp.window.document.body);\n+      const res = this.classifyTagsWithWordCount(temp.window.document.body, comment.type);\n       return { formatting: res };\n     } else {\n       throw new Error(`Could not create DOM for comment [${comment}]`);\n     }\n   }\n \n-  _countWords(text: string): number {\n-    return text.trim().split(/\\s+/).length;\n+  _countWords(symbols: FormattingEvaluatorConfiguration[\"multipliers\"][0][\"symbols\"], text: string) {\n+    const counts: { [p: string]: { count: number; multiplier: number } } = {};\n+    for (const [regex, multiplier] of Object.entries(symbols)) {\n+      const match = text.trim().match(new RegExp(regex, \"g\"));\n+      counts[regex] = {\n+        count: match?.length || 1,\n+        multiplier,\n+      };\n+    }\n+    return counts;\n   }\n \n-  classifyTagsWithWordCount(htmlElement: HTMLElement) {\n-    const tagWordCount: Record<string, { count: number; score: number }> = {};\n+  classifyTagsWithWordCount(htmlElement: HTMLElement, commentType: GithubCommentScore[\"type\"]) {\n+    const tagWordCount: Record<\n+      string,\n+      { symbols: { [p: string]: { count: number; multiplier: number } }; score: number }\n+    > = {};\n     const elements = htmlElement.getElementsByTagName(\"*\");\n \n     for (const element of elements) {\n       const tagName = element.tagName.toLowerCase();\n-      const wordCount = this._countWords(element.textContent || \"\");\n+      const wordCount = this._countWords(this._multipliers[commentType].symbols, element.textContent || \"\");",
+        "score": {
+          "reward": 0.464,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 95.68818181818183,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.6431181818181817
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1696610070,
+        "content": "I never would select `img` in the config because `a` would always wrap them automatically as a heads up.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696610070",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -91,30 +96,43 @@ export class FormattingEvaluatorModule implements Module {\n     const html = this._md.render(comment.content);\n     const temp = new JSDOM(html);\n     if (temp.window.document.body) {\n-      const res = this.classifyTagsWithWordCount(temp.window.document.body);\n+      const res = this.classifyTagsWithWordCount(temp.window.document.body, comment.type);\n       return { formatting: res };\n     } else {\n       throw new Error(`Could not create DOM for comment [${comment}]`);\n     }\n   }\n \n-  _countWords(text: string): number {\n-    return text.trim().split(/\\s+/).length;\n+  _countWords(symbols: FormattingEvaluatorConfiguration[\"multipliers\"][0][\"symbols\"], text: string) {\n+    const counts: { [p: string]: { count: number; multiplier: number } } = {};\n+    for (const [regex, multiplier] of Object.entries(symbols)) {\n+      const match = text.trim().match(new RegExp(regex, \"g\"));\n+      counts[regex] = {\n+        count: match?.length || 1,",
+        "score": {
+          "reward": 1.7,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 55.21529411764709,
+            "syllables": 27,
+            "sentences": 1,
+            "score": 0.9521529411764709
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1696613041,
+        "content": "I don't understand your example but if there is a code block inside of an unordered list, then there should be credit for both if the config enabled that. It is important for the partner to config carefully so as to not double dip, right? Or are you suggesting that we build in protection?\r\nThe thing is, as I mentioned in my [other comment](https://github.com/ubiquibot/conversation-rewards/pull/68#discussion_r1696610070), some tags are impossible to target directly, like `img` because they are automatically wrapped inside of `a`",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696613041",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -91,30 +96,43 @@ export class FormattingEvaluatorModule implements Module {\n     const html = this._md.render(comment.content);\n     const temp = new JSDOM(html);\n     if (temp.window.document.body) {\n-      const res = this.classifyTagsWithWordCount(temp.window.document.body);\n+      const res = this.classifyTagsWithWordCount(temp.window.document.body, comment.type);\n       return { formatting: res };\n     } else {\n       throw new Error(`Could not create DOM for comment [${comment}]`);\n     }\n   }\n \n-  _countWords(text: string): number {\n-    return text.trim().split(/\\s+/).length;\n+  _countWords(symbols: FormattingEvaluatorConfiguration[\"multipliers\"][0][\"symbols\"], text: string) {\n+    const counts: { [p: string]: { count: number; multiplier: number } } = {};\n+    for (const [regex, multiplier] of Object.entries(symbols)) {\n+      const match = text.trim().match(new RegExp(regex, \"g\"));\n+      counts[regex] = {\n+        count: match?.length || 1,\n+        multiplier,\n+      };\n+    }\n+    return counts;\n   }\n \n-  classifyTagsWithWordCount(htmlElement: HTMLElement) {\n-    const tagWordCount: Record<string, { count: number; score: number }> = {};\n+  classifyTagsWithWordCount(htmlElement: HTMLElement, commentType: GithubCommentScore[\"type\"]) {\n+    const tagWordCount: Record<\n+      string,\n+      { symbols: { [p: string]: { count: number; multiplier: number } }; score: number }\n+    > = {};\n     const elements = htmlElement.getElementsByTagName(\"*\");\n \n     for (const element of elements) {\n       const tagName = element.tagName.toLowerCase();\n-      const wordCount = this._countWords(element.textContent || \"\");\n+      const wordCount = this._countWords(this._multipliers[commentType].symbols, element.textContent || \"\");",
+        "score": {
+          "reward": 6.58,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 80,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 61.75000000000003,
+            "syllables": 118,
+            "sentences": 4,
+            "score": 0.9824999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1696827475,
+        "content": "So the strategy is to take the parent or the child element? I suppose the child would be more precise.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696827475",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -91,30 +96,43 @@ export class FormattingEvaluatorModule implements Module {\n     const html = this._md.render(comment.content);\n     const temp = new JSDOM(html);\n     if (temp.window.document.body) {\n-      const res = this.classifyTagsWithWordCount(temp.window.document.body);\n+      const res = this.classifyTagsWithWordCount(temp.window.document.body, comment.type);\n       return { formatting: res };\n     } else {\n       throw new Error(`Could not create DOM for comment [${comment}]`);\n     }\n   }\n \n-  _countWords(text: string): number {\n-    return text.trim().split(/\\s+/).length;\n+  _countWords(symbols: FormattingEvaluatorConfiguration[\"multipliers\"][0][\"symbols\"], text: string) {\n+    const counts: { [p: string]: { count: number; multiplier: number } } = {};\n+    for (const [regex, multiplier] of Object.entries(symbols)) {\n+      const match = text.trim().match(new RegExp(regex, \"g\"));\n+      counts[regex] = {\n+        count: match?.length || 1,\n+        multiplier,\n+      };\n+    }\n+    return counts;\n   }\n \n-  classifyTagsWithWordCount(htmlElement: HTMLElement) {\n-    const tagWordCount: Record<string, { count: number; score: number }> = {};\n+  classifyTagsWithWordCount(htmlElement: HTMLElement, commentType: GithubCommentScore[\"type\"]) {\n+    const tagWordCount: Record<\n+      string,\n+      { symbols: { [p: string]: { count: number; multiplier: number } }; score: number }\n+    > = {};\n     const elements = htmlElement.getElementsByTagName(\"*\");\n \n     for (const element of elements) {\n       const tagName = element.tagName.toLowerCase();\n-      const wordCount = this._countWords(element.textContent || \"\");\n+      const wordCount = this._countWords(this._multipliers[commentType].symbols, element.textContent || \"\");",
+        "score": {
+          "reward": 1.456,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 82.47500000000001,
+            "syllables": 27,
+            "sentences": 2,
+            "score": 0.7752499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1696830294,
+        "content": "My goal is to make the config as intuitive as possible, sorry for the runaround.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696830294",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -65,55 +65,65 @@ with:\n         redeemTask: true\n       dataPurge:\n       formattingEvaluator:\n-        scores:\n-          br: 0\n-          code: 1\n-          p: 1\n-          em: 0\n-          img: 0\n-          strong: 0\n-          blockquote: 0\n-          h1: 1\n-          h2: 1\n-          h3: 1\n-          h4: 1\n-          h5: 1\n-          h6: 1\n-          a: 1\n-          li: 1\n-          td: 1\n-          hr: 0\n         multipliers:\n           - select: [ ISSUE_SPECIFICATION ]\n             formattingMultiplier: 1\n-            wordValue: 0.1\n+            symbols:\n+              \"\\\\b\\\\w+\\\\b\": 0.1\n+            scores: # Scores can be set for each item differently",
+        "score": {
+          "reward": 0.942,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 61.890000000000015,
+            "syllables": 23,
+            "sentences": 1,
+            "score": 0.9810999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1696830913,
+        "content": "Let's do what was defined in my example config above. \nhttps://github.com/ubiquibot/conversation-rewards/pull/68#discussion_r1696576344",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696830913",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -65,55 +65,65 @@ with:\n         redeemTask: true\n       dataPurge:\n       formattingEvaluator:\n-        scores:\n-          br: 0\n-          code: 1\n-          p: 1\n-          em: 0\n-          img: 0\n-          strong: 0\n-          blockquote: 0\n-          h1: 1\n-          h2: 1\n-          h3: 1\n-          h4: 1\n-          h5: 1\n-          h6: 1\n-          a: 1\n-          li: 1\n-          td: 1\n-          hr: 0\n         multipliers:\n           - select: [ ISSUE_SPECIFICATION ]\n             formattingMultiplier: 1\n-            wordValue: 0.1\n+            symbols:",
+        "score": {
+          "reward": 3.514,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 52.018333333333345,
+            "syllables": 35,
+            "sentences": 3,
+            "score": 0.9201833333333335
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1721049100,
+        "content": "At least in the config we renamed things accordingly. For example I'm pretty sure we renamed `symbol` to `regex`, so we should do the same in the code here. \nAlso `score` should just sum per instance. For example if we want to award $1 for every paragraph, then `score` for `p` should be `1`. \n`score` is not supposed to be a multiplier. \nHowever in the config I believe we also support a `multiplier` property. This should be separate from `score`.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1721049100",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -56,15 +56,15 @@ export class FormattingEvaluatorModule implements Module {\n         const comment = comments[i];\n         // Count with html elements if any, otherwise just treat it as plain text\n         const { formatting } = this._getFormattingScore(comment);\n-        const multiplierFactor = this._multipliers?.[comment.type] ?? { wordValue: 0, formattingMultiplier: 0 };\n+        const multiplierFactor = this._multipliers?.[comment.type] ?? { multiplier: 0 };\n         const formattingTotal = formatting\n           ? Object.values(formatting).reduce((acc, curr) => {\n               let sum = new Decimal(0);\n               for (const symbol of Object.keys(curr.symbols)) {\n                 sum = sum.add(\n                   new Decimal(curr.symbols[symbol].count)\n                     .mul(curr.symbols[symbol].multiplier)\n-                    .mul(multiplierFactor.formattingMultiplier)\n+                    .mul(multiplierFactor.multiplier)\n                     .mul(curr.score)\n                 );\n               }",
+        "score": {
+          "reward": 5.886,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 72,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 75.37000000000002,
+            "syllables": 103,
+            "sentences": 7,
+            "score": 0.8462999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2256100561,
+        "content": "The \"enabled\" properties should be removed",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#issuecomment-2256100561",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.106,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 59.745000000000005,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.9974500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2195583451,
+            "effect": {
+              "addition": 5847,
+              "deletion": 1465
+            },
+            "reward": 146.24,
+            "priority": 2
+          },
+          {
+            "reviewId": 2207055683,
+            "effect": {
+              "addition": 246,
+              "deletion": 137
+            },
+            "reward": 7.66,
+            "priority": 2
+          },
+          {
+            "reviewId": 2207071068,
+            "effect": {
+              "addition": 0,
+              "deletion": 0
+            },
+            "reward": 0,
+            "priority": 2
+          },
+          {
+            "reviewId": 2207466394,
+            "effect": {
+              "addition": 34,
+              "deletion": 11
+            },
+            "reward": 0.9,
+            "priority": 2
+          },
+          {
+            "reviewId": 2244388842,
+            "effect": {
+              "addition": 1615,
+              "deletion": 815
+            },
+            "reward": 48.6,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 200 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>5</td><td>203.4</td></tr><tr><td>Issue</td><td>Comment</td><td>5</td><td>16.208</td></tr><tr><td>Review</td><td>Comment</td><td>17</td><td>42.836</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68\" target=\"_blank\" rel=\"noopener\">#68</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+5847 -1465</td><td>2</td><td>146.24</td></tr><tr><td>+246 -137</td><td>2</td><td>7.66</td></tr><tr><td>+0 -0</td><td>2</td><td>0</td></tr><tr><td>+34 -11</td><td>2</td><td>0.9</td></tr><tr><td>+1615 -815</td><td>2</td><td>48.6</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/62#issuecomment-2237061511\" target=\"_blank\" rel=\"noopener\">Hey the regex needs to be improved for the sentences. For examp&hellip;</a></h6></td><td><details><summary>2.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 126&#13;  wordValue: 0.1&#13;  result: 2.44&#13;</pre></details></td><td>0.9</td><td>2</td><td>5.508</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/62#issuecomment-2237784791\" target=\"_blank\" rel=\"noopener\">No definitely overkill. Just regex is sufficient.</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.7</td><td>2</td><td>1.106</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/62#issuecomment-2237991994\" target=\"_blank\" rel=\"noopener\">I think lets let the partners deal with that problem. For exampl&hellip;</a></h6></td><td><details><summary>2.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 105&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>0.8</td><td>2</td><td>5.232</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/62#issuecomment-2239173732\" target=\"_blank\" rel=\"noopener\">Definitely include in the reward total. Do a regex eval so the p&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.9</td><td>2</td><td>3.276</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/62#issuecomment-2309409783\" target=\"_blank\" rel=\"noopener\">What does the personal access token for the directory have to do&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.3</td><td>2</td><td>1.086</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1689072355\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionHere is a possible valid configuratio&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1689073633\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionreadonly _configuration: DataPurgeC&hellip;</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.9</td><td>2</td><td>1.944</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1692502758\" target=\"_blank\" rel=\"noopener\">This seems like an incomplete list of HTML entities. I assume th&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.5</td><td>2</td><td>1.77</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1692503153\" target=\"_blank\" rel=\"noopener\">Might be useful to make special aliases for our config to make i&hellip;</a></h6></td><td><details><summary>1.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.8</td><td>2</td><td>3.664</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1692503579\" target=\"_blank\" rel=\"noopener\">Default to &#96;1&#96; on failure?</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.6</td><td>2</td><td>0.66</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696573858\" target=\"_blank\" rel=\"noopener\">I suppose we can do a wildcard select first and then the later c&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.7</td><td>2</td><td>2.842</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696576344\" target=\"_blank\" rel=\"noopener\">I'm not sure. I'm reviewing all of the property names next to ea&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.9</td><td>2</td><td>3.492</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696581118\" target=\"_blank\" rel=\"noopener\">I've never seen people writing html comments like this. I don't &hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.4</td><td>2</td><td>1.488</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696583718\" target=\"_blank\" rel=\"noopener\">Not sure, perhaps &#96;pattern: &#96; however I know I had anoth&hellip;</a></h6></td><td><details><summary>2.56</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 65&#13;  wordValue: 0.1&#13;  result: 2.56&#13;</pre></details></td><td>0.8</td><td>2</td><td>5.328</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696609369\" target=\"_blank\" rel=\"noopener\">I didn't see this when I authored the first version</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.2</td><td>2</td><td>0.464</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696610070\" target=\"_blank\" rel=\"noopener\">I never would select &#96;img&#96; in the config because &#96;a&&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.5</td><td>2</td><td>1.7</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696613041\" target=\"_blank\" rel=\"noopener\">I don't understand your example but if there is a code block ins&hellip;</a></h6></td><td><details><summary>3.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 80&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.7</td><td>2</td><td>6.58</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696827475\" target=\"_blank\" rel=\"noopener\">So the strategy is to take the parent or the child element? I su&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.4</td><td>2</td><td>1.456</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696830294\" target=\"_blank\" rel=\"noopener\">My goal is to make the config as intuitive as possible, sorry fo&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.3</td><td>2</td><td>0.942</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696830913\" target=\"_blank\" rel=\"noopener\">Let's do what was defined in my example config above. https://g&hellip;</a></h6></td><td><details><summary>1.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.7</td><td>2</td><td>3.514</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1721049100\" target=\"_blank\" rel=\"noopener\">At least in the config we renamed things accordingly. For exampl&hellip;</a></h6></td><td><details><summary>2.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 72&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.9</td><td>2</td><td>5.886</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#issuecomment-2256100561\" target=\"_blank\" rel=\"noopener\">The \"enabled\" properties should be removed</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.7</td><td>2</td><td>1.106</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 200,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 1695764395,
+        "content": "why is there a need for merge? can't you just use `Value.Default(incentivesConfigurationSchema, JSON.parse(program.settings))`?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1695764395",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,27 +1,28 @@\n-import program from \"../parser/command-line\";\n-import { IncentivesConfiguration, incentivesConfigurationSchema, validateIncentivesConfiguration } from \"./incentives\";\n import { Value } from \"@sinclair/typebox/value\";\n import { merge } from \"lodash\";\n+import program from \"../parser/command-line\";\n+import { IncentivesConfiguration, incentivesConfigurationSchema, validateIncentivesConfiguration } from \"./incentives\";\n \n let configuration: IncentivesConfiguration | null = null;\n \n try {\n-  const defaultConf = Value.Create(incentivesConfigurationSchema);\n-  configuration = Value.Decode(incentivesConfigurationSchema, defaultConf);\n+  configuration = Value.Default(incentivesConfigurationSchema, {}) as IncentivesConfiguration;\n } catch (e) {\n   console.error(e);\n }\n \n if (program.settings) {\n-  const settings = merge(configuration, JSON.parse(program.settings));\n+  const settings = merge(\n+    configuration,\n+    Value.Default(incentivesConfigurationSchema, JSON.parse(program.settings)) as IncentivesConfiguration\n+  );",
+        "score": {
+          "reward": 2.43,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 116.14500000000001,
+            "syllables": 12,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1695771108,
+        "content": "```suggestion\r\n         * If set to false, the plugin runs even if the price label is missing, and will evaluate comments.\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1695771108",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -8,37 +8,43 @@ import { githubCommentConfigurationType } from \"./github-comment-config\";\n import { permitGenerationConfigurationType } from \"./permit-generation-configuration\";\n import { userExtractorConfigurationType } from \"./user-extractor-config\";\n \n-export const incentivesConfigurationSchema = T.Object({\n-  /**\n-   * Network ID to run in, default to 100\n-   */\n-  evmNetworkId: T.Number({ default: 100 }),\n-  /**\n-   * The encrypted key to use for permit generation\n-   */\n-  evmPrivateEncrypted: T.String(),\n-  /**\n-   * Reward token for ERC20 permits, default WXDAI for gnosis chain\n-   */\n-  erc20RewardToken: T.String({ default: \"0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d\" }),\n-  incentives: T.Object({\n+export const incentivesConfigurationSchema = T.Object(\n+  {\n     /**\n-     * Optionally specify a file to write the results in\n+     * Network ID to run in, default to 100\n      */\n-    file: T.Optional(T.String()),\n+    evmNetworkId: T.Number({ default: 100 }),\n     /**\n-     * If set to true, the plugin runs even if the price label is missing, and will evaluate comments.\n+     * The encrypted key to use for permit generation\n      */\n-    requirePriceLabel: T.Boolean({ default: true }),\n-    contentEvaluator: T.Union([contentEvaluatorConfigurationType, T.Null()]),\n-    userExtractor: T.Union([userExtractorConfigurationType, T.Null()]),\n-    dataPurge: T.Union([dataPurgeConfigurationType, T.Null()]),\n-    formattingEvaluator: T.Union([formattingEvaluatorConfigurationType, T.Null()]),\n-    permitGeneration: T.Union([permitGenerationConfigurationType, T.Null()]),\n-    githubComment: T.Union([githubCommentConfigurationType, T.Null()]),\n-  }),\n-  dataCollection: dataCollectionConfigurationType,\n-});\n+    evmPrivateEncrypted: T.String(),\n+    /**\n+     * Reward token for ERC20 permits, default WXDAI for gnosis chain\n+     */\n+    erc20RewardToken: T.String({ default: \"0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d\" }),\n+    incentives: T.Object(\n+      {\n+        /**\n+         * Optionally specify a file to write the results in\n+         */\n+        file: T.Optional(T.String()),\n+        /**\n+         * If set to true, the plugin runs even if the price label is missing, and will evaluate comments.",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1696435929,
+        "content": "won't this count twice?\r\nfor example:\r\n```\r\n<p>this a <span>test</span> string</p>\r\n```\r\nfor `p` textContent will be `this a test string` and for `span` it will be `test`",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696435929",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -91,30 +96,43 @@ export class FormattingEvaluatorModule implements Module {\n     const html = this._md.render(comment.content);\n     const temp = new JSDOM(html);\n     if (temp.window.document.body) {\n-      const res = this.classifyTagsWithWordCount(temp.window.document.body);\n+      const res = this.classifyTagsWithWordCount(temp.window.document.body, comment.type);\n       return { formatting: res };\n     } else {\n       throw new Error(`Could not create DOM for comment [${comment}]`);\n     }\n   }\n \n-  _countWords(text: string): number {\n-    return text.trim().split(/\\s+/).length;\n+  _countWords(symbols: FormattingEvaluatorConfiguration[\"multipliers\"][0][\"symbols\"], text: string) {\n+    const counts: { [p: string]: { count: number; multiplier: number } } = {};\n+    for (const [regex, multiplier] of Object.entries(symbols)) {\n+      const match = text.trim().match(new RegExp(regex, \"g\"));\n+      counts[regex] = {\n+        count: match?.length || 1,\n+        multiplier,\n+      };\n+    }\n+    return counts;\n   }\n \n-  classifyTagsWithWordCount(htmlElement: HTMLElement) {\n-    const tagWordCount: Record<string, { count: number; score: number }> = {};\n+  classifyTagsWithWordCount(htmlElement: HTMLElement, commentType: GithubCommentScore[\"type\"]) {\n+    const tagWordCount: Record<\n+      string,\n+      { symbols: { [p: string]: { count: number; multiplier: number } }; score: number }\n+    > = {};\n     const elements = htmlElement.getElementsByTagName(\"*\");\n \n     for (const element of elements) {\n       const tagName = element.tagName.toLowerCase();\n-      const wordCount = this._countWords(element.textContent || \"\");\n+      const wordCount = this._countWords(this._multipliers[commentType].symbols, element.textContent || \"\");",
+        "score": {
+          "reward": 2.754,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 92.965,
+            "syllables": 20,
+            "sentences": 2,
+            "score": 0.67035
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1696437913,
+        "content": "shouldn't it multiply by relevance not divide?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696437913",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -164,14 +164,7 @@ export class GithubCommentModule implements Module {\n             <td>\n             <details>\n               <summary>\n-                ${Object.values(commentScore.score?.formatting?.content || {}).reduce((acc, curr) => {\n-                  const multiplier = new Decimal(\n-                    commentScore.score?.formatting\n-                      ? commentScore.score.formatting.formattingMultiplier * commentScore.score.formatting.wordValue\n-                      : 0\n-                  );\n-                  return acc.add(multiplier.mul(curr.score * curr.count));\n-                }, new Decimal(0))}\n+                ${new Decimal(commentScore.score?.reward || 0).div(new Decimal(commentScore.score?.relevance || 1))}",
+        "score": {
+          "reward": 1.584,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 61.24000000000001,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.9875999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1696468252,
+        "content": "if there's no match shouldn't we set to 0?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696468252",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -91,30 +96,43 @@ export class FormattingEvaluatorModule implements Module {\n     const html = this._md.render(comment.content);\n     const temp = new JSDOM(html);\n     if (temp.window.document.body) {\n-      const res = this.classifyTagsWithWordCount(temp.window.document.body);\n+      const res = this.classifyTagsWithWordCount(temp.window.document.body, comment.type);\n       return { formatting: res };\n     } else {\n       throw new Error(`Could not create DOM for comment [${comment}]`);\n     }\n   }\n \n-  _countWords(text: string): number {\n-    return text.trim().split(/\\s+/).length;\n+  _countWords(symbols: FormattingEvaluatorConfiguration[\"multipliers\"][0][\"symbols\"], text: string) {\n+    const counts: { [p: string]: { count: number; multiplier: number } } = {};\n+    for (const [regex, multiplier] of Object.entries(symbols)) {\n+      const match = text.trim().match(new RegExp(regex, \"g\"));\n+      counts[regex] = {\n+        count: match?.length || 1,",
+        "score": {
+          "reward": 2.016,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 111.07000000000002,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1696477227,
+        "content": "In my memory score was basically a reward for each tag, for example if there are 5 p tags and the score in the config is set to 5, then the reward is 25.\r\nIf I understand correctly now symbols/regex is counted inside the tag and multiplied by the multiplier for the symbol and then multiplied by formatting multiplier which is a multiplier that is same for all symbols and tags and then multiplied by score which is like a multiplier that is same for all symbols inside the tag?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696477227",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -55,22 +58,24 @@ export class FormattingEvaluatorModule implements Module {\n         const { formatting } = this._getFormattingScore(comment);\n         const multiplierFactor = this._multipliers?.[comment.type] ?? { wordValue: 0, formattingMultiplier: 0 };\n         const formattingTotal = formatting\n-          ? Object.values(formatting).reduce(\n-              (acc, curr) =>\n-                acc.add(\n-                  new Decimal(curr.score)\n+          ? Object.values(formatting).reduce((acc, curr) => {\n+              let sum = new Decimal(0);\n+              for (const symbol of Object.keys(curr.symbols)) {\n+                sum = sum.add(\n+                  new Decimal(curr.symbols[symbol].count)\n+                    .mul(curr.symbols[symbol].multiplier)\n                     .mul(multiplierFactor.formattingMultiplier)\n-                    .mul(curr.count)\n-                    .mul(multiplierFactor.wordValue)\n-                ),\n-              new Decimal(0)\n-            )\n+                    .mul(curr.score)",
+        "score": {
+          "reward": 5.886,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 91,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 41.6546978021978,
+            "syllables": 128,
+            "sentences": 2,
+            "score": 0.8165469780219781
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1696478487,
+        "content": "maybe it'd be better to name this `tags` or `tagMultiplier`?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696478487",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -65,55 +65,65 @@ with:\n         redeemTask: true\n       dataPurge:\n       formattingEvaluator:\n-        scores:\n-          br: 0\n-          code: 1\n-          p: 1\n-          em: 0\n-          img: 0\n-          strong: 0\n-          blockquote: 0\n-          h1: 1\n-          h2: 1\n-          h3: 1\n-          h4: 1\n-          h5: 1\n-          h6: 1\n-          a: 1\n-          li: 1\n-          td: 1\n-          hr: 0\n         multipliers:\n           - select: [ ISSUE_SPECIFICATION ]\n             formattingMultiplier: 1\n-            wordValue: 0.1\n+            symbols:\n+              \"\\\\b\\\\w+\\\\b\": 0.1\n+            scores: # Scores can be set for each item differently",
+        "score": {
+          "reward": 1.526,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 103.70000000000002,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1696479782,
+        "content": "I always associate symbols with special characters like ^%$#, so maybe a better name would be `regexes` or `regexMultiplier`?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696479782",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -65,55 +65,65 @@ with:\n         redeemTask: true\n       dataPurge:\n       formattingEvaluator:\n-        scores:\n-          br: 0\n-          code: 1\n-          p: 1\n-          em: 0\n-          img: 0\n-          strong: 0\n-          blockquote: 0\n-          h1: 1\n-          h2: 1\n-          h3: 1\n-          h4: 1\n-          h5: 1\n-          h6: 1\n-          a: 1\n-          li: 1\n-          td: 1\n-          hr: 0\n         multipliers:\n           - select: [ ISSUE_SPECIFICATION ]\n             formattingMultiplier: 1\n-            wordValue: 0.1\n+            symbols:",
+        "score": {
+          "reward": 2.296,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 63.69500000000001,
+            "syllables": 24,
+            "sentences": 1,
+            "score": 0.96305
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1696485258,
+        "content": "if I want to create a multiplier that's not specific to a particular role, how do I do that?\r\nA cool feature would be to have like default multiplier but it can get overwritten by specific multipliers",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696485258",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -65,55 +65,65 @@ with:\n         redeemTask: true\n       dataPurge:\n       formattingEvaluator:\n-        scores:\n-          br: 0\n-          code: 1\n-          p: 1\n-          em: 0\n-          img: 0\n-          strong: 0\n-          blockquote: 0\n-          h1: 1\n-          h2: 1\n-          h3: 1\n-          h4: 1\n-          h5: 1\n-          h6: 1\n-          a: 1\n-          li: 1\n-          td: 1\n-          hr: 0\n         multipliers:\n           - select: [ ISSUE_SPECIFICATION ]",
+        "score": {
+          "reward": 4.416,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 60.65000000000002,
+            "syllables": 57,
+            "sentences": 2,
+            "score": 0.9934999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1696603893,
+        "content": "Of course people don't write comments in HTML but when markdown gets converted to HTML there might be a scenario where that happens",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696603893",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -91,30 +96,43 @@ export class FormattingEvaluatorModule implements Module {\n     const html = this._md.render(comment.content);\n     const temp = new JSDOM(html);\n     if (temp.window.document.body) {\n-      const res = this.classifyTagsWithWordCount(temp.window.document.body);\n+      const res = this.classifyTagsWithWordCount(temp.window.document.body, comment.type);\n       return { formatting: res };\n     } else {\n       throw new Error(`Could not create DOM for comment [${comment}]`);\n     }\n   }\n \n-  _countWords(text: string): number {\n-    return text.trim().split(/\\s+/).length;\n+  _countWords(symbols: FormattingEvaluatorConfiguration[\"multipliers\"][0][\"symbols\"], text: string) {\n+    const counts: { [p: string]: { count: number; multiplier: number } } = {};\n+    for (const [regex, multiplier] of Object.entries(symbols)) {\n+      const match = text.trim().match(new RegExp(regex, \"g\"));\n+      counts[regex] = {\n+        count: match?.length || 1,\n+        multiplier,\n+      };\n+    }\n+    return counts;\n   }\n \n-  classifyTagsWithWordCount(htmlElement: HTMLElement) {\n-    const tagWordCount: Record<string, { count: number; score: number }> = {};\n+  classifyTagsWithWordCount(htmlElement: HTMLElement, commentType: GithubCommentScore[\"type\"]) {\n+    const tagWordCount: Record<\n+      string,\n+      { symbols: { [p: string]: { count: number; multiplier: number } }; score: number }\n+    > = {};\n     const elements = htmlElement.getElementsByTagName(\"*\");\n \n     for (const element of elements) {\n       const tagName = element.tagName.toLowerCase();\n-      const wordCount = this._countWords(element.textContent || \"\");\n+      const wordCount = this._countWords(this._multipliers[commentType].symbols, element.textContent || \"\");",
+        "score": {
+          "reward": 2.926,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 73.20000000000002,
+            "syllables": 31,
+            "sentences": 1,
+            "score": 0.8679999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1721035518,
+        "content": "can you help me grasp how this calculation work?\r\nAt first for every tag (`<a>`), the number of regex matches is counted (each regex has its own multiplier) and has a so called score which is defined in the config.\r\nThen for the calculation, for every regex (symbol) the count is multiplied by the regex multiplier which makes sense, then that is multiplied by a \"general\" multiplier and multiplied by a `score` which is a multiplier for the tag I assume.\r\nI had to read the code a couple of times and it's hard to keep track of all different names for same things, like symbols = regex, score = multiplier for a tag and variables names are confusing such as `wordCount` for regex count",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1721035518",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -56,15 +56,15 @@ export class FormattingEvaluatorModule implements Module {\n         const comment = comments[i];\n         // Count with html elements if any, otherwise just treat it as plain text\n         const { formatting } = this._getFormattingScore(comment);\n-        const multiplierFactor = this._multipliers?.[comment.type] ?? { wordValue: 0, formattingMultiplier: 0 };\n+        const multiplierFactor = this._multipliers?.[comment.type] ?? { multiplier: 0 };\n         const formattingTotal = formatting\n           ? Object.values(formatting).reduce((acc, curr) => {\n               let sum = new Decimal(0);\n               for (const symbol of Object.keys(curr.symbols)) {\n                 sum = sum.add(\n                   new Decimal(curr.symbols[symbol].count)\n                     .mul(curr.symbols[symbol].multiplier)\n-                    .mul(multiplierFactor.formattingMultiplier)\n+                    .mul(multiplierFactor.multiplier)\n                     .mul(curr.score)\n                 );\n               }",
+        "score": {
+          "reward": 5.778,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 121,
+            "wordValue": 0.1,
+            "result": 2.48
+          },
+          "readability": {
+            "fleschKincaid": 58.67009297520664,
+            "syllables": 168,
+            "sentences": 4,
+            "score": 0.9867009297520665
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1723572942,
+        "content": "that was also my understanding but currently in the code it's a multiplier",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1723572942",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -56,15 +56,15 @@ export class FormattingEvaluatorModule implements Module {\n         const comment = comments[i];\n         // Count with html elements if any, otherwise just treat it as plain text\n         const { formatting } = this._getFormattingScore(comment);\n-        const multiplierFactor = this._multipliers?.[comment.type] ?? { wordValue: 0, formattingMultiplier: 0 };\n+        const multiplierFactor = this._multipliers?.[comment.type] ?? { multiplier: 0 };\n         const formattingTotal = formatting\n           ? Object.values(formatting).reduce((acc, curr) => {\n               let sum = new Decimal(0);\n               for (const symbol of Object.keys(curr.symbols)) {\n                 sum = sum.add(\n                   new Decimal(curr.symbols[symbol].count)\n                     .mul(curr.symbols[symbol].multiplier)\n-                    .mul(multiplierFactor.formattingMultiplier)\n+                    .mul(multiplierFactor.multiplier)\n                     .mul(curr.score)\n                 );\n               }",
+        "score": {
+          "reward": 1.812,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 59.68214285714288,
+            "syllables": 22,
+            "sentences": 1,
+            "score": 0.9968214285714287
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2205832450,
+            "effect": {
+              "addition": 6075,
+              "deletion": 1607
+            },
+            "reward": 153.64,
+            "priority": 2
+          },
+          {
+            "reviewId": 2244377191,
+            "effect": {
+              "addition": 1649,
+              "deletion": 826
+            },
+            "reward": 49.5,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 200 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>203.14</td></tr><tr><td>Review</td><td>Comment</td><td>12</td><td>33.424</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68\" target=\"_blank\" rel=\"noopener\">#68</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+6075 -1607</td><td>2</td><td>153.64</td></tr><tr><td>+1649 -826</td><td>2</td><td>49.5</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1695764395\" target=\"_blank\" rel=\"noopener\">why is there a need for merge? can't you just use &#96;Value.Def&hellip;</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.9</td><td>2</td><td>2.43</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1695771108\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion* If set to false, the plugi&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696435929\" target=\"_blank\" rel=\"noopener\">won't this count twice?for example:&#96;&#96;&#96;&lt;p&gt&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.9</td><td>2</td><td>2.754</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696437913\" target=\"_blank\" rel=\"noopener\">shouldn't it multiply by relevance not divide?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.8</td><td>2</td><td>1.584</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696468252\" target=\"_blank\" rel=\"noopener\">if there's no match shouldn't we set to 0?</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.8</td><td>2</td><td>2.016</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696477227\" target=\"_blank\" rel=\"noopener\">In my memory score was basically a reward for each tag, for exam&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 91&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.9</td><td>2</td><td>5.886</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696478487\" target=\"_blank\" rel=\"noopener\">maybe it'd be better to name this &#96;tags&#96; or &#96;tagMult&hellip;</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.7</td><td>2</td><td>1.526</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696479782\" target=\"_blank\" rel=\"noopener\">I always associate symbols with special characters like ^%$#, so&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.7</td><td>2</td><td>2.296</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696485258\" target=\"_blank\" rel=\"noopener\">if I want to create a multiplier that's not specific to a partic&hellip;</a></h6></td><td><details><summary>2.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.8</td><td>2</td><td>4.416</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1696603893\" target=\"_blank\" rel=\"noopener\">Of course people don't write comments in HTML but when markdown &hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.7</td><td>2</td><td>2.926</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1721035518\" target=\"_blank\" rel=\"noopener\">can you help me grasp how this calculation work?At first for e&hellip;</a></h6></td><td><details><summary>2.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 121&#13;  wordValue: 0.1&#13;  result: 2.48&#13;</pre></details></td><td>0.9</td><td>2</td><td>5.778</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#discussion_r1723572942\" target=\"_blank\" rel=\"noopener\">that was also my understanding but currently in the code it's a &hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.6</td><td>2</td><td>1.812</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 16.66,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2252137364,
+        "content": "@gentlementlegen Check [this](https://github.com/rndquu-org/test-repo/blob/8c295121fbfe3fb5da691e3288487a246951d5d9/.github/.ubiquibot-config.yml) config and [this](https://github.com/rndquu/conversation-rewards/actions/runs/10107389082/job/27951174446) CI run which outputs:\r\n```\r\nInvalid incentives configuration detected, will revert to defaults.\r\n{\r\n  type: 62,\r\n  schema: { anyOf: [ [Object], [Object] ], [Symbol(TypeBox.Kind)]: 'Union' },\r\n  path: '/incentives/formattingEvaluator',\r\n  value: {\r\n    scores: {\r\n      br: 0,\r\n      code: 1,\r\n      p: 1,\r\n      em: 0,\r\n      img: 0,\r\n      strong: 0,\r\n      blockquote: 0,\r\n      h1: 1,\r\n      h2: 1,\r\n      h3: 1,\r\n      h4: 1,\r\n      h5: 1,\r\n      h6: 1,\r\n      a: 1,\r\n      li: 1,\r\n      td: 1,\r\n      hr: 0\r\n    },\r\n    multipliers: [\r\n      [Object], [Object],\r\n      [Object], [Object],\r\n      [Object], [Object],\r\n      [Object], [Object],\r\n      [Object], [Object]\r\n    ]\r\n  },\r\n  message: 'Expected union value'\r\n}\r\n```\r\nIs this error expected?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#issuecomment-2252137364",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 7.38,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 59.68214285714288,
+            "syllables": 22,
+            "sentences": 1,
+            "score": 0.9968214285714287
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2252382408,
+        "content": "@gentlementlegen The `Invalid incentives configuration detected, will revert to defaults.` still persists both for the config from readme file and [this](https://github.com/ubiquibot/conversation-rewards/pull/68#issuecomment-2252274808) one.\r\nCheck [this](https://github.com/rndquu-org/test-repo/blob/adc6156d1255140f2236b9681b243139aa1576be/.github/.ubiquibot-config.yml) config and [this](https://github.com/rndquu/conversation-rewards/actions/runs/10109281547/job/27956860833) CI run with the `Invalid incentives configuration detected` error.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#issuecomment-2252382408",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 9.28,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 78.33000000000001,
+            "syllables": 33,
+            "sentences": 2,
+            "score": 0.8166999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 16.66 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>2</td><td>16.66</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#issuecomment-2252137364\" target=\"_blank\" rel=\"noopener\">@gentlementlegen Check [this](https://github.com/rndquu-org/test&hellip;</a></h6></td><td><details><summary>3.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.9</td><td>2</td><td>7.38</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#issuecomment-2252382408\" target=\"_blank\" rel=\"noopener\">@gentlementlegen The &#96;Invalid incentives configuration detec&hellip;</a></h6></td><td><details><summary>4.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.8</td><td>2</td><td>9.28</td></tr></tbody></table></details>"
+  },
+  "Keyrxng": {
+    "total": 4.572,
+    "userId": 106303466,
+    "comments": [
+      {
+        "id": 2291813436,
+        "content": "@gentlementlegen where can I find a working config setup? Is the readme one up to date? I'm getting typebox errors with it the same as [rndquu had](https://github.com/ubiquibot/conversation-rewards/pull/68#issuecomment-2252137364)\r\nI think we should eslint.ignore `README.md` and have the correct indentation etc copy and pasted from a working config in all plugin repos starting from `plugins:` as it has 0 indentation.\r\n```\r\nInvalid incentives configuration detected, will revert to defaults.\r\n{\r\n  type: 62,\r\n  schema: {\r\n    default: null,\r\n    anyOf: [ [Object], [Object] ],\r\n    [Symbol(TypeBox.Kind)]: 'Union'\r\n  },\r\n  path: '/incentives/formattingEvaluator',\r\n  value: {\r\n    multipliers: [\r\n      [Object], [Object],\r\n      [Object], [Object],\r\n      [Object], [Object],\r\n      [Object], [Object],\r\n      [Object], [Object]\r\n    ]\r\n  },\r\n  message: 'Expected union value'\r\n}\r\n```\r\nThe union type is the roles but it seems like the defaults are also throwing looking at this log. I have tried two of the configs from this thread and the one from the readme. I have tried making small adjustments like indentation and using quotes for strings etc but no luck. The [runs](https://github.com/ubq-testing/conversation-rewards/actions/runs/10407007367/job/28822902792) seems to be exiting without error but fails to load any modules. \r\nI'm not 100% on my triage but in my case all the user sees on the issue is `+ Evaluating results. Please wait...` and has no feedback without manually reviewing the logs. Is it something that I am doing wrong?\r\n---\r\n```\r\nPERMIT_FEE_RATE=\"\"\r\nPERMIT_TREASURY_GITHUB_USERNAME=\"\"\r\nPERMIT_ERC20_TOKENS_NO_FEE_WHITELIST=\"\"\r\n```\r\nThese are optional repo secrets right?\r\nand the only required ones are \r\n```\r\nOPENAI_API_KEY\r\nSUPABASE_KEY\r\nSUPABASE_URL\r\nX25519_PRIVATE_KEY\r\n```\r\nI did get feedback when I had missing secrets which is good",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#issuecomment-2291813436",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.708,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 7
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 184,
+            "wordValue": 0.1,
+            "result": 1.89
+          },
+          "readability": {
+            "fleschKincaid": 76.7857971014493,
+            "syllables": 249,
+            "sentences": 12,
+            "score": 0.8321420289855069
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2302991247,
+        "content": "- https://github.com/ubq-testing/conversation-rewards/issues/1\r\nThe only feedback on the issue I'm getting is `+ Evaluating results. Please wait...`.\r\nI was reading the wrong step in the run but things appear to be the same for me as before. Using the config you gave me and little feedback on the issue.\r\nAm I the only one that can't run this? @whilefoo could you? \r\nEither I'm stupid af or it's going to be as tricky for partner's to get right as it appears to be for me lol.\r\nWould it be possible to use `T.Enum` instead of `T.Union` considering it's inside a `T.Array` would that work? It might resolve the typebox union error that's happening. I don't think it's a good idea to allow that to remain unresolved. If it prevents errors down the line from being logged especially.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#issuecomment-2302991247",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.296,
+          "formatting": {
+            "content": {
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 1
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 134,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 78.86797202797204,
+            "syllables": 194,
+            "sentences": 11,
+            "score": 0.8113202797202795
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2304210635,
+        "content": "Very weird you'd expect that a fork of your branch, an exact config match and up to date kernel that it would work out-of-the-box.\r\nFor sure another issue to address the typebox issue and improve feedback on the issue for scenarios like the one I've been experiencing.\r\n---\r\nI also have a concern regarding [env vars](https://github.com/gentlementlegen/conversation-rewards/blob/feat/symbol-coefficient/src/types/env-type.ts) in this repo.\r\nIt seems that `env` and `pluginSettings` are out-of-sync. In the new config we pass the privateKey via the org config not repo secrets.\r\nPartner's that want to use this plugin need to use their org config to pass env vars as we don't want them to have to fork this repo. I think `permit_fee` etc is set by us so that makes sense to keep but I'm unsure about the rest but basically can this be cleaned up to what is actually passed via secrets? In another PR if or whatever you think is best",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#issuecomment-2304210635",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.568,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 160,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 76.55500000000004,
+            "syllables": 208,
+            "sentences": 8,
+            "score": 0.8344499999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 4.572 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>3</td><td>4.572</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#issuecomment-2291813436\" target=\"_blank\" rel=\"noopener\">@gentlementlegen where can I find a working config setup? Is the&hellip;</a></h6></td><td><details><summary>3.89</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 7&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 184&#13;  wordValue: 0.1&#13;  result: 1.89&#13;</pre></details></td><td>0.7</td><td>2</td><td>1.708</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#issuecomment-2302991247\" target=\"_blank\" rel=\"noopener\">- https://github.com/ubq-testing/conversation-rewards/issues/1&hellip;</a></h6></td><td><details><summary>3.48</summary><pre>content:&#13;  content:&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 1&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.1&#13;regex:&#13;  wordCount: 134&#13;  wordValue: 0.1&#13;  result: 2.38&#13;</pre></details></td><td>0.6</td><td>2</td><td>1.296</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/68#issuecomment-2304210635\" target=\"_blank\" rel=\"noopener\">Very weird you'd expect that a fork of your branch, an exact con&hellip;</a></h6></td><td><details><summary>3.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 160&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.8</td><td>2</td><td>1.568</td></tr></tbody></table></details>"
+  }
+}

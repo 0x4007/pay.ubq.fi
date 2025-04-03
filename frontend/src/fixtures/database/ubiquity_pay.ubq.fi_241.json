@@ -1,0 +1,754 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 200,
+    "task": {
+      "reward": 200,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 200 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>200</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 52.288,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2155829966,
+        "content": "Perhaps a simple solution will be to do a timeout in five seconds if you can't find some type of failure event.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/241#issuecomment-2155829966",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 4.14,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 65.78565217391306,
+            "syllables": 32,
+            "sentences": 1,
+            "score": 0.9421434782608693
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2155857453,
+        "content": "It might also be worth trying to reproduce based on the RPC I specified in the Telegram chat. \r\nAs long as it looks presentable thats my main concern. Seems like too much text to try and cram in.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/241#issuecomment-2155857453",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 4.176,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 84.88885964912284,
+            "syllables": 49,
+            "sentences": 3,
+            "score": 0.7511114035087716
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2340227291,
+        "content": "Related thread https://t.me/UbiquityDAO/31131/32216\nMy phone wallet had an RPC that seems to have gone down. When I clicked to claim it would infinite hang with no wallet prompt. \nWe should catch this and notify the user that there are issues with the in wallet selected RPC and suggest the top pick from our RPC handler package.  \n![image](https://github.com/ubiquity/pay.ubq.fi/assets/4975670/c67e4bc9-c028-4bc8-8138-ca853e870881)",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/241",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.27,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "br": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 55,
+            "wordValue": 0.1,
+            "result": 2.46
+          },
+          "readability": {
+            "fleschKincaid": 81.79231557377051,
+            "syllables": 79,
+            "sentences": 4,
+            "score": 0.782076844262295
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2121325074,
+        "content": "Code seems fine. Although I'm not entirely sure what the best way to test this is. @rndquu can you take a quick review to finalize this pull?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/242#pullrequestreview-2121325074",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.744,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 91.61166666666668,
+            "syllables": 35,
+            "sentences": 3,
+            "score": 0.6838833333333332
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1631941342,
+        "content": "What's the input?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/242#discussion_r1631941342",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -12,18 +13,74 @@ export async function connectWallet(): Promise<JsonRpcSigner | null> {\n \n     const address = await signer.getAddress();\n \n+    const provider = new ethers.providers.JsonRpcProvider(wallet.provider.url);\n+\n     if (!address) {\n       buttonController.hideAll();\n       console.error(\"Wallet not connected\");\n       return null;\n     }\n \n+    const isOkay = await stressTestWalletRpc(provider);\n+\n+    if (!isOkay) {\n+      toaster.create(\"error\", \"We have detected potential issues with your in-wallet RPC. Accept the request to replace it with a more reliable one.\");\n+      await addFastestHandlerNetwork();\n+      return null;\n+    }\n+\n     return signer;\n   } catch (error: unknown) {\n     return connectErrorHandler(error);\n   }\n }\n \n+async function addFastestHandlerNetwork() {\n+  const provider = await useRpcHandler(app.networkId ?? provider.network.chainId);\n+  const url = provider.connection.url;\n+\n+  try {\n+    await provider.request({\n+      method: \"wallet_addEthereumChain\",\n+      params: [\n+        {\n+          chainId: app.networkId,\n+          chainName: url,\n+          rpcUrls: [url],\n+        },\n+      ],\n+    });\n+  } catch (error) {\n+    console.error(error);\n+    toaster.create(\"error\"`Failed to add optimal RPC network. Please add it manually. Network ID: ${app.networkId}, URL: ${url}`);\n+  }\n+}\n+\n+async function stressTestWalletRpc(provider: ethers.providers.Web3Provider) {\n+  const success = [];\n+\n+  for (let i = 0; i < 10; i++) {\n+    success.push(await testEthCall(provider));\n+  }\n+\n+  return success.filter((s) => s === \"0x\" + \"00\".repeat(32)).length > 9;\n+}\n+\n+async function testEthCall(provider: ethers.providers.Web3Provider) {\n+  try {\n+    return await provider.send(\"eth_call\", [\n+      {\n+        to: \"0x000000000022D473030F116dDEE9F6B43aC78BA3\",\n+        input: \"0x4fe02b44000000000000000000000000d9530f3fbbea11bed01dc09e79318f2f20223716001fd097bcb5a1759ce02c0a671386a0bbbfa8216559e5855698a9d4de4cddea\",",
+        "score": {
+          "reward": 0.312,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 97.025,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.6297499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1637419881,
+        "content": "Why did you rename this?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/242#discussion_r1637419881",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,11 +1,11 @@\n-import { AppState } from \"../app-state\";\n+import { app } from \"../app-state\";",
+        "score": {
+          "reward": 0.414,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 100.24000000000002,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1637420142,
+        "content": "What is this used for? This doesn't seem to be the right approach to me.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/242#discussion_r1637420142",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,6 +1,10 @@\n import { JsonRpcSigner } from \"@ethersproject/providers\";\n import { ethers } from \"ethers\";\n import { buttonController, toaster } from \"../toaster\";\n+import { app } from \"../app-state\";\n+import { useHandler } from \"../web3/use-rpc-handler\";\n+\n+const mediaQuery = window.matchMedia(\"(max-width: 768px)\");",
+        "score": {
+          "reward": 2.31,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 108.82750000000001,
+            "syllables": 17,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1637421616,
+        "content": "You are assuming it is a mobile browser based on the media query. \nI'm sure there is a better way to do this in typescript.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/242#discussion_r1637421616",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -18,18 +22,148 @@ export async function connectWallet(): Promise<JsonRpcSigner | null> {\n       return null;\n     }\n \n+    const isOkay = await stressTestWalletRpc(wallet);\n+\n+    if (!isOkay) {\n+      if (mediaQuery.matches) {\n+        toaster.create(\"info\", `In case of network issues, please change your in-wallet RPC to the one below...`, 15000);\n+      } else {\n+        // Their wallet provider will auto-prompt due to the call succeeding\n+        toaster.create(\"error\", \"We have detected potential issues with your in-wallet RPC. Accept the request to replace it with a more reliable one.\");\n+      }\n+      await addFastestHandlerNetwork(wallet);\n+    }\n+\n     return signer;\n   } catch (error: unknown) {\n     return connectErrorHandler(error);\n   }\n }\n \n+async function addFastestHandlerNetwork(wallet: ethers.providers.Web3Provider) {\n+  const networkId = app.networkId ?? (await wallet.getNetwork()).chainId;\n+  const handler = useHandler(networkId);\n+  let provider = await handler.getFastestRpcProvider();\n+  const appUrl = app.provider?.connection?.url;\n+\n+  const latencies = handler.getLatencies();\n+  const latenciesArray = Object.entries(latencies).map(([url, latency]) => ({ url, latency }) as { url: string; latency: number });\n+  const sorted = latenciesArray.sort((a, b) => a.latency - b.latency);\n+\n+  let toSuggest = sorted[0];\n+\n+  let isOkay = false;\n+\n+  for await (const { url } of sorted) {\n+    const _url = url.split(\"__\")[1];\n+    if (_url !== appUrl) {\n+      provider = new ethers.providers.JsonRpcProvider(_url);\n+\n+      isOkay = await stressTestWalletRpc(provider);\n+\n+      if (isOkay) {\n+        toSuggest = { url: _url, latency: latencies[url] };\n+        break;\n+      }\n+    }\n+  }\n+\n+  if (!isOkay) {\n+    toaster.create(\"error\", \"We failed to find a more reliable RPC for you. Please try again later if you have network issues.\");\n+    return;\n+  }\n+\n+  try {\n+    await addHandlerSuggested(wallet, toSuggest.url);\n+  } catch (error) {\n+    toaster.create(\"info\", `${toSuggest.url}`, Infinity);\n+  }\n+}\n+\n+async function addHandlerSuggested(provider: ethers.providers.Web3Provider, url: string) {\n+  const symbol = app.networkId === 1 ? \"ETH\" : \"XDAI\";\n+  const altSymbol = app.networkId === 1 ? \"eth\" : \"xdai\";\n+  const altSymbol2 = app.networkId === 1 ? \"Eth\" : \"xDai\";\n+\n+  if (mediaQuery.matches) {",
+        "score": {
+          "reward": 3.924,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 76.50153846153849,
+            "syllables": 36,
+            "sentences": 2,
+            "score": 0.8349846153846151
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1637423014,
+        "content": "WebKit browsers by default allow for six concurrent tcp connections last I researched. Consider doing multiples of six for optimal speed.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/242#discussion_r1637423014",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -18,18 +22,148 @@ export async function connectWallet(): Promise<JsonRpcSigner | null> {\n       return null;\n     }\n \n+    const isOkay = await stressTestWalletRpc(wallet);\n+\n+    if (!isOkay) {\n+      if (mediaQuery.matches) {\n+        toaster.create(\"info\", `In case of network issues, please change your in-wallet RPC to the one below...`, 15000);\n+      } else {\n+        // Their wallet provider will auto-prompt due to the call succeeding\n+        toaster.create(\"error\", \"We have detected potential issues with your in-wallet RPC. Accept the request to replace it with a more reliable one.\");\n+      }\n+      await addFastestHandlerNetwork(wallet);\n+    }\n+\n     return signer;\n   } catch (error: unknown) {\n     return connectErrorHandler(error);\n   }\n }\n \n+async function addFastestHandlerNetwork(wallet: ethers.providers.Web3Provider) {\n+  const networkId = app.networkId ?? (await wallet.getNetwork()).chainId;\n+  const handler = useHandler(networkId);\n+  let provider = await handler.getFastestRpcProvider();\n+  const appUrl = app.provider?.connection?.url;\n+\n+  const latencies = handler.getLatencies();\n+  const latenciesArray = Object.entries(latencies).map(([url, latency]) => ({ url, latency }) as { url: string; latency: number });\n+  const sorted = latenciesArray.sort((a, b) => a.latency - b.latency);\n+\n+  let toSuggest = sorted[0];\n+\n+  let isOkay = false;\n+\n+  for await (const { url } of sorted) {\n+    const _url = url.split(\"__\")[1];\n+    if (_url !== appUrl) {\n+      provider = new ethers.providers.JsonRpcProvider(_url);\n+\n+      isOkay = await stressTestWalletRpc(provider);\n+\n+      if (isOkay) {\n+        toSuggest = { url: _url, latency: latencies[url] };\n+        break;\n+      }\n+    }\n+  }\n+\n+  if (!isOkay) {\n+    toaster.create(\"error\", \"We failed to find a more reliable RPC for you. Please try again later if you have network issues.\");\n+    return;\n+  }\n+\n+  try {\n+    await addHandlerSuggested(wallet, toSuggest.url);\n+  } catch (error) {\n+    toaster.create(\"info\", `${toSuggest.url}`, Infinity);\n+  }\n+}\n+\n+async function addHandlerSuggested(provider: ethers.providers.Web3Provider, url: string) {\n+  const symbol = app.networkId === 1 ? \"ETH\" : \"XDAI\";\n+  const altSymbol = app.networkId === 1 ? \"eth\" : \"xdai\";\n+  const altSymbol2 = app.networkId === 1 ? \"Eth\" : \"xDai\";\n+\n+  if (mediaQuery.matches) {\n+    /**\n+     * https://github.com/MetaMask/metamask-mobile/issues/9519\n+     *\n+     * Until this is resolved it is not possible for us to add a network on mobile\n+     * so we'll show a toast suggesting they do it manually\n+     */\n+\n+    toaster.create(\"info\", `${url}`, Infinity);\n+    return;\n+  }\n+\n+  // It will not work unless the symbols match, so we try them all\n+  for (const _symbol of [symbol, altSymbol, altSymbol2]) {\n+    // this does not work on mobile yet\n+    await addProvider(provider, url, _symbol, app.networkId);\n+  }\n+}\n+\n+async function addProvider(provider: ethers.providers.Web3Provider, url: string, symbol: string, chainId: number | null) {\n+  const _chainId = chainId || (await provider.getNetwork()).chainId;\n+  try {\n+    await provider.send(\"wallet_addEthereumChain\", [\n+      {\n+        chainId: `0x${_chainId.toString(16)}`,\n+        chainName: _chainId === 1 ? \"Ethereum\" : \"Gnosis\",\n+        nativeCurrency: {\n+          name: _chainId === 1 ? \"ETH\" : \"XDAI\",\n+          symbol,\n+          decimals: 18,\n+        },\n+        rpcUrls: [url],\n+        blockExplorerUrls: [`https://${_chainId === 1 ? \"etherscan\" : \"gnosisscan\"}.io`],\n+      },\n+    ]);\n+  } catch {\n+    console.error(\"Failed to add network\");\n+  }\n+}\n+\n+async function stressTestWalletRpc(provider: ethers.providers.Web3Provider) {\n+  const success: Promise<string | boolean>[] = [];\n+\n+  for (let i = 0; i < 10; i++) {",
+        "score": {
+          "reward": 2.328,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 51.1489285714286,
+            "syllables": 36,
+            "sentences": 2,
+            "score": 0.911489285714286
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1637423807,
+        "content": "Why seven seconds?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/242#discussion_r1637423807",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -18,18 +22,148 @@ export async function connectWallet(): Promise<JsonRpcSigner | null> {\n       return null;\n     }\n \n+    const isOkay = await stressTestWalletRpc(wallet);\n+\n+    if (!isOkay) {\n+      if (mediaQuery.matches) {\n+        toaster.create(\"info\", `In case of network issues, please change your in-wallet RPC to the one below...`, 15000);\n+      } else {\n+        // Their wallet provider will auto-prompt due to the call succeeding\n+        toaster.create(\"error\", \"We have detected potential issues with your in-wallet RPC. Accept the request to replace it with a more reliable one.\");\n+      }\n+      await addFastestHandlerNetwork(wallet);\n+    }\n+\n     return signer;\n   } catch (error: unknown) {\n     return connectErrorHandler(error);\n   }\n }\n \n+async function addFastestHandlerNetwork(wallet: ethers.providers.Web3Provider) {\n+  const networkId = app.networkId ?? (await wallet.getNetwork()).chainId;\n+  const handler = useHandler(networkId);\n+  let provider = await handler.getFastestRpcProvider();\n+  const appUrl = app.provider?.connection?.url;\n+\n+  const latencies = handler.getLatencies();\n+  const latenciesArray = Object.entries(latencies).map(([url, latency]) => ({ url, latency }) as { url: string; latency: number });\n+  const sorted = latenciesArray.sort((a, b) => a.latency - b.latency);\n+\n+  let toSuggest = sorted[0];\n+\n+  let isOkay = false;\n+\n+  for await (const { url } of sorted) {\n+    const _url = url.split(\"__\")[1];\n+    if (_url !== appUrl) {\n+      provider = new ethers.providers.JsonRpcProvider(_url);\n+\n+      isOkay = await stressTestWalletRpc(provider);\n+\n+      if (isOkay) {\n+        toSuggest = { url: _url, latency: latencies[url] };\n+        break;\n+      }\n+    }\n+  }\n+\n+  if (!isOkay) {\n+    toaster.create(\"error\", \"We failed to find a more reliable RPC for you. Please try again later if you have network issues.\");\n+    return;\n+  }\n+\n+  try {\n+    await addHandlerSuggested(wallet, toSuggest.url);\n+  } catch (error) {\n+    toaster.create(\"info\", `${toSuggest.url}`, Infinity);\n+  }\n+}\n+\n+async function addHandlerSuggested(provider: ethers.providers.Web3Provider, url: string) {\n+  const symbol = app.networkId === 1 ? \"ETH\" : \"XDAI\";\n+  const altSymbol = app.networkId === 1 ? \"eth\" : \"xdai\";\n+  const altSymbol2 = app.networkId === 1 ? \"Eth\" : \"xDai\";\n+\n+  if (mediaQuery.matches) {\n+    /**\n+     * https://github.com/MetaMask/metamask-mobile/issues/9519\n+     *\n+     * Until this is resolved it is not possible for us to add a network on mobile\n+     * so we'll show a toast suggesting they do it manually\n+     */\n+\n+    toaster.create(\"info\", `${url}`, Infinity);\n+    return;\n+  }\n+\n+  // It will not work unless the symbols match, so we try them all\n+  for (const _symbol of [symbol, altSymbol, altSymbol2]) {\n+    // this does not work on mobile yet\n+    await addProvider(provider, url, _symbol, app.networkId);\n+  }\n+}\n+\n+async function addProvider(provider: ethers.providers.Web3Provider, url: string, symbol: string, chainId: number | null) {\n+  const _chainId = chainId || (await provider.getNetwork()).chainId;\n+  try {\n+    await provider.send(\"wallet_addEthereumChain\", [\n+      {\n+        chainId: `0x${_chainId.toString(16)}`,\n+        chainName: _chainId === 1 ? \"Ethereum\" : \"Gnosis\",\n+        nativeCurrency: {\n+          name: _chainId === 1 ? \"ETH\" : \"XDAI\",\n+          symbol,\n+          decimals: 18,\n+        },\n+        rpcUrls: [url],\n+        blockExplorerUrls: [`https://${_chainId === 1 ? \"etherscan\" : \"gnosisscan\"}.io`],\n+      },\n+    ]);\n+  } catch {\n+    console.error(\"Failed to add network\");\n+  }\n+}\n+\n+async function stressTestWalletRpc(provider: ethers.providers.Web3Provider) {\n+  const success: Promise<string | boolean>[] = [];\n+\n+  for (let i = 0; i < 10; i++) {\n+    success.push(testNonceBitmapEthCall(provider));\n+  }\n+\n+  // if the test takes too long, we'll just assume it's not working\n+  const timeoutPromise = new Promise<[false]>((resolve) => {\n+    setTimeout(() => {\n+      resolve([false]);\n+    }, 7000);",
+        "score": {
+          "reward": 0.45,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 62.79000000000002,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.9720999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1637424848,
+        "content": "I'm surprised we used media queries in the typescript code at all. It really doesn't seem to be the best way to detect if it's mobile browser.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/242#discussion_r1637424848",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -18,18 +22,148 @@ export async function connectWallet(): Promise<JsonRpcSigner | null> {\n       return null;\n     }\n \n+    const isOkay = await stressTestWalletRpc(wallet);\n+\n+    if (!isOkay) {\n+      if (mediaQuery.matches) {\n+        toaster.create(\"info\", `In case of network issues, please change your in-wallet RPC to the one below...`, 15000);\n+      } else {\n+        // Their wallet provider will auto-prompt due to the call succeeding\n+        toaster.create(\"error\", \"We have detected potential issues with your in-wallet RPC. Accept the request to replace it with a more reliable one.\");\n+      }\n+      await addFastestHandlerNetwork(wallet);\n+    }\n+\n     return signer;\n   } catch (error: unknown) {\n     return connectErrorHandler(error);\n   }\n }\n \n+async function addFastestHandlerNetwork(wallet: ethers.providers.Web3Provider) {\n+  const networkId = app.networkId ?? (await wallet.getNetwork()).chainId;\n+  const handler = useHandler(networkId);\n+  let provider = await handler.getFastestRpcProvider();\n+  const appUrl = app.provider?.connection?.url;\n+\n+  const latencies = handler.getLatencies();\n+  const latenciesArray = Object.entries(latencies).map(([url, latency]) => ({ url, latency }) as { url: string; latency: number });\n+  const sorted = latenciesArray.sort((a, b) => a.latency - b.latency);\n+\n+  let toSuggest = sorted[0];\n+\n+  let isOkay = false;\n+\n+  for await (const { url } of sorted) {\n+    const _url = url.split(\"__\")[1];\n+    if (_url !== appUrl) {\n+      provider = new ethers.providers.JsonRpcProvider(_url);\n+\n+      isOkay = await stressTestWalletRpc(provider);\n+\n+      if (isOkay) {\n+        toSuggest = { url: _url, latency: latencies[url] };\n+        break;\n+      }\n+    }\n+  }\n+\n+  if (!isOkay) {\n+    toaster.create(\"error\", \"We failed to find a more reliable RPC for you. Please try again later if you have network issues.\");\n+    return;\n+  }\n+\n+  try {\n+    await addHandlerSuggested(wallet, toSuggest.url);\n+  } catch (error) {\n+    toaster.create(\"info\", `${toSuggest.url}`, Infinity);\n+  }\n+}\n+\n+async function addHandlerSuggested(provider: ethers.providers.Web3Provider, url: string) {\n+  const symbol = app.networkId === 1 ? \"ETH\" : \"XDAI\";\n+  const altSymbol = app.networkId === 1 ? \"eth\" : \"xdai\";\n+  const altSymbol2 = app.networkId === 1 ? \"Eth\" : \"xDai\";\n+\n+  if (mediaQuery.matches) {\n+    /**\n+     * https://github.com/MetaMask/metamask-mobile/issues/9519\n+     *\n+     * Until this is resolved it is not possible for us to add a network on mobile\n+     * so we'll show a toast suggesting they do it manually\n+     */\n+\n+    toaster.create(\"info\", `${url}`, Infinity);\n+    return;\n+  }\n+\n+  // It will not work unless the symbols match, so we try them all\n+  for (const _symbol of [symbol, altSymbol, altSymbol2]) {\n+    // this does not work on mobile yet\n+    await addProvider(provider, url, _symbol, app.networkId);\n+  }\n+}\n+\n+async function addProvider(provider: ethers.providers.Web3Provider, url: string, symbol: string, chainId: number | null) {\n+  const _chainId = chainId || (await provider.getNetwork()).chainId;\n+  try {\n+    await provider.send(\"wallet_addEthereumChain\", [\n+      {\n+        chainId: `0x${_chainId.toString(16)}`,\n+        chainName: _chainId === 1 ? \"Ethereum\" : \"Gnosis\",\n+        nativeCurrency: {\n+          name: _chainId === 1 ? \"ETH\" : \"XDAI\",\n+          symbol,\n+          decimals: 18,\n+        },\n+        rpcUrls: [url],\n+        blockExplorerUrls: [`https://${_chainId === 1 ? \"etherscan\" : \"gnosisscan\"}.io`],\n+      },\n+    ]);\n+  } catch {\n+    console.error(\"Failed to add network\");\n+  }\n+}\n+\n+async function stressTestWalletRpc(provider: ethers.providers.Web3Provider) {\n+  const success: Promise<string | boolean>[] = [];\n+\n+  for (let i = 0; i < 10; i++) {\n+    success.push(testNonceBitmapEthCall(provider));\n+  }\n+\n+  // if the test takes too long, we'll just assume it's not working\n+  const timeoutPromise = new Promise<[false]>((resolve) => {\n+    setTimeout(() => {\n+      resolve([false]);\n+    }, 7000);\n+  });\n+\n+  const results = await Promise.race([Promise.all(success), timeoutPromise]);\n+\n+  return results.filter((s) => s === \"0x\" + \"00\".repeat(32)).length > 9 && results.filter((s) => s === false).length < 1;\n+}\n+\n+async function testNonceBitmapEthCall(provider: ethers.providers.Web3Provider) {\n+  try {\n+    return await provider.send(\"eth_call\", [\n+      {\n+        to: \"0x000000000022D473030F116dDEE9F6B43aC78BA3\",\n+        // input works for desktop, needs to be data for mobile\n+        data: \"0x4fe02b44000000000000000000000000d9530f3fbbea11bed01dc09e79318f2f20223716001fd097bcb5a1759ce02c0a671386a0bbbfa8216559e5855698a9d4de4cddea\",\n+      },\n+      \"latest\",\n+    ]);\n+  } catch {\n+    // if the call fails, we'll assume the RPC is not working\n+  }\n+}\n+\n function connectErrorHandler(error: unknown) {\n   if (error instanceof Error) {\n     console.error(error);\n     if (error?.message?.includes(\"missing provider\")) {\n       // mobile browsers don't really support window.ethereum\n-      const mediaQuery = window.matchMedia(\"(max-width: 768px)\");\n \n       if (mediaQuery.matches) {\n         toaster.create(\"warning\", \"Please use a mobile-friendly Web3 browser such as MetaMask to collect this reward\", Infinity);",
+        "score": {
+          "reward": 3.744,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 78.81000000000003,
+            "syllables": 40,
+            "sentences": 2,
+            "score": 0.8118999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1640053147,
+        "content": "```typescript\r\n  const isTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;\r\n```\r\nI'm sure there are npm modules that handle this check robustly. I don't think it makes sense to rely on the media query in a javascript runtime.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/242#discussion_r1640053147",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -18,18 +22,148 @@ export async function connectWallet(): Promise<JsonRpcSigner | null> {\n       return null;\n     }\n \n+    const isOkay = await stressTestWalletRpc(wallet);\n+\n+    if (!isOkay) {\n+      if (mediaQuery.matches) {\n+        toaster.create(\"info\", `In case of network issues, please change your in-wallet RPC to the one below...`, 15000);\n+      } else {\n+        // Their wallet provider will auto-prompt due to the call succeeding\n+        toaster.create(\"error\", \"We have detected potential issues with your in-wallet RPC. Accept the request to replace it with a more reliable one.\");\n+      }\n+      await addFastestHandlerNetwork(wallet);\n+    }\n+\n     return signer;\n   } catch (error: unknown) {\n     return connectErrorHandler(error);\n   }\n }\n \n+async function addFastestHandlerNetwork(wallet: ethers.providers.Web3Provider) {\n+  const networkId = app.networkId ?? (await wallet.getNetwork()).chainId;\n+  const handler = useHandler(networkId);\n+  let provider = await handler.getFastestRpcProvider();\n+  const appUrl = app.provider?.connection?.url;\n+\n+  const latencies = handler.getLatencies();\n+  const latenciesArray = Object.entries(latencies).map(([url, latency]) => ({ url, latency }) as { url: string; latency: number });\n+  const sorted = latenciesArray.sort((a, b) => a.latency - b.latency);\n+\n+  let toSuggest = sorted[0];\n+\n+  let isOkay = false;\n+\n+  for await (const { url } of sorted) {\n+    const _url = url.split(\"__\")[1];\n+    if (_url !== appUrl) {\n+      provider = new ethers.providers.JsonRpcProvider(_url);\n+\n+      isOkay = await stressTestWalletRpc(provider);\n+\n+      if (isOkay) {\n+        toSuggest = { url: _url, latency: latencies[url] };\n+        break;\n+      }\n+    }\n+  }\n+\n+  if (!isOkay) {\n+    toaster.create(\"error\", \"We failed to find a more reliable RPC for you. Please try again later if you have network issues.\");\n+    return;\n+  }\n+\n+  try {\n+    await addHandlerSuggested(wallet, toSuggest.url);\n+  } catch (error) {\n+    toaster.create(\"info\", `${toSuggest.url}`, Infinity);\n+  }\n+}\n+\n+async function addHandlerSuggested(provider: ethers.providers.Web3Provider, url: string) {\n+  const symbol = app.networkId === 1 ? \"ETH\" : \"XDAI\";\n+  const altSymbol = app.networkId === 1 ? \"eth\" : \"xdai\";\n+  const altSymbol2 = app.networkId === 1 ? \"Eth\" : \"xDai\";\n+\n+  if (mediaQuery.matches) {",
+        "score": {
+          "reward": 4.176,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 75.42784482758621,
+            "syllables": 40,
+            "sentences": 2,
+            "score": 0.8457215517241379
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2157451272,
+        "content": "Make the logs way less verbose. You shouldn't show every test unless its happening very slowly (it shouldn't)  \r\nAlso for the RPC that works- can you make it a clickable link to pre-fill the network details on MetaMask? I'm pretty sure i've seen this capability on Chainlist.org etc.\r\nIn this case I would display something more like:\r\n...and thats it. \r\ngnosis.drpc.org should be a link to pre-fill all the RPC information on MetaMask.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/242#issuecomment-2157451272",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.85,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 82,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 82.03600271002712,
+            "syllables": 112,
+            "sentences": 9,
+            "score": 0.7796399728997288
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2159923701,
+        "content": "What is your conclusion on the solution here?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/242#issuecomment-2159923701",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.384,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 71.81500000000001,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.8818499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2161442892,
+        "content": "Given that they have [167 open sev2-normal issues](https://github.com/MetaMask/metamask-mobile/labels/Sev2-normal) and given that it took them two weeks to close out [the only `sev0-urgent` issue](https://github.com/MetaMask/metamask-mobile/issues/5128) I wouldn't hold my breath on it. \r\nSo then lets just accomodate users to be able to manually copy and paste the values and be done with this.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/242#issuecomment-2161442892",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 7.84,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 52,
+            "wordValue": 0.1,
+            "result": 2.41
+          },
+          "readability": {
+            "fleschKincaid": 69.8142307692308,
+            "syllables": 68,
+            "sentences": 2,
+            "score": 0.901857692307692
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2176900700,
+        "content": "@rndquu rfc",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/242#issuecomment-2176900700",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.066,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 120.20500000000001,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2105793394,
+            "effect": {
+              "addition": 58,
+              "deletion": 2
+            },
+            "reward": 1.2,
+            "priority": 2
+          },
+          {
+            "reviewId": 2114573478,
+            "effect": {
+              "addition": 119,
+              "deletion": 37
+            },
+            "reward": 3.12,
+            "priority": 2
+          },
+          {
+            "reviewId": 2121325074,
+            "effect": {
+              "addition": 75,
+              "deletion": 17
+            },
+            "reward": 1.84,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/242"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 52.288 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>6.16</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.27</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>8.316</td></tr><tr><td>Review</td><td>Comment</td><td>13</td><td>33.542</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/242\" target=\"_blank\" rel=\"noopener\">#242</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+58 -2</td><td>2</td><td>1.2</td></tr><tr><td>+119 -37</td><td>2</td><td>3.12</td></tr><tr><td>+75 -17</td><td>2</td><td>1.84</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/241\" target=\"_blank\" rel=\"noopener\">Related thread https://t.me/UbiquityDAO/31131/32216My phone wal&hellip;</a></h6></td><td><details><summary>3.46</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    br:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 55&#13;  wordValue: 0.1&#13;  result: 2.46&#13;</pre></details></td><td>1</td><td>1</td><td>4.27</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/241#issuecomment-2155829966\" target=\"_blank\" rel=\"noopener\">Perhaps a simple solution will be to do a timeout in five second&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>1</td><td>2</td><td>4.14</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/241#issuecomment-2155857453\" target=\"_blank\" rel=\"noopener\">It might also be worth trying to reproduce based on the RPC I sp&hellip;</a></h6></td><td><details><summary>2.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.8</td><td>2</td><td>4.176</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/242#pullrequestreview-2121325074\" target=\"_blank\" rel=\"noopener\">Code seems fine. Although I'm not entirely sure what the best wa&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.4</td><td>2</td><td>1.744</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/242#discussion_r1631941342\" target=\"_blank\" rel=\"noopener\">What's the input?</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.3</td><td>2</td><td>0.312</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/242#discussion_r1637419881\" target=\"_blank\" rel=\"noopener\">Why did you rename this?</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.3</td><td>2</td><td>0.414</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/242#discussion_r1637420142\" target=\"_blank\" rel=\"noopener\">What is this used for? This doesn't seem to be the right approac&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.7</td><td>2</td><td>2.31</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/242#discussion_r1637421616\" target=\"_blank\" rel=\"noopener\">You are assuming it is a mobile browser based on the media query&hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.9</td><td>2</td><td>3.924</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/242#discussion_r1637423014\" target=\"_blank\" rel=\"noopener\">WebKit browsers by default allow for six concurrent tcp connecti&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.6</td><td>2</td><td>2.328</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/242#discussion_r1637423807\" target=\"_blank\" rel=\"noopener\">Why seven seconds?</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.5</td><td>2</td><td>0.45</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/242#discussion_r1637424848\" target=\"_blank\" rel=\"noopener\">I'm surprised we used media queries in the typescript code at al&hellip;</a></h6></td><td><details><summary>1.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.8</td><td>2</td><td>3.744</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/242#discussion_r1640053147\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;typescriptconst isTouchScreen = 'ontouchstart&hellip;</a></h6></td><td><details><summary>1.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.9</td><td>2</td><td>4.176</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/242#issuecomment-2157451272\" target=\"_blank\" rel=\"noopener\">Make the logs way less verbose. You shouldn't show every test un&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;  result: 0&#13;regex:&#13;  wordCount: 82&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.9</td><td>2</td><td>5.85</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/242#issuecomment-2159923701\" target=\"_blank\" rel=\"noopener\">What is your conclusion on the solution here?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.2</td><td>2</td><td>0.384</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/242#issuecomment-2161442892\" target=\"_blank\" rel=\"noopener\">Given that they have [167 open sev2-normal issues](https://githu&hellip;</a></h6></td><td><details><summary>4.41</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 52&#13;  wordValue: 0.1&#13;  result: 2.41&#13;</pre></details></td><td>0.7</td><td>2</td><td>7.84</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/242#issuecomment-2176900700\" target=\"_blank\" rel=\"noopener\">@rndquu rfc</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.1</td><td>2</td><td>0.066</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 15.266,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2138083010,
+        "content": "Works fine",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/242#pullrequestreview-2138083010",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.066,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 120.20500000000001,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1640035618,
+        "content": "I remember using this approach https://stackoverflow.com/a/11381730/23135269",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/242#discussion_r1640035618",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -18,18 +22,148 @@ export async function connectWallet(): Promise<JsonRpcSigner | null> {\n       return null;\n     }\n \n+    const isOkay = await stressTestWalletRpc(wallet);\n+\n+    if (!isOkay) {\n+      if (mediaQuery.matches) {\n+        toaster.create(\"info\", `In case of network issues, please change your in-wallet RPC to the one below...`, 15000);\n+      } else {\n+        // Their wallet provider will auto-prompt due to the call succeeding\n+        toaster.create(\"error\", \"We have detected potential issues with your in-wallet RPC. Accept the request to replace it with a more reliable one.\");\n+      }\n+      await addFastestHandlerNetwork(wallet);\n+    }\n+\n     return signer;\n   } catch (error: unknown) {\n     return connectErrorHandler(error);\n   }\n }\n \n+async function addFastestHandlerNetwork(wallet: ethers.providers.Web3Provider) {\n+  const networkId = app.networkId ?? (await wallet.getNetwork()).chainId;\n+  const handler = useHandler(networkId);\n+  let provider = await handler.getFastestRpcProvider();\n+  const appUrl = app.provider?.connection?.url;\n+\n+  const latencies = handler.getLatencies();\n+  const latenciesArray = Object.entries(latencies).map(([url, latency]) => ({ url, latency }) as { url: string; latency: number });\n+  const sorted = latenciesArray.sort((a, b) => a.latency - b.latency);\n+\n+  let toSuggest = sorted[0];\n+\n+  let isOkay = false;\n+\n+  for await (const { url } of sorted) {\n+    const _url = url.split(\"__\")[1];\n+    if (_url !== appUrl) {\n+      provider = new ethers.providers.JsonRpcProvider(_url);\n+\n+      isOkay = await stressTestWalletRpc(provider);\n+\n+      if (isOkay) {\n+        toSuggest = { url: _url, latency: latencies[url] };\n+        break;\n+      }\n+    }\n+  }\n+\n+  if (!isOkay) {\n+    toaster.create(\"error\", \"We failed to find a more reliable RPC for you. Please try again later if you have network issues.\");\n+    return;\n+  }\n+\n+  try {\n+    await addHandlerSuggested(wallet, toSuggest.url);\n+  } catch (error) {\n+    toaster.create(\"info\", `${toSuggest.url}`, Infinity);\n+  }\n+}\n+\n+async function addHandlerSuggested(provider: ethers.providers.Web3Provider, url: string) {\n+  const symbol = app.networkId === 1 ? \"ETH\" : \"XDAI\";\n+  const altSymbol = app.networkId === 1 ? \"eth\" : \"xdai\";\n+  const altSymbol2 = app.networkId === 1 ? \"Eth\" : \"xDai\";\n+\n+  if (mediaQuery.matches) {\n+    /**\n+     * https://github.com/MetaMask/metamask-mobile/issues/9519\n+     *\n+     * Until this is resolved it is not possible for us to add a network on mobile\n+     * so we'll show a toast suggesting they do it manually\n+     */\n+\n+    toaster.create(\"info\", `${url}`, Infinity);\n+    return;\n+  }\n+\n+  // It will not work unless the symbols match, so we try them all\n+  for (const _symbol of [symbol, altSymbol, altSymbol2]) {\n+    // this does not work on mobile yet\n+    await addProvider(provider, url, _symbol, app.networkId);\n+  }\n+}\n+\n+async function addProvider(provider: ethers.providers.Web3Provider, url: string, symbol: string, chainId: number | null) {\n+  const _chainId = chainId || (await provider.getNetwork()).chainId;\n+  try {\n+    await provider.send(\"wallet_addEthereumChain\", [\n+      {\n+        chainId: `0x${_chainId.toString(16)}`,\n+        chainName: _chainId === 1 ? \"Ethereum\" : \"Gnosis\",\n+        nativeCurrency: {\n+          name: _chainId === 1 ? \"ETH\" : \"XDAI\",\n+          symbol,\n+          decimals: 18,\n+        },\n+        rpcUrls: [url],\n+        blockExplorerUrls: [`https://${_chainId === 1 ? \"etherscan\" : \"gnosisscan\"}.io`],\n+      },\n+    ]);\n+  } catch {\n+    console.error(\"Failed to add network\");\n+  }\n+}\n+\n+async function stressTestWalletRpc(provider: ethers.providers.Web3Provider) {\n+  const success: Promise<string | boolean>[] = [];\n+\n+  for (let i = 0; i < 10; i++) {\n+    success.push(testNonceBitmapEthCall(provider));\n+  }\n+\n+  // if the test takes too long, we'll just assume it's not working\n+  const timeoutPromise = new Promise<[false]>((resolve) => {\n+    setTimeout(() => {\n+      resolve([false]);\n+    }, 7000);\n+  });\n+\n+  const results = await Promise.race([Promise.all(success), timeoutPromise]);\n+\n+  return results.filter((s) => s === \"0x\" + \"00\".repeat(32)).length > 9 && results.filter((s) => s === false).length < 1;\n+}\n+\n+async function testNonceBitmapEthCall(provider: ethers.providers.Web3Provider) {\n+  try {\n+    return await provider.send(\"eth_call\", [\n+      {\n+        to: \"0x000000000022D473030F116dDEE9F6B43aC78BA3\",\n+        // input works for desktop, needs to be data for mobile\n+        data: \"0x4fe02b44000000000000000000000000d9530f3fbbea11bed01dc09e79318f2f20223716001fd097bcb5a1759ce02c0a671386a0bbbfa8216559e5855698a9d4de4cddea\",\n+      },\n+      \"latest\",\n+    ]);\n+  } catch {\n+    // if the call fails, we'll assume the RPC is not working\n+  }\n+}\n+\n function connectErrorHandler(error: unknown) {\n   if (error instanceof Error) {\n     console.error(error);\n     if (error?.message?.includes(\"missing provider\")) {\n       // mobile browsers don't really support window.ethereum\n-      const mediaQuery = window.matchMedia(\"(max-width: 768px)\");\n \n       if (mediaQuery.matches) {\n         toaster.create(\"warning\", \"Please use a mobile-friendly Web3 browser such as MetaMask to collect this reward\", Infinity);",
+        "score": {
+          "reward": 3.564,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 62.81613636363636,
+            "syllables": 18,
+            "sentences": 2,
+            "score": 0.9718386363636364
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2188475245,
+        "content": "@Keyrxng Pls resolve conflicts and merge this PR",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/242#issuecomment-2188475245",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.092,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 92.965,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.67035
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2191839832,
+        "content": "As far as I remember [this](https://github.com/ubiquity/pay.ubq.fi/actions/runs/9679728605/job/26706333735?pr=242) issue is solved with [this](https://github.com/rndquu/rpc-handler/blob/30022f441aaeacc2a4c3fcfadf41c3e7784f7f25/.github/workflows/bump-version.yml#L19-L21) CI step for yarn v4",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/242#issuecomment-2191839832",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.544,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 90.13250000000001,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.6986749999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2118729066,
+            "effect": {
+              "addition": 148,
+              "deletion": 10
+            },
+            "reward": 3.16,
+            "priority": 2
+          },
+          {
+            "reviewId": 2138083010,
+            "effect": {
+              "addition": 75,
+              "deletion": 17
+            },
+            "reward": 1.84,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/242"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 15.266 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>5</td></tr><tr><td>Review</td><td>Comment</td><td>4</td><td>10.266</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/242\" target=\"_blank\" rel=\"noopener\">#242</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+148 -10</td><td>2</td><td>3.16</td></tr><tr><td>+75 -17</td><td>2</td><td>1.84</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/242#pullrequestreview-2138083010\" target=\"_blank\" rel=\"noopener\">Works fine</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.1</td><td>2</td><td>0.066</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/242#discussion_r1640035618\" target=\"_blank\" rel=\"noopener\">I remember using this approach https://stackoverflow.com/a/11381&hellip;</a></h6></td><td><details><summary>1.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.9</td><td>2</td><td>3.564</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/242#issuecomment-2188475245\" target=\"_blank\" rel=\"noopener\">@Keyrxng Pls resolve conflicts and merge this PR</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.6</td><td>2</td><td>1.092</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/242#issuecomment-2191839832\" target=\"_blank\" rel=\"noopener\">As far as I remember [this](https://github.com/ubiquity/pay.ubq.&hellip;</a></h6></td><td><details><summary>3.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.7</td><td>2</td><td>5.544</td></tr></tbody></table></details>"
+  }
+}

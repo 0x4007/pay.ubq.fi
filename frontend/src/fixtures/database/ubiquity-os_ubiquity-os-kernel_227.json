@@ -1,0 +1,1126 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 453.815,
+    "task": {
+      "reward": 250,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2565335092,
+        "content": "Basically, it seems that once the token arrived to its limit, the calls all hang due to the use of `waitUntil` (which otherwise would just throw the error `The script will never generate a response`) because GitHub API returns a 403 (exceeded secondary rate limit). However even knowing the cause, I don't see how we can work around these limits? Eventually we could look into lowering the amount of calls we make, but it doesn't seem scalable.\r\nAs a temporary solution, I could suggest filtering some events like the ones related to `workflow` because they run a lot (one when workflow starts, one when it ends) which would significantly lower API usage. Still, knowing that we are the only organization using the bot (plus your org and some other user), it means that eventually this problem is bound to come back again if we get more users.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2565335092",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 14.9,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 140,
+            "wordValue": 0.1,
+            "result": 2.32
+          },
+          "readability": {
+            "fleschKincaid": 54.5364285714286,
+            "syllables": 205,
+            "sentences": 5,
+            "score": 0.945364285714286
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2566040682,
+        "content": "This is easily reproducible on a local setup as well, and gives more information about failures. Even the `getToken` fails with a 500 error once the token exhausted the available quota, which means all subsequent requests will fail as well. Interesting enough, restarting the app solves the problem (same as within a deployed worker).",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2566040682",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 15.45,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 53,
+            "wordValue": 0.1,
+            "result": 2.43
+          },
+          "readability": {
+            "fleschKincaid": 50.03163522012579,
+            "syllables": 87,
+            "sentences": 3,
+            "score": 0.9003163522012579
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2566955652,
+        "content": "Yes it happens because whenever we receive an event we do the following:\r\n1. fetch the configuration from the repository\r\n2. fetch the configuration from the organization\r\n3. for each plugin, fetch the manifest\r\n4. for each plugin that needs to be triggered, dispatch a workflow event\r\nIn average one event involves ~10 calls to GitHub API (and subsequently we use the same token in all the plugins which can do tons of calls as well). Plus, this is multiplied by each external organization using our bot as well.\r\nThe more plugins we have the more calls will be done, and this happens for literally any event which is why I was suggesting filtering out `workflow` related events, because we don't use them and because they get triggered at start of the workflow, end of the workflow, and we have around 4 workflows per push triggered on each of our repos. But this is obviously a short term solution.\r\nWe could have some event queue indeed, but we can't delay the calls for too long without having the worker shutting down. And as you said, we needs commands to still be responsive. I think we should find a way to avoid fetching the manifest for all the plugins for each run, which would help lowering API calls.\r\nyes it seems to be but the kernel should then work fine after waiting for some time (when the limit resets) but it seems to work right away when restarting the instance of the kernel, somehow.\r\nWe have an Azure instance up and running, only configured for `ubiquity-os-beta` and we do not use it as the moment, but it is available. Do you suggest this for longer runs?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2566955652",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 9.25,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 10
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              }
+            },
+            "result": 0.4
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 281,
+            "wordValue": 0.1,
+            "result": 1.03
+          },
+          "readability": {
+            "fleschKincaid": 57.886453736654815,
+            "syllables": 400,
+            "sentences": 10,
+            "score": 0.9788645373665481
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2567736830,
+        "content": "Like @whilefoo said the problem is when commands that need immediate response will need to be handled because if you have 100+ events in the queue they would take too long to be triggered.\r\nMy suggestion as an immediate fix would be to filter events we do not use like `workflow`, and that plugins use their own credentials probably, I do not know if that counts towards the quota but most likely.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2567736830",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 15.03,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 71,
+            "wordValue": 0.1,
+            "result": 2.6
+          },
+          "readability": {
+            "fleschKincaid": 55.22221830985917,
+            "syllables": 97,
+            "sentences": 2,
+            "score": 0.9522221830985917
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2569987936,
+        "content": "Okay then I will start filtering events, and link the changes here.\r\nFor the credentials, we share `APP_ID` and `APP_PRIVATE_KEY` in the organization, so the plugins should be able to authenticate themselves. We could change the logic in the SDK for authentication as well, so no changes in the plugins would be needed. I also mentioned that because my concern was that outside organizations receive our token at this time isn't it? I saw in the logs that there are ~3 different orgs that have `ubiquity-os` installed.\r\nIf outside organizations use our own plugins, then the auth would be our bot (using APP_ID and APP_PRIVATE_KEY from our organization). But if they create their own, it makes sense to me that they use their own credentials, otherwise it would count against our own quota and they would have too many permissions.\r\nThe queue seems to introduce a lot of complexity and fragile logic, I think we'd be better avoiding it for now.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2569987936",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 11,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 160,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 63.336250000000035,
+            "syllables": 233,
+            "sentences": 8,
+            "score": 0.9666374999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2571512448,
+        "content": "I realized that in my organization, I never had these events triggered, and then understood that you can disable these directly within the GitHub App settings. I disabled them for our two bots:\r\n<img width=\"751\" alt=\"image\" src=\"https://github.com/user-attachments/assets/d4ee878c-4945-4929-bf6c-8d9c1cc53bec\" />",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2571512448",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 18.225,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 39,
+            "wordValue": 0.1,
+            "result": 2.15
+          },
+          "readability": {
+            "fleschKincaid": 64.71033333333337,
+            "syllables": 74,
+            "sentences": 3,
+            "score": 0.9528966666666663
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2571650815,
+        "content": "Yes that would be my suggestion, but I do agree that it would add friction. Doesn't it feel dangerous that a third party can create its own plugin with our token elevations though?\r\nAnd yes it would count against our own token if all the requests they do in their plugin use our token.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2571650815",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 10.745,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 55,
+            "wordValue": 0.1,
+            "result": 2.46
+          },
+          "readability": {
+            "fleschKincaid": 77.47757575757579,
+            "syllables": 72,
+            "sentences": 3,
+            "score": 0.8252242424242421
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2571807019,
+        "content": "In my mind, the following would happen:\r\n- if an external organization just wishes to use our product, they only have to install the bot and link our plugins in their configuration, no extra step would be needed\r\n- if they wish to develop their custom plugin, they would have to provide authentication methods and use their own github app credentials\r\nI think this would be beneficial for two main reason:\r\n- they can give different access levels to that plugin, imagine they create something that would take care of billing manager access for example, our plugin does not have read or write access on this so they would need their own token anyway\r\n- at this moment, they can post any comment in behalf of `ubiquity-os` bot, which could allow them to post fraudulent reward links for example, even within our repo I suppose since the token would have access",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2571807019",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 8.01,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              }
+            },
+            "result": 0.4
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 146,
+            "wordValue": 0.1,
+            "result": 2.27
+          },
+          "readability": {
+            "fleschKincaid": -66.5166438356164,
+            "syllables": 216,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2572418217,
+        "content": "New updates regarding the quota:\r\n- @0x4007 noticed that it runs when `devpool-directory` is updated, which happens quite often and is not needed\r\n- we could filter out this repo, but it might required to be hard-coded or set within the `worker` environment directly",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2572418217",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 13.59,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 41,
+            "wordValue": 0.1,
+            "result": 2.2
+          },
+          "readability": {
+            "fleschKincaid": 45.54195121951224,
+            "syllables": 58,
+            "sentences": 1,
+            "score": 0.8554195121951225
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2579947520,
+        "content": "It seems that lowering the amount of calls didn't really solve the problem, 5he kernel still gets stuck often (today particularly because Github servers seems to be partially down). The rate limit in the logs has always 5k+ calls remaining (first rate limit). When stuck, usually it stays at \"trying to fetch configuration from\" or \"dispatching event for\" and then nothing, meaning the octokit call never made it. However no error or logs is shown afterwards. \nThe next changes I will try:\n- add a wrapper with explicit timeout to avoid getting stuck forever inside waitUntil\n- add the logger plug-in to Octokit so we can have logs about the ongoing requests\n- explicitly bind the fetch from Cloudflare to Octokit instance",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2579947520",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 17.7,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              }
+            },
+            "result": 0.3
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 121,
+            "wordValue": 0.1,
+            "result": 2.48
+          },
+          "readability": {
+            "fleschKincaid": 51.5265454545455,
+            "syllables": 187,
+            "sentences": 5,
+            "score": 0.9152654545454549
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2585141066,
+        "content": "I tried what I mentioned above and the following:\r\n- disabling retry plugin\r\n- removing the custom error logs we had in octokit plugins\r\nThe problem is the same, I can see a `GET` request is being sent but nothing happens afterwards.\r\n```\r\nrequest {\r\n  method: 'GET',\r\n  baseUrl: 'https://api.github.com',\r\n  headers: {\r\n    accept: 'application/vnd.github.v3+json',\r\n    'user-agent': 'octokit-core.js/6.1.2 Cloudflare-Workers'\r\n  },\r\n  mediaType: { format: 'raw', previews: [] },\r\n  request: {\r\n    fetch: [Function: bound fetch],\r\n    hook: [Function: bound bound register]\r\n  },\r\n  url: '/repos/{owner}/{repo}/contents/{path}',\r\n  owner: 'ubiquity',\r\n  repo: '.github-private',\r\n  path: '.github/.ubiquity-os.config.yml'\r\n}\r\n```\r\nEvery time this happens, when I redeploy the kernel, it works again for around 1h and then this happens. I don't think this is due to second rate limit either because the amount of requests per second averages to `0.06 requests` which is very low.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2585141066",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 18.1,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 83,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 53.38224899598394,
+            "syllables": 123,
+            "sentences": 3,
+            "score": 0.9338224899598394
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2585144769,
+        "content": "@0x4007 I should definitely try with another service yes. I don't think cloudflare is to blame because requests using `fetch` are working normally and events seem to be received just fine, but maybe a mix that they use their own implementation of fetch could be the cause.\r\nStarted to see some\r\n<img width=\"320\" alt=\"image\" src=\"https://github.com/user-attachments/assets/9f38d547-6260-4ed2-8d1d-b24cc8c9c0bd\" />",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2585144769",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 19.755,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 57,
+            "wordValue": 0.1,
+            "result": 2.48
+          },
+          "readability": {
+            "fleschKincaid": 72.63294117647061,
+            "syllables": 94,
+            "sentences": 4,
+            "score": 0.8736705882352939
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2594885191,
+        "content": "Updates on the monitoring:\r\nVery often the code gets stuck with the following logs (this was a `/wallet` command for example):\r\n<img width=\"1716\" alt=\"image\" src=\"https://github.com/user-attachments/assets/907f09f5-869c-47b0-b918-332765513838\" />\r\nwhich corresponds to the following source code\r\nhttps://github.com/ubiquity-os/ubiquity-os-kernel/blob/fbccd4464995967b824fe77e4749b0b4ca43d728/src/github/utils/config.ts#L190\r\nSo I thought maybe the package to read YAML was the culprit. I changed it to another one, and the issues seem to happen less often but still happen at the same spot. I wondered if both of these libraries use a non thread-safe method for cloudflare, since we use `node-compat`. But that's a wild guess and I don't wanna read the whole source code.\r\nIt is maybe a coincidence that it always seem to break there, so with @0x4007 we considered trying a gigantic configuration, which I did (more than 40 plugins!) and it worked fine until one hour later when it started to skip events.\r\nHaving no logs truly doesn't help, but I still suspect CF to unexpectedly kill the worker, but it gets silenced due to `waitUntil`. I have no more ideas on what to try except a different hosting platform to be honest, and you have any suggestions.\r\n---\r\nEdit: re-reading these logs I realize two GET requests were sent but only one file was parsed, could this be some race condition, or a promise failing that kills the other? will try to run these synchronously and see if there is any change.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2594885191",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 21.7,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 9
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 232,
+            "wordValue": 0.1,
+            "result": 1.42
+          },
+          "readability": {
+            "fleschKincaid": 70.65554796554798,
+            "syllables": 355,
+            "sentences": 13,
+            "score": 0.8934445203445202
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2762840096,
+        "content": "## What happened\r\nWhen under heavy load, the kernel sometimes stop forwarding events to plugins. We sometimes notice that when users try to invoke commands but nothing happens afterwards. This gets solved by redeploying, or having an event that would unstuck the kernel.\r\nAfter lots of tests, it seems to get stuck around these lines:\r\nhttps://github.com/ubiquity-os/ubiquity-os-kernel/blob/development/src/github/utils/config.ts#L63-L66\r\n## What was expected\r\nThe kernel should be able to handle heavy traffic, either delaying requests or cancelling them, and should not get stuck perpetually.\r\n## How to reproduce\r\nThe best way I found to reproduce the issue is to simultaneously post lots of comments at the same time. Here is a script achieving so:\r\n```javascript\r\nimport { Octokit } from \"@octokit/rest\";\r\nconst octokit = new Octokit({\r\n  auth: \"your gh token\",\r\n});\r\nasync function postCommentBatch({ owner, repo, issueNumber, batchSize = 10 }) {\r\n  const promises = Array(batchSize)\r\n    .fill()\r\n    .map(() =>\r\n      octokit.rest.issues.createComment({\r\n        owner,\r\n        repo,\r\n        issue_number: issueNumber,\r\n        body: \"/help\",\r\n      })\r\n    );\r\n  try {\r\n    await Promise.all(promises);\r\n    console.log(`Successfully posted batch of ${batchSize} comments`);\r\n    return true;\r\n  } catch (error) {\r\n    console.error(\"Error posting batch:\", error.message);\r\n    return false;\r\n  }\r\n}\r\nasync function postComments({\r\n  owner,\r\n  repo,\r\n  issueNumber,\r\n  timespan = 2000,\r\n  delay = 100,\r\n  batchSize = 10,\r\n}) {\r\n  const startTime = Date.now();\r\n  const endTime = startTime + timespan;\r\n  console.log(`Starting batch comment posting for ${timespan}ms with ${delay}ms delay between batches`);\r\n  while (Date.now() < endTime) {\r\n    try {\r\n      const success = await postCommentBatch({\r\n        owner,\r\n        repo,\r\n        issueNumber,\r\n        batchSize,\r\n      });\r\n      if (success) {\r\n        console.log(`Batch posted at ${new Date().toISOString()}`);\r\n      }\r\n      await new Promise((resolve) => setTimeout(resolve, delay));\r\n    } catch (error) {\r\n      if (error.status === 429) {\r\n        console.error(\"Rate limit exceeded. Waiting before retrying...\");\r\n        await new Promise((resolve) => setTimeout(resolve, 1000));\r\n      } else {\r\n        console.error(\"Error in batch posting cycle:\", error.message);\r\n      }\r\n    }\r\n  }\r\n  console.log(\"Finished posting all comment batches\");\r\n}\r\npostComments({\r\n  owner: \"owner\",\r\n  repo: \"repo\",\r\n  issueNumber: 3,\r\n  timespan: 2000,\r\n  delay: 100,\r\n  batchSize: 10,\r\n}).catch(console.error);\r\n```\r\nLet this run for a while before you notice no more response from the bot.\r\n---\r\nFurther findings: it seems that it stops working once the limit of requests for the GitHub token has been reached. That's why commands like `/help` will not work although the comment is received, because the kernel cannot post the comment back to the issue. Likewise, any plugin that would need an Action dispatched won't run. However, plugins that run as Workers through fetch will work fine.\r\nIf we remove the `waitUntil` function, we get the following error thrown by the Worker run: `the script will never generate a response`, which gets silenced within `waitUntil` when used. This will happen anytime the `Octokit` instance will be used, due to the limit being reached and no network call being able to be sent, resulting in a `403` error (thrown from GitHub API side)..",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 6.85,
+          "formatting": {
+            "content": {
+              "h2": {
+                "score": 1,
+                "elementCount": 3
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 8
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 4
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 243,
+            "wordValue": 0.1,
+            "result": 1.33
+          },
+          "readability": {
+            "fleschKincaid": 64.6642307692308,
+            "syllables": 379,
+            "sentences": 14,
+            "score": 0.9533576923076921
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2285543649,
+        "content": "Resolves #227\r\n- added more logs for better debugging\r\n- configuration files load synchronously\r\n- octokit logs are now logged through the official octokit plugin\r\n- added watson logs to control the level of the logs\r\n- explicitly bound fetch function within octokit\r\nThe configuration files seemed to be the bottleneck, and the kernel seems more stable. Now, it can be a pure coincidence and I became superstitious. The best way to find out is to deploy it and monitor it.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/236",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 3.51,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 7
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              }
+            },
+            "result": 0.5
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 76,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 43.09008771929825,
+            "syllables": 124,
+            "sentences": 3,
+            "score": 0.8309008771929826
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 453.815 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>250</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>6.85</td></tr><tr><td>Issue</td><td>Comment</td><td>13</td><td>193.455</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>3.51</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227\" target=\"_blank\" rel=\"noopener\">## What happenedWhen under heavy load, the kernel sometimes st&hellip;</a></h6></td><td><details><summary>5.33</summary><pre>content:&#13;  content:&#13;    h2:&#13;      score: 1&#13;      elementCount: 3&#13;    p:&#13;      score: 0&#13;      elementCount: 8&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 4&#13;regex:&#13;  wordCount: 243&#13;  wordValue: 0.1&#13;  result: 1.33&#13;</pre></details></td><td>1</td><td>1</td><td>6.85</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2565335092\" target=\"_blank\" rel=\"noopener\">Basically, it seems that once the token arrived to its limit, th&hellip;</a></h6></td><td><details><summary>2.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 140&#13;  wordValue: 0.1&#13;  result: 2.32&#13;</pre></details></td><td>1</td><td>5</td><td>14.9</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2566040682\" target=\"_blank\" rel=\"noopener\">This is easily reproducible on a local setup as well, and gives &hellip;</a></h6></td><td><details><summary>2.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 53&#13;  wordValue: 0.1&#13;  result: 2.43&#13;</pre></details></td><td>1</td><td>5</td><td>15.45</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2566955652\" target=\"_blank\" rel=\"noopener\">Yes it happens because whenever we receive an event we do the fo&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 10&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;  result: 0.4&#13;regex:&#13;  wordCount: 281&#13;  wordValue: 0.1&#13;  result: 1.03&#13;</pre></details></td><td>1</td><td>5</td><td>9.25</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2567736830\" target=\"_blank\" rel=\"noopener\">Like @whilefoo said the problem is when commands that need immed&hellip;</a></h6></td><td><details><summary>2.6</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 71&#13;  wordValue: 0.1&#13;  result: 2.6&#13;</pre></details></td><td>0.9</td><td>5</td><td>15.03</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2569987936\" target=\"_blank\" rel=\"noopener\">Okay then I will start filtering events, and link the changes he&hellip;</a></h6></td><td><details><summary>2.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 160&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.8</td><td>5</td><td>11</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2571512448\" target=\"_blank\" rel=\"noopener\">I realized that in my organization, I never had these events tri&hellip;</a></h6></td><td><details><summary>3.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 39&#13;  wordValue: 0.1&#13;  result: 2.15&#13;</pre></details></td><td>0.9</td><td>5</td><td>18.225</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2571650815\" target=\"_blank\" rel=\"noopener\">Yes that would be my suggestion, but I do agree that it would ad&hellip;</a></h6></td><td><details><summary>2.46</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 55&#13;  wordValue: 0.1&#13;  result: 2.46&#13;</pre></details></td><td>0.7</td><td>5</td><td>10.745</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2571807019\" target=\"_blank\" rel=\"noopener\">In my mind, the following would happen:- if an external organi&hellip;</a></h6></td><td><details><summary>2.67</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;  result: 0.4&#13;regex:&#13;  wordCount: 146&#13;  wordValue: 0.1&#13;  result: 2.27&#13;</pre></details></td><td>0.6</td><td>5</td><td>8.01</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2572418217\" target=\"_blank\" rel=\"noopener\">New updates regarding the quota:- @0x4007 noticed that it runs&hellip;</a></h6></td><td><details><summary>2.4</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 41&#13;  wordValue: 0.1&#13;  result: 2.2&#13;</pre></details></td><td>0.9</td><td>5</td><td>13.59</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2579947520\" target=\"_blank\" rel=\"noopener\">It seems that lowering the amount of calls didn't really solve t&hellip;</a></h6></td><td><details><summary>2.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;  result: 0.3&#13;regex:&#13;  wordCount: 121&#13;  wordValue: 0.1&#13;  result: 2.48&#13;</pre></details></td><td>1</td><td>5</td><td>17.7</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2585141066\" target=\"_blank\" rel=\"noopener\">I tried what I mentioned above and the following:- disabling r&hellip;</a></h6></td><td><details><summary>2.83</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 83&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>1</td><td>5</td><td>18.1</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2585144769\" target=\"_blank\" rel=\"noopener\">@0x4007 I should definitely try with another service yes. I don'&hellip;</a></h6></td><td><details><summary>3.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 57&#13;  wordValue: 0.1&#13;  result: 2.48&#13;</pre></details></td><td>0.9</td><td>5</td><td>19.755</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2594885191\" target=\"_blank\" rel=\"noopener\">Updates on the monitoring:Very often the code gets stuck with &hellip;</a></h6></td><td><details><summary>3.42</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 9&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 232&#13;  wordValue: 0.1&#13;  result: 1.42&#13;</pre></details></td><td>1</td><td>5</td><td>21.7</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/236\" target=\"_blank\" rel=\"noopener\">Resolves #227- added more logs for better debugging- configu&hellip;</a></h6></td><td><details><summary>3.12</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 7&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;  result: 0.5&#13;regex:&#13;  wordCount: 76&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.9</td><td>1</td><td>3.51</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 74.655,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2565271423,
+        "content": "Thanks for sharing your research. It seems that a final solution isn't clear. I suppose that research can continue under this conversation thread. @whilefoo please look into this.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2565271423",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 8.26,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 68.20038793103453,
+            "syllables": 45,
+            "sentences": 4,
+            "score": 0.9179961206896547
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2567177272,
+        "content": "This secondary rate limit seems like a mess to deal with. So is the plan now to make an events queue and handle them with a static delay timer between each so we can avoid the rate limit?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2567177272",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 12.06,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 74.00789473684213,
+            "syllables": 51,
+            "sentences": 2,
+            "score": 0.8599210526315787
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2571847808,
+        "content": "Possible but we haven't had to elevate permissions in a very long time. I think we have it mostly covered. Worst case scenario: if they aren't doing anything payment related they can simply make a GitHub action. The only secret sauce we should be focusing on is providing the infrastructure to essentially map any webhook event to a financial reward and to allow the distribution of that reward. \nThis is only true if we 1. Accept their changes in a pull to the kernel and/or 2. Install that plugin to our repos.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2571847808",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 8.4,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 95,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 65.71473684210527,
+            "syllables": 143,
+            "sentences": 7,
+            "score": 0.9428526315789473
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2572430951,
+        "content": "Setting in the environment seems appropriate! Perhaps we can set an array of values and any org/repo slug can be ignored \n```\n[\"ubiquity/devpool-directory\"]\n``` \nCome to think of it though, we may even be able to depreciate the issues being opened in that repository because now we simply aggregate them into a json object, although it is kind of nice to see the confirmation when the link back occurs that it is in the directory.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2572430951",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 13.08,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 73,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 44.625856164383606,
+            "syllables": 108,
+            "sentences": 2,
+            "score": 0.8462585616438361
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2573985576,
+        "content": "I don't like the idea of installing custom apps for plugins. It's not a good approach",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2573985576",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 5.07,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 84.90000000000003,
+            "syllables": 24,
+            "sentences": 2,
+            "score": 0.7509999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2585142538,
+        "content": "Would you say it's safe to blame cloudflare then? Have you considered A/B testing the kernel on another platform like azure or something?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2585142538",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 9.675,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 72.32350000000002,
+            "syllables": 36,
+            "sentences": 2,
+            "score": 0.8767649999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2594974256,
+        "content": "Maybe `node-compat` is not helping the problem",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2594974256",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.59,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 87.94500000000002,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.7205499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2603763523,
+        "content": "Possibly a bad idea but what about a novel implementation of a yaml parser? In exchange for simpler usage of yaml features, we could have a more reliable and simpler parser. \nHere's an o1 one-shot: https://chatgpt.com/share/678f3dc2-9a6c-8001-b527-8202efa456f3\n```typescript\ntype YamlValue = string | number | boolean | YamlObject | YamlValue[];\ntype YamlObject = Record<string, YamlValue>;\n/**\n * Parse a YAML string into a nested object.\n */\nexport function parseYaml(yaml: string): YamlObject {\n  const lines = yaml.split(/\\r?\\n/);\n  const { object: result } = parseBlock(lines, 0, 0);\n  return result;\n}\n/**\n * Recursively parse lines to build YAML objects/arrays.\n * @param lines The array of lines from the YAML string.\n * @param currentIndent The current indentation level in spaces.\n * @param startIndex The line index to begin parsing.\n * @returns The parsed object and the next line index.\n */\nfunction parseBlock(\n  lines: string[],\n  currentIndent: number,\n  startIndex: number\n): { object: YamlObject; nextLine: number } {\n  const parsedObject: YamlObject = {};\n  let i = startIndex;\n  while (i < lines.length) {\n    const line = lines[i];\n    const lineIndent = getIndent(line);\n    // Stop if indentation is shallower than current block\n    if (line.trim() === '' || lineIndent < currentIndent) {\n      break;\n    }\n    // Strip comments\n    const noCommentLine = line.split('#')[0].trimEnd();\n    if (noCommentLine.trim() === '') {\n      i += 1;\n      continue;\n    }\n    // Parse key/value or list item\n    const { key, value, isListItem } = parseLine(noCommentLine);\n    if (isListItem) {\n      // It's a list item: collect all items in an array\n      // The parent key is the last key we encountered\n      const lastKey = Object.keys(parsedObject)[Object.keys(parsedObject).length - 1];\n      if (typeof parsedObject[lastKey] === 'undefined') {\n        parsedObject[lastKey] = [];\n      }\n      const arrayRef = parsedObject[lastKey];\n      if (Array.isArray(arrayRef)) {\n        // if value is missing, parse as nested block\n        if (typeof value === 'undefined' || value === null) {\n          const { object: nested, nextLine } = parseBlock(lines, lineIndent + 2, i + 1);\n          arrayRef.push(nested);\n          i = nextLine;\n        } else {\n          arrayRef.push(value);\n          i += 1;\n        }\n      } else {\n        i += 1;\n      }\n    } else if (key !== '' && typeof value !== 'undefined') {\n      // Plain key: value\n      parsedObject[key] = value;\n      i += 1;\n    } else if (key !== '') {\n      // Key with possible nested block\n      const nextLineIndent = getIndent(lines[i + 1] || '');\n      if (nextLineIndent > lineIndent) {\n        const { object: nested, nextLine } = parseBlock(lines, nextLineIndent, i + 1);\n        parsedObject[key] = nested;\n        i = nextLine;\n      } else {\n        parsedObject[key] = '';\n        i += 1;\n      }\n    } else {\n      i += 1;\n    }\n  }\n  return { object: parsedObject, nextLine: i };\n}\n/**\n * Extract indentation width from the start of a line.\n */\nfunction getIndent(line: string): number {\n  let count = 0;\n  for (let i = 0; i < line.length; i += 1) {\n    if (line[i] === ' ') {\n      count += 1;\n    } else {\n      break;\n    }\n  }\n  return count;\n}\n/**\n * Parse a single line to discover a key-value pair or a list item.\n */\nfunction parseLine(line: string): {\n  key: string;\n  value?: YamlValue;\n  isListItem: boolean;\n} {\n  const isListItem = line.trimStart().startsWith('- ');\n  if (isListItem) {\n    // example: \"- something\"\n    const itemValue = line.trimStart().slice(2).trim();\n    if (itemValue.includes(': ')) {\n      // example: \"- key: value\" (nested object in a list)\n      const splitIndex = itemValue.indexOf(': ');\n      const subKey = itemValue.slice(0, splitIndex).trim();\n      const subValue = convertValue(itemValue.slice(splitIndex + 2).trim());\n      return { key: subKey, value: subValue, isListItem: true };\n    }\n    return { key: '', value: convertValue(itemValue), isListItem: true };\n  }\n  // example: \"key: value\"\n  const colonIndex = line.indexOf(':');\n  if (colonIndex >= 0) {\n    const rawKey = line.slice(0, colonIndex).trim();\n    const rawValue = line.slice(colonIndex + 1).trim();\n    if (rawValue !== '') {\n      return { key: rawKey, value: convertValue(rawValue), isListItem: false };\n    }\n    return { key: rawKey, isListItem: false };\n  }\n  return { key: '', isListItem: false };\n}\n/**\n * Convert a raw string value to a typed value (boolean, number, or string).\n */\nfunction convertValue(value: string): YamlValue {\n  if (value === 'true') {\n    return true;\n  }\n  if (value === 'false') {\n    return false;\n  }\n  if (!Number.isNaN(Number(value))) {\n    return Number(value);\n  }\n  return value;\n}\n```",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2603763523",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 15.52,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 37,
+            "wordValue": 0.1,
+            "result": 2.1
+          },
+          "readability": {
+            "fleschKincaid": 75.61902173913046,
+            "syllables": 65,
+            "sentences": 4,
+            "score": 0.8438097826086954
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/236"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 74.655 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>8</td><td>74.655</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2565271423\" target=\"_blank\" rel=\"noopener\">Thanks for sharing your research. It seems that a final solution&hellip;</a></h6></td><td><details><summary>1.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.7</td><td>5</td><td>8.26</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2567177272\" target=\"_blank\" rel=\"noopener\">This secondary rate limit seems like a mess to deal with. So is &hellip;</a></h6></td><td><details><summary>2.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.9</td><td>5</td><td>12.06</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2571847808\" target=\"_blank\" rel=\"noopener\">Possible but we haven't had to elevate permissions in a very lon&hellip;</a></h6></td><td><details><summary>2.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 95&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.5</td><td>5</td><td>8.4</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2572430951\" target=\"_blank\" rel=\"noopener\">Setting in the environment seems appropriate! Perhaps we can set&hellip;</a></h6></td><td><details><summary>2.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 73&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.8</td><td>5</td><td>13.08</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2573985576\" target=\"_blank\" rel=\"noopener\">I don't like the idea of installing custom apps for plugins. It'&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.6</td><td>5</td><td>5.07</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2585142538\" target=\"_blank\" rel=\"noopener\">Would you say it's safe to blame cloudflare then? Have you consi&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.9</td><td>5</td><td>9.675</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2594974256\" target=\"_blank\" rel=\"noopener\">Maybe &#96;node-compat&#96; is not helping the problem</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.7</td><td>5</td><td>2.59</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2603763523\" target=\"_blank\" rel=\"noopener\">Possibly a bad idea but what about a novel implementation of a y&hellip;</a></h6></td><td><details><summary>3.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 37&#13;  wordValue: 0.1&#13;  result: 2.1&#13;</pre></details></td><td>0.8</td><td>5</td><td>15.52</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 192.925,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 2566497855,
+        "content": "It seems the primary rate limit is 5000 per hour per org/repo, but we are hitting [secondary rate limit](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api?apiVersion=2022-11-28#about-secondary-rate-limits) which happens when too many request happen at once - 100 at once or too many per minute. \r\nWe will hit this limits even faster using Github-based storage.\r\nOne solution would be to space out events, for example if we receive 100 events at once we need to process them one by one and not all at once, having priority in mind too as events that need instant response like commands need to be processed immediately while others like text embeddings can be processed later.\r\nBut Worker plugins would still fail to execute as they use the same installation token passed from the kernel, isn't it?\r\nOur octokit uses plugin-retry plugin which should retry requests after the rate limit is over but I think that `waitUntil` still has 30 seconds hard limit so it would time out before it could retry.\r\n@gentlementlegen Didn't we try running the kernel on Azure, or was that reverted?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2566497855",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 19.1,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 176,
+            "wordValue": 0.1,
+            "result": 1.97
+          },
+          "readability": {
+            "fleschKincaid": 54.96848484848486,
+            "syllables": 254,
+            "sentences": 6,
+            "score": 0.9496848484848486
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2569348047,
+        "content": "I suggested multiple priority queues but thinking about this more I realized that it's not feasible because you don't know the priority if you don't know the config, for example a `issue_comment.created` needs to be processed fast because it can be a command but it can also be just a normal comment that can be processed in the background by `text-embeddings` or another plugin that needs it ASAP.\r\nWe should definitely do that. I'm not sure about the credentials, they need to use installation's token but they can't get it by themselves.\r\nThe most obvious fix is to not store the config in Github but somewhere else like a database. You could build queues on top of this by fetching the config from the database (each plugin would have a priority level) and you would put it in the queue for that priority level. Cloudflare Queues also have retries so if the rate limit is hit, you can schedule to retry after X time and they also have 30 min time limit compared to 30 seconds on normal workers. However I think idea won't be liked because it moves away from Github and creates a dependency on Cloudflare.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2569348047",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 9.855,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 203,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 56.54285714285716,
+            "syllables": 290,
+            "sentences": 7,
+            "score": 0.9654285714285716
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2571629386,
+        "content": "You're saying that each organization that uses our bot should create their own Github App and share credentials to the plugin via environment variables?\r\nI think that adds a lot of friction and setup on the part of the organization and I'm not sure if this fixes the rate limit. The rate limit is based on the installation token / org so there's no difference in using our bot or their own bot. Installation token only has permissions on that organization so a plugin would have same level of permissions if using our bot or organization's own bot",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2571629386",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 13.4,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 101,
+            "wordValue": 0.1,
+            "result": 2.6
+          },
+          "readability": {
+            "fleschKincaid": 55.56268564356438,
+            "syllables": 150,
+            "sentences": 4,
+            "score": 0.9556268564356438
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2571675735,
+        "content": "That was a concern from the start but it is not that critical because they can't access other organizations with that token, only the one that installed the plugin and that organization has to trust the plugin otherwise they wouldn't install it. \r\nThe most damage they could do is force push to the repo but that's possible in either cases (our github app or organization's own github app).\r\nThere was an idea that third party plugins would have to call the kernel to make actions on Github so our kernel would restrict which operations are allowed.\r\nI understand now that our Github App would be only used to fetch configs and manifests and dispatch workflows and organization's App would be used for the plugin which would alleviate the problem with rate limits, however I feel like this would too much friction",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2571675735",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 10.01,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 146,
+            "wordValue": 0.1,
+            "result": 2.27
+          },
+          "readability": {
+            "fleschKincaid": 46.94366438356167,
+            "syllables": 212,
+            "sentences": 4,
+            "score": 0.8694366438356167
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2573471924,
+        "content": "But the consumer of a third party plugin would have to install their app so you will have so many apps installed, but I think we're still a long way from third party plugins so we can think about this later",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2573471924",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 8.64,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 42,
+            "wordValue": 0.1,
+            "result": 2.23
+          },
+          "readability": {
+            "fleschKincaid": 57.44785714285716,
+            "syllables": 53,
+            "sentences": 1,
+            "score": 0.9744785714285716
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2585190165,
+        "content": "Is it possible that the 10ms limit is reached and Cloudflare shuts down the worker? But it's weird to only happen after 1 hour",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2585190165",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 8.4,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 82.47550000000001,
+            "syllables": 33,
+            "sentences": 2,
+            "score": 0.7752449999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2560425563,
+        "content": "Hope this works",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/236#pullrequestreview-2560425563",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.23,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 119.19000000000003,
+            "syllables": 3,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1921066100,
+        "content": "did you try this before changing to sync config fetch? it could be also that there was a bug in workers and we were using an old version",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/236#discussion_r1921066100",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,6 +1,6 @@\n name = \"ubiquity-os-kernel\"\n main = \"src/adapters/cloudflare-worker.ts\"\n-compatibility_date = \"2023-12-06\"\n+compatibility_date = \"2024-09-23\"",
+        "score": {
+          "reward": 8.84,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 86.875,
+            "syllables": 35,
+            "sentences": 2,
+            "score": 0.73125
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2560425563,
+            "effect": {
+              "addition": 2044,
+              "deletion": 245
+            },
+            "reward": 114.45,
+            "priority": 5
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/236"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 192.925 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>114.45</td></tr><tr><td>Issue</td><td>Comment</td><td>6</td><td>69.405</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>9.07</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/236\" target=\"_blank\" rel=\"noopener\">#236</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+2044 -245</td><td>5</td><td>114.45</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2566497855\" target=\"_blank\" rel=\"noopener\">It seems the primary rate limit is 5000 per hour per org/repo, b&hellip;</a></h6></td><td><details><summary>2.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 176&#13;  wordValue: 0.1&#13;  result: 1.97&#13;</pre></details></td><td>1</td><td>5</td><td>19.1</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2569348047\" target=\"_blank\" rel=\"noopener\">I suggested multiple priority queues but thinking about this mor&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 203&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.9</td><td>5</td><td>9.855</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2571629386\" target=\"_blank\" rel=\"noopener\">You're saying that each organization that uses our bot should cr&hellip;</a></h6></td><td><details><summary>2.6</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 101&#13;  wordValue: 0.1&#13;  result: 2.6&#13;</pre></details></td><td>0.8</td><td>5</td><td>13.4</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2571675735\" target=\"_blank\" rel=\"noopener\">That was a concern from the start but it is not that critical be&hellip;</a></h6></td><td><details><summary>2.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 146&#13;  wordValue: 0.1&#13;  result: 2.27&#13;</pre></details></td><td>0.7</td><td>5</td><td>10.01</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2573471924\" target=\"_blank\" rel=\"noopener\">But the consumer of a third party plugin would have to install t&hellip;</a></h6></td><td><details><summary>2.23</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 42&#13;  wordValue: 0.1&#13;  result: 2.23&#13;</pre></details></td><td>0.6</td><td>5</td><td>8.64</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/227#issuecomment-2585190165\" target=\"_blank\" rel=\"noopener\">Is it possible that the 10ms limit is reached and Cloudflare shu&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.8</td><td>5</td><td>8.4</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/236#pullrequestreview-2560425563\" target=\"_blank\" rel=\"noopener\">Hope this works</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.1</td><td>5</td><td>0.23</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/236#discussion_r1921066100\" target=\"_blank\" rel=\"noopener\">did you try this before changing to sync config fetch? it could &hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.8</td><td>5</td><td>8.84</td></tr></tbody></table></details>"
+  }
+}

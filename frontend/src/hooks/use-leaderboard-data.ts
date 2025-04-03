@@ -7,9 +7,11 @@ export interface LeaderboardEntry {
   avatarUrl: string;
   totalXp: number; // Using 'number' as XP comes from JSON metadata
   xpByCategory: Record<string, number>; // Added XP breakdown
+  // Add raw permits count for potential display
+  permitCount: number;
 }
 
-// Structure returned by the worker (includes node_url now)
+// Structure returned by the worker (includes node_url, category, repository now)
 interface RawPermitInfoFromWorker {
   nonce: string;
   networkId: number;
@@ -18,6 +20,8 @@ interface RawPermitInfoFromWorker {
   avatarUrl: string; // Empty string from worker
   node_url: string | null; // GitHub issue URL
   created_at?: string;
+  category?: string; // Added category
+  repository?: string; // Added repository
   // Implicitly contains beneficiary_id via githubUsername placeholder
 }
 
@@ -41,11 +45,12 @@ interface PermitCommentMetadata {
   // ... other fields
 }
 
-// Type for storing aggregated data before final formatting
+  // Type for storing aggregated data before final formatting
 interface AggregatedUserData {
   githubId: number;
   totalXp: number; // Store as number directly from JSON
   xpByCategory: Record<string, number>; // Added XP breakdown
+  permitCount: number; // Add permit count
   login?: string; // Fetched from GitHub API
   avatarUrl?: string; // Fetched from GitHub API
 }
@@ -60,11 +65,18 @@ interface GitHubComment {
 const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
 export function useLeaderboardData() {
-  const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>([]);
+  const [rawPermitData, setRawPermitData] = useState<RawPermitInfoFromWorker[]>([]); // Store raw data from worker
+  const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>([]); // Final processed data
   const [isLoading, setIsLoading] = useState<boolean>(true); // Tracks worker fetching
   const [isProcessingData, setIsProcessingData] = useState<boolean>(false); // Tracks GitHub/aggregation processing
   const [error, setError] = useState<string | null>(null);
   const { worker, isWorkerInitialized, workerError: contextWorkerError } = useWorker();
+
+  // Filter State
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedRepository, setSelectedRepository] = useState<string | null>(null);
+  const [availableCategories, setAvailableCategories] = useState<string[]>([]);
+  const [availableRepositories, setAvailableRepositories] = useState<string[]>([]);
 
   // --- GitHub API and Parsing Helpers ---
 
@@ -206,9 +218,11 @@ export function useLeaderboardData() {
       }
 
       if (!aggregatedDataByUser[githubId]) {
-        // Initialize with xpByCategory
-        aggregatedDataByUser[githubId] = { githubId, totalXp: 0, xpByCategory: {} };
+        // Initialize with xpByCategory and permitCount
+        aggregatedDataByUser[githubId] = { githubId, totalXp: 0, xpByCategory: {}, permitCount: 0 };
       }
+      // Increment permit count for the user regardless of whether XP is found later
+      aggregatedDataByUser[githubId].permitCount += 1;
 
       if (permit.node_url && !issuesToFetch.has(permit.node_url)) {
         const parsedUrl = parseGitHubIssueUrl(permit.node_url);
@@ -231,16 +245,20 @@ export function useLeaderboardData() {
 
     console.log("processAndAggregateData: Second pass - extracting XP from comments...");
     const metadataCache = new Map<string, PermitCommentMetadata | null>();
-    // Reset totalXp and xpByCategory before the second pass to avoid double counting if logic changes
+    // Reset totalXp, xpByCategory, and permitCount before the second pass
     Object.values(aggregatedDataByUser).forEach(user => {
         user.totalXp = 0;
         user.xpByCategory = {};
+        user.permitCount = 0; // Reset permit count here as well
     });
 
 
     for (const permit of rawPermits) {
       const githubId = extractGitHubId(permit.githubUsername);
       if (!githubId || !permit.node_url) continue;
+
+      // Increment permit count again in the second pass to ensure accuracy
+      aggregatedDataByUser[githubId].permitCount += 1;
 
       let metadata = metadataCache.get(permit.node_url);
       if (metadata === undefined) {
@@ -327,7 +345,8 @@ export function useLeaderboardData() {
           githubUsername: userDetails?.login ?? `GitHub ID: ${userData.githubId}`,
           avatarUrl: userDetails?.avatar_url ?? "",
           totalXp: userData.totalXp,
-          xpByCategory: userData.xpByCategory // Map the category breakdown
+          xpByCategory: userData.xpByCategory, // Map the category breakdown
+          permitCount: userData.permitCount // Add permit count
         };
       })
       .sort((a, b) => b.totalXp - a.totalXp);
@@ -371,12 +390,21 @@ export function useLeaderboardData() {
           setError("Received invalid data format from worker");
           setLeaderboardData([]);
         } else {
-          console.log("Processing worker payload:", {
-            payloadLength: payload.length,
-            samplePermit: payload[0],
-            networkId: payload[0]?.networkId,
-            nodeUrl: payload[0]?.node_url,
+          console.log("Processing worker payload:", { payloadLength: payload.length });
+          // Store raw data first
+          setRawPermitData(payload);
+
+          // Extract unique categories and repositories from the raw data
+          const categories = new Set<string>();
+          const repositories = new Set<string>();
+          payload.forEach((permit: RawPermitInfoFromWorker) => {
+            if (permit.category) categories.add(permit.category);
+            if (permit.repository) repositories.add(permit.repository);
           });
+          setAvailableCategories(Array.from(categories).sort());
+          setAvailableRepositories(Array.from(repositories).sort());
+
+          // Now process the raw data (will be refactored later to use filtered data)
           try {
             const finalData = await processAndAggregateData(payload);
             console.log("Final leaderboard data:", {
@@ -432,12 +460,61 @@ export function useLeaderboardData() {
       mounted = false;
       worker?.removeEventListener("message", handleWorkerMessage);
     };
-  }, [processAndAggregateData, worker, isWorkerInitialized, contextWorkerError]);
+  }, [processAndAggregateData, worker, isWorkerInitialized, contextWorkerError]); // Keep this effect for initial fetch
+
+  // Effect to re-process data when filters change
+  useEffect(() => {
+    if (rawPermitData.length === 0) {
+      // Don't process if there's no raw data yet
+      return;
+    }
+
+    console.log("Filtering and re-aggregating data...", { selectedCategory, selectedRepository });
+    setIsProcessingData(true); // Indicate processing start
+
+    // Apply filters
+    const filteredPermits = rawPermitData.filter(permit => {
+      const categoryMatch = !selectedCategory || permit.category === selectedCategory;
+      const repoMatch = !selectedRepository || permit.repository === selectedRepository;
+      return categoryMatch && repoMatch;
+    });
+
+    console.log(`Filtered down to ${filteredPermits.length} permits.`);
+
+    // Process the filtered data
+    processAndAggregateData(filteredPermits)
+      .then(finalData => {
+        console.log("Re-aggregated leaderboard data:", { entries: finalData.length });
+        setLeaderboardData(finalData);
+        setError(null); // Clear previous errors if processing succeeds
+      })
+      .catch(processingError => {
+        console.error("Error re-processing filtered leaderboard data:", processingError);
+        setError(`Failed to process filtered data: ${processingError instanceof Error ? processingError.message : String(processingError)}`);
+        setLeaderboardData([]); // Clear data on error
+      })
+      .finally(() => {
+        setIsProcessingData(false); // Indicate processing end
+      });
+
+  }, [rawPermitData, selectedCategory, selectedRepository, processAndAggregateData]);
+
 
   // Combine local error state with context error state
   const displayError = error || (contextWorkerError ? `Worker initialization failed: ${contextWorkerError}` : null);
   // Combine loading states
   const combinedIsLoading = isLoading || isProcessingData; // Use isProcessingData
 
-  return { leaderboardData, isLoading: combinedIsLoading, error: displayError };
+  return {
+    leaderboardData,
+    isLoading: combinedIsLoading,
+    error: displayError,
+    // Filter related state and setters
+    availableCategories,
+    availableRepositories,
+    selectedCategory,
+    setSelectedCategory,
+    selectedRepository,
+    setSelectedRepository,
+  };
 }

@@ -1,0 +1,826 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 32.537,
+    "task": {
+      "reward": 25,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2441925924,
+        "content": "It is trying to forward it but what it received is not a valid command like `/label`. Plugins react only to certain events / inputs.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2441925924",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.1,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 77.45815217391308,
+            "syllables": 32,
+            "sentences": 2,
+            "score": 0.8254184782608692
+          },
+          "multiplier": 0.25,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2442139350,
+        "content": "In the configuration file you gave, you chained plugins so it won't. You need to change it to something like\r\n```yaml\r\nplugins:\r\n  - uses:\r\n    - plugin: http://127.0.0.1:4000\r\n      with:\r\n        labels:\r\n          time:\r\n            - \"Time: <15 Minutes\"\r\n            - \"Time: <1 Hour\"\r\n            - \"Time: <2 Hours\"\r\n            - \"Time: <4 Hours\"\r\n            - \"Time: <1 Day\"\r\n            - \"Time: <1 Week\"\r\n            - \"Time: <2 Weeks\"\r\n            - \"Time: <1 Month\"\r\n          priority:\r\n            - \"Priority: 1 (Normal)\"\r\n            - \"Priority: 2 (Medium)\"\r\n            - \"Priority: 3 (High)\"\r\n            - \"Priority: 4 (Urgent)\"\r\n            - \"Priority: 5 (Emergency)\"\r\n        basePriceMultiplier: 2\r\n        publicAccessControl:\r\n          setLabel: true\r\n          fundExternalClosedIssue: false\r\n  -  uses:\r\n    - plugin: ishowvel/daemon-disqualifier:compute.yml@testing\r\n      with:\r\n        disqualification: \"2 minutes\"\r\n        warning: \"1 minutes\"\r\n        watch:\r\n          optOut:\r\n            - \"repoName\"\r\n            - \"repoName2\"\r\n        eventWhitelist:\r\n          - \"review_requested\"\r\n          - \"ready_for_review\"\r\n          - \"commented\"\r\n          - \"committed\"\r\n  - uses:\r\n    - plugin: http://localhost:4001 # or the URL where the plugin is hosted\r\n      name: start-stop\r\n      id: start-stop-command\r\n      with:\r\n        reviewDelayTolerance: \"3 Days\"\r\n        taskStaleTimeoutDuration: \"30 Days\"\r\n        maxConcurrentTasks: # Default concurrent task limits per role.\r\n          member: 5\r\n          contributor: 3\r\n        startRequiresWallet: true # default is true\r\n        emptyWalletText: \"Please set your wallet address with the /wallet command first and try again.\"\r\n        rolesWithReviewAuthority: [\"MEMBER\", \"OWNER\"]\r\n```\r\nso every plugin is called individually.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2442139350",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.116,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 61.53250000000003,
+            "syllables": 42,
+            "sentences": 2,
+            "score": 0.9846749999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2452908011,
+        "content": "It should not, otherwise it means that users can also assign themselves again after disqualification.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2452908011",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.37,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 33.690000000000026,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.7369000000000002
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2452935803,
+        "content": "No I mean that if no code was changed, it should not allow re-assign with the current implementation.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2452935803",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.45,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 71.78157894736843,
+            "syllables": 26,
+            "sentences": 1,
+            "score": 0.8821842105263157
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2463637909,
+        "content": "The `BOT_USER_ID` should match the id of the app your installed in your org @Keyrxng rfc\r\nThis is still relevant since this line is in the codebase:\r\nhttps://github.com/ubiquity-os-marketplace/command-start-stop/blob/00c8675304106cab256c683d09782382c6e0b478/src/handlers/shared/start.ts#L181",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2463637909",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.51,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 80.14248062015508,
+            "syllables": 57,
+            "sentences": 3,
+            "score": 0.7985751937984492
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2465999933,
+        "content": "I think it is safe to assume that a bot un-assign action is from our bot, and would cover both cases.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2465999933",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.384,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 84.52318181818181,
+            "syllables": 26,
+            "sentences": 1,
+            "score": 0.7547681818181818
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2466535052,
+        "content": "@ariesgun i think you should check for the user type to be a bot instead.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2466535052",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.333,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 84.45000000000003,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.7554999999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2253034107,
+        "content": "Resolves #69\r\nQA: https://github.com/Meniole/command-start-stop/issues/51\r\n## What are the changes\r\nThe bot was not behaving properly although the codebase was correct, it was in fact only working in the production version because basically the `BOT_USER_ID` was not set properly for the development` version, which I corrected in the environment settings in this repo.\r\nBut reading the codebase I found that you could abuse the system by stacking `/stop` comments which would nullify bot un-assignment count and let you start again. So I changed the logic instead to check by assignment periods and determine what was the reason of un-assign: bot, user, or admin. Otherwise, logic remains unchanged.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/113",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 5.274,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "h2": {
+                "score": 1,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 104,
+            "wordValue": 0.1,
+            "result": 2.59
+          },
+          "readability": {
+            "fleschKincaid": 52.12962831858411,
+            "syllables": 176,
+            "sentences": 5,
+            "score": 0.9212962831858411
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 32.537 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>25</td></tr><tr><td>Issue</td><td>Comment</td><td>7</td><td>2.263</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>5.274</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2441925924\" target=\"_blank\" rel=\"noopener\">It is trying to forward it but what it received is not a valid c&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.1</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2442139350\" target=\"_blank\" rel=\"noopener\">In the configuration file you gave, you chained plugins so it wo&hellip;</a></h6></td><td><details><summary>1.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.116</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2452908011\" target=\"_blank\" rel=\"noopener\">It should not, otherwise it means that users can also assign the&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>1</td><td>1</td><td>0.37</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2452935803\" target=\"_blank\" rel=\"noopener\">No I mean that if no code was changed, it should not allow re-as&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>1</td><td>1</td><td>0.45</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2463637909\" target=\"_blank\" rel=\"noopener\">The &#96;BOT_USER_ID&#96; should match the id of the app your in&hellip;</a></h6></td><td><details><summary>2.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.51</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2465999933\" target=\"_blank\" rel=\"noopener\">I think it is safe to assume that a bot un-assign action is from&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.384</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2466535052\" target=\"_blank\" rel=\"noopener\">@ariesgun i think you should check for the user type to be a bot&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.333</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/113\" target=\"_blank\" rel=\"noopener\">Resolves #69QA: https://github.com/Meniole/command-start-stop/&hellip;</a></h6></td><td><details><summary>4.59</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    h2:&#13;      score: 1&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 2&#13;regex:&#13;  wordCount: 104&#13;  wordValue: 0.1&#13;  result: 2.59&#13;</pre></details></td><td>0.9</td><td>1</td><td>5.274</td></tr></tbody></table></details>"
+  },
+  "ishowvel": {
+    "total": 0,
+    "userId": 186167176,
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/113"
+      }
+    ]
+  },
+  "0x4007": {
+    "total": 7.571,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2441800325,
+        "content": "My best guess is that you have a formatting problem in your yml config. Sometimes it's difficult to get the indentations perfectly.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2441800325",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.624,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 62.74510869565219,
+            "syllables": 36,
+            "sentences": 2,
+            "score": 0.9725489130434781
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2452453845,
+        "content": "Show me the conversation/QA on GitHub so I have context on your problem",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2452453845",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.588,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 71.76785714285715,
+            "syllables": 20,
+            "sentences": 1,
+            "score": 0.8823214285714285
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2452904673,
+        "content": "It looks like it works. @gentlementlegen rfc",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2452904673",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.528,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 70.33964285714288,
+            "syllables": 11,
+            "sentences": 2,
+            "score": 0.8966035714285713
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2452912384,
+        "content": "Disqualification and self unassignment are different things",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2452912384",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.621,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": -5.727142857142809,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2616924778,
+        "content": "example \nhttps://github.com/ubiquity/ts-template/issues/61#issuecomment-2440188077\nCalling stop should not penalize. If they called stop they should be able to reassign in the future becauss its not a disqualification.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.41,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 53.50225490196081,
+            "syllables": 57,
+            "sentences": 3,
+            "score": 0.9350225490196081
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2524861001,
+            "effect": {
+              "addition": 91,
+              "deletion": 89
+            },
+            "reward": 1.8,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/113"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 7.571 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>1.8</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.41</td></tr><tr><td>Issue</td><td>Comment</td><td>4</td><td>2.361</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/113\" target=\"_blank\" rel=\"noopener\">#113</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+91 -89</td><td>1</td><td>1.8</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69\" target=\"_blank\" rel=\"noopener\">example https://github.com/ubiquity/ts-template/issues/61#issue&hellip;</a></h6></td><td><details><summary>2.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>1</td><td>1</td><td>3.41</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2441800325\" target=\"_blank\" rel=\"noopener\">My best guess is that you have a formatting problem in your yml &hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.624</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2452453845\" target=\"_blank\" rel=\"noopener\">Show me the conversation/QA on GitHub so I have context on your &hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.588</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2452904673\" target=\"_blank\" rel=\"noopener\">It looks like it works. @gentlementlegen rfc</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.528</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2452912384\" target=\"_blank\" rel=\"noopener\">Disqualification and self unassignment are different things</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.621</td></tr></tbody></table></details>"
+  },
+  "ariesgun": {
+    "total": 2.017,
+    "userId": 10436502,
+    "comments": [
+      {
+        "id": 2465466306,
+        "content": "Cannot assign the issue to me anymore.\r\nNot sure if this is what is used in the code, but shouldn't it be \r\n```\r\nrest.user.getByUsername(\"ubiquity-os-beta[bot]\").data.id\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2465466306",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.432,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 92.17119565217394,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.6782880434782607
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2465831556,
+        "content": "I see.. so for this issue, is it possible to verify if the `BOT_USER_ID` in `dev.vars` is set properly or not?\r\nIf I look inside function, \r\nhttps://github.com/ubiquity-os-marketplace/command-start-stop/blob/00c8675304106cab256c683d09782382c6e0b478/src/handlers/shared/start.ts#L181, \r\nthe most probable root cause is the `event.actorId !== BOT_USER_ID`",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2465831556",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.819,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 77.24100000000001,
+            "syllables": 68,
+            "sentences": 5,
+            "score": 0.8275899999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2465853715,
+        "content": "Or just check for `[bot]` in the actorname?\r\n![image](https://github.com/user-attachments/assets/e026a8b0-a45a-4907-82b5-edfea56f0838)",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2465853715",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.189,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 90.95857142857145,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.6904142857142855
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2466121080,
+        "content": "If it is agreed to do it this way, (check name for `[bot]` I can make the changes quickly .\r\nCan you assign this task to me again?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2466121080",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.416,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 96.02461538461542,
+            "syllables": 30,
+            "sentences": 2,
+            "score": 0.6397538461538459
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2487880016,
+        "content": "@0x4007 , is it possible to start this task?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2487880016",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.161,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 92.965,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.67035
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/113"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 2.017 XP ]</a>&nbsp;</h3><h6>@ariesgun</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>5</td><td>2.017</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2465466306\" target=\"_blank\" rel=\"noopener\">Cannot assign the issue to me anymore.Not sure if this is what&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.432</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2465831556\" target=\"_blank\" rel=\"noopener\">I see.. so for this issue, is it possible to verify if the &#96;&hellip;</a></h6></td><td><details><summary>2.92</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.819</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2465853715\" target=\"_blank\" rel=\"noopener\">Or just check for &#96;[bot]&#96; in the actorname?![image](ht&hellip;</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.189</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2466121080\" target=\"_blank\" rel=\"noopener\">If it is agreed to do it this way, (check name for &#96;[bot]&#9&hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.416</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2487880016\" target=\"_blank\" rel=\"noopener\">@0x4007 , is it possible to start this task?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.161</td></tr></tbody></table></details>"
+  },
+  "Keyrxng": {
+    "total": 2.585,
+    "userId": 106303466,
+    "comments": [
+      {
+        "id": 2464473235,
+        "content": "`BOT_USER_ID` === `payload.user.type === \"BOT\" && payload.user.login === \"UbiquityOS\"`\r\nIt is the literal ID of the User entity which belongs to the app. Not the `APP_ID` which is the app's identifier.\r\n`rest.user.getByUsername(\"ubiquity-os-beta\").data.id`",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2464473235",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.441,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 76.46090909090911,
+            "syllables": 31,
+            "sentences": 2,
+            "score": 0.8353909090909089
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2465783911,
+        "content": "Yeah sorry you are correct it's probably better to use `-beta[bot]` than just `ubiquity-os[bot]` but you get the idea it's user.id of the bot entity",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2465783911",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.432,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 79.75538461538463,
+            "syllables": 35,
+            "sentences": 2,
+            "score": 0.8024461538461537
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2465833318,
+        "content": "The cause is likely because we have two bots and so we have two `BOT_USER_ID`s to compare. Perhaps it makes sense to add both bot ids and check the actor.id against both?\r\nThat is just an assumption obviously but to answer the question: TypeBox verifies that the env vars are defined. Whether they reflect our actual bot is another question, we opt'd for the ID over the username a while back although if there is no other clean solution it'll have to do.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2465833318",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.664,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 86,
+            "wordValue": 0.1,
+            "result": 2.64
+          },
+          "readability": {
+            "fleschKincaid": 72.3142093023256,
+            "syllables": 119,
+            "sentences": 5,
+            "score": 0.876857906976744
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2465855359,
+        "content": "That's a quick fix I guess yes.\r\nThe original intention behind specifying it's our bot was so that in a partner org where they may have lots of little bots installed that perform actions on tasks and PRs this avoids any interference with our logic.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2465855359",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.6,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 47,
+            "wordValue": 0.1,
+            "result": 2.33
+          },
+          "readability": {
+            "fleschKincaid": 65.98250000000002,
+            "syllables": 65,
+            "sentences": 2,
+            "score": 0.9401749999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2466271314,
+        "content": "@ariesgun Sounds to me like it was implied so yeah go ahead with that solution. I can't assign you but you can link the PR and you'll be assigned when someone else sees this",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2466271314",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.448,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 82.815,
+            "syllables": 45,
+            "sentences": 2,
+            "score": 0.77185
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/113"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 2.585 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>5</td><td>2.585</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2464473235\" target=\"_blank\" rel=\"noopener\">&#96;BOT_USER_ID&#96; === &#96;payload.user.type === \"BOT\" &amp;&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.441</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2465783911\" target=\"_blank\" rel=\"noopener\">Yeah sorry you are correct it's probably better to use &#96;-bet&hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.432</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2465833318\" target=\"_blank\" rel=\"noopener\">The cause is likely because we have two bots and so we have two &hellip;</a></h6></td><td><details><summary>2.64</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 86&#13;  wordValue: 0.1&#13;  result: 2.64&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.664</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2465855359\" target=\"_blank\" rel=\"noopener\">That's a quick fix I guess yes.The original intention behind s&hellip;</a></h6></td><td><details><summary>2.33</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 47&#13;  wordValue: 0.1&#13;  result: 2.33&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.6</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/69#issuecomment-2466271314\" target=\"_blank\" rel=\"noopener\">@ariesgun Sounds to me like it was implied so yeah go ahead with&hellip;</a></h6></td><td><details><summary>2.07</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.448</td></tr></tbody></table></details>"
+  }
+}

@@ -1,0 +1,1427 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 640.14,
+    "task": {
+      "reward": 600,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2126438257,
+        "content": "@Keyrxng I think this can be standalone because events would be sent from the kernel, so it doesn't matter if `start | stop` is invoked. I think this should be a watcher that updates the assignee status in the task according to reasons specified in the spec (time elapsed, activity, linked pr, commits and whatnot). Reached a certain point, a reminder is posted (maybe something like \"are you still working on it? If not, unassign yourself before the bot does), and if nothing ensues simply unassign, and eventually apply XP penalties (still don't have any XP system so don't worry about it yet I guess).",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/7#issuecomment-2126438257",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 10.02,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 105,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 57.7226785714286,
+            "syllables": 152,
+            "sentences": 4,
+            "score": 0.977226785714286
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2146814440,
+        "content": "So basically, whenever the user is detected as active, we push the deadline by the length of the task? E.g. it's a <1 Day task, each time activity is detected, we push the deadline by 1 day?\r\nAlso technically it is allowed on GitHub to have multiple users assigned on the same issue, should any activity of any user be counted to push the deadline? The old bot has some code but I suspect it never worked because it counts the same timers for everyone so either everyone is in the deadline or outside: https://github.com/ubiquity/ubiquibot/blob/8aaf055c091cc3e7f2b42c9f1cf88f45b1d86d17/src/handlers/wildcard/unassign/assign-event-found.ts#L20",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/7#issuecomment-2146814440",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 13.92,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 96,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 66.48035714285714,
+            "syllables": 167,
+            "sentences": 8,
+            "score": 0.9351964285714286
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2146841021,
+        "content": "In the provided example, it doesn't work because the calculation is the same for each user\r\n```TypeScript\r\nconst assigneesWithinGracePeriod = assignees.filter(() => now - latestAssignEventTime < taskDisqualifyDuration);\r\n```\r\nAll these values do not seem to be user based, but rather all the same for every user, just based on the latest event.\r\n---\r\nOkay so to sum it up:\r\n- on user activity, add `3.5 days` before the next reminder (configurable)\r\n- on user activity, add `7 days` before the complete disqualify (configurable)\r\n- user based time tracking, considering that multiple users could be assigned to an issue",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/7#issuecomment-2146841021",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 10.56,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              }
+            },
+            "result": 0.3
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 79,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 27.52731012658228,
+            "syllables": 130,
+            "sentences": 2,
+            "score": 0.6752731012658227
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2292563383,
+        "content": "**wildcard/unassign:** we should create a plugin that checks certain conditions across every assigned task to determine if the assignee is still actively working on it. If not, give them a follow up. If they abandoned the task then unassign. Make sure to punish them by subtracting XP!\r\n[See code reference](https://github.com/ubiquity/ubiquibot/tree/8aaf055c091cc3e7f2b42c9f1cf88f45b1d86d17/src/handlers/wildcard/unassign)\r\nRelated repository: https://github.com/ubiquibot/user-activity-watcher",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/7",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 5.64,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 51,
+            "wordValue": 0.1,
+            "result": 2.4
+          },
+          "readability": {
+            "fleschKincaid": 54.07850574712646,
+            "syllables": 98,
+            "sentences": 6,
+            "score": 0.9407850574712646
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 640.14 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>600</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>5.64</td></tr><tr><td>Issue</td><td>Comment</td><td>3</td><td>34.5</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/7\" target=\"_blank\" rel=\"noopener\">**wildcard/unassign:** we should create a plugin that checks cer&hellip;</a></h6></td><td><details><summary>4.4</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 51&#13;  wordValue: 0.1&#13;  result: 2.4&#13;</pre></details></td><td>1</td><td>1</td><td>5.64</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/7#issuecomment-2126438257\" target=\"_blank\" rel=\"noopener\">@Keyrxng I think this can be standalone because events would be &hellip;</a></h6></td><td><details><summary>2.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 105&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>1</td><td>3</td><td>10.02</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/7#issuecomment-2146814440\" target=\"_blank\" rel=\"noopener\">So basically, whenever the user is detected as active, we push t&hellip;</a></h6></td><td><details><summary>3.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 96&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>1</td><td>3</td><td>13.92</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/7#issuecomment-2146841021\" target=\"_blank\" rel=\"noopener\">In the provided example, it doesn't work because the calculation&hellip;</a></h6></td><td><details><summary>2.93</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;  result: 0.3&#13;regex:&#13;  wordCount: 79&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>1</td><td>3</td><td>10.56</td></tr></tbody></table></details>"
+  },
+  "Keyrxng": {
+    "total": 2.682,
+    "userId": 106303466,
+    "comments": [
+      {
+        "id": 2116365639,
+        "content": "I can only really think of this plugin being an invoker of #9, wouldn't you agree?\r\nIf that is the case then #9 should not handle XP mods and this plugin should handle it? \r\nAlternatively, I've setup #9 such that an invoker passes `directive === \"start\" | \"stop\"` and `xpAmount: number` and then #9 would handle the XP mods.\r\nWhat's the best approach?",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/7#issuecomment-2116365639",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 1.872,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 59,
+            "wordValue": 0.1,
+            "result": 2.51
+          },
+          "readability": {
+            "fleschKincaid": 80.01968220338985,
+            "syllables": 78,
+            "sentences": 4,
+            "score": 0.7998031779661016
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2127187169,
+        "content": "@jordan-ae is taking care of this task and yeah I understand. I made the relevant changes in `start/stop` thank you",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/7#issuecomment-2127187169",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.81,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 86.70500000000001,
+            "syllables": 26,
+            "sentences": 2,
+            "score": 0.7329499999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 2.682 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>2</td><td>2.682</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/7#issuecomment-2116365639\" target=\"_blank\" rel=\"noopener\">I can only really think of this plugin being an invoker of #9, w&hellip;</a></h6></td><td><details><summary>2.51</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 59&#13;  wordValue: 0.1&#13;  result: 2.51&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.872</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/7#issuecomment-2127187169\" target=\"_blank\" rel=\"noopener\">@jordan-ae is taking care of this task and yeah I understand. I &hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.6</td><td>3</td><td>0.81</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 313.034,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2146804481,
+        "content": "The purpose of this capability is to disqualify contributors that neglect to complete the task. A very common scenario is that a contributor will begin a task, and then give up, which means that the task is being blocked (other people will not work on it while it is already assigned.)\r\nBefore disqualification, the manager should ask for an update. If the contributor still has no updates, then the manager should disqualify the contributor by unassigning them, and ideally, not allowing them to reassign themselves (we could check in the `/start` command if the contributor was ever unassigned within the issue timeline.)\r\nIn addition, the XP of the contributor should be deducted (not sure about a static amount, or if we should do it based on the price/priority of the task.)\r\nAny user activity that shows they are working on the task should be considered valid to restart the manager's timer. Ideally we should be able to configure this. \r\n- Definitely include watching commits. \r\n- Possibly include watching comments on either the pull or the issue. \r\nI think these are the only two types of contributor events we should watch for.",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/7#issuecomment-2146804481",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 7.77,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 7
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 190,
+            "wordValue": 0.1,
+            "result": 1.83
+          },
+          "readability": {
+            "fleschKincaid": 51.74473684210528,
+            "syllables": 305,
+            "sentences": 10,
+            "score": 0.9174473684210528
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2146820093,
+        "content": "Actually, this is configurable but we always did the following default settings. `3.5 days` for follow up, `7 days` for disqualify. I like these default settings as they allow for flexibility for holidays/weekends. The time estimate label is mostly used for pricing, but otherwise is not really leveraged in other aspects of our system. \r\nI am skeptical about enforcing based on the time labels because this assumes the contributor is already onboarded to the codebase and ecosystem, which is not always the case. \r\nIt seems like a detail I may have implemented, but in practice we never have multiple assignees to tasks. I think this could be useful for when companies/teams get involved in the future. I think it is more precise to manage on the per capita level, so we should consider each assignee individually as what appears to be implemented in your provided example.",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/7#issuecomment-2146820093",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 8.294,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 144,
+            "wordValue": 0.1,
+            "result": 2.29
+          },
+          "readability": {
+            "fleschKincaid": 49.91500000000002,
+            "syllables": 236,
+            "sentences": 8,
+            "score": 0.8991500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2155517290,
+        "content": "This is a novel approach I never did research on in the past so I need more information before I'm convinced. But it seems a bit heavy to write a workflow file somewhere regularly and then delete regularly.",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/7#issuecomment-2155517290",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.662,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 39,
+            "wordValue": 0.1,
+            "result": 2.15
+          },
+          "readability": {
+            "fleschKincaid": 56.88865384615386,
+            "syllables": 60,
+            "sentences": 2,
+            "score": 0.9688865384615386
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2180712959,
+        "content": "I think the comment rewards are too high here. Especially with the occasional double counts",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/7#issuecomment-2180712959",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.468,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 63.86250000000001,
+            "syllables": 24,
+            "sentences": 2,
+            "score": 0.9613749999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2181159559,
+        "content": "Can claim I just need to adjust the settings I guess. https://github.com/ubiquibot/ubiquibot-config/commit/5ec796f09578609cd5e0836adf86559e40eba793",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/7#issuecomment-2181159559",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.741,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 44.564561403508776,
+            "syllables": 35,
+            "sentences": 3,
+            "score": 0.8456456140350878
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1632606729,
+        "content": "You just reminded me that GitHub has some type of feature to associate metadata with each repository. Perhaps we can write whatever data we need here for minimizing runs?\r\n_Source https://www.perplexity.ai/search/github-repository-metadata-RuF2Q8b0S9aPo9t0CZRJug_",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1632606729",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,16 @@\n+import { Result } from \"../proxy\";\n+import { Context } from \"../types/context\";\n+import { EnvConfigType } from \"../types/env-type\";\n+\n+/**\n+ * On issue closed, we want to delete the entry to stop watching this issue.\n+ */\n+export async function handleIssueClosed(context: Context, env: EnvConfigType): Promise<Result> {\n+  const {\n+    adapters: {\n+      supabase: { repositories },\n+    },\n+  } = context;\n+  await repositories.delete(context.payload.issue.html_url);",
+        "score": {
+          "reward": 3.231,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 42.73338461538464,
+            "syllables": 72,
+            "sentences": 5,
+            "score": 0.8273338461538464
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1635356333,
+        "content": "The checks are being managed at the repository level. Notice the code later it checks the repository URL and then will loop down through all the issues if the conditions are fine based on the repository last check time, as I understand.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1635356333",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,67 @@\n+import { SupabaseClient } from \"@supabase/supabase-js\";\n+import { Context } from \"../types/context\";\n+import { Database } from \"../types/database\";\n+\n+export function createAdapters(supabaseClient: SupabaseClient<Database>, context: Context) {\n+  return {\n+    supabase: {\n+      repositories: {",
+        "score": {
+          "reward": 4.335,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 42,
+            "wordValue": 0.1,
+            "result": 2.23
+          },
+          "readability": {
+            "fleschKincaid": 58.62000000000002,
+            "syllables": 63,
+            "sentences": 2,
+            "score": 0.9862000000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1635357760,
+        "content": "Months might be useful for some less precise organizations.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1635357760",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,44 @@\n+import { Duration } from \"luxon\";\n+import { Context } from \"../types/context\";\n+\n+export async function getTimeEstimate(context: Context) {\n+  const timeLabelRegex = /Time: <(\\d+)/i;\n+  const labels = await context.octokit.issues.listLabelsOnIssue({\n+    owner: context.payload.repository.owner.login,\n+    repo: context.payload.repository.name,\n+    issue_number: context.payload.issue.number,\n+  });\n+  const durationLabel = labels.data.find((o) => o.name.match(timeLabelRegex));\n+  if (!durationLabel) {\n+    return Duration.invalid(\"No time label was found.\");\n+  }\n+  return parseDurationString(durationLabel.name);\n+}\n+\n+export function parseDurationString(durationString: string) {\n+  const match = durationString.match(/<(\\d+)\\s*(\\w+)/);\n+  if (!match) {\n+    throw new Error(\"Invalid duration string format.\");\n+  }\n+\n+  const [, value, unit] = match;\n+  let duration;\n+  switch (unit.toLowerCase()) {\n+    case \"hour\":\n+    case \"hours\":\n+      duration = { hours: parseInt(value) };\n+      break;\n+    case \"day\":\n+    case \"days\":\n+      duration = { days: parseInt(value) };\n+      break;\n+    case \"week\":\n+    case \"weeks\":\n+      duration = { weeks: parseInt(value) };\n+      break;\n+    default:\n+      throw new Error(\"Unsupported duration unit.\");",
+        "score": {
+          "reward": 2.226,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 47.30000000000004,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.8730000000000004
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1643046078,
+        "content": "Although I understand your logic, the purpose of these labels are to be coarse estimates. Many project managers think in the resolution of \"months\" for projects, which on average, are ~30 days. \r\nWe obviously don't use them at Ubiquity because we are quite precise (we are all developers) but it is our duty to make the system as user friendly as possible. Most project managers I would expect to be using \"months\" for larger initatives",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1643046078",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,44 @@\n+import { Duration } from \"luxon\";\n+import { Context } from \"../types/context\";\n+\n+export async function getTimeEstimate(context: Context) {\n+  const timeLabelRegex = /Time: <(\\d+)/i;\n+  const labels = await context.octokit.issues.listLabelsOnIssue({\n+    owner: context.payload.repository.owner.login,\n+    repo: context.payload.repository.name,\n+    issue_number: context.payload.issue.number,\n+  });\n+  const durationLabel = labels.data.find((o) => o.name.match(timeLabelRegex));\n+  if (!durationLabel) {\n+    return Duration.invalid(\"No time label was found.\");\n+  }\n+  return parseDurationString(durationLabel.name);\n+}\n+\n+export function parseDurationString(durationString: string) {\n+  const match = durationString.match(/<(\\d+)\\s*(\\w+)/);\n+  if (!match) {\n+    throw new Error(\"Invalid duration string format.\");\n+  }\n+\n+  const [, value, unit] = match;\n+  let duration;\n+  switch (unit.toLowerCase()) {\n+    case \"hour\":\n+    case \"hours\":\n+      duration = { hours: parseInt(value) };\n+      break;\n+    case \"day\":\n+    case \"days\":\n+      duration = { days: parseInt(value) };\n+      break;\n+    case \"week\":\n+    case \"weeks\":\n+      duration = { weeks: parseInt(value) };\n+      break;\n+    default:\n+      throw new Error(\"Unsupported duration unit.\");",
+        "score": {
+          "reward": 9.072,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 76,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 53.97105263157897,
+            "syllables": 120,
+            "sentences": 4,
+            "score": 0.9397105263157897
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1644041746,
+        "content": "`Duration.fromObject` I am not familiar with this method, or object. I thought you said there was no support for months, so I assumed you would manually handle it as \"30 days\" at this line of code.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1644041746",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -22,5 +22,14 @@ export function parseDurationString(durationString: string) {\n     throw new Error(\"Invalid duration string format.\");\n   }\n   const [, value] = match;\n+  // Custom support for months, based on a 30 days duration\n+  if (/months?/i.test(value)) {\n+    const monthsMatch = value.match(/\\d+/);\n+    if (monthsMatch) {\n+      return Duration.fromObject({ months: Number(monthsMatch[0]) }).shiftToAll();",
+        "score": {
+          "reward": 4.518,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 82.71821428571431,
+            "syllables": 44,
+            "sentences": 2,
+            "score": 0.7728178571428569
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1644042791,
+        "content": "Is it worth adding tests for non plural as well? i.e. `Time: <1 Month` as well as for the other resolutions i.e. `Hour`, `Day`",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1644042791",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -61,5 +61,6 @@ describe(\"Run tests\", () => {\n     expect(parseDurationString(\"Time: <1 Week\").get(\"weeks\")).toEqual(1);\n     expect(parseDurationString(\"Time: <4 Hours\").get(\"hours\")).toEqual(4);\n     expect(parseDurationString(\"Time: <8 Weeks\").get(\"months\")).toEqual(2);\n+    expect(parseDurationString(\"Time: <3 Months\").get(\"months\")).toEqual(3);",
+        "score": {
+          "reward": 4.368,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 94.51107142857143,
+            "syllables": 27,
+            "sentences": 6,
+            "score": 0.6548892857142857
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2173794542,
+        "content": "My only feedback is to [add support for months](https://github.com/ubiquibot/user-activity-watcher/pull/1#discussion_r1643046078) and consider them 30 days.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#issuecomment-2173794542",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.649,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 77.81071428571428,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.8218928571428572
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2106673689,
+            "effect": {
+              "addition": 7717,
+              "deletion": 1
+            },
+            "reward": 231.54,
+            "priority": 3
+          },
+          {
+            "reviewId": 2111242349,
+            "effect": {
+              "addition": 177,
+              "deletion": 182
+            },
+            "reward": 10.77,
+            "priority": 3
+          },
+          {
+            "reviewId": 2124840053,
+            "effect": {
+              "addition": 476,
+              "deletion": 137
+            },
+            "reward": 18.39,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 313.034 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>260.7</td></tr><tr><td>Issue</td><td>Comment</td><td>5</td><td>18.935</td></tr><tr><td>Review</td><td>Comment</td><td>7</td><td>33.399</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1\" target=\"_blank\" rel=\"noopener\">#1</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+7717 -1</td><td>3</td><td>231.54</td></tr><tr><td>+177 -182</td><td>3</td><td>10.77</td></tr><tr><td>+476 -137</td><td>3</td><td>18.39</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/7#issuecomment-2146804481\" target=\"_blank\" rel=\"noopener\">The purpose of this capability is to disqualify contributors tha&hellip;</a></h6></td><td><details><summary>2.03</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 7&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 190&#13;  wordValue: 0.1&#13;  result: 1.83&#13;</pre></details></td><td>1</td><td>3</td><td>7.77</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/7#issuecomment-2146820093\" target=\"_blank\" rel=\"noopener\">Actually, this is configurable but we always did the following d&hellip;</a></h6></td><td><details><summary>2.29</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 144&#13;  wordValue: 0.1&#13;  result: 2.29&#13;</pre></details></td><td>0.95</td><td>3</td><td>8.294</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/7#issuecomment-2155517290\" target=\"_blank\" rel=\"noopener\">This is a novel approach I never did research on in the past so &hellip;</a></h6></td><td><details><summary>2.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 39&#13;  wordValue: 0.1&#13;  result: 2.15&#13;</pre></details></td><td>0.2</td><td>3</td><td>1.662</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/7#issuecomment-2180712959\" target=\"_blank\" rel=\"noopener\">I think the comment rewards are too high here. Especially with t&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.468</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/7#issuecomment-2181159559\" target=\"_blank\" rel=\"noopener\">Can claim I just need to adjust the settings I guess. https://gi&hellip;</a></h6></td><td><details><summary>1.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.741</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1632606729\" target=\"_blank\" rel=\"noopener\">You just reminded me that GitHub has some type of feature to ass&hellip;</a></h6></td><td><details><summary>2.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.3</td><td>3</td><td>3.231</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1635356333\" target=\"_blank\" rel=\"noopener\">The checks are being managed at the repository level. Notice the&hellip;</a></h6></td><td><details><summary>2.23</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 42&#13;  wordValue: 0.1&#13;  result: 2.23&#13;</pre></details></td><td>0.5</td><td>3</td><td>4.335</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1635357760\" target=\"_blank\" rel=\"noopener\">Months might be useful for some less precise organizations.</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.226</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1643046078\" target=\"_blank\" rel=\"noopener\">Although I understand your logic, the purpose of these labels ar&hellip;</a></h6></td><td><details><summary>2.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 76&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.9</td><td>3</td><td>9.072</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1644041746\" target=\"_blank\" rel=\"noopener\">&#96;Duration.fromObject&#96; I am not familiar with this method&hellip;</a></h6></td><td><details><summary>2.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>0.6</td><td>3</td><td>4.518</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1644042791\" target=\"_blank\" rel=\"noopener\">Is it worth adding tests for non plural as well? i.e. &#96;Time:&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.368</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#issuecomment-2173794542\" target=\"_blank\" rel=\"noopener\">My only feedback is to [add support for months](https://github.c&hellip;</a></h6></td><td><details><summary>2.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.7</td><td>3</td><td>5.649</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 287.685,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 1633619108,
+        "content": "```suggestion\r\n  return Value.Decode(envConfigSchema, process.env);\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1633619108",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,13 @@\n+import { Value } from \"@sinclair/typebox/value\";\n+import { ValidationException } from \"typebox-validators\";\n+import envConfigSchema, { envConfigValidator } from \"../types/env-type\";\n+\n+export async function getEnv() {\n+  if (!envConfigValidator.test(process.env)) {\n+    for (const error of envConfigValidator.errors(process.env)) {\n+      console.error(error);\n+    }\n+    return Promise.reject(new ValidationException(\"The environment is invalid.\"));\n+  }\n+  return Promise.resolve(Value.Decode(envConfigSchema, process.env));",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1633619264,
+        "content": "```suggestion\r\n    return new ValidationException(\"The environment is invalid.\");\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1633619264",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,13 @@\n+import { Value } from \"@sinclair/typebox/value\";\n+import { ValidationException } from \"typebox-validators\";\n+import envConfigSchema, { envConfigValidator } from \"../types/env-type\";\n+\n+export async function getEnv() {\n+  if (!envConfigValidator.test(process.env)) {\n+    for (const error of envConfigValidator.errors(process.env)) {\n+      console.error(error);\n+    }\n+    return Promise.reject(new ValidationException(\"The environment is invalid.\"));",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1634954021,
+        "content": "won't this mean that when there are 2 assignees and one gets unassigned, it will be removed from DB?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1634954021",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,27 @@\n+import { handleIssueAssigned } from \"../handlers/issue-assigned\";\n+import { handleIssueClosed } from \"../handlers/issue-closed\";\n+import { Context } from \"../types/context\";\n+import { EnvConfigType } from \"../types/env-type\";\n+import { SupportedEvents } from \"../types/plugin-inputs\";\n+\n+export interface Result {\n+  status: \"ok\" | \"failed\" | \"skipped\";\n+  content?: string;\n+  reason?: string;\n+}\n+\n+const callbacks: { [k in SupportedEvents]: (context: Context, env: EnvConfigType) => Result | Promise<Result> } = {\n+  \"issues.closed\": handleIssueClosed,\n+  \"issues.assigned\": handleIssueAssigned,\n+  \"issues.unassigned\": handleIssueClosed,",
+        "score": {
+          "reward": 4.941,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 80.78500000000003,
+            "syllables": 25,
+            "sentences": 1,
+            "score": 0.7921499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1634966258,
+        "content": "I think it's better to match without `<` for extra flexibility",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1634966258",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,44 @@\n+import { Duration } from \"luxon\";\n+import { Context } from \"../types/context\";\n+\n+export async function getTimeEstimate(context: Context) {\n+  const timeLabelRegex = /Time: <(\\d+)/i;\n+  const labels = await context.octokit.issues.listLabelsOnIssue({\n+    owner: context.payload.repository.owner.login,\n+    repo: context.payload.repository.name,\n+    issue_number: context.payload.issue.number,\n+  });\n+  const durationLabel = labels.data.find((o) => o.name.match(timeLabelRegex));\n+  if (!durationLabel) {\n+    return Duration.invalid(\"No time label was found.\");\n+  }\n+  return parseDurationString(durationLabel.name);\n+}\n+\n+export function parseDurationString(durationString: string) {\n+  const match = durationString.match(/<(\\d+)\\s*(\\w+)/);",
+        "score": {
+          "reward": 3,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 57.23363636363638,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.9723363636363638
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1634992439,
+        "content": "personally I'd move the second part out of the function because the name of the function doesn't imply that it will also filter events since last check",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1634992439",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,172 @@\n+import { DateTime } from \"luxon\";\n+import { Context } from \"../types/context\";\n+import { Database } from \"../types/database\";\n+import { parseGitHubUrl } from \"./github-url\";\n+\n+async function unassignUserFromIssue(context: Context, issue: Database[\"public\"][\"Tables\"][\"repositories\"][\"Row\"]) {\n+  const {\n+    adapters: { supabase },\n+    logger,\n+    config,\n+  } = context;\n+\n+  if (config.unassignUserThreshold <= 0) {\n+    logger.info(\"The unassign threshold is <= 0, won't unassign users.\");\n+  } else {\n+    logger.info(`Passed the deadline on ${issue.url} and no activity is detected, removing assignees.`);\n+    if (await removeIdleAssignees(context, issue)) {\n+      await supabase.repositories.delete(issue.url);\n+    }\n+  }\n+}\n+\n+async function remindAssigneesForIssue(context: Context, issue: Database[\"public\"][\"Tables\"][\"repositories\"][\"Row\"]) {\n+  const {\n+    adapters: { supabase },\n+    logger,\n+    config,\n+  } = context;\n+  const now = DateTime.now();\n+  const deadline = DateTime.fromISO(issue.deadline);\n+\n+  if (config.sendRemindersThreshold <= 0) {\n+    logger.info(\"The reminder threshold is <= 0, won't send any reminder.\");\n+  } else {\n+    const lastReminder = issue.last_reminder;\n+    logger.info(`We are passed the deadline on ${issue.url}, should we send a reminder? ${!lastReminder}`);\n+    if (!lastReminder && (await remindAssignees(context, issue))) {\n+      await supabase.repositories.upsert({\n+        url: issue.url,\n+        deadline: deadline.toJSDate(),\n+        lastReminder: now.toJSDate(),\n+        lastCheck: now.toJSDate(),\n+      });\n+    }\n+  }\n+}\n+\n+async function updateReminders(context: Context, issue: Database[\"public\"][\"Tables\"][\"repositories\"][\"Row\"]) {\n+  const {\n+    adapters: { supabase },\n+    logger,\n+    config,\n+  } = context;\n+  const now = DateTime.now();\n+  const activity = await getAssigneesActivityForIssue(context, issue);\n+  const deadline = DateTime.fromISO(issue.deadline);\n+  const deadlineWithThreshold = deadline.plus({ day: config.unassignUserThreshold });\n+  const reminderWithThreshold = deadline.plus({ day: config.sendRemindersThreshold });\n+\n+  if (activity?.length) {\n+    const lastCheck = DateTime.fromISO(issue.last_check);\n+    const timeDiff = now.diff(lastCheck);\n+    const newDeadline = deadline.plus(timeDiff);\n+    logger.info(\n+      `Activity found on ${issue.url}, will move the deadline forward from ${deadline.toLocaleString(DateTime.DATETIME_MED)} to ${newDeadline.toLocaleString(DateTime.DATETIME_MED)}`\n+    );\n+    await supabase.repositories.upsert({ url: issue.url, deadline: newDeadline.toJSDate(), lastCheck: now.toJSDate() });\n+  } else {\n+    if (now >= deadlineWithThreshold) {\n+      await unassignUserFromIssue(context, issue);\n+    } else if (now >= reminderWithThreshold) {\n+      await remindAssigneesForIssue(context, issue);\n+    } else {\n+      logger.info(\n+        `Nothing to do for ${issue.url}, still within due-time (now: ${now.toLocaleString(DateTime.DATETIME_MED)}, reminder ${reminderWithThreshold.toLocaleString(DateTime.DATETIME_MED)}, deadline: ${deadlineWithThreshold.toLocaleString(DateTime.DATETIME_MED)})`\n+      );\n+    }\n+  }\n+}\n+\n+export async function updateTasks(context: Context) {\n+  const {\n+    adapters: { supabase },\n+    logger,\n+  } = context;\n+  const watchedRepoList = await supabase.repositories.get();\n+\n+  if (!watchedRepoList?.length) {\n+    logger.info(\"No watched repos have been found, no work to do.\");\n+    return false;\n+  }\n+  for (const watchedIssue of watchedRepoList) {\n+    await updateReminders(context, watchedIssue);\n+  }\n+  return true;\n+}\n+\n+async function getAssigneesActivityForIssue({ octokit, payload }: Context, issue: Database[\"public\"][\"Tables\"][\"repositories\"][\"Row\"]) {\n+  const { repo, owner, issue_number } = parseGitHubUrl(issue.url);\n+  return octokit.paginate(\n+    octokit.rest.issues.listEvents,\n+    {\n+      owner,\n+      repo,\n+      issue_number,\n+      per_page: 100,\n+    },\n+    (res) =>\n+      res.data.filter(\n+        (o) =>\n+          payload.issue?.assignees?.find((assignee) => assignee?.login === o.actor.login) &&\n+          DateTime.fromISO(o.created_at) >= DateTime.fromISO(issue.last_check)",
+        "score": {
+          "reward": 5.76,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 60.71034482758621,
+            "syllables": 40,
+            "sentences": 1,
+            "score": 0.9928965517241379
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1635005988,
+        "content": "```suggestion\r\nasync function removeAllAssignees(context: Context, issue: Database[\"public\"][\"Tables\"][\"repositories\"][\"Row\"]) {\r\n```\r\nI think this better reflects what the function does",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1635005988",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,172 @@\n+import { DateTime } from \"luxon\";\n+import { Context } from \"../types/context\";\n+import { Database } from \"../types/database\";\n+import { parseGitHubUrl } from \"./github-url\";\n+\n+async function unassignUserFromIssue(context: Context, issue: Database[\"public\"][\"Tables\"][\"repositories\"][\"Row\"]) {\n+  const {\n+    adapters: { supabase },\n+    logger,\n+    config,\n+  } = context;\n+\n+  if (config.unassignUserThreshold <= 0) {\n+    logger.info(\"The unassign threshold is <= 0, won't unassign users.\");\n+  } else {\n+    logger.info(`Passed the deadline on ${issue.url} and no activity is detected, removing assignees.`);\n+    if (await removeIdleAssignees(context, issue)) {\n+      await supabase.repositories.delete(issue.url);\n+    }\n+  }\n+}\n+\n+async function remindAssigneesForIssue(context: Context, issue: Database[\"public\"][\"Tables\"][\"repositories\"][\"Row\"]) {\n+  const {\n+    adapters: { supabase },\n+    logger,\n+    config,\n+  } = context;\n+  const now = DateTime.now();\n+  const deadline = DateTime.fromISO(issue.deadline);\n+\n+  if (config.sendRemindersThreshold <= 0) {\n+    logger.info(\"The reminder threshold is <= 0, won't send any reminder.\");\n+  } else {\n+    const lastReminder = issue.last_reminder;\n+    logger.info(`We are passed the deadline on ${issue.url}, should we send a reminder? ${!lastReminder}`);\n+    if (!lastReminder && (await remindAssignees(context, issue))) {\n+      await supabase.repositories.upsert({\n+        url: issue.url,\n+        deadline: deadline.toJSDate(),\n+        lastReminder: now.toJSDate(),\n+        lastCheck: now.toJSDate(),\n+      });\n+    }\n+  }\n+}\n+\n+async function updateReminders(context: Context, issue: Database[\"public\"][\"Tables\"][\"repositories\"][\"Row\"]) {\n+  const {\n+    adapters: { supabase },\n+    logger,\n+    config,\n+  } = context;\n+  const now = DateTime.now();\n+  const activity = await getAssigneesActivityForIssue(context, issue);\n+  const deadline = DateTime.fromISO(issue.deadline);\n+  const deadlineWithThreshold = deadline.plus({ day: config.unassignUserThreshold });\n+  const reminderWithThreshold = deadline.plus({ day: config.sendRemindersThreshold });\n+\n+  if (activity?.length) {\n+    const lastCheck = DateTime.fromISO(issue.last_check);\n+    const timeDiff = now.diff(lastCheck);\n+    const newDeadline = deadline.plus(timeDiff);\n+    logger.info(\n+      `Activity found on ${issue.url}, will move the deadline forward from ${deadline.toLocaleString(DateTime.DATETIME_MED)} to ${newDeadline.toLocaleString(DateTime.DATETIME_MED)}`\n+    );\n+    await supabase.repositories.upsert({ url: issue.url, deadline: newDeadline.toJSDate(), lastCheck: now.toJSDate() });\n+  } else {\n+    if (now >= deadlineWithThreshold) {\n+      await unassignUserFromIssue(context, issue);\n+    } else if (now >= reminderWithThreshold) {\n+      await remindAssigneesForIssue(context, issue);\n+    } else {\n+      logger.info(\n+        `Nothing to do for ${issue.url}, still within due-time (now: ${now.toLocaleString(DateTime.DATETIME_MED)}, reminder ${reminderWithThreshold.toLocaleString(DateTime.DATETIME_MED)}, deadline: ${deadlineWithThreshold.toLocaleString(DateTime.DATETIME_MED)})`\n+      );\n+    }\n+  }\n+}\n+\n+export async function updateTasks(context: Context) {\n+  const {\n+    adapters: { supabase },\n+    logger,\n+  } = context;\n+  const watchedRepoList = await supabase.repositories.get();\n+\n+  if (!watchedRepoList?.length) {\n+    logger.info(\"No watched repos have been found, no work to do.\");\n+    return false;\n+  }\n+  for (const watchedIssue of watchedRepoList) {\n+    await updateReminders(context, watchedIssue);\n+  }\n+  return true;\n+}\n+\n+async function getAssigneesActivityForIssue({ octokit, payload }: Context, issue: Database[\"public\"][\"Tables\"][\"repositories\"][\"Row\"]) {\n+  const { repo, owner, issue_number } = parseGitHubUrl(issue.url);\n+  return octokit.paginate(\n+    octokit.rest.issues.listEvents,\n+    {\n+      owner,\n+      repo,\n+      issue_number,\n+      per_page: 100,\n+    },\n+    (res) =>\n+      res.data.filter(\n+        (o) =>\n+          payload.issue?.assignees?.find((assignee) => assignee?.login === o.actor.login) &&\n+          DateTime.fromISO(o.created_at) >= DateTime.fromISO(issue.last_check)\n+      )\n+  );\n+}\n+\n+async function remindAssignees(context: Context, issue: Database[\"public\"][\"Tables\"][\"repositories\"][\"Row\"]) {\n+  const { octokit, logger } = context;\n+  const githubIssue = await getGithubIssue(context, issue);\n+  const { repo, owner, issue_number } = parseGitHubUrl(issue.url);\n+\n+  if (!githubIssue?.assignees?.length) {\n+    logger.warn(`Missing Assignees from ${issue.url}`);\n+    return false;\n+  }\n+  const logins = githubIssue.assignees\n+    .map((o) => o?.login)\n+    .filter((o) => !!o)\n+    .join(\", @\");\n+  await octokit.rest.issues.createComment({\n+    owner,\n+    repo,\n+    issue_number,\n+    body: `@${logins}, this task has been idle for a while. Please provide an update.`,\n+  });\n+  return true;\n+}\n+\n+async function removeIdleAssignees(context: Context, issue: Database[\"public\"][\"Tables\"][\"repositories\"][\"Row\"]) {",
+        "score": {
+          "reward": 2.163,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 84.90000000000003,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.7509999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1635011089,
+        "content": "`repositories` is a bit odd name because these are basically issues",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1635011089",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,67 @@\n+import { SupabaseClient } from \"@supabase/supabase-js\";\n+import { Context } from \"../types/context\";\n+import { Database } from \"../types/database\";\n+\n+export function createAdapters(supabaseClient: SupabaseClient<Database>, context: Context) {\n+  return {\n+    supabase: {\n+      repositories: {",
+        "score": {
+          "reward": 2.736,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 69.78500000000001,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.9021499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1638501384,
+        "content": "oh that's because the validation exception should be thrown and not returned, my mistake in above comment",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1638501384",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,13 @@\n+import { Value } from \"@sinclair/typebox/value\";\n+import { ValidationException } from \"typebox-validators\";\n+import envConfigSchema, { envConfigValidator } from \"../types/env-type\";\n+\n+export async function getEnv() {\n+  if (!envConfigValidator.test(process.env)) {\n+    for (const error of envConfigValidator.errors(process.env)) {\n+      console.error(error);\n+    }\n+    return Promise.reject(new ValidationException(\"The environment is invalid.\"));\n+  }\n+  return Promise.resolve(Value.Decode(envConfigSchema, process.env));",
+        "score": {
+          "reward": 2.67,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 56.965,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.96965
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1639887408,
+        "content": "```suggestion\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1639887408",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,45 @@\n+import { Value } from \"@sinclair/typebox/value\";\n+import { ValidationException } from \"typebox-validators\";\n+import { run } from \"./run\";\n+import { EnvConfigType, envConfigValidator } from \"./types/env-type\";\n+import { userActivityWatcherSettingsSchema } from \"./types/plugin-inputs\";\n+\n+export default {\n+  async fetch(request: Request, env: EnvConfigType): Promise<Response> {\n+    try {\n+      if (request.method !== \"POST\") {\n+        return new Response(JSON.stringify({ error: `Only POST requests are supported.` }), {\n+          status: 405,\n+          headers: { \"content-type\": \"application/json\", Allow: \"POST\" },\n+        });\n+      }\n+      const contentType = request.headers.get(\"content-type\");\n+      if (contentType !== \"application/json\") {\n+        return new Response(JSON.stringify({ error: `Error: ${contentType} is not a valid content type` }), {\n+          status: 400,\n+          headers: { \"content-type\": \"application/json\" },\n+        });\n+      }\n+      if (!envConfigValidator.test(env)) {\n+        for (const error of envConfigValidator.errors(env)) {\n+          console.error(error);\n+        }\n+        return Promise.reject(new ValidationException(\"The environment is invalid.\"));\n+      }\n+      const webhookPayload = await request.json();\n+      const settings = Value.Decode(userActivityWatcherSettingsSchema, Value.Default(userActivityWatcherSettingsSchema, JSON.parse(webhookPayload.settings)));\n+      webhookPayload.eventPayload = JSON.parse(webhookPayload.eventPayload);",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1639888136,
+        "content": "```suggestion\r\n      const settings = Value.Decode(userActivityWatcherSettingsSchema, Value.Default(userActivityWatcherSettingsSchema, webhookPayload.settings));\r\n```\r\nfor workers settings and eventPayload are not even encoded anymore, only for Github actions",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1639888136",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,45 @@\n+import { Value } from \"@sinclair/typebox/value\";\n+import { ValidationException } from \"typebox-validators\";\n+import { run } from \"./run\";\n+import { EnvConfigType, envConfigValidator } from \"./types/env-type\";\n+import { userActivityWatcherSettingsSchema } from \"./types/plugin-inputs\";\n+\n+export default {\n+  async fetch(request: Request, env: EnvConfigType): Promise<Response> {\n+    try {\n+      if (request.method !== \"POST\") {\n+        return new Response(JSON.stringify({ error: `Only POST requests are supported.` }), {\n+          status: 405,\n+          headers: { \"content-type\": \"application/json\", Allow: \"POST\" },\n+        });\n+      }\n+      const contentType = request.headers.get(\"content-type\");\n+      if (contentType !== \"application/json\") {\n+        return new Response(JSON.stringify({ error: `Error: ${contentType} is not a valid content type` }), {\n+          status: 400,\n+          headers: { \"content-type\": \"application/json\" },\n+        });\n+      }\n+      if (!envConfigValidator.test(env)) {\n+        for (const error of envConfigValidator.errors(env)) {\n+          console.error(error);\n+        }\n+        return Promise.reject(new ValidationException(\"The environment is invalid.\"));\n+      }\n+      const webhookPayload = await request.json();\n+      const settings = Value.Decode(userActivityWatcherSettingsSchema, Value.Default(userActivityWatcherSettingsSchema, JSON.parse(webhookPayload.settings)));",
+        "score": {
+          "reward": 3.834,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 35.5107142857143,
+            "syllables": 26,
+            "sentences": 1,
+            "score": 0.755107142857143
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1639891991,
+        "content": "```suggestion\r\n  const timeLabelRegex = /Time: <?(\\d+)/i;\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1639891991",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,26 @@\n+import { Duration } from \"luxon\";\n+import { Context } from \"../types/context\";\n+import ms from \"ms\";\n+\n+export async function getTimeEstimate(context: Context) {\n+  const timeLabelRegex = /Time: <(\\d+)/i;",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2161617963,
+        "content": "That would be difficult to implement because if there is another plugin in `issues.unassigned`, how can we know that `issues.closed` plugin wants to use all previous events.\r\nThe only solution is using this syntax:\r\n```\r\nplugins:\r\n   [issues.assigned, issues.unassigned, issues.closed]:\r\n     - uses:\r\n         - plugin: ubiquibot/user-activity-watcher\r\n           type: github\r\n           with:\r\n             unassignUserThreshold: 5\r\n             sendRemindersThreshold: 1\r\n```\r\nBut I think that's a problem because JS objects can't have arrays as keys but it seems that yaml library can use a Map instead of an object but that destroys type safety",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#issuecomment-2161617963",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 7.92,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 67,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 52.87727611940299,
+            "syllables": 95,
+            "sentences": 2,
+            "score": 0.92877276119403
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2163479543,
+        "content": "In your example you can't make a plugin chain (multiple plugins that run in order and share inputs/outputs)\r\nIf we do it like this we can still have plugins chains but there is still a problem of merging:\r\n```yaml\r\nplugins:\r\n    - runsOn: [ 'issues.opened', 'issues.closed', 'issues.assigned' ]\r\n      uses:\r\n        - plugin: ubiquibot/user-activity-watcher\r\n          with:\r\n            unassignUserThreshold: 5\r\n            sendRemindersThreshold: 1\r\n        - plugin: ubiquibot/plugin-2\r\n          with:\r\n            test: true\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#issuecomment-2163479543",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.901,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 40,
+            "wordValue": 0.1,
+            "result": 2.18
+          },
+          "readability": {
+            "fleschKincaid": 56.255000000000024,
+            "syllables": 52,
+            "sentences": 1,
+            "score": 0.9625500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2108409032,
+            "effect": {
+              "addition": 7686,
+              "deletion": 1
+            },
+            "reward": 230.61,
+            "priority": 3
+          },
+          {
+            "reviewId": 2116279932,
+            "effect": {
+              "addition": 463,
+              "deletion": 133
+            },
+            "reward": 17.88,
+            "priority": 3
+          },
+          {
+            "reviewId": 2118491167,
+            "effect": {
+              "addition": 2,
+              "deletion": 2
+            },
+            "reward": 0.12,
+            "priority": 3
+          },
+          {
+            "reviewId": 2120341999,
+            "effect": {
+              "addition": 2,
+              "deletion": 3
+            },
+            "reward": 0.15,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 287.685 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>4</td><td>248.76</td></tr><tr><td>Review</td><td>Comment</td><td>13</td><td>38.925</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1\" target=\"_blank\" rel=\"noopener\">#1</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+7686 -1</td><td>3</td><td>230.61</td></tr><tr><td>+463 -133</td><td>3</td><td>17.88</td></tr><tr><td>+2 -2</td><td>3</td><td>0.12</td></tr><tr><td>+2 -3</td><td>3</td><td>0.15</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1633619108\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionreturn Value.Decode(envConfigSchema&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1633619264\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionreturn new ValidationException(\"T&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1634954021\" target=\"_blank\" rel=\"noopener\">won't this mean that when there are 2 assignees and one gets una&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.9</td><td>3</td><td>4.941</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1634966258\" target=\"_blank\" rel=\"noopener\">I think it's better to match without &#96;&lt;&#96; for extra fl&hellip;</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.8</td><td>3</td><td>3</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1634992439\" target=\"_blank\" rel=\"noopener\">personally I'd move the second part out of the function because &hellip;</a></h6></td><td><details><summary>1.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.8</td><td>3</td><td>5.76</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1635005988\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionasync function removeAllAssignees(con&hellip;</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.163</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1635011089\" target=\"_blank\" rel=\"noopener\">&#96;repositories&#96; is a bit odd name because these are basic&hellip;</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.8</td><td>3</td><td>2.736</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1638501384\" target=\"_blank\" rel=\"noopener\">oh that's because the validation exception should be thrown and &hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.5</td><td>3</td><td>2.67</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1639887408\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion&#96;&#96;&#96;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1639888136\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionconst settings = Value.Decode(u&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.9</td><td>3</td><td>3.834</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1639891991\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionconst timeLabelRegex = /Time: &lt;?&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#issuecomment-2161617963\" target=\"_blank\" rel=\"noopener\">That would be difficult to implement because if there is another&hellip;</a></h6></td><td><details><summary>2.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 67&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>0.8</td><td>3</td><td>7.92</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#issuecomment-2163479543\" target=\"_blank\" rel=\"noopener\">In your example you can't make a plugin chain (multiple plugins &hellip;</a></h6></td><td><details><summary>2.18</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 40&#13;  wordValue: 0.1&#13;  result: 2.18&#13;</pre></details></td><td>0.7</td><td>3</td><td>5.901</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 304.814,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 1634456852,
+        "content": "@gentlementlegen Why do we need to grant so many sensitive (delete, insert, update, etc...) permissions to the `anon` users?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1634456852",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,63 @@\n+create table \"public\".\"repositories\" (\n+    \"id\" bigint generated by default as identity not null,\n+    \"created_at\" timestamp with time zone not null default now(),\n+    \"url\" character varying not null,\n+    \"last_reminder\" timestamp with time zone default null,\n+    \"last_check\" timestamp with time zone not null default now(),\n+    \"deadline\" timestamp with time zone not null\n+);\n+\n+\n+alter table \"public\".\"repositories\" enable row level security;\n+\n+CREATE UNIQUE INDEX repositories_pkey ON public.repositories USING btree (id);\n+\n+CREATE UNIQUE INDEX repositories_url_key ON public.repositories USING btree (url);\n+\n+alter table \"public\".\"repositories\" add constraint \"repositories_pkey\" PRIMARY KEY using index \"repositories_pkey\";\n+\n+alter table \"public\".\"repositories\" add constraint \"repositories_url_key\" UNIQUE using index \"repositories_url_key\";\n+\n+grant delete on table \"public\".\"repositories\" to \"anon\";",
+        "score": {
+          "reward": 4.752,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 52.00000000000003,
+            "syllables": 31,
+            "sentences": 2,
+            "score": 0.9200000000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2157713843,
+        "content": "@gentlementlegen I'm getting `[ERROR] SyntaxError: \"[object Object]\" is not valid JSON` error when running this plugin as a worker with [this](https://github.com/rndquu-org/test-repo/blob/bb82387db22e7f8c46a024c20a82605d000af935/.github/.ubiquibot-config.yml) config (mostly taken from README). What am I doing wrong?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#issuecomment-2157713843",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 8.16,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 67.75500000000001,
+            "syllables": 36,
+            "sentences": 2,
+            "score": 0.9224499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2158559088,
+        "content": "@gentlementlegen Is [this one](https://github.com/rndquu-org/test-repo/blob/9a57f04eae649d31b7564541a2408055ef17bafe/.github/.ubiquibot-config.yml) a valid syntax for calling a specific branch of the plugin? I took this example from README at https://github.com/ubiquibot/plugin-template.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#issuecomment-2158559088",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 9.702,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 58.37595238095241,
+            "syllables": 46,
+            "sentences": 3,
+            "score": 0.9837595238095241
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2159224913,
+        "content": "@gentlementlegen Help\r\nI'm getting the `Failed to run user-activity-watcher: Error: [parseGitHubUrl] Invalid url: [https://github.com/rndquu-org/test-repo]` error in [this](https://github.com/rndquu/user-activity-watcher/actions/runs/9455000675/job/26043811384) workflow. What URL is expected to be in the `repositories.url` column in the Supabase DB?\r\nP.S. It seems that RLS policies are not applied in the [migration script](https://github.com/ubiquibot/user-activity-watcher/pull/1/files#diff-27c68f9d4869303fb1fd77f691d6b7cfe1a7a5444ce411c75a91b07280803465R11). So they should be added manually via Supabase UI to enable them and to allow read access for public anon key.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#issuecomment-2159224913",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 17.595,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 58,
+            "wordValue": 0.1,
+            "result": 2.49
+          },
+          "readability": {
+            "fleschKincaid": 74.49919540229887,
+            "syllables": 84,
+            "sentences": 6,
+            "score": 0.8550080459770113
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2160141209,
+        "content": "@gentlementlegen \r\nQuestions:\r\n1. How github issues (that should be watched for activities in the `repositories.url` DB field) are created in the first place? I mean this plugin (as far as I understand) read already saved github issues from a DB and check for assignee activities but doesn't insert any github issues itself. So there should be a piece of code that initially inserts github issues that should be watched.\r\n2. Why do we need to store issues in a DB? Bot v1 used only github APIs for opening/closing issues.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#issuecomment-2160141209",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 8.168,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 88,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 65.91645454545456,
+            "syllables": 128,
+            "sentences": 5,
+            "score": 0.9408354545454545
+          },
+          "multiplier": 1,
+          "relevance": 0.75
+        }
+      },
+      {
+        "id": 2160188503,
+        "content": "@gentlementlegen So what is the expected config that partners should use? This one:\r\n```\r\nplugins:\r\n  issues.assigned:\r\n    - uses:\r\n        - plugin: ubiquibot/user-activity-watcher\r\n          type: github\r\n          with:\r\n            unassignUserThreshold: 5\r\n            sendRemindersThreshold: 1\r\n  issues.unassigned:\r\n    - uses:\r\n        - plugin: ubiquibot/user-activity-watcher\r\n          type: github\r\n          with:\r\n            unassignUserThreshold: 5\r\n            sendRemindersThreshold: 1\r\n  issues.closed:\r\n    - uses:\r\n        - plugin: ubiquibot/user-activity-watcher\r\n          type: github\r\n          with:\r\n            unassignUserThreshold: 5\r\n            sendRemindersThreshold: 1\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#issuecomment-2160188503",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.36,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 70.08365384615385,
+            "syllables": 20,
+            "sentences": 2,
+            "score": 0.8991634615384615
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2160304490,
+        "content": "@gentlementlegen Does the kernel support this syntax?\r\n```\r\nplugins:\r\n  issues.assigned:\r\n  issues.unassigned:\r\n  issues.closed:\r\n    - uses:\r\n        - plugin: ubiquibot/user-activity-watcher\r\n          type: github\r\n          with:\r\n            unassignUserThreshold: 5\r\n            sendRemindersThreshold: 1\r\n```\r\nIf not, should we support it? At least it could be useful for `ubiquibot/user-activity-watcher`.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#issuecomment-2160304490",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.927,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 73.16833333333334,
+            "syllables": 30,
+            "sentences": 3,
+            "score": 0.8683166666666666
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2109763284,
+            "effect": {
+              "addition": 7686,
+              "deletion": 1
+            },
+            "reward": 230.61,
+            "priority": 3
+          },
+          {
+            "reviewId": 2125847442,
+            "effect": {
+              "addition": 481,
+              "deletion": 137
+            },
+            "reward": 18.54,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 304.814 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>249.15</td></tr><tr><td>Review</td><td>Comment</td><td>7</td><td>55.664</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1\" target=\"_blank\" rel=\"noopener\">#1</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+7686 -1</td><td>3</td><td>230.61</td></tr><tr><td>+481 -137</td><td>3</td><td>18.54</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#discussion_r1634456852\" target=\"_blank\" rel=\"noopener\">@gentlementlegen Why do we need to grant so many sensitive (dele&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.9</td><td>3</td><td>4.752</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#issuecomment-2157713843\" target=\"_blank\" rel=\"noopener\">@gentlementlegen I'm getting &#96;[ERROR] SyntaxError: \"[object &hellip;</a></h6></td><td><details><summary>2.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.8</td><td>3</td><td>8.16</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#issuecomment-2158559088\" target=\"_blank\" rel=\"noopener\">@gentlementlegen Is [this one](https://github.com/rndquu-org/tes&hellip;</a></h6></td><td><details><summary>3.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.7</td><td>3</td><td>9.702</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#issuecomment-2159224913\" target=\"_blank\" rel=\"noopener\">@gentlementlegen HelpI'm getting the &#96;Failed to run user-a&hellip;</a></h6></td><td><details><summary>5.49</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3&#13;regex:&#13;  wordCount: 58&#13;  wordValue: 0.1&#13;  result: 2.49&#13;</pre></details></td><td>0.85</td><td>3</td><td>17.595</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#issuecomment-2160141209\" target=\"_blank\" rel=\"noopener\">@gentlementlegen Questions:1. How github issues (that should&hellip;</a></h6></td><td><details><summary>2.83</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 88&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.75</td><td>3</td><td>8.168</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#issuecomment-2160188503\" target=\"_blank\" rel=\"noopener\">@gentlementlegen So what is the expected config that partners sh&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.8</td><td>3</td><td>3.36</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/1#issuecomment-2160304490\" target=\"_blank\" rel=\"noopener\">@gentlementlegen Does the kernel support this syntax?&#96;&#96&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.7</td><td>3</td><td>3.927</td></tr></tbody></table></details>"
+  }
+}
