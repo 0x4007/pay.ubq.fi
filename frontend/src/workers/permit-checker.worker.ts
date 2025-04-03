@@ -4,7 +4,10 @@ import { type Address, parseAbiItem } from "viem";
 import type { Tables } from "../database.types.ts";
 import type { PermitData } from "../types.ts";
 import { fetchAllPermitsForLeaderboard } from "./fetch-all-permits-for-leaderboard";
+import { fetchPermitsFromDb } from "./fetch-permits-from-db";
+import { mapDbPermitsToPermitData } from "./map-db-permit-to-permit-data";
 import { initializeSupabase } from "./supabase-singleton";
+import { validatePermitsBatch } from "./validate-permits-batch";
 
 // --- Worker Setup ---
 let workerInitialized = false;
@@ -77,13 +80,55 @@ self.onmessage = async (event: MessageEvent<{ type: string; payload?: WorkerPayl
         break;
       }
 
+      case 'FETCH_NEW_PERMITS': {
+        if (!workerInitialized) {
+          throw new Error('Worker not initialized');
+        }
+
+        if (!payload?.address) {
+          throw new Error('Missing address in payload');
+        }
+
+        try {
+          // Fetch new permits from DB
+          console.log('Worker: Fetching new permits...');
+          const newPermits = await fetchPermitsFromDb(
+            parseInt(payload.address),
+            payload.lastCheckTimestamp as string | null
+          );
+
+          console.log(`Worker: Processing ${newPermits.length} new permits...`);
+          const mappedPermits = mapDbPermitsToPermitData(newPermits);
+
+          console.log(`Worker: Validating ${mappedPermits.length} mapped permits...`);
+          const validatedPermits = await validatePermitsBatch(mappedPermits);
+
+          self.postMessage({
+            type: 'NEW_PERMITS_VALIDATED',
+            permits: validatedPermits
+          });
+        } catch (error) {
+          console.error('Worker: Error fetching/validating new permits:', error);
+          throw new Error('Failed to fetch/validate new permits: ' +
+            (error instanceof Error ? error.message : String(error)));
+        }
+        break;
+      }
+
       default:
         console.warn(`Unknown message type: ${type}`);
     }
   } catch (error) {
     console.error('Worker error:', error);
+    const errorType = (() => {
+      switch (type) {
+        case 'INIT': return 'INIT_ERROR';
+        case 'FETCH_NEW_PERMITS': return 'PERMITS_ERROR';
+        default: return 'LEADERBOARD_DATA_RESULT';
+      }
+    })();
     self.postMessage({
-      type: type === 'INIT' ? 'INIT_ERROR' : 'LEADERBOARD_DATA_RESULT',
+      type: errorType,
       error: error instanceof Error ? error.message : 'Unknown error'
     });
   }
@@ -143,7 +188,6 @@ export interface GitHubUserInfo {
 export type CombinedLeaderboardData = FetchedPermitInfo & {
     github_user: GitHubUserInfo | null; // User info will be attached
 };
-
 
 // Define the structure expected by the hook
 export interface RawPermitWithUser {

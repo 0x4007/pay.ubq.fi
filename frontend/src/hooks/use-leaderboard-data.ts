@@ -14,7 +14,7 @@ interface RawPermitInfoFromWorker {
   networkId: number;
   amount?: string; // Original on-chain amount (not used for XP)
   githubUsername: string; // Placeholder like "GitHub ID: 12345"
-  avatarUrl: string;    // Empty string from worker
+  avatarUrl: string; // Empty string from worker
   node_url: string | null; // GitHub issue URL
   created_at?: string;
   // Implicitly contains beneficiary_id via githubUsername placeholder
@@ -30,12 +30,13 @@ interface GitHubUserDetails {
 // Structure for the parsed metadata from the bot comment
 interface PermitCommentMetadata {
   output: {
-    [key: string]: { // Key is the GitHub username (string)
+    [key: string]: {
+      // Key is the GitHub username (string)
       userId: number; // GitHub User ID
       total: number; // This is the XP value we need
       // ... other fields
-    }
-  }
+    };
+  };
   // ... other fields
 }
 
@@ -49,8 +50,8 @@ interface AggregatedUserData {
 
 // Define a basic type for the expected comment structure from GitHub API
 interface GitHubComment {
-    body?: string;
-    // Add other relevant fields if needed later, e.g., user.login if needed for matching
+  body?: string;
+  // Add other relevant fields if needed later, e.g., user.login if needed for matching
 }
 
 // Get GitHub PAT from env
@@ -84,7 +85,7 @@ export function useLeaderboardData() {
     const url = `https://api.github.com/repos/${owner}/${repo}/issues/${issueNumber}/comments`;
     const headers: HeadersInit = { Accept: "application/vnd.github.v3+json" };
     if (GITHUB_TOKEN) {
-      headers['Authorization'] = `token ${GITHUB_TOKEN}`;
+      headers["Authorization"] = `token ${GITHUB_TOKEN}`;
     } else {
       console.warn("VITE_GITHUB_TOKEN not found. Making unauthenticated request to GitHub API (rate limits may apply).");
     }
@@ -96,7 +97,7 @@ export function useLeaderboardData() {
         return [];
       }
       // Assert the response type after parsing
-      const comments = await response.json() as GitHubComment[];
+      const comments = (await response.json()) as GitHubComment[];
       console.log(`fetchGitHubIssueComments: Fetched ${comments.length} comments for ${owner}/${repo}#${issueNumber}`);
       return comments;
     } catch (e) {
@@ -108,58 +109,97 @@ export function useLeaderboardData() {
   // Use the specific type for comments array
   const findAndParseMetadataComment = (comments: GitHubComment[]): PermitCommentMetadata | null => {
     console.log(`findAndParseMetadataComment: Searching ${comments.length} comments...`);
-    const marker = "<!-- Ubiquity - GithubCommentModule -";
+    // More specific marker targeting the main payload
+    const primaryMarker = "<!-- Ubiquity - GithubCommentModule - GithubCommentModule.getBodyContent";
     for (const comment of comments) {
-      if (comment.body?.includes(marker)) {
-        console.log("findAndParseMetadataComment: Found potential metadata comment.");
-        const jsonStart = comment.body.indexOf("-->\n{"); // Look for newline after marker close
-        if (jsonStart !== -1) {
-          const jsonString = comment.body.substring(jsonStart + 4); // Start after -->\n
-          try {
-            // Attempt to clean potential trailing markdown/HTML if necessary
-            const cleanedJsonString = jsonString.split("\n```")[0].trim();
-            const metadata = JSON.parse(cleanedJsonString) as PermitCommentMetadata;
-            console.log("findAndParseMetadataComment: Successfully parsed metadata.");
-            return metadata;
-          } catch (e) {
-            console.error("Failed to parse JSON metadata from comment:", e, "\nJSON String:", jsonString);
-            return null;
+      if (!comment.body) continue;
+
+      const markerIndex = comment.body.indexOf(primaryMarker);
+      if (markerIndex !== -1) {
+        console.log("findAndParseMetadataComment: Found potential metadata comment block.");
+
+        const commentEndIndex = comment.body.indexOf("-->", markerIndex);
+        if (commentEndIndex !== -1) {
+          const jsonStartIndex = comment.body.indexOf("{", commentEndIndex);
+          if (jsonStartIndex !== -1) {
+            // Extract the substring starting from the first '{' after '-->'
+            const potentialJsonString = comment.body.substring(jsonStartIndex);
+
+            // Attempt to find the matching closing brace, assuming it's the main JSON object
+            // This is a basic approach; a more robust parser might be needed for complex cases
+            let braceDepth = 0;
+            let jsonEndIndex = -1;
+            for (let i = 0; i < potentialJsonString.length; i++) {
+              if (potentialJsonString[i] === "{") {
+                braceDepth++;
+              } else if (potentialJsonString[i] === "}") {
+                braceDepth--;
+                if (braceDepth === 0) {
+                  jsonEndIndex = i;
+                  break;
+                }
+              }
+            }
+
+            console.trace({ potentialJsonString });
+
+            if (jsonEndIndex !== -1) {
+              const jsonString = potentialJsonString.substring(0, jsonEndIndex + 1);
+              try {
+                const metadata = JSON.parse(jsonString) as PermitCommentMetadata;
+
+                // Basic validation to check if it looks like the expected structure
+                if (metadata && typeof metadata.output === "object") {
+                  console.log("findAndParseMetadataComment: Successfully parsed metadata.");
+                  return metadata;
+                } else {
+                  console.warn("Parsed JSON does not match expected metadata structure (missing 'output').");
+                }
+              } catch (e) {
+                console.error("Failed to parse JSON metadata from comment:", e, "\nAttempted JSON String:", jsonString);
+                // Continue searching other comments if parsing fails
+              }
+            } else {
+              console.warn("Could not find matching closing brace for JSON object.");
+            }
+          } else {
+            console.log("findAndParseMetadataComment: Found marker and '-->' but not the subsequent '{'.");
           }
         } else {
-           console.log("findAndParseMetadataComment: Found marker but not the expected JSON start.");
+          console.log("findAndParseMetadataComment: Found marker but not the closing '-->'.");
         }
       }
     }
-    console.log("findAndParseMetadataComment: No metadata comment found.");
+    console.log("findAndParseMetadataComment: No valid metadata comment found after searching all comments.");
     return null;
   };
 
   const fetchGitHubUserDetails = async (userId: number): Promise<GitHubUserDetails | null> => {
-     console.log(`fetchGitHubUserDetails: Fetching details for user ID ${userId}`);
-     const url = `https://api.github.com/user/${userId}`;
-     const headers: HeadersInit = { Accept: "application/vnd.github.v3+json" };
-     if (GITHUB_TOKEN) {
-       headers['Authorization'] = `token ${GITHUB_TOKEN}`;
-     }
-     try {
-       const response = await fetch(url, { headers });
-       if (!response.ok) {
-         console.warn(`GitHub user API request failed for user ${userId}: ${response.status}`);
-         return null;
-       }
-       const data = await response.json();
-       if (data && typeof data.login === 'string' && typeof data.avatar_url === 'string' && typeof data.id === 'number') {
-         console.log(`fetchGitHubUserDetails: Successfully fetched details for ${data.login}`);
-         return { id: data.id, login: data.login, avatar_url: data.avatar_url };
-       } else {
-         console.warn(`GitHub user API response for ${userId} missing expected fields.`);
-         return null;
-       }
-     } catch (e) {
-       console.error(`Error fetching GitHub details for user ${userId}:`, e);
-       return null;
-     }
-   };
+    console.log(`fetchGitHubUserDetails: Fetching details for user ID ${userId}`);
+    const url = `https://api.github.com/user/${userId}`;
+    const headers: HeadersInit = { Accept: "application/vnd.github.v3+json" };
+    if (GITHUB_TOKEN) {
+      headers["Authorization"] = `token ${GITHUB_TOKEN}`;
+    }
+    try {
+      const response = await fetch(url, { headers });
+      if (!response.ok) {
+        console.warn(`GitHub user API request failed for user ${userId}: ${response.status}`);
+        return null;
+      }
+      const data = await response.json();
+      if (data && typeof data.login === "string" && typeof data.avatar_url === "string" && typeof data.id === "number") {
+        console.log(`fetchGitHubUserDetails: Successfully fetched details for ${data.login}`);
+        return { id: data.id, login: data.login, avatar_url: data.avatar_url };
+      } else {
+        console.warn(`GitHub user API response for ${userId} missing expected fields.`);
+        return null;
+      }
+    } catch (e) {
+      console.error(`Error fetching GitHub details for user ${userId}:`, e);
+      return null;
+    }
+  };
 
   // --- Aggregation Logic ---
 
@@ -197,10 +237,10 @@ export function useLeaderboardData() {
 
     console.log("processAndAggregateData: Fetching comments for all unique issues...");
     const commentPromises = Array.from(issuesToFetch.entries()).map(([url, params]) =>
-      fetchGitHubIssueComments(params.owner, params.repo, params.issueNumber).then(comments => ({ url, comments }))
+      fetchGitHubIssueComments(params.owner, params.repo, params.issueNumber).then((comments) => ({ url, comments }))
     );
     const commentResults = await Promise.all(commentPromises);
-    const commentsByUrl = new Map(commentResults.map(res => [res.url, res.comments]));
+    const commentsByUrl = new Map(commentResults.map((res) => [res.url, res.comments]));
     console.log("processAndAggregateData: Finished fetching comments.");
 
     console.log("processAndAggregateData: Second pass - extracting XP from comments...");
@@ -216,14 +256,14 @@ export function useLeaderboardData() {
         metadata = comments ? findAndParseMetadataComment(comments) : null;
         metadataCache.set(permit.node_url, metadata);
         if (!metadata) {
-            console.warn(`processAndAggregateData: Metadata not found or parsed for issue ${permit.node_url}`);
+          console.warn(`processAndAggregateData: Metadata not found or parsed for issue ${permit.node_url}`);
         }
       }
 
       if (metadata?.output) {
-        const userMetadataEntry = Object.values(metadata.output).find(entry => entry.userId === githubId);
+        const userMetadataEntry = Object.values(metadata.output).find((entry) => entry.userId === githubId);
 
-        if (userMetadataEntry && typeof userMetadataEntry.total === 'number') {
+        if (userMetadataEntry && typeof userMetadataEntry.total === "number") {
           const usersAddedForIssue = issueXpAdded.get(permit.node_url) ?? new Set<number>();
           if (!usersAddedForIssue.has(githubId)) {
             console.log(`processAndAggregateData: Adding ${userMetadataEntry.total} XP for user ${githubId} from issue ${permit.node_url}`);
@@ -231,36 +271,36 @@ export function useLeaderboardData() {
             usersAddedForIssue.add(githubId);
             issueXpAdded.set(permit.node_url, usersAddedForIssue);
           } else {
-             // console.log(`processAndAggregateData: XP for user ${githubId} from issue ${permit.node_url} already added.`);
+            // console.log(`processAndAggregateData: XP for user ${githubId} from issue ${permit.node_url} already added.`);
           }
         } else {
-           console.warn(`Could not find user ID ${githubId} or valid 'total' XP in metadata for ${permit.node_url}`);
+          console.warn(`Could not find user ID ${githubId} or valid 'total' XP in metadata for ${permit.node_url}`);
         }
       }
       // No warning here if metadata is null, already warned above
     }
     console.log("processAndAggregateData: Finished extracting XP.");
 
-     // Fetch GitHub user details
-     const uniqueUserIds = Object.keys(aggregatedDataByUser).map(id => parseInt(id, 10));
-     console.log(`Fetching GitHub user details for ${uniqueUserIds.length} users...`);
-     const userDetailPromises = uniqueUserIds.map(fetchGitHubUserDetails);
-     const userDetailResults = await Promise.all(userDetailPromises);
-     const userDetailsMap = new Map<number, GitHubUserDetails>();
-     userDetailResults.forEach(detail => {
-       if (detail) {
-         userDetailsMap.set(detail.id, detail);
-       }
-     });
-     console.log(`Fetched details for ${userDetailsMap.size} users.`);
+    // Fetch GitHub user details
+    const uniqueUserIds = Object.keys(aggregatedDataByUser).map((id) => parseInt(id, 10));
+    console.log(`Fetching GitHub user details for ${uniqueUserIds.length} users...`);
+    const userDetailPromises = uniqueUserIds.map(fetchGitHubUserDetails);
+    const userDetailResults = await Promise.all(userDetailPromises);
+    const userDetailsMap = new Map<number, GitHubUserDetails>();
+    userDetailResults.forEach((detail) => {
+      if (detail) {
+        userDetailsMap.set(detail.id, detail);
+      }
+    });
+    console.log(`Fetched details for ${userDetailsMap.size} users.`);
 
     // Final mapping
     const finalLeaderboard = Object.values(aggregatedDataByUser)
-      .map(userData => {
+      .map((userData) => {
         const userDetails = userDetailsMap.get(userData.githubId);
         return {
           githubUsername: userDetails?.login ?? `GitHub ID: ${userData.githubId}`,
-          avatarUrl: userDetails?.avatar_url ?? '',
+          avatarUrl: userDetails?.avatar_url ?? "",
           totalXp: userData.totalXp, // Use the aggregated XP from metadata
         };
       })
@@ -271,7 +311,6 @@ export function useLeaderboardData() {
     return finalLeaderboard;
   }, []);
 
-
   // Effect to handle worker interaction and trigger processing
   useEffect(() => {
     let mounted = true;
@@ -279,7 +318,7 @@ export function useLeaderboardData() {
     console.log("useLeaderboardData useEffect: Running effect.", {
       isWorkerInitialized,
       hasWorker: !!worker,
-      contextError: contextWorkerError
+      contextError: contextWorkerError,
     });
 
     const handleWorkerMessage = async (event: MessageEvent) => {
@@ -291,7 +330,7 @@ export function useLeaderboardData() {
       console.log("useLeaderboardData handleWorkerMessage:", {
         type: event.data.type,
         hasPayload: !!event.data.payload,
-        hasError: !!event.data.error
+        hasError: !!event.data.error,
       });
 
       const { type, payload, error: workerError } = event.data;
@@ -310,14 +349,14 @@ export function useLeaderboardData() {
             payloadLength: payload.length,
             samplePermit: payload[0],
             networkId: payload[0]?.networkId,
-            nodeUrl: payload[0]?.node_url
+            nodeUrl: payload[0]?.node_url,
           });
           try {
             const finalData = await processAndAggregateData(payload);
             console.log("Final leaderboard data:", {
               entries: finalData.length,
               sampleEntry: finalData[0],
-              totalXpSum: finalData.reduce((sum, entry) => sum + entry.totalXp, 0)
+              totalXpSum: finalData.reduce((sum, entry) => sum + entry.totalXp, 0),
             });
             setLeaderboardData(finalData);
             setError(null);
@@ -366,8 +405,7 @@ export function useLeaderboardData() {
       console.log("useLeaderboardData: Cleanup - removing message listener");
       mounted = false;
       worker?.removeEventListener("message", handleWorkerMessage);
-    }
-
+    };
   }, [processAndAggregateData, worker, isWorkerInitialized, contextWorkerError]);
 
   // Combine local error state with context error state
