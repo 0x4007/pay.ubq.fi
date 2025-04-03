@@ -1,8 +1,8 @@
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react"; // Re-added useRef
 import { type Address } from "viem";
-import type { PermitData } from "../types";
-import { getCowSwapQuote } from "../utils/cowswap-utils"; // Import quote function
-import { getTokenInfo } from "../constants/supported-reward-tokens"; // Ensure token info helper is imported
+import { useWorker } from "../context/worker-context.tsx"; // Import worker context hook
+import type { PermitData } from "../types.ts"; // Added .ts extension
+import { getCowSwapQuote } from "../utils/cowswap-utils.ts"; // Added .ts extension
 
 // Constants
 const PERMIT_LAST_CHECK_TIMESTAMP_KEY = "permitLastCheckTimestamp";
@@ -12,9 +12,7 @@ const PERMIT_DATA_CACHE_KEY = "permitDataCache"; // Changed cache key
 // type CachedPermitStatus = Pick<PermitData, 'isNonceUsed' | 'checkError' | 'ownerBalanceSufficient' | 'permit2AllowanceSufficient'>;
 type PermitDataCache = Record<string, PermitData>; // Cache now stores full PermitData objects
 
-// Get Supabase config from Vite env vars
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// Removed unused Supabase constants
 
 interface UsePermitDataProps {
   address: Address | undefined;
@@ -32,8 +30,8 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
   const [isQuoting, setIsQuoting] = useState(false); // Specific state for quoting process
   // Removed unused state: const [initialLoadComplete, setInitialLoadComplete] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const workerRef = useRef<Worker | null>(null);
-  const [isWorkerInitialized, setIsWorkerInitialized] = useState(false);
+  // Get worker instance and status from context
+  const { worker, isWorkerInitialized, workerError: contextWorkerError } = useWorker();
 
   // Function to load PermitData cache from localStorage
   const loadCache = useCallback((): PermitDataCache => {
@@ -43,10 +41,10 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
       const cachedData = cachedString ? JSON.parse(cachedString) : {};
 
       // Log any cached permits marked as used
-      Object.entries(cachedData).forEach(([key, permit]) => {
+      Object.entries(cachedData).forEach(([, permit]) => { // Removed unused 'key'
         // Type assertion needed here as JSON.parse returns any
         if ((permit as PermitData).isNonceUsed === true) {
-          // // console.log(`loadCache: Found cached permit ${key} with isNonceUsed=true.`);
+          // // console.log(`loadCache: Found cached permit with isNonceUsed=true.`);
         }
       });
 
@@ -217,51 +215,23 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
     return updatedPermitsMap; // Return the map with updated quote info
   }, [preferredRewardTokenAddress, address, chainId]);
 
-
-  // Initialize worker on mount
+  // Effect to handle worker messages and trigger initial fetch
   useEffect(() => {
-    if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-      setError("Supabase URL or Anon Key missing in frontend environment variables.");
-      console.error("SupABASE URL or Anon Key missing");
-      setIsWorkerInitialized(false);
-      setIsLoading(false);
-      return;
-    }
-
-    workerRef.current = new Worker(new URL('../workers/permit-checker.worker.ts', import.meta.url), { type: 'module' });
-    // console.log("Permit checker worker created.");
-
-    workerRef.current.postMessage({
-      type: 'INIT',
-      payload: { supabaseUrl: SUPABASE_URL, supabaseAnonKey: SUPABASE_ANON_KEY }
-    });
-
-    workerRef.current.onmessage = (event: MessageEvent) => {
+    // Define the message handler
+    const handleWorkerMessage = (event: MessageEvent) => {
       // Define a type for the worker message data
       type WorkerMessageData = {
-          type: 'INIT_SUCCESS' | 'INIT_ERROR' | 'NEW_PERMITS_VALIDATED' | 'PERMITS_ERROR'; // Adjusted message types
+          type: 'NEW_PERMITS_VALIDATED' | 'PERMITS_ERROR'; // Only handle these types here
           permits?: PermitData[]; // Used for NEW_PERMITS_VALIDATED
           error?: string;
       };
       const { type, permits: workerPermits, error: workerError } = event.data as WorkerMessageData;
-      // console.log("Message received from worker:", type);
+      // console.log("usePermitData: Message received from worker:", type);
 
       switch (type) {
-        case 'INIT_SUCCESS':
-          // console.log("Worker initialized successfully.");
-          setIsWorkerInitialized(true);
-          // Trigger initial fetch now that worker is ready (fetchPermitsAndCheck handles quoting based on cache)
-          fetchPermitsAndCheck();
-          break;
-        case 'INIT_ERROR':
-          console.error("Worker initialization failed:", workerError);
-          setError(`Worker initialization failed: ${workerError}`);
-          setIsWorkerInitialized(false);
-          setIsLoading(false);
-          break;
         case 'NEW_PERMITS_VALIDATED': { // Worker returns *only* newly fetched & validated permits
           const validatedNewPermits: PermitData[] = workerPermits || [];
-          // console.log(`Received validation results for ${validatedNewPermits.length} new/updated permits.`);
+          // console.log(`usePermitData: Received validation results for ${validatedNewPermits.length} new/updated permits.`);
           const currentCache = loadCache();
           let cacheUpdated = false;
 
@@ -291,14 +261,14 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
           });
 
           if (cacheUpdated) {
-            // console.log("Attempting to save updated permit data cache...");
+            // console.log("usePermitData: Attempting to save updated permit data cache...");
             saveCache(currentCache);
           }
           // Save the timestamp of this successful check cycle
           try {
             const nowISO = new Date().toISOString();
             localStorage.setItem(PERMIT_LAST_CHECK_TIMESTAMP_KEY, nowISO);
-            // console.log(`Saved last check timestamp (${nowISO}) to localStorage after validation.`); // Log timestamp save
+            // console.log(`usePermitData: Saved last check timestamp (${nowISO}) to localStorage after validation.`); // Log timestamp save
           } catch (e) { console.error("Failed to save timestamp", e); }
 
           // Apply filter first based on validation results
@@ -325,97 +295,82 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
       }
     };
 
-    workerRef.current.onerror = (event) => {
-      console.error("Worker error:", event.message, event);
-      setError(`Worker error: ${event.message}`);
-      setIsLoading(false);
-      setIsWorkerInitialized(false);
-    };
-
-    return () => {
-      // console.log("Terminating permit checker worker.");
-      workerRef.current?.terminate();
-      workerRef.current = null;
-      setIsWorkerInitialized(false);
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [applyFinalFilter, loadCache, saveCache]); // fetchPermitsAndCheck removed as it's called internally now
-
-  // Function to fetch permits (initiates the process)
-  const fetchPermitsAndCheck = useCallback(() => {
-    if (!workerRef.current || !isWorkerInitialized) {
-       console.warn("fetchPermitsAndCheck called before worker is ready.");
-       return;
-    }
-    if (!isConnected || !address) {
-      allPermitsRef.current.clear();
-      setDisplayPermits([]);
+    // Check for context error first
+    if (contextWorkerError) {
+      setError(`Worker initialization failed: ${contextWorkerError}`);
       setIsLoading(false);
       return;
     }
 
-    setIsLoading(true);
-    setError(null);
+    // Only proceed if worker is initialized and user is connected
+    if (isWorkerInitialized && worker && isConnected && address) {
+      // Add listener for permit data results
+      worker.addEventListener('message', handleWorkerMessage);
 
-    // Load cached data for immediate display
-    // console.log("fetchPermitsAndCheck: Attempting to load cache for initial display...");
-    const cachedData = loadCache();
-    const initialMap = new Map<string, PermitData>();
-    Object.entries(cachedData).forEach(([key, permit]) => {
-        initialMap.set(key, permit);
-    });
-    allPermitsRef.current = initialMap;
-    applyFinalFilter(allPermitsRef.current); // Show cached data immediately (without quotes initially)
-    // console.log(`fetchPermitsAndCheck: Displayed ${initialMap.size} permits from cache.`);
+      // Trigger initial fetch/check
+      setIsLoading(true);
+      setError(null);
 
-    // Fetch quotes for cached data immediately if preference is set
-    if (preferredRewardTokenAddress && address && chainId) {
-        // console.log("fetchPermitsAndCheck: Fetching quotes for cached data...");
-        fetchQuotesAndUpdatePermits(initialMap).then(mapWithQuotes => {
-            allPermitsRef.current = mapWithQuotes; // Update ref with quote results
-            applyFinalFilter(allPermitsRef.current); // Re-apply filter to update UI with quotes
-            // console.log("fetchPermitsAndCheck: Updated display with quotes for cached data.");
-        }).catch(quoteError => {
-            console.error("Error fetching quotes for cached data:", quoteError);
-            // Optionally set an error state here, but don't block permit validation
-        });
-    }
+      // Load cached data for immediate display
+      const cachedData = loadCache();
+      const initialMap = new Map<string, PermitData>();
+      Object.entries(cachedData).forEach(([key, permit]) => {
+          initialMap.set(key, permit);
+      });
+      allPermitsRef.current = initialMap;
+      applyFinalFilter(allPermitsRef.current); // Show cached data immediately
 
-
-    // Get last check timestamp from localStorage
-    let lastCheckTimestamp: string | null = null;
-    try {
-      // console.log("fetchPermitsAndCheck: Attempting to read last check timestamp...");
-      lastCheckTimestamp = localStorage.getItem(PERMIT_LAST_CHECK_TIMESTAMP_KEY);
-      // console.log(`fetchPermitsAndCheck: Read timestamp: ${lastCheckTimestamp}`);
-    } catch (e) {
-      console.error("Failed to read last check timestamp from localStorage", e);
-    }
-    // console.log(`Posting FETCH_NEW_PERMITS message to worker... Last check: ${lastCheckTimestamp || 'Never'}`);
-
-    // Ask worker to fetch only new permits since last check
-    workerRef.current.postMessage({ type: 'FETCH_NEW_PERMITS', payload: { address, lastCheckTimestamp } }); // Correct message type
-
-  }, [address, isConnected, isWorkerInitialized, loadCache, applyFinalFilter, preferredRewardTokenAddress, chainId, fetchQuotesAndUpdatePermits]); // Add dependencies
-
-  // Trigger fetch on initial mount after worker is initialized
-  // Also re-trigger quote fetching if the preference changes
-  useEffect(() => {
-      if (isConnected && isWorkerInitialized) {
-          // Initial fetch is now triggered from the INIT_SUCCESS handler
-          // fetchPermitsAndCheck(); // Removed duplicate call
-      } else if (!isConnected) { // Clear state if disconnected
-          allPermitsRef.current.clear();
-          setDisplayPermits([]);
-          setIsLoading(false);
+      // Fetch quotes for cached data immediately if preference is set
+      if (preferredRewardTokenAddress && address && chainId) {
+          fetchQuotesAndUpdatePermits(initialMap).then(mapWithQuotes => {
+              allPermitsRef.current = mapWithQuotes;
+              applyFinalFilter(allPermitsRef.current);
+          }).catch(quoteError => {
+              console.error("Error fetching quotes for cached data:", quoteError);
+          });
       }
-  }, [isConnected, isWorkerInitialized]); // Removed fetchPermitsAndCheck from deps
+
+      // Get last check timestamp
+      let lastCheckTimestamp: string | null = null;
+      try {
+        lastCheckTimestamp = localStorage.getItem(PERMIT_LAST_CHECK_TIMESTAMP_KEY);
+      } catch (e) {
+        console.error("Failed to read last check timestamp from localStorage", e);
+      }
+
+      // Ask worker to fetch new permits
+      // console.log(`usePermitData: Posting FETCH_NEW_PERMITS message to worker... Last check: ${lastCheckTimestamp || 'Never'}`);
+      worker.postMessage({ type: 'FETCH_NEW_PERMITS', payload: { address, lastCheckTimestamp } });
+
+      // Cleanup function for this effect instance
+      return () => {
+        worker.removeEventListener('message', handleWorkerMessage);
+        // console.log("usePermitData hook cleanup: Removed message listener.");
+      };
+    } else if (!isConnected) {
+      // Clear state if disconnected
+      allPermitsRef.current.clear();
+      setDisplayPermits([]);
+      setIsLoading(false); // Ensure loading stops if disconnected
+      setError(null); // Clear errors on disconnect
+    } else if (!isWorkerInitialized && !contextWorkerError) {
+      // Worker not ready yet, but no error. Set loading.
+      setIsLoading(true);
+    }
+
+  }, [
+    worker, isWorkerInitialized, contextWorkerError, isConnected, address, // Core dependencies
+    loadCache, saveCache, applyFinalFilter, fetchQuotesAndUpdatePermits, // Callbacks
+    preferredRewardTokenAddress, chainId // For quote fetching trigger
+  ]);
+
 
   // Effect to re-fetch quotes when preference changes
   useEffect(() => {
-    if (isConnected && address && chainId && isWorkerInitialized && !isLoading) { // Only quote if not already loading permits
-        // console.log("Preference changed, re-fetching quotes...");
-        // Use the current state of permits from the ref
+    // Only run if worker is ready, user connected, not already loading, and address/chain available
+    if (isConnected && address && chainId && isWorkerInitialized && worker && !isLoading) {
+        // console.log("Preference or related state changed, re-fetching quotes...");
+        // Use the current state of permits from the ref map
         fetchQuotesAndUpdatePermits(new Map(allPermitsRef.current)).then(mapWithQuotes => {
             allPermitsRef.current = mapWithQuotes;
             applyFinalFilter(allPermitsRef.current); // Update display with new quotes
@@ -463,8 +418,8 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
     // Removed: initialLoadComplete,
      error,
      setError,
-     fetchPermitsAndCheck, // Keep for potential manual refresh?
-     isWorkerInitialized,
+     // Removed fetchPermitsAndCheck as it's now internal to the main useEffect
+     isWorkerInitialized, // Expose context status
      updatePermitStatusCache, // Expose cache update function
      isQuoting // Expose quoting status
    };

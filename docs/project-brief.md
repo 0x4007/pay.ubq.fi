@@ -2,7 +2,11 @@
 
 ## 1. Project Goal
 
-To create a new web application from scratch that allows users to efficiently find, validate, and claim blockchain-based "Permit" rewards posted in GitHub issue comments. This application replaces the previous `pay.ubq.fi` functionality, removing all features related to gift cards and Reloadly.
+To create a web application that allows:
+1.  **Contributors** to efficiently find, validate, and claim blockchain-based "Permit" rewards posted in GitHub issue comments.
+2.  **Team Leaders** to view a developer performance analytics dashboard based on aggregated permit data.
+
+This application is forked from the `pay.ubq.fi` rewrite effort, leveraging its permit handling foundation but focusing on contributor claiming and developer analytics.
 
 ## 2. Core Requirements
 
@@ -16,6 +20,10 @@ To create a new web application from scratch that allows users to efficiently fi
     *   Connect their wallet.
     *   Initiate the batch claim process.
     *   View transaction status and history (optional).
+*   **Developer Analytics Dashboard:** Provide a view for authorized users (e.g., team leads) to:
+    *   See a leaderboard of developers ranked by aggregated permit value ("XP").
+    *   View developer GitHub usernames and avatars.
+    *   (Future) Analyze performance based on permit metadata (e.g., task type).
 
 ## 3. Scope - Exclusions
 
@@ -28,5 +36,6 @@ To create a new web application from scratch that allows users to efficiently fi
 *   Users can successfully find Permits posted in GitHub comments associated with their account.
 *   Permit validation accurately reflects on-chain status.
 *   Users can successfully claim valid Permits via the batch claim mechanism.
-*   The application is reliable, performant, and easy to use.
-*   The codebase is clean, well-documented, maintainable, and free of the technical debt present in the previous version.
+*   Team leads can view an accurate developer performance leaderboard.
+*   The application is reliable, performant, and easy to use for both contributors and team leads.
+*   The codebase is clean, well-documented, and maintainable.

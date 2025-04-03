@@ -1,29 +1,31 @@
+/// <reference lib="dom" />
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'; // Import QueryClient things
-import { StrictMode } from 'react'; // Re-add StrictMode import
+import { StrictMode } from 'react'; // Re-add StrictMode import, Add React import
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import { WagmiProvider, createConfig, http } from "wagmi";
-import { type Chain } from "viem/chains"; // Import Chain type
+// Removed BrowserRouter import
 import { injected } from "@wagmi/connectors";
+import { type Chain } from "viem/chains"; // Import Chain type
+import { WagmiProvider, createConfig, http } from "wagmi";
 import {
+  arbitrum, // 42220
+  avalanche, // 324
+  base, // 43114
+  blast, // 10
+  bsc, // 42161
+  celo, // 56
+  gnosis,
   mainnet, // 1
-  optimism, // 10
-  bsc, // 56
-  gnosis, // 100
+  optimism, // 100
   polygon, // 137
-  zkSync, // 324
-  base, // 8453
-  arbitrum, // 42161
-  celo, // 42220
-  avalanche, // 43114
-  blast, // 81457
+  zkSync, // 81457
   zora, // 7777777
 } from "wagmi/chains";
 // Removed Permit2RpcManager import as it's now used only in the worker
 import App from "./App.tsx";
 // import './ubiquity-styles.css'; // Import ubiquity styles - REMOVED, will link in index.html
 // import './grid-styles.css'; // Import grid styles (once) - REMOVED, will link in index.html
-import { grid } from './the-grid';
+import { WorkerProvider } from './context/worker-context.tsx'; // Import WorkerProvider
+import { grid } from './the-grid.ts'; // Added .ts extension
 
 // Removed Permit2RpcManager instantiation and export
 
@@ -76,10 +78,11 @@ createRoot(rootElement).render(
   <StrictMode> {/* Re-enabled StrictMode */}
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        {/* Removed AuthProvider wrapper */}
-        <BrowserRouter>
+        <WorkerProvider> {/* Wrap App with WorkerProvider */}
+          {/* Removed AuthProvider wrapper */}
+          {/* Removed BrowserRouter wrapper */}
           <App />
-        </BrowserRouter>
+        </WorkerProvider>
       </QueryClientProvider>
     </WagmiProvider>
   </StrictMode>

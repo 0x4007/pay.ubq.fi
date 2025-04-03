@@ -1,6 +1,6 @@
 # Active Context: Permit Claiming Application (Rewrite)
 
-**Date:** 2025-04-01 (Updated)
+**Date:** 2025-04-03 (Updated)
 
 ## 1. Current Focus
 
@@ -43,6 +43,11 @@
         *   Modified `hooks/use-permit-claiming.ts` to trigger placeholder `initiateCowSwap` after successful sequential claims and added state (`swapSubmissionStatus`) for UI feedback.
         *   Updated `PermitsTable.tsx` and `PermitRow.tsx` to display estimated amounts and quoting status.
         *   Updated `DashboardPage.tsx` to display estimated total value and swap submission status.
+    *   **Developer Leaderboard (2025-04-03):**
+        *   Created `hooks/use-leaderboard-data.ts` to fetch and aggregate permit data for all developers.
+        *   Modified `workers/permit-checker.worker.ts` to handle `FETCH_LEADERBOARD_DATA` message, query all permits, query associated users from the `users` table, combine the data, and return it without validation. Implemented a two-step query process to handle potential type issues with Supabase joins.
+        *   Created `components/developer-leaderboard.tsx` to display the ranked list of developers by total XP (permit amount), showing rank, avatar, username, and total XP.
+        *   Refactored `App.tsx` to use `react-router-dom`, adding routes for `/login`, `/` (Dashboard), and `/leaderboard`. Implemented `ProtectedRoute` and `AuthenticatedLayout` components for handling authentication and basic navigation.
 *   **Shared Types**:
     *   Added `ownerBalanceSufficient`, `permit2AllowanceSufficient`, `checkError` fields to `PermitData` for storing prerequisite check results.
     *   Added `estimatedAmountOut` (string) and `quoteError` (string | null) fields to `PermitData` for quote results.
@@ -63,6 +68,7 @@
 
 *   **Verify Pre-Claim Checks**: Confirm the new balance/allowance checks accurately reflect on-chain state and prevent claims appropriately.
 *   **Test Claiming**: Thoroughly test the single permit claim flow with the new checks in place.
+*   **Test Leaderboard**: Verify the leaderboard fetches data correctly, aggregates XP accurately, and displays the ranked list as expected. Check handling of users with no permits or permits with missing user info.
 *   **RPC Error Handling**: Improve backend validation functions (`isErc20NonceClaimed`, `isErc721NonceClaimed`) to better handle RPC errors (e.g., return a specific error state instead of fail-safe `true`).
 *   **(Optional)** Implement backend endpoint `/api/permits/update-status` to record successful claims.
 *   **(Backend)** Ensure backend API (`/api/permits`) correctly fetches permits based on the provided `walletAddress` query parameter.

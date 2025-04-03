@@ -1,16 +1,16 @@
-import { useEffect, useState, useMemo, useCallback } from "react"; // Re-added useCallback
+import { useCallback, useMemo, useState } from "react"; // Re-added useCallback, Add React import for JSX
+import { Address, formatUnits } from "viem"; // Add Address type
 import { useAccount, useDisconnect } from "wagmi";
-import { formatUnits, Address } from "viem"; // Add Address type
-// Removed unused PermitData import
-import { hasRequiredFields } from "../utils/permit-utils";
-import { PermitsTable } from "./permits-table";
+import type { PermitData } from "../types.ts"; // Add PermitData type import
+import { hasRequiredFields } from "../utils/permit-utils.ts"; // Added .ts
+import { PermitsTable } from "./permits-table.tsx"; // Added .tsx
 // Removed unused logoSvgContent import
-import { usePermitData } from "../hooks/use-permit-data"; // Import the data hook
-import { usePermitClaiming } from "../hooks/use-permit-claiming"; // Import the claiming hook
-import { ICONS } from "./iconography";
-import { LogoSpan } from "./login-page";
-import { PreferredTokenSelectorButton } from "./preferred-token-selector-button"; // Import the new button component
-import { getTokenInfo } from "../constants/supported-reward-tokens"; // Import token info helper
+import { getTokenInfo } from "../constants/supported-reward-tokens.ts"; // Added .ts
+import { usePermitClaiming } from "../hooks/use-permit-claiming.ts"; // Added .ts
+import { usePermitData } from "../hooks/use-permit-data.ts"; // Added .ts
+import { ICONS } from "./iconography.tsx"; // Added .tsx
+import { LogoSpan } from "./login-page.tsx"; // Added .tsx
+import { PreferredTokenSelectorButton } from "./preferred-token-selector-button.tsx"; // Added .tsx
 // Removed unused imports: useWriteContract, useWaitForTransactionReceipt, usePublicClient, rpcHandler, readContract, Address, Hex, BaseError, ContractFunctionRevertedError, Abi, permit2ABI, preparePermitPrerequisiteContracts, ICONS, RewardPreferenceSelector
 
 // Removed constants BACKEND_API_URL, PERMIT2_ADDRESS as they are now in hooks/utils
@@ -34,8 +34,8 @@ export function DashboardPage() {
     // initialLoadComplete, // Removed unused state
     error: dataError,
     setError, // Get the setter from usePermitData
-    fetchPermitsAndCheck,
-    isWorkerInitialized, // Get the worker initialization state
+    // fetchPermitsAndCheck removed, hook handles fetching internally
+    // isWorkerInitialized removed, not used in this component
     updatePermitStatusCache, // Get cache update function
     isQuoting, // Get quoting status
   } = usePermitData({
@@ -49,7 +49,7 @@ export function DashboardPage() {
   const claimablePermits = useMemo(() => {
     // Assign filter result to variable first
     const filteredPermits = permits.filter(
-      (p) =>
+      (p: PermitData) => // Add explicit type
         p.networkId === chain?.id &&
         p.type === "erc20-permit" &&
         p.status !== "Claimed" &&
@@ -70,6 +70,7 @@ export function DashboardPage() {
   const claimableTotalValue = useMemo(() => {
     const assumedDecimals = 18;
     let totalSumInWei = 0n;
+    // Add explicit type for permit in loop if needed, though TS might infer it from claimablePermits
     for (const permit of claimablePermits) {
       if (permit.amount) {
         try {
@@ -101,9 +102,10 @@ export function DashboardPage() {
     }
 
     let totalEstimatedValueInWei = 0n;
-    const permitsToConsider = permits.filter(p => claimablePermits.some(cp => cp.nonce === p.nonce && cp.networkId === p.networkId)); // Use permits that passed claimable filter
+    // Add explicit types for filter callbacks
+    const permitsToConsider = permits.filter((p: PermitData) => claimablePermits.some((cp: PermitData) => cp.nonce === p.nonce && cp.networkId === p.networkId)); // Use permits that passed claimable filter
 
-    permitsToConsider.forEach(permit => {
+    permitsToConsider.forEach((permit: PermitData) => { // Add explicit type
       if (permit.tokenAddress?.toLowerCase() === preferredRewardTokenAddress.toLowerCase()) {
         // Add original amount if it's already the preferred token
         if (permit.amount) {
@@ -159,14 +161,7 @@ export function DashboardPage() {
 
   // --- Effects ---
 
-  // Fetch permits when connection status changes AND worker is ready
-  useEffect(() => {
-    if (isConnected && isWorkerInitialized) {
-      // Check both connection and worker init status
-      fetchPermitsAndCheck();
-    }
-    // No need for else block, usePermitData handles clearing permits on disconnect
-  }, [isConnected, isWorkerInitialized, fetchPermitsAndCheck]); // Add isWorkerInitialized to dependencies
+  // Removed useEffect that called fetchPermitsAndCheck, as the hook now handles this internally based on dependencies.
 
   // Removed effect for initial animations
 
@@ -253,7 +248,8 @@ export function DashboardPage() {
       {Object.keys(swapSubmissionStatus).length > 0 && (
         <section id="swap-status-wrapper" style={{ marginTop: "10px" }}>
           <h3>Swap Status:</h3>
-          {Object.entries(swapSubmissionStatus).map(([key, status]) => (
+          {/* Define status type based on usePermitClaiming hook's state, allow message to be undefined */}
+          {Object.entries(swapSubmissionStatus).map(([key, status]: [string, { status: 'submitting' | 'submitted' | 'error'; message?: string; orderUid?: string }]) => (
             <div key={key} className={`swap-status ${status.status === 'error' ? 'error-message' : status.status === 'submitted' ? 'success-message' : 'info-message'}`} style={{marginBottom: '5px', padding: '5px', border: '1px solid #ccc', borderRadius: '4px'}}>
               {status.status === 'error' && ICONS.WARNING}
               {status.status === 'submitted' && ICONS.CLAIM} {/* Use CLAIM icon as placeholder for SUCCESS */}
