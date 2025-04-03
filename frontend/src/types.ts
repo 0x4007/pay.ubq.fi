@@ -21,7 +21,7 @@ export interface PermitData {
   deadline: string;
   signature: string;
   type: 'erc20-permit' | 'erc721-permit';
-  owner: string; // Funder
+  owner: `0x${string}`; // Funder - Use viem's Hex type
   tokenAddress?: string;
   githubCommentUrl: string;
   token?: TokenInfoInternal; // Use internal type

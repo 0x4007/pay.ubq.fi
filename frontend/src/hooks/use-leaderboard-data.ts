@@ -109,7 +109,6 @@ export function useLeaderboardData() {
   // Use the specific type for comments array
   const findAndParseMetadataComment = (comments: GitHubComment[]): PermitCommentMetadata | null => {
     console.log(`findAndParseMetadataComment: Searching ${comments.length} comments...`);
-    // More specific marker targeting the main payload
     const primaryMarker = "<!-- Ubiquity - GithubCommentModule - GithubCommentModule.getBodyContent";
     for (const comment of comments) {
       if (!comment.body) continue;
@@ -118,37 +117,20 @@ export function useLeaderboardData() {
       if (markerIndex !== -1) {
         console.log("findAndParseMetadataComment: Found potential metadata comment block.");
 
-        const commentEndIndex = comment.body.indexOf("-->", markerIndex);
-        if (commentEndIndex !== -1) {
-          const jsonStartIndex = comment.body.indexOf("{", commentEndIndex);
-          if (jsonStartIndex !== -1) {
-            // Extract the substring starting from the first '{' after '-->'
-            const potentialJsonString = comment.body.substring(jsonStartIndex);
+        // Find the first '{' AFTER the marker
+        const jsonStartIndex = comment.body.indexOf("{", markerIndex + primaryMarker.length);
+        if (jsonStartIndex !== -1) {
+          // Find the closing '-->' AFTER the '{'
+          const commentEndIndex = comment.body.indexOf("-->", jsonStartIndex);
+          if (commentEndIndex !== -1) {
+            // Extract the string between the '{' and '-->'
+            const potentialJsonString = comment.body.substring(jsonStartIndex, commentEndIndex).trim();
+            console.trace({ potentialJsonString }); // Log the extracted string for debugging
 
-            // Attempt to find the matching closing brace, assuming it's the main JSON object
-            // This is a basic approach; a more robust parser might be needed for complex cases
-            let braceDepth = 0;
-            let jsonEndIndex = -1;
-            for (let i = 0; i < potentialJsonString.length; i++) {
-              if (potentialJsonString[i] === "{") {
-                braceDepth++;
-              } else if (potentialJsonString[i] === "}") {
-                braceDepth--;
-                if (braceDepth === 0) {
-                  jsonEndIndex = i;
-                  break;
-                }
-              }
-            }
-
-            console.trace({ potentialJsonString });
-
-            if (jsonEndIndex !== -1) {
-              const jsonString = potentialJsonString.substring(0, jsonEndIndex + 1);
+            if (potentialJsonString) {
               try {
-                const metadata = JSON.parse(jsonString) as PermitCommentMetadata;
-
-                // Basic validation to check if it looks like the expected structure
+                const metadata = JSON.parse(potentialJsonString) as PermitCommentMetadata;
+                // Basic validation
                 if (metadata && typeof metadata.output === "object") {
                   console.log("findAndParseMetadataComment: Successfully parsed metadata.");
                   return metadata;
@@ -156,17 +138,17 @@ export function useLeaderboardData() {
                   console.warn("Parsed JSON does not match expected metadata structure (missing 'output').");
                 }
               } catch (e) {
-                console.error("Failed to parse JSON metadata from comment:", e, "\nAttempted JSON String:", jsonString);
+                console.error("Failed to parse JSON metadata from comment:", e, "\nAttempted JSON String:", potentialJsonString);
                 // Continue searching other comments if parsing fails
               }
             } else {
-              console.warn("Could not find matching closing brace for JSON object.");
+              console.warn("Extracted potential JSON string is empty.");
             }
           } else {
-            console.log("findAndParseMetadataComment: Found marker and '-->' but not the subsequent '{'.");
+            console.log("findAndParseMetadataComment: Found marker and '{' but not the subsequent '-->'.");
           }
         } else {
-          console.log("findAndParseMetadataComment: Found marker but not the closing '-->'.");
+          console.log("findAndParseMetadataComment: Found marker but not the subsequent '{'.");
         }
       }
     }

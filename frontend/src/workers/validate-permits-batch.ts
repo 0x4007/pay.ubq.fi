@@ -3,10 +3,10 @@
 // Function to perform batch validation using rpcClient
 
 import { JsonRpcResponse } from "@ubiquity-dao/permit2-rpc-client";
-import { encodeFunctionData, Abi } from "viem";
+import { Abi, encodeFunctionData } from "viem";
 import { PermitData } from "../types.ts";
 import { preparePermitPrerequisiteContracts } from "../utils/permit-utils.ts";
-import { rpcClient, JsonRpcRequest, permit2Abi } from "./permit-checker.worker.ts";
+import { JsonRpcRequest, permit2Abi, rpcClient } from "./permit-checker.worker.ts";
 
 export async function validatePermitsBatch(permitsToValidate: PermitData[]): Promise<PermitData[]> {
   if (!rpcClient) throw new Error("RPC client not initialized.");
@@ -27,7 +27,7 @@ export async function validatePermitsBatch(permitsToValidate: PermitData[]): Pro
 
     const key = `${permit.nonce}-${permit.networkId}`;
     const chainId = permit.networkId;
-    const owner = permit.owner as string;
+    const owner = permit.owner; // Removed 'as string' cast
 
     const wordPos = BigInt(permit.nonce) >> 8n;
     batchRequests.push({
