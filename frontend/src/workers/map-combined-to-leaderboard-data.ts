@@ -1,0 +1,46 @@
+import { CombinedLeaderboardData, RawPermitWithUser, undefined } from "./permit-checker.worker.ts";
+
+// Function to map the *combined* data for the leaderboard hook
+
+export function mapCombinedToLeaderboardData(permit: CombinedLeaderboardData): RawPermitWithUser | null {
+  const networkIdNum = Number(permit.token?.network ?? 0); // Default to 0 if token or network is null
+
+
+  // Safely access joined data, providing defaults
+  const githubUser = permit.github_user; // Access the potentially null user info
+
+  // Use the GitHub ID as the username identifier since no username column exists
+  const githubUsername = githubUser ? `GitHub ID: ${githubUser.id}` : `UnknownUser(${permit.beneficiary_id})`; // Use beneficiary_id in fallback
+  const avatarUrl = ''; // Set to empty string as it's not available from DB
+  const nodeUrl = permit.location?.node_url ?? null; // Extract node_url
+
+
+  // Basic validation: Ensure we have a valid user and node_url
+  if (!githubUser || !nodeUrl) {
+    console.warn(`Worker: Filtering out leaderboard permit nonce ${permit.nonce} due to missing github_user info or node_url.`);
+    return null;
+  }
+
+  // Ensure amount is parseable (though hook does parseFloat too)
+  // This check might be less relevant now if XP comes from metadata, but keep for safety
+  if (permit.amount !== undefined && permit.amount !== null) {
+    try {
+      parseFloat(permit.amount);
+      if (isNaN(parseFloat(permit.amount))) throw new Error("Amount is NaN");
+    } catch (e) {
+      console.warn(`Worker: Filtering out leaderboard permit nonce ${permit.nonce} due to invalid amount format: ${permit.amount}`, e);
+      return null;
+    }
+  }
+
+
+  return {
+    nonce: String(permit.nonce),
+    networkId: networkIdNum,
+    amount: permit.amount !== undefined && permit.amount !== null ? String(permit.amount) : undefined, // Keep original amount
+    githubUsername: githubUsername,
+    avatarUrl: avatarUrl,
+    node_url: nodeUrl, // Include node_url
+    created_at: permit.created // Include creation date if needed
+  };
+}
