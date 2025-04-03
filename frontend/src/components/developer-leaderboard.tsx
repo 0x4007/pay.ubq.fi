@@ -12,16 +12,54 @@ function formatXp(xp: number): string {
 export function DeveloperLeaderboard() {
   const { leaderboardData, isLoading, error } = useLeaderboardData();
 
+  // Add detailed logging for debugging
+  console.log("DeveloperLeaderboard render state:", {
+    isLoading,
+    hasError: !!error,
+    errorMessage: error,
+    hasData: !!leaderboardData,
+    dataLength: leaderboardData?.length,
+    sampleEntry: leaderboardData?.[0]
+  });
+
   if (isLoading) {
-    return <div className="loading-container">Loading leaderboard...</div>;
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <div>Loading leaderboard data...</div>
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="error-container">Error loading leaderboard: {error}</div>;
+    console.error("DeveloperLeaderboard error:", error);
+    return (
+      <div className="error-container">
+        <h3>Error Loading Leaderboard</h3>
+        <p>{error}</p>
+        <button onClick={() => window.location.reload()} className="retry-button">
+          Retry
+        </button>
+      </div>
+    );
   }
 
   if (!leaderboardData || leaderboardData.length === 0) {
-    return <div className="info-container">No leaderboard data available.</div>;
+    console.log("DeveloperLeaderboard: No data available");
+    return (
+      <div className="info-container">
+        <p>No leaderboard data available</p>
+        <button
+          onClick={() => {
+            console.log("Retrying leaderboard fetch...");
+            window.location.reload();
+          }}
+          className="retry-button"
+        >
+          Refresh
+        </button>
+      </div>
+    );
   }
 
   return (
@@ -65,14 +103,17 @@ export function DeveloperLeaderboard() {
           width: 100%;
           border-collapse: collapse;
           margin-top: 15px;
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 8px;
         }
         .leaderboard-table th, .leaderboard-table td {
-          border: 1px solid #ddd; /* Example border */
-          padding: 8px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          padding: 12px;
           text-align: left;
         }
         .leaderboard-table th {
-          background-color: #f2f2f2; /* Example header background */
+          background: rgba(255, 255, 255, 0.1);
+          font-weight: bold;
         }
         .developer-info {
           display: flex;
@@ -81,11 +122,43 @@ export function DeveloperLeaderboard() {
         }
         .avatar {
           border-radius: 50%;
-          border: 1px solid #ccc;
+          border: 2px solid rgba(255, 255, 255, 0.2);
+          width: 30px;
+          height: 30px;
+          object-fit: cover;
         }
         .loading-container, .error-container, .info-container {
-          padding: 20px;
+          padding: 40px;
           text-align: center;
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 8px;
+          margin: 20px;
+        }
+        .loading-spinner {
+          border: 3px solid rgba(255, 255, 255, 0.1);
+          border-radius: 50%;
+          border-top: 3px solid #fff;
+          width: 30px;
+          height: 30px;
+          animation: spin 1s linear infinite;
+          margin: 0 auto 20px;
+        }
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        .retry-button {
+          margin-top: 20px;
+          padding: 8px 16px;
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 4px;
+          color: white;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+        .retry-button:hover {
+          background: rgba(255, 255, 255, 0.2);
         }
       `}</style>
     </div>

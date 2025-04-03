@@ -10,7 +10,7 @@ import { DeveloperLeaderboard } from "./components/developer-leaderboard"; // Im
 function AuthenticatedLayout({ children }: { children: React.ReactNode }) {
   return (
     <div>
-      <nav style={{ marginBottom: '20px', padding: '10px', borderBottom: '1px solid #eee' }}>
+      <nav >
         <Link to="/" style={{ marginRight: '15px' }}>Dashboard</Link>
         <Link to="/leaderboard">Leaderboard</Link>
         {/* Add logout button or other nav items here if needed */}

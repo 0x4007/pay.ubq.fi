@@ -80,6 +80,7 @@ export function useLeaderboardData() {
 
   // Use the specific type for comments array
   const fetchGitHubIssueComments = async (owner: string, repo: string, issueNumber: number): Promise<GitHubComment[]> => {
+    console.log(`fetchGitHubIssueComments: Fetching for ${owner}/${repo}#${issueNumber}`);
     const url = `https://api.github.com/repos/${owner}/${repo}/issues/${issueNumber}/comments`;
     const headers: HeadersInit = { Accept: "application/vnd.github.v3+json" };
     if (GITHUB_TOKEN) {
@@ -95,7 +96,9 @@ export function useLeaderboardData() {
         return [];
       }
       // Assert the response type after parsing
-      return await response.json() as GitHubComment[];
+      const comments = await response.json() as GitHubComment[];
+      console.log(`fetchGitHubIssueComments: Fetched ${comments.length} comments for ${owner}/${repo}#${issueNumber}`);
+      return comments;
     } catch (e) {
       console.error(`Error fetching comments for ${owner}/${repo}#${issueNumber}:`, e);
       return [];
@@ -104,28 +107,35 @@ export function useLeaderboardData() {
 
   // Use the specific type for comments array
   const findAndParseMetadataComment = (comments: GitHubComment[]): PermitCommentMetadata | null => {
+    console.log(`findAndParseMetadataComment: Searching ${comments.length} comments...`);
     const marker = "<!-- Ubiquity - GithubCommentModule -";
     for (const comment of comments) {
       if (comment.body?.includes(marker)) {
-        // Extract JSON - assumes JSON starts after the marker comment closing tag -->
+        console.log("findAndParseMetadataComment: Found potential metadata comment.");
         const jsonStart = comment.body.indexOf("-->\n{"); // Look for newline after marker close
         if (jsonStart !== -1) {
           const jsonString = comment.body.substring(jsonStart + 4); // Start after -->\n
           try {
             // Attempt to clean potential trailing markdown/HTML if necessary
             const cleanedJsonString = jsonString.split("\n```")[0].trim();
-            return JSON.parse(cleanedJsonString) as PermitCommentMetadata;
+            const metadata = JSON.parse(cleanedJsonString) as PermitCommentMetadata;
+            console.log("findAndParseMetadataComment: Successfully parsed metadata.");
+            return metadata;
           } catch (e) {
             console.error("Failed to parse JSON metadata from comment:", e, "\nJSON String:", jsonString);
             return null;
           }
+        } else {
+           console.log("findAndParseMetadataComment: Found marker but not the expected JSON start.");
         }
       }
     }
+    console.log("findAndParseMetadataComment: No metadata comment found.");
     return null;
   };
 
   const fetchGitHubUserDetails = async (userId: number): Promise<GitHubUserDetails | null> => {
+     console.log(`fetchGitHubUserDetails: Fetching details for user ID ${userId}`);
      const url = `https://api.github.com/user/${userId}`;
      const headers: HeadersInit = { Accept: "application/vnd.github.v3+json" };
      if (GITHUB_TOKEN) {
@@ -139,6 +149,7 @@ export function useLeaderboardData() {
        }
        const data = await response.json();
        if (data && typeof data.login === 'string' && typeof data.avatar_url === 'string' && typeof data.id === 'number') {
+         console.log(`fetchGitHubUserDetails: Successfully fetched details for ${data.login}`);
          return { id: data.id, login: data.login, avatar_url: data.avatar_url };
        } else {
          console.warn(`GitHub user API response for ${userId} missing expected fields.`);
@@ -153,17 +164,21 @@ export function useLeaderboardData() {
   // --- Aggregation Logic ---
 
   const processAndAggregateData = useCallback(async (rawPermits: RawPermitInfoFromWorker[]): Promise<LeaderboardEntry[]> => {
-    setIsProcessingData(true); // Start processing
+    console.log("processAndAggregateData: Starting...");
+    setIsProcessingData(true);
     setError(null);
 
     const aggregatedDataByUser: Record<number, AggregatedUserData> = {};
     const issuesToFetch = new Map<string, { owner: string; repo: string; issueNumber: number }>();
-    const issueXpAdded = new Map<string, Set<number>>(); // Track which user's XP has been added for which issue URL
+    const issueXpAdded = new Map<string, Set<number>>();
 
-    // First pass: Group by user and identify unique issues
+    console.log("processAndAggregateData: First pass - identifying users and issues...");
     for (const permit of rawPermits) {
       const githubId = extractGitHubId(permit.githubUsername);
-      if (!githubId) continue;
+      if (!githubId) {
+        console.warn(`processAndAggregateData: Could not extract GitHub ID from ${permit.githubUsername}`);
+        continue;
+      }
 
       if (!aggregatedDataByUser[githubId]) {
         aggregatedDataByUser[githubId] = { githubId, totalXp: 0 };
@@ -173,18 +188,22 @@ export function useLeaderboardData() {
         const parsedUrl = parseGitHubIssueUrl(permit.node_url);
         if (parsedUrl) {
           issuesToFetch.set(permit.node_url, parsedUrl);
+        } else {
+          console.warn(`processAndAggregateData: Could not parse issue URL: ${permit.node_url}`);
         }
       }
     }
+    console.log(`processAndAggregateData: Identified ${Object.keys(aggregatedDataByUser).length} users and ${issuesToFetch.size} unique issues.`);
 
-    // Fetch comments for unique issues
+    console.log("processAndAggregateData: Fetching comments for all unique issues...");
     const commentPromises = Array.from(issuesToFetch.entries()).map(([url, params]) =>
       fetchGitHubIssueComments(params.owner, params.repo, params.issueNumber).then(comments => ({ url, comments }))
     );
     const commentResults = await Promise.all(commentPromises);
     const commentsByUrl = new Map(commentResults.map(res => [res.url, res.comments]));
+    console.log("processAndAggregateData: Finished fetching comments.");
 
-    // Second pass: Extract XP and aggregate, ensuring XP is added only once per user per issue metadata comment
+    console.log("processAndAggregateData: Second pass - extracting XP from comments...");
     const metadataCache = new Map<string, PermitCommentMetadata | null>();
 
     for (const permit of rawPermits) {
@@ -196,26 +215,31 @@ export function useLeaderboardData() {
         const comments = commentsByUrl.get(permit.node_url);
         metadata = comments ? findAndParseMetadataComment(comments) : null;
         metadataCache.set(permit.node_url, metadata);
+        if (!metadata) {
+            console.warn(`processAndAggregateData: Metadata not found or parsed for issue ${permit.node_url}`);
+        }
       }
 
       if (metadata?.output) {
         const userMetadataEntry = Object.values(metadata.output).find(entry => entry.userId === githubId);
 
         if (userMetadataEntry && typeof userMetadataEntry.total === 'number') {
-          // Check if XP for this user from this issue URL has already been added
           const usersAddedForIssue = issueXpAdded.get(permit.node_url) ?? new Set<number>();
           if (!usersAddedForIssue.has(githubId)) {
+            console.log(`processAndAggregateData: Adding ${userMetadataEntry.total} XP for user ${githubId} from issue ${permit.node_url}`);
             aggregatedDataByUser[githubId].totalXp += userMetadataEntry.total;
-            usersAddedForIssue.add(githubId); // Mark as added for this issue
+            usersAddedForIssue.add(githubId);
             issueXpAdded.set(permit.node_url, usersAddedForIssue);
+          } else {
+             // console.log(`processAndAggregateData: XP for user ${githubId} from issue ${permit.node_url} already added.`);
           }
         } else {
            console.warn(`Could not find user ID ${githubId} or valid 'total' XP in metadata for ${permit.node_url}`);
         }
-      } else {
-         console.warn(`Could not find or parse metadata comment in ${permit.node_url}`);
       }
+      // No warning here if metadata is null, already warned above
     }
+    console.log("processAndAggregateData: Finished extracting XP.");
 
      // Fetch GitHub user details
      const uniqueUserIds = Object.keys(aggregatedDataByUser).map(id => parseInt(id, 10));
@@ -243,63 +267,105 @@ export function useLeaderboardData() {
       .sort((a, b) => b.totalXp - a.totalXp);
 
     setIsProcessingData(false); // Finish processing
+    console.log("processAndAggregateData: Finished, returning final leaderboard:", finalLeaderboard);
     return finalLeaderboard;
   }, []);
 
 
   // Effect to handle worker interaction and trigger processing
   useEffect(() => {
+    let mounted = true;
+
+    console.log("useLeaderboardData useEffect: Running effect.", {
+      isWorkerInitialized,
+      hasWorker: !!worker,
+      contextError: contextWorkerError
+    });
+
     const handleWorkerMessage = async (event: MessageEvent) => {
+      if (!mounted) {
+        console.log("useLeaderboardData: Ignoring message, component unmounted");
+        return;
+      }
+
+      console.log("useLeaderboardData handleWorkerMessage:", {
+        type: event.data.type,
+        hasPayload: !!event.data.payload,
+        hasError: !!event.data.error
+      });
+
       const { type, payload, error: workerError } = event.data;
 
       if (type === "LEADERBOARD_DATA_RESULT") {
-        setIsLoading(false); // Worker fetch is complete
         if (workerError) {
-          console.error("Error fetching leaderboard data from worker:", workerError);
+          console.error("Worker returned error:", workerError);
           setError(`Failed to fetch leaderboard data: ${workerError}`);
           setLeaderboardData([]);
-          return;
-        }
-
-        const rawPermits = payload as RawPermitInfoFromWorker[];
-        console.log("Received raw permit info from worker:", rawPermits);
-
-        if (rawPermits.length === 0) {
+        } else if (!payload || !Array.isArray(payload)) {
+          console.error("Invalid payload from worker:", payload);
+          setError("Received invalid data format from worker");
           setLeaderboardData([]);
-          return;
+        } else {
+          console.log("Processing worker payload:", {
+            payloadLength: payload.length,
+            samplePermit: payload[0],
+            networkId: payload[0]?.networkId,
+            nodeUrl: payload[0]?.node_url
+          });
+          try {
+            const finalData = await processAndAggregateData(payload);
+            console.log("Final leaderboard data:", {
+              entries: finalData.length,
+              sampleEntry: finalData[0],
+              totalXpSum: finalData.reduce((sum, entry) => sum + entry.totalXp, 0)
+            });
+            setLeaderboardData(finalData);
+            setError(null);
+          } catch (processingError) {
+            console.error("Error processing leaderboard data:", processingError);
+            setError(`Failed to process leaderboard data: ${processingError instanceof Error ? processingError.message : String(processingError)}`);
+            setLeaderboardData([]);
+          }
         }
 
-        // Process the raw data (fetch GitHub info, parse comments, aggregate XP)
-        try {
-          const finalData = await processAndAggregateData(rawPermits);
-          setLeaderboardData(finalData);
-          setError(null);
-        } catch (processingError) {
-           console.error("Error processing leaderboard data:", processingError);
-           setError(`Failed to process leaderboard data: ${processingError instanceof Error ? processingError.message : String(processingError)}`);
-           setLeaderboardData([]);
-        }
+        // Always set loading to false after handling the result
+        setIsLoading(false);
       }
     };
 
     if (contextWorkerError) {
+      console.error("useLeaderboardData useEffect: Worker context error detected.");
       setError(`Worker initialization failed: ${contextWorkerError}`);
       setIsLoading(false);
       return;
     }
 
-    if (isWorkerInitialized && worker) {
-      worker.addEventListener("message", handleWorkerMessage);
-      console.log("Requesting leaderboard data from worker...");
-      worker.postMessage({ type: "FETCH_LEADERBOARD_DATA" });
-      setIsLoading(true); // Start loading (worker fetch)
+    const initializeAndFetch = () => {
+      if (!worker) {
+        console.error("useLeaderboardData: No worker instance available");
+        setError("Worker initialization failed");
+        setIsLoading(false);
+        return;
+      }
 
-      return () => {
-        worker.removeEventListener("message", handleWorkerMessage);
-        console.log("Leaderboard hook cleanup: Removed message listener.");
-      };
-    } else if (!isWorkerInitialized && !contextWorkerError) {
-      setIsLoading(true); // Set loading while waiting for worker init
+      if (!isWorkerInitialized) {
+        console.log("useLeaderboardData: Waiting for worker initialization...");
+        setIsLoading(true);
+        return;
+      }
+
+      console.log("useLeaderboardData: Setting up worker message handler and requesting data...");
+      worker.addEventListener("message", handleWorkerMessage);
+      setIsLoading(true);
+      worker.postMessage({ type: "FETCH_LEADERBOARD_DATA" });
+    };
+
+    initializeAndFetch();
+
+    return () => {
+      console.log("useLeaderboardData: Cleanup - removing message listener");
+      mounted = false;
+      worker?.removeEventListener("message", handleWorkerMessage);
     }
 
   }, [processAndAggregateData, worker, isWorkerInitialized, contextWorkerError]);

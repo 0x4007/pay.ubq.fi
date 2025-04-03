@@ -1,25 +1,37 @@
-import { CombinedLeaderboardData, GitHubUserInfo, PERMITS_TABLE, supabase, undefined } from "./permit-checker.worker.ts";
+import { CombinedLeaderboardData, GitHubUserInfo, PERMITS_TABLE } from "./permit-checker.worker.ts";
+import { getSupabase } from "./supabase-singleton";
 
 // Function to fetch ALL permits and associated user data using two queries
 
-
 export async function fetchAllPermitsForLeaderboard(): Promise<CombinedLeaderboardData[]> {
-  if (!supabase) throw new Error("Supabase client not initialized.");
-
+  const supabase = getSupabase();
   console.log(`Worker: Querying ALL permits for leaderboard (Step 1)...`);
 
-  // Step 1: Fetch all permits with necessary fields including beneficiary_id and token network
+  // Define permit data type based on the query
+  interface PermitQueryResult {
+    nonce: string;
+    amount: string | null;
+    created: string;
+    beneficiary_id: number;
+    token: { network: number } | null;
+    location: { node_url: string | null } | null;
+  }
+
+  // Step 1: Fetch all permits with necessary fields
   const { data: permitsData, error: permitsError } = await supabase
     .from(PERMITS_TABLE)
     .select(`
-            nonce,
-            amount,
-            created,
-            beneficiary_id,
-            token:tokens!inner(network),
-            location:locations(node_url) // Select node_url from locations table
-        `)
-    .is("transaction", null); // Keep filtering for unclaimed permits
+      nonce,
+      amount,
+      created,
+      beneficiary_id,
+      token:tokens!inner(network),
+      location:locations(node_url)
+    `)
+    .is("transaction", null) as {
+      data: PermitQueryResult[] | null;
+      error: Error | null
+    };
 
   if (permitsError) {
     console.error("Supabase leaderboard permits fetch error (Step 1):", permitsError);
@@ -43,12 +55,10 @@ export async function fetchAllPermitsForLeaderboard(): Promise<CombinedLeaderboa
     )
   ];
 
-
   if (beneficiaryIds.length === 0) {
     console.log(`Worker: No valid beneficiary IDs found in permits.`);
     // Return permits without user info if no IDs to query
-    // Explicitly map to handle potential type issues
-    return permitsData.map((p: any) => ({
+    return permitsData.map((p: PermitQueryResult) => ({
       nonce: p.nonce,
       amount: p.amount,
       created: p.created,
@@ -61,17 +71,24 @@ export async function fetchAllPermitsForLeaderboard(): Promise<CombinedLeaderboa
 
   console.log(`Worker: Querying ${beneficiaryIds.length} unique GitHub users (Step 2)...`);
 
+  interface UserQueryResult {
+    id: number;
+  }
+
   // Step 3: Fetch corresponding GitHub users
   const { data: usersData, error: usersError } = await supabase
-    .from('users') // Correct table name
-    .select('id') // Select ONLY id
-    .in('id', beneficiaryIds); // Filter by the correct ID column
+    .from('users')
+    .select('id')
+    .in('id', beneficiaryIds) as {
+      data: UserQueryResult[] | null;
+      error: Error | null;
+    };
 
   if (usersError) {
     console.error("Supabase GitHub users fetch error (Step 2):", usersError);
     console.warn("Worker: Failed to fetch GitHub user details. Leaderboard will show placeholders.");
     // Return permits without user info if user fetch fails
-    return permitsData.map((p: any) => ({
+    return permitsData.map((p: PermitQueryResult) => ({
       nonce: p.nonce,
       amount: p.amount,
       created: p.created,
@@ -87,16 +104,13 @@ export async function fetchAllPermitsForLeaderboard(): Promise<CombinedLeaderboa
   // Step 4: Combine the data
   const usersMap = new Map<number, GitHubUserInfo>();
   usersData?.forEach(user => {
-    const potentialUser = user as any;
-    if (potentialUser && typeof potentialUser.id === 'number') {
-      const userInfo: GitHubUserInfo = { id: potentialUser.id };
-      usersMap.set(userInfo.id, userInfo);
-    }
+    const userInfo: GitHubUserInfo = { id: user.id };
+    usersMap.set(userInfo.id, userInfo);
   });
 
   // Explicitly construct the CombinedLeaderboardData object with type checks
   const combinedData: CombinedLeaderboardData[] = permitsData
-    .map((permit: any): CombinedLeaderboardData | null => {
+    .map((permit: PermitQueryResult): CombinedLeaderboardData | null => {
       // Check if permit is a valid object and has the core properties
       if (!permit || typeof permit !== 'object' ||
         !('nonce' in permit) ||
@@ -126,7 +140,7 @@ export async function fetchAllPermitsForLeaderboard(): Promise<CombinedLeaderboa
       // Construct the object explicitly, ensuring all fields match CombinedLeaderboardData
       return {
         nonce: permit.nonce,
-        amount: permit.amount,
+        amount: permit.amount || '',  // Convert null to empty string
         created: permit.created,
         beneficiary_id: permit.beneficiary_id,
         token: tokenData,

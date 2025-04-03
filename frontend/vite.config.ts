@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills'; // Import the polyfills plugin
 
 // https://vite.dev/config/
@@ -28,7 +28,7 @@ export default defineConfig({
   },
   // Server configuration to disable HMR
   server: {
-    hmr: true
+    hmr: false
   },
   // Restore css and build config, add worker format
   css: {

@@ -1,11 +1,13 @@
 /// <reference lib="webworker" />
-import { SupabaseClient } from "@supabase/supabase-js";
 import { createRpcClient } from '@ubiquity-dao/permit2-rpc-client';
 import { type Address, parseAbiItem } from "viem";
-import type { Database, Tables } from "../database.types.ts"; // Added .ts extension
-import type { PermitData } from "../types.ts"; // Added .ts extension
+import type { Tables } from "../database.types.ts";
+import type { PermitData } from "../types.ts";
+import { fetchAllPermitsForLeaderboard } from "./fetch-all-permits-for-leaderboard";
+import { initializeSupabase } from "./supabase-singleton";
 
 // --- Worker Setup ---
+let workerInitialized = false;
 
 // Define table names
 export const PERMITS_TABLE = "permits";
@@ -19,11 +21,73 @@ export const LOCATIONS_TABLE = "locations";
 // ABIs needed for checks
 export const permit2Abi = parseAbiItem("function nonceBitmap(address owner, uint256 wordPos) view returns (uint256)");
 
-// Initialize Supabase & RPC clients (will be set in INIT)
-export const supabase: SupabaseClient<Database> | null = null; // Use Database type
+// Initialize RPC client
 export const rpcClient: ReturnType<typeof createRpcClient> | null = null;
-export const PROXY_BASE_URL = ""; // Will be set in INIT
-export const initializationPromise: Promise<void> | null = null; // Promise to track initialization
+export const PROXY_BASE_URL = "";
+
+// Handle worker messages
+self.onmessage = async (event: MessageEvent<{ type: string; payload?: WorkerPayload }>) => {
+  const { type, payload } = event.data;
+
+  try {
+    switch (type) {
+      case 'INIT':
+        if (!payload?.supabaseUrl || !payload?.supabaseAnonKey) {
+          throw new Error('Missing Supabase credentials');
+        }
+
+        try {
+          // Initialize Supabase singleton and verify connection
+          console.log('Worker: Initializing Supabase client...');
+          await initializeSupabase(payload.supabaseUrl, payload.supabaseAnonKey);
+
+          workerInitialized = true;
+          self.postMessage({ type: 'INIT_SUCCESS' });
+          console.log('Worker: Worker initialization completed successfully');
+        } catch (initError) {
+          const errorMessage = 'Failed to initialize Supabase client: ' +
+            (initError instanceof Error ? initError.message : String(initError));
+          console.error('Worker: ' + errorMessage);
+          throw new Error(errorMessage);
+        }
+        break;
+
+      case 'FETCH_LEADERBOARD_DATA': {
+        if (!workerInitialized) {
+          throw new Error('Worker not initialized');
+        }
+
+        const combinedData = await fetchAllPermitsForLeaderboard();
+
+        // Map combined data to the format expected by the hook
+        const mappedData = combinedData.map(permit => ({
+          nonce: permit.nonce,
+          networkId: permit.token?.network ?? 1, // Default to mainnet if not specified
+          amount: permit.amount,
+          githubUsername: permit.github_user ? `GitHub ID: ${permit.github_user.id}` : 'Unknown',
+          avatarUrl: '', // Will be fetched by the hook
+          node_url: permit.location?.node_url ?? null,
+          created_at: permit.created
+        }));
+
+        self.postMessage({
+          type: 'LEADERBOARD_DATA_RESULT',
+          payload: mappedData
+        });
+        break;
+      }
+
+      default:
+        console.warn(`Unknown message type: ${type}`);
+    }
+  } catch (error) {
+    console.error('Worker error:', error);
+    self.postMessage({
+      type: type === 'INIT' ? 'INIT_ERROR' : 'LEADERBOARD_DATA_RESULT',
+      error: error instanceof Error ? error.message : 'Unknown error'
+    });
+  }
+};
 
 // Define type for JSON-RPC Request object
 export interface JsonRpcRequest {
