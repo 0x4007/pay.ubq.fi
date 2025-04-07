@@ -40,10 +40,13 @@ import { getSupabase } from "./supabase-singleton.ts"; // Add .ts extension
     }
 };
 
-// Function to fetch permits and associated user data using two queries, filtered by date
-export async function fetchAllPermitsForLeaderboard(cutoffDateIsoString: string): Promise<CombinedLeaderboardData[]> {
+export async function fetchAllPermitsForLeaderboard(cutoffDateIsoString?: string): Promise<CombinedLeaderboardData[]> {
   const supabase = getSupabase();
-  console.log(`Worker: Querying permits created on or after ${cutoffDateIsoString} for leaderboard (Step 1)...`); // Updated log
+  if (cutoffDateIsoString) {
+    console.log(`Worker: Querying permits created on or after ${cutoffDateIsoString} for leaderboard (Step 1)...`);
+  } else {
+    console.log(`Worker: Querying ALL permits for leaderboard (Step 1)...`);
+  }
 
   // Define permit data type based on the updated query
   interface PermitQueryResult {
@@ -65,7 +68,7 @@ export async function fetchAllPermitsForLeaderboard(cutoffDateIsoString: string)
   }
 
   // Step 1: Fetch all permits with necessary fields
-  const { data: permitsData, error: permitsError } = (await supabase // Added parenthesis
+  let query = supabase
     .from(PERMITS_TABLE)
     .select(`
       nonce,
@@ -75,12 +78,16 @@ export async function fetchAllPermitsForLeaderboard(cutoffDateIsoString: string)
       token:tokens!inner(network),
       location:locations(node_url)
     `, { head: false })
-    .is("transaction", null)
-    .gte('created', cutoffDateIsoString) // Added date filter
-  ) as { // Moved 'as' to wrap the await expression
-      data: PermitQueryResult[] | null;
-      error: Error | null
-    };
+    .is("transaction", null);
+
+  if (cutoffDateIsoString) {
+    query = query.gte('created', cutoffDateIsoString);
+  }
+
+  const { data: permitsData, error: permitsError } = await query as {
+    data: PermitQueryResult[] | null;
+    error: Error | null;
+  };
 
   if (permitsError) {
     console.error("Supabase leaderboard permits fetch error (Step 1):", permitsError);

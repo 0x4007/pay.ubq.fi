@@ -13,7 +13,11 @@ interface UseLeaderboardDataProps {
 /**
  * Hook to fetch and manage leaderboard data using the shared worker
  */
-export function useLeaderboardData({ selectedWeeks, selectedRepository }: UseLeaderboardDataProps) {
+export function useLeaderboardData({ selectedWeeks, selectedRepository }: UseLeaderboardDataProps): {
+  leaderboardData: LeaderboardEntry[];
+  isLoading: boolean;
+  error: string | null;
+} {
   const { worker, isWorkerInitialized, workerError } = useWorker(); // Get worker from context
   const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>([]); // State for the data
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -53,11 +57,11 @@ export function useLeaderboardData({ selectedWeeks, selectedRepository }: UseLea
       // Try to load from cache first
       const cacheKey = getCacheKey(selectedWeeks, selectedRepository);
       console.log(`useLeaderboardData: Checking cache with key ${cacheKey}...`);
-      const cachedData = await leaderboardCache.getProcessedData(cacheKey);
+      const cachedData = await leaderboardCache.getProcessedData(cacheKey, selectedRepository);
 
-      if (cachedData && cachedData.length > 0) {
-        console.log(`useLeaderboardData: Using cached data (${cachedData.length} entries)`);
-        setLeaderboardData(cachedData);
+      if (cachedData.processedData && cachedData.isComplete) {
+        console.log(`useLeaderboardData: Using cached data (${cachedData.processedData.length} entries)`);
+        setLeaderboardData(cachedData.processedData);
         setIsLoading(false);
         return; // Exit early if cache hit
       }
@@ -89,17 +93,23 @@ export function useLeaderboardData({ selectedWeeks, selectedRepository }: UseLea
             setError(workerMsgError);
             setLeaderboardData([]);
           } else {
-            const freshData = (payload as LeaderboardEntry[]) || [];
-            console.log(`useLeaderboardData: Received ${freshData.length} entries from worker`);
-            setLeaderboardData(freshData);
-            setError(null); // Clear previous errors on success
+            const { processedData: freshData, rawData } = payload;
+            if (Array.isArray(freshData)) {
+              console.log(`useLeaderboardData: Received ${freshData.length} entries from worker`);
+              setLeaderboardData(freshData);
+              setError(null); // Clear previous errors on success
 
-            // Cache the results for future use with repository filtering
-            leaderboardCache.setProcessedData(freshData, getCacheKey(selectedWeeks, selectedRepository))
-              .then(() => console.log(`useLeaderboardData: Cached ${freshData.length} entries for ${selectedWeeks} weeks`))
-              .catch(cacheError => console.error("useLeaderboardData: Error caching data:", cacheError));
+              // Cache the results for future use with repository filtering
+              leaderboardCache.setProcessedData(
+                freshData,
+                rawData,
+                getCacheKey(selectedWeeks, selectedRepository),
+                true
+              ).then(() => console.log(`useLeaderboardData: Cached ${freshData.length} entries for ${selectedWeeks} weeks`))
+                .catch(cacheError => console.error("useLeaderboardData: Error caching data:", cacheError));
+            }
+            setIsLoading(false); // Update loading state
           }
-          setIsLoading(false); // Update loading state
         }
         // Potentially handle other message types if the worker sends more than just leaderboard results
       };

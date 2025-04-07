@@ -35,7 +35,7 @@ const getUniqueFilterOptions = (data: LeaderboardEntry[]) => {
   const categories = new Set<string>();
   const repositories = new Set<string>();
 
-  data.forEach((entry: LeaderboardEntry) => {
+  data.forEach((entry) => {
     Object.keys(entry.xpByCategory).forEach(cat => categories.add(cat));
     // Add all repositories from the entry's repositories array
     entry.repositories.forEach(repo => repositories.add(repo));
@@ -62,12 +62,15 @@ export function DeveloperLeaderboard() {
 
   // Calculate available filter options based on the fetched data
   const { availableCategories, availableRepositories } = useMemo(() => {
-    return getUniqueFilterOptions(rawLeaderboardData || []);
+    if (!Array.isArray(rawLeaderboardData)) {
+      return { availableCategories: [], availableRepositories: [] };
+    }
+    return getUniqueFilterOptions(rawLeaderboardData);
   }, [rawLeaderboardData]);
 
   // Apply filtering locally based on state
   const filteredLeaderboardData = useMemo(() => {
-    if (!rawLeaderboardData) return [];
+    if (!Array.isArray(rawLeaderboardData)) return [];
 
     // Apply category and repository filters locally (time filtering is done in worker/hook)
     return rawLeaderboardData.filter((entry) => {
@@ -87,9 +90,9 @@ export function DeveloperLeaderboard() {
     isLoading, // Hook's loading state (worker fetching/processing)
     hasError: !!error,
     errorMessage: error,
-    hasRawData: !!rawLeaderboardData,
-    rawDataLength: rawLeaderboardData?.length,
-    filteredDataLength: filteredLeaderboardData?.length,
+    hasRawData: Array.isArray(rawLeaderboardData),
+    rawDataLength: Array.isArray(rawLeaderboardData) ? rawLeaderboardData.length : 0,
+    filteredDataLength: Array.isArray(filteredLeaderboardData) ? filteredLeaderboardData.length : 0,
     sampleEntry: filteredLeaderboardData?.[0]
   });
 
@@ -108,8 +111,8 @@ export function DeveloperLeaderboard() {
     );
   }
 
-  // Show loading only if not errored and data hasn't loaded yet
-  if (isLoading && !rawLeaderboardData?.length) {
+  // Show loading state for initial load and filter changes
+  if (isLoading) {
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
@@ -119,32 +122,86 @@ export function DeveloperLeaderboard() {
   }
 
 
-  // Handle case where data is loaded but filtering results in empty list
-  if (!isLoading && filteredLeaderboardData.length === 0) {
-     console.log("DeveloperLeaderboard: No data available after filtering");
-     // Keep filter controls visible even when no data matches
-     // return (
-     //   <div className="info-container">
-     //     <p>No leaderboard data matches the current filters.</p>
-     //     <button onClick={() => window.location.reload()} className="retry-button">Refresh</button>
-     //   </div>
-     // );
-     // Instead of returning, we'll render the filters and an empty chart area below
-  } else if (!isLoading && !rawLeaderboardData?.length) {
-     // Handle case where initial fetch returned no data at all
-     console.log("DeveloperLeaderboard: No data available from source");
-     return (
-       <div className="info-container">
-         <p>No leaderboard data available</p>
-        <button
-          onClick={() => {
-            console.log("Retrying leaderboard fetch...");
-            window.location.reload();
-          }}
-          className="retry-button"
-        >
-          Refresh
-        </button>
+  // Handle case where there's no data
+  if (!isLoading && (filteredLeaderboardData.length === 0 || !Array.isArray(rawLeaderboardData) || rawLeaderboardData.length === 0)) {
+    const isFiltered = !!selectedCategory || !!selectedRepository;
+    const message = isFiltered
+      ? "No data matches the current filters"
+      : "No leaderboard data available";
+
+    console.log(`DeveloperLeaderboard: ${message}`);
+    return (
+      <div className="leaderboard-container page-container">
+        <h2>Developer XP Leaderboard</h2>
+        {/* Keep filter controls visible even when no data */}
+        <div className="filters-container">
+          <label>
+            Category:
+            <select
+              value={selectedCategory ?? ""}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedCategory(e.target.value || null)}
+              disabled={isLoading}
+            >
+              <option value="">All Categories</option>
+              {availableCategories.map(category => (
+                <option key={category} value={category}>{category}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Repository:
+            <select
+              value={selectedRepository ?? ""}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedRepository(e.target.value || null)}
+              disabled={isLoading}
+            >
+              <option value="">All Repositories</option>
+              {availableRepositories.map(repo => (
+                <option key={repo} value={repo}>
+                  {repo.split('/').pop() || repo}
+                </option>
+              ))}
+            </select>
+          </label>
+          <div className="time-radio-group">
+            <span className="time-radio-label">Time Range:</span>
+            {[
+              { label: "All Time", weeks: 0 },
+              { label: "1 Week", weeks: 1 },
+              { label: "2 Weeks", weeks: 2 },
+              { label: "1 Month", weeks: 4 },
+              { label: "3 Months", weeks: 13 },
+              { label: "1 Year", weeks: 52 },
+            ].map(({ label, weeks }) => (
+              <label key={label} className="radio-label">
+                <input
+                  type="radio"
+                  name="timeRange"
+                  value={weeks}
+                  checked={selectedWeeks === weeks}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedWeeks(parseInt(e.target.value, 10))}
+                  disabled={isLoading}
+                  className="radio-input"
+                />
+                {label}
+              </label>
+            ))}
+          </div>
+        </div>
+        <div className="info-container">
+          <p>{message}</p>
+          {!isFiltered && (
+            <button
+              onClick={() => {
+                console.log("Retrying leaderboard fetch...");
+                window.location.reload();
+              }}
+              className="retry-button"
+            >
+              Refresh
+            </button>
+          )}
+        </div>
       </div>
     );
   }
@@ -188,26 +245,27 @@ export function DeveloperLeaderboard() {
         {/* Time Range Radio Buttons */}
         <div className="time-radio-group">
           <span className="time-radio-label">Time Range:</span>
-          {[
-            { label: "1 Week", weeks: 1 },
-            { label: "2 Weeks", weeks: 2 },
-            { label: "1 Month", weeks: 4 },
-            { label: "3 Months", weeks: 13 },
-            { label: "1 Year", weeks: 52 },
-          ].map(({ label, weeks }) => (
-            <label key={weeks} className="radio-label">
-              <input
-                type="radio"
-                name="timeRange"
-                value={weeks}
-                checked={selectedWeeks === weeks}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedWeeks(parseInt(e.target.value, 10))}
-                disabled={isLoading}
-                className="radio-input"
-              />
-              {label}
-            </label>
-          ))}
+            {[
+              { label: "All Time", weeks: 0 },
+              { label: "1 Week", weeks: 1 },
+              { label: "2 Weeks", weeks: 2 },
+              { label: "1 Month", weeks: 4 },
+              { label: "3 Months", weeks: 13 },
+              { label: "1 Year", weeks: 52 },
+            ].map(({ label, weeks }) => (
+              <label key={label} className="radio-label">
+                <input
+                  type="radio"
+                  name="timeRange"
+                  value={weeks}
+                  checked={selectedWeeks === weeks}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedWeeks(parseInt(e.target.value, 10))}
+                  disabled={isLoading}
+                  className="radio-input"
+                />
+                {label}
+              </label>
+            ))}
         </div>
       </div>
 

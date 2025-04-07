@@ -77,38 +77,80 @@ async function handleInitMessage(payload: WorkerPayload | undefined) {
   console.log('Worker: Worker initialization completed successfully');
 }
 
+let cachedAllTimeRawData: CombinedLeaderboardData[] | null = null;
+let cachedAllTimeTimestamp = 0;
+const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 1 day TTL for raw data cache
+
 async function handleFetchLeaderboardData(payload: WorkerPayload | undefined) {
   if (!workerInitialized || !isSupabaseInitialized) {
     throw new Error('Worker or Supabase not initialized');
   }
   console.log("Worker: Starting leaderboard data fetch and processing...");
 
-  // Extract selectedWeeks from payload, default to 52 (1 year) if not provided
+  const now = Date.now();
   const selectedWeeks = payload?.selectedWeeks ?? 52;
-  console.log(`Worker: Filtering leaderboard data for the last ${selectedWeeks} weeks.`);
+  const selectedRepository = payload?.selectedRepository as string | undefined;
 
-  // Calculate cutoff date
-  const cutoffDate = new Date();
-  cutoffDate.setDate(cutoffDate.getDate() - selectedWeeks * 7);
-  console.log(`Worker: Filtering permits created on or after: ${cutoffDate.toISOString()}`);
+  const isAllTime = selectedWeeks === 0;
 
-  // Step 1: Fetch raw data from Supabase, filtered by date
-  console.log("Worker: Calling fetchAllPermitsForLeaderboard with cutoff date...");
-  const filteredRawData = await fetchAllPermitsForLeaderboard(cutoffDate.toISOString()); // Pass cutoff date
-  console.log(`Worker: Fetched ${filteredRawData.length} permit entries within the time range directly from DB.`);
+  let fullRawData: CombinedLeaderboardData[] = [];
 
-  // Step 1.5: Removed redundant JS filtering block
+  const cacheValid = cachedAllTimeRawData && (now - cachedAllTimeTimestamp < CACHE_TTL_MS);
 
-  // Step 2: Process and aggregate the *already filtered* data using the imported function
+  if (isAllTime) {
+    if (cacheValid) {
+      console.log("Worker: Using cached ALL TIME raw data");
+      fullRawData = cachedAllTimeRawData!;
+    } else {
+      console.log("Worker: Fetching ALL TIME raw data from Supabase...");
+      fullRawData = await fetchAllPermitsForLeaderboard(""); // no cutoff date
+      cachedAllTimeRawData = fullRawData;
+      cachedAllTimeTimestamp = now;
+      console.log(`Worker: Cached ${fullRawData.length} ALL TIME permits`);
+    }
+  } else {
+    if (cacheValid) {
+      console.log("Worker: Filtering cached ALL TIME raw data for last", selectedWeeks, "weeks");
+      const cutoffDate = new Date();
+      cutoffDate.setDate(cutoffDate.getDate() - selectedWeeks * 7);
+      fullRawData = cachedAllTimeRawData!.filter(p => {
+        if (!p.created) return false;
+        return new Date(p.created) >= cutoffDate;
+      });
+    } else {
+      console.log("Worker: Cache expired or missing, fetching fresh ALL TIME raw data...");
+      fullRawData = await fetchAllPermitsForLeaderboard(""); // fetch all
+      cachedAllTimeRawData = fullRawData;
+      cachedAllTimeTimestamp = now;
+      console.log(`Worker: Cached ${fullRawData.length} ALL TIME permits`);
+      // Now filter
+      const cutoffDate = new Date();
+      cutoffDate.setDate(cutoffDate.getDate() - selectedWeeks * 7);
+      fullRawData = fullRawData.filter(p => {
+        if (!p.created) return false;
+        return new Date(p.created) >= cutoffDate;
+      });
+    }
+  }
+
+  console.log(`Worker: Using ${fullRawData.length} permits after time filtering`);
+
+  // Repository filter
+  const repositoryFilteredData = selectedRepository
+    ? fullRawData.filter(permit => permit.repository === selectedRepository)
+    : fullRawData;
+  console.log(`Worker: Filtered to ${repositoryFilteredData.length} entries for repository: ${selectedRepository || 'all'}`);
+
   console.log("Worker: Calling imported processAndAggregateLeaderboardData...");
-  // Pass the current GITHUB_TOKEN_WORKER to the aggregator
-  const processedData = await processAndAggregateLeaderboardData(filteredRawData, GITHUB_TOKEN_WORKER); // Process the filtered data
+  const processedData = await processAndAggregateLeaderboardData(repositoryFilteredData, GITHUB_TOKEN_WORKER);
   console.log(`Worker: Processed filtered data into ${processedData.length} leaderboard entries.`);
 
-  // Step 3: Post the successful result back
   self.postMessage({
     type: "LEADERBOARD_DATA_RESULT",
-    payload: processedData,
+    payload: {
+      processedData,
+      rawData: repositoryFilteredData
+    },
   });
   console.log("Worker: Sent LEADERBOARD_DATA_RESULT with processed data.");
 }
@@ -229,6 +271,7 @@ export interface WorkerPayload {
     permits?: PermitData[]; // For VALIDATE_PERMITS (if used, currently batch validation is internal)
     proxyBaseUrl?: string;
     selectedWeeks?: number; // Added for leaderboard
+    selectedRepository?: string; // Added for repository filtering
     [key: string]: unknown;
 }
 
