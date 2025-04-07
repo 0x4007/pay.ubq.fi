@@ -1,11 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
-import { useWorker } from "../context/worker-context";
+import { useCallback, useEffect, useState, useRef } from "react";
+// Removed useWorker import
 import { leaderboardCache } from "../utils/leaderboard-cache"; // Keep for caching final results
 import type { LeaderboardEntry } from "../workers/leaderboard-processing"; // Import final type
 
 // Removed unused types: RawPermitInfoFromWorker, GitHubUserDetails, PermitCommentMetadata, AggregatedUserData, GitHubComment
 
-// Removed GITHUB_TOKEN constant
+// Read GitHub Token from environment variables
+const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
 // Props no longer needed as filtering happens in component
 // interface UseLeaderboardDataProps {
@@ -18,15 +19,10 @@ export function useLeaderboardData() {
   const [isLoading, setIsLoading] = useState<boolean>(true); // Tracks worker fetching/processing
   // Removed isProcessingData state
   const [error, setError] = useState<string | null>(null);
-  const {
-    worker,
-    isWorkerInitialized,
-    workerError: contextWorkerError,
-  }: {
-    worker: Worker | null;
-    isWorkerInitialized: boolean;
-    workerError: string | null;
-  } = useWorker();
+  // Use useRef to hold the worker instance - prevents re-creation on re-renders
+  const workerRef = useRef<Worker | null>(null);
+  // State to track if the worker has been successfully initialized (token sent)
+  const [isWorkerReady, setIsWorkerReady] = useState<boolean>(false);
 
   // Removed filter state - this should be managed by the component using the hook
   // const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -49,8 +45,8 @@ export function useLeaderboardData() {
   const handleWorkerMessage = useCallback(
     async (event: MessageEvent<WorkerMessage>) => {
       // Check mount status using a ref or check if worker is still valid
-      if (!worker) {
-         console.log("useLeaderboardData: Ignoring message, worker instance lost (likely unmounted)");
+      if (!workerRef.current) {
+         console.log("useLeaderboardData: Ignoring message, worker instance lost (likely unmounted or not created)");
          return;
       }
 
@@ -88,7 +84,7 @@ export function useLeaderboardData() {
         }
       }
     },
-    [worker, setLeaderboardData, setError, setIsLoading] // Dependencies updated
+    [setLeaderboardData, setError, setIsLoading] // Dependencies updated - workerRef is stable
   );
 
   // Initial data loading function (simplified)
@@ -107,72 +103,114 @@ export function useLeaderboardData() {
     return false; // Cache miss
   };
 
-  // Effect for worker initialization and data fetching
+  // Effect for worker creation, initialization, and data fetching
   useEffect(() => {
     let mounted = true; // Simple mount check
 
-    const initializeAndFetch = async () => {
-      if (contextWorkerError) {
-        console.error("useLeaderboardData: Worker context error detected.");
+    const initializeWorker = () => {
+      console.log("useLeaderboardData: Initializing leaderboard worker...");
+      setIsLoading(true); // Start loading
+      setError(null); // Clear previous errors
+
+      try {
+        // Create the worker instance
+        const newWorker = new Worker(new URL('../workers/leaderboard-processing.ts', import.meta.url), { type: 'module' });
+        workerRef.current = newWorker;
+        console.log("useLeaderboardData: Leaderboard worker instance created.");
+
+        // --- Error Handling ---
+        const handleError = (event: ErrorEvent) => {
+          console.error("useLeaderboardData: Worker error:", event.message, event);
+          if (mounted) {
+            setError(`Worker error: ${event.message}`);
+            setIsLoading(false);
+            setIsWorkerReady(false); // Mark as not ready on error
+            // Clean up worker instance on critical error
+            workerRef.current?.terminate();
+            workerRef.current = null;
+          }
+        };
+        newWorker.addEventListener('error', handleError);
+
+        // --- Message Handling ---
+        newWorker.addEventListener('message', handleWorkerMessage);
+        console.log("useLeaderboardData: Added message and error listeners.");
+
+        // --- Send Token ---
+        if (!GITHUB_TOKEN) {
+          console.warn("useLeaderboardData: VITE_GITHUB_TOKEN is missing in environment variables. Proceeding without authentication.");
+          // Optionally set an error state or allow proceeding unauthenticated
+          // setError("GitHub token is missing. Leaderboard data might be incomplete or rate-limited.");
+        }
+        console.log("useLeaderboardData: Sending SET_GITHUB_TOKEN to worker.");
+        newWorker.postMessage({ type: 'SET_GITHUB_TOKEN', payload: GITHUB_TOKEN || null }); // Send null if undefined
+
+        // Mark worker as ready (token sent, listeners attached)
         if (mounted) {
-          setError(`Worker initialization failed: ${contextWorkerError}`);
+          setIsWorkerReady(true);
+          console.log("useLeaderboardData: Worker marked as ready.");
+        }
+
+      } catch (e) {
+        console.error("useLeaderboardData: Failed to create worker instance:", e);
+        if (mounted) {
+          setError(`Failed to create worker: ${e instanceof Error ? e.message : String(e)}`);
           setIsLoading(false);
         }
-        return;
       }
+    };
 
-      if (!worker) {
-        console.warn("useLeaderboardData: No worker instance available yet.");
-        // Don't set error immediately, wait for initialization
-        if (mounted) setIsLoading(true);
-        return;
-      }
+    // Initialize worker only if it doesn't exist yet
+    if (!workerRef.current) {
+      initializeWorker();
+    }
 
-      if (!isWorkerInitialized) {
-        console.log("useLeaderboardData: Waiting for worker initialization...");
-        if (mounted) setIsLoading(true);
-        return;
-      }
-
-      // Try loading from cache
-      const hadCacheHit = await loadInitialData();
-
-      // Set up worker message handler if mounted
-      if (mounted) {
-        console.log("useLeaderboardData: Setting up worker message handler");
-        worker.addEventListener("message", handleWorkerMessage);
-
-        // Only request fresh data from worker if cache was missed
-        if (!hadCacheHit) {
-          console.log("useLeaderboardData: Requesting fresh data from worker (FETCH_LEADERBOARD_DATA)");
-          worker.postMessage({ type: "FETCH_LEADERBOARD_DATA" });
-          // Keep isLoading true until response received
+    // --- Fetch Data (only if worker is ready) ---
+    const fetchData = async () => {
+      if (isWorkerReady && workerRef.current) {
+        console.log("useLeaderboardData: Worker is ready, checking cache...");
+        const hadCacheHit = await loadInitialData();
+        if (!hadCacheHit && mounted) {
+          console.log("useLeaderboardData: Cache miss, requesting fresh data (FETCH_LEADERBOARD_DATA)");
+          workerRef.current.postMessage({ type: "FETCH_LEADERBOARD_DATA" });
+          // isLoading should already be true or set by loadInitialData
+        } else if (hadCacheHit) {
+          console.log("useLeaderboardData: Cache hit, data loaded.");
+          // isLoading should have been set to false by loadInitialData
         }
+      } else if (!workerRef.current && mounted) {
+         console.log("useLeaderboardData: Waiting for worker to be ready before fetching data...");
+         setIsLoading(true); // Ensure loading state is true while waiting
       }
     };
 
-    initializeAndFetch();
+    fetchData();
 
-    // Cleanup function
+    // --- Cleanup ---
     return () => {
-      console.log("useLeaderboardData: Cleanup - removing message listener");
+      console.log("useLeaderboardData: Cleanup running.");
       mounted = false;
-      // Remove listener only if worker instance still exists
-      worker?.removeEventListener("message", handleWorkerMessage);
+      if (workerRef.current) {
+        console.log("useLeaderboardData: Terminating worker and removing listeners.");
+        // Remove listeners before terminating
+        workerRef.current.removeEventListener('message', handleWorkerMessage);
+        // Error listener is implicitly removed on terminate, but good practice:
+        // workerRef.current.removeEventListener('error', handleError); // Need to store handleError ref if doing this
+        workerRef.current.terminate();
+        workerRef.current = null;
+        setIsWorkerReady(false); // Reset ready state on unmount
+      }
     };
-    // Dependencies: worker instance, initialization status, context error, and the message handler
-  }, [worker, isWorkerInitialized, contextWorkerError, handleWorkerMessage]);
+    // Dependencies: Only run on mount and unmount essentially, plus when worker becomes ready
+  }, [isWorkerReady, handleWorkerMessage]); // Added isWorkerReady dependency
 
   // Removed the second useEffect for client-side filtering/re-processing
-
-  // Combine local error state with context error state
-  const displayError = error || (contextWorkerError ? `Worker initialization failed: ${contextWorkerError}` : null);
 
   // Return simplified state
   return {
     leaderboardData,
     isLoading, // Only one loading state now
-    error: displayError,
+    error, // Use local error state directly
     // Removed filter-related returns
   };
 }

@@ -1,8 +1,9 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
-// Get Supabase config from Vite env vars - needed for INIT
+// Get Supabase config and GitHub Token from Vite env vars
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN; // Read the GitHub token
 
 // --- Module-level Worker Instance ---
 let sharedWorker: Worker | null = null;
@@ -86,11 +87,13 @@ const initializeSharedWorker = () => {
     }
 
     console.log("WorkerContext Module: Sending INIT message to shared worker...");
+    console.log("WorkerContext Module: Sending INIT message to shared worker (including GitHub token if present)...");
     sharedWorker.postMessage({
       type: 'INIT',
       payload: {
         supabaseUrl: SUPABASE_URL,
-        supabaseAnonKey: SUPABASE_ANON_KEY
+        supabaseAnonKey: SUPABASE_ANON_KEY,
+        githubToken: GITHUB_TOKEN || null // Pass the token (or null if undefined/empty)
       }
     });
 

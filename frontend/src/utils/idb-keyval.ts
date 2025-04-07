@@ -1,5 +1,24 @@
+// Function to completely delete and recreate the database
+export const resetDatabase = async (): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    const deleteRequest = indexedDB.deleteDatabase("ubiquityCache");
+
+    deleteRequest.onerror = () => {
+      console.error("Failed to delete database:", deleteRequest.error);
+      reject(deleteRequest.error);
+    };
+
+    deleteRequest.onsuccess = () => {
+      console.log("Successfully deleted database");
+      // Recreate the database
+      dbRequest = createDB();
+      resolve();
+    };
+  });
+};
+
 // Create a single instance of IndexedDB for all our key-value stores
-const createDB = () => {
+const createDB = (): IDBOpenDBRequest => {
   const dbName = "ubiquityCache";
   const dbVersion = 2; // Increment version to trigger schema update
   const request = indexedDB.open(dbName, dbVersion);
@@ -29,7 +48,7 @@ const createDB = () => {
 };
 
 // Initialize the database
-const dbRequest = createDB();
+let dbRequest = createDB();
 
 export function createIdbKeyval<T>(storeName: string) {
   const getDB = (): Promise<IDBDatabase | null> => {

@@ -1,6 +1,17 @@
-import { githubCommentCache } from "../utils/github-comment-cache"; // Adjust path if needed
-import { leaderboardCache } from "../utils/leaderboard-cache"; // Adjust path if needed
-import type { CombinedLeaderboardData } from "./permit-checker.worker"; // Import type from worker
+import { githubCommentCache } from "../utils/github-comment-cache.ts";
+// Removed resetDatabase import as we won't reset the whole DB anymore
+import { leaderboardCache } from "../utils/leaderboard-cache.ts";
+import type { CombinedLeaderboardData } from "./permit-checker.worker.ts"; // Assuming this type is still correct for the fetched data structure
+import { initializeSupabase, getSupabase } from "./supabase-singleton.ts";
+import { fetchAllPermitsForLeaderboard } from "./fetch-all-permits-for-leaderboard.ts";
+
+// Global variable to store the GitHub token
+let GITHUB_TOKEN: string | null = null;
+let isSupabaseInitialized = false;
+
+// Read Supabase credentials from environment variables
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 // --- Types (Moved from useLeaderboardData) ---
 
@@ -62,8 +73,7 @@ interface GitHubComment {
 // We'll need to pass this in during worker init or fetch it differently.
 // For now, assume it's available globally or passed in.
 // TODO: Securely handle GITHUB_TOKEN in worker
-// Use a more specific type for self if possible, or handle token passing differently
-const GITHUB_TOKEN = (self as WorkerGlobalScope & { GITHUB_TOKEN?: string }).GITHUB_TOKEN || ""; // Placeholder access
+// Removed placeholder access
 
 // --- Helper Functions (Moved from useLeaderboardData) ---
 
@@ -104,9 +114,10 @@ export const fetchAndCacheIssueMetadata = async (owner: string, repo: string, is
       console.log(`Worker: Fetching comments for ${owner}/${repo}#${issueNumber}`);
       const headers: HeadersInit = { Accept: "application/vnd.github.v3+json" };
       if (GITHUB_TOKEN) {
-        headers["Authorization"] = `token ${GITHUB_TOKEN}`;
+        // console.log(`Worker: Using GitHub token for ${apiUrl}`); // Too noisy
+        headers["Authorization"] = `Bearer ${GITHUB_TOKEN}`; // Use Bearer for PATs
       } else {
-        console.warn("Worker: VITE_GITHUB_TOKEN not found. Making unauthenticated request to GitHub API.");
+        console.warn(`Worker: No GitHub token available. Making unauthenticated request to ${apiUrl}.`);
       }
 
       const response = await fetch(apiUrl, { headers });
@@ -179,34 +190,73 @@ export const findAndParseMetadataComment = (comments: GitHubComment[]): PermitCo
 };
 
 export const fetchGitHubUserDetails = async (userId: number): Promise<GitHubUserDetails | null> => {
+  // Skip cache if no token is available to ensure fresh data when token is restored
+  if (!GITHUB_TOKEN) {
+    console.warn(`Worker: No GitHub token available. Skipping user details fetch for ${userId}`);
+    return null;
+  }
+
   const cachedDetails = await leaderboardCache.getUserDetails(userId);
-  if (cachedDetails) {
+  if (cachedDetails && cachedDetails.login && !cachedDetails.login.startsWith('GitHub ID:')) {
     console.log(`Worker: Using cached user details for ID ${userId}`);
     return cachedDetails;
   }
 
   console.log(`Worker: Fetching GitHub details for user ID ${userId}`);
   const url = `https://api.github.com/user/${userId}`;
-  const headers: HeadersInit = { Accept: "application/vnd.github.v3+json" };
-  if (GITHUB_TOKEN) {
-    headers["Authorization"] = `token ${GITHUB_TOKEN}`;
-  }
+  const headers: HeadersInit = {
+    Accept: "application/vnd.github.v3+json",
+    Authorization: `Bearer ${GITHUB_TOKEN}`
+  };
+
   try {
     const response = await fetch(url, { headers });
+
+    // Handle rate limiting
+    if (response.status === 403) {
+      const rateLimitRemaining = response.headers.get('x-ratelimit-remaining');
+      const rateLimitReset = response.headers.get('x-ratelimit-reset');
+      console.warn(`Worker: Rate limited when fetching user ${userId}. Remaining: ${rateLimitRemaining}, Reset: ${rateLimitReset}`);
+      return null;
+    }
+
     if (!response.ok) {
       console.warn(`Worker: GitHub user API request failed for user ${userId}: ${response.status}`);
       return null;
     }
+
     const data = await response.json();
-    if (data && typeof data.login === "string" && typeof data.avatar_url === "string" && typeof data.id === "number") {
-      const userDetails: GitHubUserDetails = { id: data.id, login: data.login, avatar_url: data.avatar_url };
-      console.log(`Worker: Successfully fetched details for ${userDetails.login}`);
-      await leaderboardCache.setUserDetails(userId, userDetails);
-      return userDetails;
-    } else {
-      console.warn(`Worker: GitHub user API response for ${userId} missing expected fields.`);
+
+    // Strict validation of GitHub profile data
+    if (!data || typeof data !== 'object') {
+      console.warn(`Worker: Invalid response data for user ${userId}`);
       return null;
     }
+
+    const { id, login, avatar_url } = data;
+
+    // Validate all required fields
+    if (typeof id !== 'number' || id !== userId) {
+      console.warn(`Worker: Mismatched or invalid user ID in response for ${userId}`);
+      return null;
+    }
+
+    if (typeof login !== 'string' || login.startsWith('GitHub ID:') || !login.trim()) {
+      console.warn(`Worker: Invalid login in response for user ${userId}`);
+      return null;
+    }
+
+    if (typeof avatar_url !== 'string' || !avatar_url.startsWith('http')) {
+      console.warn(`Worker: Invalid avatar URL in response for user ${userId}`);
+      return null;
+    }
+
+    const userDetails: GitHubUserDetails = { id, login, avatar_url };
+    console.log(`Worker: Successfully fetched details for ${userDetails.login}`);
+
+    // Only cache valid GitHub profile data
+    await leaderboardCache.setUserDetails(userId, userDetails);
+    return userDetails;
   } catch (e) {
     console.error(`Worker: Error fetching GitHub details for user ${userId}:`, e);
     return null;
@@ -356,3 +406,114 @@ export const processAndAggregateLeaderboardData = async (
   console.log("Worker: processAndAggregateLeaderboardData: Finished, returning final leaderboard.");
   return finalLeaderboard;
 };
+
+
+// --- Supabase Initialization Helper ---
+async function ensureSupabaseInitialized(): Promise<boolean> {
+  if (isSupabaseInitialized) {
+    return true;
+  }
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    console.error("Worker: Supabase URL or Key is missing in environment variables.");
+    return false;
+  }
+  try {
+    console.log("Worker: Initializing Supabase...");
+    await initializeSupabase(SUPABASE_URL, SUPABASE_ANON_KEY);
+    isSupabaseInitialized = true;
+    console.log("Worker: Supabase initialized successfully.");
+    return true;
+  } catch (error) {
+    console.error("Worker: Failed to initialize Supabase:", error);
+    isSupabaseInitialized = false;
+    return false;
+  }
+}
+
+
+// --- Message Handler ---
+
+// Define the structure of messages received by the worker
+interface WorkerIncomingMessage {
+  type: "SET_GITHUB_TOKEN" | "FETCH_LEADERBOARD_DATA"; // Add other types as needed
+  payload?: unknown; // Use specific types for payload based on 'type'
+}
+
+// Define the structure for messages sent back to the main thread
+interface WorkerOutgoingMessage {
+  type: string; // e.g., "LEADERBOARD_DATA_RESULT"
+  payload?: LeaderboardEntry[];
+  error?: string;
+}
+
+// Main message handler
+self.onmessage = async (event: MessageEvent<WorkerIncomingMessage>) => {
+  const { type, payload } = event.data;
+
+  console.log(`Worker: Received message type: ${type}`);
+
+  if (type === "SET_GITHUB_TOKEN") {
+    const newGitHubToken = (typeof payload === 'string' && payload) ? payload : null;
+    const tokenChanged = GITHUB_TOKEN !== newGitHubToken;
+    GITHUB_TOKEN = newGitHubToken;
+    console.log(`Worker: GitHub token ${GITHUB_TOKEN ? 'received and set' : 'set to null'}.`);
+
+    if (tokenChanged) {
+      console.log("Worker: Token changed, clearing caches...");
+      try {
+        await Promise.all([
+          leaderboardCache.clearAll(),
+          githubCommentCache.clearCache()
+        ]);
+        console.log("Worker: Cleared all caches on token change.");
+      } catch (error) {
+        console.error("Worker: Error clearing caches:", error);
+        // Proceed even if cache clearing fails
+      }
+    }
+
+    // Ensure Supabase is initialized (or re-initialized if needed, though singleton handles that)
+    // We do this here to ensure Supabase is ready *before* the first fetch request comes.
+    await ensureSupabaseInitialized();
+
+  } else if (type === "FETCH_LEADERBOARD_DATA") {
+    console.log("Worker: Starting leaderboard data fetch and processing...");
+    try {
+      // Ensure Supabase is initialized before fetching
+      const supabaseReady = await ensureSupabaseInitialized();
+      if (!supabaseReady) {
+        throw new Error("Supabase client could not be initialized.");
+      }
+
+      // Step 1: Fetch raw data from Supabase
+      console.log("Worker: Calling fetchAllPermitsForLeaderboard...");
+      const rawData = await fetchAllPermitsForLeaderboard();
+      console.log(`Worker: Fetched ${rawData.length} raw permit entries.`);
+
+      // Step 2: Process and aggregate the data
+      console.log("Worker: Calling processAndAggregateLeaderboardData...");
+      const processedData = await processAndAggregateLeaderboardData(rawData);
+      console.log(`Worker: Processed data into ${processedData.length} leaderboard entries.`);
+
+      // Step 3: Post the successful result back
+      self.postMessage({
+        type: "LEADERBOARD_DATA_RESULT",
+        payload: processedData,
+      } as WorkerOutgoingMessage);
+      console.log("Worker: Sent LEADERBOARD_DATA_RESULT with processed data.");
+
+    } catch (error) {
+      console.error("Worker: Error during FETCH_LEADERBOARD_DATA:", error);
+      // Post an error message back
+      self.postMessage({
+        type: "LEADERBOARD_DATA_RESULT",
+        error: error instanceof Error ? error.message : String(error),
+      } as WorkerOutgoingMessage);
+      console.log("Worker: Sent LEADERBOARD_DATA_RESULT with error.");
+    }
+  } else {
+    console.warn(`Worker: Unhandled message type: ${type}`);
+  }
+};
+
+console.log("Worker: leaderboard-processing.ts loaded and message handler attached.");
