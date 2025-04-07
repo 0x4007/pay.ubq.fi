@@ -15,6 +15,8 @@ import { PreferredTokenSelectorButton } from "./preferred-token-selector-button.
 
 // Removed constants BACKEND_API_URL, PERMIT2_ADDRESS as they are now in hooks/utils
 
+import { DynamicAnalytics } from "./dynamic-analytics.tsx";
+
 export function DashboardPage() {
   // UI State
   const [isTableVisible, setIsTableVisible] = useState(false);
@@ -285,6 +287,10 @@ export function DashboardPage() {
         />
       )}
 
+      {/* Dynamic Analytics Explorer */}
+      <section style={{ marginTop: "2rem" }}>
+        <DynamicAnalytics />
+      </section>
     </>
   );
 }

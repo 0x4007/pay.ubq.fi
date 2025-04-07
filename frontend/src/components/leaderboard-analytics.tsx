@@ -17,18 +17,42 @@ interface CustomTooltipProps {
   label?: string;
 }
 
+function formatRepoName(sanitizedRepo: string): string {
+  const firstUnderscore = sanitizedRepo.indexOf("_");
+  if (firstUnderscore === -1) return sanitizedRepo;
+  const owner = sanitizedRepo.slice(0, firstUnderscore);
+  const repo = sanitizedRepo.slice(firstUnderscore + 1).replace(/_/g, ".");
+  return `${owner}/${repo}`;
+}
+
 const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
   if (active && payload && payload.length) {
     return (
-      <div style={{ background: "white", border: "1px solid #ccc", padding: "10px" }}>
-        <strong>{label}</strong>
-        <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
-          {payload.map((entry, idx) => (
-            <li key={idx} style={{ color: entry.color }}>
-              {entry.name}: {Number(entry.value).toFixed(0)}
-            </li>
-          ))}
-        </ul>
+      <div
+        style={{
+          background: "black",
+          color: "white",
+          border: "1px solid #ccc",
+          padding: "10px",
+          fontSize: "0.9rem",
+          maxWidth: "250px",
+        }}
+      >
+        <div style={{ fontWeight: "bold", marginBottom: "5px", textAlign: "right" }}>{label}</div>
+        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <tbody>
+            {payload.map((entry, idx) => (
+              <tr key={idx}>
+                <td style={{ color: entry.color, textAlign: "right", padding: "2px 4px" }}>
+                  {formatRepoName(entry.name)}
+                </td>
+                <td style={{ textAlign: "right", padding: "2px 4px" }}>
+                  {Number(entry.value).toFixed(0)}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     );
   }
