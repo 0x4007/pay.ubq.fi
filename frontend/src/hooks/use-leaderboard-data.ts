@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useWorker } from "../context/worker-context.tsx";
+import { leaderboardCache } from "../utils/leaderboard-cache.ts";
 
 // Define the structure for aggregated leaderboard data
 export interface LeaderboardEntry {
@@ -62,9 +63,14 @@ interface GitHubComment {
 }
 
 // Get GitHub PAT from env
-const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
+  const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
-export function useLeaderboardData() {
+// Add selectedWeeks parameter to the hook props if needed, or manage it internally via useEffect dependency
+interface UseLeaderboardDataProps {
+  selectedWeeks: number; // Receive selected weeks from the component
+}
+
+export function useLeaderboardData({ selectedWeeks }: UseLeaderboardDataProps) { // Destructure selectedWeeks
   const [rawPermitData, setRawPermitData] = useState<RawPermitInfoFromWorker[]>([]); // Store raw data from worker
   const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>([]); // Final processed data
   const [isLoading, setIsLoading] = useState<boolean>(true); // Tracks worker fetching
@@ -366,6 +372,17 @@ export function useLeaderboardData() {
       contextError: contextWorkerError,
     });
 
+    // Try to load from cache first
+    const cachedData = leaderboardCache.get();
+    if (cachedData) {
+      console.log("Using cached leaderboard data");
+      setRawPermitData(cachedData.rawPermitData);
+      setLeaderboardData(cachedData.processedData);
+      setAvailableCategories(cachedData.filters.categories);
+      setAvailableRepositories(cachedData.filters.repositories);
+      // Still fetch fresh data in background
+    }
+
     const handleWorkerMessage = async (event: MessageEvent) => {
       if (!mounted) {
         console.log("useLeaderboardData: Ignoring message, component unmounted");
@@ -407,13 +424,24 @@ export function useLeaderboardData() {
           // Now process the raw data (will be refactored later to use filtered data)
           try {
             const finalData = await processAndAggregateData(payload);
-            console.log("Final leaderboard data:", {
-              entries: finalData.length,
-              sampleEntry: finalData.length > 0 ? { ...finalData[0], xpByCategory: JSON.stringify(finalData[0].xpByCategory) } : null, // Log category breakdown for sample
-              totalXpSum: finalData.reduce((sum, entry) => sum + entry.totalXp, 0),
-            });
-            setLeaderboardData(finalData);
-            setError(null);
+          console.log("Final leaderboard data:", {
+            entries: finalData.length,
+            sampleEntry: finalData.length > 0 ? { ...finalData[0], xpByCategory: JSON.stringify(finalData[0].xpByCategory) } : null,
+            totalXpSum: finalData.reduce((sum, entry) => sum + entry.totalXp, 0),
+          });
+          setLeaderboardData(finalData);
+          setError(null);
+
+          // Cache the results
+          leaderboardCache.set({
+            rawPermitData: payload,
+            processedData: finalData,
+            lastUpdate: new Date().toISOString(),
+            filters: {
+              categories: Array.from(categories),
+              repositories: Array.from(repositories)
+            }
+          });
           } catch (processingError) {
             console.error("Error processing leaderboard data:", processingError);
             setError(`Failed to process leaderboard data: ${processingError instanceof Error ? processingError.message : String(processingError)}`);
@@ -462,26 +490,47 @@ export function useLeaderboardData() {
     };
   }, [processAndAggregateData, worker, isWorkerInitialized, contextWorkerError]); // Keep this effect for initial fetch
 
-  // Effect to re-process data when filters change
+  // Effect to re-process data when filters or time range change
   useEffect(() => {
     if (rawPermitData.length === 0) {
       // Don't process if there's no raw data yet
       return;
     }
 
-    console.log("Filtering and re-aggregating data...", { selectedCategory, selectedRepository });
+    console.log("Filtering and re-aggregating data...", { selectedCategory, selectedRepository, selectedWeeks });
     setIsProcessingData(true); // Indicate processing start
 
-    // Apply filters
+    // Calculate cutoff date based on selectedWeeks
+    const cutoffDate = new Date();
+    cutoffDate.setDate(cutoffDate.getDate() - selectedWeeks * 7);
+    console.log(`Filtering permits created on or after: ${cutoffDate.toISOString()}`);
+
+    // Apply category, repository, and time filters
     const filteredPermits = rawPermitData.filter(permit => {
       const categoryMatch = !selectedCategory || permit.category === selectedCategory;
       const repoMatch = !selectedRepository || permit.repository === selectedRepository;
-      return categoryMatch && repoMatch;
+
+      // Time filter
+      let timeMatch = true; // Default to true if created_at is missing or invalid
+      if (permit.created_at) {
+        try {
+          const permitDate = new Date(permit.created_at);
+          timeMatch = permitDate >= cutoffDate;
+        } catch (e) {
+          console.warn(`Could not parse permit created_at date: ${permit.created_at}`, e);
+          // Keep the permit if date is invalid? Or filter it out? Let's keep it for now.
+        }
+      } else {
+         console.warn(`Permit missing created_at field:`, permit); // Warn if timestamp is missing
+      }
+
+
+      return categoryMatch && repoMatch && timeMatch;
     });
 
-    console.log(`Filtered down to ${filteredPermits.length} permits.`);
+    console.log(`Filtered down to ${filteredPermits.length} permits after all filters.`);
 
-    // Process the filtered data
+    // Process the time-filtered data
     processAndAggregateData(filteredPermits)
       .then(finalData => {
         console.log("Re-aggregated leaderboard data:", { entries: finalData.length });
@@ -497,7 +546,7 @@ export function useLeaderboardData() {
         setIsProcessingData(false); // Indicate processing end
       });
 
-  }, [rawPermitData, selectedCategory, selectedRepository, processAndAggregateData]);
+  }, [rawPermitData, selectedCategory, selectedRepository, selectedWeeks, processAndAggregateData]); // Add selectedWeeks dependency
 
 
   // Combine local error state with context error state

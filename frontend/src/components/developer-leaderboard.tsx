@@ -1,4 +1,4 @@
-import React from "react"; // Ensure React is imported
+import React, { useState } from "react"; // Import useState
 import {
   ResponsiveContainer,
   BarChart,
@@ -28,6 +28,8 @@ function formatXp(xp: number): string {
 }
 
 export function DeveloperLeaderboard() {
+  const [selectedWeeks, setSelectedWeeks] = useState(52); // State for the slider (1 to 52 weeks) - Declare BEFORE use
+
   const {
     leaderboardData,
     isLoading,
@@ -38,7 +40,7 @@ export function DeveloperLeaderboard() {
     setSelectedCategory,
     selectedRepository,
     setSelectedRepository,
-  } = useLeaderboardData();
+  } = useLeaderboardData({ selectedWeeks }); // Pass selectedWeeks to the hook
 
   // Add detailed logging for debugging
   console.log("DeveloperLeaderboard render state:", {
@@ -123,6 +125,19 @@ export function DeveloperLeaderboard() {
               <option key={repo} value={repo}>{repo}</option>
             ))}
           </select>
+        </label>
+        {/* Time Range Slider */}
+        <label className="time-slider-label">
+          Time Range (Weeks): {selectedWeeks}
+          <input
+            type="range"
+            min="1"
+            max="52"
+            value={selectedWeeks}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedWeeks(parseInt(e.target.value, 10))}
+            className="time-slider"
+            disabled={isLoading}
+          />
         </label>
       </div>
 

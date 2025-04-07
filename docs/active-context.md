@@ -46,7 +46,9 @@
     *   **Developer Leaderboard (2025-04-07):**
         *   Created `hooks/use-leaderboard-data.ts` to fetch and aggregate permit data for all developers.
         *   Modified `workers/permit-checker.worker.ts` to handle `FETCH_LEADERBOARD_DATA` message, query all permits, query associated users from the `users` table, combine the data, and return it without validation. Implemented a two-step query process to handle potential type issues with Supabase joins.
-        *   **Updated `components/developer-leaderboard.tsx`:** Replaced the HTML table view with a stacked bar chart using `recharts`. The chart visualizes XP breakdown by category (`comments`, `task`, `reviewRewards`) for each developer. Added `recharts` dependency. Extracted inline styles to `components/leaderboard-styles.css`.
+        *   **Updated `components/developer-leaderboard.tsx`:** Replaced the HTML table view with a stacked bar chart using `recharts`. The chart visualizes XP breakdown by category (`comments`, `task`, `reviewRewards`) for each developer. Added `recharts` dependency. Extracted inline styles to `components/leaderboard-styles.css`. **Added a time range slider (1-52 weeks) to filter data.**
+        *   **Updated `hooks/use-leaderboard-data.ts`:** Modified the hook to accept `selectedWeeks` state, calculate a cutoff date, and filter the raw permit data based on `created_at` timestamp before aggregation. Added `selectedWeeks` to the re-processing `useEffect` dependencies.
+        *   **Updated `components/leaderboard-styles.css`:** Added styles for the new time range slider.
         *   Refactored `App.tsx` to use `react-router-dom`, adding routes for `/login`, `/` (Dashboard), and `/leaderboard`. Implemented `ProtectedRoute` and `AuthenticatedLayout` components for handling authentication and basic navigation.
 *   **Shared Types**:
     *   Added `ownerBalanceSufficient`, `permit2AllowanceSufficient`, `checkError` fields to `PermitData` for storing prerequisite check results.
@@ -68,7 +70,7 @@
 
 *   **Verify Pre-Claim Checks**: Confirm the new balance/allowance checks accurately reflect on-chain state and prevent claims appropriately.
 *   **Test Claiming**: Thoroughly test the single permit claim flow with the new checks in place.
-*   **Test Leaderboard**: Verify the leaderboard fetches data correctly, aggregates XP accurately, and **displays the stacked bar chart visualization correctly**. Check handling of users with no permits or permits with missing user info, and chart responsiveness/readability.
+*   **Test Leaderboard**: Verify the leaderboard fetches data correctly, aggregates XP accurately, displays the stacked bar chart visualization correctly, **and filters correctly based on the new time range slider**. Check handling of users with no permits or permits with missing user info, and chart responsiveness/readability.
 *   **RPC Error Handling**: Improve backend validation functions (`isErc20NonceClaimed`, `isErc721NonceClaimed`) to better handle RPC errors (e.g., return a specific error state instead of fail-safe `true`).
 *   **(Optional)** Implement backend endpoint `/api/permits/update-status` to record successful claims.
 *   **(Backend)** Ensure backend API (`/api/permits`) correctly fetches permits based on the provided `walletAddress` query parameter.

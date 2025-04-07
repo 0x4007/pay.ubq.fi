@@ -46,18 +46,20 @@ graph LR
     *   **Quote Fetching:** If a preferred reward token is set (via `localStorage`), fetches quotes from CowSwap API (via `cowswap-utils.ts`) for claimable permits needing swaps. Stores estimated amounts (`estimatedAmountOut`, `quoteError`) in the permit data map (`allPermitsRef`).
     *   Updates the UI state after filtering and potentially adding quote estimates.
 *   **Frontend Hook (`useLeaderboardData.ts`):** Orchestrates fetching and aggregation for the leaderboard view.
+    *   Accepts `selectedWeeks` state from the component.
     *   Sends `FETCH_LEADERBOARD_DATA` message to the worker.
-    *   Receives the combined list of permits and user info.
-    *   Aggregates data by developer (GitHub username), summing permit amounts ("XP").
+    *   Receives the combined list of permits and user info (raw data).
+    *   **Filters the raw data client-side based on `selectedCategory`, `selectedRepository`, and `selectedWeeks` (using `created_at` timestamp).**
+    *   Aggregates the filtered data by developer (GitHub username), summing permit amounts ("XP").
     *   Sorts the aggregated data.
-    *   Provides the sorted leaderboard data, loading state, and error state to the UI component.
+    *   Provides the sorted leaderboard data, loading state, error state, and filter options/setters to the UI component.
 *   **Frontend Hook (`usePermitClaiming`):** Handles claim logic (Dashboard view).
     *   Currently uses `handleClaimAllValidSequential` for "Claim All", which simulates and claims permits one by one.
     *   **Post-Claim Swapping:** After sequential claims complete, identifies successfully claimed tokens, groups them, and triggers CowSwap order submissions (via `cowswap-utils.ts` and `initiateCowSwap`) for tokens needing to be swapped to the preferred token.
     *   Updates `localStorage` status cache immediately upon successful claim confirmation.
     *   Manages state for swap submission status (`swapSubmissionStatus`).
 *   **Frontend Component (`DashboardPage.tsx`):** Displays permits for the connected user, allows claiming. Uses `usePermitData` and `usePermitClaiming`.
-*   **Frontend Component (`DeveloperLeaderboard.tsx`):** Displays the developer XP leaderboard using a **stacked bar chart (`recharts`)** to visualize XP breakdown by category. Uses `useLeaderboardData`. Includes filtering controls. Styling in `leaderboard-styles.css`.
+*   **Frontend Component (`DeveloperLeaderboard.tsx`):** Displays the developer XP leaderboard using a **stacked bar chart (`recharts`)** to visualize XP breakdown by category. Uses `useLeaderboardData`. Includes filtering controls (category, repository) **and a time range slider (weeks)**. Manages `selectedWeeks` state. Styling in `leaderboard-styles.css`.
 *   **Frontend Component (`LoginPage.tsx`):** Handles wallet connection prompt.
 *   **Frontend Component (`RewardPreferenceSelector`):** Allows user to select preferred reward token from a list (defined in `constants/supported-reward-tokens.ts`). Saves selection to `localStorage`.
 *   **Frontend Utility (`cowswap-utils.ts`):** Contains (currently placeholder) functions to interact with CowSwap API for quotes (`getCowSwapQuote`) and order submission (`initiateCowSwap`). Uses `@cowprotocol/cow-sdk`.
@@ -84,7 +86,7 @@ graph LR
 1.  **Wallet Connection:** Frontend (User Action) -> Wallet (Approve Connection) -> Frontend (`useAccount` hook updates).
 2.  **Preference Selection:** Frontend (`RewardPreferenceSelector`) -> Save Address (`localStorage`).
 3.  **Permit Fetching & Validation (Dashboard):** Frontend (`usePermitData` on connect/refresh) -> Read Timestamp/Cache (`localStorage`) & Display Cache -> Worker (`FETCH_NEW_PERMITS` with timestamp) -> Supabase (Query user ID, then new permits) -> Worker (Map & Validate Batch RPC) -> Worker (Return validated list) -> Frontend (`usePermitData` receives list).
-4.  **Leaderboard Fetching & Display:** Frontend (`DeveloperLeaderboard` mount) -> `useLeaderboardData` -> Worker (`FETCH_LEADERBOARD_DATA`) -> Supabase (Query all permits) -> Supabase (Query users by ID) -> Worker (Combine data) -> Worker (Return combined list) -> Frontend (`useLeaderboardData` receives list, aggregates) -> Frontend (`DeveloperLeaderboard` displays data **as a stacked bar chart**).
+4.  **Leaderboard Fetching, Filtering & Display:** Frontend (`DeveloperLeaderboard` mount) -> `useLeaderboardData` -> Worker (`FETCH_LEADERBOARD_DATA`) -> Supabase (Query all permits) -> Supabase (Query users by ID) -> Worker (Combine data) -> Worker (Return combined list) -> Frontend (`useLeaderboardData` receives raw list) -> **Frontend (`useLeaderboardData` filters raw list based on category, repo, and `selectedWeeks`)** -> Frontend (`useLeaderboardData` aggregates filtered list) -> Frontend (`DeveloperLeaderboard` displays aggregated data **as a stacked bar chart**).
 5.  **Quote Fetching (Conditional - Dashboard):** Frontend (`usePermitData` after validation or preference change) -> Check Preference (`localStorage`) -> If set, Group Permits -> CowSwap API (`getCowSwapQuote`) -> Frontend (Update Permit Data with `estimatedAmountOut`/`quoteError`) -> Frontend (Update UI).
 6.  **Claiming (Sequential "Claim All" - Dashboard):** Frontend (`DashboardPage` User Click) -> `usePermitClaiming` (`handleClaimAllValidSequential`) -> Loop: [ Simulate -> `handleClaimPermit` -> Wallet (Sign Tx) -> Blockchain (`permitTransferFrom`) -> Wait for Receipt -> Update Permit State/Cache (`localStorage`) ].
 7.  **Post-Claim Swapping (Conditional - Dashboard):** Frontend (`usePermitClaiming` after loop) -> Read Preference (`localStorage`) -> Group Successful Claims -> Loop: [ CowSwap API (`initiateCowSwap`) -> Wallet (Sign Order) -> CowSwap API (Submit Order) ] -> Frontend (Update Swap Status UI).
