@@ -1,11 +1,10 @@
 import { CombinedLeaderboardData, GitHubUserInfo, PERMITS_TABLE } from "./app-worker.ts"; // Updated import path
 import { getSupabase } from "./supabase-singleton.ts"; // Add .ts extension
 
-// Function to fetch ALL permits and associated user data using two queries
-
-export async function fetchAllPermitsForLeaderboard(): Promise<CombinedLeaderboardData[]> {
+// Function to fetch permits and associated user data using two queries, filtered by date
+export async function fetchAllPermitsForLeaderboard(cutoffDateIsoString: string): Promise<CombinedLeaderboardData[]> { // Added parameter
   const supabase = getSupabase();
-  console.log(`Worker: Querying ALL permits for leaderboard (Step 1)...`);
+  console.log(`Worker: Querying permits created on or after ${cutoffDateIsoString} for leaderboard (Step 1)...`); // Updated log
 
   // Define permit data type based on the updated query
   interface PermitQueryResult {
@@ -27,7 +26,7 @@ export async function fetchAllPermitsForLeaderboard(): Promise<CombinedLeaderboa
   }
 
   // Step 1: Fetch all permits with necessary fields
-  const { data: permitsData, error: permitsError } = await supabase
+  const { data: permitsData, error: permitsError } = (await supabase // Added parenthesis
     .from(PERMITS_TABLE)
     .select(`
       nonce,
@@ -37,7 +36,9 @@ export async function fetchAllPermitsForLeaderboard(): Promise<CombinedLeaderboa
       token:tokens!inner(network),
       location:locations(node_url)
     `, { head: false })
-    .is("transaction", null) as {
+    .is("transaction", null)
+    .gte('created', cutoffDateIsoString) // Added date filter
+  ) as { // Moved 'as' to wrap the await expression
       data: PermitQueryResult[] | null;
       error: Error | null
     };
@@ -49,10 +50,10 @@ export async function fetchAllPermitsForLeaderboard(): Promise<CombinedLeaderboa
 
   // Add a type check for permitsData before proceeding
   if (!permitsData || !Array.isArray(permitsData)) {
-    console.log(`Worker: No valid permits data found for leaderboard (Step 1).`);
+    console.log(`Worker: No valid permits data found for leaderboard (Step 1) after date filter.`); // Updated log
     return [];
   }
-  console.log(`Worker: Found ${permitsData.length} permits (Step 1).`);
+  console.log(`Worker: Found ${permitsData.length} permits (Step 1) after date filter.`); // Updated log
 
   // Step 2: Fetch all discovered permits
   const { data: discoveredPermitsData, error: discoveredPermitsError } = await supabase
@@ -85,7 +86,7 @@ export async function fetchAllPermitsForLeaderboard(): Promise<CombinedLeaderboa
     });
   }
 
-  // Step 2: Extract unique beneficiary IDs, ensuring they are numbers
+  // Step 3: Extract unique beneficiary IDs from the *filtered* permitsData
   const beneficiaryIds = [
     ...new Set(
       permitsData
@@ -124,10 +125,10 @@ export async function fetchAllPermitsForLeaderboard(): Promise<CombinedLeaderboa
       });
     }
   } else {
-    console.log(`Worker: No valid beneficiary IDs found in permits. Skipping user query.`);
+    console.log(`Worker: No valid beneficiary IDs found in filtered permits. Skipping user query.`); // Updated log
   }
 
-  // Step 4: Map and filter permits data
+  // Step 5: Map and filter permits data (no date filtering needed here anymore)
   const combinedData: CombinedLeaderboardData[] = permitsData
     .map((permit: PermitQueryResult): CombinedLeaderboardData | null => {
       // Check if permit is a valid object and has the core properties

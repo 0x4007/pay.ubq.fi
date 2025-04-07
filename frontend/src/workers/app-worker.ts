@@ -92,31 +92,17 @@ async function handleFetchLeaderboardData(payload: WorkerPayload | undefined) {
   cutoffDate.setDate(cutoffDate.getDate() - selectedWeeks * 7);
   console.log(`Worker: Filtering permits created on or after: ${cutoffDate.toISOString()}`);
 
-  // Step 1: Fetch raw data from Supabase
-  console.log("Worker: Calling fetchAllPermitsForLeaderboard...");
-  const allRawData = await fetchAllPermitsForLeaderboard();
-  console.log(`Worker: Fetched ${allRawData.length} total raw permit entries.`);
+  // Step 1: Fetch raw data from Supabase, filtered by date
+  console.log("Worker: Calling fetchAllPermitsForLeaderboard with cutoff date...");
+  const filteredRawData = await fetchAllPermitsForLeaderboard(cutoffDate.toISOString()); // Pass cutoff date
+  console.log(`Worker: Fetched ${filteredRawData.length} permit entries within the time range directly from DB.`);
 
-  // Step 1.5: Filter raw data based on cutoffDate
-  const filteredRawData = allRawData.filter((permit: CombinedLeaderboardData) => {
-    if (!permit.created) {
-      console.warn(`Worker: Permit nonce ${permit.nonce} missing 'created' timestamp, excluding from time filter.`);
-      return false;
-    }
-    try {
-      const permitDate = new Date(permit.created);
-      return permitDate >= cutoffDate;
-    } catch (e) {
-      console.error(`Worker: Error parsing 'created' date for permit nonce ${permit.nonce}: ${permit.created}`, e);
-      return false;
-    }
-  });
-  console.log(`Worker: Filtered down to ${filteredRawData.length} permit entries within the time range.`);
+  // Step 1.5: Removed redundant JS filtering block
 
-  // Step 2: Process and aggregate the *filtered* data using the imported function
+  // Step 2: Process and aggregate the *already filtered* data using the imported function
   console.log("Worker: Calling imported processAndAggregateLeaderboardData...");
   // Pass the current GITHUB_TOKEN_WORKER to the aggregator
-  const processedData = await processAndAggregateLeaderboardData(filteredRawData, GITHUB_TOKEN_WORKER);
+  const processedData = await processAndAggregateLeaderboardData(filteredRawData, GITHUB_TOKEN_WORKER); // Process the filtered data
   console.log(`Worker: Processed filtered data into ${processedData.length} leaderboard entries.`);
 
   // Step 3: Post the successful result back
