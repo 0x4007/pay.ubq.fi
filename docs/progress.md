@@ -33,18 +33,18 @@ Implementation is progressing through multiple phases simultaneously, focusing o
 *   **Frontend Server**: Added `frontend/server.ts` to serve built static assets on Deno Deploy, handling SPA routing.
 *   **Deployment Script**: Created `scripts/deploy-frontend.sh` for automated build and deployment to Deno Deploy using `deployctl`. Includes project name sanitization. Added `deploy` script to `frontend/package.json`.
 *   **Frontend Deployment**: Successfully deployed to Deno Deploy via the script.
-*   **Documentation**: Updated `frontend/README.md` with deployment instructions. Updated core docs (`project-brief`, `product-context`, `system-patterns`, `active-context`, `progress`) for Leaderboard feature.
-*   **Developer Leaderboard**:
-    *   Worker (`permit-checker.worker.ts`) fetches all permits and user data (`users` table) via `FETCH_LEADERBOARD_DATA` message using a two-step query.
-    *   Hook (`use-leaderboard-data.ts`) aggregates data by developer and calculates total XP.
-    *   Component (`developer-leaderboard.tsx`) displays ranked leaderboard.
+    *   **Documentation**: Updated `frontend/README.md` with deployment instructions. Updated core docs (`project-brief`, `product-context`, `system-patterns`, `active-context`, `progress`) for Leaderboard feature and chart implementation.
+    *   **Developer Leaderboard**:
+        *   Worker (`permit-checker.worker.ts`) fetches all permits and user data (`users` table) via `FETCH_LEADERBOARD_DATA` message using a two-step query.
+        *   Hook (`use-leaderboard-data.ts`) aggregates data by developer and calculates total XP.
+        *   Component (`developer-leaderboard.tsx`) **updated to display a stacked bar chart (`recharts`)** showing XP breakdown by category, replacing the previous table view. Added `recharts` dependency. Extracted styles to `leaderboard-styles.css`.
 *   **Routing**: `App.tsx` uses `react-router-dom` for `/login`, `/` (Dashboard), and `/leaderboard` routes with protected routing.
 
 ## 3. What's Next (High Level)
 
 *   **Verify Pre-Claim Checks**: Confirm frontend balance/allowance checks work correctly and display appropriate warnings/errors.
 *   **Test Single Claim**: Thoroughly test the end-to-end single claim flow, including success and failure cases (due to pre-claim checks or on-chain errors).
-*   **Test Leaderboard**: Verify the leaderboard fetches data correctly, aggregates XP accurately, and displays the ranked list as expected. Check handling of users with no permits or permits with missing user info.
+*   **Test Leaderboard**: Verify the leaderboard fetches data correctly, aggregates XP accurately, and **displays the stacked bar chart visualization correctly**. Check handling of users with no permits or permits with missing user info, and chart responsiveness/readability.
 *   **Address RPC Errors**: Improve backend validation error handling.
 *   **Implement GitHub Scanning**: Add logic to backend to scan GitHub for new permits (Phase 3).
 *   **Integrate Multicall Claiming**: Update UI to allow selecting multiple permits and trigger the `claimMultiplePermitsViaMulticall` function (Phase 5).

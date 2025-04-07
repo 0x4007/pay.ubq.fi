@@ -1,9 +1,27 @@
 import React from "react"; // Ensure React is imported
-import { LeaderboardEntry, useLeaderboardData } from "../hooks/use-leaderboard-data.ts";
-// Assuming app-styles.css or similar is imported globally (e.g., in main.tsx)
-// import "../app-styles.css"; // Import styles if needed locally
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  // Cell, // If needed for individual bar colors later
+} from "recharts";
+import { useLeaderboardData } from "../hooks/use-leaderboard-data.ts"; // Removed LeaderboardEntry
+import "./leaderboard-styles.css"; // Import the new CSS file
 
-// Helper function to format XP (optional)
+// Define colors for categories (adjust as needed for better contrast/aesthetics)
+const CATEGORY_COLORS = {
+  comments: "#8884d8", // Purple
+  task: "#82ca9d", // Green
+  reviewRewards: "#ffc658", // Yellow/Orange
+  // Add more categories and colors if they exist
+};
+
+// Helper function to format XP (optional) - Keep this if used elsewhere or for tooltip
 function formatXp(xp: number): string {
   // Add any desired formatting, e.g., thousands separators
   return xp.toLocaleString();
@@ -108,127 +126,47 @@ export function DeveloperLeaderboard() {
         </label>
       </div>
 
-      <table className="leaderboard-table"> {/* Add specific class for styling */}
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Developer</th>
-            <th>Comments XP</th>
-            <th>Task XP</th>
-            <th>Reviews XP</th>
-            <th>Total XP</th>
-            <th>Permit Count</th> {/* Add Permit Count Header */}
-          </tr>
-        </thead>
-        <tbody>
-          {leaderboardData.map((entry: LeaderboardEntry, index: number) => (
-            <tr key={entry.githubUsername}>
-              <td>{index + 1}</td>
-              <td>
-                <div className="developer-info">
-                  <img
-                    src={entry.avatarUrl}
-                    alt={`${entry.githubUsername}'s avatar`}
-                    className="avatar" // Add class for styling
-                    width="30"
-                    height="30"
-                  />
-                  <span>{entry.githubUsername}</span>
-                </div>
-              </td>
-              <td>{formatXp(entry.xpByCategory?.comments || 0)}</td>
-              <td>{formatXp(entry.xpByCategory?.task || 0)}</td>
-              <td>{formatXp(entry.xpByCategory?.reviewRewards || 0)}</td>
-              <td>{formatXp(entry.totalXp)}</td>
-              <td>{entry.permitCount}</td> {/* Display Permit Count */}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      {/* Basic styling (can be moved to CSS file) - Ensure this is correctly placed */}
-      <style>{`
-        .leaderboard-container {
-          padding: 20px;
-        }
-        .filters-container {
-          margin-bottom: 15px;
-          display: flex;
-          gap: 15px;
-        }
-        .filters-container label {
-          display: flex;
-          align-items: center;
-          gap: 5px;
-        }
-        .filters-container select {
-          padding: 5px 8px;
-          background: rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: 4px;
-          color: white;
-        }
-        .leaderboard-table {
-          width: 100%;
-          border-collapse: collapse;
-          margin-top: 15px;
-          background: rgba(255, 255, 255, 0.05);
-          border-radius: 8px;
-        }
-        .leaderboard-table th, .leaderboard-table td {
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          padding: 12px;
-          text-align: left;
-        }
-        .leaderboard-table th {
-          background: rgba(255, 255, 255, 0.1);
-          font-weight: bold;
-        }
-        .developer-info {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
-        .avatar {
-          border-radius: 50%;
-          border: 2px solid rgba(255, 255, 255, 0.2);
-          width: 30px;
-          height: 30px;
-          object-fit: cover;
-        }
-        .loading-container, .error-container, .info-container {
-          padding: 40px;
-          text-align: center;
-          background: rgba(255, 255, 255, 0.05);
-          border-radius: 8px;
-          margin: 20px;
-        }
-        .loading-spinner {
-          border: 3px solid rgba(255, 255, 255, 0.1);
-          border-radius: 50%;
-          border-top: 3px solid #fff;
-          width: 30px;
-          height: 30px;
-          animation: spin 1s linear infinite;
-          margin: 0 auto 20px;
-        }
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        .retry-button {
-          margin-top: 20px;
-          padding: 8px 16px;
-          background: rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: 4px;
-          color: white;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-        .retry-button:hover {
-          background: rgba(255, 255, 255, 0.2);
-        }
-      `}</style>
-    </div> // Ensure this is the closing tag for the main div
+      {/* Stacked Bar Chart */}
+      <div className="chart-container">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            layout="vertical" // Use vertical layout for better readability of usernames
+            data={leaderboardData}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 100, // Increase left margin for usernames
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
+            <XAxis type="number" stroke="rgba(255, 255, 255, 0.7)" />
+            <YAxis
+              dataKey="githubUsername"
+              type="category"
+              stroke="rgba(255, 255, 255, 0.7)"
+              width={100} // Adjust width based on longest username expected
+              tick={{ fontSize: 10 }} // Smaller font size for Y-axis labels
+            />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "rgba(0, 0, 0, 0.8)",
+                borderColor: "rgba(255, 255, 255, 0.3)",
+                color: "white",
+              }}
+              formatter={(value: number, name: string) => [formatXp(value), name]} // Format tooltip value
+            />
+            <Legend wrapperStyle={{ color: "white", paddingTop: "10px" }} />
+            {/* Define stacked bars for each category */}
+            {/* Ensure the keys match the properties in xpByCategory */}
+            <Bar dataKey="xpByCategory.comments" stackId="a" fill={CATEGORY_COLORS.comments} name="Comments XP" />
+            <Bar dataKey="xpByCategory.task" stackId="a" fill={CATEGORY_COLORS.task} name="Task XP" />
+            <Bar dataKey="xpByCategory.reviewRewards" stackId="a" fill={CATEGORY_COLORS.reviewRewards} name="Reviews XP" />
+            {/* Add more <Bar> components here if other categories exist in xpByCategory */}
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+      {/* Removed inline style block */}
+    </div>
   );
 }
