@@ -28,7 +28,7 @@ export default defineConfig({
   },
   // Server configuration to disable HMR
   server: {
-    hmr: true
+    hmr: false
   },
   // Restore css and build config, add worker format
   css: {

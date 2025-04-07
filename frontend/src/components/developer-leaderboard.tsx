@@ -1,27 +1,26 @@
 import React, { useState } from "react"; // Import useState
 import {
-  ResponsiveContainer,
-  BarChart,
   Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  // Cell, // If needed for individual bar colors later
 } from "recharts";
 // Removed duplicate React/useState import
 import { useMemo } from "react"; // Keep useMemo
 // Correct import path for LeaderboardEntry and hook
-import { useLeaderboardData } from "../hooks/use-leaderboard-data";
-import type { LeaderboardEntry } from "../workers/leaderboard-aggregator"; // Corrected import path
-import "./leaderboard-styles.css"; // Import the new CSS file
+import { useLeaderboardData } from "../hooks/use-leaderboard-data.ts";
+import type { LeaderboardEntry } from "../workers/leaderboard-aggregator.ts";
+import "./leaderboard-styles.css"; // Import styles
 
 // Define colors for categories (adjust as needed for better contrast/aesthetics)
 const CATEGORY_COLORS = {
-  comments: "#8884d8", // Purple
-  task: "#82ca9d", // Green
-  reviewRewards: "#ffc658", // Yellow/Orange
+  comments: "#8884d8",
+  task: "#82ca9d",
+  reviewRewards: "#ffc658",
   // Add more categories and colors if they exist
 };
 
@@ -34,12 +33,12 @@ function formatXp(xp: number): string {
 // Helper function to extract unique categories/repos from data
 const getUniqueFilterOptions = (data: LeaderboardEntry[]) => {
   const categories = new Set<string>();
-  const repositories = new Set<string>(); // Assuming repository info might be added later
+  const repositories = new Set<string>();
 
-  data.forEach(entry => {
+  data.forEach((entry: LeaderboardEntry) => {
     Object.keys(entry.xpByCategory).forEach(cat => categories.add(cat));
-    // If repository info becomes available on LeaderboardEntry, uncomment below
-    // if (entry.repository) repositories.add(entry.repository);
+    // Add all repositories from the entry's repositories array
+    entry.repositories.forEach(repo => repositories.add(repo));
   });
 
   return {
@@ -56,7 +55,10 @@ export function DeveloperLeaderboard() {
   const [selectedRepository, setSelectedRepository] = useState<string | null>(null); // Keep for future use
 
   // Fetch data using the hook, passing selectedWeeks
-  const { leaderboardData: rawLeaderboardData, isLoading, error } = useLeaderboardData({ selectedWeeks });
+  const { leaderboardData: rawLeaderboardData, isLoading, error } = useLeaderboardData({
+    selectedWeeks,
+    selectedRepository
+  });
 
   // Calculate available filter options based on the fetched data
   const { availableCategories, availableRepositories } = useMemo(() => {
@@ -72,8 +74,8 @@ export function DeveloperLeaderboard() {
       // Category Filter: Check if the entry has XP in the selected category
       const categoryMatch = !selectedCategory || (entry.xpByCategory[selectedCategory] ?? 0) > 0;
 
-      // Repository Filter (Placeholder - requires repo info on LeaderboardEntry)
-      const repoMatch = !selectedRepository; // || entry.repository === selectedRepository;
+      // Repository Filter - check if entry has the selected repository
+      const repoMatch = !selectedRepository || entry.repositories.includes(selectedRepository);
 
       return categoryMatch && repoMatch;
     });
@@ -167,22 +169,22 @@ export function DeveloperLeaderboard() {
             ))}
           </select>
         </label>
-        {/* Repository filter - kept for future use if repo data is added */}
-        {availableRepositories.length > 0 && (
-           <label> {/* Removed duplicate label tag inside */}
-               Repository:
-               <select
-                 value={selectedRepository ?? ""}
-                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedRepository(e.target.value || null)}
-                 disabled={isLoading}
-               >
-                 <option value="">All Repositories</option>
-                 {availableRepositories.map(repo => (
-                   <option key={repo} value={repo}>{repo}</option>
-                 ))}
-               </select>
-           </label> // Closing tag for the outer label
-        )}
+        {/* Repository filter */}
+        <label>
+          Repository:
+          <select
+            value={selectedRepository ?? ""}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedRepository(e.target.value || null)}
+            disabled={isLoading}
+          >
+            <option value="">All Repositories</option>
+            {availableRepositories.map(repo => (
+              <option key={repo} value={repo}>
+                {repo.split('/').pop() || repo} {/* Show just repo name, not full path */}
+              </option>
+            ))}
+          </select>
+        </label>
         {/* Time Range Radio Buttons */}
         <div className="time-radio-group">
           <span className="time-radio-label">Time Range:</span>

@@ -1,8 +1,47 @@
 import { CombinedLeaderboardData, GitHubUserInfo, PERMITS_TABLE } from "./app-worker.ts"; // Updated import path
 import { getSupabase } from "./supabase-singleton.ts"; // Add .ts extension
 
+  // GitHub repository name validation helpers
+  const validateGitHubRepo = {
+    // Track validation failures for debugging
+    validationErrors: {
+      emptyFields: 0,
+      invalidOwner: 0,
+      invalidRepo: 0
+    },
+
+    owner: (name: string) => /^[a-z0-9](?:[a-z0-9]|-(?=[a-z0-9])){0,38}$/.test(name),
+    name: (name: string) => /^[a-z0-9][a-z0-9._-]*[a-z0-9]$/.test(name),
+
+  // Convert and validate a repository string
+    sanitize: (owner: string, repo: string): string | undefined => {
+      const cleanOwner = owner.trim().toLowerCase();
+      const cleanRepo = repo.trim().toLowerCase()
+        .replace(/\.git$/, '')
+        .replace(/\/+$/, '');
+
+      if (!cleanOwner || !cleanRepo) {
+        validateGitHubRepo.validationErrors.emptyFields++;
+        console.debug(`Worker: [Repository] Empty owner/repo: ${owner}/${repo}`);
+        return undefined;
+      }
+      if (!validateGitHubRepo.owner(cleanOwner)) {
+        validateGitHubRepo.validationErrors.invalidOwner++;
+        console.debug(`Worker: [Repository] Invalid owner format: ${cleanOwner}`);
+        return undefined;
+      }
+      if (!validateGitHubRepo.name(cleanRepo)) {
+        validateGitHubRepo.validationErrors.invalidRepo++;
+        console.debug(`Worker: [Repository] Invalid repo format: ${cleanRepo}`);
+        return undefined;
+      }
+
+      return `${cleanOwner}/${cleanRepo}`;
+    }
+};
+
 // Function to fetch permits and associated user data using two queries, filtered by date
-export async function fetchAllPermitsForLeaderboard(cutoffDateIsoString: string): Promise<CombinedLeaderboardData[]> { // Added parameter
+export async function fetchAllPermitsForLeaderboard(cutoffDateIsoString: string): Promise<CombinedLeaderboardData[]> {
   const supabase = getSupabase();
   console.log(`Worker: Querying permits created on or after ${cutoffDateIsoString} for leaderboard (Step 1)...`); // Updated log
 
@@ -70,20 +109,40 @@ export async function fetchAllPermitsForLeaderboard(cutoffDateIsoString: string)
     };
 
   if (discoveredPermitsError) {
-    console.error("Supabase discovered permits fetch error:", discoveredPermitsError);
+    console.error("Worker: [Repository] Failed to fetch discovered permits:", discoveredPermitsError);
     // Continue without discovered permits if fetch fails
-    console.warn("Worker: Failed to fetch discovered permits. Leaderboard will show limited data.");
+    console.debug("Worker: [Repository] Continuing without discovered permits data");
+  } else {
+    console.debug(`Worker: [Repository] Fetched ${discoveredPermitsData?.length ?? 0} discovered permits`);
   }
 
   // Create a map of discovered permits by nonce for faster lookups
   const discoveredPermitsByNonce = new Map<string, DiscoveredPermitResult>();
   if (discoveredPermitsData && Array.isArray(discoveredPermitsData)) {
-    console.log(`Worker: Found ${discoveredPermitsData.length} discovered permits.`);
+    console.debug(`Worker: [Repository] Processing ${discoveredPermitsData.length} permits for repository info...`);
     discoveredPermitsData.forEach(permit => {
-      if (permit.permit_nonce) {
-        discoveredPermitsByNonce.set(permit.permit_nonce, permit);
+      // Validate permit data structure
+      if (!permit || typeof permit !== 'object') {
+        console.debug(`Worker: [Repository] Skipping invalid permit entry`);
+        return;
       }
+
+      // Validate required fields
+      if (!permit.permit_nonce) {
+        console.debug(`Worker: [Repository] Skipping permit with missing nonce`);
+        return;
+      }
+
+      // Log repository information if present
+      if (permit.github_repo_owner && permit.github_repo_name) {
+        console.debug(`Worker: [Repository] Found ${permit.github_repo_owner}/${permit.github_repo_name} for permit ${permit.permit_nonce}`);
+      }
+
+      discoveredPermitsByNonce.set(permit.permit_nonce, permit);
     });
+    console.debug(`Worker: [Repository] Mapped ${discoveredPermitsByNonce.size} permits with repository info`);
+  } else {
+    console.debug(`Worker: [Repository] No valid discovered permits data found`);
   }
 
   // Step 3: Extract unique beneficiary IDs from the *filtered* permitsData
@@ -157,14 +216,37 @@ export async function fetchAllPermitsForLeaderboard(cutoffDateIsoString: string)
       // Get the associated discovered permit data
       const discoveredPermit = discoveredPermitsByNonce.get(permit.nonce);
 
-      // Extract category and repository from discovered permit if available
-      const category: string | undefined = discoveredPermit?.permit_type || undefined;
+      // Try to get repository from discovered permits first
       let repository: string | undefined = undefined;
-
-      // Construct repository string if we have both owner and name
       if (discoveredPermit?.github_repo_owner && discoveredPermit?.github_repo_name) {
-        repository = `${discoveredPermit.github_repo_owner}/${discoveredPermit.github_repo_name}`;
+        repository = validateGitHubRepo.sanitize(discoveredPermit.github_repo_owner, discoveredPermit.github_repo_name);
+        if (repository) {
+          console.debug(`Worker: [Repository] Using ${repository} from discovered permit ${permit.nonce}`);
+        }
       }
+
+      // Fallback to extracting from GitHub issue URL if not found in discovered permits
+      if (!repository) {
+        const locationUrl = permit.location?.node_url;
+        if (locationUrl && locationUrl.includes('github.com')) {
+          const parts = locationUrl.split('github.com/');
+          if (parts.length > 1) {
+            const pathParts = parts[1].split('/');
+            if (pathParts.length >= 2) {
+              repository = validateGitHubRepo.sanitize(pathParts[0], pathParts[1]);
+              if (repository) {
+                console.debug(`Worker: [Repository] Extracted ${repository} from URL for permit ${permit.nonce}`);
+              }
+            }
+          }
+          if (!repository) {
+            console.debug(`Worker: [Repository] Could not extract from URL for permit ${permit.nonce}: ${locationUrl}`);
+          }
+        }
+      }
+
+      // Extract category from discovered permit if available
+      const category: string | undefined = discoveredPermit?.permit_type || undefined;
 
       // Construct the object explicitly, ensuring all fields match CombinedLeaderboardData
       return {
@@ -181,6 +263,39 @@ export async function fetchAllPermitsForLeaderboard(cutoffDateIsoString: string)
       };
     })
     .filter((item): item is CombinedLeaderboardData => item !== null); // Filter out nulls
+
+  // Calculate repository extraction stats
+  const repoStats = {
+    total: combinedData.length,
+    withRepo: combinedData.filter(item => item.repository).length,
+    fromDiscovered: combinedData.filter(item => {
+      const permit = discoveredPermitsByNonce.get(item.nonce);
+      return permit?.github_repo_owner && permit?.github_repo_name;
+    }).length,
+    fromUrl: combinedData.filter(item => item.location?.node_url?.includes('github.com')).length,
+    uniqueRepos: new Set(combinedData.map(item => item.repository).filter(Boolean)).size
+  };
+
+  // Log detailed extraction summary
+  console.debug(`Worker: [Repository] Extraction stats:
+    - Total permits: ${repoStats.total}
+    - With valid repos: ${repoStats.withRepo} (${((repoStats.withRepo / repoStats.total) * 100).toFixed(1)}%)
+    - From discovered: ${repoStats.fromDiscovered}
+    - With GitHub URLs: ${repoStats.fromUrl}
+    - Unique repos: ${repoStats.uniqueRepos}
+
+    Validation failures:
+    - Empty fields: ${validateGitHubRepo.validationErrors.emptyFields}
+    - Invalid owner format: ${validateGitHubRepo.validationErrors.invalidOwner}
+    - Invalid repo format: ${validateGitHubRepo.validationErrors.invalidRepo}
+  `);
+
+  // Reset validation error counters for next run
+  validateGitHubRepo.validationErrors = {
+    emptyFields: 0,
+    invalidOwner: 0,
+    invalidRepo: 0
+  };
 
   return combinedData; // Return the final filtered array
 }

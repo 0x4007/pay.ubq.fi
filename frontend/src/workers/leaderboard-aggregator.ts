@@ -1,8 +1,8 @@
 console.log("Worker: Loading leaderboard-aggregator.ts..."); // Add top-level log
 
 import type { CombinedLeaderboardData } from "./app-worker.ts"; // Updated import path
-import { parseGitHubIssueUrl } from "./leaderboard-helpers.ts";
 import { fetchAndCacheIssueMetadata, fetchGitHubUserDetails, type GitHubUserDetails } from "./github-data-fetcher.ts";
+import { parseGitHubIssueUrl } from "./leaderboard-helpers.ts";
 
 // --- Types ---
 
@@ -13,6 +13,7 @@ export interface LeaderboardEntry {
   totalXp: number;
   xpByCategory: Record<string, number>;
   permitCount: number;
+  repositories: string[]; // Change from single repository to array of repositories
 }
 
 // Type for storing aggregated data during processing
@@ -164,12 +165,21 @@ export const processAndAggregateLeaderboardData = async (
   const finalLeaderboard = Object.values(aggregatedDataByUser)
     .map((userData): LeaderboardEntry => {
       const userDetails = userDetailsMap.get(userData.githubId);
+      // Track repositories for this user
+      const repositoriesSet = new Set<string>();
+      combinedDataFromDb.forEach(permit => {
+        if (permit.github_user?.id === userData.githubId && permit.repository) {
+          repositoriesSet.add(permit.repository);
+        }
+      });
+
       return {
         githubUsername: userDetails?.login ?? `GitHub ID: ${userData.githubId}`,
         avatarUrl: userDetails?.avatar_url ?? "",
         totalXp: userData.totalXp,
         xpByCategory: userData.xpByCategory,
         permitCount: userData.permitCount,
+        repositories: Array.from(repositoriesSet), // Use all repositories found for this user
       };
     })
     .sort((a, b) => b.totalXp - a.totalXp); // Sort descending by total XP

@@ -259,7 +259,7 @@ export interface GitHubUserInfo {
 export type CombinedLeaderboardData = FetchedPermitInfo & {
     github_user: GitHubUserInfo | null;
     category?: string;
-    repository?: string;
+    repository?: string; // Repository in owner/repo format
 };
 
 console.log("Worker: app-worker.ts loaded and message handler attached.");

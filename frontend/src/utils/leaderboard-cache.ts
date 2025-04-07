@@ -58,22 +58,18 @@ const initializeStores = () => {
 
 const stores = initializeStores();
 
-// Helper to generate the cache key based on weeks
-const getProcessedDataKey = (weeks: number): string => `leaderboard_processed_${weeks}_weeks`;
-
 export const leaderboardCache = {
   /**
    * Get processed leaderboard data from cache for a specific week range
    */
-  async getProcessedData(selectedWeeks: number): Promise<LeaderboardEntry[] | null> {
+  async getProcessedData(cacheKey: string): Promise<LeaderboardEntry[] | null> {
     if (!stores) return null;
-    const cacheKey = getProcessedDataKey(selectedWeeks);
     try {
       const cached = await stores.processedLeaderboardStore.get(cacheKey);
       if (!cached) return null;
 
       if (Date.now() - cached.timestamp > cached.ttl) {
-        console.log(`Cache expired for ${selectedWeeks} weeks data`);
+        console.log(`Cache expired for key: ${cacheKey}`);
         await stores.processedLeaderboardStore.del(cacheKey);
         return null;
       }
@@ -87,9 +83,8 @@ export const leaderboardCache = {
   /**
    * Set processed leaderboard data to cache for a specific week range
    */
-  async setProcessedData(processedData: LeaderboardEntry[], selectedWeeks: number): Promise<void> {
+  async setProcessedData(processedData: LeaderboardEntry[], cacheKey: string): Promise<void> {
     if (!stores) return;
-    const cacheKey = getProcessedDataKey(selectedWeeks);
     try {
       const cachedData: CachedProcessedLeaderboardData = {
         processedData,
@@ -98,7 +93,7 @@ export const leaderboardCache = {
       };
       await stores.processedLeaderboardStore.set(cacheKey, cachedData);
     } catch (error) {
-      console.error(`Failed to cache processed leaderboard data for ${selectedWeeks} weeks:`, error);
+      console.error(`Failed to cache processed leaderboard data for key ${cacheKey}:`, error);
     }
   },
 

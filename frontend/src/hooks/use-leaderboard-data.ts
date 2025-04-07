@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useWorker } from "../context/worker-context.tsx"; // Import useWorker
 import { leaderboardCache } from "../utils/leaderboard-cache.ts";
 import type { LeaderboardEntry } from "../workers/leaderboard-aggregator.ts";
@@ -7,12 +7,13 @@ import type { LeaderboardEntry } from "../workers/leaderboard-aggregator.ts";
 // Define hook props
 interface UseLeaderboardDataProps {
   selectedWeeks: number;
+  selectedRepository?: string | null;
 }
 
 /**
  * Hook to fetch and manage leaderboard data using the shared worker
  */
-export function useLeaderboardData({ selectedWeeks }: UseLeaderboardDataProps) {
+export function useLeaderboardData({ selectedWeeks, selectedRepository }: UseLeaderboardDataProps) {
   const { worker, isWorkerInitialized, workerError } = useWorker(); // Get worker from context
   const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>([]); // State for the data
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -22,6 +23,10 @@ export function useLeaderboardData({ selectedWeeks }: UseLeaderboardDataProps) {
   /**
    * Load data from cache or worker
    */
+  // Helper to get cache key incorporating repository filter
+  const getCacheKey = (weeks: number, repo: string | null | undefined) =>
+    repo ? `${weeks}_weeks_repo_${repo}` : `${weeks}_weeks`;
+
   const loadData = useCallback(async () => {
     // Ensure worker is ready before proceeding
     if (!isWorkerInitialized) {
@@ -46,8 +51,9 @@ export function useLeaderboardData({ selectedWeeks }: UseLeaderboardDataProps) {
 
     try {
       // Try to load from cache first
-      console.log(`useLeaderboardData: Checking cache for ${selectedWeeks} weeks...`);
-      const cachedData = await leaderboardCache.getProcessedData(selectedWeeks);
+      const cacheKey = getCacheKey(selectedWeeks, selectedRepository);
+      console.log(`useLeaderboardData: Checking cache with key ${cacheKey}...`);
+      const cachedData = await leaderboardCache.getProcessedData(cacheKey);
 
       if (cachedData && cachedData.length > 0) {
         console.log(`useLeaderboardData: Using cached data (${cachedData.length} entries)`);
@@ -88,8 +94,8 @@ export function useLeaderboardData({ selectedWeeks }: UseLeaderboardDataProps) {
             setLeaderboardData(freshData);
             setError(null); // Clear previous errors on success
 
-            // Cache the results for future use
-            leaderboardCache.setProcessedData(freshData, selectedWeeks)
+            // Cache the results for future use with repository filtering
+            leaderboardCache.setProcessedData(freshData, getCacheKey(selectedWeeks, selectedRepository))
               .then(() => console.log(`useLeaderboardData: Cached ${freshData.length} entries for ${selectedWeeks} weeks`))
               .catch(cacheError => console.error("useLeaderboardData: Error caching data:", cacheError));
           }
@@ -108,7 +114,10 @@ export function useLeaderboardData({ selectedWeeks }: UseLeaderboardDataProps) {
       // Send the request to the worker
       worker.postMessage({
         type: "FETCH_LEADERBOARD_DATA",
-        payload: { selectedWeeks }
+        payload: {
+          selectedWeeks,
+          selectedRepository
+        }
       });
       console.log(`useLeaderboardData: Sent FETCH_LEADERBOARD_DATA message for ${selectedWeeks} weeks.`);
 
@@ -125,7 +134,7 @@ export function useLeaderboardData({ selectedWeeks }: UseLeaderboardDataProps) {
       }
     }
     // Note: setIsLoading(false) is handled within the message listener or catch block for async operations
-  }, [selectedWeeks, worker, isWorkerInitialized, workerError]); // Dependencies for the useCallback
+  }, [selectedWeeks, selectedRepository, worker, isWorkerInitialized, workerError]); // Dependencies for the useCallback
 
   // Effect to trigger loading data when selectedWeeks or worker initialization state changes
   useEffect(() => {
