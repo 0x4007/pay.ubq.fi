@@ -62,7 +62,7 @@ const getUniqueFilterOptions = (data: LeaderboardEntry[]) => {
 };
 
 export function DeveloperLeaderboard() {
-  const [selectedWeeks, setSelectedWeeks] = useState(52);
+  const [selectedWeeks, setSelectedWeeks] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedRepository, setSelectedRepository] = useState<string | null>(null);
   const [refreshCounter, setRefreshCounter] = useState(0);

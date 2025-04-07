@@ -3,9 +3,8 @@ import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
 import { useAccount } from "wagmi";
 
 // Import page components
-import { DashboardPage } from "./components/dashboard-page.tsx";
-import { LoginPage } from "./components/login-page.tsx";
 import { LeaderboardRoute } from "./components/leaderboard-route.tsx"; // Import LeaderboardRoute
+import { LoginPage } from "./components/login-page.tsx";
 import { WorkerProvider } from "./context/worker-context.tsx"; // Import WorkerProvider
 
 // A simple layout component for authenticated views
@@ -42,11 +41,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route
             path="/"
-            element={
-              <ProtectedRoute>
-                <DashboardPage />
-              </ProtectedRoute>
-            }
+            element={<Navigate to="/leaderboard" replace />}
           />
           <Route
             path="/leaderboard"
