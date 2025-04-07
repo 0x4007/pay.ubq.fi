@@ -26,17 +26,79 @@ describe('Leaderboard Page', () => {
     });
     page = await browser.newPage();
 
-    // Mock worker responses
-    await page.setRequestInterception(true);
-    page.on('request', (request) => {
-      if (request.url().includes('worker')) {
-        request.respond({
-          status: 200,
-          contentType: 'application/javascript',
-          body: 'console.log("Mock worker loaded")'
-        });
-      } else {
-        request.continue();
+    // Enhanced worker mock with persistence checks
+    await page.evaluate(() => {
+      // Create mock worker with all required Worker properties
+      const mockWorker = {
+        postMessage: (data: unknown) => {
+          console.log('Mock worker message sent:', data);
+          // Queue messages if no handler set yet
+          if (!this.onmessage) {
+            this.messageQueue = this.messageQueue || [];
+            this.messageQueue.push(data);
+          }
+        },
+        onmessage: null,
+        onmessageerror: null,
+        onerror: null,
+        addEventListener: (type: string, listener: any) => {
+          if (type === 'message') this.onmessage = listener;
+        },
+        removeEventListener: () => {},
+        dispatchEvent: () => true,
+        terminate: () => {},
+        messageQueue: [] as any[]
+      };
+
+      // Create persistent mock context
+      const mockContext = {
+        worker: mockWorker,
+        isWorkerInitialized: true,
+        workerError: null
+      };
+
+      // Make it non-configurable and non-writable
+      Object.defineProperty(window, '__MOCK_WORKER_CONTEXT__', {
+        value: mockContext,
+        writable: false,
+        configurable: false
+      });
+
+      console.log('Mock worker context created:', window.__MOCK_WORKER_CONTEXT__);
+    });
+
+    // Verify mock persists after creation
+    await page.evaluate(() => {
+      if (!window.__MOCK_WORKER_CONTEXT__) {
+        throw new Error('Mock worker context not set');
+      }
+      if (!window.__MOCK_WORKER_CONTEXT__.worker) {
+        throw new Error('Mock worker not set in context');
+      }
+    });
+
+    // Enhanced React context override with debugging
+    await page.addScriptTag({
+      content: `
+        console.log('Installing React context override...');
+        const originalUseContext = window.React.useContext;
+        window.React.useContext = (context) => {
+          console.log('Intercepting useContext call for:', context);
+          if (context._context && context._context.displayName === 'WorkerContext') {
+            console.log('Returning mock worker context');
+            return window.__MOCK_WORKER_CONTEXT__;
+          }
+          return originalUseContext(context);
+        };
+        console.log('React context override installed');
+      `
+    });
+
+    // Verify mock was properly set
+    await page.evaluate(() => {
+      console.log('Verifying mock worker context:', window.__MOCK_WORKER_CONTEXT__);
+      if (!window.__MOCK_WORKER_CONTEXT__) {
+        throw new Error('Mock worker context not set');
       }
     });
 
@@ -54,9 +116,22 @@ describe('Leaderboard Page', () => {
       timeout: 10000
     });
 
-    // Inject mock data
+    // Inject mock data and mock worker
     await page.evaluate((data) => {
       window.__MOCK_LEADERBOARD_DATA__ = data;
+
+      // Mock worker responses
+      window.__MOCK_WORKER_CONTEXT__.worker.onmessage = ({ data }) => {
+        if (data.type === 'FETCH_LEADERBOARD_DATA') {
+          window.__MOCK_WORKER_CONTEXT__.worker.postMessage({
+            type: 'LEADERBOARD_DATA_RESULT',
+            payload: {
+              processedData: window.__MOCK_LEADERBOARD_DATA__,
+              rawData: []
+            }
+          });
+        }
+      };
     }, mockLeaderboardData);
   });
 
@@ -107,18 +182,18 @@ describe('Leaderboard Page', () => {
       const radioSelector = `input[type="radio"][value="${filter.value}"]`;
       await page.waitForSelector(radioSelector, { timeout: 5000 });
 
-      // Click using more reliable method
+      // Click with proper type assertion
       await page.evaluate((selector) => {
-        const radio = document.querySelector(selector);
+        const radio = document.querySelector(selector) as HTMLInputElement;
         if (radio) radio.click();
       }, radioSelector);
 
       // Wait for potential updates
       await page.waitForTimeout(1000);
 
-      // Verify radio is checked
+      // Verify radio is checked with proper type assertion
       const isChecked = await page.evaluate((selector) => {
-        const radio = document.querySelector(selector);
+        const radio = document.querySelector(selector) as HTMLInputElement;
         return radio ? radio.checked : false;
       }, radioSelector);
 

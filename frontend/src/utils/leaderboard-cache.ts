@@ -214,5 +214,18 @@ export const leaderboardCache = {
     } catch (error) {
       console.error("Failed to clear caches:", error);
     }
+  },
+
+  /**
+   * Clear processed leaderboard cache for a specific key
+   */
+  async clearProcessedData(cacheKey: string): Promise<void> {
+    if (!stores) return;
+    try {
+      await stores.processedLeaderboardStore.del(cacheKey);
+      console.log(`Cleared leaderboard cache for key: ${cacheKey}`);
+    } catch (error) {
+      console.error(`Failed to clear leaderboard cache for key ${cacheKey}:`, error);
+    }
   }
 };

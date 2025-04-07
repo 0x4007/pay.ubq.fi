@@ -116,7 +116,7 @@ initializeSharedWorker();
 
 // --- React Context ---
 
-interface WorkerContextProps {
+export interface WorkerContextProps {
   worker: Worker | null;
   isWorkerInitialized: boolean;
   workerError: string | null;

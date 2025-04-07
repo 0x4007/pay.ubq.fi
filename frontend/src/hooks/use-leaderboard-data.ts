@@ -8,12 +8,13 @@ import type { LeaderboardEntry } from "../workers/leaderboard-aggregator.ts";
 interface UseLeaderboardDataProps {
   selectedWeeks: number;
   selectedRepository?: string | null;
+  refreshCounter?: number; // Optional, triggers refetch when changed
 }
 
 /**
  * Hook to fetch and manage leaderboard data using the shared worker
  */
-export function useLeaderboardData({ selectedWeeks, selectedRepository }: UseLeaderboardDataProps): {
+export function useLeaderboardData({ selectedWeeks, selectedRepository, refreshCounter }: UseLeaderboardDataProps): {
   leaderboardData: LeaderboardEntry[];
   isLoading: boolean;
   error: string | null;
@@ -146,9 +147,9 @@ export function useLeaderboardData({ selectedWeeks, selectedRepository }: UseLea
     // Note: setIsLoading(false) is handled within the message listener or catch block for async operations
   }, [selectedWeeks, selectedRepository, worker, isWorkerInitialized, workerError]); // Dependencies for the useCallback
 
-  // Effect to trigger loading data when selectedWeeks or worker initialization state changes
+  // Effect to trigger loading data when selectedWeeks, refreshCounter, or worker state changes
   useEffect(() => {
-    console.log("useLeaderboardData useEffect: Running effect. isWorkerInitialized:", isWorkerInitialized, "workerError:", workerError); // Added log
+    console.log("useLeaderboardData useEffect: Running effect. isWorkerInitialized:", isWorkerInitialized, "workerError:", workerError, "refreshCounter:", refreshCounter);
     loadData();
 
     // Cleanup function: Remove the message listener when the component unmounts
@@ -160,7 +161,7 @@ export function useLeaderboardData({ selectedWeeks, selectedRepository }: UseLea
         messageListenerRef.current = null; // Clear ref on cleanup
       }
     };
-  }, [loadData, worker, isWorkerInitialized, workerError]); // Added isWorkerInitialized and workerError to dependencies
+  }, [loadData, worker, isWorkerInitialized, workerError, refreshCounter]); // Add refreshCounter to dependencies
 
   return {
     leaderboardData,

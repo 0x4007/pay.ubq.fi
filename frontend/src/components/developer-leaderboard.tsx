@@ -13,6 +13,7 @@ import {
 import { useMemo } from "react"; // Keep useMemo
 // Correct import path for LeaderboardEntry and hook
 import { useLeaderboardData } from "../hooks/use-leaderboard-data.ts";
+import { leaderboardCache } from "../utils/leaderboard-cache.ts";
 import type { LeaderboardEntry } from "../workers/leaderboard-aggregator.ts";
 import "./leaderboard-styles.css"; // Import styles
 
@@ -53,11 +54,24 @@ export function DeveloperLeaderboard() {
   const [selectedWeeks, setSelectedWeeks] = useState(52);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedRepository, setSelectedRepository] = useState<string | null>(null); // Keep for future use
+  const [refreshCounter, setRefreshCounter] = useState(0);
+
+  // Helper to compute cache key (same as in hook)
+  const getCacheKey = (weeks: number, repo: string | null | undefined) =>
+    repo ? `${weeks}_weeks_repo_${repo}` : `${weeks}_weeks`;
+
+  const refreshLeaderboard = async () => {
+    const cacheKey = getCacheKey(selectedWeeks, selectedRepository);
+    console.log(`DeveloperLeaderboard: Clearing cache for key ${cacheKey} and refreshing leaderboard...`);
+    await leaderboardCache.clearProcessedData(cacheKey);
+    setRefreshCounter((prev) => prev + 1);
+  };
 
   // Fetch data using the hook, passing selectedWeeks
   const { leaderboardData: rawLeaderboardData, isLoading, error } = useLeaderboardData({
     selectedWeeks,
-    selectedRepository
+    selectedRepository,
+    refreshCounter
   });
 
   // Calculate available filter options based on the fetched data
@@ -192,10 +206,7 @@ export function DeveloperLeaderboard() {
           <p>{message}</p>
           {!isFiltered && (
             <button
-              onClick={() => {
-                console.log("Retrying leaderboard fetch...");
-                window.location.reload();
-              }}
+              onClick={refreshLeaderboard}
               className="retry-button"
             >
               Refresh
