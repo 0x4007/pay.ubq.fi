@@ -1,0 +1,1658 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 410.152,
+    "task": {
+      "reward": 400,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2576542287,
+        "content": "@0x4007 Wouldn't it be simpler to use a \"quota\" or \"credits\" for reminders?\r\nBased on what you describe:\r\n- priority 1 gets 5 credits\r\n- priority 2 gets 4 credits\r\n- etc...\r\nSo basically you would be allowed to get `n` reminders total for a given task, each of the reminders using 1 credit?\r\nMaybe I didn't understand properly, but given the specification, consider the following example:\r\n- a user has 7 days to fulfill the task\r\n- the user takes 6 days to finish it, and changes it to \"ready for review\"\r\n- no review happens within 3.5 days, a reminder should be sent, but instead the user gets disqualified right away?\r\nIs this correct?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2576542287",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 3.672,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 11
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 6
+              }
+            },
+            "result": 0.6
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 112,
+            "wordValue": 0.1,
+            "result": 2.54
+          },
+          "readability": {
+            "fleschKincaid": 60.23297619047622,
+            "syllables": 169,
+            "sentences": 6,
+            "score": 0.9976702380952378
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2576610450,
+        "content": "I think your idea makes more sense because with mine, a `Priority 1` with a `1 Week` deadline would get 5 reminders thus a month of extra time at most, which is too much for a one week tasks obviously. \r\nHowever wouldn't this mean that it would also be the case with your spec? I know the deadlines are not meant to be strictly exact, but the gap between a week and a month seems too big.\r\nMaybe we could make it as simple as one reminder allowed only? Would that be too harsh? If we handle slow reviews I think it would help us keeping deadline tighter.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2576610450",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.528,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 105,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 83.5239285714286,
+            "syllables": 131,
+            "sentences": 6,
+            "score": 0.764760714285714
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2578124391,
+        "content": "Yes I understand the problem you are trying to solve. The one I am thinking of is when users take a 1h task, and they keep pushing for many days, so no reminder or blame is sent although that task should have been finished quite quickly. I've seen 15 minutes tasks take a week.\r\nLet's try implementing your idea and see how it goes, it just feels like more pressure is put on high priority tasks which are currently mostly handled by the core team, when I think what you're targeting are low level priority tasks done by outside contributors.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2578124391",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.296,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 103,
+            "wordValue": 0.1,
+            "result": 2.59
+          },
+          "readability": {
+            "fleschKincaid": 69.81525485436894,
+            "syllables": 135,
+            "sentences": 4,
+            "score": 0.9018474514563105
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2603921267,
+        "content": "I am convinced that the top-up calculation can be made much simpler, because in the end it is just a multiplier for the deadline, no need to calculate all the in-between steps, more likely just the \"final final\" deadline,",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2603921267",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.656,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 41,
+            "wordValue": 0.1,
+            "result": 2.2
+          },
+          "readability": {
+            "fleschKincaid": 45.54195121951224,
+            "syllables": 58,
+            "sentences": 1,
+            "score": 0.8554195121951225
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 410.152 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>400</td></tr><tr><td>Issue</td><td>Comment</td><td>4</td><td>10.152</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2576542287\" target=\"_blank\" rel=\"noopener\">@0x4007 Wouldn't it be simpler to use a \"quota\" or \"credits\" for&hellip;</a></h6></td><td><details><summary>3.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 11&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 6&#13;  result: 0.6&#13;regex:&#13;  wordCount: 112&#13;  wordValue: 0.1&#13;  result: 2.54&#13;</pre></details></td><td>0.9</td><td>4</td><td>3.672</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2576610450\" target=\"_blank\" rel=\"noopener\">I think your idea makes more sense because with mine, a &#96;Pri&hellip;</a></h6></td><td><details><summary>2.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 105&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>0.8</td><td>4</td><td>2.528</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2578124391\" target=\"_blank\" rel=\"noopener\">Yes I understand the problem you are trying to solve. The one I &hellip;</a></h6></td><td><details><summary>2.59</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 103&#13;  wordValue: 0.1&#13;  result: 2.59&#13;</pre></details></td><td>0.7</td><td>4</td><td>2.296</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2603921267\" target=\"_blank\" rel=\"noopener\">I am convinced that the top-up calculation can be made much simp&hellip;</a></h6></td><td><details><summary>2.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 41&#13;  wordValue: 0.1&#13;  result: 2.2&#13;</pre></details></td><td>0.6</td><td>4</td><td>1.656</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 221.372,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2576557035,
+        "content": "Yes. \nIn practice the good talent gets their reviews processed pretty quickly. The ones who aren't cut out for the job end up being much slower from reviewers losing patience with them. But perhaps your proposal might be more fair. \nThe concept of \"credits\" seem to imply that storage is required. My strategy is just a calculation based on elapsed time. \nYou might be able to parse the entire timeline every time to see if there are exceptions to the timing though, like for slow reviews and such, but it makes the logic more complex.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2576557035",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 11.844,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 96,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 74.82750000000003,
+            "syllables": 134,
+            "sentences": 7,
+            "score": 0.8517249999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2576710996,
+        "content": "Of course in an ideal world everybody processes their tasks with utmost priority and speed. But the reality is that even our core team members spend several weeks on, for example, a one week task. \nAfter monitoring these behaviors for some years I confidently came up with this design for the specification. \nI think it's an acceptable starting point and we can iterate from there to try and coax better performance out of the team. However the main business problem I want to solve with this implementation is to disqualify the outside contributors who fall under this category:",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2576710996",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 11.288,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 99,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 50.86527272727275,
+            "syllables": 159,
+            "sentences": 5,
+            "score": 0.9086527272727275
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2578747395,
+        "content": "I would like to try the current proposed strategy first but we can potentially have a static amount of top ups too with an alternative configuration (for example, 5 for every priority level) which would make things easier for the higher priority tasks.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2578747395",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 10.222,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 43,
+            "wordValue": 0.1,
+            "result": 2.25
+          },
+          "readability": {
+            "fleschKincaid": 25.46906976744188,
+            "syllables": 70,
+            "sentences": 1,
+            "score": 0.6546906976744188
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2604318753,
+        "content": "What about the reminders? If that is handled by another set of logic then okay!",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2604318753",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 4.864,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 75.14250000000001,
+            "syllables": 22,
+            "sentences": 2,
+            "score": 0.8485749999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2647255176,
+        "content": "Yeah I think each top up should incur a reminder of sorts. I'm wondering if it's annoying to interject and say something like \n\"You used 3 of 5 top ups!\" Etc",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2647255176",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 9.272,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 82.87000000000003,
+            "syllables": 44,
+            "sentences": 3,
+            "score": 0.7712999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2647547827,
+        "content": "I think there is value in saying both numbers to take advantage of the psychological principle of loss aversion.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2647547827",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 5.728,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 45.06578947368425,
+            "syllables": 32,
+            "sentences": 1,
+            "score": 0.8506578947368425
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2687850699,
+        "content": "Your formatting score needs better rounding. Can you fix that? I've seen it a few times before. @gentlementlegen",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2687850699",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.712,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 77.34006578947371,
+            "syllables": 28,
+            "sentences": 4,
+            "score": 0.8265993421052629
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2693452035,
+        "content": "A quick idea that can use improvement:\r\nAssignee can restart the disqualification timer by continuing to try. There's many clear examples of the task not being the right fit for the assignee and they try i.e. for months on projects that should be doable in a day.\r\nWe could consider doing limits on time limit \"top ups.\" So for example:\r\n```\r\nPriority 1 - 5 top ups\r\nPriority 2 - 4 top ups \r\nPriority 3 - 3 top ups \r\nPriority 4 - 2 top ups \r\nPriority 5 - 1 top up. \r\n```\r\nI suspect that priority 5 tasks will border on eliminating most even capable assignees but once the task is complete even if just slightly after deadline we can always retroactively assign credit. \r\n---\r\n- We should be able to toggle this behavior in the config. \r\n- If it is enabled the message should clearly explain the amount of remaining top ups. \r\nI foresee a bit of complexity around the logic related to dealing with the \"time limits\" for follow up/disqualify and the top up counter. \r\n- If the limits are 7/14 as they are now, then the first top up should occur after 14 days on a priority 1 normal project. \r\n- priority 5 top up would be after `14 / 5 = 2.8` days.\r\n- Check the assignment timestamp and use that as a point of reference to calculate the current top up counter/state. i.e. if the task was assigned 35 days ago, and the clock speed is 14 days, then `35/14=2.5` meaning we are still at top up number 2. \r\n## Example Context\r\n- https://github.com/ubiquity-os/plugins-wishlist/issues/46#issuecomment-2450630585\r\n- Assigned 1 November, but this should have been disqualified by 10 November. \r\nLogic: \r\n```\r\n14 days base timer / priority 4 = 3.5 days. \r\nthis means that top up counter increments every 3.5 days. \r\npriority 4 has 2 additional top ups. \r\n1 November is the original granted 3.5 day time limit. \r\nafter 3.5 days pass, the first top up is spent. \r\nafter another 3.5 days pass, the second top up is spent. \r\n3.5 + 3.5 + 3.5 = 10.5 days has elapsed \r\non the next attempt to follow up disqualification occurs because no more top ups remain. \r\n```\r\nRemarks:\r\nI wonder if the original time that we grant should be based on the `Time: ` label because I see problems with tasks that are set to `Time: <1 Week` and `Priority: 5 (Emergency)` they would only be able to get 5.6 days to work on it.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.75,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 15
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 7
+              },
+              "h2": {
+                "score": 1,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 2.7
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 282,
+            "wordValue": 0.1,
+            "result": 1.02
+          },
+          "readability": {
+            "fleschKincaid": 67.60310939464703,
+            "syllables": 428,
+            "sentences": 19,
+            "score": 0.9239689060535297
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2635865685,
+        "content": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1966956414",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#pullrequestreview-2635865685",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.904,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 24.36159090909092,
+            "syllables": 23,
+            "sentences": 2,
+            "score": 0.6436159090909093
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2644937270,
+        "content": "Just need to change the message and we can merge this https://github.com/Meniole/daemon-disqualifier/issues/20#issuecomment-2685408080",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#pullrequestreview-2644937270",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 7.112,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 63.23464285714289,
+            "syllables": 33,
+            "sentences": 2,
+            "score": 0.9676535714285711
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1948077808,
+        "content": "Ideally we should parse the priority labels from the plugin config because they are intended to be customizable to adhere to each org's preferences.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1948077808",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,7 +1,53 @@\n import { watchUserActivity } from \"./handlers/watch-user-activity\";\n import { ContextPlugin } from \"./types/plugin-input\";\n \n+async function populateTopUpThresholds(context: ContextPlugin) {\n+  const { config, octokit, logger } = context;\n+\n+  if (!config.topUps.enabled || Object.keys(config.topUps.amounts).length) {\n+    return;\n+  }\n+  if (!context.payload.repository.owner?.login) {\n+    throw logger.fatal(\"Missing owner login from payload\", { context: context.payload });\n+  }\n+\n+  const data = await octokit.paginate(octokit.rest.issues.listLabelsForRepo, {\n+    owner: context.payload.repository.owner?.login,\n+    repo: context.payload.repository.name,\n+  });\n+\n+  if (!data.length) {\n+    logger.debug(\"No labels have been found, won't populate top ups.\", { data });\n+    return;\n+  }\n+\n+  const priorityLabels = data\n+    .map((label) => {\n+      const match = label.name.match(/^Priority:\\s*(\\d+).*$/i);",
+        "score": {
+          "reward": 7.632,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 42.71600000000004,
+            "syllables": 41,
+            "sentences": 1,
+            "score": 0.8271600000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1948786702,
+        "content": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2647547827",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1948786702",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -40,12 +42,14 @@ async function remindAssignees(context: ContextPlugin, issue: ListIssueForRepo)\n     logger.error(`Missing Assignees from ${issue.html_url}`);\n     return false;\n   }\n+\n   const logins = issue.assignees\n     .map((o) => o?.login)\n     .filter((o) => !!o)\n     .join(\", @\");\n+  const topUps = await getTopUpsRemaining(context);\n \n-  const logMessage = logger.info(`@${logins}, this task has been idle for a while. Please provide an update.\\n\\n`, {\n+  const logMessage = logger.info(`@${logins}, this task has been idle for a while. Please provide an update.\\n\\n<h5>Top ups remaining: ${topUps}</h5>`, {",
+        "score": {
+          "reward": 2.34,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 17.44500000000002,
+            "syllables": 26,
+            "sentences": 2,
+            "score": 0.5744500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1950448003,
+        "content": "```suggestion\n    `@${logins}, this task has been idle for a while. Please provide an update.\\n\\n<h5>You used `${topUpLimit - remainingTopUps}` of `${topUpLimit}` top ups</h5>`,\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1950448003",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -40,14 +42,19 @@ async function remindAssignees(context: ContextPlugin, issue: ListIssueForRepo)\n     logger.error(`Missing Assignees from ${issue.html_url}`);\n     return false;\n   }\n+\n   const logins = issue.assignees\n     .map((o) => o?.login)\n     .filter((o) => !!o)\n     .join(\", @\");\n+  const { remainingTopUps, topUpLimit } = await getTopUpsRemaining(context);\n \n-  const logMessage = logger.info(`@${logins}, this task has been idle for a while. Please provide an update.\\n\\n`, {\n-    taskAssignees: issue.assignees.map((o) => o?.id),\n-  });\n+  const logMessage = logger.info(\n+    `@${logins}, this task has been idle for a while. Please provide an update.\\n\\n<h5>You used ${topUpLimit - remainingTopUps} / ${topUpLimit} top ups</h5>`,",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1952051200,
+        "content": "Anything is possible. Just parse the yml config looking for daemon pricing",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1952051200",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,7 +1,53 @@\n import { watchUserActivity } from \"./handlers/watch-user-activity\";\n import { ContextPlugin } from \"./types/plugin-input\";\n \n+async function populateTopUpThresholds(context: ContextPlugin) {\n+  const { config, octokit, logger } = context;\n+\n+  if (!config.topUps.enabled || Object.keys(config.topUps.amounts).length) {\n+    return;\n+  }\n+  if (!context.payload.repository.owner?.login) {\n+    throw logger.fatal(\"Missing owner login from payload\", { context: context.payload });\n+  }\n+\n+  const data = await octokit.paginate(octokit.rest.issues.listLabelsForRepo, {\n+    owner: context.payload.repository.owner?.login,\n+    repo: context.payload.repository.name,\n+  });\n+\n+  if (!data.length) {\n+    logger.debug(\"No labels have been found, won't populate top ups.\", { data });\n+    return;\n+  }\n+\n+  const priorityLabels = data\n+    .map((label) => {\n+      const match = label.name.match(/^Priority:\\s*(\\d+).*$/i);",
+        "score": {
+          "reward": 3.24,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 59.745000000000005,
+            "syllables": 20,
+            "sentences": 2,
+            "score": 0.9974500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1966956414,
+        "content": "Since you added the priority levels to the config here, why don't you work with those?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1966956414",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,7 +1,53 @@\n import { watchUserActivity } from \"./handlers/watch-user-activity\";\n import { ContextPlugin } from \"./types/plugin-input\";\n \n+async function populateTopUpThresholds(context: ContextPlugin) {\n+  const { config, octokit, logger } = context;\n+\n+  if (!config.topUps.enabled || Object.keys(config.topUps.amounts).length) {\n+    return;\n+  }\n+  if (!context.payload.repository.owner?.login) {\n+    throw logger.fatal(\"Missing owner login from payload\", { context: context.payload });\n+  }\n+\n+  const data = await octokit.paginate(octokit.rest.issues.listLabelsForRepo, {\n+    owner: context.payload.repository.owner?.login,\n+    repo: context.payload.repository.name,\n+  });\n+\n+  if (!data.length) {\n+    logger.debug(\"No labels have been found, won't populate top ups.\", { data });\n+    return;\n+  }\n+\n+  const priorityLabels = data\n+    .map((label) => {\n+      const match = label.name.match(/^Priority:\\s*(\\d+).*$/i);",
+        "score": {
+          "reward": 5.184,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 85.07411764705884,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 0.7492588235294115
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1966958888,
+        "content": "I hope that you can think through and test if partners want to set the priority labels to be different. This should be easy to set up the plugin to work as expected, and to be verbose if it thinks there might be some problem or incompatibility with the partner config and preferences. \nFor example I've seen people do things like \np0 p1 p2 p3\nAnd priority 1 (emergency)",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1966958888",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,7 +1,53 @@\n import { watchUserActivity } from \"./handlers/watch-user-activity\";\n import { ContextPlugin } from \"./types/plugin-input\";\n \n+async function populateTopUpThresholds(context: ContextPlugin) {\n+  const { config, octokit, logger } = context;\n+\n+  if (!config.topUps.enabled || Object.keys(config.topUps.amounts).length) {\n+    return;\n+  }\n+  if (!context.payload.repository.owner?.login) {\n+    throw logger.fatal(\"Missing owner login from payload\", { context: context.payload });\n+  }\n+\n+  const data = await octokit.paginate(octokit.rest.issues.listLabelsForRepo, {\n+    owner: context.payload.repository.owner?.login,\n+    repo: context.payload.repository.name,\n+  });\n+\n+  if (!data.length) {\n+    logger.debug(\"No labels have been found, won't populate top ups.\", { data });\n+    return;\n+  }\n+\n+  const priorityLabels = data\n+    .map((label) => {\n+      const match = label.name.match(/^Priority:\\s*(\\d+).*$/i);",
+        "score": {
+          "reward": 12.06,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 70,
+            "wordValue": 0.1,
+            "result": 2.6
+          },
+          "readability": {
+            "fleschKincaid": 63.50309523809524,
+            "syllables": 99,
+            "sentences": 3,
+            "score": 0.9649690476190476
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2658580627,
+        "content": "There's no top up messages so this doesn't achieve the goal we discussed.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#issuecomment-2658580627",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.672,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 90.09000000000002,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.6990999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2658867059,
+        "content": "I guess your examples only say \"disqualified cause no more top ups remaining\"\nCan you show an example with the counter like we discussed \n\"You used 3 of 5 top ups!\" Etc",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#issuecomment-2658867059",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 7.84,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 74.27000000000001,
+            "syllables": 44,
+            "sentences": 2,
+            "score": 0.8573
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2660791541,
+        "content": "Can you show a full example because the one you just linked only says 1 of 2 both times then it's closed which is unexpected. \nIt should be 1 of 2 \n2 of 2 \nDisqualified. \n---\nLastly I'm thinking of the best way to word it because without context the message is meaningless. \nI want to explain concisely something like \"you have used 1 of 2 deadline extensions.\"",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#issuecomment-2660791541",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 16.164,
+          "formatting": {
+            "content": {
+              "h2": {
+                "score": 1,
+                "elementCount": 1
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 69,
+            "wordValue": 0.1,
+            "result": 2.59
+          },
+          "readability": {
+            "fleschKincaid": 76.3497391304348,
+            "syllables": 95,
+            "sentences": 5,
+            "score": 0.836502608695652
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2661242848,
+        "content": "It would seem more like a human manager if it didn't constantly remind of the top up state. \nIdeally we should only remark on the top up on state change. \nAlternatively we can reword the entire comment to make it seem like it's a foot note/subtitle or something.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#issuecomment-2661242848",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 9.792,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 51,
+            "wordValue": 0.1,
+            "result": 2.4
+          },
+          "readability": {
+            "fleschKincaid": 68.48588235294119,
+            "syllables": 73,
+            "sentences": 3,
+            "score": 0.9151411764705881
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2661770834,
+        "content": "Perhaps it makes more sense to focus on making it better UX for expected follow up times instead of optimizing it for a testing edge case. Nobody is going to set a 10 minute threshold in production.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#issuecomment-2661770834",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 6.48,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 37,
+            "wordValue": 0.1,
+            "result": 2.1
+          },
+          "readability": {
+            "fleschKincaid": 64.58722972972974,
+            "syllables": 54,
+            "sentences": 2,
+            "score": 0.9541277027027025
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2664206238,
+        "content": "We need first to use the time label as a given amount of time and then use our disqualifier configured timer \nSo 15 minutes would be the time label and then after that we hit the first top up\nThen after 14 days or whatever the second top up.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#issuecomment-2664206238",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 8.316,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 49,
+            "wordValue": 0.1,
+            "result": 2.37
+          },
+          "readability": {
+            "fleschKincaid": 44.875510204081664,
+            "syllables": 65,
+            "sentences": 1,
+            "score": 0.8487551020408166
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2664549958,
+        "content": "I don't understand but I imagine that the previous comments can be reviewed for a string match to determine when to share the update about \"state change\"\nIt's under \"remarks\" section of spec and I emphasized multiple times in our DMs as a \"concern\" when you were asking about starting this.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#issuecomment-2664549958",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.9,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 53,
+            "wordValue": 0.1,
+            "result": 2.43
+          },
+          "readability": {
+            "fleschKincaid": 31.726792452830225,
+            "syllables": 76,
+            "sentences": 1,
+            "score": 0.7172679245283022
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2664623463,
+        "content": "Regular reminders are the most useful capability. \nTop ups as less frequent notices are also useful. \nTop ups should not be redundant. For example it should repeat that you used 1 of 2 deadline extensions. It should only notify of each deadline extension once, like a human manager would.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#issuecomment-2664623463",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 11.016,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 49,
+            "wordValue": 0.1,
+            "result": 2.37
+          },
+          "readability": {
+            "fleschKincaid": 57.03902040816328,
+            "syllables": 81,
+            "sentences": 5,
+            "score": 0.9703902040816328
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2664627956,
+        "content": "Sure. Bonus points if you can consolidate into a single comment next time cron runs",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#issuecomment-2664627956",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.04,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 75.14250000000001,
+            "syllables": 22,
+            "sentences": 2,
+            "score": 0.8485749999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2670515999,
+        "content": "I left comments. New QA I wouldn't have expected it to close it until disqualification. If it is pull related perhaps it would be more clear to mention that no pull is linked and in this repository a pull must be linked for deadline extensions. \nFor the second link I think that making the numbers bold as well looks better. I left an example there.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#issuecomment-2670515999",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 10.24,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 66,
+            "wordValue": 0.1,
+            "result": 2.57
+          },
+          "readability": {
+            "fleschKincaid": 78.07336363636367,
+            "syllables": 90,
+            "sentences": 5,
+            "score": 0.8192663636363633
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2604200296,
+            "effect": {
+              "addition": 53,
+              "deletion": 0
+            },
+            "reward": 2.12,
+            "priority": 4
+          },
+          {
+            "reviewId": 2605312584,
+            "effect": {
+              "addition": 92,
+              "deletion": 24
+            },
+            "reward": 4.64,
+            "priority": 4
+          },
+          {
+            "reviewId": 2608051573,
+            "effect": {
+              "addition": 28,
+              "deletion": 18
+            },
+            "reward": 1.84,
+            "priority": 4
+          },
+          {
+            "reviewId": 2610933048,
+            "effect": {
+              "addition": 48,
+              "deletion": 13
+            },
+            "reward": 2.44,
+            "priority": 4
+          },
+          {
+            "reviewId": 2635864755,
+            "effect": {
+              "addition": 412,
+              "deletion": 225
+            },
+            "reward": 25.48,
+            "priority": 4
+          },
+          {
+            "reviewId": 2644937270,
+            "effect": {
+              "addition": 44,
+              "deletion": 37
+            },
+            "reward": 3.24,
+            "priority": 4
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 221.372 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>6</td><td>39.76</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.75</td></tr><tr><td>Issue</td><td>Comment</td><td>7</td><td>53.93</td></tr><tr><td>Review</td><td>Comment</td><td>18</td><td>122.932</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79\" target=\"_blank\" rel=\"noopener\">#79</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+53 -0</td><td>4</td><td>2.12</td></tr><tr><td>+92 -24</td><td>4</td><td>4.64</td></tr><tr><td>+28 -18</td><td>4</td><td>1.84</td></tr><tr><td>+48 -13</td><td>4</td><td>2.44</td></tr><tr><td>+412 -225</td><td>4</td><td>25.48</td></tr><tr><td>+44 -37</td><td>4</td><td>3.24</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51\" target=\"_blank\" rel=\"noopener\">A quick idea that can use improvement:Assignee can restart the&hellip;</a></h6></td><td><details><summary>3.72</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 15&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 3&#13;    li:&#13;      score: 0.1&#13;      elementCount: 7&#13;    h2:&#13;      score: 1&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 2.7&#13;regex:&#13;  wordCount: 282&#13;  wordValue: 0.1&#13;  result: 1.02&#13;</pre></details></td><td>1</td><td>1</td><td>4.75</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2576557035\" target=\"_blank\" rel=\"noopener\">Yes. In practice the good talent gets their reviews processed p&hellip;</a></h6></td><td><details><summary>2.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 96&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.9</td><td>4</td><td>11.844</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2576710996\" target=\"_blank\" rel=\"noopener\">Of course in an ideal world everybody processes their tasks with&hellip;</a></h6></td><td><details><summary>2.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 99&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.85</td><td>4</td><td>11.288</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2578747395\" target=\"_blank\" rel=\"noopener\">I would like to try the current proposed strategy first but we c&hellip;</a></h6></td><td><details><summary>2.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 43&#13;  wordValue: 0.1&#13;  result: 2.25&#13;</pre></details></td><td>0.95</td><td>4</td><td>10.222</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2604318753\" target=\"_blank\" rel=\"noopener\">What about the reminders? If that is handled by another set of l&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.8</td><td>4</td><td>4.864</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2647255176\" target=\"_blank\" rel=\"noopener\">Yeah I think each top up should incur a reminder of sorts. I'm w&hellip;</a></h6></td><td><details><summary>1.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.95</td><td>4</td><td>9.272</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2647547827\" target=\"_blank\" rel=\"noopener\">I think there is value in saying both numbers to take advantage &hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.8</td><td>4</td><td>5.728</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2687850699\" target=\"_blank\" rel=\"noopener\">Your formatting score needs better rounding. Can you fix that? I&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.1</td><td>4</td><td>0.712</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#pullrequestreview-2635865685\" target=\"_blank\" rel=\"noopener\">https://github.com/ubiquity-os-marketplace/daemon-disqualifier/p&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.4</td><td>4</td><td>1.904</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#pullrequestreview-2644937270\" target=\"_blank\" rel=\"noopener\">Just need to change the message and we can merge this https://gi&hellip;</a></h6></td><td><details><summary>1.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.7</td><td>4</td><td>7.112</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1948077808\" target=\"_blank\" rel=\"noopener\">Ideally we should parse the priority labels from the plugin conf&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.9</td><td>4</td><td>7.632</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1948786702\" target=\"_blank\" rel=\"noopener\">https://github.com/ubiquity-os-marketplace/daemon-disqualifier/i&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>4</td><td>2.34</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1950448003\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion&#96;@${logins}, this task has bee&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1952051200\" target=\"_blank\" rel=\"noopener\">Anything is possible. Just parse the yml config looking for daem&hellip;</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.6</td><td>4</td><td>3.24</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1966956414\" target=\"_blank\" rel=\"noopener\">Since you added the priority levels to the config here, why don'&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.8</td><td>4</td><td>5.184</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1966958888\" target=\"_blank\" rel=\"noopener\">I hope that you can think through and test if partners want to s&hellip;</a></h6></td><td><details><summary>2.6</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 70&#13;  wordValue: 0.1&#13;  result: 2.6&#13;</pre></details></td><td>0.9</td><td>4</td><td>12.06</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#issuecomment-2658580627\" target=\"_blank\" rel=\"noopener\">There's no top up messages so this doesn't achieve the goal we d&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.8</td><td>4</td><td>4.672</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#issuecomment-2658867059\" target=\"_blank\" rel=\"noopener\">I guess your examples only say \"disqualified cause no more top u&hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.8</td><td>4</td><td>7.84</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#issuecomment-2660791541\" target=\"_blank\" rel=\"noopener\">Can you show a full example because the one you just linked only&hellip;</a></h6></td><td><details><summary>3.59</summary><pre>content:&#13;  content:&#13;    h2:&#13;      score: 1&#13;      elementCount: 1&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 69&#13;  wordValue: 0.1&#13;  result: 2.59&#13;</pre></details></td><td>0.9</td><td>4</td><td>16.164</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#issuecomment-2661242848\" target=\"_blank\" rel=\"noopener\">It would seem more like a human manager if it didn't constantly &hellip;</a></h6></td><td><details><summary>2.4</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 51&#13;  wordValue: 0.1&#13;  result: 2.4&#13;</pre></details></td><td>0.8</td><td>4</td><td>9.792</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#issuecomment-2661770834\" target=\"_blank\" rel=\"noopener\">Perhaps it makes more sense to focus on making it better UX for &hellip;</a></h6></td><td><details><summary>2.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 37&#13;  wordValue: 0.1&#13;  result: 2.1&#13;</pre></details></td><td>0.6</td><td>4</td><td>6.48</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#issuecomment-2664206238\" target=\"_blank\" rel=\"noopener\">We need first to use the time label as a given amount of time an&hellip;</a></h6></td><td><details><summary>2.37</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 49&#13;  wordValue: 0.1&#13;  result: 2.37&#13;</pre></details></td><td>0.7</td><td>4</td><td>8.316</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#issuecomment-2664549958\" target=\"_blank\" rel=\"noopener\">I don't understand but I imagine that the previous comments can &hellip;</a></h6></td><td><details><summary>2.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 53&#13;  wordValue: 0.1&#13;  result: 2.43&#13;</pre></details></td><td>0.5</td><td>4</td><td>5.9</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#issuecomment-2664623463\" target=\"_blank\" rel=\"noopener\">Regular reminders are the most useful capability. Top ups as le&hellip;</a></h6></td><td><details><summary>2.37</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 49&#13;  wordValue: 0.1&#13;  result: 2.37&#13;</pre></details></td><td>0.9</td><td>4</td><td>11.016</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#issuecomment-2664627956\" target=\"_blank\" rel=\"noopener\">Sure. Bonus points if you can consolidate into a single comment &hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.5</td><td>4</td><td>3.04</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#issuecomment-2670515999\" target=\"_blank\" rel=\"noopener\">I left comments. New QA I wouldn't have expected it to close it &hellip;</a></h6></td><td><details><summary>2.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 66&#13;  wordValue: 0.1&#13;  result: 2.57&#13;</pre></details></td><td>0.8</td><td>4</td><td>10.24</td></tr></tbody></table></details>"
+  },
+  "ManyRios": {
+    "total": 0,
+    "userId": 34518489,
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79"
+      }
+    ]
+  },
+  "whilefoo": {
+    "total": 117.788,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 1966605843,
+        "content": "could use better naming of these variables",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1966605843",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -22,41 +24,129 @@ export async function remindAssigneesForIssue(context: ContextPlugin, issue: Lis\n   const issueItem = parseIssueUrl(issue.html_url);\n \n   const hasLinkedPr = !!(await collectLinkedPullRequests(context, issueItem)).filter((o) => o.state === \"OPEN\").length;\n+  const { remainingTopUps } = await getTopUpsRemaining(context);\n   if (config.warning <= 0) {\n     logger.info(\"The reminder threshold is <= 0, won't send any reminder.\");\n-  } else if (config.pullRequestRequired && !hasLinkedPr) {\n+  } else if ((config.pullRequestRequired && !hasLinkedPr) || remainingTopUps <= 0) {\n     await unassignUserFromIssue(context, issue);\n+    await closeLinkedPullRequests(context, issue);\n   } else {\n     logger.info(`Passed the reminder threshold on ${issue.html_url} sending a reminder.`);\n     await remindAssignees(context, issue);\n   }\n }\n \n-async function remindAssignees(context: ContextPlugin, issue: ListIssueForRepo) {\n-  const { octokit, logger, config } = context;\n-  const { repo, owner, issue_number } = parseIssueUrl(issue.html_url);\n+interface Args {\n+  issueNumber: number;\n+  remainingTopUps: number;\n+  pr?: {\n+    prOwner: string;\n+    prRepo: string;\n+    prNumber: number;\n+  };\n+}\n \n-  if (!issue?.assignees?.length) {\n-    logger.error(`Missing Assignees from ${issue.html_url}`);\n+async function shouldDisplayTopUpsReminder(context: ContextPlugin, args: Args) {\n+  const { octokit, logger } = context;\n+  const userAssignmentEvent = await getMostRecentUserAssignmentEvent(context, context.payload.repository, args.issueNumber);\n+\n+  if (!userAssignmentEvent) {\n+    logger.warn(\"No user assignment event was found, won't display top-up value\");\n+    return false;\n+  }\n+\n+  const issueNumber = args.pr?.prNumber ?? args.issueNumber;\n+  const owner = args.pr?.prOwner ?? context.payload.repository.owner?.login;\n+  const repo = args.pr?.prRepo ?? context.payload.repository.name;\n+\n+  if (!owner) {\n+    logger.error(\"No owner was found in the payload, won't display top-up value\");\n     return false;\n   }\n+\n+  const regex = new RegExp(/\"remainingTopUps\": (\\d+)/, \"i\");\n+\n+  const lastTopUpValue = (\n+    await octokit.paginate(octokit.rest.issues.listEventsForTimeline, {\n+      owner: owner,\n+      repo: repo,\n+      issue_number: issueNumber,\n+    })\n+  ).reduce((acc, o) => {\n+    if (\n+      \"created_at\" in o &&\n+      \"actor\" in o &&\n+      \"body\" in o &&\n+      o.event === \"commented\" &&\n+      new Date(o.created_at).getTime() >= new Date(userAssignmentEvent.created_at).getTime() &&\n+      o.actor?.type === \"Bot\" &&\n+      o.body?.includes(\"remainingTopUps\")\n+    ) {\n+      const res = regex.exec(o.body);\n+      const value = Number(res?.[1]);\n+      if (!acc || value < acc) {\n+        return value;\n+      } else {\n+        return acc;\n+      }",
+        "score": {
+          "reward": 2.464,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 66.7871428571429,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.9321285714285711
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1966605977,
+        "content": "```suggestion\r\n  ).reduce((lastTopUpvalue, event) => {\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1966605977",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -22,41 +24,129 @@ export async function remindAssigneesForIssue(context: ContextPlugin, issue: Lis\n   const issueItem = parseIssueUrl(issue.html_url);\n \n   const hasLinkedPr = !!(await collectLinkedPullRequests(context, issueItem)).filter((o) => o.state === \"OPEN\").length;\n+  const { remainingTopUps } = await getTopUpsRemaining(context);\n   if (config.warning <= 0) {\n     logger.info(\"The reminder threshold is <= 0, won't send any reminder.\");\n-  } else if (config.pullRequestRequired && !hasLinkedPr) {\n+  } else if ((config.pullRequestRequired && !hasLinkedPr) || remainingTopUps <= 0) {\n     await unassignUserFromIssue(context, issue);\n+    await closeLinkedPullRequests(context, issue);\n   } else {\n     logger.info(`Passed the reminder threshold on ${issue.html_url} sending a reminder.`);\n     await remindAssignees(context, issue);\n   }\n }\n \n-async function remindAssignees(context: ContextPlugin, issue: ListIssueForRepo) {\n-  const { octokit, logger, config } = context;\n-  const { repo, owner, issue_number } = parseIssueUrl(issue.html_url);\n+interface Args {\n+  issueNumber: number;\n+  remainingTopUps: number;\n+  pr?: {\n+    prOwner: string;\n+    prRepo: string;\n+    prNumber: number;\n+  };\n+}\n \n-  if (!issue?.assignees?.length) {\n-    logger.error(`Missing Assignees from ${issue.html_url}`);\n+async function shouldDisplayTopUpsReminder(context: ContextPlugin, args: Args) {\n+  const { octokit, logger } = context;\n+  const userAssignmentEvent = await getMostRecentUserAssignmentEvent(context, context.payload.repository, args.issueNumber);\n+\n+  if (!userAssignmentEvent) {\n+    logger.warn(\"No user assignment event was found, won't display top-up value\");\n+    return false;\n+  }\n+\n+  const issueNumber = args.pr?.prNumber ?? args.issueNumber;\n+  const owner = args.pr?.prOwner ?? context.payload.repository.owner?.login;\n+  const repo = args.pr?.prRepo ?? context.payload.repository.name;\n+\n+  if (!owner) {\n+    logger.error(\"No owner was found in the payload, won't display top-up value\");\n     return false;\n   }\n+\n+  const regex = new RegExp(/\"remainingTopUps\": (\\d+)/, \"i\");\n+\n+  const lastTopUpValue = (\n+    await octokit.paginate(octokit.rest.issues.listEventsForTimeline, {\n+      owner: owner,\n+      repo: repo,\n+      issue_number: issueNumber,\n+    })\n+  ).reduce((acc, o) => {",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1966609037,
+        "content": "`startPlusLabelDuration` is not even used anywhere? https://github.com/search?q=repo%3Aubiquity-os-marketplace%2Fdaemon-disqualifier%20startPlusLabelDuration&type=code",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1966609037",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -47,6 +35,29 @@ export async function getTaskAssignmentDetails(\n     mostRecentAssignmentEvent = latestBotAssignment;\n   }\n \n+  return mostRecentAssignmentEvent;\n+}\n+\n+/**\n+ * Retrieves assignment events from the timeline of an issue and calculates the disqualification threshold based on the time label.\n+ *\n+ * It does not care about previous updates, comments or other events that might have happened on the issue.\n+ *\n+ * It returns who is assigned and the initial calculated disqualification threshold (start + time label duration).\n+ */\n+export async function getTaskAssignmentDetails(\n+  context: ContextPlugin,\n+  repo: ContextPlugin[\"payload\"][\"repository\"],\n+  issue: ListIssueForRepo\n+): Promise<{ startPlusLabelDuration: string; taskAssignees: number[] } | false> {",
+        "score": {
+          "reward": 6.624,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 28.36111842105265,
+            "syllables": 39,
+            "sentences": 4,
+            "score": 0.6836111842105265
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1966610066,
+        "content": "this function is very similar to `getMostRecentUserAssignmentEvent`, is there any reason for two functions?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1966610066",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -7,17 +7,44 @@ import { collectLinkedPullRequests } from \"./collect-linked-pulls\";\n import { getAssigneesActivityForIssue } from \"./get-assignee-activity\";\n import { parseIssueUrl } from \"./github-url\";\n import { areLinkedPullRequestsApproved } from \"./pull-request\";\n-import { closeLinkedPullRequests, remindAssigneesForIssue, unassignUserFromIssue } from \"./remind-and-remove\";\n+import { closeLinkedPullRequests, remindAssignees, remindAssigneesForIssue, unassignUserFromIssue } from \"./remind-and-remove\";\n import { getCommentsFromMetadata } from \"./structured-metadata\";\n import { getTaskAssignmentDetails, parsePriorityLabel } from \"./task-metadata\";\n \n function getMostRecentActivityDate(assignedEventDate: DateTime, activityEventDate?: DateTime): DateTime {\n   return activityEventDate && activityEventDate > assignedEventDate ? activityEventDate : assignedEventDate;\n }\n \n+export async function getAssignedEvent(context: ContextPlugin, repo: ContextPlugin[\"payload\"][\"repository\"], issue: ListIssueForRepo) {",
+        "score": {
+          "reward": 4.48,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 69.99384615384618,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.9000615384615382
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1966612153,
+        "content": "this whole thing with args is a bit confusing",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1966612153",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -22,41 +24,129 @@ export async function remindAssigneesForIssue(context: ContextPlugin, issue: Lis\n   const issueItem = parseIssueUrl(issue.html_url);\n \n   const hasLinkedPr = !!(await collectLinkedPullRequests(context, issueItem)).filter((o) => o.state === \"OPEN\").length;\n+  const { remainingTopUps } = await getTopUpsRemaining(context);\n   if (config.warning <= 0) {\n     logger.info(\"The reminder threshold is <= 0, won't send any reminder.\");\n-  } else if (config.pullRequestRequired && !hasLinkedPr) {\n+  } else if ((config.pullRequestRequired && !hasLinkedPr) || remainingTopUps <= 0) {\n     await unassignUserFromIssue(context, issue);\n+    await closeLinkedPullRequests(context, issue);\n   } else {\n     logger.info(`Passed the reminder threshold on ${issue.html_url} sending a reminder.`);\n     await remindAssignees(context, issue);\n   }\n }\n \n-async function remindAssignees(context: ContextPlugin, issue: ListIssueForRepo) {\n-  const { octokit, logger, config } = context;\n-  const { repo, owner, issue_number } = parseIssueUrl(issue.html_url);\n+interface Args {\n+  issueNumber: number;\n+  remainingTopUps: number;\n+  pr?: {\n+    prOwner: string;\n+    prRepo: string;\n+    prNumber: number;\n+  };\n+}\n \n-  if (!issue?.assignees?.length) {\n-    logger.error(`Missing Assignees from ${issue.html_url}`);\n+async function shouldDisplayTopUpsReminder(context: ContextPlugin, args: Args) {",
+        "score": {
+          "reward": 2.472,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 84.90000000000003,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.7509999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1968275039,
+        "content": "why are there so many defined properties if only 4 of them are used?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1968275039",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -22,41 +34,135 @@ export async function remindAssigneesForIssue(context: ContextPlugin, issue: Lis\n   const issueItem = parseIssueUrl(issue.html_url);\n \n   const hasLinkedPr = !!(await collectLinkedPullRequests(context, issueItem)).filter((o) => o.state === \"OPEN\").length;\n-  if (config.warning <= 0) {\n+  const { remainingExtensions } = await getRemainingAvailableExtensions(context);\n+  if (config.followUpInterval <= 0) {\n     logger.info(\"The reminder threshold is <= 0, won't send any reminder.\");\n-  } else if (config.pullRequestRequired && !hasLinkedPr) {\n+  } else if ((config.pullRequestRequired && !hasLinkedPr) || remainingExtensions <= 0) {\n     await unassignUserFromIssue(context, issue);\n+    await closeLinkedPullRequests(context, issue);\n   } else {\n     logger.info(`Passed the reminder threshold on ${issue.html_url} sending a reminder.`);\n     await remindAssignees(context, issue);\n   }\n }\n \n-async function remindAssignees(context: ContextPlugin, issue: ListIssueForRepo) {\n-  const { octokit, logger, config } = context;\n-  const { repo, owner, issue_number } = parseIssueUrl(issue.html_url);\n+async function shouldDisplayTopUpsReminder(context: ContextPlugin, issueAndPrTargets: IssuePrTarget) {\n+  const { octokit, logger } = context;\n+  const userAssignmentEvent = await getMostRecentUserAssignmentEvent(context, context.payload.repository, issueAndPrTargets.issueNumber);\n \n-  if (!issue?.assignees?.length) {\n-    logger.error(`Missing Assignees from ${issue.html_url}`);\n+  if (!userAssignmentEvent) {\n+    logger.warn(\"No user assignment event was found, won't display top-up value\");\n     return false;\n   }\n+\n+  const issueNumber = issueAndPrTargets.pr?.prNumber ?? issueAndPrTargets.issueNumber;\n+  const owner = issueAndPrTargets.pr?.prOwner ?? context.payload.repository.owner?.login;\n+  const repo = issueAndPrTargets.pr?.prRepo ?? context.payload.repository.name;\n+\n+  if (!owner) {\n+    logger.error(\"No owner was found in the payload, won't display top-up value\");\n+    return false;\n+  }\n+\n+  const regex = new RegExp(/\"remainingTopUps\": (\\d+)/, \"i\");\n+\n+  const lastTopUpValue = (\n+    await octokit.paginate(octokit.rest.issues.listEventsForTimeline, {\n+      owner: owner,\n+      repo: repo,\n+      issue_number: issueNumber,\n+    })\n+  ).reduce((lastTopUpValue, event) => {\n+    if (\n+      \"created_at\" in event &&\n+      \"actor\" in event &&\n+      \"body\" in event &&\n+      event.event === \"commented\" &&\n+      new Date(event.created_at).getTime() >= new Date(userAssignmentEvent.created_at).getTime() &&\n+      event.actor?.type === \"Bot\" &&\n+      event.body?.includes(\"remainingExtensions\")\n+    ) {\n+      const res = regex.exec(event.body);\n+      const value = Number(res?.[1]);\n+      if (!lastTopUpValue || value < lastTopUpValue) {\n+        return value;\n+      } else {\n+        return lastTopUpValue;\n+      }\n+    }\n+    return lastTopUpValue;\n+  }, 0);\n+  logger.debug(\"Last reminder top up value\", { lastTopUpValue, remainingExtensions: issueAndPrTargets.remainingExtensions });\n+  return lastTopUpValue !== issueAndPrTargets.remainingExtensions;\n+}\n+\n+async function buildReminderMessage(context: ContextPlugin, args: { remainingExtensions: number; extensionsLimit: number } & IssuePrTarget) {\n+  return !context.config.negligenceThreshold || !context.config.availableDeadlineExtensions.enabled || !(await shouldDisplayTopUpsReminder(context, args))\n+    ? \"this task has been idle for a while\"\n+    : `you have used <code>**${args.extensionsLimit - args.remainingExtensions + 1}**</code> of <code>**${args.extensionsLimit}**</code> available deadline extensions`;\n+}\n+\n+async function constructBodyWithMetadata(\n+  context: ContextPlugin,\n+  {\n+    reminderContent,\n+    extensionsLimit,\n+    remainingExtensions,\n+    issue,\n+  }: {\n+    reminderContent: string;\n+    extensionsLimit: number;\n+    remainingExtensions: number;\n+    owner: string;\n+    repo: string;\n+    issue_number: number;\n+    issue: ListIssueForRepo;\n+  }",
+        "score": {
+          "reward": 4.06,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 77.81071428571428,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.8218928571428572
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1968298257,
+        "content": "you forgot to rename to deadline extensions",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1968298257",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,7 +1,53 @@\n import { watchUserActivity } from \"./handlers/watch-user-activity\";\n import { ContextPlugin } from \"./types/plugin-input\";\n \n+async function populateTopUpThresholds(context: ContextPlugin) {",
+        "score": {
+          "reward": 2.848,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 54.70142857142861,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.947014285714286
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1968298815,
+        "content": "add description for plugin installer",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1968298815",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -91,6 +77,13 @@ export const pluginSettingsSchema = T.Object(\n       description: \"Whether a pull request is required for the given issue on disqualify\",\n       examples: [\"true\", \"false\"],\n     }),\n+    availableDeadlineExtensions: T.Object(",
+        "score": {
+          "reward": 1.82,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 32.56000000000003,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.7256000000000004
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1968306202,
+        "content": "I know this is old code but I'm trying to understand the whole logic, won't this be always `lastReminderTime` because last reminder is always newer than `mostRecentActivityDate` or am I missing something?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1968306202",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -81,20 +99,24 @@ export async function updateTaskReminder(context: ContextPlugin, repo: ContextPl\n     mostRecentActivityDate: mostRecentActivityDate.toLocaleString(DateTime.DATETIME_MED),\n   });\n \n-  const disqualificationTimeDifference = disqualification - warning;\n+  const disqualificationTimeDifference = negligenceThreshold - followUpInterval;\n \n   if (lastReminderComment) {\n     const lastReminderTime = DateTime.fromISO(lastReminderComment.created_at);\n     mostRecentActivityDate = lastReminderTime > mostRecentActivityDate ? lastReminderTime : mostRecentActivityDate;",
+        "score": {
+          "reward": 8.032,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 55.38625000000003,
+            "syllables": 45,
+            "sentences": 1,
+            "score": 0.9538625000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1968311420,
+        "content": "looking at this again and it doesn't make sense, first `mostRecentAssignmentEvent` gets assigned to whichever is truthy and then it's checked if both are present and if user assignment is newer than bot then user assignment gets assigned to `mostRecentAssignmentEvent` but in else statement it's assigned to bot assignment even if it might actually be `null`",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1968311420",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -8,37 +8,25 @@ type IssueLabel = Partial<Omit<RestEndpointMethodTypes[\"issues\"][\"listLabelsForR\n   color?: string | null;\n };\n \n-/**\n- * Retrieves assignment events from the timeline of an issue and calculates the disqualification threshold based on the time label.\n- *\n- * It does not care about previous updates, comments or other events that might have happened on the issue.\n- *\n- * It returns who is assigned and the initial calculated disqualification threshold (start + time label duration).\n- */\n-export async function getTaskAssignmentDetails(\n-  context: ContextPlugin,\n-  repo: ContextPlugin[\"payload\"][\"repository\"],\n-  issue: ListIssueForRepo\n-): Promise<{ startPlusLabelDuration: string; taskAssignees: number[] } | false> {\n+export async function getMostRecentUserAssignmentEvent(context: ContextPlugin, repo: ContextPlugin[\"payload\"][\"repository\"], issueNumber: number) {\n   const { logger, octokit, payload } = context;\n \n   if (!repo.owner) {\n     throw logger.error(\"No owner was found in the payload\", { payload });\n   }\n \n-  const assignmentEvents = await octokit.paginate(octokit.rest.issues.listEvents, {\n+  const events = await octokit.paginate(octokit.rest.issues.listEvents, {\n     owner: repo.owner.login,\n     repo: repo.name,\n-    issue_number: issue.number,\n+    issue_number: issueNumber,\n   });\n \n-  const assignedEvents = assignmentEvents\n+  const assignedEvents = events\n     .filter((o) => o.event === \"assigned\")\n     .sort((a, b) => DateTime.fromISO(b.created_at).toMillis() - DateTime.fromISO(a.created_at).toMillis());\n \n-  const latestUserAssignment = assignedEvents.find((o) => o.actor?.type === \"User\");\n-  const latestBotAssignment = assignedEvents.find((o) => o.actor?.type === \"Bot\");\n-\n+  const latestUserAssignment = assignedEvents.find((o) => (\"assigner\" in o ? o.assigner?.type === \"User\" : o.actor?.type === \"User\"));\n+  const latestBotAssignment = assignedEvents.find((o) => (\"assigner\" in o ? o.assigner?.type === \"Bot\" : o.actor?.type === \"Bot\"));\n   let mostRecentAssignmentEvent = latestUserAssignment || latestBotAssignment;\n \n   if (latestUserAssignment && latestBotAssignment && DateTime.fromISO(latestUserAssignment.created_at) > DateTime.fromISO(latestBotAssignment.created_at)) {",
+        "score": {
+          "reward": 10.764,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 56,
+            "wordValue": 0.1,
+            "result": 2.47
+          },
+          "readability": {
+            "fleschKincaid": 30.64857142857143,
+            "syllables": 79,
+            "sentences": 1,
+            "score": 0.7064857142857143
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1968312212,
+        "content": "you forgot to rename",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1968312212",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -22,41 +34,135 @@ export async function remindAssigneesForIssue(context: ContextPlugin, issue: Lis\n   const issueItem = parseIssueUrl(issue.html_url);\n \n   const hasLinkedPr = !!(await collectLinkedPullRequests(context, issueItem)).filter((o) => o.state === \"OPEN\").length;\n-  if (config.warning <= 0) {\n+  const { remainingExtensions } = await getRemainingAvailableExtensions(context);\n+  if (config.followUpInterval <= 0) {\n     logger.info(\"The reminder threshold is <= 0, won't send any reminder.\");\n-  } else if (config.pullRequestRequired && !hasLinkedPr) {\n+  } else if ((config.pullRequestRequired && !hasLinkedPr) || remainingExtensions <= 0) {\n     await unassignUserFromIssue(context, issue);\n+    await closeLinkedPullRequests(context, issue);\n   } else {\n     logger.info(`Passed the reminder threshold on ${issue.html_url} sending a reminder.`);\n     await remindAssignees(context, issue);\n   }\n }\n \n-async function remindAssignees(context: ContextPlugin, issue: ListIssueForRepo) {\n-  const { octokit, logger, config } = context;\n-  const { repo, owner, issue_number } = parseIssueUrl(issue.html_url);\n+async function shouldDisplayTopUpsReminder(context: ContextPlugin, issueAndPrTargets: IssuePrTarget) {\n+  const { octokit, logger } = context;\n+  const userAssignmentEvent = await getMostRecentUserAssignmentEvent(context, context.payload.repository, issueAndPrTargets.issueNumber);\n \n-  if (!issue?.assignees?.length) {\n-    logger.error(`Missing Assignees from ${issue.html_url}`);\n+  if (!userAssignmentEvent) {\n+    logger.warn(\"No user assignment event was found, won't display top-up value\");\n     return false;\n   }\n+\n+  const issueNumber = issueAndPrTargets.pr?.prNumber ?? issueAndPrTargets.issueNumber;\n+  const owner = issueAndPrTargets.pr?.prOwner ?? context.payload.repository.owner?.login;\n+  const repo = issueAndPrTargets.pr?.prRepo ?? context.payload.repository.name;\n+\n+  if (!owner) {\n+    logger.error(\"No owner was found in the payload, won't display top-up value\");\n+    return false;\n+  }\n+\n+  const regex = new RegExp(/\"remainingTopUps\": (\\d+)/, \"i\");\n+\n+  const lastTopUpValue = (",
+        "score": {
+          "reward": 1.76,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 75.87500000000001,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 0.8412499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1968314696,
+        "content": "if it gets logged that's fine, but if it's not used then we should remove it",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1968314696",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -47,6 +35,29 @@ export async function getTaskAssignmentDetails(\n     mostRecentAssignmentEvent = latestBotAssignment;\n   }\n \n+  return mostRecentAssignmentEvent;\n+}\n+\n+/**\n+ * Retrieves assignment events from the timeline of an issue and calculates the disqualification threshold based on the time label.\n+ *\n+ * It does not care about previous updates, comments or other events that might have happened on the issue.\n+ *\n+ * It returns who is assigned and the initial calculated disqualification threshold (start + time label duration).\n+ */\n+export async function getTaskAssignmentDetails(\n+  context: ContextPlugin,\n+  repo: ContextPlugin[\"payload\"][\"repository\"],\n+  issue: ListIssueForRepo\n+): Promise<{ startPlusLabelDuration: string; taskAssignees: number[] } | false> {",
+        "score": {
+          "reward": 4.564,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 99.265,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.60735
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1968318325,
+        "content": "I'm not sure if the metadata affects anything because it's just an extra check that assignment events assignees are really the ones that started the task so maybe we should use the one with metadata?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1968318325",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -7,17 +7,44 @@ import { collectLinkedPullRequests } from \"./collect-linked-pulls\";\n import { getAssigneesActivityForIssue } from \"./get-assignee-activity\";\n import { parseIssueUrl } from \"./github-url\";\n import { areLinkedPullRequestsApproved } from \"./pull-request\";\n-import { closeLinkedPullRequests, remindAssigneesForIssue, unassignUserFromIssue } from \"./remind-and-remove\";\n+import { closeLinkedPullRequests, remindAssignees, remindAssigneesForIssue, unassignUserFromIssue } from \"./remind-and-remove\";\n import { getCommentsFromMetadata } from \"./structured-metadata\";\n import { getTaskAssignmentDetails, parsePriorityLabel } from \"./task-metadata\";\n \n function getMostRecentActivityDate(assignedEventDate: DateTime, activityEventDate?: DateTime): DateTime {\n   return activityEventDate && activityEventDate > assignedEventDate ? activityEventDate : assignedEventDate;\n }\n \n+export async function getAssignedEvent(context: ContextPlugin, repo: ContextPlugin[\"payload\"][\"repository\"], issue: ListIssueForRepo) {",
+        "score": {
+          "reward": 7.392,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 37,
+            "wordValue": 0.1,
+            "result": 2.1
+          },
+          "readability": {
+            "fleschKincaid": 45.80972972972974,
+            "syllables": 54,
+            "sentences": 1,
+            "score": 0.8580972972972973
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1972118758,
+        "content": "if you look at the code (line 71) you can see that it only checks for reminders that happened after most recent activity",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1972118758",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -81,20 +99,24 @@ export async function updateTaskReminder(context: ContextPlugin, repo: ContextPl\n     mostRecentActivityDate: mostRecentActivityDate.toLocaleString(DateTime.DATETIME_MED),\n   });\n \n-  const disqualificationTimeDifference = disqualification - warning;\n+  const disqualificationTimeDifference = negligenceThreshold - followUpInterval;\n \n   if (lastReminderComment) {\n     const lastReminderTime = DateTime.fromISO(lastReminderComment.created_at);\n     mostRecentActivityDate = lastReminderTime > mostRecentActivityDate ? lastReminderTime : mostRecentActivityDate;",
+        "score": {
+          "reward": 4.968,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 65.78565217391306,
+            "syllables": 32,
+            "sentences": 1,
+            "score": 0.9421434782608693
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1972164337,
+        "content": "Why? The one with metadata just has an extra check. Honestly just choose one, I don't think it makes much difference in practice :D",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1972164337",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -7,17 +7,44 @@ import { collectLinkedPullRequests } from \"./collect-linked-pulls\";\n import { getAssigneesActivityForIssue } from \"./get-assignee-activity\";\n import { parseIssueUrl } from \"./github-url\";\n import { areLinkedPullRequestsApproved } from \"./pull-request\";\n-import { closeLinkedPullRequests, remindAssigneesForIssue, unassignUserFromIssue } from \"./remind-and-remove\";\n+import { closeLinkedPullRequests, remindAssignees, remindAssigneesForIssue, unassignUserFromIssue } from \"./remind-and-remove\";\n import { getCommentsFromMetadata } from \"./structured-metadata\";\n import { getTaskAssignmentDetails, parsePriorityLabel } from \"./task-metadata\";\n \n function getMostRecentActivityDate(assignedEventDate: DateTime, activityEventDate?: DateTime): DateTime {\n   return activityEventDate && activityEventDate > assignedEventDate ? activityEventDate : assignedEventDate;\n }\n \n+export async function getAssignedEvent(context: ContextPlugin, repo: ContextPlugin[\"payload\"][\"repository\"], issue: ListIssueForRepo) {",
+        "score": {
+          "reward": 4.18,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 83.32066666666667,
+            "syllables": 34,
+            "sentences": 3,
+            "score": 0.7667933333333333
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2635313205,
+            "effect": {
+              "addition": 473,
+              "deletion": 162
+            },
+            "reward": 25.4,
+            "priority": 4
+          },
+          {
+            "reviewId": 2638206866,
+            "effect": {
+              "addition": 144,
+              "deletion": 102
+            },
+            "reward": 9.84,
+            "priority": 4
+          },
+          {
+            "reviewId": 2638271791,
+            "effect": {
+              "addition": 0,
+              "deletion": 0
+            },
+            "reward": 0,
+            "priority": 4
+          },
+          {
+            "reviewId": 2645438331,
+            "effect": {
+              "addition": 144,
+              "deletion": 102
+            },
+            "reward": 9.84,
+            "priority": 4
+          },
+          {
+            "reviewId": 2645520006,
+            "effect": {
+              "addition": 54,
+              "deletion": 53
+            },
+            "reward": 4.28,
+            "priority": 4
+          },
+          {
+            "reviewId": 2647362049,
+            "effect": {
+              "addition": 13,
+              "deletion": 37
+            },
+            "reward": 2,
+            "priority": 4
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 117.788 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>6</td><td>51.36</td></tr><tr><td>Review</td><td>Comment</td><td>15</td><td>66.428</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79\" target=\"_blank\" rel=\"noopener\">#79</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+473 -162</td><td>4</td><td>25.4</td></tr><tr><td>+144 -102</td><td>4</td><td>9.84</td></tr><tr><td>+0 -0</td><td>4</td><td>0</td></tr><tr><td>+144 -102</td><td>4</td><td>9.84</td></tr><tr><td>+54 -53</td><td>4</td><td>4.28</td></tr><tr><td>+13 -37</td><td>4</td><td>2</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1966605843\" target=\"_blank\" rel=\"noopener\">could use better naming of these variables</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.7</td><td>4</td><td>2.464</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1966605977\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion).reduce((lastTopUpvalue, event) =&&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1966609037\" target=\"_blank\" rel=\"noopener\">&#96;startPlusLabelDuration&#96; is not even used anywhere? http&hellip;</a></h6></td><td><details><summary>1.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.9</td><td>4</td><td>6.624</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1966610066\" target=\"_blank\" rel=\"noopener\">this function is very similar to &#96;getMostRecentUserAssignmen&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.8</td><td>4</td><td>4.48</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1966612153\" target=\"_blank\" rel=\"noopener\">this whole thing with args is a bit confusing</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.6</td><td>4</td><td>2.472</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1968275039\" target=\"_blank\" rel=\"noopener\">why are there so many defined properties if only 4 of them are u&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.7</td><td>4</td><td>4.06</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1968298257\" target=\"_blank\" rel=\"noopener\">you forgot to rename to deadline extensions</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.8</td><td>4</td><td>2.848</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1968298815\" target=\"_blank\" rel=\"noopener\">add description for plugin installer</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.7</td><td>4</td><td>1.82</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1968306202\" target=\"_blank\" rel=\"noopener\">I know this is old code but I'm trying to understand the whole l&hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.8</td><td>4</td><td>8.032</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1968311420\" target=\"_blank\" rel=\"noopener\">looking at this again and it doesn't make sense, first &#96;most&hellip;</a></h6></td><td><details><summary>2.47</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 56&#13;  wordValue: 0.1&#13;  result: 2.47&#13;</pre></details></td><td>0.9</td><td>4</td><td>10.764</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1968312212\" target=\"_blank\" rel=\"noopener\">you forgot to rename</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.8</td><td>4</td><td>1.76</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1968314696\" target=\"_blank\" rel=\"noopener\">if it gets logged that's fine, but if it's not used then we shou&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.7</td><td>4</td><td>4.564</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1968318325\" target=\"_blank\" rel=\"noopener\">I'm not sure if the metadata affects anything because it's just &hellip;</a></h6></td><td><details><summary>2.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 37&#13;  wordValue: 0.1&#13;  result: 2.1&#13;</pre></details></td><td>0.7</td><td>4</td><td>7.392</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1972118758\" target=\"_blank\" rel=\"noopener\">if you look at the code (line 71) you can see that it only check&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.6</td><td>4</td><td>4.968</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/79#discussion_r1972164337\" target=\"_blank\" rel=\"noopener\">Why? The one with metadata just has an extra check. Honestly jus&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.5</td><td>4</td><td>4.18</td></tr></tbody></table></details>"
+  }
+}

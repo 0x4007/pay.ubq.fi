@@ -1,0 +1,575 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 26.829,
+    "task": {
+      "reward": 25,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2067297235,
+        "content": "@rndquu Following our Telegram conversation, I think we shall transfer this issue to https://github.com/ubiquibot/conversation-rewards if that is still relevant",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/13#issuecomment-2067297235",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.296,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 43.08000000000001,
+            "syllables": 43,
+            "sentences": 2,
+            "score": 0.8308000000000001
+          },
+          "multiplier": 0.25,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2067781996,
+        "content": "@rndquu makes sense to me. In terms of DB structure, `credits` and `debits` would become one table (maybe `transactions`) and it would keep a record of any financial flow that occurred for a user correct?\r\nBut is it solving the fact that we do not save permits to the DB or is it something that would be aside this task?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/13#issuecomment-2067781996",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.532,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 57,
+            "wordValue": 0.1,
+            "result": 2.48
+          },
+          "readability": {
+            "fleschKincaid": 82.17105263157896,
+            "syllables": 71,
+            "sentences": 3,
+            "score": 0.7782894736842104
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2067800086,
+        "content": "All these tables are empty so far so pretty safe to update them. But in the end, we should still push the generated permits to the table then, which is not yet the case right now. We might need a separate task for this?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/13#issuecomment-2067800086",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.621,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 44,
+            "wordValue": 0.1,
+            "result": 2.27
+          },
+          "readability": {
+            "fleschKincaid": 88.12106060606062,
+            "syllables": 54,
+            "sentences": 3,
+            "score": 0.7187893939393938
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2068422197,
+        "content": "I don't think credit and debit should be separate tables. I don't know if XP should be on its own, this can be figured out when we implement it. Probably has to if we had Tiers and Rewards later on.\r\nBecause in the end credit is a positive value and debit a negative value. It is way easier to count / sort them if they exist on the same table, and it would be a common use case to have to fetch all of them ordered by date which implies lots of cross joins if they are separated. On the other hand, Postgres allows for Views to solve that as well. As long as the tables are properly indexed the performance should be similar.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/13#issuecomment-2068422197",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.38,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 125,
+            "wordValue": 0.1,
+            "result": 2.45
+          },
+          "readability": {
+            "fleschKincaid": 77.71480000000001,
+            "syllables": 164,
+            "sentences": 7,
+            "score": 0.8228519999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 26.829 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>25</td></tr><tr><td>Issue</td><td>Comment</td><td>4</td><td>1.829</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/13#issuecomment-2067297235\" target=\"_blank\" rel=\"noopener\">@rndquu Following our Telegram conversation, I think we shall tr&hellip;</a></h6></td><td><details><summary>2.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.296</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/13#issuecomment-2067781996\" target=\"_blank\" rel=\"noopener\">@rndquu makes sense to me. In terms of DB structure, &#96;credit&hellip;</a></h6></td><td><details><summary>2.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 57&#13;  wordValue: 0.1&#13;  result: 2.48&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.532</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/13#issuecomment-2067800086\" target=\"_blank\" rel=\"noopener\">All these tables are empty so far so pretty safe to update them.&hellip;</a></h6></td><td><details><summary>2.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 44&#13;  wordValue: 0.1&#13;  result: 2.27&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.621</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/13#issuecomment-2068422197\" target=\"_blank\" rel=\"noopener\">I don't think credit and debit should be separate tables. I don'&hellip;</a></h6></td><td><details><summary>2.45</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 125&#13;  wordValue: 0.1&#13;  result: 2.45&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.38</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 25,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2067312299,
+        "content": "@gentlementlegen \r\nThere is [this](https://github.com/ubiquity/pay.ubq.fi/issues/174) issue which adds a \"Ubiquity virtual card\" feature (by using [gift cards API](https://docs.reloadly.com/gift-cards) under the hood). Simply put, collaborators will have 2 options for withdrawing rewards:\r\n1) Our usual permit URL\r\n2) Payout to generated virtual card\r\nThe thing is that for this feature we don't need to save permits in a DB. We just need to save/maintain \"debits and credits\" (in terms of pavlovcik's supabase DB instance) ledger table and only save smth to permits or virtual cards tables when collaborators actually want to withdraw a reward.\r\nSo I wanted to modify the current issue to implement the \"ledger style\" DB reward table. What do you think?\r\n<img width=\"1512\" alt=\"Screenshot 2024-04-20 at 00 35 06\" src=\"https://github.com/ubiquibot/conversation-rewards/assets/119500907/79fb6611-d652-49b1-995c-a5a72c80f8ca\">",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/13#issuecomment-2067312299",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 5.103,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 7
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 126,
+            "wordValue": 0.1,
+            "result": 2.44
+          },
+          "readability": {
+            "fleschKincaid": 57.64978417266187,
+            "syllables": 212,
+            "sentences": 7,
+            "score": 0.9764978417266187
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2067786288,
+        "content": "The `transactions` table is, as far as I understand, the `settlements` table in terms of pavlovcik's DB instance\r\n<img width=\"1512\" alt=\"Screenshot 2024-04-21 at 00 26 37\" src=\"https://github.com/ubiquibot/conversation-rewards/assets/119500907/1a0d6d49-35eb-4410-ae65-64611ddd7a1d\">\r\nFrom my understanding, when the `transactions/settlements` table is ready the `permits` table (along with the `virtual_cards` table) will be updated only when user requests a withdraw either in crypto (the way we use it now) either to a virtual card.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/13#issuecomment-2067786288",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 3.6,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 67,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 45.68000000000002,
+            "syllables": 114,
+            "sentences": 2,
+            "score": 0.8568000000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2254020884,
+        "content": "Original [comment](https://github.com/ubiquity/pay.ubq.fi/issues/182#issuecomment-1980238150)\r\nWhat should be done:\r\n- on permits generation ([example](https://github.com/ubiquity/pay.ubq.fi/issues/182#issuecomment-1980167172)) we should save them to the `permits` table in supabase (use pavlovcik's DB instance)",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/13",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.43,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 41.47500000000002,
+            "syllables": 40,
+            "sentences": 1,
+            "score": 0.8147500000000002
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2060552795,
+        "content": "Approving this, but pls fix the tests",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/20#pullrequestreview-2060552795",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.581,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 90.95857142857145,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.6904142857142855
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1602895310,
+        "content": "@gentlementlegen Isn't the `locations` table deprecated? Shouldn't we just delete it or at least don't use at all?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/20#discussion_r1602895310",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -100,13 +102,77 @@ export class PermitGenerationModule implements Module {\n           config.permitRequests\n         );\n         result[key].permitUrl = `https://pay.ubq.fi?claim=${encodePermits(permits)}`;\n+        await this._savePermitsToDatabase(result[key].userId, { issueUrl: payload.issueUrl, issueId }, permits);\n       } catch (e) {\n         console.error(e);\n       }\n     }\n     return result;\n   }\n \n+  async _getOrCreateIssueLocation(issue: { issueId: number; issueUrl: string }) {\n+    let locationId: number | null = null;\n+\n+    const { data: locationData } = await this._supabase\n+      .from(\"locations\")\n+      .select(\"id\")\n+      .eq(\"issue_id\", issue.issueId)\n+      .eq(\"node_url\", issue.issueUrl)\n+      .single();\n+\n+    if (!locationData) {\n+      const issueItem = await getRepo(parseGitHubUrl(issue.issueUrl));\n+      const { data: newLocationData, error } = await this._supabase\n+        .from(\"locations\")",
+        "score": {
+          "reward": 1.656,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 78.24500000000002,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.8175499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2060031358,
+            "effect": {
+              "addition": 749,
+              "deletion": 453
+            },
+            "reward": 12.02,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/20"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 25 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>12.02</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.43</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>8.703</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>2.237</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/20\" target=\"_blank\" rel=\"noopener\">#20</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+749 -453</td><td>1</td><td>12.02</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/13\" target=\"_blank\" rel=\"noopener\">Original [comment](https://github.com/ubiquity/pay.ubq.fi/issues&hellip;</a></h6></td><td><details><summary>2.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.1&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>1</td><td>1</td><td>3.43</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/13#issuecomment-2067312299\" target=\"_blank\" rel=\"noopener\">@gentlementlegen There is [this](https://github.com/ubiquity/p&hellip;</a></h6></td><td><details><summary>5.64</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 7&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.2&#13;regex:&#13;  wordCount: 126&#13;  wordValue: 0.1&#13;  result: 2.44&#13;</pre></details></td><td>0.7</td><td>1</td><td>5.103</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/13#issuecomment-2067786288\" target=\"_blank\" rel=\"noopener\">The &#96;transactions&#96; table is, as far as I understand, the&hellip;</a></h6></td><td><details><summary>3.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 67&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>0.8</td><td>1</td><td>3.6</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/20#pullrequestreview-2060552795\" target=\"_blank\" rel=\"noopener\">Approving this, but pls fix the tests</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.581</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/20#discussion_r1602895310\" target=\"_blank\" rel=\"noopener\">@gentlementlegen Isn't the &#96;locations&#96; table deprecated?&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.656</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 19.932,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2067940971,
+        "content": "For additional context on why I broke everything apart into so many tables: I intended for transactions to also accommodate other forms of \"currency\" like XP \nPermits correspond only to \"cash\" (crypto) rewards. \nFor example a project admin can, for example, arbitrarily add 100 to your XP. So now your repo XP is registered as a \"credit\" (with no payment permit associated) with a value of 100. \nThe original intent was that I wanted to couple the XP scoring with dollars earned in the system. And then add additional modifiers on top primarily for subtractions for poor performance (without penalizing money)\nMaybe there could be a more elegant way to handle matters but I figured if they are so tightly coupled it would make sense to leave as is.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/13#issuecomment-2067940971",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.432,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 129,
+            "wordValue": 0.1,
+            "result": 2.42
+          },
+          "readability": {
+            "fleschKincaid": 45.550325581395384,
+            "syllables": 206,
+            "sentences": 5,
+            "score": 0.8555032558139538
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2118817684,
+        "content": "It's impossible to have a permit associated with a debit so it doesn't make sense to combine them. Then you have wasted cells.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/13#issuecomment-2118817684",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.26,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 82.47550000000001,
+            "syllables": 33,
+            "sentences": 2,
+            "score": 0.7752449999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1603955470,
+        "content": "Yeah we should probably stop using that table and instead just add a new URL column wherever it makes sense in the other tables.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/20#discussion_r1603955470",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -100,13 +102,77 @@ export class PermitGenerationModule implements Module {\n           config.permitRequests\n         );\n         result[key].permitUrl = `https://pay.ubq.fi?claim=${encodePermits(permits)}`;\n+        await this._savePermitsToDatabase(result[key].userId, { issueUrl: payload.issueUrl, issueId }, permits);\n       } catch (e) {\n         console.error(e);\n       }\n     }\n     return result;\n   }\n \n+  async _getOrCreateIssueLocation(issue: { issueId: number; issueUrl: string }) {\n+    let locationId: number | null = null;\n+\n+    const { data: locationData } = await this._supabase\n+      .from(\"locations\")\n+      .select(\"id\")\n+      .eq(\"issue_id\", issue.issueId)\n+      .eq(\"node_url\", issue.issueUrl)\n+      .single();\n+\n+    if (!locationData) {\n+      const issueItem = await getRepo(parseGitHubUrl(issue.issueUrl));\n+      const { data: newLocationData, error } = await this._supabase\n+        .from(\"locations\")",
+        "score": {
+          "reward": 1.498,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 62.62500000000003,
+            "syllables": 34,
+            "sentences": 1,
+            "score": 0.9737499999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1605786934,
+        "content": "Don't worry about data migrations. Basically none of the old data is valuable. No need to do extra work to save it.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/20#discussion_r1605786934",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -100,13 +102,77 @@ export class PermitGenerationModule implements Module {\n           config.permitRequests\n         );\n         result[key].permitUrl = `https://pay.ubq.fi?claim=${encodePermits(permits)}`;\n+        await this._savePermitsToDatabase(result[key].userId, { issueUrl: payload.issueUrl, issueId }, permits);\n       } catch (e) {\n         console.error(e);\n       }\n     }\n     return result;\n   }\n \n+  async _getOrCreateIssueLocation(issue: { issueId: number; issueUrl: string }) {\n+    let locationId: number | null = null;\n+\n+    const { data: locationData } = await this._supabase\n+      .from(\"locations\")\n+      .select(\"id\")\n+      .eq(\"issue_id\", issue.issueId)\n+      .eq(\"node_url\", issue.issueUrl)\n+      .single();\n+\n+    if (!locationData) {\n+      const issueItem = await getRepo(parseGitHubUrl(issue.issueUrl));\n+      const { data: newLocationData, error } = await this._supabase\n+        .from(\"locations\")",
+        "score": {
+          "reward": 1.632,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 70.31420289855075,
+            "syllables": 35,
+            "sentences": 3,
+            "score": 0.8968579710144925
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2061747936,
+            "effect": {
+              "addition": 749,
+              "deletion": 453
+            },
+            "reward": 12.02,
+            "priority": 1
+          },
+          {
+            "reviewId": 2064757954,
+            "effect": {
+              "addition": 95,
+              "deletion": 14
+            },
+            "reward": 1.09,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/20"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 19.932 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>13.11</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>3.692</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>3.13</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/20\" target=\"_blank\" rel=\"noopener\">#20</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+749 -453</td><td>1</td><td>12.02</td></tr><tr><td>+95 -14</td><td>1</td><td>1.09</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/13#issuecomment-2067940971\" target=\"_blank\" rel=\"noopener\">For additional context on why I broke everything apart into so m&hellip;</a></h6></td><td><details><summary>2.42</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 129&#13;  wordValue: 0.1&#13;  result: 2.42&#13;</pre></details></td><td>0.8</td><td>1</td><td>2.432</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/13#issuecomment-2118817684\" target=\"_blank\" rel=\"noopener\">It's impossible to have a permit associated with a debit so it d&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.6</td><td>1</td><td>1.26</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/20#discussion_r1603955470\" target=\"_blank\" rel=\"noopener\">Yeah we should probably stop using that table and instead just a&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.498</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/20#discussion_r1605786934\" target=\"_blank\" rel=\"noopener\">Don't worry about data migrations. Basically none of the old dat&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.632</td></tr></tbody></table></details>"
+  },
+  "gitcoindev": {
+    "total": 12.41,
+    "userId": 88761781,
+    "comments": [
+      {
+        "id": 2116997557,
+        "content": "I also did a review. The error handling looks good, after tests are fixed can be merged.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/20#issuecomment-2116997557",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.28,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 88.72514705882354,
+            "syllables": 22,
+            "sentences": 2,
+            "score": 0.7127485294117646
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2062626357,
+            "effect": {
+              "addition": 758,
+              "deletion": 455
+            },
+            "reward": 12.13,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/20"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 12.41 XP ]</a>&nbsp;</h3><h6>@gitcoindev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>12.13</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>0.28</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/20\" target=\"_blank\" rel=\"noopener\">#20</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+758 -455</td><td>1</td><td>12.13</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/20#issuecomment-2116997557\" target=\"_blank\" rel=\"noopener\">I also did a review. The error handling looks good, after tests &hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.28</td></tr></tbody></table></details>"
+  }
+}

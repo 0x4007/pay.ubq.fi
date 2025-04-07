@@ -1,0 +1,251 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 107.362,
+    "task": {
+      "reward": 100,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2689763640,
+        "content": "@whilefoo A thing we could do for Workers is to put the url to the logs, that would look like\r\n`https://dash.cloudflare.com/${env.CLOUDFLARE_ACCOUNT_ID}/workers/services/view/${env.CLOUDFLARE_WORKER_NAME}/production/observability/logs?granularity=0&time=${timeParam}`\r\nHowever this would require worker deployments to upload these values as they are not accessible through a worker by default. What do you think?\r\nIf yes, it should be its own task I believe.\r\n_Originally posted by @gentlementlegen in https://github.com/ubiquity-os/ubiquity-os-kernel/pull/169#discussion_r1821942110_\r\n`postComment` can post the url for an Action worker, but doesn't not have context for a Worker run. What could be done is adding a url to the dashboard with the time of the run as a filter so that we instantly have the related logs displayed.\r\nCode snippet:\r\n```typescript\r\nconst toTime = Date.now() + 60000;\r\n    const fromTime = Date.now() - 60000;\r\n    const timeParam = encodeURIComponent(`{\"type\":\"absolute\",\"to\":${toTime},\"from\":${fromTime}}`);\r\n    console.log(\r\n      `https://dash.cloudflare.com/${env.CLOUDFLARE_ACCOUNT_ID}/workers/services/view/${env.CLOUDFLARE_WORKER_NAME}/production/observability/logs?granularity=0&time=${timeParam}`\r\n    );\r\n```\r\nThis would imply uploading `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_WORKER_NAME` during worker deployment as these values are not available by default.\r\nTo achieve this, a new reusable GitHub action could be created to avoid having to modify each upload script from every worker plugin. This would greatly benefit all the projects and make deployment simpler.",
+        "url": "https://github.com/ubiquity-os/plugin-sdk/issues/34",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 5.36,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 9
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 158,
+            "wordValue": 0.1,
+            "result": 2.15
+          },
+          "readability": {
+            "fleschKincaid": 63.128218277449065,
+            "syllables": 249,
+            "sentences": 9,
+            "score": 0.9687178172255093
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2153311210,
+        "content": "Resolves https://github.com/ubiquity-os/plugin-sdk/issues/34\r\nQA: https://github.com/Meniole/command-query/issues/5#issuecomment-2573320305",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/18",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 2.002,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 50.67285714285717,
+            "syllables": 37,
+            "sentences": 3,
+            "score": 0.9067285714285717
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 107.362 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>100</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>5.36</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>2.002</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugin-sdk/issues/34\" target=\"_blank\" rel=\"noopener\">@whilefoo A thing we could do for Workers is to put the url to t&hellip;</a></h6></td><td><details><summary>4.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 9&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 158&#13;  wordValue: 0.1&#13;  result: 2.15&#13;</pre></details></td><td>1</td><td>1</td><td>5.36</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/18\" target=\"_blank\" rel=\"noopener\">Resolves https://github.com/ubiquity-os/plugin-sdk/issues/34QA&hellip;</a></h6></td><td><details><summary>2.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.7</td><td>1</td><td>2.002</td></tr></tbody></table></details>"
+  },
+  "Keyrxng": {
+    "total": 1.972,
+    "userId": 106303466,
+    "comments": [
+      {
+        "id": 2497271251,
+        "content": "This should be transferred into https://github.com/ubiquity-os/plugin-sdk\r\nAlso when this is labelled I'm happy to re-sub the PR",
+        "url": "https://github.com/ubiquity-os/plugin-sdk/issues/34#issuecomment-2497271251",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.75,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 75.70750000000002,
+            "syllables": 35,
+            "sentences": 2,
+            "score": 0.8429249999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2670565816,
+        "content": "Did I get short-changed on this one do you think @gentlementlegen?\nhttps://github.com/ubiquity-os/plugin-sdk/pull/42 introduced the real changes which I pretty much built and tried to PR into your fork as suggested at the time. You thanked me even for the \"code head start\", do you think we can re-approach this?",
+        "url": "https://github.com/ubiquity-os/plugin-sdk/issues/34#issuecomment-2670565816",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.312,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 50,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 84.3213771186441,
+            "syllables": 75,
+            "sentences": 4,
+            "score": 0.7567862288135591
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1855191688,
+        "content": "if this is for the worker log url: wasn't the plan was to implement it SDK-side only (which I did) so that plugins don't have to define this in their schema?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/18#discussion_r1855191688",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -6,6 +6,8 @@ export const envSchema = T.Object({\n   SUPABASE_KEY: T.String(),\n   KERNEL_PUBLIC_KEY: T.Optional(T.String()),\n   LOG_LEVEL: T.Enum(LOG_LEVEL, { default: LOG_LEVEL.INFO }),\n+  CLOUDFLARE_ACCOUNT_ID: T.Optional(T.String()),",
+        "score": {
+          "reward": 0.512,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 34,
+            "wordValue": 0.1,
+            "result": 2.01
+          },
+          "readability": {
+            "fleschKincaid": 70.3073529411765,
+            "syllables": 41,
+            "sentences": 1,
+            "score": 0.8969264705882349
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1856166885,
+        "content": "gotcha npnp",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/18#discussion_r1856166885",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -6,6 +6,8 @@ export const envSchema = T.Object({\n   SUPABASE_KEY: T.String(),\n   KERNEL_PUBLIC_KEY: T.Optional(T.String()),\n   LOG_LEVEL: T.Enum(LOG_LEVEL, { default: LOG_LEVEL.INFO }),\n+  CLOUDFLARE_ACCOUNT_ID: T.Optional(T.String()),",
+        "score": {
+          "reward": 0.008,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 77.90500000000002,
+            "syllables": 3,
+            "sentences": 1,
+            "score": 0.8209499999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2456405198,
+            "effect": {
+              "addition": 24,
+              "deletion": 15
+            },
+            "reward": 0.39,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/18"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 1.972 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>0.39</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>1.062</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>0.52</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/18\" target=\"_blank\" rel=\"noopener\">#18</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+24 -15</td><td>1</td><td>0.39</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugin-sdk/issues/34#issuecomment-2497271251\" target=\"_blank\" rel=\"noopener\">This should be transferred into https://github.com/ubiquity-os/p&hellip;</a></h6></td><td><details><summary>2.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>1</td><td>1</td><td>0.75</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugin-sdk/issues/34#issuecomment-2670565816\" target=\"_blank\" rel=\"noopener\">Did I get short-changed on this one do you think @gentlementlege&hellip;</a></h6></td><td><details><summary>3.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 50&#13;  wordValue: 0.1&#13;  result: 2.38&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.312</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/18#discussion_r1855191688\" target=\"_blank\" rel=\"noopener\">if this is for the worker log url: wasn't the plan was to implem&hellip;</a></h6></td><td><details><summary>2.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 34&#13;  wordValue: 0.1&#13;  result: 2.01&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.512</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/18#discussion_r1856166885\" target=\"_blank\" rel=\"noopener\">gotcha npnp</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.008</td></tr></tbody></table></details>"
+  }
+}

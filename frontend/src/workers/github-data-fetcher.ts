@@ -1,6 +1,40 @@
 import { githubCommentCache } from "../utils/github-comment-cache.ts";
 import { leaderboardCache } from "../utils/leaderboard-cache.ts";
 
+// Toggle for using local fixtures instead of GitHub API
+const USE_GITHUB_FIXTURES = true;
+
+/**
+ * Loads parsed metadata from local fixture JSON file.
+ */
+async function loadFixtureMetadata(
+  owner: string,
+  repo: string,
+  issueNumber: number
+): Promise<PermitCommentMetadata | null> {
+  const sanitizedRepo = `${owner}_${repo}`; // e.g., ubiquity-os-marketplace_command-start-stop
+  const url = `/fixtures/database/${sanitizedRepo}_${issueNumber}.json`;
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      console.warn(`GitHubFetcher: Fixture not found at ${url}`);
+      return null;
+    }
+    const data = await response.json();
+
+    if (data && typeof data === "object" && "output" in data) {
+      return data as PermitCommentMetadata;
+    }
+
+    // Some fixtures may be keyed by usernames (legacy format)
+    return { output: data } as PermitCommentMetadata;
+  } catch (e) {
+    console.warn(`GitHubFetcher: Failed to load fixture from ${url}`, e);
+    return null;
+  }
+}
+
 // --- Types ---
 
 // Structure for fetched GitHub user details (login and avatar)
@@ -52,9 +86,23 @@ export const fetchAndCacheIssueMetadata = async (
   githubToken: string | null // Accept token as parameter
 ): Promise<PermitCommentMetadata | null> => {
   const issueUrl = `https://github.com/${owner}/${repo}/issues/${issueNumber}`;
-  const apiUrl = `https://api.github.com/repos/${owner}/${repo}/issues/${issueNumber}/comments`;
 
   try {
+    if (USE_GITHUB_FIXTURES) {
+      const metadata = await loadFixtureMetadata(owner, repo, issueNumber);
+      if (metadata) {
+        console.log(`GitHubFetcher: Loaded metadata from fixture for ${owner}/${repo}#${issueNumber}`);
+        await leaderboardCache.setMetadata(issueUrl, metadata);
+        return metadata;
+      } else {
+        console.warn(`GitHubFetcher: No fixture metadata found for ${owner}/${repo}#${issueNumber}`);
+        return null;
+      }
+    }
+
+    // fallback to live GitHub API fetch
+    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/issues/${issueNumber}/comments`;
+
     // Try to get metadata from cache first
     const cachedMetadata = await leaderboardCache.getMetadata(issueUrl);
     if (cachedMetadata) {
@@ -100,8 +148,6 @@ export const fetchAndCacheIssueMetadata = async (
       console.log(`GitHubFetcher: Cached metadata for ${issueUrl}`);
     } else {
       console.warn(`GitHubFetcher: No metadata found in comments for ${issueUrl}`);
-      // Optional: Cache null to avoid re-fetching comments for a while
-      // await leaderboardCache.setMetadata(issueUrl, null);
     }
 
     return metadata;

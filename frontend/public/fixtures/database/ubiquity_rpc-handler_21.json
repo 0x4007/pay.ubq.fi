@@ -1,0 +1,179 @@
+{
+  "Sadaf-A": {
+    "userId": 119438857,
+    "total": 75,
+    "task": {
+      "reward": 75,
+      "multiplier": 1
+    },
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 75 XP ]</a>&nbsp;</h3><h6>@Sadaf-A</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>75</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "Keyrxng": {
+    "total": 15.576,
+    "userId": 106303466,
+    "comments": [
+      {
+        "id": 2156605657,
+        "content": "@Sadaf-A just a heads up, #24 is likely to resolve this issue already.\r\nThe error has been potentially identified as being either:\r\n1. How the yarn scripts are executing in the context of the wf.\r\n2. The arrangement/execution flow of the wf itself.\r\n<hr/>\r\nJust giving you more context to work with, do with it what you will",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/21#issuecomment-2156605657",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 8.256,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 58,
+            "wordValue": 0.1,
+            "result": 2.49
+          },
+          "readability": {
+            "fleschKincaid": 66.67612068965518,
+            "syllables": 86,
+            "sentences": 4,
+            "score": 0.9332387931034483
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2313847922,
+        "content": "I'm unsure what's caused this but it's been published without types.\r\n- https://www.npmjs.com/package/@ubiquity-dao/rpc-handler?activeTab=code \r\n- https://www.npmjs.com/package/@keyrxng/rpc-handler?activeTab=code what it should look like\r\nrunning `yarn build` then `yarn pack` followed by `tar -tf ubiquity-dao-rpc-handler-v1.1.0.tgz` locally reveals:\r\n```bash\r\n...\r\npackage/dist/types\r\npackage/dist/cjs/index.js\r\npackage/dist/esm/index.js\r\npackage/dist/types/constants.d.ts\r\npackage/dist/types/handler.d.ts\r\npackage/dist/types/rpc-handler.d.ts\r\n```\r\nLooking at the [run](https://github.com/ubiquity/rpc-handler/actions/runs/9180797875/job/25246055017) reveals:\r\n```bash\r\nnpm notice 📦  @ubiquity-dao/rpc-handler@1.1.0\r\nnpm notice === Tarball Contents === \r\nnpm notice 2.5kB   README.md        \r\nnpm notice 1.5MB   dist/cjs/index.js\r\nnpm notice 572.7kB dist/esm/index.js\r\nnpm notice 573.1kB dist/index.js    \r\nnpm notice 2.6kB   package.json     \r\nnpm notice === Tarball Details === \r\n```\r\nLooking at both versions of the UBQ package neither has `/types` or any `d.ts` files. While all four of my versions have either `/types` or `.d.ts` files.\r\n<hr/>\r\nThe only difference between the two workflows is `publish` is broken off into an additional step (don't see why that would affect it).\r\nLocally the types are built as expected.",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/21",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 7.32,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 9
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 84,
+            "wordValue": 0.1,
+            "result": 2.64
+          },
+          "readability": {
+            "fleschKincaid": 75.48350649350651,
+            "syllables": 151,
+            "sentences": 11,
+            "score": 0.8451649350649348
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 15.576 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>7.32</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>8.256</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/21\" target=\"_blank\" rel=\"noopener\">I'm unsure what's caused this but it's been published without ty&hellip;</a></h6></td><td><details><summary>5.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 9&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.2&#13;regex:&#13;  wordCount: 84&#13;  wordValue: 0.1&#13;  result: 2.64&#13;</pre></details></td><td>1</td><td>1</td><td>7.32</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/21#issuecomment-2156605657\" target=\"_blank\" rel=\"noopener\">@Sadaf-A just a heads up, #24 is likely to resolve this issue al&hellip;</a></h6></td><td><details><summary>2.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 58&#13;  wordValue: 0.1&#13;  result: 2.49&#13;</pre></details></td><td>0.8</td><td>3</td><td>8.256</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 0,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2210830451,
+        "content": "@gentlementlegen I think a good starting point is to try and match the settings on v2 so we can ensure that everything is working as expected. I'm not sure if there is a bug that it can't read pull comments or if those rewards are disabled.",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/21#issuecomment-2210830451",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 48,
+            "wordValue": 0.1,
+            "result": 2.35
+          },
+          "readability": {
+            "fleschKincaid": 71.43750000000003,
+            "syllables": 63,
+            "sentences": 2,
+            "score": 0.8856249999999997
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      }
+    ]
+  },
+  "gentlementlegen": {
+    "total": 0.996,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2211766470,
+        "content": "@0x4007 It'd be nice to have the metadata to help investigating bugs. Will look into it.",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/21#issuecomment-2211766470",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.996,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 73.79573529411766,
+            "syllables": 25,
+            "sentences": 2,
+            "score": 0.8620426470588234
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 0.996 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.996</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/21#issuecomment-2211766470\" target=\"_blank\" rel=\"noopener\">@0x4007 It'd be nice to have the metadata to help investigating &hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.996</td></tr></tbody></table></details>"
+  }
+}

@@ -1,0 +1,1015 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 806.899,
+    "task": {
+      "reward": 800,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2102332432,
+        "content": "@jordan-ae I have nothing against using IndexedDb but I am not sure this solves the problem either. The sole purpose of that cache is to lower the amount of requests done against GitHub API because when you are logged out, quotas are quite low. We are not manipulating large amounts of data, so performance is not a requirement. I've not seen anything about eviction or custom caching however, if you can point out where are these capabilities I would be interested. It's been a while that I didn't dive into that code, but I believe that's because the cache already contains a value which should be an empty array, so no fetch is done, and no data is displayed (or rather it thinks there is no item).\r\nI think what should be changed is the logic on \"when is data fetched\", \"when is it refreshed\", because currently there is basically one API call per item on the list, to get the details (no call is made during sorting, only the present data is showed in a different order). We could think of something like a time base refresh, or if there is a way to check if the amount of items changed, then refresh.\r\nAnd I agree with @alkimake first action should be to define proper repro steps.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2102332432",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.764,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 223,
+            "wordValue": 0.1,
+            "result": 1.51
+          },
+          "readability": {
+            "fleschKincaid": 60.17774943946189,
+            "syllables": 312,
+            "sentences": 8,
+            "score": 0.9982225056053811
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2106508066,
+        "content": "@jordan-ae Thanks for your investigation. If this is the sole source of the issue then it most likely is fixed within https://github.com/ubiquity/work.ubq.fi/pull/48/files#diff-a526a47f6685dd952321fd365cea2c75b28fb920d5d3f46f3dedb61d0ebed95bR27",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2106508066",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.624,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 65.5682941176471,
+            "syllables": 54,
+            "sentences": 5,
+            "score": 0.944317058823529
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2130781277,
+        "content": "@0x4007 Is this one deployed, or do you have to deploy manually? https://github.com/ubiquity/ubiquibot/pull/929",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2130781277",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.78,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 66.82771929824563,
+            "syllables": 30,
+            "sentences": 3,
+            "score": 0.9317228070175437
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2132467258,
+        "content": "@0x4007 Job run reference: https://github.com/ubiquibot/comment-incentives/actions/runs/9228516676/job/25392684815\r\nCommit https://github.com/ubiquibot/comment-incentives/commit/a3e647e7adb501ad0ca94148dbab0b4cb4b349ef is from the main branch, back to April 24. So I don't think the bug is related to the latest changes I made which are not even in the dev branch so far.\r\nLogs don't help much, except they confirm all the comments got parsed properly, but in the end only one permit got generated.\r\n---\r\nAfter some research it seems that actually everything works normally, the culprit being the HTML interpreted with a comment breaking all the following content. Quick fix done: https://github.com/ubiquibot/comment-incentives/pull/37",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2132467258",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.456,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 89,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 61.570948275862094,
+            "syllables": 179,
+            "sentences": 8,
+            "score": 0.9842905172413791
+          },
+          "multiplier": 0.25,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1863490411,
+        "content": "Resolves #41 \r\nResolves #47",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/48",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 0.275,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 75.87500000000001,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 0.8412499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2104180373,
+        "content": "This is a proposal to fix the permissions requested for newcomers, as requesting full access on public / private repos seems excessive and scary for new users.\r\nIt's a bit complicated to solve, since knowing the data related to a user requires that user to be logged in, where scopes have already been requested. So here is a draft proposal on how to handle it:\r\n1. A new user logs in for the first time at `work.ubq.fi` and gets requested the following\r\n<img width=\"502\" alt=\"image\" src=\"https://github.com/ubiquity/work.ubq.fi/assets/9807008/1391dfbc-2e8a-486d-a22a-7a8c5250b317\">\r\nEverything is read-only, and the Org will help us later on determine if that user if part of Ubiquity's Org.\r\n2. We check post login if that user is part of Ubiquity's team. If so, we display a \"lock\" button next to the user name, like so\r\n<img width=\"345\" alt=\"image\" src=\"https://github.com/ubiquity/work.ubq.fi/assets/9807008/247945eb-3b0e-40e9-8764-df20a156c977\">\r\nWhen clicked, we get redirected to the GitHub OAuth permission page requesting higher privileges\r\n<img width=\"558\" alt=\"image\" src=\"https://github.com/ubiquity/work.ubq.fi/assets/9807008/db95895a-cbe4-454c-8236-bd0305c4f2c0\">\r\nIf allowed, the \"lock\" button is gone.\r\nIf that workflow is satisfactory, I can spend some time on the CSS to make it look better.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/48#issuecomment-2104180373",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 9
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.2
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 186,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 72.29910526315791,
+            "syllables": 321,
+            "sentences": 15,
+            "score": 0.8770089473684208
+          },
+          "multiplier": 0,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2104205400,
+        "content": "@0x4007 Thanks for the feedback. Seems that Ubiquibot still doesn't like me: https://github.com/ubiquity/work.ubq.fi/issues/41#issuecomment-2104200066\r\nFor the lock icon I actually pulled it out from [Material UI icons](https://mui.com/material-ui/material-icons/?query=lock). Maybe an opened lock would make more sense anyway.\r\nBy CSS issue I was referring that the placement of the button is inappropriate right now as it takes too much left and right space with the user name.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/48#issuecomment-2104205400",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 64,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 76.39200000000001,
+            "syllables": 106,
+            "sentences": 7,
+            "score": 0.8360799999999999
+          },
+          "multiplier": 0,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2105681267,
+        "content": "Current looks of the button in the navbar:\r\n<img width=\"590\" alt=\"image\" src=\"https://github.com/ubiquity/work.ubq.fi/assets/9807008/02f616ce-cd5b-44e4-bda7-459c505b8910\">",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/48#issuecomment-2105681267",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 87.93714285714289,
+            "syllables": 37,
+            "sentences": 4,
+            "score": 0.7206285714285712
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2109120579,
+        "content": "@0x4007 Yep makes sense, very accidentally fixed two by doing this one. Thought it would not make much sense to have another PR with the same exact code as this one, will keep this in mind and open two different PRs next time.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/48#issuecomment-2109120579",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 43,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 78.77063953488374,
+            "syllables": 54,
+            "sentences": 2,
+            "score": 0.8122936046511626
+          },
+          "multiplier": 0,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 806.899 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>800</td></tr><tr><td>Issue</td><td>Comment</td><td>4</td><td>6.624</td></tr><tr><td>Review</td><td>Comment</td><td>5</td><td>0.275</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2102332432\" target=\"_blank\" rel=\"noopener\">@jordan-ae I have nothing against using IndexedDb but I am not s&hellip;</a></h6></td><td><details><summary>1.51</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 223&#13;  wordValue: 0.1&#13;  result: 1.51&#13;</pre></details></td><td>0.9</td><td>4</td><td>1.764</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2106508066\" target=\"_blank\" rel=\"noopener\">@jordan-ae Thanks for your investigation. If this is the sole so&hellip;</a></h6></td><td><details><summary>2.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.8</td><td>4</td><td>2.624</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2130781277\" target=\"_blank\" rel=\"noopener\">@0x4007 Is this one deployed, or do you have to deploy manually?&hellip;</a></h6></td><td><details><summary>2.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.3</td><td>4</td><td>0.78</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2132467258\" target=\"_blank\" rel=\"noopener\">@0x4007 Job run reference: https://github.com/ubiquibot/comment-&hellip;</a></h6></td><td><details><summary>5.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3&#13;regex:&#13;  wordCount: 89&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.2</td><td>4</td><td>1.456</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/48\" target=\"_blank\" rel=\"noopener\">Resolves #41 Resolves #47</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.275</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/48#issuecomment-2104180373\" target=\"_blank\" rel=\"noopener\">This is a proposal to fix the permissions requested for newcomer&hellip;</a></h6></td><td><details><summary>3.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 9&#13;    ol:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.2&#13;regex:&#13;  wordCount: 186&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/48#issuecomment-2104205400\" target=\"_blank\" rel=\"noopener\">@0x4007 Thanks for the feedback. Seems that Ubiquibot still does&hellip;</a></h6></td><td><details><summary>2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 64&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/48#issuecomment-2105681267\" target=\"_blank\" rel=\"noopener\">Current looks of the button in the navbar:&lt;img width=\"590\" &hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/48#issuecomment-2109120579\" target=\"_blank\" rel=\"noopener\">@0x4007 Yep makes sense, very accidentally fixed two by doing th&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 43&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.2</td><td>4</td><td>0</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 46.332,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2098876494,
+        "content": "This is a cache issue. This is hard to dev and test for but I'm glad that you were able to confirm this as a newcomer! The problem is that the cache system is complex, as there are issues pointing to other issues (nested issues) which makes the data structure more complex.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2098876494",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 10.872,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 53,
+            "wordValue": 0.1,
+            "result": 2.43
+          },
+          "readability": {
+            "fleschKincaid": 78.76371069182392,
+            "syllables": 69,
+            "sentences": 3,
+            "score": 0.8123628930817608
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2099774414,
+        "content": "You can try submitting after jordan-ae if they don't have it done by then.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2099774414",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.872,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 84.845,
+            "syllables": 20,
+            "sentences": 1,
+            "score": 0.75155
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2101878680,
+        "content": "Using a more performant and more complex system isn't going to solve this problem. We are far from the localStorage limits so we don't need to switch.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2101878680",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 7.36,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 78.34508620689657,
+            "syllables": 39,
+            "sentences": 2,
+            "score": 0.8165491379310343
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2130151558,
+        "content": "```js\r\n{\r\n  permit: {\r\n    permitted: {\r\n      token: '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d',\r\n      amount: '838800000000000000000'\r\n    },\r\n    nonce: '51326910327906309883188819007812311989963322456571322321343357623203337777012',\r\n    deadline: '115792089237316195423570985008687907853269984665640564039457584007913129639935'\r\n  },\r\n  transferDetails: {\r\n    to: '0x2F05fD58023B0a95d1866aa0A3b672cEf05945c5',\r\n    requestedAmount: '838800000000000000000'\r\n  },\r\n  owner: '0x44Ca15Db101fD1c194467Db6AF0c67C6BbF4AB51',\r\n  signature: '0x72bd76f2887061c65c28616efedb7a2a003157e973b2ab24bda262c856d0baa318003668a92b6177f5b9b60159a87a31da6dba8f346199540cbb0392c22d546a1b',\r\n  networkId: 100\r\n}\r\n```",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2130151558",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2130155814,
+        "content": "@ubiquity/software-development can you guys help me generate a payment link? For some reason its not posting.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2130155814",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.712,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 56.70000000000002,
+            "syllables": 30,
+            "sentences": 2,
+            "score": 0.9670000000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2130159056,
+        "content": "@gentlementlegen you made changes in the UbiquiBot repo, perhaps it affected the permit generation because in the GitHub Actions logs it showed seven permits generated but now its only generating mine.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2130159056",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.824,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 22.544193548387113,
+            "syllables": 56,
+            "sentences": 1,
+            "score": 0.6254419354838712
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2130161079,
+        "content": "```\r\n  permit: {\r\n    permitted: {\r\n      token: '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d',\r\n      amount: '25000000000000000000'\r\n    },\r\n    nonce: '53865570348806040278299262806175160245566981806630939793958945642615424334121',\r\n    deadline: '115792089237316195423570985008687907853269984665640564039457584007913129639935'\r\n  },\r\n  transferDetails: {\r\n    to: '0x4007CE2083c7F3E18097aeB3A39bb8eC149a341d',\r\n    requestedAmount: '25000000000000000000'\r\n  },\r\n  owner: '0x44Ca15Db101fD1c194467Db6AF0c67C6BbF4AB51',\r\n  signature: '0xb3ca03ff19602fc99e953b553e54fe7b16b3bc9cfa5209bf79911a73bc06c8e54887c90a667a31333117e384754385c7d5005a51476355c639eee14961c8f9101b',\r\n  networkId: 100\r\n}\r\n, {\r\n  permit: {\r\n    permitted: {\r\n      token: '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d',\r\n      amount: '74600000000000000000'\r\n    },\r\n    nonce: '83555713187550377125854358200695773462622554808000177228638359559484874604184',\r\n    deadline: '115792089237316195423570985008687907853269984665640564039457584007913129639935'\r\n  },\r\n  transferDetails: {\r\n    to: '0x0fC1b909ba9265A846b82CF4CE352fc3e7EeB2ED',\r\n    requestedAmount: '74600000000000000000'\r\n  },\r\n  owner: '0x44Ca15Db101fD1c194467Db6AF0c67C6BbF4AB51',\r\n  signature: '0x3a03d914dfdae3357f9adb38b7b81714b25888578b77ef258681384c56dda4de33dc32dda32010759fd18071ff7c4aa2df29cbaca107a5b73c9b0ef27f07c2ff1b',\r\n  networkId: 100\r\n}\r\n, {\r\n  permit: {\r\n    permitted: {\r\n      token: '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d',\r\n      amount: '838800000000000000000'\r\n    },\r\n    nonce: '51326910327906309883188819007812311989963322456571322321343357623203337777012',\r\n    deadline: '115792089237316195423570985008687907853269984665640564039457584007913129639935'\r\n  },\r\n  transferDetails: {\r\n    to: '0x2F05fD58023B0a95d1866aa0A3b672cEf05945c5',\r\n    requestedAmount: '838800000000000000000'\r\n  },\r\n  owner: '0x44Ca15Db101fD1c194467Db6AF0c67C6BbF4AB51',\r\n  signature: '0x72bd76f2887061c65c28616efedb7a2a003157e973b2ab24bda262c856d0baa318003668a92b6177f5b9b60159a87a31da6dba8f346199540cbb0392c22d546a1b',\r\n  networkId: 100\r\n}\r\n, {\r\n  permit: {\r\n    permitted: {\r\n      token: '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d',\r\n      amount: '1300000000000000000'\r\n    },\r\n    nonce: '65599133746545427316213762315231225229780294529349481331456602574317806142042',\r\n    deadline: '115792089237316195423570985008687907853269984665640564039457584007913129639935'\r\n  },\r\n  transferDetails: {\r\n    to: '0x4D0704f400D57Ba93eEa88765C3FcDBD826dCFc4',\r\n    requestedAmount: '1300000000000000000'\r\n  },\r\n  owner: '0x44Ca15Db101fD1c194467Db6AF0c67C6BbF4AB51',\r\n  signature: '0x07185d6a739cdf8af2bf45400453eeb152a8f003e6363f6b6700b352cafffd2551048b4e127a016a96c7b5fda4503297cb1387c3f01c8fed0d03db0077ebdd2d1b',\r\n  networkId: 100\r\n}\r\n, {\r\n  permit: {\r\n    permitted: {\r\n      token: '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d',\r\n      amount: '800000000000000000'\r\n    },\r\n    nonce: '87063146335607115105548788605334513531195652228333586749707118852323853704438',\r\n    deadline: '115792089237316195423570985008687907853269984665640564039457584007913129639935'\r\n  },\r\n  transferDetails: {\r\n    to: '0x7e92476D69Ff1377a8b45176b1829C4A5566653a',\r\n    requestedAmount: '800000000000000000'\r\n  },\r\n  owner: '0x44Ca15Db101fD1c194467Db6AF0c67C6BbF4AB51',\r\n  signature: '0x7fb5938c091c598bc6432abbe264f6ee7f1ae62416f9e429345f5cd946fa216c5ee98287106e9062e37969f0b47ef1c0db5711114083c204d8f60afa3ecfdf211b',\r\n  networkId: 100\r\n}\r\n, {\r\n  permit: {\r\n    permitted: {\r\n      token: '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d',\r\n      amount: '18600000000000000000'\r\n    },\r\n    nonce: '34097111854323721124090637104404643537350753179660445873556877008889771184711',\r\n    deadline: '115792089237316195423570985008687907853269984665640564039457584007913129639935'\r\n  },\r\n  transferDetails: {\r\n    to: '0xAe5D1F192013db889b1e2115A370aB133f359765',\r\n    requestedAmount: '18600000000000000000'\r\n  },\r\n  owner: '0x44Ca15Db101fD1c194467Db6AF0c67C6BbF4AB51',\r\n  signature: '0xbe883ce075522f38db3477c239122226bb9ac7765753cf50a7b2dc13873214c13cba30ead21a3723930e829cf5ccd861425ca1d0955cd940d81e4d3ca9b39b211c',\r\n  networkId: 100\r\n}\r\n, {\r\n  permit: {\r\n    permitted: {\r\n      token: '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d',\r\n      amount: '82400000000000000000'\r\n    },\r\n    nonce: '77100550677979703963343156157432341822182969326283029828442932663857920998507',\r\n    deadline: '115792089237316195423570985008687907853269984665640564039457584007913129639935'\r\n  },\r\n  transferDetails: {\r\n    to: '0x336C033842FA316d470e820c81b742e62A0765DC',\r\n    requestedAmount: '82400000000000000000'\r\n  },\r\n  owner: '0x44Ca15Db101fD1c194467Db6AF0c67C6BbF4AB51',\r\n  signature: '0x29b4eee7a33c88e32973863858a81462eee8e481820baea7e4c4dcf7fe61ec4c262deba100cea7bafbf65e8ead1d795d590585fd3f0bf01a2890e44d1e8501751b',\r\n  networkId: 100\r\n};\r\n```",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2130161079",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2130649316,
+        "content": "Whoever provided the accepted deliverable should earn the task reward, however, everyone who contributed comments should receive their comment rewards. \nThe first problem we need to diagnose here is why are the permits not posting for everybody's contributions? This isn't a political debate, we have rules for handling this situation described in code.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2130649316",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.472,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 55,
+            "wordValue": 0.1,
+            "result": 2.46
+          },
+          "readability": {
+            "fleschKincaid": 45.175757575757615,
+            "syllables": 93,
+            "sentences": 3,
+            "score": 0.8517575757575762
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2131128810,
+        "content": "The revision of the bot that posted the reward is `a3e647e`\nThe netlify UI is trash from mobile so I can't tell much but it says it was updated about 11 days ago which checks out.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2131128810",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.128,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 64.54500000000002,
+            "syllables": 45,
+            "sentences": 1,
+            "score": 0.9545499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2104189645,
+        "content": "I think it's a great proposal thanks for figuring this out. I am unsure that a lock is the best icon but until I have time to look through icon libraries I am unsure which is better. \nTry using Google material design icons I normally stick with those for all of our UIs.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/48#issuecomment-2104189645",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 7.392,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 54,
+            "wordValue": 0.1,
+            "result": 2.44
+          },
+          "readability": {
+            "fleschKincaid": 72.63166666666666,
+            "syllables": 74,
+            "sentences": 3,
+            "score": 0.8736833333333334
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2104191860,
+        "content": "I think you should also set a time estimate.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/48#issuecomment-2104191860",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.236,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 84.90000000000003,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.7509999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2104194864,
+        "content": "Oh I just realized this is a pull sorry!",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/48#issuecomment-2104194864",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 94.30000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.6569999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2108920323,
+        "content": "We discourage multiple associated issues in a single pull. \nThis is so that we can audit changes (git blame) more efficiently if problems are discovered later. \nIn the future I would branch off and open two pulls separately. This can be done retroactively after all the code is complete as long as you use the git \"cherry pick\" feature @gentlementlegen",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/48#issuecomment-2108920323",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 10.464,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 60,
+            "wordValue": 0.1,
+            "result": 2.52
+          },
+          "readability": {
+            "fleschKincaid": 59.07000000000002,
+            "syllables": 94,
+            "sentences": 4,
+            "score": 0.9907000000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/48"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 46.332 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>9</td><td>27.24</td></tr><tr><td>Review</td><td>Comment</td><td>4</td><td>19.092</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2098876494\" target=\"_blank\" rel=\"noopener\">This is a cache issue. This is hard to dev and test for but I'm &hellip;</a></h6></td><td><details><summary>2.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 53&#13;  wordValue: 0.1&#13;  result: 2.43&#13;</pre></details></td><td>0.9</td><td>4</td><td>10.872</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2099774414\" target=\"_blank\" rel=\"noopener\">You can try submitting after jordan-ae if they don't have it don&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.3</td><td>4</td><td>1.872</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2101878680\" target=\"_blank\" rel=\"noopener\">Using a more performant and more complex system isn't going to s&hellip;</a></h6></td><td><details><summary>1.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.8</td><td>4</td><td>7.36</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2130151558\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;js{permit: {permitted: {token&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.1</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2130155814\" target=\"_blank\" rel=\"noopener\">@ubiquity/software-development can you guys help me generate a p&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.1</td><td>4</td><td>0.712</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2130159056\" target=\"_blank\" rel=\"noopener\">@gentlementlegen you made changes in the UbiquiBot repo, perhaps&hellip;</a></h6></td><td><details><summary>1.92</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.2</td><td>4</td><td>1.824</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2130161079\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;permit: {permitted: {token: '0x&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.1</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2130649316\" target=\"_blank\" rel=\"noopener\">Whoever provided the accepted deliverable should earn the task r&hellip;</a></h6></td><td><details><summary>2.46</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 55&#13;  wordValue: 0.1&#13;  result: 2.46&#13;</pre></details></td><td>0.2</td><td>4</td><td>2.472</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2131128810\" target=\"_blank\" rel=\"noopener\">The revision of the bot that posted the reward is &#96;a3e647e&#&hellip;</a></h6></td><td><details><summary>2.07</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.2</td><td>4</td><td>2.128</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/48#issuecomment-2104189645\" target=\"_blank\" rel=\"noopener\">I think it's a great proposal thanks for figuring this out. I am&hellip;</a></h6></td><td><details><summary>2.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 54&#13;  wordValue: 0.1&#13;  result: 2.44&#13;</pre></details></td><td>0.6</td><td>4</td><td>7.392</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/48#issuecomment-2104191860\" target=\"_blank\" rel=\"noopener\">I think you should also set a time estimate.</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.3</td><td>4</td><td>1.236</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/48#issuecomment-2104194864\" target=\"_blank\" rel=\"noopener\">Oh I just realized this is a pull sorry!</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/48#issuecomment-2108920323\" target=\"_blank\" rel=\"noopener\">We discourage multiple associated issues in a single pull. This&hellip;</a></h6></td><td><details><summary>2.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 60&#13;  wordValue: 0.1&#13;  result: 2.52&#13;</pre></details></td><td>0.8</td><td>4</td><td>10.464</td></tr></tbody></table></details>"
+  },
+  "alkimake": {
+    "total": 10.652,
+    "userId": 266219,
+    "comments": [
+      {
+        "id": 2099619798,
+        "content": "This looks like something i am interested actually. Problem reproducibility is a priority IMO.\r\nThis week i am a bit busy but i will try to get involved with this issue next week if its ok.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2099619798",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 7.392,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 67.75500000000001,
+            "syllables": 54,
+            "sentences": 3,
+            "score": 0.9224499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2283071689,
+        "content": "**Summary**: When a newcomer logs in with GitHub authentication, the directory pool appears as an empty page. A screenshot is attached for reference:\r\n![image](https://github.com/ubiquity/work.ubq.fi/assets/266219/05cbebbd-3271-4d9f-9fb9-eb19c1c651ca)\r\n**Description**: Upon login, it seems that the page requests collaborator information for the logged-in user from the repository by calling `/repos/ubiquity/devpool-directory-private/collaborators/{username}` and receives a 404 NotFound result.\r\n**Expected Behavior**: Even if the user is not a collaborator, the devpool listing should still be accessible on the listing page, similar to when the user is not logged in.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/47",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.26,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 76,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 40.863771929824566,
+            "syllables": 126,
+            "sentences": 3,
+            "score": 0.8086377192982457
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/48"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 10.652 XP ]</a>&nbsp;</h3><h6>@alkimake</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.26</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>7.392</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/47\" target=\"_blank\" rel=\"noopener\">**Summary**: When a newcomer logs in with GitHub authentication,&hellip;</a></h6></td><td><details><summary>2.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 76&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>1</td><td>1</td><td>3.26</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2099619798\" target=\"_blank\" rel=\"noopener\">This looks like something i am interested actually. Problem repr&hellip;</a></h6></td><td><details><summary>2.07</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.7</td><td>4</td><td>7.392</td></tr></tbody></table></details>"
+  },
+  "jordan-ae": {
+    "total": 0,
+    "userId": 33989423,
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/48"
+      }
+    ]
+  },
+  "molecula451": {
+    "total": 5.28,
+    "userId": 41552663,
+    "comments": [
+      {
+        "id": 2126432498,
+        "content": "but your PR made it? @jordan-ae looks like your PR was closed?",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2126432498",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 1.008,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 109.12980769230771,
+            "syllables": 14,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2130306891,
+        "content": "@jordan-ae did not completed this task, it wass @gentlementlegen, are we grating the permit to @jordan-ae  @0x4007 ?",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2130306891",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 1.472,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 62.87631578947371,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.971236842105263
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2130720368,
+        "content": "We understand the concern, everyone who contribute directly and indirectly gets rewarded, stay tuned",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2130720368",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.84,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 29.467857142857156,
+            "syllables": 27,
+            "sentences": 1,
+            "score": 0.6946785714285716
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2050916640,
+            "effect": {
+              "addition": 44,
+              "deletion": 5
+            },
+            "reward": 1.96,
+            "priority": 4
+          }
+        ],
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/48"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 5.28 XP ]</a>&nbsp;</h3><h6>@molecula451</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>1.96</td></tr><tr><td>Issue</td><td>Comment</td><td>3</td><td>3.32</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/work.ubq.fi/pull/48\" target=\"_blank\" rel=\"noopener\">#48</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+44 -5</td><td>4</td><td>1.96</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2126432498\" target=\"_blank\" rel=\"noopener\">but your PR made it? @jordan-ae looks like your PR was closed?</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.7</td><td>4</td><td>1.008</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2130306891\" target=\"_blank\" rel=\"noopener\">@jordan-ae did not completed this task, it wass @gentlementlegen&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.8</td><td>4</td><td>1.472</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/47#issuecomment-2130720368\" target=\"_blank\" rel=\"noopener\">We understand the concern, everyone who contribute directly and &hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.6</td><td>4</td><td>0.84</td></tr></tbody></table></details>"
+  },
+  "gitcoindev": {
+    "total": 4.024,
+    "userId": 88761781,
+    "comments": [
+      {
+        "id": 2108091040,
+        "content": "Looks good! I also reviewed from my side.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/48#issuecomment-2108091040",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.184,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 97.025,
+            "syllables": 10,
+            "sentences": 2,
+            "score": 0.6297499999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2053094773,
+            "effect": {
+              "addition": 80,
+              "deletion": 16
+            },
+            "reward": 3.84,
+            "priority": 4
+          }
+        ],
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/48"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 4.024 XP ]</a>&nbsp;</h3><h6>@gitcoindev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>3.84</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>0.184</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/work.ubq.fi/pull/48\" target=\"_blank\" rel=\"noopener\">#48</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+80 -16</td><td>4</td><td>3.84</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/48#issuecomment-2108091040\" target=\"_blank\" rel=\"noopener\">Looks good! I also reviewed from my side.</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.2</td><td>4</td><td>0.184</td></tr></tbody></table></details>"
+  }
+}

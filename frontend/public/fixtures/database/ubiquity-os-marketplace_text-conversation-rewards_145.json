@@ -1,0 +1,394 @@
+{
+  "jaykayudo": {
+    "userId": 58009744,
+    "total": 12,
+    "task": {
+      "reward": 12,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 12 XP ]</a>&nbsp;</h3><h6>@jaykayudo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>12</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 12,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2423382084,
+        "content": "@jaykayudo We are having trouble with RPCs at the moment, and are actively working on fixing them, sorry about that.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/145#issuecomment-2423382084",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.618,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 46.94500000000005,
+            "syllables": 33,
+            "sentences": 1,
+            "score": 0.8694500000000005
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2568622473,
+        "content": "Sure but I'm saying add a filter at the very end for edge cases like this.\r\n_Originally posted by @0x4007 in https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/72#issuecomment-2395410882_",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/145",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.34,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 59.633333333333354,
+            "syllables": 56,
+            "sentences": 3,
+            "score": 0.9963333333333335
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2359398660,
+        "content": "This is not properly formatted. Also, I would be cautious about removing the whole result, we probably just want it to be removed from the GitHub comment posting only. And we would need unit tests with this change.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/150#pullrequestreview-2359398660",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.352,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 67.07833333333336,
+            "syllables": 57,
+            "sentences": 3,
+            "score": 0.9292166666666664
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2374818663,
+        "content": "I tested and indeed the result did not contain the users with `0` as a reward, but the returned JSON did contain them. Let me give this a run in the org within the issue that was having this problem and I'll merge.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/150#pullrequestreview-2374818663",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.04,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 43,
+            "wordValue": 0.1,
+            "result": 2.25
+          },
+          "readability": {
+            "fleschKincaid": 78.77063953488374,
+            "syllables": 54,
+            "sentences": 2,
+            "score": 0.8122936046511626
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1797638877,
+        "content": "Remove the comments",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/150#discussion_r1797638877",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,146 @@\n+import { drop } from \"@mswjs/data\";\n+import \"../src/parser/command-line\";\n+import { db } from \"./__mocks__/db\";\n+import dbSeed from \"./__mocks__/db-seed.json\";\n+import { server } from \"./__mocks__/node\";\n+import * as Validator from \"../src/helpers/validator\";\n+\n+const issueUrl = \"https://github.com/ubiquity/work.ubq.fi/issues/69\";\n+\n+jest.mock(\"@actions/github\", () => ({\n+  context: {\n+    runId: \"1\",\n+    payload: {\n+      repository: {\n+        html_url: \"https://github.com/ubiquibot/conversation-rewards\",\n+      },\n+    },\n+  },\n+}));\n+\n+jest.mock(\"@octokit/plugin-paginate-graphql\", () => ({\n+  paginateGraphQL() {\n+    return {\n+      graphql: {\n+        paginate() {\n+          return {\n+            repository: {\n+              issue: {\n+                closedByPullRequestsReferences: {\n+                  edges: [\n+                    {\n+                      node: {\n+                        id: \"PR_kwDOKzVPS85zXUok\",\n+                        title: \"fix: add state to sorting manager for bottom and top 2\",\n+                        number: 71,\n+                        url: \"https://github.com/ubiquity/work.ubq.fi/pull/71\",\n+                        state: \"MERGED\",\n+                        author: {\n+                          login: \"0x4007\",\n+                          id: 4975670,\n+                        },\n+                        repository: {\n+                          owner: {\n+                            login: \"ubiquity\",\n+                          },\n+                          name: \"work.ubq.fi\",\n+                        },\n+                      },\n+                    },\n+                  ],\n+                },\n+              },\n+            },\n+          };\n+        },\n+      },\n+    };\n+  },\n+}));\n+\n+jest.mock(\"../src/parser/command-line\", () => {\n+  // eslint-disable-next-line @typescript-eslint/no-var-requires\n+  const cfg = require(\"./__mocks__/results/valid-configuration.json\");\n+  // eslint-disable-next-line @typescript-eslint/no-var-requires\n+  const dotenv = require(\"dotenv\");\n+  dotenv.config();\n+  return {\n+    stateId: 1,\n+    eventName: \"issues.closed\",\n+    authToken: process.env.GITHUB_TOKEN,\n+    ref: \"\",\n+    eventPayload: {\n+      issue: {\n+        html_url: issueUrl,\n+        number: 1,\n+        state_reason: \"completed\",\n+      },\n+      repository: {\n+        name: \"conversation-rewards\",\n+        owner: {\n+          login: \"ubiquibot\",\n+          id: 76412717,\n+        },\n+      },\n+    },\n+    settings: JSON.stringify({\n+      ...cfg,\n+      incentives: {\n+        ...cfg.incentives,\n+        requirePriceLabel: false,\n+      },\n+    }),\n+  };\n+});\n+\n+beforeAll(() => server.listen());\n+afterEach(() => server.resetHandlers());\n+afterAll(() => server.close());\n+\n+describe(\"Result filter tests\", () => {\n+  beforeEach(async () => {\n+    drop(db);\n+    for (const table of Object.keys(dbSeed)) {\n+      const tableName = table as keyof typeof dbSeed;\n+      for (const row of dbSeed[tableName]) {\n+        db[tableName].create(row);\n+      }\n+    }\n+  });\n+\n+  it(\"Should remove result item with 0 total\", async () => {\n+    // const patchMock = jest.fn(() => HttpResponse.json({}));\n+    // server.use(http.patch(\"https://api.github.com/repos/ubiquity/work.ubq.fi/issues/69\", patchMock, { once: true }));",
+        "score": {
+          "reward": 0.18,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 62.79000000000002,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.9720999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2408469032,
+        "content": "@jaykayudo Thank you for the test. However I think the logic should be different:\r\n- the user that got 0 reward should not be removed from the result\r\n- however, the posted comment on GitHub should not display that user, see [this file](https://github.com/ubiquity-os-marketplace/text-conversation-rewards/blob/1a2c3e26ac364a888dcac70e5a1b0dcaa44bd5a6/src/parser/github-comment-module.ts)",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/150#issuecomment-2408469032",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 7.92,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.2
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 41,
+            "wordValue": 0.1,
+            "result": 2.2
+          },
+          "readability": {
+            "fleschKincaid": 62.22262195121952,
+            "syllables": 60,
+            "sentences": 2,
+            "score": 0.9777737804878047
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2408808308,
+        "content": "@jaykayudo You have a few options:\r\n- you can put the GitHub API result in a `json` file and use it, like in the tests\r\n- you can directly call the function with a fake result and see if the call from the `POST` to GitHub is correct\r\nThe second one should be the easier.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/150#issuecomment-2408808308",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.232,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 51,
+            "wordValue": 0.1,
+            "result": 2.4
+          },
+          "readability": {
+            "fleschKincaid": 45.58764705882355,
+            "syllables": 66,
+            "sentences": 1,
+            "score": 0.8558764705882355
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2415791179,
+        "content": "@jaykayudo We are having some trouble with RPCs at the moment so you did not introduced these problems, no worries. Please resolve the file conflicts.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/150#issuecomment-2415791179",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.18,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 65.55550000000002,
+            "syllables": 38,
+            "sentences": 2,
+            "score": 0.9444449999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2359398660,
+            "effect": {
+              "addition": 7,
+              "deletion": 1
+            },
+            "reward": 0.16,
+            "priority": 2
+          },
+          {
+            "reviewId": 2363836445,
+            "effect": {
+              "addition": 162,
+              "deletion": 7
+            },
+            "reward": 3.38,
+            "priority": 2
+          },
+          {
+            "reviewId": 2374818663,
+            "effect": {
+              "addition": 5811,
+              "deletion": 4842
+            },
+            "reward": 213.06,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/150"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 12 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>⚠️ Your rewards have been limited to the task price of 12 XP.</h6><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>216.6</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.34</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>2.618</td></tr><tr><td>Review</td><td>Comment</td><td>6</td><td>24.904</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/150\" target=\"_blank\" rel=\"noopener\">#150</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+7 -1</td><td>2</td><td>0.16</td></tr><tr><td>+162 -7</td><td>2</td><td>3.38</td></tr><tr><td>+5811 -4842</td><td>2</td><td>213.06</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/145\" target=\"_blank\" rel=\"noopener\">Sure but I'm saying add a filter at the very end for edge cases &hellip;</a></h6></td><td><details><summary>2.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>1</td><td>1</td><td>3.34</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/145#issuecomment-2423382084\" target=\"_blank\" rel=\"noopener\">@jaykayudo We are having trouble with RPCs at the moment, and ar&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.7</td><td>2</td><td>2.618</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/150#pullrequestreview-2359398660\" target=\"_blank\" rel=\"noopener\">This is not properly formatted. Also, I would be cautious about &hellip;</a></h6></td><td><details><summary>2.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.8</td><td>2</td><td>4.352</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/150#pullrequestreview-2374818663\" target=\"_blank\" rel=\"noopener\">I tested and indeed the result did not contain the users with &#&hellip;</a></h6></td><td><details><summary>2.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 43&#13;  wordValue: 0.1&#13;  result: 2.25&#13;</pre></details></td><td>0.9</td><td>2</td><td>5.04</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/150#discussion_r1797638877\" target=\"_blank\" rel=\"noopener\">Remove the comments</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.2</td><td>2</td><td>0.18</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/150#issuecomment-2408469032\" target=\"_blank\" rel=\"noopener\">@jaykayudo Thank you for the test. However I think the logic sho&hellip;</a></h6></td><td><details><summary>3.4</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.2&#13;regex:&#13;  wordCount: 41&#13;  wordValue: 0.1&#13;  result: 2.2&#13;</pre></details></td><td>0.9</td><td>2</td><td>7.92</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/150#issuecomment-2408808308\" target=\"_blank\" rel=\"noopener\">@jaykayudo You have a few options:- you can put the GitHub API&hellip;</a></h6></td><td><details><summary>2.6</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 51&#13;  wordValue: 0.1&#13;  result: 2.4&#13;</pre></details></td><td>0.8</td><td>2</td><td>5.232</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/150#issuecomment-2415791179\" target=\"_blank\" rel=\"noopener\">@jaykayudo We are having some trouble with RPCs at the moment so&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.5</td><td>2</td><td>2.18</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 3.908,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1797640069,
+        "content": "What is this logic use new variables?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/150#discussion_r1797640069",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -33,6 +33,8 @@ export async function run() {\n     const processor = new Processor();\n     await processor.run(activity);\n     let result = processor.dump();\n+    const zeroFilterResult = resultFilter(result);\n+    result = zeroFilterResult;",
+        "score": {
+          "reward": 0.688,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 78.87285714285717,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.8112714285714283
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2363837570,
+            "effect": {
+              "addition": 161,
+              "deletion": 0
+            },
+            "reward": 3.22,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/150"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 3.908 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>3.22</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>0.688</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/150\" target=\"_blank\" rel=\"noopener\">#150</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+161 -0</td><td>2</td><td>3.22</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/150#discussion_r1797640069\" target=\"_blank\" rel=\"noopener\">What is this logic use new variables?</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.4</td><td>2</td><td>0.688</td></tr></tbody></table></details>"
+  }
+}

@@ -1,0 +1,1517 @@
+{
+  "shiv810": {
+    "userId": 53160903,
+    "total": 151.744,
+    "task": {
+      "reward": 150,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2147712398,
+        "content": "Resolves #19\r\n- Introduces a method to selectively retrieve diffs.\r\n- Allows for the exclusion of files based on their directory and file extensions.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 1.744,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 38.00636363636366,
+            "syllables": 41,
+            "sentences": 2,
+            "score": 0.7800636363636366
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1818133699,
+        "content": "It uses the gitignore from the Repository if one is present.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818133699",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -167,15 +168,18 @@ export async function mergeCommentsAndFetchSpec(\n export async function fetchPullRequestDiff(context: Context, org: string, repo: string, issue: number): Promise<string | null> {\n   const { octokit, logger } = context;\n   try {\n-    const { data } = await octokit.pulls.get({\n-      owner: org,\n-      repo,\n-      pull_number: issue,\n-      mediaType: {\n-        format: \"diff\",\n-      },\n+    const githubDiff = new GithubDiff(octokit);\n+    //Fetch the statistics of the pull request\n+    const stats = await githubDiff.getPullRequestStats(org, repo, issue);\n+    //Find the filenames which do not have more than 200 changes\n+    let files = stats.filter((file) => file.changes < 500).map((file) => file.filename);\n+    //Ignore files like in dist or build or .lock files\n+    const ignoredFiles = [\"dist/*\", \"build/*\", \".lock\", \"index.js\"];",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 57.23363636363638,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.9723363636363638
+          },
+          "multiplier": 0,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1818133938,
+        "content": "Revised the approach:\r\n- Sorts the diffs in ascending order based on file size\r\n- Continues adding diffs until the maximum context token limit is reached\r\nHow should the maximum token limit be configured—via config settings or environment variables?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818133938",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -167,15 +168,18 @@ export async function mergeCommentsAndFetchSpec(\n export async function fetchPullRequestDiff(context: Context, org: string, repo: string, issue: number): Promise<string | null> {\n   const { octokit, logger } = context;\n   try {\n-    const { data } = await octokit.pulls.get({\n-      owner: org,\n-      repo,\n-      pull_number: issue,\n-      mediaType: {\n-        format: \"diff\",\n-      },\n+    const githubDiff = new GithubDiff(octokit);\n+    //Fetch the statistics of the pull request\n+    const stats = await githubDiff.getPullRequestStats(org, repo, issue);\n+    //Find the filenames which do not have more than 200 changes\n+    let files = stats.filter((file) => file.changes < 500).map((file) => file.filename);",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 21.328157894736847,
+            "syllables": 66,
+            "sentences": 1,
+            "score": 0.6132815789473685
+          },
+          "multiplier": 0,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1818149683,
+        "content": "Switched to GraphQL to directly fetch pull requests that close issues through GitHub GQL's closedByPullRequestsReferences field. This replaces the previous API-based approach which relied on parsing PR body text for issue references (via # or URLs).",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818149683",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -83,7 +88,18 @@ async function createContextBlockSection(\n   if (!issueNumber || isNaN(issueNumber)) {\n     throw context.logger.error(\"Issue number is not valid\");\n   }\n-  const prDiff = await fetchPullRequestDiff(context, org, repo, issueNumber);\n+  const pulls = await fetchLinkedPrFromIssue(org, repo, issueNumber, context);",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 37,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 50.86831081081081,
+            "syllables": 60,
+            "sentences": 2,
+            "score": 0.9086831081081082
+          },
+          "multiplier": 0,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1818149956,
+        "content": "Is port 4000 required by some other service/kernel? I'm currently unable to use it but can switch back if needed",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818149956",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -17,7 +17,7 @@\n     \"knip-ci\": \"knip --no-exit-code --reporter json --config .github/knip.ts\",\n     \"prepare\": \"husky install\",\n     \"test\": \"jest --setupFiles dotenv/config --coverage\",\n-    \"worker\": \"wrangler dev --env dev --port 4000\"\n+    \"worker\": \"wrangler dev --env dev --port 5000\"",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 80.30636363636367,
+            "syllables": 30,
+            "sentences": 2,
+            "score": 0.7969363636363633
+          },
+          "multiplier": 0,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1818150017,
+        "content": "Not applicable - replaced with GraphQL solution",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818150017",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -296,3 +318,41 @@ function castCommentsToSimplifiedComments(comments: Comments, params: FetchParam\n       url: comment.html_url,\n     }));\n }\n+\n+export async function fetchLinkedPrFromIssue(owner: string, repo: string, issueNumber: number, context: Context) {\n+  const prs = await context.octokit.rest.pulls.list({\n+    owner: owner,\n+    repo: repo,\n+    state: \"all\",\n+  });\n+  //Filter the PRs which are linked to the issue using the body of the PR\n+  return prs.data.filter((pr) => pr.body?.includes(`#${issueNumber}`));",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 31.545000000000016,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.7154500000000001
+          },
+          "multiplier": 0,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1818238754,
+        "content": "It used to, I have removed all of that now. It just checks for file sizes in bytes now.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818238754",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -167,15 +168,18 @@ export async function mergeCommentsAndFetchSpec(\n export async function fetchPullRequestDiff(context: Context, org: string, repo: string, issue: number): Promise<string | null> {\n   const { octokit, logger } = context;\n   try {\n-    const { data } = await octokit.pulls.get({\n-      owner: org,\n-      repo,\n-      pull_number: issue,\n-      mediaType: {\n-        format: \"diff\",\n-      },\n+    const githubDiff = new GithubDiff(octokit);\n+    //Fetch the statistics of the pull request\n+    const stats = await githubDiff.getPullRequestStats(org, repo, issue);\n+    //Find the filenames which do not have more than 200 changes\n+    let files = stats.filter((file) => file.changes < 500).map((file) => file.filename);\n+    //Ignore files like in dist or build or .lock files\n+    const ignoredFiles = [\"dist/*\", \"build/*\", \".lock\", \"index.js\"];",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 103.68723684210525,
+            "syllables": 21,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1818321372,
+        "content": "10k seemed like a reasonable limit. If someone is using older OpenAI models (3.5 Turbo, Gpt4Turbo-28K), it could result in a hefty bill instantly.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818321372",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -23,6 +23,7 @@ export const pluginSettingsSchema = T.Object({\n   model: T.String({ default: \"o1-mini\" }),\n   openAiBaseUrl: T.Optional(T.String()),\n   similarityThreshold: T.Number({ default: 0.9 }),\n+  maxTokens: T.Number({ default: 10000 }),",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 61.376794871794914,
+            "syllables": 42,
+            "sentences": 3,
+            "score": 0.9862320512820508
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2440015993,
+        "content": "QA: [issue](https://github.com/sshivaditya2019/test-public/issues/207)\r\nWith the same 15 mb index.js file in the PR",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#issuecomment-2440015993",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 96.11442307692309,
+            "syllables": 16,
+            "sentences": 2,
+            "score": 0.6388557692307691
+          },
+          "multiplier": 0,
+          "relevance": 0.45
+        }
+      },
+      {
+        "id": 2440116700,
+        "content": "QA: [Issue](https://github.com/sshivaditya2019/test-public/issues/207#issuecomment-2440112081)",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#issuecomment-2440116700",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 77.90500000000002,
+            "syllables": 3,
+            "sentences": 1,
+            "score": 0.8209499999999998
+          },
+          "multiplier": 0,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2440216030,
+        "content": "I think that counting the number of changes isn't the best metric. For instance, `dist/index.js` had only about 300 changes. A more effective metric would be the diff size in bytes.\r\nI'm following the guidelines outlined in [this comment](https://www.github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/163#issuecomment-2439995967). Is there another specification for this issue?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#issuecomment-2440216030",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 47,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 73.09400000000002,
+            "syllables": 69,
+            "sentences": 5,
+            "score": 0.8690599999999997
+          },
+          "multiplier": 0,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2440224083,
+        "content": "It seems to use file size as a criterion to determine whether to show the UI, as those files wouldn't be accessible even in a regular file viewer without the diffs.\r\nIt is indeed significant, more than what you'd typically see in a standard file diff. However, while 300 lines could potentially be changed through code, the diff size in bytes for index.js was around 15.6 MB. In comparison, a code file with the same number of line changes would be much smaller in size.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#issuecomment-2440224083",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 89,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 70.10725655430713,
+            "syllables": 128,
+            "sentences": 6,
+            "score": 0.8989274344569287
+          },
+          "multiplier": 0,
+          "relevance": 0.75
+        }
+      },
+      {
+        "id": 2440331081,
+        "content": "@0x4007 I need some clarification. Currently, the system retrieves both filenames and the difference size in bytes, and then it fetches the diffs for each filename. Once that’s done, we sort the results in ascending order and continue adding to the context until we reach the maximum limit. \r\nI followed along up to the sorting step in the specifications, but I'm unsure if I understand it correctly. What criteria should be used to select the diffs? Is it based on file size being under a certain threshold, or is there another method we should use?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#issuecomment-2440331081",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 97,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 63.96191580756016,
+            "syllables": 145,
+            "sentences": 6,
+            "score": 0.9603808419243984
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2440442243,
+        "content": "Ok, I see now that I misunderstood these lines. I think this PR is ready to be merged. I'll post more QA for this.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#issuecomment-2440442243",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 100.24066666666668,
+            "syllables": 29,
+            "sentences": 3,
+            "score": 1
+          },
+          "multiplier": 0,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2440452686,
+        "content": "QA: [Link](https://github.com/sshivaditya2019/test-public/issues/207#issuecomment-2440450148)",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#issuecomment-2440452686",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 120.20500000000001,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 151.744 XP ]</a>&nbsp;</h3><h6>@shiv810</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>150</td></tr><tr><td>Review</td><td>Comment</td><td>15</td><td>1.744</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21\" target=\"_blank\" rel=\"noopener\">Resolves #19- Introduces a method to selectively retrieve diff&hellip;</a></h6></td><td><details><summary>1.77</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.744</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818133699\" target=\"_blank\" rel=\"noopener\">It uses the gitignore from the Repository if one is present.</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818133938\" target=\"_blank\" rel=\"noopener\">Revised the approach:- Sorts the diffs in ascending order base&hellip;</a></h6></td><td><details><summary>0.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818149683\" target=\"_blank\" rel=\"noopener\">Switched to GraphQL to directly fetch pull requests that close i&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 37&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.85</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818149956\" target=\"_blank\" rel=\"noopener\">Is port 4000 required by some other service/kernel? I'm currentl&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.4</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818150017\" target=\"_blank\" rel=\"noopener\">Not applicable - replaced with GraphQL solution</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818238754\" target=\"_blank\" rel=\"noopener\">It used to, I have removed all of that now. It just checks for f&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818321372\" target=\"_blank\" rel=\"noopener\">10k seemed like a reasonable limit. If someone is using older Op&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#issuecomment-2440015993\" target=\"_blank\" rel=\"noopener\">QA: [issue](https://github.com/sshivaditya2019/test-public/issue&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.45</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#issuecomment-2440116700\" target=\"_blank\" rel=\"noopener\">QA: [Issue](https://github.com/sshivaditya2019/test-public/issue&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.2</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#issuecomment-2440216030\" target=\"_blank\" rel=\"noopener\">I think that counting the number of changes isn't the best metri&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 47&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.85</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#issuecomment-2440224083\" target=\"_blank\" rel=\"noopener\">It seems to use file size as a criterion to determine whether to&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 89&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.75</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#issuecomment-2440331081\" target=\"_blank\" rel=\"noopener\">@0x4007 I need some clarification. Currently, the system retriev&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 97&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#issuecomment-2440442243\" target=\"_blank\" rel=\"noopener\">Ok, I see now that I misunderstood these lines. I think this PR &hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#issuecomment-2440452686\" target=\"_blank\" rel=\"noopener\">QA: [Link](https://github.com/sshivaditya2019/test-public/issues&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>3</td><td>0</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 83.267,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2440452788,
+        "content": "Assign isn't working on pull linked i thought we fixed this @gentlementlegen",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/issues/19#issuecomment-2440452788",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 3.36,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 69.99384615384618,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.9000615384615382
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2440463909,
+        "content": "Could be the user configured privacy settings we discussed in another thread. We should throw a warning when we see the negative graphql response due to privacy settings.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/issues/19#issuecomment-2440463909",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 6.345,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 59.68214285714288,
+            "syllables": 44,
+            "sentences": 2,
+            "score": 0.9968214285714287
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2616562859,
+        "content": "This is an example of a diff q&a gone bad. Too much was sent to the model and it was rate limited. Below describes a dynamic strategy that should be simple to implement and should intelligently include only the most relevant changes. \nhttps://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/163#issuecomment-2439995967",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/issues/19",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.22,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 43,
+            "wordValue": 0.1,
+            "result": 2.25
+          },
+          "readability": {
+            "fleschKincaid": 59.50271428571429,
+            "syllables": 90,
+            "sentences": 5,
+            "score": 0.9950271428571429
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2397646739,
+        "content": "Perhaps my spec isnt clear but youre not following it. \n- Remove all the file ignores. \n- Count amount of changes per file. \n- sort in order of amount of changes\n- filter out files from most changes to least based on context limits. \nThis will automatically filter out large automated changes like compiled dist and lock files.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#pullrequestreview-2397646739",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 10.74,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              }
+            },
+            "result": 0.4
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 54,
+            "wordValue": 0.1,
+            "result": 2.44
+          },
+          "readability": {
+            "fleschKincaid": 73.67300000000003,
+            "syllables": 78,
+            "sentences": 5,
+            "score": 0.8632699999999996
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1818096382,
+        "content": "Should definitely be dynamic from git ignore and such. Otherwise this was not included in the spec.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818096382",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -167,15 +168,18 @@ export async function mergeCommentsAndFetchSpec(\n export async function fetchPullRequestDiff(context: Context, org: string, repo: string, issue: number): Promise<string | null> {\n   const { octokit, logger } = context;\n   try {\n-    const { data } = await octokit.pulls.get({\n-      owner: org,\n-      repo,\n-      pull_number: issue,\n-      mediaType: {\n-        format: \"diff\",\n-      },\n+    const githubDiff = new GithubDiff(octokit);\n+    //Fetch the statistics of the pull request\n+    const stats = await githubDiff.getPullRequestStats(org, repo, issue);\n+    //Find the filenames which do not have more than 200 changes\n+    let files = stats.filter((file) => file.changes < 500).map((file) => file.filename);\n+    //Ignore files like in dist or build or .lock files\n+    const ignoredFiles = [\"dist/*\", \"build/*\", \".lock\", \"index.js\"];",
+        "score": {
+          "reward": 3.57,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 63.84279411764709,
+            "syllables": 27,
+            "sentences": 2,
+            "score": 0.9615720588235291
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1818096852,
+        "content": "Wrong approach. Should not be any hard cut off from some arbitrary number. Follow the spec",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818096852",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -167,15 +168,18 @@ export async function mergeCommentsAndFetchSpec(\n export async function fetchPullRequestDiff(context: Context, org: string, repo: string, issue: number): Promise<string | null> {\n   const { octokit, logger } = context;\n   try {\n-    const { data } = await octokit.pulls.get({\n-      owner: org,\n-      repo,\n-      pull_number: issue,\n-      mediaType: {\n-        format: \"diff\",\n-      },\n+    const githubDiff = new GithubDiff(octokit);\n+    //Fetch the statistics of the pull request\n+    const stats = await githubDiff.getPullRequestStats(org, repo, issue);\n+    //Find the filenames which do not have more than 200 changes\n+    let files = stats.filter((file) => file.changes < 500).map((file) => file.filename);",
+        "score": {
+          "reward": 3.744,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 85.09666666666669,
+            "syllables": 22,
+            "sentences": 3,
+            "score": 0.7490333333333331
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1818202137,
+        "content": "Hey i just realized this is pointless. \nIf its ignored it wont be on git or on the diff. Remove all this logic and just rely on filtering files out based on largest amount of changes to smallest.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818202137",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -164,18 +165,40 @@ export async function mergeCommentsAndFetchSpec(\n  * @param issue - The pull request number.\n  * @returns A promise that resolves to the diff of the pull request as a string, or null if an error occurs.\n  */\n-export async function fetchPullRequestDiff(context: Context, org: string, repo: string, issue: number): Promise<string | null> {\n+export async function fetchPullRequestDiff(context: Context, org: string, repo: string, issue: number): Promise<{ diff: string; diffSize: number }[] | null> {\n   const { octokit, logger } = context;\n   try {\n-    const { data } = await octokit.pulls.get({\n-      owner: org,\n-      repo,\n-      pull_number: issue,\n-      mediaType: {\n-        format: \"diff\",\n-      },\n-    });\n-    return data as unknown as string;\n+    const githubDiff = new GithubDiff(octokit);\n+    //Fetch the statistics of the pull request\n+    const stats = await githubDiff.getPullRequestStats(org, repo, issue);\n+    //Ignore files like in dist or build or .lock files\n+    const ignoredFiles = (await buildIgnoreFilesFromGitIgnore(context, org, repo)) || [];",
+        "score": {
+          "reward": 7.074,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 82.66254385964915,
+            "syllables": 50,
+            "sentences": 3,
+            "score": 0.7733745614035086
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1818202331,
+        "content": "Get rid of all this logic too",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818202331",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -296,3 +318,68 @@ function castCommentsToSimplifiedComments(comments: Comments, params: FetchParam\n       url: comment.html_url,\n     }));\n }\n+\n+export async function fetchLinkedPullRequests(owner: string, repo: string, issueNumber: number, context: Context) {\n+  const query = `\n+    query($owner: String!, $repo: String!, $issueNumber: Int!) {\n+      repository(owner: $owner, name: $repo) {\n+        issue(number: $issueNumber) {\n+          closedByPullRequestsReferences(first: 100) {\n+            nodes {\n+              number\n+              title\n+              state\n+              merged\n+              url\n+            }\n+          }\n+        }\n+      }\n+    }\n+  `;\n+\n+  try {\n+    const { repository } = await context.octokit.graphql<LinkedPullsToIssue>(query, {\n+      owner,\n+      repo,\n+      issueNumber,\n+    });\n+    return repository.issue.closedByPullRequestsReferences.nodes;\n+  } catch (error) {\n+    context.logger.error(`Error fetching linked PRs from issue`, {\n+      error: error as Error,\n+      owner,\n+      repo,\n+      issueNumber,\n+    });\n+    return null;\n+  }\n+}\n+\n+async function buildIgnoreFilesFromGitIgnore(context: Context, owner: string, repo: string): Promise<string[] | null> {\n+  try {\n+    const gitignore = await context.octokit.rest.repos.getContent({\n+      owner,\n+      repo,\n+      path: \".gitignore\",\n+    });\n+    // Build an array of files to ignore",
+        "score": {
+          "reward": 1.89,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 103.04428571428575,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1818227790,
+        "content": "Max i guess config so that partners can budget their token use.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818227790",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -167,15 +168,18 @@ export async function mergeCommentsAndFetchSpec(\n export async function fetchPullRequestDiff(context: Context, org: string, repo: string, issue: number): Promise<string | null> {\n   const { octokit, logger } = context;\n   try {\n-    const { data } = await octokit.pulls.get({\n-      owner: org,\n-      repo,\n-      pull_number: issue,\n-      mediaType: {\n-        format: \"diff\",\n-      },\n+    const githubDiff = new GithubDiff(octokit);\n+    //Fetch the statistics of the pull request\n+    const stats = await githubDiff.getPullRequestStats(org, repo, issue);\n+    //Find the filenames which do not have more than 200 changes\n+    let files = stats.filter((file) => file.changes < 500).map((file) => file.filename);",
+        "score": {
+          "reward": 1.152,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 81.85500000000002,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.7814499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1818320238,
+        "content": "Default should be the max for the model we are using? 10k seems arbitrary.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818320238",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -23,6 +23,7 @@ export const pluginSettingsSchema = T.Object({\n   model: T.String({ default: \"o1-mini\" }),\n   openAiBaseUrl: T.Optional(T.String()),\n   similarityThreshold: T.Number({ default: 0.9 }),\n+  maxTokens: T.Number({ default: 10000 }),",
+        "score": {
+          "reward": 2.592,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 78.87285714285717,
+            "syllables": 20,
+            "sentences": 2,
+            "score": 0.8112714285714283
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1818322251,
+        "content": "Default to the latest sensible models then like 4o etc",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818322251",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -23,6 +23,7 @@ export const pluginSettingsSchema = T.Object({\n   model: T.String({ default: \"o1-mini\" }),\n   openAiBaseUrl: T.Optional(T.String()),\n   similarityThreshold: T.Number({ default: 0.9 }),\n+  maxTokens: T.Number({ default: 10000 }),",
+        "score": {
+          "reward": 1.71,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 69.78500000000001,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.9021499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2440220956,
+        "content": "This could have been worded better. I meant that it would automatically exclude those based on how large their diffs are. \nGitHub pull request code view UI handles this in a smart way, where it wont display the dist/index.js and lock files due to \"large diffs\" \nPerhaps they also have a line length limitation. It may be wise to replicate. \nThen again, 300 line changes is significant. Much more than a normal file diff i think?\nThis would almost certainly be filtered out if there were a ton of file changes with ~10 lines changed per each etc.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#issuecomment-2440220956",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 7.68,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 100,
+            "wordValue": 0.1,
+            "result": 2.6
+          },
+          "readability": {
+            "fleschKincaid": 83.32150000000001,
+            "syllables": 131,
+            "sentences": 8,
+            "score": 0.7667849999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2440238593,
+        "content": "Alright so then it seems clear to me that we can measure the diff size in bytes and then go from there.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#issuecomment-2440238593",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.402,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 92.21409090909091,
+            "syllables": 24,
+            "sentences": 1,
+            "score": 0.6778590909090909
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2440434576,
+        "content": "I think that's all you need to do. What is the problem?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#issuecomment-2440434576",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.858,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 109.12980769230771,
+            "syllables": 14,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2397548085,
+            "effect": {
+              "addition": 59,
+              "deletion": 26
+            },
+            "reward": 2.55,
+            "priority": 3
+          },
+          {
+            "reviewId": 2397646739,
+            "effect": {
+              "addition": 582,
+              "deletion": 120
+            },
+            "reward": 21.06,
+            "priority": 3
+          },
+          {
+            "reviewId": 2397845345,
+            "effect": {
+              "addition": 10,
+              "deletion": 34
+            },
+            "reward": 1.32,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 83.267 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>24.93</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.22</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>9.705</td></tr><tr><td>Review</td><td>Comment</td><td>11</td><td>44.412</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21\" target=\"_blank\" rel=\"noopener\">#21</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+59 -26</td><td>3</td><td>2.55</td></tr><tr><td>+582 -120</td><td>3</td><td>21.06</td></tr><tr><td>+10 -34</td><td>3</td><td>1.32</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/issues/19\" target=\"_blank\" rel=\"noopener\">This is an example of a diff q&amp;a gone bad. Too much was sent&hellip;</a></h6></td><td><details><summary>3.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 43&#13;  wordValue: 0.1&#13;  result: 2.25&#13;</pre></details></td><td>1</td><td>1</td><td>4.22</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/issues/19#issuecomment-2440452788\" target=\"_blank\" rel=\"noopener\">Assign isn't working on pull linked i thought we fixed this @gen&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.8</td><td>3</td><td>3.36</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/issues/19#issuecomment-2440463909\" target=\"_blank\" rel=\"noopener\">Could be the user configured privacy settings we discussed in an&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.9</td><td>3</td><td>6.345</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#pullrequestreview-2397646739\" target=\"_blank\" rel=\"noopener\">Perhaps my spec isnt clear but youre not following it. - Remove&hellip;</a></h6></td><td><details><summary>2.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;  result: 0.4&#13;regex:&#13;  wordCount: 54&#13;  wordValue: 0.1&#13;  result: 2.44&#13;</pre></details></td><td>1</td><td>3</td><td>10.74</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818096382\" target=\"_blank\" rel=\"noopener\">Should definitely be dynamic from git ignore and such. Otherwise&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.7</td><td>3</td><td>3.57</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818096852\" target=\"_blank\" rel=\"noopener\">Wrong approach. Should not be any hard cut off from some arbitra&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.8</td><td>3</td><td>3.744</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818202137\" target=\"_blank\" rel=\"noopener\">Hey i just realized this is pointless. If its ignored it wont b&hellip;</a></h6></td><td><details><summary>2.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.9</td><td>3</td><td>7.074</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818202331\" target=\"_blank\" rel=\"noopener\">Get rid of all this logic too</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.7</td><td>3</td><td>1.89</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818227790\" target=\"_blank\" rel=\"noopener\">Max i guess config so that partners can budget their token use.</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.152</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818320238\" target=\"_blank\" rel=\"noopener\">Default should be the max for the model we are using? 10k seems &hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.6</td><td>3</td><td>2.592</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818322251\" target=\"_blank\" rel=\"noopener\">Default to the latest sensible models then like 4o etc</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.5</td><td>3</td><td>1.71</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#issuecomment-2440220956\" target=\"_blank\" rel=\"noopener\">This could have been worded better. I meant that it would automa&hellip;</a></h6></td><td><details><summary>2.6</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 100&#13;  wordValue: 0.1&#13;  result: 2.6&#13;</pre></details></td><td>0.8</td><td>3</td><td>7.68</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#issuecomment-2440238593\" target=\"_blank\" rel=\"noopener\">Alright so then it seems clear to me that we can measure the dif&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.6</td><td>3</td><td>3.402</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#issuecomment-2440434576\" target=\"_blank\" rel=\"noopener\">I think that's all you need to do. What is the problem?</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.858</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 10.86,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2440458741,
+        "content": "@0x4007 Seems to work: https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/77#issuecomment-2439958186 ; there might be another reason for this.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/issues/19#issuecomment-2440458741",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.25,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 50.130000000000024,
+            "syllables": 41,
+            "sentences": 2,
+            "score": 0.9013000000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2440518141,
+        "content": "I will check the logs for details, hopefully more information is given there so we can determine the cause programmatically and take action.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/issues/19#issuecomment-2440518141",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 3,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 40.03782608695653,
+            "syllables": 39,
+            "sentences": 1,
+            "score": 0.8003782608695653
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2440529657,
+        "content": "Logs of the start stop\r\n![image](https://github.com/user-attachments/assets/902a5474-6133-44c2-af0b-3ba9994fcc53)\r\nNo POST was received meaning the event was never forwarded\r\nKernel logs\r\n![image](https://github.com/user-attachments/assets/2b1cf0c8-f1bd-4ce2-8726-d8e821ea1a3c)\r\nSo it seems the `fetch` transport broke which is why it never got delivered. Seems tricky to reproduce, will have a look.\r\nError message:",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/issues/19#issuecomment-2440529657",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.632,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 7
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 40,
+            "wordValue": 0.1,
+            "result": 2.18
+          },
+          "readability": {
+            "fleschKincaid": 76.97666666666669,
+            "syllables": 55,
+            "sentences": 3,
+            "score": 0.8302333333333332
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1818225799,
+        "content": "Does it combine this + gitignore?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818225799",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -167,15 +168,18 @@ export async function mergeCommentsAndFetchSpec(\n export async function fetchPullRequestDiff(context: Context, org: string, repo: string, issue: number): Promise<string | null> {\n   const { octokit, logger } = context;\n   try {\n-    const { data } = await octokit.pulls.get({\n-      owner: org,\n-      repo,\n-      pull_number: issue,\n-      mediaType: {\n-        format: \"diff\",\n-      },\n+    const githubDiff = new GithubDiff(octokit);\n+    //Fetch the statistics of the pull request\n+    const stats = await githubDiff.getPullRequestStats(org, repo, issue);\n+    //Find the filenames which do not have more than 200 changes\n+    let files = stats.filter((file) => file.changes < 500).map((file) => file.filename);\n+    //Ignore files like in dist or build or .lock files\n+    const ignoredFiles = [\"dist/*\", \"build/*\", \".lock\", \"index.js\"];",
+        "score": {
+          "reward": 1.428,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 66.40000000000003,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.9359999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2397679683,
+            "effect": {
+              "addition": 59,
+              "deletion": 26
+            },
+            "reward": 2.55,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 10.86 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>2.55</td></tr><tr><td>Issue</td><td>Comment</td><td>3</td><td>6.882</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>1.428</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21\" target=\"_blank\" rel=\"noopener\">#21</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+59 -26</td><td>3</td><td>2.55</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/issues/19#issuecomment-2440458741\" target=\"_blank\" rel=\"noopener\">@0x4007 Seems to work: https://github.com/ubiquity-os-marketplac&hellip;</a></h6></td><td><details><summary>1.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.3</td><td>3</td><td>2.25</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/issues/19#issuecomment-2440518141\" target=\"_blank\" rel=\"noopener\">I will check the logs for details, hopefully more information is&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.5</td><td>3</td><td>3</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/issues/19#issuecomment-2440529657\" target=\"_blank\" rel=\"noopener\">Logs of the start stop![image](https://github.com/user-attachm&hellip;</a></h6></td><td><details><summary>2.18</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 7&#13;  result: 0&#13;regex:&#13;  wordCount: 40&#13;  wordValue: 0.1&#13;  result: 2.18&#13;</pre></details></td><td>0.2</td><td>3</td><td>1.632</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818225799\" target=\"_blank\" rel=\"noopener\">Does it combine this + gitignore?</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.7</td><td>3</td><td>1.428</td></tr></tbody></table></details>"
+  },
+  "Keyrxng": {
+    "total": 15.249,
+    "userId": 106303466,
+    "comments": [
+      {
+        "id": 1818138760,
+        "content": "These `pulls` rely on searching the repo for all PRs then parsing the PR bodies for a `#<issueNumber>`, which is recommended but not enforced so this isn't 100% reliable. We tend to use GQL API for this nowadays as it's most reliable. Also for queries that potentially return <del>more than 100 items</del> I'm not sure of the limit actually but it's likely 100, we should use `octokit.paginate(octokit.pulls.list))` as when scanning all PRs it's likely.\r\nIt's also relying on the PR author actually linking using `#` because if they copy paste the url which most do then it'll be a url in the pr body instead. I had logic for hashtag + url matching in my implementation but I think you may have removed it.\r\nI think it may also be pulling more PR diffs than intended within this promise on each call to `createContextBlockSection`, unsure without QA-ing and inspecting the formatted chat on a context rich repo.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818138760",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -83,7 +88,18 @@ async function createContextBlockSection(\n   if (!issueNumber || isNaN(issueNumber)) {\n     throw context.logger.error(\"Issue number is not valid\");\n   }\n-  const prDiff = await fetchPullRequestDiff(context, org, repo, issueNumber);\n+  const pulls = await fetchLinkedPrFromIssue(org, repo, issueNumber, context);",
+        "score": {
+          "reward": 1.836,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 161,
+            "wordValue": 0.1,
+            "result": 2.12
+          },
+          "readability": {
+            "fleschKincaid": 63.47121635610769,
+            "syllables": 221,
+            "sentences": 6,
+            "score": 0.9652878364389231
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1818139127,
+        "content": "Is there a specific reason that you change this? The template uses `:4000` so all other plugins also, it's tedious having to change it back for no reason",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818139127",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -17,7 +17,7 @@\n     \"knip-ci\": \"knip --no-exit-code --reporter json --config .github/knip.ts\",\n     \"prepare\": \"husky install\",\n     \"test\": \"jest --setupFiles dotenv/config --coverage\",\n-    \"worker\": \"wrangler dev --env dev --port 4000\"\n+    \"worker\": \"wrangler dev --env dev --port 5000\"",
+        "score": {
+          "reward": 1.026,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 74.78928571428573,
+            "syllables": 39,
+            "sentences": 2,
+            "score": 0.8521071428571427
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1818139234,
+        "content": "should move this into `config` and pass this via the yml config",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818139234",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -2,6 +2,7 @@ import OpenAI from \"openai\";\n import { Context } from \"../../../types\";\n import { SuperOpenAi } from \"./openai\";\n import { CompletionsModelHelper, ModelApplications } from \"../../../types/llm\";\n+import { encode } from \"gpt-tokenizer\";\n const MAX_TOKENS = 7000;",
+        "score": {
+          "reward": 0.609,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 95.68818181818183,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.6431181818181817
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1818139296,
+        "content": "Same here. Should also be renamed to `MAX_COMPLETION_TOKENS`.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818139296",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -1,8 +1,9 @@\n import { Context } from \"../types\";\n import { StreamlinedComment, StreamlinedComments } from \"../types/llm\";\n import { createKey, streamlineComments } from \"../handlers/comments\";\n-import { fetchPullRequestDiff, fetchIssue, fetchIssueComments } from \"./issue-fetching\";\n+import { fetchPullRequestDiff, fetchIssue, fetchIssueComments, fetchLinkedPrFromIssue } from \"./issue-fetching\";\n import { splitKey } from \"./issue\";\n+const MAX_TOKENS_ALLOWED = 7000;",
+        "score": {
+          "reward": 0.441,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 94.51107142857143,
+            "syllables": 9,
+            "sentences": 2,
+            "score": 0.6548892857142857
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1818139897,
+        "content": "This lib is only called twice and can be done just as simply with one or two rest calls I'm sure, it's not clear if this is ideal relying on a lib for this. Nothing to hold back the PR for just an observation.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818139897",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -164,18 +165,40 @@ export async function mergeCommentsAndFetchSpec(\n  * @param issue - The pull request number.\n  * @returns A promise that resolves to the diff of the pull request as a string, or null if an error occurs.\n  */\n-export async function fetchPullRequestDiff(context: Context, org: string, repo: string, issue: number): Promise<string | null> {\n+export async function fetchPullRequestDiff(context: Context, org: string, repo: string, issue: number): Promise<{ diff: string; diffSize: number }[] | null> {\n   const { octokit, logger } = context;\n   try {\n-    const { data } = await octokit.pulls.get({\n-      owner: org,\n-      repo,\n-      pull_number: issue,\n-      mediaType: {\n-        format: \"diff\",\n-      },\n-    });\n-    return data as unknown as string;\n+    const githubDiff = new GithubDiff(octokit);\n+    //Fetch the statistics of the pull request\n+    const stats = await githubDiff.getPullRequestStats(org, repo, issue);",
+        "score": {
+          "reward": 1.065,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 46,
+            "wordValue": 0.1,
+            "result": 2.31
+          },
+          "readability": {
+            "fleschKincaid": 84.17695652173914,
+            "syllables": 54,
+            "sentences": 2,
+            "score": 0.7582304347826085
+          },
+          "multiplier": 0.25,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1818140113,
+        "content": "Might be best to wrap this in a try-catch because if e.g the repo has been deleted this will likely throw",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818140113",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -296,3 +318,41 @@ function castCommentsToSimplifiedComments(comments: Comments, params: FetchParam\n       url: comment.html_url,\n     }));\n }\n+\n+export async function fetchLinkedPrFromIssue(owner: string, repo: string, issueNumber: number, context: Context) {\n+  const prs = await context.octokit.rest.pulls.list({",
+        "score": {
+          "reward": 1.152,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 92.17119565217394,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.6782880434782607
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1818140402,
+        "content": "Could be better named as it's actually fetching the linked issue from the pull request body",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818140402",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -296,3 +318,41 @@ function castCommentsToSimplifiedComments(comments: Comments, params: FetchParam\n       url: comment.html_url,\n     }));\n }\n+\n+export async function fetchLinkedPrFromIssue(owner: string, repo: string, issueNumber: number, context: Context) {",
+        "score": {
+          "reward": 0.882,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 70.14470588235295,
+            "syllables": 24,
+            "sentences": 1,
+            "score": 0.8985529411764704
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1818140507,
+        "content": "Might be best to add handling for url matching too",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818140507",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -296,3 +318,41 @@ function castCommentsToSimplifiedComments(comments: Comments, params: FetchParam\n       url: comment.html_url,\n     }));\n }\n+\n+export async function fetchLinkedPrFromIssue(owner: string, repo: string, issueNumber: number, context: Context) {\n+  const prs = await context.octokit.rest.pulls.list({\n+    owner: owner,\n+    repo: repo,\n+    state: \"all\",\n+  });\n+  //Filter the PRs which are linked to the issue using the body of the PR\n+  return prs.data.filter((pr) => pr.body?.includes(`#${issueNumber}`));",
+        "score": {
+          "reward": 0.648,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 95.165,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.64835
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1818150965,
+        "content": "The plugin-template comes with `:4000` as standard so it's habitual for plugin devs to copy paste that url into `-config.yml` and expecting it to work thinking something is broken for it to be the dev port lmao.\r\nIdeally don't commit it if you want to use another port, like running multiple plugins locally for example, always change it back to the template port if you can remember to.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818150965",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -17,7 +17,7 @@\n     \"knip-ci\": \"knip --no-exit-code --reporter json --config .github/knip.ts\",\n     \"prepare\": \"husky install\",\n     \"test\": \"jest --setupFiles dotenv/config --coverage\",\n-    \"worker\": \"wrangler dev --env dev --port 4000\"\n+    \"worker\": \"wrangler dev --env dev --port 5000\"",
+        "score": {
+          "reward": 1.23,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 69,
+            "wordValue": 0.1,
+            "result": 2.59
+          },
+          "readability": {
+            "fleschKincaid": 49.20880434782609,
+            "syllables": 100,
+            "sentences": 2,
+            "score": 0.8920880434782609
+          },
+          "multiplier": 0.25,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2397590103,
+            "effect": {
+              "addition": 122,
+              "deletion": 90
+            },
+            "reward": 6.36,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/21"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 15.249 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>6.36</td></tr><tr><td>Review</td><td>Comment</td><td>9</td><td>8.889</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21\" target=\"_blank\" rel=\"noopener\">#21</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+122 -90</td><td>3</td><td>6.36</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818138760\" target=\"_blank\" rel=\"noopener\">These &#96;pulls&#96; rely on searching the repo for all PRs the&hellip;</a></h6></td><td><details><summary>2.12</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 161&#13;  wordValue: 0.1&#13;  result: 2.12&#13;</pre></details></td><td>0.9</td><td>3</td><td>1.836</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818139127\" target=\"_blank\" rel=\"noopener\">Is there a specific reason that you change this? The template us&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.6</td><td>3</td><td>1.026</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818139234\" target=\"_blank\" rel=\"noopener\">should move this into &#96;config&#96; and pass this via the yml&hellip;</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.7</td><td>3</td><td>0.609</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818139296\" target=\"_blank\" rel=\"noopener\">Same here. Should also be renamed to &#96;MAX_COMPLETION_TOKENS&&hellip;</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.7</td><td>3</td><td>0.441</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818139897\" target=\"_blank\" rel=\"noopener\">This lib is only called twice and can be done just as simply wit&hellip;</a></h6></td><td><details><summary>2.31</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 46&#13;  wordValue: 0.1&#13;  result: 2.31&#13;</pre></details></td><td>0.5</td><td>3</td><td>1.065</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818140113\" target=\"_blank\" rel=\"noopener\">Might be best to wrap this in a try-catch because if e.g the rep&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.152</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818140402\" target=\"_blank\" rel=\"noopener\">Could be better named as it's actually fetching the linked issue&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.7</td><td>3</td><td>0.882</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818140507\" target=\"_blank\" rel=\"noopener\">Might be best to add handling for url matching too</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.8</td><td>3</td><td>0.648</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/21#discussion_r1818150965\" target=\"_blank\" rel=\"noopener\">The plugin-template comes with &#96;:4000&#96; as standard so it&hellip;</a></h6></td><td><details><summary>2.59</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 69&#13;  wordValue: 0.1&#13;  result: 2.59&#13;</pre></details></td><td>0.5</td><td>3</td><td>1.23</td></tr></tbody></table></details>"
+  }
+}

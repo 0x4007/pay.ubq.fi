@@ -1,0 +1,173 @@
+{
+  "zugdev": {
+    "userId": 155616000,
+    "total": 12,
+    "task": {
+      "reward": 6,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2639813746,
+        "content": "Currently in authentication, we have two different conditions to show user GitHub info and the login button. \r\nhttps://github.com/ubiquity/work.ubq.fi/blob/bd41261088d2194c70602a18bdb5323cc83dee7c/src/home/authentication.ts#L14-L23\r\nThis leads to a scenario where both can be shown at the same time or none is shown:\r\n![image](https://github.com/user-attachments/assets/6170f799-d741-4e35-9878-570758277939)",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/161",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.86,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 69.78466666666668,
+            "syllables": 76,
+            "sentences": 6,
+            "score": 0.9021533333333331
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2168630111,
+        "content": "Resolves #161 \r\n```\r\nconst gitHubUser: null | GitHubUser = await getGitHubUser();\r\n  if (gitHubUser) {\r\n    await trackReferralCode();\r\n    await displayGitHubUserInformation(gitHubUser);\r\n  }\r\n  const accessToken = getGitHubAccessToken();\r\n  if (!accessToken) {\r\n    renderGitHubLoginButton();\r\n  }\r\n```\r\nThe problem with this code order is that `getGitHubAccessToken()` is the function that checks and clears expired tokens. Therefore GitHub user info is shown, and only afterwards we check if expired and show login button. To reproduce the error you can simply change accessToken to null:\r\n```\r\n const accessToken = null;\r\n```\r\nThough I'd like to simplify auth sometime it's quicker to just switch the order back into correct place. I think we should increase our token expiry date though, 60 mins seems very short.\r\nHere is the reproduced bug with a null accessToken:\r\nhttps://github.com/user-attachments/assets/40a9a879-bbc4-4784-b45a-837e3c1e4e7c\r\nTo QA this solution one can comment the following lines\r\n```\r\n//  if (accessToken) {\r\n//    return accessToken;\r\n//  }\r\n```\r\nin `getGitHubAccessToken()`:\r\nhttps://github.com/ubiquity/work.ubq.fi/blob/bd41261088d2194c70602a18bdb5323cc83dee7c/src/home/getters/get-github-access-token.ts#L29-L47\r\nand run with a clean cache. Whenever you login, GitHub info will never be shown.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/162",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 5.463,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 9
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 117,
+            "wordValue": 0.1,
+            "result": 2.51
+          },
+          "readability": {
+            "fleschKincaid": 68.38519480519481,
+            "syllables": 217,
+            "sentences": 11,
+            "score": 0.9161480519480518
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 12 XP ]</a>&nbsp;</h3><h6>@zugdev</h6></b></summary><h6>⚠️ Your rewards have been limited to the task price of 6 XP.</h6><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>6</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.86</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>5.463</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/161\" target=\"_blank\" rel=\"noopener\">Currently in authentication, we have two different conditions to&hellip;</a></h6></td><td><details><summary>3.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>1</td><td>1</td><td>3.86</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/162\" target=\"_blank\" rel=\"noopener\">Resolves #161 &#96;&#96;&#96;const gitHubUser: null | GitHub&hellip;</a></h6></td><td><details><summary>4.51</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 9&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 117&#13;  wordValue: 0.1&#13;  result: 2.51&#13;</pre></details></td><td>0.95</td><td>1</td><td>5.463</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 1.942,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2425621849,
+        "content": "There was some reason I changed the order I forgot the bug. I suppose you don't recall either. \nWasn't it throwing the error in the modal due to this?",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/162#pullrequestreview-2425621849",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.404,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 87.18537634408602,
+            "syllables": 40,
+            "sentences": 3,
+            "score": 0.7281462365591398
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2466562063,
+        "content": "Also let's change the token expiry time to max",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/162#issuecomment-2466562063",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.448,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 78.24500000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.8175499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2425621849,
+            "effect": {
+              "addition": 5,
+              "deletion": 4
+            },
+            "reward": 0.09,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/162"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 1.942 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>0.09</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>1.852</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/work.ubq.fi/pull/162\" target=\"_blank\" rel=\"noopener\">#162</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+5 -4</td><td>1</td><td>0.09</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/162#pullrequestreview-2425621849\" target=\"_blank\" rel=\"noopener\">There was some reason I changed the order I forgot the bug. I su&hellip;</a></h6></td><td><details><summary>1.92</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.6</td><td>1</td><td>1.404</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/162#issuecomment-2466562063\" target=\"_blank\" rel=\"noopener\">Also let's change the token expiry time to max</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.448</td></tr></tbody></table></details>"
+  }
+}

@@ -1,0 +1,915 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 605.36,
+    "task": {
+      "reward": 600,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2294439953,
+        "content": "**command/query:** see statistics on a user. We have wallet address and label access control details. We should eventually include repo/org/global XP as well, and possibly dollars earned if our ledger works.\r\n[See source code](https://github.com/ubiquity/ubiquibot/blob/579c447ce23397d8947e2f3f2a5e665f1c60fedf/src/handlers/comment/handlers/query.ts)\r\n[See related repository](https://github.com/ubiquibot/command-query-user)",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/10",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 5.36,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 59.16092105263158,
+            "syllables": 62,
+            "sentences": 4,
+            "score": 0.9916092105263158
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 605.36 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>600</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>5.36</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/10\" target=\"_blank\" rel=\"noopener\">**command/query:** see statistics on a user. We have wallet addr&hellip;</a></h6></td><td><details><summary>4.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>1</td><td>1</td><td>5.36</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 116.979,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 1614718147,
+        "content": "Maybe it'd be a good idea to post a comment with the error so we don't think the bot is down and we can easily see what's wrong",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1614718147",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,62 @@\n+import { Context } from \"../types/context\";\n+\n+export async function queryUser(context: Context, username: string) {\n+  const {\n+    octokit,\n+    payload,\n+    adapters: { supabase },\n+    config,\n+  } = context;\n+  const body: string[] = [];\n+  try {\n+    const {\n+      data: { id },\n+    } = await octokit.users.getByUsername({\n+      username,\n+    });\n+    if (!config.allowPublicQuery && payload.organization) {\n+      const { status } = await octokit.orgs.checkMembershipForUser({\n+        username,\n+        org: payload.organization.login,\n+      });\n+      // @ts-expect-error Somehow typing seems wrong but according to\n+      // https://docs.github.com/en/rest/orgs/members?apiVersion=2022-11-28#check-organization-membership-for-a-user--status-codes\n+      // 204 means the user is part of the Organization\n+      if (status !== 204) {\n+        body.push(`\\`\\`\\`User ${username} cannot request another user as it is not member of the organization.\\`\\`\\``);\n+        await octokit.issues.createComment({\n+          body: body.join(\"\\n\"),\n+          owner: payload.repository.owner.login,\n+          repo: payload.repository.name,\n+          issue_number: payload.issue.number,\n+        });\n+        return;\n+      }\n+    }\n+    const access = await supabase.access.getAccess(id);\n+    const wallet = await supabase.wallet.getWallet(id);\n+    if (!access && !wallet) {\n+      body.push(`\\`\\`\\`\n+User information for ${username} was not found.\n+\\`\\`\\``);\n+    } else {\n+      body.push(`\n+| Property | Value |\n+|----------|-------|`);\n+      if (wallet) {\n+        body.push(`| Wallet | ${wallet.address} |`);\n+      }\n+      if (access) {\n+        body.push(`| Access | ${access.multiplier_reason} |`);\n+      }\n+    }\n+    await octokit.issues.createComment({\n+      body: body.join(\"\\n\"),\n+      owner: payload.repository.owner.login,\n+      repo: payload.repository.name,\n+      issue_number: payload.issue.number,\n+    });\n+  } catch (e) {\n+    context.logger.error(\"Could not query user.\", e);",
+        "score": {
+          "reward": 5.04,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 77.12483870967742,
+            "syllables": 36,
+            "sentences": 1,
+            "score": 0.8287516129032259
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1614719739,
+        "content": "I think access table contains information about which labels the user can set, not sure if multiplier_reason is there. Also I don't see database types?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1614719739",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,62 @@\n+import { Context } from \"../types/context\";\n+\n+export async function queryUser(context: Context, username: string) {\n+  const {\n+    octokit,\n+    payload,\n+    adapters: { supabase },\n+    config,\n+  } = context;\n+  const body: string[] = [];\n+  try {\n+    const {\n+      data: { id },\n+    } = await octokit.users.getByUsername({\n+      username,\n+    });\n+    if (!config.allowPublicQuery && payload.organization) {\n+      const { status } = await octokit.orgs.checkMembershipForUser({\n+        username,\n+        org: payload.organization.login,\n+      });\n+      // @ts-expect-error Somehow typing seems wrong but according to\n+      // https://docs.github.com/en/rest/orgs/members?apiVersion=2022-11-28#check-organization-membership-for-a-user--status-codes\n+      // 204 means the user is part of the Organization\n+      if (status !== 204) {\n+        body.push(`\\`\\`\\`User ${username} cannot request another user as it is not member of the organization.\\`\\`\\``);\n+        await octokit.issues.createComment({\n+          body: body.join(\"\\n\"),\n+          owner: payload.repository.owner.login,\n+          repo: payload.repository.name,\n+          issue_number: payload.issue.number,\n+        });\n+        return;\n+      }\n+    }\n+    const access = await supabase.access.getAccess(id);\n+    const wallet = await supabase.wallet.getWallet(id);\n+    if (!access && !wallet) {\n+      body.push(`\\`\\`\\`\n+User information for ${username} was not found.\n+\\`\\`\\``);\n+    } else {\n+      body.push(`\n+| Property | Value |\n+|----------|-------|`);\n+      if (wallet) {\n+        body.push(`| Wallet | ${wallet.address} |`);\n+      }\n+      if (access) {\n+        body.push(`| Access | ${access.multiplier_reason} |`);",
+        "score": {
+          "reward": 6.075,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 56.97846153846157,
+            "syllables": 42,
+            "sentences": 2,
+            "score": 0.9697846153846157
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1614720410,
+        "content": "why is the github token retrieved from the env? Normally the token is passed from the kernel",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1614720410",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,66 @@\n+import { createClient } from \"@supabase/supabase-js\";\n+import { CommanderError } from \"commander\";\n+import { Octokit } from \"@octokit/rest\";\n+import { createAdapters } from \"./adapters\";\n+import { CommandParser } from \"./handlers/command-parser\";\n+import { Context } from \"./types/context\";\n+import { Env } from \"./types/env\";\n+import { PluginInputs } from \"./types/plugin-input\";\n+\n+export async function run(inputs: PluginInputs, env: Env) {\n+  if (inputs.eventName !== \"issue_comment.created\") {\n+    console.warn(`Unsupported event ${inputs.eventName}, skipping.`);\n+    return;\n+  }\n+  const args = inputs.eventPayload.comment.body.trim().split(/\\s+/);\n+  const octokit = new Octokit({ auth: env.UBIQUIBOT_TOKEN });",
+        "score": {
+          "reward": 3.936,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 78.77220588235295,
+            "syllables": 24,
+            "sentences": 2,
+            "score": 0.8122779411764705
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1614720859,
+        "content": "You need to check the membership of the user who posted the comment not the user who is queried or maybe I'm missing something",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1614720859",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,62 @@\n+import { Context } from \"../types/context\";\n+\n+export async function queryUser(context: Context, username: string) {\n+  const {\n+    octokit,\n+    payload,\n+    adapters: { supabase },\n+    config,\n+  } = context;\n+  const body: string[] = [];\n+  try {\n+    const {\n+      data: { id },\n+    } = await octokit.users.getByUsername({\n+      username,\n+    });\n+    if (!config.allowPublicQuery && payload.organization) {\n+      const { status } = await octokit.orgs.checkMembershipForUser({\n+        username,",
+        "score": {
+          "reward": 5.886,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 66.40400000000001,
+            "syllables": 34,
+            "sentences": 1,
+            "score": 0.9359599999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1614721390,
+        "content": "I think we will have a different type for workers plugin or maybe it can be implicitly inferred",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1614721390",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,28 +1,47 @@\n-# `@ubiquity/ts-template`\n+# `@ubiquibot/command-query-user`\n \n-This template repository includes support for the following:\n+This package helps users querying their information, from they wallet address, label access control or current XP.\n \n-- TypeScript\n-- Environment Variables\n-- Conventional Commits\n-- Automatic deployment to Cloudflare Pages\n+## Usage\n \n-## Testing\n-\n-### Cypress\n+The following commands are allowed:\n \n-To test with Cypress Studio UI, run\n+```shell\n+/query @user\n+```\n \n+## Running locally\n+### Worker\n+Start the Worker by running\n ```shell\n-yarn cy:open\n+yarn dev\n ```\n \n-Otherwise to simply run the tests through the console, run\n+### Make requests\n+To trigger the worker, `POST` requests should be made to http://localhost:4000 with a `Content-Type: application/json`\n+header and a body looking like\n+```json\n+{\n+  \"stateId\": \"\",\n+  \"eventName\": \"\",\n+  \"eventPayload\": \"\",\n+  \"settings\": \"\",\n+  \"ref\": \"\"\n+}\n+```\n+For convenience, you can find an `.http` file with a valid request [here](/tests/http/request.http).\n \n-```shell\n-yarn cy:run\n+## Configuration\n+A valid configuration can be like:\n+\n+```yaml\n+- plugin: https://ubiquibot-command-query-user.ubq.fi\n+  type: github",
+        "score": {
+          "reward": 2.124,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 66.36500000000001,
+            "syllables": 26,
+            "sentences": 1,
+            "score": 0.9363499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1616125826,
+        "content": "But does it make sense to post comment for every log? We should make it like the old bot where the logger returned an error and if it's thrown then a comment will be posted",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1616125826",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,62 @@\n+import { Context } from \"../types/context\";\n+\n+export async function queryUser(context: Context, username: string) {\n+  const {\n+    octokit,\n+    payload,\n+    adapters: { supabase },\n+    config,\n+  } = context;\n+  const body: string[] = [];\n+  try {\n+    const {\n+      data: { id },\n+    } = await octokit.users.getByUsername({\n+      username,\n+    });\n+    if (!config.allowPublicQuery && payload.organization) {\n+      const { status } = await octokit.orgs.checkMembershipForUser({\n+        username,\n+        org: payload.organization.login,\n+      });\n+      // @ts-expect-error Somehow typing seems wrong but according to\n+      // https://docs.github.com/en/rest/orgs/members?apiVersion=2022-11-28#check-organization-membership-for-a-user--status-codes\n+      // 204 means the user is part of the Organization\n+      if (status !== 204) {\n+        body.push(`\\`\\`\\`User ${username} cannot request another user as it is not member of the organization.\\`\\`\\``);\n+        await octokit.issues.createComment({\n+          body: body.join(\"\\n\"),\n+          owner: payload.repository.owner.login,\n+          repo: payload.repository.name,\n+          issue_number: payload.issue.number,\n+        });\n+        return;\n+      }\n+    }\n+    const access = await supabase.access.getAccess(id);\n+    const wallet = await supabase.wallet.getWallet(id);\n+    if (!access && !wallet) {\n+      body.push(`\\`\\`\\`\n+User information for ${username} was not found.\n+\\`\\`\\``);\n+    } else {\n+      body.push(`\n+| Property | Value |\n+|----------|-------|`);\n+      if (wallet) {\n+        body.push(`| Wallet | ${wallet.address} |`);\n+      }\n+      if (access) {\n+        body.push(`| Access | ${access.multiplier_reason} |`);\n+      }\n+    }\n+    await octokit.issues.createComment({\n+      body: body.join(\"\\n\"),\n+      owner: payload.repository.owner.login,\n+      repo: payload.repository.name,\n+      issue_number: payload.issue.number,\n+    });\n+  } catch (e) {\n+    context.logger.error(\"Could not query user.\", e);",
+        "score": {
+          "reward": 6.048,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 87.515,
+            "syllables": 43,
+            "sentences": 2,
+            "score": 0.72485
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1616148795,
+        "content": "You should display `labels`, it's an array like `['time', 'priority']`. We don't really use multiplier anymore",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1616148795",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,62 @@\n+import { Context } from \"../types/context\";\n+\n+export async function queryUser(context: Context, username: string) {\n+  const {\n+    octokit,\n+    payload,\n+    adapters: { supabase },\n+    config,\n+  } = context;\n+  const body: string[] = [];\n+  try {\n+    const {\n+      data: { id },\n+    } = await octokit.users.getByUsername({\n+      username,\n+    });\n+    if (!config.allowPublicQuery && payload.organization) {\n+      const { status } = await octokit.orgs.checkMembershipForUser({\n+        username,\n+        org: payload.organization.login,\n+      });\n+      // @ts-expect-error Somehow typing seems wrong but according to\n+      // https://docs.github.com/en/rest/orgs/members?apiVersion=2022-11-28#check-organization-membership-for-a-user--status-codes\n+      // 204 means the user is part of the Organization\n+      if (status !== 204) {\n+        body.push(`\\`\\`\\`User ${username} cannot request another user as it is not member of the organization.\\`\\`\\``);\n+        await octokit.issues.createComment({\n+          body: body.join(\"\\n\"),\n+          owner: payload.repository.owner.login,\n+          repo: payload.repository.name,\n+          issue_number: payload.issue.number,\n+        });\n+        return;\n+      }\n+    }\n+    const access = await supabase.access.getAccess(id);\n+    const wallet = await supabase.wallet.getWallet(id);\n+    if (!access && !wallet) {\n+      body.push(`\\`\\`\\`\n+User information for ${username} was not found.\n+\\`\\`\\``);\n+    } else {\n+      body.push(`\n+| Property | Value |\n+|----------|-------|`);\n+      if (wallet) {\n+        body.push(`| Wallet | ${wallet.address} |`);\n+      }\n+      if (access) {\n+        body.push(`| Access | ${access.multiplier_reason} |`);",
+        "score": {
+          "reward": 4.104,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 75.14250000000001,
+            "syllables": 22,
+            "sentences": 2,
+            "score": 0.8485749999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1616150439,
+        "content": "My understanding from that conversation was that for the prototype we will still pass the token from the kernel, but later we need to find a better way",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1616150439",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,66 @@\n+import { createClient } from \"@supabase/supabase-js\";\n+import { CommanderError } from \"commander\";\n+import { Octokit } from \"@octokit/rest\";\n+import { createAdapters } from \"./adapters\";\n+import { CommandParser } from \"./handlers/command-parser\";\n+import { Context } from \"./types/context\";\n+import { Env } from \"./types/env\";\n+import { PluginInputs } from \"./types/plugin-input\";\n+\n+export async function run(inputs: PluginInputs, env: Env) {\n+  if (inputs.eventName !== \"issue_comment.created\") {\n+    console.warn(`Unsupported event ${inputs.eventName}, skipping.`);\n+    return;\n+  }\n+  const args = inputs.eventPayload.comment.body.trim().split(/\\s+/);\n+  const octokit = new Octokit({ auth: env.UBIQUIBOT_TOKEN });",
+        "score": {
+          "reward": 4.212,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 57.55785714285717,
+            "syllables": 40,
+            "sentences": 1,
+            "score": 0.9755785714285717
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1617598503,
+        "content": "maybe it'd be better to use [this api](https://docs.github.com/en/rest/collaborators/collaborators?apiVersion=2022-11-28#list-repository-collaborators) which will also work if repo is not owned by an org?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1617598503",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,65 @@\n+import { Context } from \"../types/context\";\n+\n+async function checkUserAccess(context: Context, username: string) {\n+  const { octokit, payload } = context;\n+  if (!payload.organization || !payload.comment.user?.name) {\n+    throw new Error(\"Missing Organization / User from payload, cannot check for organization membership.\");\n+  }\n+  const { status } = await octokit.orgs.checkMembershipForUser({",
+        "score": {
+          "reward": 8.262,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 88.83428571428574,
+            "syllables": 24,
+            "sentences": 1,
+            "score": 0.7116571428571425
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1617606061,
+        "content": "```suggestion\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1617606061",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,9 @@\n+import { Type as T, StaticDecode } from \"@sinclair/typebox\";\n+\n+export const envSchema = T.Object({\n+  SUPABASE_URL: T.String(),\n+  SUPABASE_KEY: T.String(),\n+  UBIQUIBOT_TOKEN: T.String(),",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1617632512,
+        "content": "this is not needed because wrangler will load the env file and it will be provided in the `fetch` func below. \r\nit would be a good idea to validate the env and also the request (just the general shape of the json before parsing the payload/settings...) but this can be done as a part of another PR",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1617632512",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,41 @@\n+import { Value } from \"@sinclair/typebox/value\";\n+import { config } from \"dotenv\";\n+import { run } from \"./run\";\n+import { Env } from \"./types/env\";\n+import { commandQueryUserScheme } from \"./types/plugin-input\";\n+\n+config();",
+        "score": {
+          "reward": 7.44,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 57,
+            "wordValue": 0.1,
+            "result": 2.48
+          },
+          "readability": {
+            "fleschKincaid": 76.2342105263158,
+            "syllables": 75,
+            "sentences": 3,
+            "score": 0.8376578947368419
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1620313878,
+        "content": "I think this is just additional explanation for org-owned repos, I tested and it works with non-org repos too",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1620313878",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,65 @@\n+import { Context } from \"../types/context\";\n+\n+async function checkUserAccess(context: Context, username: string) {\n+  const { octokit, payload } = context;\n+  if (!payload.organization || !payload.comment.user?.name) {\n+    throw new Error(\"Missing Organization / User from payload, cannot check for organization membership.\");\n+  }\n+  const { status } = await octokit.orgs.checkMembershipForUser({",
+        "score": {
+          "reward": 3.492,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 68.69142857142859,
+            "syllables": 29,
+            "sentences": 1,
+            "score": 0.9130857142857142
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2079046071,
+            "effect": {
+              "addition": 820,
+              "deletion": 65
+            },
+            "reward": 26.55,
+            "priority": 3
+          },
+          {
+            "reviewId": 2083367442,
+            "effect": {
+              "addition": 1025,
+              "deletion": 63
+            },
+            "reward": 32.64,
+            "priority": 3
+          },
+          {
+            "reviewId": 2090956097,
+            "effect": {
+              "addition": 18,
+              "deletion": 21
+            },
+            "reward": 1.17,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 116.979 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>60.36</td></tr><tr><td>Review</td><td>Comment</td><td>12</td><td>56.619</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1\" target=\"_blank\" rel=\"noopener\">#1</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+820 -65</td><td>3</td><td>26.55</td></tr><tr><td>+1025 -63</td><td>3</td><td>32.64</td></tr><tr><td>+18 -21</td><td>3</td><td>1.17</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1614718147\" target=\"_blank\" rel=\"noopener\">Maybe it'd be a good idea to post a comment with the error so we&hellip;</a></h6></td><td><details><summary>1.92</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.7</td><td>3</td><td>5.04</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1614719739\" target=\"_blank\" rel=\"noopener\">I think access table contains information about which labels the&hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.9</td><td>3</td><td>6.075</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1614720410\" target=\"_blank\" rel=\"noopener\">why is the github token retrieved from the env? Normally the tok&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.8</td><td>3</td><td>3.936</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1614720859\" target=\"_blank\" rel=\"noopener\">You need to check the membership of the user who posted the comm&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.9</td><td>3</td><td>5.886</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1614721390\" target=\"_blank\" rel=\"noopener\">I think we will have a different type for workers plugin or mayb&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.4</td><td>3</td><td>2.124</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1616125826\" target=\"_blank\" rel=\"noopener\">But does it make sense to post comment for every log? We should &hellip;</a></h6></td><td><details><summary>2.07</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.8</td><td>3</td><td>6.048</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1616148795\" target=\"_blank\" rel=\"noopener\">You should display &#96;labels&#96;, it's an array like &#96;['t&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.9</td><td>3</td><td>4.104</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1616150439\" target=\"_blank\" rel=\"noopener\">My understanding from that conversation was that for the prototy&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.6</td><td>3</td><td>4.212</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1617598503\" target=\"_blank\" rel=\"noopener\">maybe it'd be better to use [this api](https://docs.github.com/e&hellip;</a></h6></td><td><details><summary>2.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.9</td><td>3</td><td>8.262</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1617606061\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion&#96;&#96;&#96;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1617632512\" target=\"_blank\" rel=\"noopener\">this is not needed because wrangler will load the env file and i&hellip;</a></h6></td><td><details><summary>2.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 57&#13;  wordValue: 0.1&#13;  result: 2.48&#13;</pre></details></td><td>0.8</td><td>3</td><td>7.44</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1620313878\" target=\"_blank\" rel=\"noopener\">I think this is just additional explanation for org-owned repos,&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.6</td><td>3</td><td>3.492</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 98.625,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1614780480,
+        "content": "The logger should automatically handle posting the comment as well I believe. That's how I designed my logger in the old code.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1614780480",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,62 @@\n+import { Context } from \"../types/context\";\n+\n+export async function queryUser(context: Context, username: string) {\n+  const {\n+    octokit,\n+    payload,\n+    adapters: { supabase },\n+    config,\n+  } = context;\n+  const body: string[] = [];\n+  try {\n+    const {\n+      data: { id },\n+    } = await octokit.users.getByUsername({\n+      username,\n+    });\n+    if (!config.allowPublicQuery && payload.organization) {\n+      const { status } = await octokit.orgs.checkMembershipForUser({\n+        username,\n+        org: payload.organization.login,\n+      });\n+      // @ts-expect-error Somehow typing seems wrong but according to\n+      // https://docs.github.com/en/rest/orgs/members?apiVersion=2022-11-28#check-organization-membership-for-a-user--status-codes\n+      // 204 means the user is part of the Organization\n+      if (status !== 204) {\n+        body.push(`\\`\\`\\`User ${username} cannot request another user as it is not member of the organization.\\`\\`\\``);\n+        await octokit.issues.createComment({\n+          body: body.join(\"\\n\"),\n+          owner: payload.repository.owner.login,\n+          repo: payload.repository.name,\n+          issue_number: payload.issue.number,\n+        });\n+        return;\n+      }\n+    }\n+    const access = await supabase.access.getAccess(id);\n+    const wallet = await supabase.wallet.getWallet(id);\n+    if (!access && !wallet) {\n+      body.push(`\\`\\`\\`\n+User information for ${username} was not found.\n+\\`\\`\\``);\n+    } else {\n+      body.push(`\n+| Property | Value |\n+|----------|-------|`);\n+      if (wallet) {\n+        body.push(`| Wallet | ${wallet.address} |`);\n+      }\n+      if (access) {\n+        body.push(`| Access | ${access.multiplier_reason} |`);\n+      }\n+    }\n+    await octokit.issues.createComment({\n+      body: body.join(\"\\n\"),\n+      owner: payload.repository.owner.login,\n+      repo: payload.repository.name,\n+      issue_number: payload.issue.number,\n+    });\n+  } catch (e) {\n+    context.logger.error(\"Could not query user.\", e);",
+        "score": {
+          "reward": 4.944,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 66.42336956521743,
+            "syllables": 35,
+            "sentences": 2,
+            "score": 0.9357663043478257
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1614780737,
+        "content": "It's supposed to store a JSON object of key value pairs. We should be able to write any key/value. Although come to think of it that was for labels. Not sure about the other user properties.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1614780737",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,62 @@\n+import { Context } from \"../types/context\";\n+\n+export async function queryUser(context: Context, username: string) {\n+  const {\n+    octokit,\n+    payload,\n+    adapters: { supabase },\n+    config,\n+  } = context;\n+  const body: string[] = [];\n+  try {\n+    const {\n+      data: { id },\n+    } = await octokit.users.getByUsername({\n+      username,\n+    });\n+    if (!config.allowPublicQuery && payload.organization) {\n+      const { status } = await octokit.orgs.checkMembershipForUser({\n+        username,\n+        org: payload.organization.login,\n+      });\n+      // @ts-expect-error Somehow typing seems wrong but according to\n+      // https://docs.github.com/en/rest/orgs/members?apiVersion=2022-11-28#check-organization-membership-for-a-user--status-codes\n+      // 204 means the user is part of the Organization\n+      if (status !== 204) {\n+        body.push(`\\`\\`\\`User ${username} cannot request another user as it is not member of the organization.\\`\\`\\``);\n+        await octokit.issues.createComment({\n+          body: body.join(\"\\n\"),\n+          owner: payload.repository.owner.login,\n+          repo: payload.repository.name,\n+          issue_number: payload.issue.number,\n+        });\n+        return;\n+      }\n+    }\n+    const access = await supabase.access.getAccess(id);\n+    const wallet = await supabase.wallet.getWallet(id);\n+    if (!access && !wallet) {\n+      body.push(`\\`\\`\\`\n+User information for ${username} was not found.\n+\\`\\`\\``);\n+    } else {\n+      body.push(`\n+| Property | Value |\n+|----------|-------|`);\n+      if (wallet) {\n+        body.push(`| Wallet | ${wallet.address} |`);\n+      }\n+      if (access) {\n+        body.push(`| Access | ${access.multiplier_reason} |`);",
+        "score": {
+          "reward": 3.9,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 85.87671052631579,
+            "syllables": 50,
+            "sentences": 4,
+            "score": 0.7412328947368421
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1614781222,
+        "content": "Remove type. It should be inferred by the protocol prefix (or lack thereof)",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1614781222",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,28 +1,47 @@\n-# `@ubiquity/ts-template`\n+# `@ubiquibot/command-query-user`\n \n-This template repository includes support for the following:\n+This package helps users querying their information, from they wallet address, label access control or current XP.\n \n-- TypeScript\n-- Environment Variables\n-- Conventional Commits\n-- Automatic deployment to Cloudflare Pages\n+## Usage\n \n-## Testing\n-\n-### Cypress\n+The following commands are allowed:\n \n-To test with Cypress Studio UI, run\n+```shell\n+/query @user\n+```\n \n+## Running locally\n+### Worker\n+Start the Worker by running\n ```shell\n-yarn cy:open\n+yarn dev\n ```\n \n-Otherwise to simply run the tests through the console, run\n+### Make requests\n+To trigger the worker, `POST` requests should be made to http://localhost:4000 with a `Content-Type: application/json`\n+header and a body looking like\n+```json\n+{\n+  \"stateId\": \"\",\n+  \"eventName\": \"\",\n+  \"eventPayload\": \"\",\n+  \"settings\": \"\",\n+  \"ref\": \"\"\n+}\n+```\n+For convenience, you can find an `.http` file with a valid request [here](/tests/http/request.http).\n \n-```shell\n-yarn cy:run\n+## Configuration\n+A valid configuration can be like:\n+\n+```yaml\n+- plugin: https://ubiquibot-command-query-user.ubq.fi\n+  type: github",
+        "score": {
+          "reward": 2.898,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 76.59134615384617,
+            "syllables": 19,
+            "sentences": 2,
+            "score": 0.8340865384615382
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1616420830,
+        "content": "We should standardize messaging through the kernel ideally, or at minimum via our SDK\nWe should adhere to the `ok`, `info`, `error`, `fatal` message classes with the coloring via the diff styling accordingly as I implemented in v1",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1616420830",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,70 @@\n+import { Context } from \"../types/context\";\n+\n+async function checkUserAccess(context: Context, username: string) {\n+  const { octokit, payload } = context;\n+  if (!payload.organization || !payload.comment.user?.name) {\n+    throw new Error(\"Missing Organization / User from payload, cannot check for organization membership.\");\n+  }\n+  const { status } = await octokit.orgs.checkMembershipForUser({\n+    username: payload.comment.user.name,\n+    org: payload.organization.login,\n+  });\n+  // @ts-expect-error Somehow typing seems wrong but according to\n+  // https://docs.github.com/en/rest/orgs/members?apiVersion=2022-11-28#check-organization-membership-for-a-user--status-codes\n+  // 204 means the user is part of the Organization\n+  if (status !== 204) {\n+    await octokit.issues.createComment({\n+      body: `\\`\\`\\`User ${username} cannot request another user as it is not member of the organization.\\`\\`\\``,",
+        "score": {
+          "reward": 6.75,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 34,
+            "wordValue": 0.1,
+            "result": 2.01
+          },
+          "readability": {
+            "fleschKincaid": 40.448529411764724,
+            "syllables": 53,
+            "sentences": 1,
+            "score": 0.8044852941176472
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1616421045,
+        "content": "Shouldn't the logger automatically post the comment? We should only use the logger then instead of octokit post comment.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1616421045",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,70 @@\n+import { Context } from \"../types/context\";\n+\n+async function checkUserAccess(context: Context, username: string) {\n+  const { octokit, payload } = context;\n+  if (!payload.organization || !payload.comment.user?.name) {\n+    throw new Error(\"Missing Organization / User from payload, cannot check for organization membership.\");\n+  }\n+  const { status } = await octokit.orgs.checkMembershipForUser({\n+    username: payload.comment.user.name,\n+    org: payload.organization.login,\n+  });\n+  // @ts-expect-error Somehow typing seems wrong but according to\n+  // https://docs.github.com/en/rest/orgs/members?apiVersion=2022-11-28#check-organization-membership-for-a-user--status-codes\n+  // 204 means the user is part of the Organization\n+  if (status !== 204) {\n+    await octokit.issues.createComment({\n+      body: `\\`\\`\\`User ${username} cannot request another user as it is not member of the organization.\\`\\`\\``,\n+      owner: payload.repository.owner.login,\n+      repo: payload.repository.name,\n+      issue_number: payload.issue.number,\n+    });\n+    return false;\n+  }\n+  return true;\n+}\n+\n+export async function queryUser(context: Context, username: string) {\n+  const {\n+    octokit,\n+    payload,\n+    adapters: { supabase },\n+    config,\n+  } = context;\n+  const body: string[] = [];\n+  try {\n+    const {\n+      data: { id },\n+    } = await octokit.users.getByUsername({\n+      username,\n+    });\n+    if (!config.allowPublicQuery && !(await checkUserAccess(context, username))) {\n+      return;\n+    }\n+    const access = await supabase.access.getAccess(id);\n+    const wallet = await supabase.wallet.getWallet(id);\n+    if (!access && !wallet) {\n+      body.push(`\\`\\`\\`\n+User information for ${username} was not found.\n+\\`\\`\\``);\n+    } else {\n+      body.push(`\n+| Property | Value |\n+|----------|-------|`);\n+      if (wallet) {\n+        body.push(`| Wallet | ${wallet.address} |`);\n+      }\n+      if (access) {\n+        body.push(`| Access | \\`\\`\\`${Array.isArray(access.labels) ? access.labels.join(\", \") : JSON.stringify(access.labels, null, 2)}\\`\\`\\` |`);\n+      }\n+    }\n+    await octokit.issues.createComment({\n+      body: body.join(\"\\n\"),\n+      owner: payload.repository.owner.login,\n+      repo: payload.repository.name,\n+      issue_number: payload.issue.number,\n+    });\n+  } catch (e) {\n+    await context.logger.fatal(`Could not query user ${username}.`, e);",
+        "score": {
+          "reward": 4.584,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 57.09500000000003,
+            "syllables": 33,
+            "sentences": 2,
+            "score": 0.9709500000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1616421184,
+        "content": "Should only be using our logger. Never console. How will this be debugged remotely?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1616421184",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,73 @@\n+import { createClient } from \"@supabase/supabase-js\";\n+import { CommanderError } from \"commander\";\n+import { Octokit } from \"@octokit/rest\";\n+import { createAdapters } from \"./adapters\";\n+import { CommandParser } from \"./handlers/command-parser\";\n+import { Context } from \"./types/context\";\n+import { Database } from \"./types/database\";\n+import { Env } from \"./types/env\";\n+import { PluginInputs } from \"./types/plugin-input\";\n+\n+export async function run(inputs: PluginInputs, env: Env) {\n+  if (inputs.eventName !== \"issue_comment.created\") {\n+    console.warn(`Unsupported event ${inputs.eventName}, skipping.`);",
+        "score": {
+          "reward": 4.05,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 57.06976190476192,
+            "syllables": 24,
+            "sentences": 3,
+            "score": 0.9706976190476192
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1616421420,
+        "content": "Not in spec but if you default to allow everybody to query then it's fine.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1616421420",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,21 @@\n+import { EmitterWebhookEvent as WebhookEvent, EmitterWebhookEventName as WebhookEventName } from \"@octokit/webhooks\";\n+import { SupportedEvents } from \"./context\";\n+import { StaticDecode, Type as T } from \"@sinclair/typebox\";\n+\n+export interface PluginInputs<T extends WebhookEventName = SupportedEvents> {\n+  stateId: string;\n+  eventName: T;\n+  eventPayload: WebhookEvent<T>[\"payload\"];\n+  settings: CommandQuerySettings;\n+  authToken: string;\n+  ref: string;\n+}\n+\n+export const commandQueryUserScheme = T.Object({\n+  /**\n+   * Allows any user to query anyone else. If false, only org members can query others.\n+   */\n+  allowPublicQuery: T.Boolean({ default: true }),",
+        "score": {
+          "reward": 2.916,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 68.9825,
+            "syllables": 23,
+            "sentences": 1,
+            "score": 0.910175
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1616422655,
+        "content": "There's an environment variable in the version one of the bots that sets what log level should be commented. For example, `info` logs don't necessarily have to be commented, but `fatal` and `error` yes",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1616422655",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,62 @@\n+import { Context } from \"../types/context\";\n+\n+export async function queryUser(context: Context, username: string) {\n+  const {\n+    octokit,\n+    payload,\n+    adapters: { supabase },\n+    config,\n+  } = context;\n+  const body: string[] = [];\n+  try {\n+    const {\n+      data: { id },\n+    } = await octokit.users.getByUsername({\n+      username,\n+    });\n+    if (!config.allowPublicQuery && payload.organization) {\n+      const { status } = await octokit.orgs.checkMembershipForUser({\n+        username,\n+        org: payload.organization.login,\n+      });\n+      // @ts-expect-error Somehow typing seems wrong but according to\n+      // https://docs.github.com/en/rest/orgs/members?apiVersion=2022-11-28#check-organization-membership-for-a-user--status-codes\n+      // 204 means the user is part of the Organization\n+      if (status !== 204) {\n+        body.push(`\\`\\`\\`User ${username} cannot request another user as it is not member of the organization.\\`\\`\\``);\n+        await octokit.issues.createComment({\n+          body: body.join(\"\\n\"),\n+          owner: payload.repository.owner.login,\n+          repo: payload.repository.name,\n+          issue_number: payload.issue.number,\n+        });\n+        return;\n+      }\n+    }\n+    const access = await supabase.access.getAccess(id);\n+    const wallet = await supabase.wallet.getWallet(id);\n+    if (!access && !wallet) {\n+      body.push(`\\`\\`\\`\n+User information for ${username} was not found.\n+\\`\\`\\``);\n+    } else {\n+      body.push(`\n+| Property | Value |\n+|----------|-------|`);\n+      if (wallet) {\n+        body.push(`| Wallet | ${wallet.address} |`);\n+      }\n+      if (access) {\n+        body.push(`| Access | ${access.multiplier_reason} |`);\n+      }\n+    }\n+    await octokit.issues.createComment({\n+      body: body.join(\"\\n\"),\n+      owner: payload.repository.owner.login,\n+      repo: payload.repository.name,\n+      issue_number: payload.issue.number,\n+    });\n+  } catch (e) {\n+    context.logger.error(\"Could not query user.\", e);",
+        "score": {
+          "reward": 5.313,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 67.03295454545456,
+            "syllables": 48,
+            "sentences": 2,
+            "score": 0.9296704545454544
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1616423007,
+        "content": "We don't really use `multiplier` anymore that's true but one of the first questions that powerhouse asked related to the capabilities of `multiplier` so I feel like we should not neglect this capability as it may find more use in other organizations",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1616423007",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,62 @@\n+import { Context } from \"../types/context\";\n+\n+export async function queryUser(context: Context, username: string) {\n+  const {\n+    octokit,\n+    payload,\n+    adapters: { supabase },\n+    config,\n+  } = context;\n+  const body: string[] = [];\n+  try {\n+    const {\n+      data: { id },\n+    } = await octokit.users.getByUsername({\n+      username,\n+    });\n+    if (!config.allowPublicQuery && payload.organization) {\n+      const { status } = await octokit.orgs.checkMembershipForUser({\n+        username,\n+        org: payload.organization.login,\n+      });\n+      // @ts-expect-error Somehow typing seems wrong but according to\n+      // https://docs.github.com/en/rest/orgs/members?apiVersion=2022-11-28#check-organization-membership-for-a-user--status-codes\n+      // 204 means the user is part of the Organization\n+      if (status !== 204) {\n+        body.push(`\\`\\`\\`User ${username} cannot request another user as it is not member of the organization.\\`\\`\\``);\n+        await octokit.issues.createComment({\n+          body: body.join(\"\\n\"),\n+          owner: payload.repository.owner.login,\n+          repo: payload.repository.name,\n+          issue_number: payload.issue.number,\n+        });\n+        return;\n+      }\n+    }\n+    const access = await supabase.access.getAccess(id);\n+    const wallet = await supabase.wallet.getWallet(id);\n+    if (!access && !wallet) {\n+      body.push(`\\`\\`\\`\n+User information for ${username} was not found.\n+\\`\\`\\``);\n+    } else {\n+      body.push(`\n+| Property | Value |\n+|----------|-------|`);\n+      if (wallet) {\n+        body.push(`| Wallet | ${wallet.address} |`);\n+      }\n+      if (access) {\n+        body.push(`| Access | ${access.multiplier_reason} |`);",
+        "score": {
+          "reward": 4.95,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 42,
+            "wordValue": 0.1,
+            "result": 2.23
+          },
+          "readability": {
+            "fleschKincaid": 37.30500000000002,
+            "syllables": 63,
+            "sentences": 1,
+            "score": 0.7730500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2079085205,
+            "effect": {
+              "addition": 820,
+              "deletion": 65
+            },
+            "reward": 26.55,
+            "priority": 3
+          },
+          {
+            "reviewId": 2081511609,
+            "effect": {
+              "addition": 1013,
+              "deletion": 46
+            },
+            "reward": 31.77,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 98.625 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>58.32</td></tr><tr><td>Review</td><td>Comment</td><td>9</td><td>40.305</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1\" target=\"_blank\" rel=\"noopener\">#1</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+820 -65</td><td>3</td><td>26.55</td></tr><tr><td>+1013 -46</td><td>3</td><td>31.77</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1614780480\" target=\"_blank\" rel=\"noopener\">The logger should automatically handle posting the comment as we&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.944</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1614780737\" target=\"_blank\" rel=\"noopener\">It's supposed to store a JSON object of key value pairs. We shou&hellip;</a></h6></td><td><details><summary>2.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.5</td><td>3</td><td>3.9</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1614781222\" target=\"_blank\" rel=\"noopener\">Remove type. It should be inferred by the protocol prefix (or la&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.898</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1616420830\" target=\"_blank\" rel=\"noopener\">We should standardize messaging through the kernel ideally, or a&hellip;</a></h6></td><td><details><summary>2.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 34&#13;  wordValue: 0.1&#13;  result: 2.01&#13;</pre></details></td><td>0.9</td><td>3</td><td>6.75</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1616421045\" target=\"_blank\" rel=\"noopener\">Shouldn't the logger automatically post the comment? We should o&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.584</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1616421184\" target=\"_blank\" rel=\"noopener\">Should only be using our logger. Never console. How will this be&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.9</td><td>3</td><td>4.05</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1616421420\" target=\"_blank\" rel=\"noopener\">Not in spec but if you default to allow everybody to query then &hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.6</td><td>3</td><td>2.916</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1616422655\" target=\"_blank\" rel=\"noopener\">There's an environment variable in the version one of the bots t&hellip;</a></h6></td><td><details><summary>1.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.7</td><td>3</td><td>5.313</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#discussion_r1616423007\" target=\"_blank\" rel=\"noopener\">We don't really use &#96;multiplier&#96; anymore that's true but&hellip;</a></h6></td><td><details><summary>2.23</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 42&#13;  wordValue: 0.1&#13;  result: 2.23&#13;</pre></details></td><td>0.6</td><td>3</td><td>4.95</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 11.304,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2128826034,
+        "content": "@gentlementlegen Help\r\nI'm trying to run this cloudflare worker but getting `SyntaxError: \"[object Object]\" is not valid JSON` error.\r\nI don't fully understand how [this](https://github.com/ubiquibot/command-query-user/blob/ceb9a68f5ea8fda6a9965cdfe5e1388c5df5b60f/src/worker.ts) file is supposed to work:\r\n1. [Here](https://github.com/ubiquibot/command-query-user/blob/ceb9a68f5ea8fda6a9965cdfe5e1388c5df5b60f/src/worker.ts#L19) we transform raw json to a js object\r\n2. [Here](https://github.com/ubiquibot/command-query-user/blob/ceb9a68f5ea8fda6a9965cdfe5e1388c5df5b60f/src/worker.ts#L20C99-L20C134) we're trying to parse a js object instead of raw text hence the error `SyntaxError: \"[object Object]\" is not valid JSON` is thrown\r\nWhat am I doing wrong?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#issuecomment-2128826034",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 11.304,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 57,
+            "wordValue": 0.1,
+            "result": 2.48
+          },
+          "readability": {
+            "fleschKincaid": 66.5917105263158,
+            "syllables": 75,
+            "sentences": 2,
+            "score": 0.934082894736842
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 11.304 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>1</td><td>11.304</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#issuecomment-2128826034\" target=\"_blank\" rel=\"noopener\">@gentlementlegen HelpI'm trying to run this cloudflare worker &hellip;</a></h6></td><td><details><summary>3.68</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.2&#13;regex:&#13;  wordCount: 57&#13;  wordValue: 0.1&#13;  result: 2.48&#13;</pre></details></td><td>0.8</td><td>3</td><td>11.304</td></tr></tbody></table></details>"
+  },
+  "gitcoindev": {
+    "total": 1.701,
+    "userId": 88761781,
+    "comments": [
+      {
+        "id": 2129021322,
+        "content": "I had a similar problem with understanding an another plugin. @gentlementlegen provided then an example. I believe that for each plugin we should have such an example (apart from tests), and a clear instruction on how to execute the example. @gentlementlegen I would be grateful if you added one here as well and added to `README.md` instruction how to execute it.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1#issuecomment-2129021322",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.701,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 60,
+            "wordValue": 0.1,
+            "result": 2.52
+          },
+          "readability": {
+            "fleschKincaid": 54.84000000000003,
+            "syllables": 97,
+            "sentences": 4,
+            "score": 0.9484000000000004
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/command-query/pull/1"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 1.701 XP ]</a>&nbsp;</h3><h6>@gitcoindev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>1</td><td>1.701</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-query/pull/1#issuecomment-2129021322\" target=\"_blank\" rel=\"noopener\">I had a similar problem with understanding an another plugin. @g&hellip;</a></h6></td><td><details><summary>2.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 60&#13;  wordValue: 0.1&#13;  result: 2.52&#13;</pre></details></td><td>0.7</td><td>3</td><td>1.701</td></tr></tbody></table></details>"
+  }
+}

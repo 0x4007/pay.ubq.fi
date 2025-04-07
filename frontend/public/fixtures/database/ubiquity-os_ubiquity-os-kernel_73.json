@@ -1,0 +1,819 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 103.08,
+    "task": {
+      "reward": 100,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2404375169,
+        "content": "We will have a `runs_on` item that will describe which events the plugin will be subscribed to, according to the following discussion.\r\nExpected format:\r\n- on the manifest side:\r\n```diff\r\n{\r\n  \"name\": \"query-user\",\r\n+ \"ubiquity:runsOn\": [ \"issues.opened\", \"issues.closed\" ]\r\n}\r\n```\r\n- on the configuration side: \r\n```diff\r\nplugins:\r\n- 'issues.opened':\r\n  - uses:\r\n     - plugin: org/query-user\r\n+      runsOn: [ 'issues.opened' ]\r\n```\r\nThe configuration takes over the manifest is present, otherwise the manifest is the default.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/73",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.08,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 45,
+            "wordValue": 0.1,
+            "result": 2.29
+          },
+          "readability": {
+            "fleschKincaid": 39.23750000000001,
+            "syllables": 77,
+            "sentences": 2,
+            "score": 0.7923750000000002
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 103.08 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>100</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.08</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/73\" target=\"_blank\" rel=\"noopener\">We will have a &#96;runs_on&#96; item that will describe which e&hellip;</a></h6></td><td><details><summary>2.49</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 45&#13;  wordValue: 0.1&#13;  result: 2.29&#13;</pre></details></td><td>1</td><td>1</td><td>3.08</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 12.131,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2224260739,
+        "content": "`runsOn` Camel case seems unexpected. What about snake case as I've seen in the manifest standard. \nOr better, consider a one word solution like subscribe, invoke, listener (reference to event listener)\nSome other interesting syntax:\n`\"plugin:addEventListener\": [ ... ]`\nAlso isn't `uses:` superfluous?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/73#issuecomment-2224260739",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.152,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 39,
+            "wordValue": 0.1,
+            "result": 2.15
+          },
+          "readability": {
+            "fleschKincaid": 43.963076923076954,
+            "syllables": 69,
+            "sentences": 3,
+            "score": 0.8396307692307695
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2247131332,
+        "content": "@gentlementlegen Review comments aren't taken into account",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/73#issuecomment-2247131332",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.435,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 8.365000000000009,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.4836500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1681987090,
+        "content": "I think the agreement was to clobber the webhook event's array using the repository config if it exists in the org config. It allows for repo config to overwrite org config event, on the webhook event level.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1681987090",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -39,11 +40,8 @@ async function getConfigurationFromRepo(context: GitHubContext, repository: stri\n  */\n function mergeConfigurations(configuration1: PluginConfiguration, configuration2: PluginConfiguration): PluginConfiguration {\n   const mergedConfiguration = { ...configuration1 };\n-  for (const key of Object.keys(configuration2.plugins)) {\n-    const pluginKey = key as keyof PluginConfiguration[\"plugins\"];\n-    if (configuration2.plugins[pluginKey]?.length) {\n-      mergedConfiguration.plugins[pluginKey] = configuration2.plugins[pluginKey];\n-    }\n+  if (configuration2.plugins?.length) {\n+    mergedConfiguration.plugins = configuration2.plugins;",
+        "score": {
+          "reward": 2.43,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 49.518421052631595,
+            "syllables": 62,
+            "sentences": 2,
+            "score": 0.8951842105263159
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1681989664,
+        "content": "More motivation to close this series A...",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1681989664",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,56 @@\n+import { GithubPlugin, isGithubPlugin, PluginConfiguration } from \"../types/plugin-configuration\";\n+import { EmitterWebhookEventName } from \"@octokit/webhooks\";\n+import { GitHubContext } from \"../github-context\";\n+import { Manifest } from \"../../types/manifest\";\n+import { Buffer } from \"node:buffer\";\n+\n+const _manifestCache: Record<string, Manifest> = {};",
+        "score": {
+          "reward": 0.088,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 66.7871428571429,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.9321285714285711
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1685093475,
+        "content": "I think they are read from the manifest of each plugin now",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1685093475",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -146,17 +146,13 @@ How to run a \"hello-world\" plugin the Cloudflare way:\n 2. Run `bun plugin:hello-world` to spin up a local server for the \"hello-world\" plugin\n 3. Update the bot's config file in the repository where you use the bot (`OWNER/REPOSITORY/.github/.ubiquibot-config.yml`):\n \n-```\n+```yml\n plugins:\n-  'issue_comment.created':\n-    - name: \"hello-world-plugin name\"\n-      description: \"hello-world-plugin description\"\n-      command: \"/hello\"\n-      example: \"/hello example\"\n-      skipBotEvents: true",
+        "score": {
+          "reward": 0.756,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 88.905,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.71095
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2232217774,
+        "content": "@gentlementlegen yes merge them.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#issuecomment-2232217774",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.27,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 33.57500000000002,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.7357500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2184430486,
+            "effect": {
+              "addition": 323,
+              "deletion": 204
+            },
+            "reward": 5.27,
+            "priority": 1
+          },
+          {
+            "reviewId": 2189489132,
+            "effect": {
+              "addition": 19,
+              "deletion": 54
+            },
+            "reward": 0.73,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 12.131 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>6</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>2.587</td></tr><tr><td>Review</td><td>Comment</td><td>4</td><td>3.544</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74\" target=\"_blank\" rel=\"noopener\">#74</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+323 -204</td><td>1</td><td>5.27</td></tr><tr><td>+19 -54</td><td>1</td><td>0.73</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/73#issuecomment-2224260739\" target=\"_blank\" rel=\"noopener\">&#96;runsOn&#96; Camel case seems unexpected. What about snake c&hellip;</a></h6></td><td><details><summary>2.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 39&#13;  wordValue: 0.1&#13;  result: 2.15&#13;</pre></details></td><td>0.8</td><td>1</td><td>2.152</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/73#issuecomment-2247131332\" target=\"_blank\" rel=\"noopener\">@gentlementlegen Review comments aren't taken into account</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.435</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1681987090\" target=\"_blank\" rel=\"noopener\">I think the agreement was to clobber the webhook event's array u&hellip;</a></h6></td><td><details><summary>2.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.9</td><td>1</td><td>2.43</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1681989664\" target=\"_blank\" rel=\"noopener\">More motivation to close this series A...</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.088</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1685093475\" target=\"_blank\" rel=\"noopener\">I think they are read from the manifest of each plugin now</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.756</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#issuecomment-2232217774\" target=\"_blank\" rel=\"noopener\">@gentlementlegen yes merge them.</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.27</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 16.923,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2195858476,
+        "content": "Works fine",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#pullrequestreview-2195858476",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.033,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 120.20500000000001,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1684499812,
+        "content": "@gentlementlegen Aren't `name, description, command, example` required properties?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1684499812",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -146,17 +146,13 @@ How to run a \"hello-world\" plugin the Cloudflare way:\n 2. Run `bun plugin:hello-world` to spin up a local server for the \"hello-world\" plugin\n 3. Update the bot's config file in the repository where you use the bot (`OWNER/REPOSITORY/.github/.ubiquibot-config.yml`):\n \n-```\n+```yml\n plugins:\n-  'issue_comment.created':\n-    - name: \"hello-world-plugin name\"\n-      description: \"hello-world-plugin description\"\n-      command: \"/hello\"\n-      example: \"/hello example\"\n-      skipBotEvents: true",
+        "score": {
+          "reward": 0.371,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": -18.19999999999996,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2233039597,
+        "content": "@gentlementlegen Check [this](https://github.com/rndquu-org/test-repo/blob/6658e8d35bd72a554d3363500dc012f9e99a2ed4/.github/.ubiquibot-config.yml) config.\r\nTrying to run the [hello world plugin](https://github.com/ubiquity/ubiquibot-kernel?tab=readme-ov-file#plugin-quick-start) and the kernel responds with `No handler found for event issue_comment` although the config does [have](https://github.com/rndquu-org/test-repo/blob/6658e8d35bd72a554d3363500dc012f9e99a2ed4/.github/.ubiquibot-config.yml#L3) the `runsOn` section. \r\nWhat am I doing wrong?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#issuecomment-2233039597",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.808,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 76.50452380952383,
+            "syllables": 40,
+            "sentences": 3,
+            "score": 0.8349547619047617
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2239398391,
+        "content": "@gentlementlegen Check [this](https://github.com/rndquu-org/test-repo/issues/67) issue, [this](https://github.com/rndquu-org/test-repo/blob/0c6038c92a93d682ea0d50c4ba67686c9bffacdc/.github/.ubiquibot-config.yml) config (from readme) and [this](https://github.com/rndquu-org/test-repo/issues/67#issuecomment-2239391525) comment. It seems that the \"hello-world\" plugin responds to [any comment](https://github.com/rndquu-org/test-repo/issues/67#issuecomment-2239391461) while the expected behavior is to respond only to the `/hello` command.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#issuecomment-2239398391",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.653,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 59.342045454545485,
+            "syllables": 51,
+            "sentences": 2,
+            "score": 0.9934204545454548
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2247059148,
+        "content": "If plugin doesn't serve manifest at all then what's going to happen? Perhaps we should create a new github issue for showing empty manifest related error and stopping plugin execution?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#issuecomment-2247059148",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.518,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 58.4075,
+            "syllables": 50,
+            "sentences": 2,
+            "score": 0.984075
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2188431406,
+            "effect": {
+              "addition": 336,
+              "deletion": 228
+            },
+            "reward": 5.64,
+            "priority": 1
+          },
+          {
+            "reviewId": 2195858476,
+            "effect": {
+              "addition": 54,
+              "deletion": 36
+            },
+            "reward": 0.9,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 16.923 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>6.54</td></tr><tr><td>Review</td><td>Comment</td><td>5</td><td>10.383</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74\" target=\"_blank\" rel=\"noopener\">#74</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+336 -228</td><td>1</td><td>5.64</td></tr><tr><td>+54 -36</td><td>1</td><td>0.9</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#pullrequestreview-2195858476\" target=\"_blank\" rel=\"noopener\">Works fine</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.033</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1684499812\" target=\"_blank\" rel=\"noopener\">@gentlementlegen Aren't &#96;name, description, command, example&hellip;</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.371</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#issuecomment-2233039597\" target=\"_blank\" rel=\"noopener\">@gentlementlegen Check [this](https://github.com/rndquu-org/test&hellip;</a></h6></td><td><details><summary>3.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.8</td><td>1</td><td>3.808</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#issuecomment-2239398391\" target=\"_blank\" rel=\"noopener\">@gentlementlegen Check [this](https://github.com/rndquu-org/test&hellip;</a></h6></td><td><details><summary>3.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.9</td><td>1</td><td>4.653</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#issuecomment-2247059148\" target=\"_blank\" rel=\"noopener\">If plugin doesn't serve manifest at all then what's going to hap&hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.6</td><td>1</td><td>1.518</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 19.543,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 1681515498,
+        "content": "actually now you can just iterate through plugins instead of event names",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1681515498",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -75,20 +73,28 @@ export async function getConfig(context: GitHubContext): Promise<PluginConfigura\n \n   checkPluginChains(mergedConfiguration);\n \n+  for (const plugin of mergedConfiguration.plugins) {\n+    if (plugin.uses.length && !plugin.uses[0].runsOn?.length) {\n+      const manifest = await getManifest(context, plugin.uses[0].plugin);\n+      if (manifest) {\n+        plugin.uses[0].runsOn = manifest[\"ubiquity:listeners\"] || [];\n+      }\n+    }\n+  }\n   return mergedConfiguration;\n }\n \n function checkPluginChains(config: PluginConfiguration) {\n   for (const eventName of eventNames) {\n-    const plugins = config.plugins[eventName];\n+    const plugins = getPluginsForEvent(config.plugins, eventName);",
+        "score": {
+          "reward": 1.08,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 60.70500000000001,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.9929499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1681542912,
+        "content": "so now the merge strategy is just to overwrite everything?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1681542912",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -39,11 +40,8 @@ async function getConfigurationFromRepo(context: GitHubContext, repository: stri\n  */\n function mergeConfigurations(configuration1: PluginConfiguration, configuration2: PluginConfiguration): PluginConfiguration {\n   const mergedConfiguration = { ...configuration1 };\n-  for (const key of Object.keys(configuration2.plugins)) {\n-    const pluginKey = key as keyof PluginConfiguration[\"plugins\"];\n-    if (configuration2.plugins[pluginKey]?.length) {\n-      mergedConfiguration.plugins[pluginKey] = configuration2.plugins[pluginKey];\n-    }\n+  if (configuration2.plugins?.length) {\n+    mergedConfiguration.plugins = configuration2.plugins;",
+        "score": {
+          "reward": 1.035,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 52.86500000000001,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0.9286500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1681544838,
+        "content": "```suggestion\r\n    runsOn: T.Array(emitterType, { default: [] }),\r\n```\r\n`T.Optional` is not needed if you set a default",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1681544838",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -46,11 +45,21 @@ function githubPluginType() {\n     });\n }\n \n+type IntoStringLiteralUnion<T> = { [K in keyof T]: T[K] extends string ? TLiteral<T[K]> : never };\n+\n+export function stringLiteralUnion<T extends string[]>(values: readonly [...T]): Union<IntoStringLiteralUnion<T>> {\n+  const literals = values.map((value) => T.Literal(value));\n+  return T.Union(literals as never);\n+}\n+\n+const emitterType = stringLiteralUnion(emitterEventNames);\n+\n const pluginChainSchema = T.Array(\n   T.Object({\n     id: T.Optional(T.String()),\n     plugin: githubPluginType(),\n     with: T.Record(T.String(), T.Unknown(), { default: {} }),\n+    runsOn: T.Optional(T.Array(emitterType, { default: [] })),",
+        "score": {
+          "reward": 0.891,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 103.54,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1681553309,
+        "content": "I think this won't be effective as we are running kernel as worker. \r\nActually [limit for KV](https://developers.cloudflare.com/kv/platform/limits/) if you have paid plan is unlimited and [paid plan](https://www.cloudflare.com/en-gb/plans/developer-platform/) is 5$ @0x4007",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1681553309",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,56 @@\n+import { GithubPlugin, isGithubPlugin, PluginConfiguration } from \"../types/plugin-configuration\";\n+import { EmitterWebhookEventName } from \"@octokit/webhooks\";\n+import { GitHubContext } from \"../github-context\";\n+import { Manifest } from \"../../types/manifest\";\n+import { Buffer } from \"node:buffer\";\n+\n+const _manifestCache: Record<string, Manifest> = {};",
+        "score": {
+          "reward": 3.409,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 79.21217741935487,
+            "syllables": 41,
+            "sentences": 2,
+            "score": 0.8078782258064513
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1681556710,
+        "content": "why is event name type here much more complicated than in the manifest schema? it's the same thing, isn't it?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1681556710",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -46,11 +45,21 @@ function githubPluginType() {\n     });\n }\n \n+type IntoStringLiteralUnion<T> = { [K in keyof T]: T[K] extends string ? TLiteral<T[K]> : never };\n+\n+export function stringLiteralUnion<T extends string[]>(values: readonly [...T]): Union<IntoStringLiteralUnion<T>> {\n+  const literals = values.map((value) => T.Literal(value));\n+  return T.Union(literals as never);\n+}\n+\n+const emitterType = stringLiteralUnion(emitterEventNames);",
+        "score": {
+          "reward": 1.624,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 87.99727272727276,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.7200272727272724
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1681604441,
+        "content": "why are there two `getContent` functions, one in `octokit.repos` and another in `octokit.rest.repos`?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1681604441",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -38,41 +48,46 @@ describe(\"Configuration tests\", () => {\n         },\n       } as unknown as GitHubContext<\"issues.closed\">[\"payload\"],\n       octokit: {",
+        "score": {
+          "reward": 0.77,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 86.70500000000001,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.7329499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1684078950,
+        "content": "that's my bad then. in #64 I changed [octokit plugin](https://github.com/ubiquity/ubiquibot-kernel/blob/development/src/github/github-client.ts) from `legacyRestEndpointMethods` to `restEndpointMethods` which uses only `rest`",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1684078950",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -38,41 +48,46 @@ describe(\"Configuration tests\", () => {\n         },\n       } as unknown as GitHubContext<\"issues.closed\">[\"payload\"],\n       octokit: {",
+        "score": {
+          "reward": 2.184,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 92.965,
+            "syllables": 20,
+            "sentences": 2,
+            "score": 0.67035
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1684092676,
+        "content": "in `manifest.ts` it's just `T.Union(emitterEventNames.map((o) => T.Literal(o)))`, can't it be used like this here too?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1684092676",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -46,11 +45,21 @@ function githubPluginType() {\n     });\n }\n \n+type IntoStringLiteralUnion<T> = { [K in keyof T]: T[K] extends string ? TLiteral<T[K]> : never };\n+\n+export function stringLiteralUnion<T extends string[]>(values: readonly [...T]): Union<IntoStringLiteralUnion<T>> {\n+  const literals = values.map((value) => T.Literal(value));\n+  return T.Union(literals as never);\n+}\n+\n+const emitterType = stringLiteralUnion(emitterEventNames);",
+        "score": {
+          "reward": 1.216,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 109.04000000000002,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1684464333,
+        "content": "yes, legacy way was using without `.rest`",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1684464333",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -38,41 +48,46 @@ describe(\"Configuration tests\", () => {\n         },\n       } as unknown as GitHubContext<\"issues.closed\">[\"payload\"],\n       octokit: {",
+        "score": {
+          "reward": 0.474,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 59.745000000000005,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.9974500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2183692142,
+            "effect": {
+              "addition": 323,
+              "deletion": 204
+            },
+            "reward": 5.27,
+            "priority": 1
+          },
+          {
+            "reviewId": 2191203407,
+            "effect": {
+              "addition": 71,
+              "deletion": 88
+            },
+            "reward": 1.59,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 19.543 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>6.86</td></tr><tr><td>Review</td><td>Comment</td><td>9</td><td>12.683</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74\" target=\"_blank\" rel=\"noopener\">#74</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+323 -204</td><td>1</td><td>5.27</td></tr><tr><td>+71 -88</td><td>1</td><td>1.59</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1681515498\" target=\"_blank\" rel=\"noopener\">actually now you can just iterate through plugins instead of eve&hellip;</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.08</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1681542912\" target=\"_blank\" rel=\"noopener\">so now the merge strategy is just to overwrite everything?</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.035</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1681544838\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionrunsOn: T.Array(emitterType, { de&hellip;</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.891</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1681553309\" target=\"_blank\" rel=\"noopener\">I think this won't be effective as we are running kernel as work&hellip;</a></h6></td><td><details><summary>3.92</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.7</td><td>1</td><td>3.409</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1681556710\" target=\"_blank\" rel=\"noopener\">why is event name type here much more complicated than in the ma&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.85</td><td>1</td><td>1.624</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1681604441\" target=\"_blank\" rel=\"noopener\">why are there two &#96;getContent&#96; functions, one in &#96;oc&hellip;</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.77</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1684078950\" target=\"_blank\" rel=\"noopener\">that's my bad then. in #64 I changed [octokit plugin](https://gi&hellip;</a></h6></td><td><details><summary>2.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.8</td><td>1</td><td>2.184</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1684092676\" target=\"_blank\" rel=\"noopener\">in &#96;manifest.ts&#96; it's just &#96;T.Union(emitterEventName&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.85</td><td>1</td><td>1.216</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/74#discussion_r1684464333\" target=\"_blank\" rel=\"noopener\">yes, legacy way was using without &#96;.rest&#96;</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.474</td></tr></tbody></table></details>"
+  }
+}

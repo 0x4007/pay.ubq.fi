@@ -1,0 +1,125 @@
+{
+  "0x4007": {
+    "total": 5.682,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1891138190,
+        "content": "@wannacfuture",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/909#issuecomment-1891138190",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": -132.57999999999996,
+            "syllables": 4,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 1894626568,
+        "content": "@wannacfuture \r\nhttps://github.com/ubiquibot/comment-incentives/actions/runs/7548284630/job/20550022286#step:5:1\r\nLooks like the qualitative analysis of comments is shaky. Please look into solutions:\r\n- [ ] https://github.com/ubiquibot/comment-incentives/issues/1\r\n- [ ] https://github.com/ubiquibot/conversation-rewards/issues/22",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/909#issuecomment-1894626568",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.152,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.2
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 38.31663636363638,
+            "syllables": 83,
+            "sentences": 5,
+            "score": 0.7831663636363637
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2058684491,
+        "content": "The bot needs to be able to gracefully handle a missing label (create it) instead of failing on a 404 so that we can set pricing. \r\nhttps://github.com/ubiquity/business-development/issues/67#issuecomment-1871375461\r\n```diff\r\n! action has an uncaught error\r\n```\r\n```json\r\n{\r\n  \"handlerType\": {\r\n    \"type\": \"post\",\r\n    \"actions\": [\r\n      null\r\n    ]\r\n  },\r\n  \"activeHandler\": \"onLabelChangeSetPricing\",\r\n  \"error\": {\r\n    \"name\": \"HttpError\",\r\n    \"status\": 404,\r\n    \"response\": {\r\n      \"url\": \"https://api.github.com/repos/ubiquity/business-development/labels/Price%3A%20800%20USD\",\r\n      \"status\": 404,\r\n      \"headers\": {\r\n        \"access-control-allow-origin\": \"*\",\r\n        \"access-control-expose-headers\": \"ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, Deprecation, Sunset\",\r\n        \"content-encoding\": \"gzip\",\r\n        \"content-security-policy\": \"default-src 'none'\",\r\n        \"content-type\": \"application/json; charset=utf-8\",\r\n        \"date\": \"Thu, 28 Dec 2023 17:46:11 GMT\",\r\n        \"referrer-policy\": \"origin-when-cross-origin, strict-origin-when-cross-origin\",\r\n        \"server\": \"GitHub.com\",\r\n        \"strict-transport-security\": \"max-age=31536000; includeSubdomains; preload\",\r\n        \"transfer-encoding\": \"chunked\",\r\n        \"vary\": \"Accept-Encoding, Accept, X-Requested-With\",\r\n        \"x-accepted-github-permissions\": \"issues=read; pull_requests=read\",\r\n        \"x-content-type-options\": \"nosniff\",\r\n        \"x-frame-options\": \"deny\",\r\n        \"x-github-api-version-selected\": \"2022-11-28\",\r\n        \"x-github-media-type\": \"github.v3; format=json\",\r\n        \"x-github-request-id\": \"B722:4657:1571747:2CD2988:658DB463\",\r\n        \"x-ratelimit-limit\": \"6650\",\r\n        \"x-ratelimit-remaining\": \"6601\",\r\n        \"x-ratelimit-reset\": \"1703789114\",\r\n        \"x-ratelimit-resource\": \"core\",\r\n        \"x-ratelimit-used\": \"49\",\r\n        \"x-xss-protection\": \"0\"\r\n      },\r\n      \"data\": {\r\n        \"message\": \"Not Found\",\r\n        \"documentation_url\": \"https://docs.github.com/rest/issues/labels#get-a-label\"\r\n      }\r\n    },\r\n    \"request\": {\r\n      \"method\": \"GET\",\r\n      \"url\": \"https://api.github.com/repos/ubiquity/business-development/labels/Price%3A%20800%20USD\",\r\n      \"headers\": {\r\n        \"accept\": \"application/vnd.github.v3+json\",\r\n        \"user-agent\": \"probot/12.3.3 octokit-core.js/3.6.0 Node.js/20.9.0 (linux; x64)\",\r\n        \"authorization\": \"token [REDACTED]\"\r\n      },\r\n      \"request\": {\r\n        \"retryCount\": 1\r\n      }\r\n    }\r\n  },\r\n  \"caller\": \"renderCatchAll\",\r\n  \"revision\": \"abf320c\"\r\n}\r\n```",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/909",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.53,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 56.005000000000024,
+            "syllables": 59,
+            "sentences": 3,
+            "score": 0.9600500000000003
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 5.682 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.53</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>2.152</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/909\" target=\"_blank\" rel=\"noopener\">The bot needs to be able to gracefully handle a missing label (c&hellip;</a></h6></td><td><details><summary>2.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>1</td><td>1</td><td>3.53</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/909#issuecomment-1891138190\" target=\"_blank\" rel=\"noopener\">@wannacfuture</a></h6></td><td><details><summary>0.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>0</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/909#issuecomment-1894626568\" target=\"_blank\" rel=\"noopener\">@wannacfuture https://github.com/ubiquibot/comment-incentives/&hellip;</a></h6></td><td><details><summary>4.36</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.2&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.1</td><td>4</td><td>2.152</td></tr></tbody></table></details>"
+  },
+  "wannacfuture": {
+    "total": 0,
+    "userId": 119157793
+  }
+}

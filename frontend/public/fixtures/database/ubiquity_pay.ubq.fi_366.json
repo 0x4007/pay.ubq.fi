@@ -1,0 +1,297 @@
+{
+  "EresDev": {
+    "userId": 11886219,
+    "total": 1214.376,
+    "task": {
+      "reward": 1200,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2565109666,
+        "content": "Estimated 2-3 days. I hope I have labeled time correctly.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/366#issuecomment-2565109666",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.452,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 78.19795454545455,
+            "syllables": 16,
+            "sentences": 2,
+            "score": 0.8180204545454545
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2762760181,
+        "content": "Some ideas that I hope will make the product more reliable, stable, easy to deploy and  configure. \n### Improvements\n- Add a way to test cards [in pull request](https://github.com/ubiquity/pay.ubq.fi/pull/365#issuecomment-2558355327). Currently 0$ permit will never give you a card to test in PR because no card is available at 0$.\n- reduce duplication. use non secret vars like treasury, reward token from .env vars and push them to cloudflare during deployment. Maybe even push secrets to cloudflare from github and keep all secrets in github. There should not be a need to add vars and secrets in cloudflare manually. I think this is how kernel works and this should too.\n- improve folder structure, move all configs to one `/configs` folder.\n- enforce yarn version in package.json (let's try this at least in this repository i think it will be helpful.)\n- add some text indicating reloadly sandbox if the page is using reloadly sandbox\n- add a way for developers to work on frontend only without worrying about or configuring much of the backend. I think this is possible by changing the base-url in frontend. \n- <s>ask for user's name on card minting, as it is required field in Reloadly docs, but somehow it still works without name. It will be a good idea to include it.</s> see [update] of this (https://github.com/ubiquity/pay.ubq.fi/issues/366#issuecomment-2589199798)\n- Do not ask user to change their rpc on metamask. Only ask user to change network if user is on the wrong network. If their rpc is down, just tell the user the rpc is down. Changing their RPC seems too invasive to me. Current code did this several times to me even though the official RPC was working fine.\n### Bugs\n- `undefined` error when wallet is connected, but not signed in. sometime it doesn't show up. more likely to show up on a new permit link.\n![image](https://github.com/user-attachments/assets/22192a0c-f1f7-4056-bfab-6bccfa181249)\n- this is not a unknown error but a more common error. should show limited info.\n![image](https://github.com/user-attachments/assets/f6fdd2d2-987d-4287-b070-52b6e2c5182a)",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/366",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 7.24,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "h3": {
+                "score": 1,
+                "elementCount": 2
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 10
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 5
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 319,
+            "wordValue": 0.1,
+            "result": 0.78
+          },
+          "readability": {
+            "fleschKincaid": 75.81954545454546,
+            "syllables": 466,
+            "sentences": 29,
+            "score": 0.8418045454545454
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2256999507,
+        "content": "Resolves #366\r\n### QA: Preview link: https://github.com/EresDevOrg/pay.ubq.fi-deploy-test/pull/1#issuecomment-2589839507\r\nThe preview link of the QA shows a 30$ permit link on preview deployment, which uses Reloadly sandbox. This should meet most of the UI changes required by issues specs. \r\n### QA: [Minted payment card](https://pay-ubq-fi-edd.pages.dev/?claim=W3sidHlwZSI6ImVyYzIwLXBlcm1pdCIsInBlcm1pdCI6eyJwZXJtaXR0ZWQiOnsidG9rZW4iOiIweEM2ZWQ0ZjUyMGY2QTRlNERDMjcyNzM1MDkyMzliN0Y4QTY4ZDIwNjgiLCJhbW91bnQiOiI2NTAwMDAwMDAwMDAwMDAwMDAwIn0sIm5vbmNlIjoiMjUwMTI5MTU1MzU1OTQzMjk3OTkxMjI3Mzc2OTg0MTc3MzE5MTE2NTI4MTk1Njc0ODgxMzcxMTEyNjc1MTI0NzkwODU5OTM5MTQ5OTciLCJkZWFkbGluZSI6IjExNTc5MjA4OTIzNzMxNjE5NTQyMzU3MDk4NTAwODY4NzkwNzg1MzI2OTk4NDY2NTY0MDU2NDAzOTQ1NzU4NDAwNzkxMzEyOTYzOTkzNSJ9LCJ0cmFuc2ZlckRldGFpbHMiOnsidG8iOiIweDFjODhCNTg4MDUxNjE4MWY0Yzk4MzkxZWIyMzkwYmIxMzE2MkEzYzciLCJyZXF1ZXN0ZWRBbW91bnQiOiI2NTAwMDAwMDAwMDAwMDAwMDAwIn0sIm93bmVyIjoiMHhiODY4OTA1RDQ2ODdCMzQ0OWI3NTU3YWVCMGFjNzM3YkIwYzAwZTFGIiwic2lnbmF0dXJlIjoiMHhiOGRlZDkyZDhlMWU1NDZjZGI0OWY2ZDM3M2I2YTQxODQyMTIxMDQ5M2U3NzNhZGFlZjNiNmUwY2EyNjFiMTYzNzg0M2NmOWZkNDhjMzhjMzFkZTJlYTkzOTAxZTI1MzJhYTllNjU1NzE3M2Q5YjdmNmFiY2E0Mjc3N2RlM2U5ZTFiIiwibmV0d29ya0lkIjoxMDB9LHsidHlwZSI6ImVyYzIwLXBlcm1pdCIsInBlcm1pdCI6eyJwZXJtaXR0ZWQiOnsidG9rZW4iOiIweEM2ZWQ0ZjUyMGY2QTRlNERDMjcyNzM1MDkyMzliN0Y4QTY4ZDIwNjgiLCJhbW91bnQiOiI2NTAwMDAwMDAwMDAwMDAwMDAwIn0sIm5vbmNlIjoiMjY0NTQ3NDU0MjMwNDc5NzgwNDM0Nzc3MzMwNTUwODg1ODU2MTM2MDczNDUyMzkzMzg4MjM3NTcwNjM1ODk1NzEzNTYwNjMzNjA3MjMiLCJkZWFkbGluZSI6IjExNTc5MjA4OTIzNzMxNjE5NTQyMzU3MDk4NTAwODY4NzkwNzg1MzI2OTk4NDY2NTY0MDU2NDAzOTQ1NzU4NDAwNzkxMzEyOTYzOTkzNSJ9LCJ0cmFuc2ZlckRldGFpbHMiOnsidG8iOiIweDFjODhCNTg4MDUxNjE4MWY0Yzk4MzkxZWIyMzkwYmIxMzE2MkEzYzciLCJyZXF1ZXN0ZWRBbW91bnQiOiI2NTAwMDAwMDAwMDAwMDAwMDAwIn0sIm93bmVyIjoiMHhiODY4OTA1RDQ2ODdCMzQ0OWI3NTU3YWVCMGFjNzM3YkIwYzAwZTFGIiwic2lnbmF0dXJlIjoiMHgyMWQ0ZjkyNjQ2YTNlMTdjZTcyNjI0MzAxYTZmNzFkMzEwYTg0NGRkYzc3ZTNmMjJiMWNmNTkyMTIxMTdiMDI4NGE2OWNiOWUxZjMyYjY1MzcxNGY5MWNlYmNlYzlkZDM5YTBkYzY4ZTMxMjg3ODRiZDE5NGIwNDZmZjc1NWY2NTFiIiwibmV0d29ya0lkIjoxMDB9LHsidHlwZSI6ImVyYzIwLXBlcm1pdCIsInBlcm1pdCI6eyJwZXJtaXR0ZWQiOnsidG9rZW4iOiIweEM2ZWQ0ZjUyMGY2QTRlNERDMjcyNzM1MDkyMzliN0Y4QTY4ZDIwNjgiLCJhbW91bnQiOiI2NTAwMDAwMDAwMDAwMDAwMDAwIn0sIm5vbmNlIjoiNzk4MDU2NDUzNzQwNjQ5OTk1MTg2ODE4MTg2ODI5MDY4MTk5NjY0NTI4MzY1NTEwMzk5MTE2MTgyMzYzMjQ0OTEyNTE4NjM5NDYwMDAiLCJkZWFkbGluZSI6IjExNTc5MjA4OTIzNzMxNjE5NTQyMzU3MDk4NTAwODY4NzkwNzg1MzI2OTk4NDY2NTY0MDU2NDAzOTQ1NzU4NDAwNzkxMzEyOTYzOTkzNSJ9LCJ0cmFuc2ZlckRldGFpbHMiOnsidG8iOiIweDFjODhCNTg4MDUxNjE4MWY0Yzk4MzkxZWIyMzkwYmIxMzE2MkEzYzciLCJyZXF1ZXN0ZWRBbW91bnQiOiI2NTAwMDAwMDAwMDAwMDAwMDAwIn0sIm93bmVyIjoiMHhiODY4OTA1RDQ2ODdCMzQ0OWI3NTU3YWVCMGFjNzM3YkIwYzAwZTFGIiwic2lnbmF0dXJlIjoiMHg4OTllZDA2OTNhMzY4ZGYzNmQ4MmI2Njc2ODdjMGQ0Njc1ZDQ0MTc0ZjVmMTcxYWEwNzRkODdkN2I0MDQ0MDY0M2EwYjZhZGNiMDFmNmExYWRjMTYwZjc5NWQ2NTY3YzVhNDQ0YTFhNGJhMTFlNWZiZTdmOGZhYzMwZGNlMDRmNDFjIiwibmV0d29ya0lkIjoxMDB9XQ==) \r\nto show minting is working smoothly after changes.\r\n### How to test?\r\nThe deliverable is a combination of multiple different issues. If you follow each issue, it should be easy to test using preview link or source code. \r\nSome parts of the issue specs are ignored by this PR because the specs seem useful but their implementation were causing more trouble than it was solving. They were:\r\nThe plan was to move all backend, frontend, and shared env vars to one file as they currently exists in .env, wrangler.toml, and shared/constants.ts. \r\nBut they are needed by different systems at different time. Moving them to .env was requiring another system to regenrate them at right time in the right system. So, this was skiped as current implementation is simpler.\r\nThere are many config files in the main directory of the repository. Moving them to /configs was interesting idea but some packages were causing hard to fix issues with this as they were expecting configs in the main directory. Plus, in the configs, there are paths to other files which were requiring more attention and debugging and paths were becoming odd. So, this was skipped.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/367",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 5.684,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 8
+              },
+              "h3": {
+                "score": 1,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 5
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 234,
+            "wordValue": 0.1,
+            "result": 1.4
+          },
+          "readability": {
+            "fleschKincaid": 70.42312384983438,
+            "syllables": 365,
+            "sentences": 22,
+            "score": 0.8957687615016562
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 1214.376 XP ]</a>&nbsp;</h3><h6>@EresDev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>1200</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>7.24</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.452</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>5.684</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/366\" target=\"_blank\" rel=\"noopener\">Some ideas that I hope will make the product more reliable, stab&hellip;</a></h6></td><td><details><summary>5.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    h3:&#13;      score: 1&#13;      elementCount: 2&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 10&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 5&#13;regex:&#13;  wordCount: 319&#13;  wordValue: 0.1&#13;  result: 0.78&#13;</pre></details></td><td>1</td><td>1</td><td>7.24</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/366#issuecomment-2565109666\" target=\"_blank\" rel=\"noopener\">Estimated 2-3 days. I hope I have labeled time correctly.</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.4</td><td>3</td><td>1.452</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/367\" target=\"_blank\" rel=\"noopener\">Resolves #366### QA: Preview link: https://github.com/EresDevO&hellip;</a></h6></td><td><details><summary>6.4</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 8&#13;    h3:&#13;      score: 1&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 5&#13;regex:&#13;  wordCount: 234&#13;  wordValue: 0.1&#13;  result: 1.4&#13;</pre></details></td><td>0.7</td><td>1</td><td>5.684</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 11.565,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2589009827,
+        "content": "Don't add more friction to card minting process. This should be passed in within the encoded permit from GitHub ideally",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/366#issuecomment-2589009827",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 5.157,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 75.32035714285716,
+            "syllables": 30,
+            "sentences": 2,
+            "score": 0.8467964285714283
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2589330153,
+        "content": "Seems like this will be hard to offer a reliable experience with reloadly. Maybe we should brand this feature as in beta.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/366#issuecomment-2589330153",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 4.704,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 76.46090909090911,
+            "syllables": 31,
+            "sentences": 2,
+            "score": 0.8353909090909089
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2597570721,
+        "content": "I added them to the organization secrets just in case we need elsewhere!",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/367#issuecomment-2597570721",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.704,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 63.486153846153854,
+            "syllables": 20,
+            "sentences": 1,
+            "score": 0.9651384615384615
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/367"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 11.565 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>2</td><td>9.861</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>1.704</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/366#issuecomment-2589009827\" target=\"_blank\" rel=\"noopener\">Don't add more friction to card minting process. This should be &hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.9</td><td>3</td><td>5.157</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/366#issuecomment-2589330153\" target=\"_blank\" rel=\"noopener\">Seems like this will be hard to offer a reliable experience with&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.704</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/367#issuecomment-2597570721\" target=\"_blank\" rel=\"noopener\">I added them to the organization secrets just in case we need el&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.4</td><td>3</td><td>1.704</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 12.969,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2558287942,
+        "content": "Works fine",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/367#pullrequestreview-2558287942",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.099,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 120.20500000000001,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2558287942,
+            "effect": {
+              "addition": 222,
+              "deletion": 207
+            },
+            "reward": 12.87,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/367"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 12.969 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>12.87</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>0.099</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/367\" target=\"_blank\" rel=\"noopener\">#367</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+222 -207</td><td>3</td><td>12.87</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/367#pullrequestreview-2558287942\" target=\"_blank\" rel=\"noopener\">Works fine</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.099</td></tr></tbody></table></details>"
+  }
+}

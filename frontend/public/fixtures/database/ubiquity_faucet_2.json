@@ -1,0 +1,573 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 25,
+    "task": {
+      "reward": 25,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 25 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>25</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 8.641,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1818943473,
+        "content": "I think it will be my responsibility by default to ensure that the database calls are all valid in the refactor. \nHowever this week I can't code much and have been thinking about delegating the task to refactor the database calls. \nWe are still waiting for one fairly major adjustment by @wannacfuture which delegates the long running compute of certain operations (like parsing comments and calculating the comment incentives) to a GitHub Actions runner. \nThat way the bot kernel runs quick operations within Netlify and delegates to GitHub Actions for slow running operations including all the AI related operations.  \nAfter that is complete, the last major step is refactoring the database calls (any takers?)",
+        "url": "https://github.com/ubiquity/faucet/issues/2#issuecomment-1818943473",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.52,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "br": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 115,
+            "wordValue": 0.1,
+            "result": 2.52
+          },
+          "readability": {
+            "fleschKincaid": 43.92865942028985,
+            "syllables": 195,
+            "sentences": 6,
+            "score": 0.8392865942028984
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1819848706,
+        "content": "It is complete. I recommend you set up a new database and then apply the schema backup: \nhttps://t.me/UbiquityDAO/29891/31504\nBe sure to work off of my latest commit on my fork, refer to Git Graph extension on vscode. \nI believe it is `feat/contributor-incentives-total-scoring`",
+        "url": "https://github.com/ubiquity/faucet/issues/2#issuecomment-1819848706",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 3.573,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 40,
+            "wordValue": 0.1,
+            "result": 2.18
+          },
+          "readability": {
+            "fleschKincaid": 77.45815217391308,
+            "syllables": 64,
+            "sentences": 4,
+            "score": 0.8254184782608692
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1498957696,
+        "content": "Yes",
+        "url": "https://github.com/ubiquity/faucet/pull/4#discussion_r1498957696",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -52,7 +52,7 @@ export default {\n     // Searching using github api might not return all users so I'm sticking to the db\n     // this can be worked around if they change their registered wallet address\n     // but it's inherently abuse-proof as to get a subsidy you must have a permit == need a contribution for 0.0003 eth/xdai\n-    const { data: permits } = await supabase.from(\"permits\").select(\"bounty_hunter_address\").eq(\"bounty_hunter_address\", ethAddress);\n+    const { data: permits } = await supabase.from(\"permits\").select(\"users(wallets(address))\").eq(\"users.wallets.address\", ethAddress);",
+        "score": {
+          "reward": 0.126,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": 121.22000000000003,
+            "syllables": 1,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1501683422,
+        "content": "```suggestion\r\n    const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_ANON_KEY);\r\n```\r\nWe changed the secrets org wide to indicate ANON_KEY",
+        "url": "https://github.com/ubiquity/faucet/pull/4#discussion_r1501683422",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -29,52 +33,89 @@ export default {\n \n     const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_KEY);",
+        "score": {
+          "reward": 0.972,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 66.10000000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.9389999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1957273116,
+        "content": "I have it on my personal Supabase for now but I will move it to the official account once things are stable.",
+        "url": "https://github.com/ubiquity/faucet/pull/4#issuecomment-1957273116",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.6,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 69.14136363636365,
+            "syllables": 30,
+            "sentences": 1,
+            "score": 0.9085863636363635
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1895390078,
+            "effect": {
+              "addition": 2,
+              "deletion": 2
+            },
+            "reward": 0.04,
+            "priority": 1
+          },
+          {
+            "reviewId": 1899555132,
+            "effect": {
+              "addition": 58,
+              "deletion": 13
+            },
+            "reward": 0.71,
+            "priority": 1
+          },
+          {
+            "reviewId": 1899634756,
+            "effect": {
+              "addition": 5,
+              "deletion": 5
+            },
+            "reward": 0.1,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/faucet/pull/4"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 8.641 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>0.85</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>6.093</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>1.698</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/faucet/pull/4\" target=\"_blank\" rel=\"noopener\">#4</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+2 -2</td><td>1</td><td>0.04</td></tr><tr><td>+58 -13</td><td>1</td><td>0.71</td></tr><tr><td>+5 -5</td><td>1</td><td>0.1</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/faucet/issues/2#issuecomment-1818943473\" target=\"_blank\" rel=\"noopener\">I think it will be my responsibility by default to ensure that t&hellip;</a></h6></td><td><details><summary>2.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    br:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 115&#13;  wordValue: 0.1&#13;  result: 2.52&#13;</pre></details></td><td>0.8</td><td>1</td><td>2.52</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/faucet/issues/2#issuecomment-1819848706\" target=\"_blank\" rel=\"noopener\">It is complete. I recommend you set up a new database and then a&hellip;</a></h6></td><td><details><summary>3.18</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 40&#13;  wordValue: 0.1&#13;  result: 2.18&#13;</pre></details></td><td>0.9</td><td>1</td><td>3.573</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/faucet/pull/4#discussion_r1498957696\" target=\"_blank\" rel=\"noopener\">Yes</a></h6></td><td><details><summary>0.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.126</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/faucet/pull/4#discussion_r1501683422\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionconst supabase = createClient(env&hellip;</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.972</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/faucet/pull/4#issuecomment-1957273116\" target=\"_blank\" rel=\"noopener\">I have it on my personal Supabase for now but I will move it to &hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.6</td></tr></tbody></table></details>"
+  },
+  "devpanther": {
+    "total": 0.36,
+    "userId": 42383942,
+    "comments": [
+      {
+        "id": 1819774735,
+        "content": "I'm up for it, the database schema update is still pending or has it been completed in-house?",
+        "url": "https://github.com/ubiquity/faucet/issues/2#issuecomment-1819774735",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.36,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 76.2342105263158,
+            "syllables": 25,
+            "sentences": 1,
+            "score": 0.8376578947368419
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/faucet/pull/4"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 0.36 XP ]</a>&nbsp;</h3><h6>@devpanther</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.36</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/faucet/issues/2#issuecomment-1819774735\" target=\"_blank\" rel=\"noopener\">I'm up for it, the database schema update is still pending or ha&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.36</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 15.599,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 1956825216,
+        "content": "As far as I remember this is a requirement for one of the cloudflare npm packages due to some bug. This is solely for build purposes since `\"aws-sdk\": \"link:stub\"` references an empty file. @Keyrxng might now better.",
+        "url": "https://github.com/ubiquity/faucet/issues/2#issuecomment-1956825216",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.257,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 74.13619047619049,
+            "syllables": 50,
+            "sentences": 3,
+            "score": 0.8586380952380951
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2001561535,
+        "content": "Depends on https://github.com/ubiquity/ubiquibot/pull/644\r\nThe https://github.com/ubiquity/ubiquibot/pull/644 PR introduces DB field updates. When https://github.com/ubiquity/ubiquibot/pull/644 is implemented we should make sure that the following conditions are not broken due to DB field renamins:\r\n- https://github.com/ubiquity/faucet/blob/0efe857822dde40d63913ceb379babf43f6960e9/src/index.ts#L46\r\n- https://github.com/ubiquity/faucet/blob/0efe857822dde40d63913ceb379babf43f6960e9/src/index.ts#L55",
+        "url": "https://github.com/ubiquity/faucet/issues/2",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 5.01,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 46.66055555555556,
+            "syllables": 126,
+            "sentences": 9,
+            "score": 0.8666055555555556
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1905576148,
+        "content": "Works fine",
+        "url": "https://github.com/ubiquity/faucet/pull/4#pullrequestreview-1905576148",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.033,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 120.20500000000001,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1497946749,
+        "content": "For any address this line returns:\r\n```\r\n[ { users: { wallets: null } } ]\r\n``` \r\nHence [here](https://github.com/ubiquity/faucet/pull/4/files#diff-a2a171449d862fe29692ce031981047d7ab755ae7f84c707aef80701b3ea0c80R58) error is shown all the time even if there are no permits for the provided address\r\nExpected behaviour:\r\n1. If there are no permits then allow the faucet to send a payment\r\n2. If there are permits for the provided address then throw an error",
+        "url": "https://github.com/ubiquity/faucet/pull/4#discussion_r1497946749",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -52,7 +52,7 @@ export default {\n     // Searching using github api might not return all users so I'm sticking to the db\n     // this can be worked around if they change their registered wallet address\n     // but it's inherently abuse-proof as to get a subsidy you must have a permit == need a contribution for 0.0003 eth/xdai\n-    const { data: permits } = await supabase.from(\"permits\").select(\"bounty_hunter_address\").eq(\"bounty_hunter_address\", ethAddress);\n+    const { data: permits } = await supabase.from(\"permits\").select(\"users(wallets(address))\").eq(\"users.wallets.address\", ethAddress);",
+        "score": {
+          "reward": 4.005,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 51,
+            "wordValue": 0.1,
+            "result": 2.4
+          },
+          "readability": {
+            "fleschKincaid": 38.9523529411765,
+            "syllables": 70,
+            "sentences": 1,
+            "score": 0.789523529411765
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1498921535,
+        "content": "The issue remains\r\nDo you have access to pavlovcik's supabase instance?\r\nThere is a single permit with id 1 for `beneficiary_id = 119157793` which has wallet address `0x9e4ef4353c928cd3eb473e8f12aecf58c208ef40`\r\nSo when I call the faucet for the `0x9e4ef4353c928cd3eb473e8f12aecf58c208ef40` address [this](https://github.com/ubiquity/faucet/pull/4/files#diff-a2a171449d862fe29692ce031981047d7ab755ae7f84c707aef80701b3ea0c80R83) error is expected but it is not caught right now since [permits](https://github.com/ubiquity/faucet/pull/4/files#diff-a2a171449d862fe29692ce031981047d7ab755ae7f84c707aef80701b3ea0c80R78) is `null` anyway",
+        "url": "https://github.com/ubiquity/faucet/pull/4#discussion_r1498921535",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -52,7 +52,7 @@ export default {\n     // Searching using github api might not return all users so I'm sticking to the db\n     // this can be worked around if they change their registered wallet address\n     // but it's inherently abuse-proof as to get a subsidy you must have a permit == need a contribution for 0.0003 eth/xdai\n-    const { data: permits } = await supabase.from(\"permits\").select(\"bounty_hunter_address\").eq(\"bounty_hunter_address\", ethAddress);\n+    const { data: permits } = await supabase.from(\"permits\").select(\"users(wallets(address))\").eq(\"users.wallets.address\", ethAddress);",
+        "score": {
+          "reward": 3.464,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 49,
+            "wordValue": 0.1,
+            "result": 2.37
+          },
+          "readability": {
+            "fleschKincaid": 64.56341836734696,
+            "syllables": 68,
+            "sentences": 2,
+            "score": 0.9543658163265305
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1957265477,
+        "content": "Questions:\r\n1. Where is the latest production DB located? I have access to the `UbiquiBot` project in my supabase account but the schema of the `ubiquibot-production` instance does not match the one introduced in this PR.\r\n2. @pavlovcik If the bot's production DB is located in a new place could you share access to rndquu@gmail.com ?",
+        "url": "https://github.com/ubiquity/faucet/pull/4#issuecomment-1957265477",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.98,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 54,
+            "wordValue": 0.1,
+            "result": 2.44
+          },
+          "readability": {
+            "fleschKincaid": 77.19916666666668,
+            "syllables": 74,
+            "sentences": 4,
+            "score": 0.8280083333333331
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1893881417,
+            "effect": {
+              "addition": 2,
+              "deletion": 2
+            },
+            "reward": 0.04,
+            "priority": 1
+          },
+          {
+            "reviewId": 1905576148,
+            "effect": {
+              "addition": 63,
+              "deletion": 18
+            },
+            "reward": 0.81,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/faucet/pull/4"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 15.599 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>0.85</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>5.01</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.257</td></tr><tr><td>Review</td><td>Comment</td><td>4</td><td>9.482</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/faucet/pull/4\" target=\"_blank\" rel=\"noopener\">#4</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+2 -2</td><td>1</td><td>0.04</td></tr><tr><td>+63 -18</td><td>1</td><td>0.81</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/faucet/issues/2\" target=\"_blank\" rel=\"noopener\">Depends on https://github.com/ubiquity/ubiquibot/pull/644The h&hellip;</a></h6></td><td><details><summary>3.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.2&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>1</td><td>1</td><td>5.01</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/faucet/issues/2#issuecomment-1956825216\" target=\"_blank\" rel=\"noopener\">As far as I remember this is a requirement for one of the cloudf&hellip;</a></h6></td><td><details><summary>2.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.257</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/faucet/pull/4#pullrequestreview-1905576148\" target=\"_blank\" rel=\"noopener\">Works fine</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.033</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/faucet/pull/4#discussion_r1497946749\" target=\"_blank\" rel=\"noopener\">For any address this line returns:&#96;&#96;&#96;[ { users: &hellip;</a></h6></td><td><details><summary>3.6</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.2&#13;regex:&#13;  wordCount: 51&#13;  wordValue: 0.1&#13;  result: 2.4&#13;</pre></details></td><td>0.9</td><td>1</td><td>4.005</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/faucet/pull/4#discussion_r1498921535\" target=\"_blank\" rel=\"noopener\">The issue remainsDo you have access to pavlovcik's supabase in&hellip;</a></h6></td><td><details><summary>3.37</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 49&#13;  wordValue: 0.1&#13;  result: 2.37&#13;</pre></details></td><td>0.8</td><td>1</td><td>3.464</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/faucet/pull/4#issuecomment-1957265477\" target=\"_blank\" rel=\"noopener\">Questions:1. Where is the latest production DB located? I have&hellip;</a></h6></td><td><details><summary>2.64</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 54&#13;  wordValue: 0.1&#13;  result: 2.44&#13;</pre></details></td><td>0.6</td><td>1</td><td>1.98</td></tr></tbody></table></details>"
+  },
+  "Keyrxng": {
+    "total": 0.084,
+    "userId": 106303466,
+    "comments": [
+      {
+        "id": 1956845140,
+        "content": "It's to do with the patch that gets applied to adjust axios and oz defender to run in Deno I'm sure if I remember correctly. It's those two packages anyway and I assumed it was for running in a Deno env but may be for another reason\r\nthe patch updates axios fetch and I forget off the top of my head what gets changed in defender it may be the same thing\r\nbut yeah there for build reasons, it's referenced in the pnpm.lock",
+        "url": "https://github.com/ubiquity/faucet/issues/2#issuecomment-1956845140",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.084,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 88,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 66.5048484848485,
+            "syllables": 115,
+            "sentences": 3,
+            "score": 0.9349515151515151
+          },
+          "multiplier": 0.25,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/faucet/pull/4"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 0.084 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.084</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/faucet/issues/2#issuecomment-1956845140\" target=\"_blank\" rel=\"noopener\">It's to do with the patch that gets applied to adjust axios and &hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 88&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.084</td></tr></tbody></table></details>"
+  }
+}

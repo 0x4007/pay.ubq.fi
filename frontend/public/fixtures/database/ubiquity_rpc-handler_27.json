@@ -1,0 +1,702 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 106.19,
+    "task": {
+      "reward": 100,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2354715787,
+        "content": "It needs:\r\n- An improved collection of network explorers covering all Permit2 deployments including testnets\r\n- An improved collection of network currencies (including potential alt variations to make it easier to add a custom network if the spelling does not match the user' spelling)\r\n- Either improve or remove `tokens` as it's likely unneeded because everything is gearing towards being dynamic for token and decimals\r\n- Any other constants that can be improved\r\n##### time: < 4 hour\r\n_original context https://github.com/ubiquity/pay.ubq.fi/pull/251#discussion_r1640957043_",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/27",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 6.19,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              },
+              "h5": {
+                "score": 1,
+                "elementCount": 1
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 2.4
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 74,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 38.477142857142866,
+            "syllables": 146,
+            "sentences": 4,
+            "score": 0.7847714285714287
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 106.19 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>100</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>6.19</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/27\" target=\"_blank\" rel=\"noopener\">It needs:- An improved collection of network explorers coverin&hellip;</a></h6></td><td><details><summary>5.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;    h5:&#13;      score: 1&#13;      elementCount: 1&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 2.4&#13;regex:&#13;  wordCount: 74&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>1</td><td>1</td><td>6.19</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 100,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1642100796,
+        "content": "Instead of ignoring the duplicate string rule, why don't you assign this to a variable and reuse?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1642100796",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,66 @@\n+import { appendFile, writeFile } from \"fs/promises\";\n+import { BlockExplorer, NativeToken } from \"../types/handler\";\n+import { generateChainData } from \"../lib/chainlist/utils/fetch\";\n+\n+/**\n+ * This produces dynamic types and constants for:\n+ * - CHAINS_IDS\n+ * - NETWORKS\n+ * - NETWORK_FAUCETS\n+ * - NETWORK_EXPLORERS\n+ * - NETWORK_CURRENCIES\n+ * - EXTRA_RPCS\n+ */\n+\n+async function createDynamicTypes() {\n+  const data = await generateChainData();\n+  const idToNetwork: Record<string, string> = {};\n+  const networkToId: Record<string, number> = {};\n+  const idToRpc: Record<string, string[]> = {};\n+  const idToFaucet: Record<string, string[]> = {};\n+  const idToExplorers = {} as Record<string, BlockExplorer[]>;\n+  const idToNativeCurrency: Record<string, NativeToken> = {};\n+  const extraRpcs: Record<string, string[]> = {};\n+\n+  for (const chain of data) {\n+    let { name, chainId, networkId, rpc, faucets, explorers, nativeCurrency } = chain;\n+    name = name.toLowerCase().replace(/\\s/g, \"-\");\n+    idToNetwork[chainId] = name;\n+    networkToId[name] = networkId;\n+    idToRpc[chainId] = rpc;\n+    idToFaucet[chainId] = faucets;\n+\n+    if (explorers && explorers.length > 0) {\n+      idToExplorers[chainId] = explorers;\n+    }\n+\n+    if (rpc && rpc.length > 0) {\n+      const rpcs = rpc.filter((rpc: { url: string }) => rpc.url);\n+      extraRpcs[chainId] = rpcs.map((rpc: { url: string }) => rpc.url);\n+    }\n+\n+    idToNativeCurrency[chainId] = nativeCurrency;\n+  }\n+\n+  // Clear the file\n+  await writeFile(\"types/dynamic.ts\", \"/* eslint-disable sonarjs/no-duplicate-string */\\n\\n\");",
+        "score": {
+          "reward": 1.253,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 61.665000000000006,
+            "syllables": 27,
+            "sentences": 1,
+            "score": 0.98335
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1642101495,
+        "content": "Not sure if this is a bad idea but I would experiment with removing await. It doesn't matter what order the exports are defined, so it could save time to append all async instead of waiting for each.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1642101495",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,66 @@\n+import { appendFile, writeFile } from \"fs/promises\";\n+import { BlockExplorer, NativeToken } from \"../types/handler\";\n+import { generateChainData } from \"../lib/chainlist/utils/fetch\";\n+\n+/**\n+ * This produces dynamic types and constants for:\n+ * - CHAINS_IDS\n+ * - NETWORKS\n+ * - NETWORK_FAUCETS\n+ * - NETWORK_EXPLORERS\n+ * - NETWORK_CURRENCIES\n+ * - EXTRA_RPCS\n+ */\n+\n+async function createDynamicTypes() {\n+  const data = await generateChainData();\n+  const idToNetwork: Record<string, string> = {};\n+  const networkToId: Record<string, number> = {};\n+  const idToRpc: Record<string, string[]> = {};\n+  const idToFaucet: Record<string, string[]> = {};\n+  const idToExplorers = {} as Record<string, BlockExplorer[]>;\n+  const idToNativeCurrency: Record<string, NativeToken> = {};\n+  const extraRpcs: Record<string, string[]> = {};\n+\n+  for (const chain of data) {\n+    let { name, chainId, networkId, rpc, faucets, explorers, nativeCurrency } = chain;\n+    name = name.toLowerCase().replace(/\\s/g, \"-\");\n+    idToNetwork[chainId] = name;\n+    networkToId[name] = networkId;\n+    idToRpc[chainId] = rpc;\n+    idToFaucet[chainId] = faucets;\n+\n+    if (explorers && explorers.length > 0) {\n+      idToExplorers[chainId] = explorers;\n+    }\n+\n+    if (rpc && rpc.length > 0) {\n+      const rpcs = rpc.filter((rpc: { url: string }) => rpc.url);\n+      extraRpcs[chainId] = rpcs.map((rpc: { url: string }) => rpc.url);\n+    }\n+\n+    idToNativeCurrency[chainId] = nativeCurrency;\n+  }\n+\n+  // Clear the file\n+  await writeFile(\"types/dynamic.ts\", \"/* eslint-disable sonarjs/no-duplicate-string */\\n\\n\");\n+\n+  await appendFile(\"types/dynamic.ts\", `\\nexport const CHAINS_IDS = ${JSON.stringify(idToNetwork, null, 2)} as const;\\n`);\n+  await appendFile(\"types/dynamic.ts\", `\\nexport const NETWORKS = ${JSON.stringify(networkToId, null, 2)} as const;\\n`);\n+  await appendFile(\"types/dynamic.ts\", `\\nexport const NETWORK_FAUCETS = ${JSON.stringify(idToFaucet, null, 2)};\\n`);\n+  await appendFile(\"types/dynamic.ts\", `\\nexport const NETWORK_EXPLORERS = ${JSON.stringify(idToExplorers, null, 2)};\\n`);\n+  await appendFile(\"types/dynamic.ts\", `\\nexport const NETWORK_CURRENCIES = ${JSON.stringify(idToNativeCurrency, null, 2)};\\n`);\n+  await appendFile(\"types/dynamic.ts\", `\\nexport const EXTRA_RPCS = ${JSON.stringify(extraRpcs, null, 2)};\\n`);",
+        "score": {
+          "reward": 2.184,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 39,
+            "wordValue": 0.1,
+            "result": 2.15
+          },
+          "readability": {
+            "fleschKincaid": 69.90403846153849,
+            "syllables": 54,
+            "sentences": 2,
+            "score": 0.9009596153846151
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1642103541,
+        "content": "You're building types twice?\nAlso consider using the run-s syntax because we include that tool in our template. \nFor example\n\"run-s clean:dist build:types build\"\nAnd each of those steps should be defined in other package.json scripts \nYou may be able to review our other repos for examples of using run-s from the npm-run-all dependency.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1642103541",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -22,8 +22,8 @@\n     \"knip-ci\": \"knip --no-exit-code --reporter json\",\n     \"prepare\": \"husky install\",\n     \"build:types\": \"tsc --emitDeclarationOnly --declaration --outDir dist && rm -rf dist/src\",\n-    \"build:tests\": \"tsx build/esbuild-build-tests.ts && tsc --emitDeclarationOnly --declaration --project tsconfig.tests.json\",\n-    \"build\": \"rm -rf dist && tsx build/esbuild-build.ts\",\n+    \"build:tests\": \"tsx build/types.ts && tsx build/esbuild-build-tests.ts && tsc --emitDeclarationOnly --declaration --project tsconfig.tests.json\",\n+    \"build\": \"rm -rf dist && tsx build/types.ts && tsx build/esbuild-build.ts \",\n     \"postbuild\": \"yarn build:types\",",
+        "score": {
+          "reward": 2.889,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 63,
+            "wordValue": 0.1,
+            "result": 2.55
+          },
+          "readability": {
+            "fleschKincaid": 74.02017857142857,
+            "syllables": 87,
+            "sentences": 4,
+            "score": 0.8597982142857142
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1642103863,
+        "content": "We generally refer to these as network id in our code because rollups aren't \"chains.\"",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1642103863",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,10 +1,10 @@\n-import { ValidBlockData } from \"../../types/handler\";\n+import { ChainId, ValidBlockData } from \"../../types/handler\";",
+        "score": {
+          "reward": 0.966,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 71.81500000000001,
+            "syllables": 24,
+            "sentences": 2,
+            "score": 0.8818499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1642104530,
+        "content": "Why do you change these to strings?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1642104530",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -22,17 +23,17 @@ export class RPCHandler implements HandlerInterface {\n   constructor(config: HandlerConstructorConfig) {\n     this._networkId = config.networkId;\n     this._networkRpcs = networkRpcs[this._networkId];\n-    this._networkName = networkNames[this._networkId];\n+    this._networkName = networkIds[this._networkId];\n     this._initialize(config);\n   }\n   public async getFastestRpcProvider(): Promise<JsonRpcProvider> {\n-    if (this._networkId === 31337) {\n-      this._provider = new JsonRpcProvider(LOCAL_HOST, this._networkId);\n+    if (this._networkId === \"31337\") {",
+        "score": {
+          "reward": 0.72,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 115.13000000000002,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1642104790,
+        "content": "Consider removing this unused code.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1642104790",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -29,9 +29,16 @@ import getRPCHandler, { HandlerConstructorConfig, RPCHandler } from \"../dist/\";\n \n   const latencies = handler.getLatencies();\n \n-  const provider = handler.getFastestRpcProvider();\n-\n-  console.log(provider);\n+  // console.log(\"=====================================\");\n+  // console.log(networkIds);\n+  // console.log(\"=====================================\");\n+  // console.log(networkNames);\n+  // console.log(\"=====================================\");\n+  // console.log(networkRpcs);\n+  // console.log(\"=====================================\");\n+  // console.log(networkCurrencies);\n+  // console.log(\"=====================================\");\n+  // console.log(networkExplorers);",
+        "score": {
+          "reward": 0.325,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 32.56000000000003,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.7256000000000004
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1642105371,
+        "content": "Seems strange to me that you defined them as strings and then coerce to numbers here.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1642105371",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -71,7 +71,7 @@ export class RPCHandler implements HandlerInterface {\n       throw new Error(\"Failed to find fastest RPC\");\n     }\n \n-    const provider = new JsonRpcProvider(fastestRpcUrl, this._networkId);\n+    const provider = new JsonRpcProvider(fastestRpcUrl, Number(this._networkId));",
+        "score": {
+          "reward": 1.216,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 95.42,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.6457999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1642498472,
+        "content": "That makes sense. In case coercing back to number via `Number()` becomes tedious, consider initalizing an empty array and then assigning the chain names to the appropriate indicies in the array. Then you can use numbers (array index) as your key.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1642498472",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -22,17 +23,17 @@ export class RPCHandler implements HandlerInterface {\n   constructor(config: HandlerConstructorConfig) {\n     this._networkId = config.networkId;\n     this._networkRpcs = networkRpcs[this._networkId];\n-    this._networkName = networkNames[this._networkId];\n+    this._networkName = networkIds[this._networkId];\n     this._initialize(config);\n   }\n   public async getFastestRpcProvider(): Promise<JsonRpcProvider> {\n-    if (this._networkId === 31337) {\n-      this._provider = new JsonRpcProvider(LOCAL_HOST, this._networkId);\n+    if (this._networkId === \"31337\") {",
+        "score": {
+          "reward": 1.981,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 40,
+            "wordValue": 0.1,
+            "result": 2.18
+          },
+          "readability": {
+            "fleschKincaid": 60.0566666666667,
+            "syllables": 63,
+            "sentences": 3,
+            "score": 0.999433333333333
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1645043280,
+        "content": "You should make the file name a variable.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1645043280",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -45,22 +45,10 @@ async function createDynamicTypes() {\n   // Clear the file\n   await writeFile(\"types/dynamic.ts\", \"/* eslint-disable sonarjs/no-duplicate-string */\\n\\n\");\n \n-  await appendFile(\"types/dynamic.ts\", `\\nexport const CHAINS_IDS = ${JSON.stringify(idToNetwork, null, 2)} as const;\\n`);\n-  await appendFile(\"types/dynamic.ts\", `\\nexport const NETWORKS = ${JSON.stringify(networkToId, null, 2)} as const;\\n`);\n-  await appendFile(\"types/dynamic.ts\", `\\nexport const NETWORK_FAUCETS = ${JSON.stringify(idToFaucet, null, 2)};\\n`);\n-  await appendFile(\"types/dynamic.ts\", `\\nexport const NETWORK_EXPLORERS = ${JSON.stringify(idToExplorers, null, 2)};\\n`);\n-  await appendFile(\"types/dynamic.ts\", `\\nexport const NETWORK_CURRENCIES = ${JSON.stringify(idToNativeCurrency, null, 2)};\\n`);\n-  await appendFile(\"types/dynamic.ts\", `\\nexport const EXTRA_RPCS = ${JSON.stringify(extraRpcs, null, 2)};\\n`);\n-}\n-\n-/**\n- * this is the same source that chainlist pulls it's data from\n- * but is has a lot more info that we'd benefit from such as explorers,\n- * faucets, rpcs etc.\n- *\n- * Writing this to a local file so that we can use it for improved static exports\n- */\n-\n-(async () => {\n-  await createDynamicTypes();\n-})().catch(console.error);\n+  appendFile(\"types/dynamic.ts\", `\\nexport const CHAINS_IDS = ${JSON.stringify(idToNetwork, null, 2)} as const;\\n`);\n+  appendFile(\"types/dynamic.ts\", `\\nexport const NETWORKS = ${JSON.stringify(networkToId, null, 2)} as const;\\n`);\n+  appendFile(\"types/dynamic.ts\", `\\nexport const NETWORK_FAUCETS = ${JSON.stringify(idToFaucet, null, 2)};\\n`);\n+  appendFile(\"types/dynamic.ts\", `\\nexport const NETWORK_EXPLORERS = ${JSON.stringify(idToExplorers, null, 2)};\\n`);\n+  appendFile(\"types/dynamic.ts\", `\\nexport const NETWORK_CURRENCIES = ${JSON.stringify(idToNativeCurrency, null, 2)};\\n`);\n+  appendFile(\"types/dynamic.ts\", `\\nexport const EXTRA_RPCS = ${JSON.stringify(extraRpcs, null, 2)};\\n`);",
+        "score": {
+          "reward": 0.564,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 82.39000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.7760999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1645043987,
+        "content": "```suggestion\r\ncreateDynamicTypes().then(main).catch(console.error);\r\n```\r\nUnusual syntax.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1645043987",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -69,18 +68,13 @@ async function buildIndex() {\n   console.log(\"Index build complete.\");\n }\n \n-function createEnvDefines(generatedAtBuild: Record<string, unknown>): Record<string, string> {\n-  const defines: Record<string, string> = {};\n-  Object.keys(generatedAtBuild).forEach((key) => {\n-    defines[key] = JSON.stringify(generatedAtBuild[key]);\n-  });\n-\n-  return defines;\n-}\n-\n function ensureDistDir() {\n   const distPath = path.resolve(__dirname, \"dist\");\n   if (!fs.existsSync(distPath)) {\n     fs.mkdirSync(distPath, { recursive: true });\n   }\n }\n+\n+createDynamicTypes().then(async () =>\n+  await main()\n+).catch(console.error);",
+        "score": {
+          "reward": 0.175,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": -6.694999999999993,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1645044359,
+        "content": "```suggestion\r\n    \"format\": \"run-p yarn:format:*\",\r\n```",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1645044359",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -14,19 +14,21 @@\n     \"node\": \">=20.10.0\"\n   },\n   \"scripts\": {\n-    \"format\": \"run-s format:lint format:prettier format:cspell\",\n+    \"format\": \"concurrently yarn:format:*\",",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1645044509,
+        "content": "We already have run-p for this.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1645044509",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -54,6 +56,7 @@\n     \"@types/node-fetch\": \"^2.6.11\",\n     \"@typescript-eslint/eslint-plugin\": \"^7.0.1\",\n     \"@typescript-eslint/parser\": \"^7.0.1\",\n+    \"concurrently\": \"^8.2.2\",",
+        "score": {
+          "reward": 0.498,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 90.95857142857145,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.6904142857142855
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1645047139,
+        "content": "I'm referring to the file name. \r\nColloquially the \"coin\" is the gas token. Everything else refers to erc20 compliant tokens. Cryptocurrency, colloquially refers to both \"coins\" and \"tokens\"\r\nAlthough I haven't heard anybody make a point about distinction since 2018.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1645047139",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,66 @@\n+import { appendFile, writeFile } from \"fs/promises\";\n+import { BlockExplorer, NativeToken } from \"../types/handler\";\n+import { generateChainData } from \"../lib/chainlist/utils/fetch\";\n+\n+/**\n+ * This produces dynamic types and constants for:\n+ * - CHAINS_IDS\n+ * - NETWORKS\n+ * - NETWORK_FAUCETS\n+ * - NETWORK_EXPLORERS\n+ * - NETWORK_CURRENCIES\n+ * - EXTRA_RPCS\n+ */\n+\n+async function createDynamicTypes() {\n+  const data = await generateChainData();\n+  const idToNetwork: Record<string, string> = {};\n+  const networkToId: Record<string, number> = {};\n+  const idToRpc: Record<string, string[]> = {};\n+  const idToFaucet: Record<string, string[]> = {};\n+  const idToExplorers = {} as Record<string, BlockExplorer[]>;\n+  const idToNativeCurrency: Record<string, NativeToken> = {};\n+  const extraRpcs: Record<string, string[]> = {};\n+\n+  for (const chain of data) {\n+    let { name, chainId, networkId, rpc, faucets, explorers, nativeCurrency } = chain;\n+    name = name.toLowerCase().replace(/\\s/g, \"-\");\n+    idToNetwork[chainId] = name;\n+    networkToId[name] = networkId;\n+    idToRpc[chainId] = rpc;\n+    idToFaucet[chainId] = faucets;\n+\n+    if (explorers && explorers.length > 0) {\n+      idToExplorers[chainId] = explorers;\n+    }\n+\n+    if (rpc && rpc.length > 0) {\n+      const rpcs = rpc.filter((rpc: { url: string }) => rpc.url);\n+      extraRpcs[chainId] = rpcs.map((rpc: { url: string }) => rpc.url);\n+    }\n+\n+    idToNativeCurrency[chainId] = nativeCurrency;\n+  }\n+\n+  // Clear the file\n+  await writeFile(\"types/dynamic.ts\", \"/* eslint-disable sonarjs/no-duplicate-string */\\n\\n\");",
+        "score": {
+          "reward": 1.124,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 42,
+            "wordValue": 0.1,
+            "result": 2.23
+          },
+          "readability": {
+            "fleschKincaid": 47.12035714285716,
+            "syllables": 74,
+            "sentences": 4,
+            "score": 0.8712035714285716
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2171744042,
+        "content": "What was the problem with injecting at build? Seems that the codebase was significantly smaller and more maintainable before. You did this to remove the one tsc ignore? \nI don't understand this but we shouldn't assume the decimals. Besides USDC/T use six and are very popular tokens to work with.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/28#issuecomment-2171744042",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.781,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 53,
+            "wordValue": 0.1,
+            "result": 2.43
+          },
+          "readability": {
+            "fleschKincaid": 69.9741132075472,
+            "syllables": 79,
+            "sentences": 5,
+            "score": 0.9002588679245279
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2172097217,
+        "content": "Okay your rationale makes sense. Just as long as we support the chains with permit2 regarding the 18 decimals it's fine. I'm assuming you're referring only to the native token of the networks.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/28#issuecomment-2172097217",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.792,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 67.75500000000001,
+            "syllables": 54,
+            "sentences": 3,
+            "score": 0.9224499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2121772084,
+            "effect": {
+              "addition": 26275,
+              "deletion": 168
+            },
+            "reward": 264.43,
+            "priority": 1
+          },
+          {
+            "reviewId": 2126475651,
+            "effect": {
+              "addition": 19742,
+              "deletion": 15554
+            },
+            "reward": 352.96,
+            "priority": 1
+          },
+          {
+            "reviewId": 2126482300,
+            "effect": {
+              "addition": 0,
+              "deletion": 0
+            },
+            "reward": 0,
+            "priority": 1
+          },
+          {
+            "reviewId": 2131587782,
+            "effect": {
+              "addition": 21481,
+              "deletion": 17292
+            },
+            "reward": 387.73,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/rpc-handler/pull/28"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 100 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>4</td><td>1005.12</td></tr><tr><td>Review</td><td>Comment</td><td>15</td><td>17.468</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/rpc-handler/pull/28\" target=\"_blank\" rel=\"noopener\">#28</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+26275 -168</td><td>1</td><td>264.43</td></tr><tr><td>+19742 -15554</td><td>1</td><td>352.96</td></tr><tr><td>+0 -0</td><td>1</td><td>0</td></tr><tr><td>+21481 -17292</td><td>1</td><td>387.73</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1642100796\" target=\"_blank\" rel=\"noopener\">Instead of ignoring the duplicate string rule, why don't you ass&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.253</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1642101495\" target=\"_blank\" rel=\"noopener\">Not sure if this is a bad idea but I would experiment with remov&hellip;</a></h6></td><td><details><summary>2.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 39&#13;  wordValue: 0.1&#13;  result: 2.15&#13;</pre></details></td><td>0.8</td><td>1</td><td>2.184</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1642103541\" target=\"_blank\" rel=\"noopener\">You're building types twice?Also consider using the run-s synta&hellip;</a></h6></td><td><details><summary>2.55</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 63&#13;  wordValue: 0.1&#13;  result: 2.55&#13;</pre></details></td><td>0.9</td><td>1</td><td>2.889</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1642103863\" target=\"_blank\" rel=\"noopener\">We generally refer to these as network id in our code because ro&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.966</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1642104530\" target=\"_blank\" rel=\"noopener\">Why do you change these to strings?</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.72</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1642104790\" target=\"_blank\" rel=\"noopener\">Consider removing this unused code.</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.325</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1642105371\" target=\"_blank\" rel=\"noopener\">Seems strange to me that you defined them as strings and then co&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.216</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1642498472\" target=\"_blank\" rel=\"noopener\">That makes sense. In case coercing back to number via &#96;Numbe&hellip;</a></h6></td><td><details><summary>2.18</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 40&#13;  wordValue: 0.1&#13;  result: 2.18&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.981</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1645043280\" target=\"_blank\" rel=\"noopener\">You should make the file name a variable.</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.564</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1645043987\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestioncreateDynamicTypes().then(main).catch&hellip;</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.175</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1645044359\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion\"format\": \"run-p yarn:format:*\",&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1645044509\" target=\"_blank\" rel=\"noopener\">We already have run-p for this.</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.498</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1645047139\" target=\"_blank\" rel=\"noopener\">I'm referring to the file name. Colloquially the \"coin\" is the&hellip;</a></h6></td><td><details><summary>2.23</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 42&#13;  wordValue: 0.1&#13;  result: 2.23&#13;</pre></details></td><td>0.4</td><td>1</td><td>1.124</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/28#issuecomment-2171744042\" target=\"_blank\" rel=\"noopener\">What was the problem with injecting at build? Seems that the cod&hellip;</a></h6></td><td><details><summary>2.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 53&#13;  wordValue: 0.1&#13;  result: 2.43&#13;</pre></details></td><td>0.9</td><td>1</td><td>2.781</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/28#issuecomment-2172097217\" target=\"_blank\" rel=\"noopener\">Okay your rationale makes sense. Just as long as we support the &hellip;</a></h6></td><td><details><summary>2.07</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.792</td></tr></tbody></table></details>"
+  },
+  "molecula451": {
+    "total": 100,
+    "userId": 41552663,
+    "comments": [
+      {
+        "id": 1645098517,
+        "content": "indeed",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1645098517",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -54,6 +56,7 @@\n     \"@types/node-fetch\": \"^2.6.11\",\n     \"@typescript-eslint/eslint-plugin\": \"^7.0.1\",\n     \"@typescript-eslint/parser\": \"^7.0.1\",\n+    \"concurrently\": \"^8.2.2\",",
+        "score": {
+          "reward": 0.004,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": 36.62000000000003,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 0.7662000000000003
+          },
+          "multiplier": 0.25,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1648031868,
+        "content": "why remove the return type ?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1648031868",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -111,11 +111,11 @@ export class RPCHandler implements HandlerInterface {\n     return this._runtimeRpcs;\n   }\n \n-  public getNetworkId(): number {\n+  public getNetworkId() {\n     return this._networkId;\n   }\n \n-  public getNetworkName(): string {\n+  public getNetworkName() {",
+        "score": {
+          "reward": 0.128,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 83.32000000000004,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 0.7667999999999996
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2126559729,
+            "effect": {
+              "addition": 30493,
+              "deletion": 198
+            },
+            "reward": 306.91,
+            "priority": 1
+          },
+          {
+            "reviewId": 2131186432,
+            "effect": {
+              "addition": 14689,
+              "deletion": 14688
+            },
+            "reward": 293.77,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/rpc-handler/pull/28"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 100 XP ]</a>&nbsp;</h3><h6>@molecula451</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>600.68</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>0.132</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/rpc-handler/pull/28\" target=\"_blank\" rel=\"noopener\">#28</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+30493 -198</td><td>1</td><td>306.91</td></tr><tr><td>+14689 -14688</td><td>1</td><td>293.77</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1645098517\" target=\"_blank\" rel=\"noopener\">indeed</a></h6></td><td><details><summary>0.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.004</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/28#discussion_r1648031868\" target=\"_blank\" rel=\"noopener\">why remove the return type ?</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.128</td></tr></tbody></table></details>"
+  }
+}

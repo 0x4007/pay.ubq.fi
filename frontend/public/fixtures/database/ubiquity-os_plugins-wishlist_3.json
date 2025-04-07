@@ -1,0 +1,2978 @@
+{
+  "EresDev": {
+    "userId": 11886219,
+    "total": 75,
+    "task": {
+      "reward": 75,
+      "multiplier": 0.5
+    },
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1"
+      },
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1"
+      },
+      {
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/70"
+      },
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/3"
+      },
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/4"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 75 XP ]</a>&nbsp;</h3><h6>@EresDev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>0.5</td><td>75</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "whilefoo": {
+    "userId": 139262667,
+    "total": 83.912,
+    "task": {
+      "reward": 75,
+      "multiplier": 0.5
+    },
+    "comments": [
+      {
+        "id": 2313791707,
+        "content": "Resolves https://github.com/ubiquity-os/plugins-wishlist/issues/3",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 0.58,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": 49.48000000000002,
+            "syllables": 18,
+            "sentences": 2,
+            "score": 0.8948000000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1944621643,
+        "content": "You're right, I'll use the new decryption method that checks the org/repo",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1944621643",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -0,0 +1 @@\n+GITHUB_PAT_ENCRYPTED: 4SjBaP65FdfrDM3Mt9c9IyNRDYL7LvvvBHs6WoM3tXRzQRDpHoh8_-x_TnT-5P8Im2QS1Ib-NCMAQo5KIRqp9atIT1zCXi1W-PLyKnnPZh0eMoI-q48HUQ",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 84.45000000000003,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.7554999999999997
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1948894978,
+        "content": "It should've spell checked markdown files because it's not listed in `ignorePaths`, if we use `files` instead of `ignorePaths` then you need to explicitly set all paths",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1948894978",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -1,93 +1,54 @@\n-# `@ubiquity-os/plugin-template`\n+# `@ubiquity-os/personal-agent`\n \n-## Prerequisites\n+The Personal Agent is a [UbiquityOS](https://github.com/apps/ubiquity-os) plugin designed to run actions in user's Github account. It is forked, configured, and hosted by a Github user. Any issue comment beginning with `@username` is forwarded to this plugin for processing. Find below a list features offered by the plugin:\n \n-- A good understanding of how the [kernel](https://github.com/ubiquity/ubiquibot-kernel) works and how to interact with it.\n-- A basic understanding of the Ubiquibot configuration and how to define your plugin's settings.\n+- `@username say hello`\n+  The plugin should respond with a `Hello, world!`.\n \n-## Getting Started\n+More features coming soon...\n \n-1. Create a new repository using this template.\n-2. Clone the repository to your local machine.\n-3. Install the dependencies preferably using `bun`.\n+Communication between [UbiquityOS](https://github.com/apps/ubiquity-os) and the [Personal Agent](https://github.com/ubiquity-os-marketplace/personal-agent) plugin is handled by [Personal Agent Bridge](https://github.com/ubiquity-os-marketplace/personal-agent-bridge).\n \n-## Creating a new plugin\n+## How to set up?\n \n-- If your plugin is to be used as a slash command which should have faster response times as opposed to longer running GitHub action tasks, you should use the `worker` type.\n+- Make sure the Personal Agent Bridge is also configured. You can read its [documentation](https://github.com/ubiquity-os-marketplace/personal-agent-bridge/blob/development/README.md).\n \n-1. Ensure you understand and have setup the [kernel](https://github.com/ubiquity/ubiquibot-kernel).\n-2. Update [compute.yml](./.github/workflows/compute.yml) with your plugin's name and update the `id`.\n-3. Update [context.ts](./src/types/context.ts) with the events that your plugin will fire on.\n-4. Update [manifest.json](./manifest.json) with a proper description of your plugin.\n-5. Update [plugin-input.ts](./src/types/plugin-input.ts) to match the `with:` settings in your org or repo level configuration.\n+- Fork this repository with exactly the same name `personal-agent` under your personal or your organization account.\n \n-- Your plugin config should look similar to this:\n+- Generate a Github clasic Personal Access Token PAT with access to repositories.",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 73.06807692307696,
+            "syllables": 33,
+            "sentences": 1,
+            "score": 0.8693192307692305
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1948913671,
+        "content": "it's automatically updated, it will be `development` once it merges",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1948913671",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -1,25 +1,11 @@\n {\n-  \"name\": \"ts-template\",\n-  \"description\": \"ts-template for UbiquityOS plugins.\",\n+  \"name\": \"Personal Agent\",\n+  \"description\": \"Personal agent processes commands from UbiquityOS in user's Github actions\",\n   \"ubiquity:listeners\": [\"issue_comment.created\"],\n-  \"commands\": {\n-    \"hello\": {\n-      \"ubiquity:example\": \"/hello argument\",\n-      \"description\": \"Hello command with an argument.\"\n-    }\n-  },\n   \"configuration\": {\n     \"default\": {},\n     \"type\": \"object\",\n-    \"properties\": {\n-      \"configurableResponse\": {\n-        \"default\": \"Hello, world!\",\n-        \"type\": \"string\"\n-      },\n-      \"customStringsUrl\": {\n-        \"type\": \"string\"\n-      }\n-    }\n+    \"properties\": {}\n   },\n-  \"homepage_url\": \"https://your-plugin-name-development.ubiquity.workers.dev\"\n+  \"homepage_url\": \"https://your-plugin-name-agent.ubiquity.workers.dev\"",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 61.32500000000002,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.9867499999999998
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1948914869,
+        "content": "The bridge doesn't have functionality to generate a signature, I'd have to copy a lot of code from the kernel to the bridge, but then it'd make more sense to just have this as part of the kernel like I suggested before.",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1948914869",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -13,6 +13,6 @@ export default createActionsPlugin<PluginSettings, Env, null, SupportedEvents>(\n     envSchema: envSchema,\n     ...(process.env.KERNEL_PUBLIC_KEY && { kernelPublicKey: process.env.KERNEL_PUBLIC_KEY }),\n     postCommentOnError: true,\n-    bypassSignatureVerification: process.env.NODE_ENV === \"local\",\n+    bypassSignatureVerification: true,",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 45,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 52.12000000000002,
+            "syllables": 58,
+            "sentences": 1,
+            "score": 0.9212000000000002
+          },
+          "multiplier": 0,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1948919564,
+        "content": "Technically this would be possible if user's personal-agent had the Ubiquity app installed, but the problem would be that the SDK creates an Octokit instance from the `authToken` received from the kernel/bridge, so if we didn't any token it would fail.\r\nWe could modify the SDK to look for env variable if `authToken` is empty or supply it when creating the plugin like\r\n```js\r\ncreateActionsPlugin(handler, { customToken: env.GITHUB_PAT })\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1948919564",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -0,0 +1 @@\n+GITHUB_PAT_ENCRYPTED: S6K1T2liquv_G9yS2GxGf20NSHMAVDmX7DDx9-hnjG9518z2TKiWuEZrJobREMFzbBPiCvS1R3peatoiyR6phdjVWmeFM4FNAFp6neO5iUu2kVFVU-r2XvXuFAj-rL8RKEF3XC6yInobjcai",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 65,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 52.804423076923115,
+            "syllables": 93,
+            "sentences": 2,
+            "score": 0.9280442307692311
+          },
+          "multiplier": 0,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1948921461,
+        "content": "The bridge only triggers the personal agent if it matches the owner but I can add the check in the personal agent if you think it's worth",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1948921461",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -23,16 +23,14 @@ on:\n \n jobs:\n   compute:\n-    name: \"plugin name\"\n+    name: \"Personal Agent\"\n     runs-on: ubuntu-latest\n     permissions: write-all\n     environment: ${{ github.ref == 'refs/heads/main' && 'main' || 'development' }}\n     env:\n       PLUGIN_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}\n       KERNEL_PUBLIC_KEY: ${{ secrets.KERNEL_PUBLIC_KEY }}\n       LOG_LEVEL: ${{ secrets.LOG_LEVEL || 'info' }}",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 66.62214285714289,
+            "syllables": 37,
+            "sentences": 1,
+            "score": 0.9337785714285711
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1957194644,
+        "content": "You're approving that we should move the bridge to the kernel?",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1957194644",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -13,6 +13,6 @@ export default createActionsPlugin<PluginSettings, Env, null, SupportedEvents>(\n     envSchema: envSchema,\n     ...(process.env.KERNEL_PUBLIC_KEY && { kernelPublicKey: process.env.KERNEL_PUBLIC_KEY }),\n     postCommentOnError: true,\n-    bypassSignatureVerification: process.env.NODE_ENV === \"local\",\n+    bypassSignatureVerification: true,",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 88.905,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.71095
+          },
+          "multiplier": 0,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1957299566,
+        "content": "Ah yes, we moved the `signPayload` to the SDK however I'd still need to copy the serialization function, but it seems counter-productive to duplicate code. I guess if we are starting to have plugins which call workflows on kernel's behalf we could also move that logic to the SDK.",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1957299566",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -13,6 +13,6 @@ export default createActionsPlugin<PluginSettings, Env, null, SupportedEvents>(\n     envSchema: envSchema,\n     ...(process.env.KERNEL_PUBLIC_KEY && { kernelPublicKey: process.env.KERNEL_PUBLIC_KEY }),\n     postCommentOnError: true,\n-    bypassSignatureVerification: process.env.NODE_ENV === \"local\",\n+    bypassSignatureVerification: true,",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 51,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 63.17602941176473,
+            "syllables": 71,
+            "sentences": 2,
+            "score": 0.9682397058823526
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2313807531,
+        "content": "Resolves https://github.com/ubiquity-os/plugins-wishlist/issues/3\r\nRelated PR: https://github.com/ubiquity-os-marketplace/personal-agent/pull/1\r\nQA: https://github.com/ubiquibot-whilefoo-testing/testing/issues/12\r\nBased on: https://github.com/EresDevOrg/personal-agent-bridge/pull/3\r\nWhat I changed:\r\n- uses new template\r\n- bridge passes the classic PAT tokens to the `personal-agent` via `authToken` which automatically gets picked up by the SDK so we don't need two tokens like before\r\n- some other small improvements\r\nOne caveat: the signature is just a dummy value and signature verification is disabled in `personal-agent` because the plugin would need `APP_ID` and `APP_PRIVATE_KEY` along with the whole kernel code just to generate a signature. In this case the security is not affected because Github permissions are still needed to trigger the workflow.",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 8.332,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 9
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 4
+              }
+            },
+            "result": 4.3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 92,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 48.603197674418624,
+            "syllables": 208,
+            "sentences": 6,
+            "score": 0.8860319767441862
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2634120159,
+        "content": "This seems wrong because they are imported, I'l add it to ignore list for now",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1#issuecomment-2634120159",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 90.13250000000001,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.6986749999999999
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2636807856,
+        "content": "Yes, technically you can target `ubiquity-os-marketplace/personal-agent-bridge@bridge` in the config and fork [personal-agent](https://github.com/ubiquity-os-marketplace/personal-agent/tree/agent) to your personal account, both repos need the Github app installed, and then you can trigger it with a mention",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1#issuecomment-2636807856",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 47.45500000000003,
+            "syllables": 48,
+            "sentences": 1,
+            "score": 0.8745500000000003
+          },
+          "multiplier": 0,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2639682921,
+        "content": "It seems the README doesn't specify that the file should be at `.github/personal-agent.config.yml`",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1#issuecomment-2639682921",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 89.51692307692309,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.704830769230769
+          },
+          "multiplier": 0,
+          "relevance": 0.85
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 83.912 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>0.5</td><td>75</td></tr><tr><td>Review</td><td>Comment</td><td>13</td><td>8.912</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1\" target=\"_blank\" rel=\"noopener\">Resolves https://github.com/ubiquity-os/plugins-wishlist/issues/3</a></h6></td><td><details><summary>1.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.58</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1944621643\" target=\"_blank\" rel=\"noopener\">You're right, I'll use the new decryption method that checks the&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1948894978\" target=\"_blank\" rel=\"noopener\">It should've spell checked markdown files because it's not liste&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1948913671\" target=\"_blank\" rel=\"noopener\">it's automatically updated, it will be &#96;development&#96; onc&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1948914869\" target=\"_blank\" rel=\"noopener\">The bridge doesn't have functionality to generate a signature, I&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 45&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1948919564\" target=\"_blank\" rel=\"noopener\">Technically this would be possible if user's personal-agent had &hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 65&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.85</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1948921461\" target=\"_blank\" rel=\"noopener\">The bridge only triggers the personal agent if it matches the ow&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1957194644\" target=\"_blank\" rel=\"noopener\">You're approving that we should move the bridge to the kernel?</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1957299566\" target=\"_blank\" rel=\"noopener\">Ah yes, we moved the &#96;signPayload&#96; to the SDK however I'&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 51&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1\" target=\"_blank\" rel=\"noopener\">Resolves https://github.com/ubiquity-os/plugins-wishlist/issues/&hellip;</a></h6></td><td><details><summary>6.93</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 9&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 4&#13;  result: 4.3&#13;regex:&#13;  wordCount: 92&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.95</td><td>1</td><td>8.332</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1#issuecomment-2634120159\" target=\"_blank\" rel=\"noopener\">This seems wrong because they are imported, I'l add it to ignore&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1#issuecomment-2636807856\" target=\"_blank\" rel=\"noopener\">Yes, technically you can target &#96;ubiquity-os-marketplace/per&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1#issuecomment-2639682921\" target=\"_blank\" rel=\"noopener\">It seems the README doesn't specify that the file should be at &&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.85</td><td>3</td><td>0</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 150,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2382648273,
+        "content": "@gentlementlegen how would this look from a plugin config standpoint? Perhaps we make a special adapter? For example, we attach an `issues_comment.created` plugin that will route the request to one's \"personal agent\"?",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2382648273",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 7.211,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 61.17708333333337,
+            "syllables": 51,
+            "sentences": 3,
+            "score": 0.9882291666666663
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2382835575,
+        "content": "I take that as a yes. Then we can make the only config option to be the host repository name. For example:\r\n```yml\r\n   - with:\r\n       name: ubiquity-os-agent\r\n```\r\nThen it will relay the payload to 0x4007/ubiquity-os-agent",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2382835575",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 7.125,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 72.61545454545457,
+            "syllables": 48,
+            "sentences": 3,
+            "score": 0.8738454545454544
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2386785358,
+        "content": "@sshivaditya2019 this is becoming recursive so I don't think its working correctly. It just keeps stacking more every time I create a new issue.",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2386785358",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 5.28,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 62.17150000000001,
+            "syllables": 39,
+            "sentences": 2,
+            "score": 0.978285
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2504011409,
+        "content": "2. The bridge makes sense. This was basically my suggestion [here](https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2382648273).",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2504011409",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 3.402,
+          "formatting": {
+            "content": {
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 1
+              }
+            },
+            "result": 0.1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 74.86000000000003,
+            "syllables": 15,
+            "sentences": 2,
+            "score": 0.8513999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2510616305,
+        "content": "Normally you're supposed to open a pull on your own repository and link it here so that we can keep track of progress. You should do that now to maintain your assignment.",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2510616305",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 5.229,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 74.72386363636366,
+            "syllables": 45,
+            "sentences": 2,
+            "score": 0.8527613636363633
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2513509400,
+        "content": "Actually it only works if you target the default branch, `development`",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2513509400",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.907,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 69.78500000000001,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.9021499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2519363349,
+        "content": "This is perfectly acceptable. \nIt must be configured to do so with the yml file so this shouldn't happen unintentionally \nWe have our built in encryption with the X25519 key so we can do the same if necessary.",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2519363349",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 7.533,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 39,
+            "wordValue": 0.1,
+            "result": 2.15
+          },
+          "readability": {
+            "fleschKincaid": 61.2271153846154,
+            "syllables": 58,
+            "sentences": 2,
+            "score": 0.9877288461538459
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2677237871,
+        "content": "@gentlementlegen disqualifier seems to repeat itself when there are multiple assignees.",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2677237871",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.344,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 11.088181818181852,
+            "syllables": 24,
+            "sentences": 1,
+            "score": 0.5108818181818185
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2704116287,
+        "content": "Somebody should go in and change all the Cautions to Warnings unless they are real errors bubbled up (like real thrown errors with internal problems)",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2704116287",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 3.315,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 59.636000000000024,
+            "syllables": 36,
+            "sentences": 1,
+            "score": 0.9963600000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2705183260,
+        "content": "I feel like we need a slash command to handle this edge case. I don't like the idea of even an admin (me) not being able to push this through.",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2705183260",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.784,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 90.12830645161293,
+            "syllables": 37,
+            "sentences": 2,
+            "score": 0.6987169354838707
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2705344945,
+        "content": "You can also \"link back\" or reference other issues to pollute their timelines as well and there's nothing the repository maintainers can do about removing those.",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2705344945",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 3.3,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 38.43000000000001,
+            "syllables": 45,
+            "sentences": 1,
+            "score": 0.7843000000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2705585992,
+        "content": "Hmm something tells me this task time was under estimated. \nWe should have a protocol for this that is trust minimized. \nThe labels are used as training data for the fine tuned model that will be automatically setting labels for us.",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2705585992",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 5.058,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 41,
+            "wordValue": 0.1,
+            "result": 2.2
+          },
+          "readability": {
+            "fleschKincaid": 67.09504065040652,
+            "syllables": 61,
+            "sentences": 3,
+            "score": 0.9290495934959349
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2708788887,
+        "content": "There isn't an incentive to lie. It's an interesting idea for collaborators only!",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2708788887",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.395,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 52.58250000000001,
+            "syllables": 26,
+            "sentences": 2,
+            "score": 0.9258250000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2710128222,
+        "content": "It can because we already see this happen with disqualifier. \nI think this makes sense, yes. \nAs a side note I expect that most pulls the bot might not have access to, like envision a new contributor. It's unlikely they installed the bot. \nBut it would look the best if we see the bot close everything out before distributing rewards.",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2710128222",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 3.816,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 61,
+            "wordValue": 0.1,
+            "result": 2.53
+          },
+          "readability": {
+            "fleschKincaid": 73.79298360655739,
+            "syllables": 87,
+            "sentences": 5,
+            "score": 0.8620701639344261
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2716050053,
+        "content": "I think if their fork is targeting our repository we don't own the pull and can't admin it.",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2716050053",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.683,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 72.32500000000003,
+            "syllables": 27,
+            "sentences": 1,
+            "score": 0.8767499999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2716056845,
+        "content": "For now you can post here how long this should have taken for reference.",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2716056845",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.26,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 89.89642857142859,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0.7010357142857141
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2719297294,
+        "content": "We definitely should increase focus on the conversation and far less on repository details @shiv810",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2719297294",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.752,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 28.05000000000001,
+            "syllables": 29,
+            "sentences": 1,
+            "score": 0.6805000000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2719447695,
+        "content": "@whilefoo could you help me make a personal agent that will rewrite and correct typos from mobile? I can possibly drop in a signature when writing from mobile like a line break at the end (the keyboard on iOS always covers the bottom lines of my draft)",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2719447695",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 7.701,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 47,
+            "wordValue": 0.1,
+            "result": 2.33
+          },
+          "readability": {
+            "fleschKincaid": 60.58250000000001,
+            "syllables": 68,
+            "sentences": 2,
+            "score": 0.9941749999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2720650728,
+        "content": "It only rewrites when I double line break at the end",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2720650728",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.832,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 87.99727272727276,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.7200272727272724
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2208105478,
+        "content": "# Task\r\n- This will be registered under `issues_comment.created`\r\n- This will look for username tags at the beginning of any comment, and relay everything to their self hosted plugin. \r\n- The rest of the magic happens within their own self hosted plugin so this should be a super simple plugin to build.\r\n### Config\r\nThe host repository name. For example:\r\n```yml\r\nplugins:\r\n  - uses:\r\n    - plugin: ubiquity-os-marketplace/ubiquity-os-agent\r\n      with:\r\n        target: ubiquity-os-agent\r\n```\r\nThen comments starting with `@0x4007` will relay the full `issues_comment.created` payload to `0x4007/ubiquity-os-agent`\r\n# Context\r\nThis one I'm very excited about. The vision here is that we can make custom user \"agents\" (i.e. plugins with LLMs) that are hosted by the user's GitHub (so they can modify it) and will automate actions for the user (with their PAT to authorize as them) with the full context of a particular repository/organization.  \r\n- We make a repository that power users are intended to fork, for example `@ubiquibot/personal-agent` -> `@pavlovcik/personal-agent`\r\n- A repository/organization configures personal agents command to be `/@<user's name>` `/@pavlovcik` maybe something like that. This should also support arguments, for example a sentence that can be parsed by an LLM `/@pavlovcik review my pull #123`\r\n   - This technically would allow other users to invoke other user's agents. We can easily see if the invoker is an \"authorized\" user by checking the event context, and hard coding authorized users (self) in the boilerplate plugin code. \r\n   - I wonder if it would be more useful if we just look for comments that start with a username tag instead, it might be more natural to set up automations for common questions/requests i.e. `@pavlovcik can i work on this issue?` then my agent, with my PAT, and my custom prompt saying what to do in this situation, would just automatically assign them and explain the `/start` command.\r\n- The kernel will invoke a request (and pass all parameters) to that user's plugin/agent (hosted at `@username/personal-agent` actions)\r\n- The user can grant access to their PAT from their agent, allowing the agent to act on behalf of the owner inheriting their permissions. \r\nThere are some ways we can make the template code which will be forked:\r\n1. simple starting point would be just template/boilerplate that doesn't do anything\r\n2. code makes a call to an LLM (we could even run a small model locally on the GitHub Action runner potentially in order to make dealing with credentials/API keys more hands off, at the tradeoff of it being dumber than ChatGPT etc but decentralization/free is cool)\r\n   1. this LLM has a big prompt in the template that explains the context (you're running in a github action runner and a user invoked you from this repo...) and its capabilities (we can provide some local functions from our SDK that it can invoke to perform specific tasks by using an authenticated octokit instance using the person's PAT. It also receives all of the context of the event invocation (which user called the function, what repository and organization is it coming in from? possibly even scraping all the linked issues and pull requests for more context)\r\n      2. If we can reliably get the LLM to write working code with Octokit (or just raw CURLs with the PAT) then we can have a context aware and english language input to any function a user can perform on GitHub (limited to the PAT permissions) which is quite interesting. \r\n      3. The user can \"fine-tune\" their LLM by adding extra details and preferences to their prompt in their forked code. I imagine that I would continue to add new sections as I see repetitive questions/queries.\r\n---\r\nAssuming that the org config enables support for personal agents, technically we can extend personal agent capabilities beyond GitHub. Generic telegram example: `@pavlovcik send me the credentials on Telegram @username` with the right code in my personal agent, the GitHub Action can send information to their Telegram. All invoked from the GitHub Action runner!\r\nThis could make plugin development a lot more exciting and rapid. If the team all works on their own agents, and tests them in production, we could extract useful bits from eachothers' and release \"official\" plugins which may normally have slower r&d cycles. \r\nIn the further future, our kernel can support webhooks coming in from other services (like Telegram) and invoke user agents which can be a very powerful architecture for platform composability. For example, a bot call (can be \"inline\" in a dm to someone as well) that will pass along the conversation context to our kernel, then to a user's personal agent (github action) back to kernel and then back to Telegram\r\n### Notes for @pavlovcik/personal-agent\r\n- I want to make use of the XP system (as an admin) to soft incentivize/disincentivize behaviors. \r\n   - Prompt follow ups: there are situations where I tag team members for input and they take days to reply. I think if they take longer than 24 hours to reply, I would want to dock XP, and include an automated follow up (perhaps even on Telegram dm!) High performing team members generally reply promptly. XP can be used as a heartbeat for how actively engaged the contributor is, and how well they are performing, which is important for performance evaluations regarding base pay. \r\n   - On the other end of the spectrum: unnecessary tags. If I make it clear to team members that I am around to help but more for emergencies, I would appreciate not being pinged on things unless its essential. Would be interesting to make a personal agent that will automatically reply (like an away message) explaining this, while also scrubbing out the tag from their message. Assuming it is during my awake/working hours, I would still receive a push notification on my device from the original tag. \r\n## Planned Capabilities\r\n### Comment rewrites:\r\nFrom my phone sometimes writing comments can be arduous with the custom vocabulary we use and the autocorrect. A simple agent that will save me from a lot of frustration is to edit my comments posted, and correct any typos when I post from my phone. \r\n### Review and follow up:\r\nSometimes a pull request will be 99% of the way there. It will be something like \"just make sure CI passes\" or \"fix merge conflicts\" \r\nIdeally the personal agent should monitor pulls that I approved and are still opened. If I said something like this, and if those conditions are met, it should merge the pull. \r\n- Example: https://github.com/ubiquity-os/plugin-template/pull/23#issuecomment-2391416311",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 12.47,
+          "formatting": {
+            "content": {
+              "h1": {
+                "score": 1,
+                "elementCount": 2
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 18
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 27
+              },
+              "h3": {
+                "score": 1,
+                "elementCount": 4
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "h2": {
+                "score": 1,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 9.8
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 1034,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 50.835378787878824,
+            "syllables": 1615,
+            "sentences": 42,
+            "score": 0.9083537878787883
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1944133156,
+        "content": "If we use the same strategy as our evm private key, the decryption method checks the encoded organization or repository id inside of this string and only honors it if it matches. \nSo the source decrypted string may look something like\n```\nmy_pat_token:organization_id:repository_id\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1944133156",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1 @@\n+GITHUB_PAT_ENCRYPTED: 4SjBaP65FdfrDM3Mt9c9IyNRDYL7LvvvBHs6WoM3tXRzQRDpHoh8_-x_TnT-5P8Im2QS1Ib-NCMAQo5KIRqp9atIT1zCXi1W-PLyKnnPZh0eMoI-q48HUQ",
+        "score": {
+          "reward": 7.695,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 41,
+            "wordValue": 0.1,
+            "result": 2.2
+          },
+          "readability": {
+            "fleschKincaid": 58.09579268292684,
+            "syllables": 62,
+            "sentences": 2,
+            "score": 0.9809579268292684
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1944133767,
+        "content": "CSpell should have caught this. Are your pre commit hooks running?",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1944133767",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,93 +1,54 @@\n-# `@ubiquity-os/plugin-template`\n+# `@ubiquity-os/personal-agent`\n \n-## Prerequisites\n+The Personal Agent is a [UbiquityOS](https://github.com/apps/ubiquity-os) plugin designed to run actions in user's Github account. It is forked, configured, and hosted by a Github user. Any issue comment beginning with `@username` is forwarded to this plugin for processing. Find below a list features offered by the plugin:\n \n-- A good understanding of how the [kernel](https://github.com/ubiquity/ubiquibot-kernel) works and how to interact with it.\n-- A basic understanding of the Ubiquibot configuration and how to define your plugin's settings.\n+- `@username say hello`\n+  The plugin should respond with a `Hello, world!`.\n \n-## Getting Started\n+More features coming soon...\n \n-1. Create a new repository using this template.\n-2. Clone the repository to your local machine.\n-3. Install the dependencies preferably using `bun`.\n+Communication between [UbiquityOS](https://github.com/apps/ubiquity-os) and the [Personal Agent](https://github.com/ubiquity-os-marketplace/personal-agent) plugin is handled by [Personal Agent Bridge](https://github.com/ubiquity-os-marketplace/personal-agent-bridge).\n \n-## Creating a new plugin\n+## How to set up?\n \n-- If your plugin is to be used as a slash command which should have faster response times as opposed to longer running GitHub action tasks, you should use the `worker` type.\n+- Make sure the Personal Agent Bridge is also configured. You can read its [documentation](https://github.com/ubiquity-os-marketplace/personal-agent-bridge/blob/development/README.md).\n \n-1. Ensure you understand and have setup the [kernel](https://github.com/ubiquity/ubiquibot-kernel).\n-2. Update [compute.yml](./.github/workflows/compute.yml) with your plugin's name and update the `id`.\n-3. Update [context.ts](./src/types/context.ts) with the events that your plugin will fire on.\n-4. Update [manifest.json](./manifest.json) with a proper description of your plugin.\n-5. Update [plugin-input.ts](./src/types/plugin-input.ts) to match the `with:` settings in your org or repo level configuration.\n+- Fork this repository with exactly the same name `personal-agent` under your personal or your organization account.\n \n-- Your plugin config should look similar to this:\n+- Generate a Github clasic Personal Access Token PAT with access to repositories.",
+        "score": {
+          "reward": 2.268,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 101.27068181818181,
+            "syllables": 13,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1944533527,
+        "content": "Perhaps we should add markdown files as well!",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1944533527",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,93 +1,54 @@\n-# `@ubiquity-os/plugin-template`\n+# `@ubiquity-os/personal-agent`\n \n-## Prerequisites\n+The Personal Agent is a [UbiquityOS](https://github.com/apps/ubiquity-os) plugin designed to run actions in user's Github account. It is forked, configured, and hosted by a Github user. Any issue comment beginning with `@username` is forwarded to this plugin for processing. Find below a list features offered by the plugin:\n \n-- A good understanding of how the [kernel](https://github.com/ubiquity/ubiquibot-kernel) works and how to interact with it.\n-- A basic understanding of the Ubiquibot configuration and how to define your plugin's settings.\n+- `@username say hello`\n+  The plugin should respond with a `Hello, world!`.\n \n-## Getting Started\n+More features coming soon...\n \n-1. Create a new repository using this template.\n-2. Clone the repository to your local machine.\n-3. Install the dependencies preferably using `bun`.\n+Communication between [UbiquityOS](https://github.com/apps/ubiquity-os) and the [Personal Agent](https://github.com/ubiquity-os-marketplace/personal-agent) plugin is handled by [Personal Agent Bridge](https://github.com/ubiquity-os-marketplace/personal-agent-bridge).\n \n-## Creating a new plugin\n+## How to set up?\n \n-- If your plugin is to be used as a slash command which should have faster response times as opposed to longer running GitHub action tasks, you should use the `worker` type.\n+- Make sure the Personal Agent Bridge is also configured. You can read its [documentation](https://github.com/ubiquity-os-marketplace/personal-agent-bridge/blob/development/README.md).\n \n-1. Ensure you understand and have setup the [kernel](https://github.com/ubiquity/ubiquibot-kernel).\n-2. Update [compute.yml](./.github/workflows/compute.yml) with your plugin's name and update the `id`.\n-3. Update [context.ts](./src/types/context.ts) with the events that your plugin will fire on.\n-4. Update [manifest.json](./manifest.json) with a proper description of your plugin.\n-5. Update [plugin-input.ts](./src/types/plugin-input.ts) to match the `with:` settings in your org or repo level configuration.\n+- Fork this repository with exactly the same name `personal-agent` under your personal or your organization account.\n \n-- Your plugin config should look similar to this:\n+- Generate a Github clasic Personal Access Token PAT with access to repositories.",
+        "score": {
+          "reward": 0.846,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 82.39000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.7760999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1948898760,
+        "content": "Hey actually this should just be in the repository secrets. No need for a new config file or encryption @whilefoo",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1948898760",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1 @@\n+GITHUB_PAT_ENCRYPTED: S6K1T2liquv_G9yS2GxGf20NSHMAVDmX7DDx9-hnjG9518z2TKiWuEZrJobREMFzbBPiCvS1R3peatoiyR6phdjVWmeFM4FNAFp6neO5iUu2kVFVU-r2XvXuFAj-rL8RKEF3XC6yInobjcai",
+        "score": {
+          "reward": 5.157,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 57.09500000000003,
+            "syllables": 33,
+            "sentences": 2,
+            "score": 0.9709500000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1948901545,
+        "content": "Why not leave as `development`",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1948901545",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,25 +1,11 @@\n {\n-  \"name\": \"ts-template\",\n-  \"description\": \"ts-template for UbiquityOS plugins.\",\n+  \"name\": \"Personal Agent\",\n+  \"description\": \"Personal agent processes commands from UbiquityOS in user's Github actions\",\n   \"ubiquity:listeners\": [\"issue_comment.created\"],\n-  \"commands\": {\n-    \"hello\": {\n-      \"ubiquity:example\": \"/hello argument\",\n-      \"description\": \"Hello command with an argument.\"\n-    }\n-  },\n   \"configuration\": {\n     \"default\": {},\n     \"type\": \"object\",\n-    \"properties\": {\n-      \"configurableResponse\": {\n-        \"default\": \"Hello, world!\",\n-        \"type\": \"string\"\n-      },\n-      \"customStringsUrl\": {\n-        \"type\": \"string\"\n-      }\n-    }\n+    \"properties\": {}\n   },\n-  \"homepage_url\": \"https://your-plugin-name-development.ubiquity.workers.dev\"\n+  \"homepage_url\": \"https://your-plugin-name-agent.ubiquity.workers.dev\"",
+        "score": {
+          "reward": 1.197,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 118.17500000000001,
+            "syllables": 4,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1948901866,
+        "content": "Why true?",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1948901866",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -13,6 +13,6 @@ export default createActionsPlugin<PluginSettings, Env, null, SupportedEvents>(\n     envSchema: envSchema,\n     ...(process.env.KERNEL_PUBLIC_KEY && { kernelPublicKey: process.env.KERNEL_PUBLIC_KEY }),\n     postCommentOnError: true,\n-    bypassSignatureVerification: process.env.NODE_ENV === \"local\",\n+    bypassSignatureVerification: true,",
+        "score": {
+          "reward": 0.792,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 120.20500000000001,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1948902862,
+        "content": "I think there is a way to dynamically check the owner of the repository so that we can automatically catch the correct `@xxx` name",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1948902862",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -23,16 +23,14 @@ on:\n \n jobs:\n   compute:\n-    name: \"plugin name\"\n+    name: \"Personal Agent\"\n     runs-on: ubuntu-latest\n     permissions: write-all\n     environment: ${{ github.ref == 'refs/heads/main' && 'main' || 'development' }}\n     env:\n       PLUGIN_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}\n       KERNEL_PUBLIC_KEY: ${{ secrets.KERNEL_PUBLIC_KEY }}\n       LOG_LEVEL: ${{ secrets.LOG_LEVEL || 'info' }}",
+        "score": {
+          "reward": 4.824,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 43.716086956521764,
+            "syllables": 38,
+            "sentences": 1,
+            "score": 0.8371608695652176
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1949502860,
+        "content": "Let's go with your suggestion. I've never worked with the kernel code so I have limited insight.",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1949502860",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -13,6 +13,6 @@ export default createActionsPlugin<PluginSettings, Env, null, SupportedEvents>(\n     envSchema: envSchema,\n     ...(process.env.KERNEL_PUBLIC_KEY && { kernelPublicKey: process.env.KERNEL_PUBLIC_KEY }),\n     postCommentOnError: true,\n-    bypassSignatureVerification: process.env.NODE_ENV === \"local\",\n+    bypassSignatureVerification: true,",
+        "score": {
+          "reward": 2.625,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 85.87671052631579,
+            "syllables": 25,
+            "sentences": 2,
+            "score": 0.7412328947368421
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1957239593,
+        "content": "If you and @gentlementlegen have consensus on a decision then I'm sure it's the best one!",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1957239593",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -13,6 +13,6 @@ export default createActionsPlugin<PluginSettings, Env, null, SupportedEvents>(\n     envSchema: envSchema,\n     ...(process.env.KERNEL_PUBLIC_KEY && { kernelPublicKey: process.env.KERNEL_PUBLIC_KEY }),\n     postCommentOnError: true,\n-    bypassSignatureVerification: process.env.NODE_ENV === \"local\",\n+    bypassSignatureVerification: true,",
+        "score": {
+          "reward": 1.593,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 66.36500000000001,
+            "syllables": 26,
+            "sentences": 1,
+            "score": 0.9363499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1983542199,
+        "content": "Not sure what we are supposed to do when we do key rotations. It seems like we have several systems that rely on the same key. \r\nhttps://github.com/ubiquity/demo.ubq.fi/blob/18702c8d8cd00da994efd3c7b5c36c3a9e491a05/static/scripts/demo/auth-context.ts#L19",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1983542199",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -13,13 +13,21 @@ Communication between [UbiquityOS](https://github.com/apps/ubiquity-os) and the\n \n - Make sure the Personal Agent Bridge is also configured. You can read its [documentation](https://github.com/ubiquity-os-marketplace/personal-agent-bridge/blob/development/README.md).\n \n-- Fork this repository with exactly the same name `personal-agent` under your personal or your organization account.\n+- Fork this repository with exactly the same name `personal-agent` under your personal account.\n \n-- Generate a Github clasic Personal Access Token PAT with access to repositories.\n+- Generate a GitHub classic Personal Access Token PAT with access to repositories.\n \n - Encrypt your PAT with UbiquityOS's `X25519_PUBLIC_KEY` using [keygen.ubq.fi](https://keygen.ubq.fi/).",
+        "score": {
+          "reward": 9.234,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 77.87357142857145,
+            "syllables": 61,
+            "sentences": 7,
+            "score": 0.8212642857142854
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2647742668,
+        "content": "Thinking is not posted in the [review thread](https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1948903492). Also should have the tip syntax:\r\n---\r\n@shiv810 can you address these",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2647742668",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.633,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 90.32934210526317,
+            "syllables": 24,
+            "sentences": 2,
+            "score": 0.6967065789473683
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2658526945,
+        "content": "It doesn't post to review threads at all anymore",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2658526945",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.65,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 86.70500000000001,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.7329499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2692249553,
+        "content": "It probably does that for every comment which is a problem. Remove the thrown error.",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2692249553",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.696,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 69.5025,
+            "syllables": 23,
+            "sentences": 2,
+            "score": 0.904975
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2696849648,
+        "content": "We need to stop prepending Error: on every error message. I keep seeing Error: Error: wrapped in error syntax which is redundant.",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2696849648",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.872,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 57.23363636363638,
+            "syllables": 36,
+            "sentences": 2,
+            "score": 0.9723363636363638
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2704147912,
+        "content": "Why don't we make an endpoint on the kernel that we can query what the public key is over an API? \r\nWe already have three disconnected systems that rely on the same public key. Key rotation will be a mess. \r\nBest if we query when using these tools so that its always synchronized.",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2704147912",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 8.181,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 54,
+            "wordValue": 0.1,
+            "result": 2.44
+          },
+          "readability": {
+            "fleschKincaid": 78.76583333333336,
+            "syllables": 73,
+            "sentences": 4,
+            "score": 0.8123416666666664
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2705347815,
+        "content": "We should rotate keys occasionally. I do this with:\n- The treasury multisig signing keys\n- the kernel x25519 key \n- the UbiquityOS wallet",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2705347815",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.176,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              }
+            },
+            "result": 0.3
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 51.1489285714286,
+            "syllables": 36,
+            "sentences": 2,
+            "score": 0.911489285714286
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2593033268,
+        "content": "QA, code, and CI seem fine",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1#pullrequestreview-2593033268",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.185,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 116.14500000000001,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2632614560,
+        "content": "There's merge conflicts",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1#issuecomment-2632614560",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.092,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 97.025,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.6297499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2635813161,
+        "content": "@gentlementlegen You should review asap",
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/70#pullrequestreview-2635813161",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.744,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 15.640000000000015,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.5564000000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2597708726,
+            "effect": {
+              "addition": 69,
+              "deletion": 189
+            },
+            "reward": 7.74,
+            "priority": 3
+          },
+          {
+            "reviewId": 2605496518,
+            "effect": {
+              "addition": 13,
+              "deletion": 26
+            },
+            "reward": 1.17,
+            "priority": 3
+          },
+          {
+            "reviewId": 2664763877,
+            "effect": {
+              "addition": 30,
+              "deletion": 25
+            },
+            "reward": 1.65,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1"
+      },
+      {
+        "reviews": [
+          {
+            "reviewId": 2593033268,
+            "effect": {
+              "addition": 297,
+              "deletion": 216
+            },
+            "reward": 15.39,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1"
+      },
+      {
+        "reviews": [
+          {
+            "reviewId": 2635813161,
+            "effect": {
+              "addition": 51,
+              "deletion": 0
+            },
+            "reward": 1.53,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/70"
+      },
+      {
+        "reviews": [
+          {
+            "reviewId": 2644273500,
+            "effect": {
+              "addition": 52,
+              "deletion": 22
+            },
+            "reward": 2.22,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/3"
+      },
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/4"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 150 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>⚠️ Your rewards have been limited to the task price of 150 XP.</h6><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>6</td><td>29.7</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>12.47</td></tr><tr><td>Issue</td><td>Comment</td><td>19</td><td>74.927</td></tr><tr><td>Review</td><td>Comment</td><td>19</td><td>65.46</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1\" target=\"_blank\" rel=\"noopener\">#1</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+69 -189</td><td>3</td><td>7.74</td></tr><tr><td>+13 -26</td><td>3</td><td>1.17</td></tr><tr><td>+30 -25</td><td>3</td><td>1.65</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1\" target=\"_blank\" rel=\"noopener\">#1</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+297 -216</td><td>3</td><td>15.39</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/plugin-sdk/pull/70\" target=\"_blank\" rel=\"noopener\">#70</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+51 -0</td><td>3</td><td>1.53</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/3\" target=\"_blank\" rel=\"noopener\">#3</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+52 -22</td><td>3</td><td>2.22</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3\" target=\"_blank\" rel=\"noopener\"># Task- This will be registered under &#96;issues_comment.crea&hellip;</a></h6></td><td><details><summary>9.8</summary><pre>content:&#13;  content:&#13;    h1:&#13;      score: 1&#13;      elementCount: 2&#13;    ul:&#13;      score: 0&#13;      elementCount: 6&#13;    li:&#13;      score: 0.1&#13;      elementCount: 18&#13;    p:&#13;      score: 0&#13;      elementCount: 27&#13;    h3:&#13;      score: 1&#13;      elementCount: 4&#13;    ol:&#13;      score: 0&#13;      elementCount: 3&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    h2:&#13;      score: 1&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 9.8&#13;regex:&#13;  wordCount: 1034&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>1</td><td>1</td><td>12.47</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2382648273\" target=\"_blank\" rel=\"noopener\">@gentlementlegen how would this look from a plugin config standp&hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.95</td><td>3</td><td>7.211</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2382835575\" target=\"_blank\" rel=\"noopener\">I take that as a yes. Then we can make the only config option to&hellip;</a></h6></td><td><details><summary>1.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.95</td><td>3</td><td>7.125</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2386785358\" target=\"_blank\" rel=\"noopener\">@sshivaditya2019 this is becoming recursive so I don't think its&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.8</td><td>3</td><td>5.28</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2504011409\" target=\"_blank\" rel=\"noopener\">2. The bridge makes sense. This was basically my suggestion [her&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 1&#13;  result: 0.1&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.9</td><td>3</td><td>3.402</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2510616305\" target=\"_blank\" rel=\"noopener\">Normally you're supposed to open a pull on your own repository a&hellip;</a></h6></td><td><details><summary>1.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.7</td><td>3</td><td>5.229</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2513509400\" target=\"_blank\" rel=\"noopener\">Actually it only works if you target the default branch, &#96;de&hellip;</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.85</td><td>3</td><td>2.907</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2519363349\" target=\"_blank\" rel=\"noopener\">This is perfectly acceptable. It must be configured to do so wi&hellip;</a></h6></td><td><details><summary>2.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 39&#13;  wordValue: 0.1&#13;  result: 2.15&#13;</pre></details></td><td>0.9</td><td>3</td><td>7.533</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2677237871\" target=\"_blank\" rel=\"noopener\">@gentlementlegen disqualifier seems to repeat itself when there &hellip;</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.4</td><td>3</td><td>1.344</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2704116287\" target=\"_blank\" rel=\"noopener\">Somebody should go in and change all the Cautions to Warnings un&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.5</td><td>3</td><td>3.315</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2705183260\" target=\"_blank\" rel=\"noopener\">I feel like we need a slash command to handle this edge case. I &hellip;</a></h6></td><td><details><summary>1.92</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.4</td><td>3</td><td>2.784</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2705344945\" target=\"_blank\" rel=\"noopener\">You can also \"link back\" or reference other issues to pollute th&hellip;</a></h6></td><td><details><summary>1.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>0.5</td><td>3</td><td>3.3</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2705585992\" target=\"_blank\" rel=\"noopener\">Hmm something tells me this task time was under estimated. We s&hellip;</a></h6></td><td><details><summary>2.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 41&#13;  wordValue: 0.1&#13;  result: 2.2&#13;</pre></details></td><td>0.6</td><td>3</td><td>5.058</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2708788887\" target=\"_blank\" rel=\"noopener\">There isn't an incentive to lie. It's an interesting idea for co&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.395</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2710128222\" target=\"_blank\" rel=\"noopener\">It can because we already see this happen with disqualifier. I &hellip;</a></h6></td><td><details><summary>2.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 61&#13;  wordValue: 0.1&#13;  result: 2.53&#13;</pre></details></td><td>0.4</td><td>3</td><td>3.816</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2716050053\" target=\"_blank\" rel=\"noopener\">I think if their fork is targeting our repository we don't own t&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.683</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2716056845\" target=\"_blank\" rel=\"noopener\">For now you can post here how long this should have taken for re&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.26</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2719297294\" target=\"_blank\" rel=\"noopener\">We definitely should increase focus on the conversation and far &hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.4</td><td>3</td><td>1.752</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2719447695\" target=\"_blank\" rel=\"noopener\">@whilefoo could you help me make a personal agent that will rewr&hellip;</a></h6></td><td><details><summary>2.33</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 47&#13;  wordValue: 0.1&#13;  result: 2.33&#13;</pre></details></td><td>0.85</td><td>3</td><td>7.701</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2720650728\" target=\"_blank\" rel=\"noopener\">It only rewrites when I double line break at the end</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.8</td><td>3</td><td>2.832</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1944133156\" target=\"_blank\" rel=\"noopener\">If we use the same strategy as our evm private key, the decrypti&hellip;</a></h6></td><td><details><summary>2.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 41&#13;  wordValue: 0.1&#13;  result: 2.2&#13;</pre></details></td><td>0.9</td><td>3</td><td>7.695</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1944133767\" target=\"_blank\" rel=\"noopener\">CSpell should have caught this. Are your pre commit hooks runnin&hellip;</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.6</td><td>3</td><td>2.268</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1944533527\" target=\"_blank\" rel=\"noopener\">Perhaps we should add markdown files as well!</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.846</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1948898760\" target=\"_blank\" rel=\"noopener\">Hey actually this should just be in the repository secrets. No n&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.9</td><td>3</td><td>5.157</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1948901545\" target=\"_blank\" rel=\"noopener\">Why not leave as &#96;development&#96;</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.7</td><td>3</td><td>1.197</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1948901866\" target=\"_blank\" rel=\"noopener\">Why true?</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.8</td><td>3</td><td>0.792</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1948902862\" target=\"_blank\" rel=\"noopener\">I think there is a way to dynamically check the owner of the rep&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.824</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1949502860\" target=\"_blank\" rel=\"noopener\">Let's go with your suggestion. I've never worked with the kernel&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.5</td><td>3</td><td>2.625</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1957239593\" target=\"_blank\" rel=\"noopener\">If you and @gentlementlegen have consensus on a decision then I'&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.593</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1983542199\" target=\"_blank\" rel=\"noopener\">Not sure what we are supposed to do when we do key rotations. It&hellip;</a></h6></td><td><details><summary>2.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.9</td><td>3</td><td>9.234</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2647742668\" target=\"_blank\" rel=\"noopener\">Thinking is not posted in the [review thread](https://github.com&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.7</td><td>3</td><td>3.633</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2658526945\" target=\"_blank\" rel=\"noopener\">It doesn't post to review threads at all anymore</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.5</td><td>3</td><td>1.65</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2692249553\" target=\"_blank\" rel=\"noopener\">It probably does that for every comment which is a problem. Remo&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.8</td><td>3</td><td>3.696</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2696849648\" target=\"_blank\" rel=\"noopener\">We need to stop prepending Error: on every error message. I keep&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.872</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2704147912\" target=\"_blank\" rel=\"noopener\">Why don't we make an endpoint on the kernel that we can query wh&hellip;</a></h6></td><td><details><summary>2.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 54&#13;  wordValue: 0.1&#13;  result: 2.44&#13;</pre></details></td><td>0.9</td><td>3</td><td>8.181</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2705347815\" target=\"_blank\" rel=\"noopener\">We should rotate keys occasionally. I do this with:- The treasu&hellip;</a></h6></td><td><details><summary>1.82</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;  result: 0.3&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.6</td><td>3</td><td>4.176</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1#pullrequestreview-2593033268\" target=\"_blank\" rel=\"noopener\">QA, code, and CI seem fine</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.5</td><td>3</td><td>1.185</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1#issuecomment-2632614560\" target=\"_blank\" rel=\"noopener\">There's merge conflicts</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.7</td><td>3</td><td>1.092</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugin-sdk/pull/70#pullrequestreview-2635813161\" target=\"_blank\" rel=\"noopener\">@gentlementlegen You should review asap</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.4</td><td>3</td><td>0.744</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 150,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2382714347,
+        "content": "If you do like other plugins and hook it to the `issue_comment.created` you will already get the full payload for that event, how would this differ?",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2382714347",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 5.778,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 73.17200000000001,
+            "syllables": 32,
+            "sentences": 1,
+            "score": 0.8682799999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2382971703,
+        "content": "As long as you have the bot installed in your organization, you can hook any plugin from your organization you want to see running so\r\n```\r\nplugins:\r\n  - uses: 0x4007/ubiquity-os-agent\r\n```\r\nwould run your agent.",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2382971703",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 5.736,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 57.793103448275886,
+            "syllables": 41,
+            "sentences": 1,
+            "score": 0.9779310344827589
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2512183219,
+        "content": "I think it didn't pick up the pull-request because you do not target this repository / organization.",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2512183219",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.584,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 52.265000000000015,
+            "syllables": 29,
+            "sentences": 1,
+            "score": 0.9226500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2677239807,
+        "content": "I am not sure if that is due to having many people or having many linked pull-requests. If the bot fails to post to the linked pull-request, it will post to the issue as a backup. Since we have multiple linked pull-request, if they all fail this would increase the amount of messages posted to the issue as well.",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2677239807",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.89,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 62,
+            "wordValue": 0.1,
+            "result": 2.54
+          },
+          "readability": {
+            "fleschKincaid": 79.42607526881723,
+            "syllables": 78,
+            "sentences": 3,
+            "score": 0.8057392473118277
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2705227212,
+        "content": "I think it's weird that there is no way to manually unlink pull-requests from GitHub's UI, this means you can pollute any repository by linking random pull-requests. I did not find anything to counter this, so yes let's have some command.",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2705227212",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.885,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 46,
+            "wordValue": 0.1,
+            "result": 2.31
+          },
+          "readability": {
+            "fleschKincaid": 67.62478260869567,
+            "syllables": 63,
+            "sentences": 2,
+            "score": 0.9237521739130433
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2708770488,
+        "content": "Instead of having to specify organizations in the list, maybe we could just check if the bot has access during the run?",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2708770488",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 3.045,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 61.45045454545455,
+            "syllables": 32,
+            "sentences": 1,
+            "score": 0.9854954545454545
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2664400931,
+        "content": "I am fine with the code changes and I could test it and it works. Only change I would like to see is the `x25519_PUBLIC_KEY` made available somewhere otherwise no one can make personal agents with `ubiquity-os` bot.",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#pullrequestreview-2664400931",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 6.966,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 78.11500000000001,
+            "syllables": 47,
+            "sentences": 2,
+            "score": 0.8188499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1943992099,
+        "content": "```suggestion\n- Generate a GitHub classic Personal Access Token PAT with access to repositories.\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1943992099",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,93 +1,54 @@\n-# `@ubiquity-os/plugin-template`\n+# `@ubiquity-os/personal-agent`\n \n-## Prerequisites\n+The Personal Agent is a [UbiquityOS](https://github.com/apps/ubiquity-os) plugin designed to run actions in user's Github account. It is forked, configured, and hosted by a Github user. Any issue comment beginning with `@username` is forwarded to this plugin for processing. Find below a list features offered by the plugin:\n \n-- A good understanding of how the [kernel](https://github.com/ubiquity/ubiquibot-kernel) works and how to interact with it.\n-- A basic understanding of the Ubiquibot configuration and how to define your plugin's settings.\n+- `@username say hello`\n+  The plugin should respond with a `Hello, world!`.\n \n-## Getting Started\n+More features coming soon...\n \n-1. Create a new repository using this template.\n-2. Clone the repository to your local machine.\n-3. Install the dependencies preferably using `bun`.\n+Communication between [UbiquityOS](https://github.com/apps/ubiquity-os) and the [Personal Agent](https://github.com/ubiquity-os-marketplace/personal-agent) plugin is handled by [Personal Agent Bridge](https://github.com/ubiquity-os-marketplace/personal-agent-bridge).\n \n-## Creating a new plugin\n+## How to set up?\n \n-- If your plugin is to be used as a slash command which should have faster response times as opposed to longer running GitHub action tasks, you should use the `worker` type.\n+- Make sure the Personal Agent Bridge is also configured. You can read its [documentation](https://github.com/ubiquity-os-marketplace/personal-agent-bridge/blob/development/README.md).\n \n-1. Ensure you understand and have setup the [kernel](https://github.com/ubiquity/ubiquibot-kernel).\n-2. Update [compute.yml](./.github/workflows/compute.yml) with your plugin's name and update the `id`.\n-3. Update [context.ts](./src/types/context.ts) with the events that your plugin will fire on.\n-4. Update [manifest.json](./manifest.json) with a proper description of your plugin.\n-5. Update [plugin-input.ts](./src/types/plugin-input.ts) to match the `with:` settings in your org or repo level configuration.\n+- Fork this repository with exactly the same name `personal-agent` under your personal or your organization account.\n \n-- Your plugin config should look similar to this:\n+- Generate a Github clasic Personal Access Token PAT with access to repositories.",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1944024113,
+        "content": "Even if this is encrypted, couldn't it be used to impersonate the account that was encrypted in this key?",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1944024113",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1 @@\n+GITHUB_PAT_ENCRYPTED: 4SjBaP65FdfrDM3Mt9c9IyNRDYL7LvvvBHs6WoM3tXRzQRDpHoh8_-x_TnT-5P8Im2QS1Ib-NCMAQo5KIRqp9atIT1zCXi1W-PLyKnnPZh0eMoI-q48HUQ",
+        "score": {
+          "reward": 4.488,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 72.32500000000003,
+            "syllables": 27,
+            "sentences": 1,
+            "score": 0.8767499999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1944167971,
+        "content": "Yes CSpell ran: https://github.com/ubiquity-os-marketplace/personal-agent/actions/runs/13137497851/job/36656295119#step:4:66\r\nIt only checks typescript files.",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1944167971",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,93 +1,54 @@\n-# `@ubiquity-os/plugin-template`\n+# `@ubiquity-os/personal-agent`\n \n-## Prerequisites\n+The Personal Agent is a [UbiquityOS](https://github.com/apps/ubiquity-os) plugin designed to run actions in user's Github account. It is forked, configured, and hosted by a Github user. Any issue comment beginning with `@username` is forwarded to this plugin for processing. Find below a list features offered by the plugin:\n \n-- A good understanding of how the [kernel](https://github.com/ubiquity/ubiquibot-kernel) works and how to interact with it.\n-- A basic understanding of the Ubiquibot configuration and how to define your plugin's settings.\n+- `@username say hello`\n+  The plugin should respond with a `Hello, world!`.\n \n-## Getting Started\n+More features coming soon...\n \n-1. Create a new repository using this template.\n-2. Clone the repository to your local machine.\n-3. Install the dependencies preferably using `bun`.\n+Communication between [UbiquityOS](https://github.com/apps/ubiquity-os) and the [Personal Agent](https://github.com/ubiquity-os-marketplace/personal-agent) plugin is handled by [Personal Agent Bridge](https://github.com/ubiquity-os-marketplace/personal-agent-bridge).\n \n-## Creating a new plugin\n+## How to set up?\n \n-- If your plugin is to be used as a slash command which should have faster response times as opposed to longer running GitHub action tasks, you should use the `worker` type.\n+- Make sure the Personal Agent Bridge is also configured. You can read its [documentation](https://github.com/ubiquity-os-marketplace/personal-agent-bridge/blob/development/README.md).\n \n-1. Ensure you understand and have setup the [kernel](https://github.com/ubiquity/ubiquibot-kernel).\n-2. Update [compute.yml](./.github/workflows/compute.yml) with your plugin's name and update the `id`.\n-3. Update [context.ts](./src/types/context.ts) with the events that your plugin will fire on.\n-4. Update [manifest.json](./manifest.json) with a proper description of your plugin.\n-5. Update [plugin-input.ts](./src/types/plugin-input.ts) to match the `with:` settings in your org or repo level configuration.\n+- Fork this repository with exactly the same name `personal-agent` under your personal or your organization account.\n \n-- Your plugin config should look similar to this:\n+- Generate a Github clasic Personal Access Token PAT with access to repositories.",
+        "score": {
+          "reward": 3.42,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 60.70500000000001,
+            "syllables": 38,
+            "sentences": 2,
+            "score": 0.9929499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1957209849,
+        "content": "@whilefoo Isn't this signature in the SDK?",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1957209849",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -13,6 +13,6 @@ export default createActionsPlugin<PluginSettings, Env, null, SupportedEvents>(\n     envSchema: envSchema,\n     ...(process.env.KERNEL_PUBLIC_KEY && { kernelPublicKey: process.env.KERNEL_PUBLIC_KEY }),\n     postCommentOnError: true,\n-    bypassSignatureVerification: process.env.NODE_ENV === \"local\",\n+    bypassSignatureVerification: true,",
+        "score": {
+          "reward": 2.304,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 71.81500000000001,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.8818499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1957306514,
+        "content": "I think it can be useful since this would be like the third plugin that needs this capability, I agree.",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1957306514",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -13,6 +13,6 @@ export default createActionsPlugin<PluginSettings, Env, null, SupportedEvents>(\n     envSchema: envSchema,\n     ...(process.env.KERNEL_PUBLIC_KEY && { kernelPublicKey: process.env.KERNEL_PUBLIC_KEY }),\n     postCommentOnError: true,\n-    bypassSignatureVerification: process.env.NODE_ENV === \"local\",\n+    bypassSignatureVerification: true,",
+        "score": {
+          "reward": 3.969,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 68.09500000000004,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.9190499999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1973493253,
+        "content": "Just curious why loading the env is needed? Don't bun and wrangler populate this locally too?",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1973493253",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,6 +1,6 @@\n import { StaticDecode, Type as T } from \"@sinclair/typebox\";\n-import \"dotenv/config\";\n import { LOG_LEVEL } from \"@ubiquity-os/ubiquity-os-logger\";\n+import \"dotenv/config\";\n ",
+        "score": {
+          "reward": 2.988,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 73.79573529411766,
+            "syllables": 25,
+            "sentences": 2,
+            "score": 0.8620426470588234
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1979211038,
+        "content": "```suggestion\n- Generate a GitHub classic Personal Access Token (PAT) with access to repositories.\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1979211038",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,93 +1,54 @@\n-# `@ubiquity-os/plugin-template`\n+# `@ubiquity-os/personal-agent`\n \n-## Prerequisites\n+The Personal Agent is a [UbiquityOS](https://github.com/apps/ubiquity-os) plugin designed to run actions in user's Github account. It is forked, configured, and hosted by a Github user. Any issue comment beginning with `@username` is forwarded to this plugin for processing. Find below a list features offered by the plugin:\n \n-- A good understanding of how the [kernel](https://github.com/ubiquity/ubiquibot-kernel) works and how to interact with it.\n-- A basic understanding of the Ubiquibot configuration and how to define your plugin's settings.\n+- `@username say hello`\n+  The plugin should respond with a `Hello, world!`.\n \n-## Getting Started\n+More features coming soon...\n \n-1. Create a new repository using this template.\n-2. Clone the repository to your local machine.\n-3. Install the dependencies preferably using `bun`.\n+Communication between [UbiquityOS](https://github.com/apps/ubiquity-os) and the [Personal Agent](https://github.com/ubiquity-os-marketplace/personal-agent) plugin is handled by [Personal Agent Bridge](https://github.com/ubiquity-os-marketplace/personal-agent-bridge).\n \n-## Creating a new plugin\n+## How to set up?\n \n-- If your plugin is to be used as a slash command which should have faster response times as opposed to longer running GitHub action tasks, you should use the `worker` type.\n+- Make sure the Personal Agent Bridge is also configured. You can read its [documentation](https://github.com/ubiquity-os-marketplace/personal-agent-bridge/blob/development/README.md).\n \n-1. Ensure you understand and have setup the [kernel](https://github.com/ubiquity/ubiquibot-kernel).\n-2. Update [compute.yml](./.github/workflows/compute.yml) with your plugin's name and update the `id`.\n-3. Update [context.ts](./src/types/context.ts) with the events that your plugin will fire on.\n-4. Update [manifest.json](./manifest.json) with a proper description of your plugin.\n-5. Update [plugin-input.ts](./src/types/plugin-input.ts) to match the `with:` settings in your org or repo level configuration.\n+- Fork this repository with exactly the same name `personal-agent` under your personal or your organization account.\n \n-- Your plugin config should look similar to this:\n+- Generate a Github clasic Personal Access Token PAT with access to repositories.",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1982861482,
+        "content": "Do we have a link for this key available anywhere?",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1982861482",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -13,13 +13,21 @@ Communication between [UbiquityOS](https://github.com/apps/ubiquity-os) and the\n \n - Make sure the Personal Agent Bridge is also configured. You can read its [documentation](https://github.com/ubiquity-os-marketplace/personal-agent-bridge/blob/development/README.md).\n \n-- Fork this repository with exactly the same name `personal-agent` under your personal or your organization account.\n+- Fork this repository with exactly the same name `personal-agent` under your personal account.\n \n-- Generate a Github clasic Personal Access Token PAT with access to repositories.\n+- Generate a GitHub classic Personal Access Token PAT with access to repositories.\n \n - Encrypt your PAT with UbiquityOS's `X25519_PUBLIC_KEY` using [keygen.ubq.fi](https://keygen.ubq.fi/).",
+        "score": {
+          "reward": 3.078,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 69.78500000000001,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.9021499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1983200774,
+        "content": "I was just trying to think with the perspective of someone new trying to setup its own personal agent, who would probably get stuck here, so either prefill, link it or provide it directly here would be helpful",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1983200774",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -13,13 +13,21 @@ Communication between [UbiquityOS](https://github.com/apps/ubiquity-os) and the\n \n - Make sure the Personal Agent Bridge is also configured. You can read its [documentation](https://github.com/ubiquity-os-marketplace/personal-agent-bridge/blob/development/README.md).\n \n-- Fork this repository with exactly the same name `personal-agent` under your personal or your organization account.\n+- Fork this repository with exactly the same name `personal-agent` under your personal account.\n \n-- Generate a Github clasic Personal Access Token PAT with access to repositories.\n+- Generate a GitHub classic Personal Access Token PAT with access to repositories.\n \n - Encrypt your PAT with UbiquityOS's `X25519_PUBLIC_KEY` using [keygen.ubq.fi](https://keygen.ubq.fi/).",
+        "score": {
+          "reward": 6.504,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 50.270263157894775,
+            "syllables": 53,
+            "sentences": 1,
+            "score": 0.9027026315789477
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1983316839,
+        "content": "That makes the two of us then haha\r\nProbably @0x4007 knows the key?",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1983316839",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -13,13 +13,21 @@ Communication between [UbiquityOS](https://github.com/apps/ubiquity-os) and the\n \n - Make sure the Personal Agent Bridge is also configured. You can read its [documentation](https://github.com/ubiquity-os-marketplace/personal-agent-bridge/blob/development/README.md).\n \n-- Fork this repository with exactly the same name `personal-agent` under your personal or your organization account.\n+- Fork this repository with exactly the same name `personal-agent` under your personal account.\n \n-- Generate a Github clasic Personal Access Token PAT with access to repositories.\n+- Generate a GitHub classic Personal Access Token PAT with access to repositories.\n \n - Encrypt your PAT with UbiquityOS's `X25519_PUBLIC_KEY` using [keygen.ubq.fi](https://keygen.ubq.fi/).",
+        "score": {
+          "reward": 2.394,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 89.51692307692309,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.704830769230769
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2692173914,
+        "content": "@whilefoo I tested and the hello world seems to work fine. However, when I type `/help` I get this error:\r\nhttps://github.com/gentlementlegen/personal-agent/issues/2#issuecomment-2692173562\r\nIs it me having the wrong setup or does it happen on your side as well?",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2692173914",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 10.476,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 67.53000000000003,
+            "syllables": 66,
+            "sentences": 3,
+            "score": 0.9246999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2692564993,
+        "content": "@whilefoo my configuration only has the `personal-bridge` with no other plugin, this is how it should be set up correct? I'll pull your changes and test again.",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2692564993",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.704,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 74.06583333333336,
+            "syllables": 38,
+            "sentences": 2,
+            "score": 0.8593416666666664
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2694640767,
+        "content": "https://github.com/gentlementlegen/personal-agent/issues/2#issuecomment-2694627919\r\nSeems to have been fixed with your latest changes? My config was minimal, sorry I ran this locally with your branch and changes, here are the logs now\r\n```\r\n⎔ Starting local server...\r\n        › Executing helloWorld:\r\n        › {\r\n            \"sender\": \"gentlementlegen\",\r\n            \"repo\": \"personal-agent\",\r\n            \"issueNumber\": 2,\r\n            \"owner\": \"gentlementlegen\",\r\n            \"agentOwner\": \"gentlementlegen\",\r\n            \"caller\": \"helloWorld\"\r\n          }\r\n        ✓ Hello, world!\r\n        ✓ {\r\n            \"caller\": \"helloWorld\"\r\n          }\r\n        ✓ Successfully created comment!\r\n        ✓ {\r\n            \"caller\": \"helloWorld\"\r\n          }\r\n[wrangler:inf] POST / 200 OK (1794ms)\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2694640767",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 8.616,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 67.07833333333336,
+            "syllables": 57,
+            "sentences": 3,
+            "score": 0.9292166666666664
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2696364848,
+        "content": "Yes I was running this locally so no run happened in the Actions, let me re-run with a deployment.\r\nhttps://github.com/gentlementlegen/personal-agent/issues/2#issuecomment-2696467360\r\nhttps://github.com/Meniole/personal-agent-bridge/actions/runs/13648469815/job/38151607248\r\nIf I understand this right, I should provide `GITHUB_PAT_ENCRYPTED` inside of the configuration at `personal-agent.config.yml` which is why it doesn't work. In the docs it states to uses the `x25519_PUBLIC_KEY` but it is not linked anywhere?\r\n---\r\nAfter using my own key and github token, I got the following: https://github.com/gentlementlegen/personal-agent/issues/2#issuecomment-2696551880 (underlying error being `Personal agent PAT does not allow running on gentlementlegen/personal-agent`), so please fix the formatting to not display [object Object]. For the PAT, I used the OAuth token, maybe that's why it is complaning?",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2696364848",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 16.146,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 94,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 61.934464285714284,
+            "syllables": 192,
+            "sentences": 8,
+            "score": 0.9806553571428571
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2697149745,
+        "content": "@whilefoo Thanks for reminding me this, had forgotten you need to provide the ids afterwards. Maybe would be worth mentioning this in the README.\r\nMy other mistake was that I was modifying the token inside of the `agent` branch and not the default one.\r\nNew QA:\r\nhttps://github.com/gentlementlegen/personal-agent/issues/2#issuecomment-2697141212",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2697149745",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 10.152,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 45,
+            "wordValue": 0.1,
+            "result": 2.29
+          },
+          "readability": {
+            "fleschKincaid": 64.9245454545455,
+            "syllables": 85,
+            "sentences": 5,
+            "score": 0.9507545454545451
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2705215583,
+        "content": "Well that would solve the key rotation as well I suppose, that can work.",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2705215583",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.52,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 89.89642857142859,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0.7010357142857141
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2636793432,
+        "content": "@whilefoo thank you for the fix, how exactly can I test this one? I need the personal agent bridge up and running in my org, and create some dummy plugin to be called?",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1#issuecomment-2636793432",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.166,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 79.85113636363639,
+            "syllables": 43,
+            "sentences": 2,
+            "score": 0.8014886363636361
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2638597248,
+        "content": "Currently trying to run it but the signature always fail on development, because I believe the values are wrong for development at the moment:\r\nhttps://github.com/ubiquity-os-marketplace/personal-agent-bridge/actions/runs/13170364016\r\nWill try to update them and re-run. Interesting that the runs are appearing here as \"deployments\".\r\n---\r\nI got the plugin to run, but now get the error `No personal agent config found on gentlementlegen/personal-agent`. Maybe that would be helpful to display that for the user in a comment?\r\nAlso, the configuration states: `Encrypt your PAT with UbiquityOS's `X25519_PUBLIC_KEY` using [keygen.ubq.fi]`. Would be handy to have a link to that public key I believe. ~~Also maybe an example of the `personal-agent.config.yml` would be helpful because it just says `add it to the file` which can be confusing~~ The example could be linked within the docs.",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1#issuecomment-2638597248",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 12.555,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 92,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 66.74000000000002,
+            "syllables": 156,
+            "sentences": 8,
+            "score": 0.9325999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2667353220,
+        "content": "@whilefoo Should the kernel import this code as well to avoid duplicating it?",
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/70#issuecomment-2667353220",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.982,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 56.97846153846157,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 0.9697846153846157
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1971409792,
+        "content": "I trust you that this key is revoked and does not grant any priviledges 😄",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/3#discussion_r1971409792",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -176,6 +176,23 @@ function createContextInner(\n     config: {},\n     env: {\n       X25519_PRIVATE_KEY: \"lkQCx6wMxB7V8oXVxWDdEY2xqAF5VqJx7dLIK4qMyIw\",\n+      APP_ID: \"test\",\n+      APP_PRIVATE_KEY: `-----BEGIN PRIVATE KEY-----",
+        "score": {
+          "reward": 2.1,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 89.89642857142859,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0.7010357142857141
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2703078518,
+        "content": "Just a bit concerned that the user might not understand what is going on if they didn't set up their agent properly and get no feedback, but I guess we will see when people use it if they figure it out easily.",
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/4#issuecomment-2703078518",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 6.936,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 43,
+            "wordValue": 0.1,
+            "result": 2.25
+          },
+          "readability": {
+            "fleschKincaid": 54.98069767441861,
+            "syllables": 55,
+            "sentences": 1,
+            "score": 0.9498069767441861
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2597505369,
+            "effect": {
+              "addition": 69,
+              "deletion": 189
+            },
+            "reward": 7.74,
+            "priority": 3
+          },
+          {
+            "reviewId": 2619510885,
+            "effect": {
+              "addition": 13,
+              "deletion": 26
+            },
+            "reward": 1.17,
+            "priority": 3
+          },
+          {
+            "reviewId": 2647629137,
+            "effect": {
+              "addition": 16,
+              "deletion": 20
+            },
+            "reward": 1.08,
+            "priority": 3
+          },
+          {
+            "reviewId": 2657030179,
+            "effect": {
+              "addition": 5,
+              "deletion": 4
+            },
+            "reward": 0.27,
+            "priority": 3
+          },
+          {
+            "reviewId": 2663619556,
+            "effect": {
+              "addition": 11,
+              "deletion": 3
+            },
+            "reward": 0.42,
+            "priority": 3
+          },
+          {
+            "reviewId": 2664400931,
+            "effect": {
+              "addition": 3,
+              "deletion": 3
+            },
+            "reward": 0.18,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1"
+      },
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1"
+      },
+      {
+        "reviews": [
+          {
+            "reviewId": 2635842897,
+            "effect": {
+              "addition": 51,
+              "deletion": 0
+            },
+            "reward": 1.53,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/70"
+      },
+      {
+        "reviews": [
+          {
+            "reviewId": 2644112002,
+            "effect": {
+              "addition": 52,
+              "deletion": 22
+            },
+            "reward": 2.22,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/3"
+      },
+      {
+        "reviews": [
+          {
+            "reviewId": 2663615368,
+            "effect": {
+              "addition": 3,
+              "deletion": 3
+            },
+            "reward": 0.18,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/4"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 150 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>9</td><td>14.79</td></tr><tr><td>Issue</td><td>Comment</td><td>6</td><td>18.918</td></tr><tr><td>Review</td><td>Comment</td><td>22</td><td>118.464</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1\" target=\"_blank\" rel=\"noopener\">#1</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+69 -189</td><td>3</td><td>7.74</td></tr><tr><td>+13 -26</td><td>3</td><td>1.17</td></tr><tr><td>+16 -20</td><td>3</td><td>1.08</td></tr><tr><td>+5 -4</td><td>3</td><td>0.27</td></tr><tr><td>+11 -3</td><td>3</td><td>0.42</td></tr><tr><td>+3 -3</td><td>3</td><td>0.18</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/plugin-sdk/pull/70\" target=\"_blank\" rel=\"noopener\">#70</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+51 -0</td><td>3</td><td>1.53</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/3\" target=\"_blank\" rel=\"noopener\">#3</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+52 -22</td><td>3</td><td>2.22</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/4\" target=\"_blank\" rel=\"noopener\">#4</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+3 -3</td><td>3</td><td>0.18</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2382714347\" target=\"_blank\" rel=\"noopener\">If you do like other plugins and hook it to the &#96;issue_comme&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.9</td><td>3</td><td>5.778</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2382971703\" target=\"_blank\" rel=\"noopener\">As long as you have the bot installed in your organization, you &hellip;</a></h6></td><td><details><summary>1.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.8</td><td>3</td><td>5.736</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2512183219\" target=\"_blank\" rel=\"noopener\">I think it didn't pick up the pull-request because you do not ta&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.584</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2677239807\" target=\"_blank\" rel=\"noopener\">I am not sure if that is due to having many people or having man&hellip;</a></h6></td><td><details><summary>2.54</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 62&#13;  wordValue: 0.1&#13;  result: 2.54&#13;</pre></details></td><td>0.2</td><td>3</td><td>1.89</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2705227212\" target=\"_blank\" rel=\"noopener\">I think it's weird that there is no way to manually unlink pull-&hellip;</a></h6></td><td><details><summary>2.31</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 46&#13;  wordValue: 0.1&#13;  result: 2.31&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.885</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2708770488\" target=\"_blank\" rel=\"noopener\">Instead of having to specify organizations in the list, maybe we&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.5</td><td>3</td><td>3.045</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#pullrequestreview-2664400931\" target=\"_blank\" rel=\"noopener\">I am fine with the code changes and I could test it and it works&hellip;</a></h6></td><td><details><summary>2.07</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.9</td><td>3</td><td>6.966</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1943992099\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion- Generate a GitHub classic Personal A&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1944024113\" target=\"_blank\" rel=\"noopener\">Even if this is encrypted, couldn't it be used to impersonate th&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.488</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1944167971\" target=\"_blank\" rel=\"noopener\">Yes CSpell ran: https://github.com/ubiquity-os-marketplace/perso&hellip;</a></h6></td><td><details><summary>1.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.5</td><td>3</td><td>3.42</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1957209849\" target=\"_blank\" rel=\"noopener\">@whilefoo Isn't this signature in the SDK?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.8</td><td>3</td><td>2.304</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1957306514\" target=\"_blank\" rel=\"noopener\">I think it can be useful since this would be like the third plug&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.7</td><td>3</td><td>3.969</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1973493253\" target=\"_blank\" rel=\"noopener\">Just curious why loading the env is needed? Don't bun and wrangl&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.6</td><td>3</td><td>2.988</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1979211038\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion- Generate a GitHub classic Personal A&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1982861482\" target=\"_blank\" rel=\"noopener\">Do we have a link for this key available anywhere?</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.9</td><td>3</td><td>3.078</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1983200774\" target=\"_blank\" rel=\"noopener\">I was just trying to think with the perspective of someone new t&hellip;</a></h6></td><td><details><summary>2.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.8</td><td>3</td><td>6.504</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1983316839\" target=\"_blank\" rel=\"noopener\">That makes the two of us then hahaProbably @0x4007 knows the k&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.6</td><td>3</td><td>2.394</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2692173914\" target=\"_blank\" rel=\"noopener\">@whilefoo I tested and the hello world seems to work fine. Howev&hellip;</a></h6></td><td><details><summary>3.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>0.9</td><td>3</td><td>10.476</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2692564993\" target=\"_blank\" rel=\"noopener\">@whilefoo my configuration only has the &#96;personal-bridge&#96&hellip;</a></h6></td><td><details><summary>1.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>0.7</td><td>3</td><td>4.704</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2694640767\" target=\"_blank\" rel=\"noopener\">https://github.com/gentlementlegen/personal-agent/issues/2#issue&hellip;</a></h6></td><td><details><summary>2.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.8</td><td>3</td><td>8.616</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2696364848\" target=\"_blank\" rel=\"noopener\">Yes I was running this locally so no run happened in the Actions&hellip;</a></h6></td><td><details><summary>4.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 94&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.9</td><td>3</td><td>16.146</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2697149745\" target=\"_blank\" rel=\"noopener\">@whilefoo Thanks for reminding me this, had forgotten you need t&hellip;</a></h6></td><td><details><summary>3.29</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 45&#13;  wordValue: 0.1&#13;  result: 2.29&#13;</pre></details></td><td>0.8</td><td>3</td><td>10.152</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#issuecomment-2705215583\" target=\"_blank\" rel=\"noopener\">Well that would solve the key rotation as well I suppose, that c&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.6</td><td>3</td><td>2.52</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1#issuecomment-2636793432\" target=\"_blank\" rel=\"noopener\">@whilefoo thank you for the fix, how exactly can I test this one&hellip;</a></h6></td><td><details><summary>1.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.7</td><td>3</td><td>5.166</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1#issuecomment-2638597248\" target=\"_blank\" rel=\"noopener\">Currently trying to run it but the signature always fail on deve&hellip;</a></h6></td><td><details><summary>3.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 92&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.9</td><td>3</td><td>12.555</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugin-sdk/pull/70#issuecomment-2667353220\" target=\"_blank\" rel=\"noopener\">@whilefoo Should the kernel import this code as well to avoid du&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.982</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/3#discussion_r1971409792\" target=\"_blank\" rel=\"noopener\">I trust you that this key is revoked and does not grant any priv&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.5</td><td>3</td><td>2.1</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/4#issuecomment-2703078518\" target=\"_blank\" rel=\"noopener\">Just a bit concerned that the user might not understand what is &hellip;</a></h6></td><td><details><summary>2.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 43&#13;  wordValue: 0.1&#13;  result: 2.25&#13;</pre></details></td><td>0.8</td><td>3</td><td>6.936</td></tr></tbody></table></details>"
+  },
+  "Keyrxng": {
+    "total": 0.513,
+    "userId": 106303466,
+    "comments": [
+      {
+        "id": 2556646863,
+        "content": "I thought the official UbiquityOS app is installed via GH marketplace and is a single subscription per org, no? Maybe I've been mistaken in thinking that?",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2556646863",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.513,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 64.66583333333335,
+            "syllables": 41,
+            "sentences": 2,
+            "score": 0.9533416666666664
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent/pull/1"
+      },
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/1"
+      },
+      {
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/70"
+      },
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/3"
+      },
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/personal-agent-bridge/pull/4"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 0.513 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.513</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/3#issuecomment-2556646863\" target=\"_blank\" rel=\"noopener\">I thought the official UbiquityOS app is installed via GH market&hellip;</a></h6></td><td><details><summary>1.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.513</td></tr></tbody></table></details>"
+  }
+}

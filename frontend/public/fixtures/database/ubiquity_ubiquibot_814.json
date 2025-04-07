@@ -1,0 +1,145 @@
+{
+  "wannacfuture": {
+    "userId": 119157793,
+    "total": 37.5,
+    "task": {
+      "reward": 37.5,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 37.5 XP ]</a>&nbsp;</h3><h6>@wannacfuture</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>37.5</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 7.934,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1909910646,
+        "content": "This seems opinionated, perhaps this should be configurable? \r\nI believe that every contributor should have the authority to estimate an official time on a task since they are possibly going to be working on it, they probably have a feeling for how long it should take. \r\n'll add that feature on this PR after the weekend. @pavlovcik\r\n_Originally posted by @wannacfuture in https://github.com/ubiquity/ubiquibot/pull/805#discussion_r1335023563_",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/814",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.5,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 62,
+            "wordValue": 0.1,
+            "result": 2.54
+          },
+          "readability": {
+            "fleschKincaid": 50.013571428571424,
+            "syllables": 118,
+            "sentences": 5,
+            "score": 0.9001357142857143
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1335419509,
+        "content": "```suggestion\n        return `Error upserting access info for @${user}`;\n```",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/830#discussion_r1335419509",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -28,12 +28,18 @@ export const query = async (body: string) => {\n     let data = await getAllAccessLevels(user, repo.full_name);\n     if (!data) {\n       logger.info(`Access info does not exist for @${user}`);\n-      data = {\n-        multiplier: false,\n-        priority: false,\n-        time: true,\n-        price: false,\n-      };\n+      try {\n+        await upsertAccessControl(user, repo.full_name, \"time_access\", true);\n+        data = {\n+          multiplier: false,\n+          priority: false,\n+          time: true,\n+          price: false,\n+        };\n+      } catch (e) {\n+        logger.error(`Exception thrown by getAllAcessLevels: ${e}`);\n+        return `Error upserting acess info for @${user}`;",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1335419861,
+        "content": "I thought we are using a new error function so that the bot posts it in diff format. Something like `errorDiff()` @Keyrxng rfc",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/830#discussion_r1335419861",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -28,12 +28,18 @@ export const query = async (body: string) => {\n     let data = await getAllAccessLevels(user, repo.full_name);\n     if (!data) {\n       logger.info(`Access info does not exist for @${user}`);\n-      data = {\n-        multiplier: false,\n-        priority: false,\n-        time: true,\n-        price: false,\n-      };\n+      try {\n+        await upsertAccessControl(user, repo.full_name, \"time_access\", true);\n+        data = {\n+          multiplier: false,\n+          priority: false,\n+          time: true,\n+          price: false,\n+        };\n+      } catch (e) {\n+        logger.error(`Exception thrown by getAllAcessLevels: ${e}`);",
+        "score": {
+          "reward": 2.674,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 87.99727272727276,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.7200272727272724
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1641384957,
+            "effect": {
+              "addition": 22,
+              "deletion": 9
+            },
+            "reward": 0.62,
+            "priority": 2
+          },
+          {
+            "reviewId": 1642629255,
+            "effect": {
+              "addition": 4,
+              "deletion": 3
+            },
+            "reward": 0.14,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquibot/pull/830"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 7.934 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>0.76</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.5</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>2.674</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquibot/pull/830\" target=\"_blank\" rel=\"noopener\">#830</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+22 -9</td><td>2</td><td>0.62</td></tr><tr><td>+4 -3</td><td>2</td><td>0.14</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/814\" target=\"_blank\" rel=\"noopener\">This seems opinionated, perhaps this should be configurable? I&hellip;</a></h6></td><td><details><summary>3.54</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 62&#13;  wordValue: 0.1&#13;  result: 2.54&#13;</pre></details></td><td>1</td><td>1</td><td>4.5</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/830#discussion_r1335419509\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionreturn &#96;Error upserting ac&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/830#discussion_r1335419861\" target=\"_blank\" rel=\"noopener\">I thought we are using a new error function so that the bot post&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.7</td><td>2</td><td>2.674</td></tr></tbody></table></details>"
+  }
+}

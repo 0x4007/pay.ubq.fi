@@ -1,0 +1,557 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 50,
+    "task": {
+      "reward": 50,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 50 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>50</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "Keyrxng": {
+    "total": 13.169,
+    "userId": 106303466,
+    "comments": [
+      {
+        "id": 2203162321,
+        "content": "My understanding is that `finally()` happens regardless of success or failure and so the results would be set and then the \"open\" `abortController` was closed during this block but I understand how `.race()` could return a failed call, nice catch @gentlementlegen. \r\nI too spent a lot of time trying to resolve this so hopefully it remains resolved this time",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/33#pullrequestreview-2203162321",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.48,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 56,
+            "wordValue": 0.1,
+            "result": 2.47
+          },
+          "readability": {
+            "fleschKincaid": 57.55785714285717,
+            "syllables": 80,
+            "sentences": 2,
+            "score": 0.9755785714285717
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2206728090,
+        "content": "`rpc-handler.test.ts` contains tests related to the original functionality of the package, so things like proper init values and it returning the fastest provider.\r\n`call-handler.test.ts` should contain tests that are testing the `proxy` and therefor all of the retry and reselection logic\r\nAs far as I can see all of the `call-handler.test` tests are now testing with `expect(provider).toBeTruthy();` which is only testing for the successful returning of a provider on init\r\nCheckout this [jest run](https://github.com/ubiquity/rpc-handler/actions/runs/9981094118/job/27583941992) as I merged `proxify`. No leaking worker and lots of logs showing that the retry logic was being hit and was working. This [latest run](https://github.com/ubiquity/rpc-handler/actions/runs/10156775700/job/28085708779) only shows `provider initialized` logs and doesn't appear to be hitting the retry logic",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/33#pullrequestreview-2206728090",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.323,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 106,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 55.43183962264153,
+            "syllables": 156,
+            "sentences": 4,
+            "score": 0.9543183962264153
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2208638283,
+        "content": "Everything looks good as far as I can tell. Test logs showing retry logic and no leaky worker error",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/33#pullrequestreview-2208638283",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.225,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 72.51881578947369,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.8748118421052631
+          },
+          "multiplier": 0.25,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1696306483,
+        "content": "Why have we removed all of the happy path tests, seems like we are only testing for failure cases?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/33#discussion_r1696306483",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -1,144 +1,18 @@\n-import { expect, jest } from \"@jest/globals\";\n-import { JsonRpcProvider } from \"@ethersproject/providers\";\n import { RPCHandler } from \"../types/rpc-handler\";\n import { HandlerConstructorConfig } from \"../types/handler\";\n import { PrettyLogs } from \"../types/logs\";\n \n-export const testConfig: HandlerConstructorConfig = {\n-  networkId: \"100\",\n-  autoStorage: false,\n-  cacheRefreshCycles: 3,\n-  networkName: null,\n-  networkRpcs: null,\n-  rpcTimeout: 600,\n-  runtimeRpcs: null,\n-  proxySettings: {\n-    retryCount: 3,\n-    retryDelay: 10,\n-    logTier: \"info\",\n-    logger: new PrettyLogs(),\n-    strictLogs: true,\n-  },\n-};\n-\n-const nonceBitmapData = {\n-  to: \"0x000000000022D473030F116dDEE9F6B43aC78BA3\",\n-  data: \"0x4fe02b44000000000000000000000000d9530f3fbbea11bed01dc09e79318f2f20223716001fd097bcb5a1759ce02c0a671386a0bbbfa8216559e5855698a9d4de4cddea\",\n-};\n-const rpcList = [\n-  { url: \"http://127.0.0.1:85451\" },\n-  { url: \"http://127.0.0.1:85454\" },\n-  { url: \"http://127.0.0.1:85453\" },\n-  { url: \"http://127.0.0.1:854531\" },\n-  { url: \"http://127.0.0.1:854532\" },\n-  { url: \"http://127.0.0.1:854533\" },\n-  { url: \"http://127.0.0.1:854535\" },\n-  { url: \"http://127.0.0.1:854\" },\n-  { url: \"http://127.0.0.1:85\" },\n-  { url: \"http://127.0.0.1:81\" },\n-  { url: \"http://127.0.0.1:8545\" },\n-];\n-const txHashRegex = new RegExp(\"0x[0-9a-f]{64}\");\n+jest.mock(\"axios\", () => ({\n+  ...jest.requireActual(\"axios\"),\n+  create: jest.fn(() => ({\n+    post: jest.fn(),\n+  })),\n+}));\n \n describe(\"Call Handler\", () => {\n-  afterAll(() => {\n+  afterEach(() => {\n     jest.clearAllMocks();\n     jest.clearAllTimers();\n-    jest.resetAllMocks();\n-    jest.resetModules();\n-  });\n-\n-  beforeEach(() => {\n-    jest.clearAllMocks();\n-    jest.clearAllTimers();\n-    jest.resetAllMocks();\n-    jest.resetModules();\n-  });\n-\n-  describe(\"createProviderProxy\", () => {\n-    let provider: JsonRpcProvider;\n-\n-    it(\"should make a successful get_blockNumber call\", async () => {\n-      await jest.isolateModulesAsync(async () => {\n-        const module = await import(\"../types/rpc-handler\");\n-        const handler = new module.RPCHandler({ ...testConfig, proxySettings: { ...testConfig.proxySettings, logTier: \"verbose\" } });\n-\n-        provider = await handler.getFastestRpcProvider();\n-        const blockNumber = await provider.send(\"eth_blockNumber\", []);\n-        expect(parseInt(blockNumber)).toBeGreaterThan(0);\n-      });\n-    }, 15000);\n-\n-    it(\"should make a successful eth_call\", async () => {\n-      await jest.isolateModulesAsync(async () => {\n-        const module = await import(\"../types/rpc-handler\");\n-        const handler = new module.RPCHandler({ ...testConfig, proxySettings: { ...testConfig.proxySettings, logTier: \"verbose\" } });\n-\n-        provider = await handler.getFastestRpcProvider();\n-        const response = await provider.send(\"eth_call\", [nonceBitmapData, \"latest\"]);\n-        expect(response).toBeDefined();\n-        expect(response).toBe(\"0x\" + \"00\".repeat(32));\n-      });\n-    }, 15000);\n-  });\n-\n-  describe(\"Write ops cases\", () => {",
+        "score": {
+          "reward": 0.352,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 80.68684210526318,
+            "syllables": 24,
+            "sentences": 1,
+            "score": 0.7931315789473682
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1696307641,
+        "content": "this test is no longer testing what it says it's testing",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/33#discussion_r1696307641",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -186,47 +55,14 @@ describe(\"Call Handler\", () => {\n         networkRpcs: badRpcList,\n         proxySettings: { ...mods.proxySettings, retryDelay: 10, strictLogs: false, logTier: \"verbose\" },\n       });\n-\n-      let thrownError: Error | unknown = null;\n-\n-      try {\n-        const newProvider = await newHandler.getFastestRpcProvider();\n-        await newProvider.send(\"eth_call\", [null, null, null]);\n-      } catch (er) {\n-        thrownError = er;\n-      }\n-\n-      expect(thrownError).toBeInstanceOf(Error);\n-      expect((thrownError as Error).message).toContain(\"invalid type: null\");\n-      expect(newHandler[\"_runtimeRpcs\"].length).toBe(1);\n-      expect(newHandler[\"_runtimeRpcs\"][0]).toBe(\"http://127.0.0.1:8545\");\n+      const newProvider = await newHandler.getFastestRpcProvider();\n+      expect(newProvider).toBeTruthy();",
+        "score": {
+          "reward": 0.224,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 88.905,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.71095
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2255459625,
+        "content": "If I understand correctly here - we will no longer gather a list of valid latencies/providers but instead will just use the first endpoint to successfully respond and use it? Does this imply then that the retry logic would be refactored such that we retest all RPCs again and not loop through our list of latencies?\r\nI raised this same point previously which was why I introduced a timeout so that we kill any tests that run beyond the user defined limit but this way we still have a list of valid endpoints/latencies",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/33#issuecomment-2255459625",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.672,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 94,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 53.531666666666695,
+            "syllables": 135,
+            "sentences": 3,
+            "score": 0.9353166666666669
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2255657844,
+        "content": "Ah that makes sense like a `getSingleFastestProvider()` approach\r\nI looked at the latest jest [run](https://github.com/ubiquity/rpc-handler/actions/runs/10139976423/job/28034258991?pr=33) and the error has returned that you had me set out to resolve and I think was also the purpose of this PR?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/33#issuecomment-2255657844",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.693,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 37,
+            "wordValue": 0.1,
+            "result": 2.1
+          },
+          "readability": {
+            "fleschKincaid": 68.6745945945946,
+            "syllables": 44,
+            "sentences": 1,
+            "score": 0.913254054054054
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2255691062,
+        "content": "good luck, it's got hands",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/33#issuecomment-2255691062",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.02,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 116.14500000000001,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2257476186,
+        "content": "I agree the first/top two tests were testing the provider API endpoints but only with `read ops` but the following `write ops` were all targeting the local anvil instance.\r\n```ts\r\n  const mods: HandlerConstructorConfig = {\r\n      runtimeRpcs: rpcList.map((rpc) => rpc.url),\r\n      networkRpcs: rpcList,\r\n      autoStorage: false,\r\n      cacheRefreshCycles: 1,\r\n      networkName: \"anvil\",\r\n      networkId: \"31337\",\r\n      rpcTimeout: 700,\r\n      proxySettings: {\r\n        retryCount: 1,\r\n        retryDelay: 10,\r\n        logTier: \"verbose\",\r\n        logger: new PrettyLogs(),\r\n        strictLogs: false,\r\n      },\r\n    };\r\n```\r\n---\r\nThe provider racing was the original functionality of this package but it's now in control of all read and write operations so I think we should have tests for this",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/33#issuecomment-2257476186",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.632,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 57,
+            "wordValue": 0.1,
+            "result": 2.48
+          },
+          "readability": {
+            "fleschKincaid": 51.7496052631579,
+            "syllables": 85,
+            "sentences": 2,
+            "score": 0.9174960526315791
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2257588846,
+        "content": "Well no actually because anvil is dumb and will respond successfully more or less no matter what you send to it, so in the specific case that our nonceBitMap read op was failing and it was only for certain providers anvil will always give you a great light under that scenario\r\nMaybe I am mistaken @gentlementlegen and you can do that it may be possible so let me correct above and just say that the above is my opinion and that's why I took the approach that I did but you can mock everything if we are still able to effectively test the call-handler aspect I guess",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/33#issuecomment-2257588846",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.448,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 109,
+            "wordValue": 0.1,
+            "result": 2.56
+          },
+          "readability": {
+            "fleschKincaid": -25.655045871559608,
+            "syllables": 157,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2203162321,
+            "effect": {
+              "addition": 89,
+              "deletion": 69
+            },
+            "reward": 1.58,
+            "priority": 1
+          },
+          {
+            "reviewId": 2206638109,
+            "effect": {
+              "addition": 93,
+              "deletion": 248
+            },
+            "reward": 3.41,
+            "priority": 1
+          },
+          {
+            "reviewId": 2206728090,
+            "effect": {
+              "addition": 79,
+              "deletion": 0
+            },
+            "reward": 0.79,
+            "priority": 1
+          },
+          {
+            "reviewId": 2208638283,
+            "effect": {
+              "addition": 169,
+              "deletion": 63
+            },
+            "reward": 2.32,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/rpc-handler/pull/33"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 13.169 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>4</td><td>8.1</td></tr><tr><td>Review</td><td>Comment</td><td>10</td><td>5.069</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/rpc-handler/pull/33\" target=\"_blank\" rel=\"noopener\">#33</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+89 -69</td><td>1</td><td>1.58</td></tr><tr><td>+93 -248</td><td>1</td><td>3.41</td></tr><tr><td>+79 -0</td><td>1</td><td>0.79</td></tr><tr><td>+169 -63</td><td>1</td><td>2.32</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/33#pullrequestreview-2203162321\" target=\"_blank\" rel=\"noopener\">My understanding is that &#96;finally()&#96; happens regardless &hellip;</a></h6></td><td><details><summary>2.47</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 56&#13;  wordValue: 0.1&#13;  result: 2.47&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.48</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/33#pullrequestreview-2206728090\" target=\"_blank\" rel=\"noopener\">&#96;rpc-handler.test.ts&#96; contains tests related to the orig&hellip;</a></h6></td><td><details><summary>4.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 106&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.323</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/33#pullrequestreview-2208638283\" target=\"_blank\" rel=\"noopener\">Everything looks good as far as I can tell. Test logs showing re&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.225</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/33#discussion_r1696306483\" target=\"_blank\" rel=\"noopener\">Why have we removed all of the happy path tests, seems like we a&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.352</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/33#discussion_r1696307641\" target=\"_blank\" rel=\"noopener\">this test is no longer testing what it says it's testing</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.224</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/33#issuecomment-2255459625\" target=\"_blank\" rel=\"noopener\">If I understand correctly here - we will no longer gather a list&hellip;</a></h6></td><td><details><summary>2.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 94&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.672</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/33#issuecomment-2255657844\" target=\"_blank\" rel=\"noopener\">Ah that makes sense like a &#96;getSingleFastestProvider()&#96; &hellip;</a></h6></td><td><details><summary>3.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 37&#13;  wordValue: 0.1&#13;  result: 2.1&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.693</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/33#issuecomment-2255691062\" target=\"_blank\" rel=\"noopener\">good luck, it's got hands</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.02</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/33#issuecomment-2257476186\" target=\"_blank\" rel=\"noopener\">I agree the first/top two tests were testing the provider API en&hellip;</a></h6></td><td><details><summary>2.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 57&#13;  wordValue: 0.1&#13;  result: 2.48&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.632</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/33#issuecomment-2257588846\" target=\"_blank\" rel=\"noopener\">Well no actually because anvil is dumb and will respond successf&hellip;</a></h6></td><td><details><summary>2.56</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 109&#13;  wordValue: 0.1&#13;  result: 2.56&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.448</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 7.158,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2204007443,
+        "content": "Code seems fine although I haven't used this codebase or ran the tests.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/33#pullrequestreview-2204007443",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.284,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 83.85357142857143,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.7614642857142857
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1696251629,
+        "content": "Seems like an unusual duration.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/33#discussion_r1696251629",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -36,38 +35,34 @@ describe(\"RPCHandler\", () => {\n   });\n \n   it(\"executing without an rpc timeout\", async () => {\n-    await jest.isolateModulesAsync(async () => {\n-      const module = await import(\"../types/rpc-handler\");\n-      const rpcHandler = new module.RPCHandler({\n-        ...testConfig,\n-        rpcTimeout: 99999999,\n-      });\n-      await rpcHandler.testRpcPerformance();\n-      const latencies = rpcHandler.getLatencies();\n+    const module = await import(\"../types/rpc-handler\");\n+    const rpcHandler = new module.RPCHandler({\n+      ...testConfig,\n+      rpcTimeout: 99999999,",
+        "score": {
+          "reward": 0.402,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 49.48000000000002,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.8948000000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2255267087,
+        "content": "I agree we should just take the first working endpoint and terminate all the pending tests.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/33#issuecomment-2255267087",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.28,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 74.27000000000001,
+            "syllables": 22,
+            "sentences": 1,
+            "score": 0.8573
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2255426600,
+        "content": "No plan for it, and theres no reason to add features \"just in case\"",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/33#issuecomment-2255426600",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.552,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 95.93928571428573,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.6406071428571427
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2204007443,
+            "effect": {
+              "addition": 89,
+              "deletion": 69
+            },
+            "reward": 1.58,
+            "priority": 1
+          },
+          {
+            "reviewId": 2206582721,
+            "effect": {
+              "addition": 96,
+              "deletion": 210
+            },
+            "reward": 3.06,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/rpc-handler/pull/33"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 7.158 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>4.64</td></tr><tr><td>Review</td><td>Comment</td><td>4</td><td>2.518</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/rpc-handler/pull/33\" target=\"_blank\" rel=\"noopener\">#33</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+89 -69</td><td>1</td><td>1.58</td></tr><tr><td>+96 -210</td><td>1</td><td>3.06</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/33#pullrequestreview-2204007443\" target=\"_blank\" rel=\"noopener\">Code seems fine although I haven't used this codebase or ran the&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.284</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/33#discussion_r1696251629\" target=\"_blank\" rel=\"noopener\">Seems like an unusual duration.</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.402</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/33#issuecomment-2255267087\" target=\"_blank\" rel=\"noopener\">I agree we should just take the first working endpoint and termi&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.28</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/33#issuecomment-2255426600\" target=\"_blank\" rel=\"noopener\">No plan for it, and theres no reason to add features \"just in ca&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.552</td></tr></tbody></table></details>"
+  }
+}

@@ -1,0 +1,1184 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 215.72,
+    "task": {
+      "reward": 200,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2448922712,
+        "content": "I'll look into it tomorrow as I may have caused it with the refactor but I didn't touch the issue fetching or context window logic but either way I'll resolve whatever the issue is if not resolved by then",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/issues/26#issuecomment-2448922712",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 5.62,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 42,
+            "wordValue": 0.1,
+            "result": 2.23
+          },
+          "readability": {
+            "fleschKincaid": 47.37642857142859,
+            "syllables": 58,
+            "sentences": 1,
+            "score": 0.8737642857142859
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2625855882,
+        "content": "It looks like `/ask` is not working as it should be\r\n1. Hallucinating against the spec because it never pulled the spec in.\r\n2. The README inside the conversation block without distinction makes it appear as if it's part of the current conversation which also should state Pull Request in the header but appears as Issue\r\n3. It looks like it hasn't pulled in the PR diff at all\r\nPlease see this [run](https://github.com/ubiquity-os-marketplace/command-ask/actions/runs/11605147726/job/32315045572)\r\n_related [context](https://github.com/ubiquity-os/permit-generation/pull/96#issuecomment-2448904538)_",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/issues/26",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 6.29,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 73,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 53.897089041095924,
+            "syllables": 100,
+            "sentences": 2,
+            "score": 0.9389708904109593
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2157173231,
+        "content": "Resolves #26\r\n- returned hash matching for inter-repo references (cause of the original context). I can't actually QA the OG ctx issue because it's a hash match problem so my results would be different, but you'll see that's the problem if you edit the body\r\n- fixed context window structure: correct headers, READMEs own section, and diff own section\r\n- refactored PR and diff parsing using a combination of simple heuristic and encoding\r\n- removing the largest of files from the context window and maxing our token limit as best we can\r\n- optimized `promise.all()` usage and removed `github-diff-tool`\r\n- hardcoded model token limits to help calcs, no endpoint afaik to pull this on the fly\r\n- removed jsdoc and added helpful comments (we don't use JSDOC comments and I've been warned before)\r\n- created an exhaustive list of extensions (using gpt) that we should automatically ignore and not even consider towards the goal of execution speed in large PRs to minimize encoding which is costly\r\n- optimized diff parsing by splitting it into `per-file-diffs` because working down the way takes too long\r\n- improved logs so we can see the full systemMessage as well as just the formatted chat \r\nQA: https://github.com/ubq-testing/ask-plugin/actions/runs/11620710161/job/32363062027\r\n![image](https://github.com/user-attachments/assets/7c32f761-dd58-4b07-8567-caba4b967e1e)\r\nYou can inspect the action logs and see the structure, diff parsing and logs regarding what files were excluded from the diff etc.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 3.81,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 14
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 10
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 218,
+            "wordValue": 0.1,
+            "result": 1.55
+          },
+          "readability": {
+            "fleschKincaid": 3.2218115942029186,
+            "syllables": 342,
+            "sentences": 3,
+            "score": 0.4322181159420292
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 1825278319,
+        "content": "I implemented your suggested strategy mate. This is a move towards improving exec speed by ignoring files outright that are not readable. \r\nFiles are added to the diff smallest first but we auto exclude files that are blatantly over the model's limit as well as files that would not be comprehendible.\r\nIn my testing, encoding was a bottleneck so I tried to improve the speed as much as I could by removing anything that we shouldn't encode and making what we do encode smaller.\r\n---\r\nIf it's unclear via code review what's happening I can produce a bunch internal logs and it can be inspected",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1825278319",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -0,0 +1,261 @@\n+import { encode } from \"gpt-tokenizer\";\n+import { TokenLimits } from \"../types/llm\";\n+import { logger } from \"./errors\";\n+import { EncodeOptions } from \"gpt-tokenizer/esm/GptEncoding\";\n+\n+export async function processPullRequestDiff(diff: string, tokenLimits: TokenLimits) {\n+  const { runningTokenCount, tokensRemaining } = tokenLimits;\n+\n+  // parse the diff into per-file diffs for quicker processing\n+  const perFileDiffs = parsePerFileDiffs(diff);\n+\n+  // filter out obviously non-essential files; .png, .jpg, .pdf, etc.\n+  const essentialFileDiffs = perFileDiffs.filter(({ filename }) => {\n+    return isEssentialFile(filename);\n+  });\n+\n+  // quick estimate using a simple heuristic; 3.5 characters per token\n+  const estimatedFileDiffStats = essentialFileDiffs.map(({ filename, diffContent }) => {\n+    const estimatedTokenCount = Math.ceil(diffContent.length / 3.5);\n+    return { filename, estimatedTokenCount, diffContent };\n+  });\n+\n+  estimatedFileDiffStats.sort((a, b) => a.estimatedTokenCount - b.estimatedTokenCount); // Smallest first\n+\n+  let currentTokenCount = runningTokenCount;\n+  const includedFileDiffs = [];\n+\n+  // Using the quick estimate, include as many files as possible without exceeding token limits\n+  for (const file of estimatedFileDiffStats) {\n+    if (currentTokenCount + file.estimatedTokenCount > tokensRemaining) {\n+      logger.info(`Skipping ${file.filename} to stay within token limits.`);\n+      continue;\n+    }\n+    includedFileDiffs.push(file);\n+    currentTokenCount += file.estimatedTokenCount;\n+  }\n+\n+  // If no files can be included, return null\n+  if (includedFileDiffs.length === 0) {\n+    logger.error(`Cannot include any files from diff without exceeding token limits.`);\n+    return { diff: null };\n+  }\n+\n+  // Accurately calculate token count for included files we have approximated to be under the limit\n+  const accurateFileDiffStats = await Promise.all(\n+    includedFileDiffs.map(async (file) => {\n+      const tokenCountArray = await encodeAsync(file.diffContent, { disallowedSpecial: new Set() });\n+      const tokenCount = tokenCountArray.length;\n+      return { ...file, tokenCount };\n+    })\n+  );\n+\n+  // Take an accurate reading of our current collection of files within the diff\n+  currentTokenCount = accurateFileDiffStats.reduce((sum, file) => sum + file.tokenCount, runningTokenCount);\n+\n+  // Remove files from the end of the list until we are within token limits\n+  while (currentTokenCount > tokensRemaining && accurateFileDiffStats.length > 0) {\n+    const removedFile = accurateFileDiffStats.pop();\n+    currentTokenCount -= removedFile?.tokenCount || 0;\n+    logger.info(`Excluded ${removedFile?.filename || \"Unknown filename\"} after accurate token count exceeded limits.`);\n+  }\n+\n+  if (accurateFileDiffStats.length === 0) {\n+    logger.error(`Cannot include any files from diff after accurate token count calculation.`);\n+    return { diff: null };\n+  }\n+\n+  // Build the diff with the included files\n+  const currentDiff = accurateFileDiffStats.map((file) => file.diffContent).join(\"\\n\");\n+\n+  return { diff: currentDiff };\n+}\n+\n+// Helper to speed up tokenization\n+export async function encodeAsync(text: string, options: EncodeOptions): Promise<number[]> {\n+  return new Promise((resolve) => {\n+    const result = encode(text, options);\n+    resolve(result);\n+  });\n+}\n+\n+// Helper to parse a diff into per-file diffs\n+export function parsePerFileDiffs(diff: string): { filename: string; diffContent: string }[] {\n+  // regex to capture diff sections, including the last file\n+  const diffPattern = /^diff --git a\\/(.*?) b\\/.*$/gm;\n+  let match: RegExpExecArray | null;\n+  const perFileDiffs = [];\n+  let lastIndex = 0;\n+\n+  // iterate over each file in the diff\n+  while ((match = diffPattern.exec(diff)) !== null) {\n+    const filename = match[1];\n+    const startIndex = match.index;\n+\n+    // if we have pushed a file into the array, \"append\" the diff content\n+    if (perFileDiffs.length > 0) {\n+      perFileDiffs[perFileDiffs.length - 1].diffContent = diff.substring(lastIndex, startIndex).trim();\n+    }\n+\n+    perFileDiffs.push({ filename, diffContent: \"\" });\n+    lastIndex = startIndex;\n+  }\n+  // append the last file's diff content\n+  if (perFileDiffs.length > 0 && lastIndex < diff.length) {\n+    perFileDiffs[perFileDiffs.length - 1].diffContent = diff.substring(lastIndex).trim();\n+  }\n+\n+  return perFileDiffs;\n+}\n+\n+// This speeds things up considerably by skipping non-readable/non-relevant files\n+function isEssentialFile(filename: string): boolean {",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 108,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 59.57766666666669,
+            "syllables": 160,
+            "sentences": 5,
+            "score": 0.9957766666666669
+          },
+          "multiplier": 0,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1825280060,
+        "content": "empty strings are safe in this context. \"\" evaluates to null and if added into the context window it's nothing. The alternative means explicitly typing null and then filtering, wasn't sure which was cleaner.\r\nI'll remove them and use the Octokit defined types which include `undefined | null` etc by default for this value",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1825280060",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -1,99 +1,62 @@\n-import { GithubDiff } from \"github-diff-tool\";\n import { createKey, getAllStreamlinedComments } from \"../handlers/comments\";\n import { Context } from \"../types\";\n import { IssueComments, FetchParams, Issue, LinkedIssues, LinkedPullsToIssue, ReviewComments, SimplifiedComment } from \"../types/github-types\";\n-import { StreamlinedComment } from \"../types/llm\";\n+import { StreamlinedComment, TokenLimits } from \"../types/llm\";\n import { logger } from \"./errors\";\n-import {\n-  dedupeStreamlinedComments,\n-  fetchCodeLinkedFromIssue,\n-  idIssueFromComment,\n-  mergeStreamlinedComments,\n-  pullReadmeFromRepoForIssue,\n-  splitKey,\n-} from \"./issue\";\n+import { dedupeStreamlinedComments, fetchCodeLinkedFromIssue, idIssueFromComment, mergeStreamlinedComments, splitKey } from \"./issue\";\n import { handleIssue, handleSpec, handleSpecAndBodyKeys, throttlePromises } from \"./issue-handling\";\n+import { processPullRequestDiff } from \"./pull-request-parsing\";\n \n-/**\n- * Recursively fetches linked issues and processes them, including fetching comments and specifications.\n- *\n- * @param params - The parameters required to fetch the linked issues, including context and other details.\n- * @returns A promise that resolves to an object containing linked issues, specifications, streamlined comments, and seen issue keys.\n- */\n export async function recursivelyFetchLinkedIssues(params: FetchParams) {\n+  // take a first run at gathering everything we need and package it up\n   const { linkedIssues, seen, specAndBodies, streamlinedComments } = await fetchLinkedIssues(params);\n+  // build promises and throttle them; this calls handleSpec which is a recursive function potentially to great depth\n   const fetchPromises = linkedIssues.map(async (linkedIssue) => await mergeCommentsAndFetchSpec(params, linkedIssue, streamlinedComments, specAndBodies, seen));\n   await throttlePromises(fetchPromises, 10);\n+  // handle the keys that have been gathered\n   const linkedIssuesKeys = linkedIssues.map((issue) => createKey(`${issue.owner}/${issue.repo}/${issue.issueNumber}`));\n+  // exhaustive list of unique keys from the first full pass\n   const specAndBodyKeys = Array.from(new Set([...Object.keys(specAndBodies), ...Object.keys(streamlinedComments), ...linkedIssuesKeys]));\n+  // this fn throttles from within but again, be weary of the rate limit\n   await handleSpecAndBodyKeys(specAndBodyKeys, params, dedupeStreamlinedComments(streamlinedComments), seen);\n   return { linkedIssues, specAndBodies, streamlinedComments };\n }\n \n-/**\n- * Fetches linked issues recursively and processes them.\n- *\n- * @param params - The parameters required to fetch the linked issues, including context and other details.\n- * @returns A promise that resolves to an object containing linked issues, specifications, streamlined comments, and seen issue keys.\n- */\n export async function fetchLinkedIssues(params: FetchParams) {\n   const { comments, issue } = await fetchIssueComments(params);\n   if (!issue) {\n     return { streamlinedComments: {}, linkedIssues: [], specAndBodies: {}, seen: new Set<string>() };\n   }\n-  if (!issue.body || !issue.html_url) {\n-    throw logger.error(\"Issue body or URL not found\", { issueUrl: issue.html_url });\n-  }\n \n   if (!params.owner || !params.repo) {\n     throw logger.error(\"Owner or repo not found\");\n   }\n+\n   const issueKey = createKey(issue.html_url);\n   const [owner, repo, issueNumber] = splitKey(issueKey);\n-  const linkedIssues: LinkedIssues[] = [{ body: issue.body, comments, issueNumber: parseInt(issueNumber), owner, repo, url: issue.html_url }];\n+  const linkedIssues: LinkedIssues[] = [{ body: issue.body || \"\", comments, issueNumber: parseInt(issueNumber), owner, repo, url: issue.html_url }];\n   const specAndBodies: Record<string, string> = {};\n   const seen = new Set<string>([issueKey]);\n \n   comments.push({\n-    body: issue.body,\n+    body: issue.body || \"\",",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 53,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 68.88058962264155,
+            "syllables": 78,
+            "sentences": 4,
+            "score": 0.9111941037735845
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1825280366,
+        "content": "I've used in a few of my plugins now and yeah far more readable",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1825280366",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -74,15 +77,15 @@ export function createKey(issueUrl: string, issue?: number) {\n  */\n export function streamlineComments(comments: SimplifiedComment[]) {\n   const streamlined: Record<string, StreamlinedComment[]> = {};\n+\n   for (const comment of comments) {\n     const { user, issueUrl: url, body } = comment;\n-    // Skip bot comments\n     if (user?.type === \"Bot\") continue;\n+\n     const key = createKey(url);\n     const [owner, repo] = splitKey(key);\n-    if (!streamlined[key]) {\n-      streamlined[key] = [];\n-    }\n+    streamlined[key] ??= [];",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 90.09000000000002,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.6990999999999998
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1825293091,
+        "content": "removed it but if you think it's a good idea we can always return it",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1825293091",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -0,0 +1,261 @@\n+import { encode } from \"gpt-tokenizer\";\n+import { TokenLimits } from \"../types/llm\";\n+import { logger } from \"./errors\";\n+import { EncodeOptions } from \"gpt-tokenizer/esm/GptEncoding\";\n+\n+export async function processPullRequestDiff(diff: string, tokenLimits: TokenLimits) {\n+  const { runningTokenCount, tokensRemaining } = tokenLimits;\n+\n+  // parse the diff into per-file diffs for quicker processing\n+  const perFileDiffs = parsePerFileDiffs(diff);\n+\n+  // filter out obviously non-essential files; .png, .jpg, .pdf, etc.\n+  const essentialFileDiffs = perFileDiffs.filter(({ filename }) => {\n+    return isEssentialFile(filename);\n+  });\n+\n+  // quick estimate using a simple heuristic; 3.5 characters per token\n+  const estimatedFileDiffStats = essentialFileDiffs.map(({ filename, diffContent }) => {\n+    const estimatedTokenCount = Math.ceil(diffContent.length / 3.5);\n+    return { filename, estimatedTokenCount, diffContent };\n+  });\n+\n+  estimatedFileDiffStats.sort((a, b) => a.estimatedTokenCount - b.estimatedTokenCount); // Smallest first\n+\n+  let currentTokenCount = runningTokenCount;\n+  const includedFileDiffs = [];\n+\n+  // Using the quick estimate, include as many files as possible without exceeding token limits\n+  for (const file of estimatedFileDiffStats) {\n+    if (currentTokenCount + file.estimatedTokenCount > tokensRemaining) {\n+      logger.info(`Skipping ${file.filename} to stay within token limits.`);\n+      continue;\n+    }\n+    includedFileDiffs.push(file);\n+    currentTokenCount += file.estimatedTokenCount;\n+  }\n+\n+  // If no files can be included, return null\n+  if (includedFileDiffs.length === 0) {\n+    logger.error(`Cannot include any files from diff without exceeding token limits.`);\n+    return { diff: null };\n+  }\n+\n+  // Accurately calculate token count for included files we have approximated to be under the limit\n+  const accurateFileDiffStats = await Promise.all(\n+    includedFileDiffs.map(async (file) => {\n+      const tokenCountArray = await encodeAsync(file.diffContent, { disallowedSpecial: new Set() });\n+      const tokenCount = tokenCountArray.length;\n+      return { ...file, tokenCount };\n+    })\n+  );\n+\n+  // Take an accurate reading of our current collection of files within the diff\n+  currentTokenCount = accurateFileDiffStats.reduce((sum, file) => sum + file.tokenCount, runningTokenCount);\n+\n+  // Remove files from the end of the list until we are within token limits\n+  while (currentTokenCount > tokensRemaining && accurateFileDiffStats.length > 0) {\n+    const removedFile = accurateFileDiffStats.pop();\n+    currentTokenCount -= removedFile?.tokenCount || 0;\n+    logger.info(`Excluded ${removedFile?.filename || \"Unknown filename\"} after accurate token count exceeded limits.`);\n+  }\n+\n+  if (accurateFileDiffStats.length === 0) {\n+    logger.error(`Cannot include any files from diff after accurate token count calculation.`);\n+    return { diff: null };\n+  }\n+\n+  // Build the diff with the included files\n+  const currentDiff = accurateFileDiffStats.map((file) => file.diffContent).join(\"\\n\");\n+\n+  return { diff: currentDiff };\n+}\n+\n+// Helper to speed up tokenization\n+export async function encodeAsync(text: string, options: EncodeOptions): Promise<number[]> {\n+  return new Promise((resolve) => {\n+    const result = encode(text, options);\n+    resolve(result);\n+  });\n+}\n+\n+// Helper to parse a diff into per-file diffs\n+export function parsePerFileDiffs(diff: string): { filename: string; diffContent: string }[] {\n+  // regex to capture diff sections, including the last file\n+  const diffPattern = /^diff --git a\\/(.*?) b\\/.*$/gm;\n+  let match: RegExpExecArray | null;\n+  const perFileDiffs = [];\n+  let lastIndex = 0;\n+\n+  // iterate over each file in the diff\n+  while ((match = diffPattern.exec(diff)) !== null) {\n+    const filename = match[1];\n+    const startIndex = match.index;\n+\n+    // if we have pushed a file into the array, \"append\" the diff content\n+    if (perFileDiffs.length > 0) {\n+      perFileDiffs[perFileDiffs.length - 1].diffContent = diff.substring(lastIndex, startIndex).trim();\n+    }\n+\n+    perFileDiffs.push({ filename, diffContent: \"\" });\n+    lastIndex = startIndex;\n+  }\n+  // append the last file's diff content\n+  if (perFileDiffs.length > 0 && lastIndex < diff.length) {\n+    perFileDiffs[perFileDiffs.length - 1].diffContent = diff.substring(lastIndex).trim();\n+  }\n+\n+  return perFileDiffs;\n+}\n+\n+// This speeds things up considerably by skipping non-readable/non-relevant files\n+function isEssentialFile(filename: string): boolean {",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 84.845,
+            "syllables": 20,
+            "sentences": 1,
+            "score": 0.75155
+          },
+          "multiplier": 0,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1826881068,
+        "content": "You should run it and QA it properly but files are not fetched. The single PR diff is split into sections based on the file sections included within the raw diff as per the regex used to split the diff.\r\nIt's an action, we have 6 hours and no cap I'm aware of in terms of memory, but this processes things fast, which was my intention considering how slow it can be to encode thousands of lines of diff, I know this by experimenting with various methods.\r\nThat raises the API calls and needs promise.all refactoring. My approach literally uses just the diff of the PR. \r\nWhy fetch any files at all, we only send the diff not the full file, the diff is what's been changed within the file not the whole thing so why would we use the full file sizes that also raising api calls in the process and needs additional math logic to calculate differences etc - It makes sense to just use the diff.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1826881068",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -0,0 +1,104 @@\n+import { encode } from \"gpt-tokenizer\";\n+import { TokenLimits } from \"../types/llm\";\n+import { logger } from \"./errors\";\n+import { EncodeOptions } from \"gpt-tokenizer/esm/GptEncoding\";\n+\n+export async function processPullRequestDiff(diff: string, tokenLimits: TokenLimits) {\n+  const { runningTokenCount, tokensRemaining } = tokenLimits;\n+\n+  // parse the diff into per-file diffs for quicker processing\n+  const perFileDiffs = parsePerFileDiffs(diff);\n+\n+  // quick estimate using a simple heuristic; 3.5 characters per token\n+  const estimatedFileDiffStats = perFileDiffs.map(({ filename, diffContent }) => {",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 172,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 69.7508139534884,
+            "syllables": 228,
+            "sentences": 7,
+            "score": 0.902491860465116
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1826882038,
+        "content": "Maybe it's best I close this PR\r\n1. It involves quite a lot of changes that may or may not clash with your refactoring and vision for how things should work, as I appear to be stepping wrong no matter what it seems.\r\n2. I feel my opinions and work is repeatedly being dismissed without proper QA or review and it's feeling combative, and I'm not vying for ownership of this plugin. I did write and rewrite it three times for V1 and V2 so I felt a sense of ownership to it but I'm happy to step back and get out of your way with things. I can focus on other areas of development no problem.\r\n3. I'm happy to help if requested but I think you and 0x4007 have got things more than covered.\r\nPlease feel free to close the PR or take over it again, no hard feelings or anything, I just don't want any tension with anyone in the org that's all.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1826882038",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -0,0 +1,104 @@\n+import { encode } from \"gpt-tokenizer\";\n+import { TokenLimits } from \"../types/llm\";\n+import { logger } from \"./errors\";\n+import { EncodeOptions } from \"gpt-tokenizer/esm/GptEncoding\";\n+\n+export async function processPullRequestDiff(diff: string, tokenLimits: TokenLimits) {\n+  const { runningTokenCount, tokensRemaining } = tokenLimits;\n+\n+  // parse the diff into per-file diffs for quicker processing\n+  const perFileDiffs = parsePerFileDiffs(diff);\n+\n+  // quick estimate using a simple heuristic; 3.5 characters per token\n+  const estimatedFileDiffStats = perFileDiffs.map(({ filename, diffContent }) => {",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              }
+            },
+            "result": 0.3
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 170,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 71.5801960784314,
+            "syllables": 214,
+            "sentences": 6,
+            "score": 0.884198039215686
+          },
+          "multiplier": 0,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2450967483,
+        "content": "I QA'd using the original issue which caused the failure due to including `/dist`.\r\nIn my debugging the gql fetch was erroring out and doing nothing pretty much. Although I was testing on my own issue with the body as the original error issue, all context was coming in without it. Maybe I've overlooked something but I've removed it since it's unused.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2450967483",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 65,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 64.09201923076924,
+            "syllables": 97,
+            "sentences": 4,
+            "score": 0.9590798076923076
+          },
+          "multiplier": 0,
+          "relevance": 0.75
+        }
+      },
+      {
+        "id": 2450990987,
+        "content": "@sshivaditya2019 @0x4007 @gentlementlegen \r\nready for review",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2450990987",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": -10.754999999999995,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 0,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2451049123,
+        "content": "1. First we split each file in the diff into sections\r\n2. Then we determine quickly if it's above the models limit by `diff.length / 3.5`\r\n3. We mark files to be added to the diff via `usedTokens + approximation < tokensRemaining`\r\n4. Binary, bundles, etc they are the first to be excluded before any encoding as they tend to overshoot the model limit.\r\n5. We mark the smallest files to be added first building up to the biggest (minus any that outright overshoot)\r\n6. We get an accurate encoding of the sections and start popping the largest.\r\n7. We return the included files.\r\nI think this is pretty efficient and fits the purpose well. I tried an alternative, which was use the gitTree and base it on `file.size` but it wasn't as efficient or effective.\r\nI'm unaware of any packages but I think a simple file ext system would be as good as we'd need it to be. An alt approach is feed an array of the filenames to GPT and have it determine which to exclude but seems redundant. I can look into packages if my approach isn't effective/accepted for merge.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2451049123",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 7
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 9
+              }
+            },
+            "result": 0.7
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 183,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 65.73162909836068,
+            "syllables": 255,
+            "sentences": 8,
+            "score": 0.9426837090163932
+          },
+          "multiplier": 0,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2452948496,
+        "content": "@sshivaditya @sshivaditya2019 @gentlementlegen please review when you can",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2452948496",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": -2.2099999999999795,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 0,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2453093529,
+        "content": "[As a rough rule of thumb, 1 token is approximately 4 characters or 0.75 words for English text.](https://platform.openai.com/docs/concepts/tokens#tokens)\r\nA rough approximation of OpenAIs encoding",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2453093529",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 52.864666666666665,
+            "syllables": 43,
+            "sentences": 3,
+            "score": 0.9286466666666666
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2453099979,
+        "content": "I [do use](https://github.com/ubiquity-os-marketplace/command-ask/pull/28/files#diff-23c426746bbf7449570050410ae6fa234caedd116e8b2f1e7fa82e1bbc1e7577R42) the official tokenizer for a more accurate reading once I've excluded the files that are clearly over the limit with the quick approximation, such as dist files etc. Encoding those massive files is a terrible bottleneck and should be avoided if possible in my opinion, which is why I've implemented things the way I have.\r\nI calculate `tokensRemaining` at the beginning via `model.maxTokens - model.maxOutput` which gives us full response windows",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2453099979",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 72,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 52.05000000000001,
+            "syllables": 111,
+            "sentences": 3,
+            "score": 0.9205000000000001
+          },
+          "multiplier": 0,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2453442958,
+        "content": "I'm finished with it so if that's your review done you can merge it I guess\r\nOur dist builds range from 3MB-16MB, encoding these takes a lot of time especially the larger ones which was the one I used for development. Partners may have much larger files. dist files are added via a workflow (for us) and it tends to change huge sections, potentially the entire file in git's eyes.\r\nThe primary optimization was reducing API calls to maintain speed in building the ctx window, which includes encoding the diff. \r\n- Encoding the full thing and slicing then re-encoding takes too long: we don't have file sizes to selectively slice without encoding each section or spamming the API.\r\n- Say we use `perFileDiff.length` encoding and then adding to the returned diff til we hit a 15MB file which will never fit, but we'd need to encode it unnecessarily to find out if it would\r\n- In my testing the token count was around 35k I believe with the diff stripped so we have a huge amount of tokens left to use but the 15MB file never had a chance in of being included\r\n- `promise.all` usage was implemented to improve exec speed building the ctx window, hitting the secondary was either a reduce speed or reduce calls problem.\r\n- I chose reduce calls, but introduced a bottleneck encoding the entire diff so further optimizations had to be made and so it made sense to stay inline with OpenAIs rule of thumb for their encoder but not perform a full encoding of 16MB worth of code when not required\r\nI'm pretty intentional in my work there's not something I'll do 'just because', for no reason or to show off or something whatever the opinion might me.\r\nFeel free to ask why I did something in particular if you are unclear of why I did it, I'm happy to explain my thought process if it's not clear via review alone.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2453442958",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 10
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              }
+            },
+            "result": 0.5
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 333,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 45.434273648648684,
+            "syllables": 469,
+            "sentences": 8,
+            "score": 0.8543427364864868
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2453443177,
+        "content": "I'm happy to remove anything that you guys don't want or don't think is required and we'll get this merged ASAP",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2453443177",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 76.55600000000001,
+            "syllables": 31,
+            "sentences": 1,
+            "score": 0.8344399999999998
+          },
+          "multiplier": 0,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 215.72 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>200</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>6.29</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>5.62</td></tr><tr><td>Review</td><td>Comment</td><td>15</td><td>3.81</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/issues/26\" target=\"_blank\" rel=\"noopener\">It looks like &#96;/ask&#96; is not working as it should be1. &hellip;</a></h6></td><td><details><summary>4.91</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.3&#13;regex:&#13;  wordCount: 73&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>1</td><td>1</td><td>6.29</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/issues/26#issuecomment-2448922712\" target=\"_blank\" rel=\"noopener\">I'll look into it tomorrow as I may have caused it with the refa&hellip;</a></h6></td><td><details><summary>2.23</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 42&#13;  wordValue: 0.1&#13;  result: 2.23&#13;</pre></details></td><td>1</td><td>2</td><td>5.62</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28\" target=\"_blank\" rel=\"noopener\">Resolves #26- returned hash matching for inter-repo references&hellip;</a></h6></td><td><details><summary>3.55</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 14&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 10&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 2&#13;regex:&#13;  wordCount: 218&#13;  wordValue: 0.1&#13;  result: 1.55&#13;</pre></details></td><td>0.95</td><td>1</td><td>3.81</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1825278319\" target=\"_blank\" rel=\"noopener\">I implemented your suggested strategy mate. This is a move towar&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 108&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.85</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1825280060\" target=\"_blank\" rel=\"noopener\">empty strings are safe in this context. \"\" evaluates to null and&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 53&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1825280366\" target=\"_blank\" rel=\"noopener\">I've used in a few of my plugins now and yeah far more readable</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1825293091\" target=\"_blank\" rel=\"noopener\">removed it but if you think it's a good idea we can always retur&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1826881068\" target=\"_blank\" rel=\"noopener\">You should run it and QA it properly but files are not fetched. &hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 172&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1826882038\" target=\"_blank\" rel=\"noopener\">Maybe it's best I close this PR1. It involves quite a lot of c&hellip;</a></h6></td><td><details><summary>0.3</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;  result: 0.3&#13;regex:&#13;  wordCount: 170&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.1</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2450967483\" target=\"_blank\" rel=\"noopener\">I QA'd using the original issue which caused the failure due to &hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 65&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.75</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2450990987\" target=\"_blank\" rel=\"noopener\">@sshivaditya2019 @0x4007 @gentlementlegen ready for review</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2451049123\" target=\"_blank\" rel=\"noopener\">1. First we split each file in the diff into sections2. Then w&hellip;</a></h6></td><td><details><summary>0.7</summary><pre>content:&#13;  content:&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 7&#13;    p:&#13;      score: 0&#13;      elementCount: 9&#13;  result: 0.7&#13;regex:&#13;  wordCount: 183&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2452948496\" target=\"_blank\" rel=\"noopener\">@sshivaditya @sshivaditya2019 @gentlementlegen please review whe&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.2</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2453093529\" target=\"_blank\" rel=\"noopener\">[As a rough rule of thumb, 1 token is approximately 4 characters&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2453099979\" target=\"_blank\" rel=\"noopener\">I [do use](https://github.com/ubiquity-os-marketplace/command-as&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 72&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.85</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2453442958\" target=\"_blank\" rel=\"noopener\">I'm finished with it so if that's your review done you can merge&hellip;</a></h6></td><td><details><summary>0.5</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 10&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;  result: 0.5&#13;regex:&#13;  wordCount: 333&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2453443177\" target=\"_blank\" rel=\"noopener\">I'm happy to remove anything that you guys don't want or don't t&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.4</td><td>2</td><td>0</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 0.188,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2466693490,
+        "content": "@Keyrxng Pls don't start unfunded github issues",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/issues/26#issuecomment-2466693490",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.188,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 82.39000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.7760999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 0.188 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.188</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/issues/26#issuecomment-2466693490\" target=\"_blank\" rel=\"noopener\">@Keyrxng Pls don't start unfunded github issues</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.1</td><td>2</td><td>0.188</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 45.35,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1825274107,
+        "content": "Black listing is definitely the wrong approach. I explained a dynamic strategy elsewhere that will exclude the most changes to the least.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1825274107",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,261 @@\n+import { encode } from \"gpt-tokenizer\";\n+import { TokenLimits } from \"../types/llm\";\n+import { logger } from \"./errors\";\n+import { EncodeOptions } from \"gpt-tokenizer/esm/GptEncoding\";\n+\n+export async function processPullRequestDiff(diff: string, tokenLimits: TokenLimits) {\n+  const { runningTokenCount, tokensRemaining } = tokenLimits;\n+\n+  // parse the diff into per-file diffs for quicker processing\n+  const perFileDiffs = parsePerFileDiffs(diff);\n+\n+  // filter out obviously non-essential files; .png, .jpg, .pdf, etc.\n+  const essentialFileDiffs = perFileDiffs.filter(({ filename }) => {\n+    return isEssentialFile(filename);\n+  });\n+\n+  // quick estimate using a simple heuristic; 3.5 characters per token\n+  const estimatedFileDiffStats = essentialFileDiffs.map(({ filename, diffContent }) => {\n+    const estimatedTokenCount = Math.ceil(diffContent.length / 3.5);\n+    return { filename, estimatedTokenCount, diffContent };\n+  });\n+\n+  estimatedFileDiffStats.sort((a, b) => a.estimatedTokenCount - b.estimatedTokenCount); // Smallest first\n+\n+  let currentTokenCount = runningTokenCount;\n+  const includedFileDiffs = [];\n+\n+  // Using the quick estimate, include as many files as possible without exceeding token limits\n+  for (const file of estimatedFileDiffStats) {\n+    if (currentTokenCount + file.estimatedTokenCount > tokensRemaining) {\n+      logger.info(`Skipping ${file.filename} to stay within token limits.`);\n+      continue;\n+    }\n+    includedFileDiffs.push(file);\n+    currentTokenCount += file.estimatedTokenCount;\n+  }\n+\n+  // If no files can be included, return null\n+  if (includedFileDiffs.length === 0) {\n+    logger.error(`Cannot include any files from diff without exceeding token limits.`);\n+    return { diff: null };\n+  }\n+\n+  // Accurately calculate token count for included files we have approximated to be under the limit\n+  const accurateFileDiffStats = await Promise.all(\n+    includedFileDiffs.map(async (file) => {\n+      const tokenCountArray = await encodeAsync(file.diffContent, { disallowedSpecial: new Set() });\n+      const tokenCount = tokenCountArray.length;\n+      return { ...file, tokenCount };\n+    })\n+  );\n+\n+  // Take an accurate reading of our current collection of files within the diff\n+  currentTokenCount = accurateFileDiffStats.reduce((sum, file) => sum + file.tokenCount, runningTokenCount);\n+\n+  // Remove files from the end of the list until we are within token limits\n+  while (currentTokenCount > tokensRemaining && accurateFileDiffStats.length > 0) {\n+    const removedFile = accurateFileDiffStats.pop();\n+    currentTokenCount -= removedFile?.tokenCount || 0;\n+    logger.info(`Excluded ${removedFile?.filename || \"Unknown filename\"} after accurate token count exceeded limits.`);\n+  }\n+\n+  if (accurateFileDiffStats.length === 0) {\n+    logger.error(`Cannot include any files from diff after accurate token count calculation.`);\n+    return { diff: null };\n+  }\n+\n+  // Build the diff with the included files\n+  const currentDiff = accurateFileDiffStats.map((file) => file.diffContent).join(\"\\n\");\n+\n+  return { diff: currentDiff };\n+}\n+\n+// Helper to speed up tokenization\n+export async function encodeAsync(text: string, options: EncodeOptions): Promise<number[]> {\n+  return new Promise((resolve) => {\n+    const result = encode(text, options);\n+    resolve(result);\n+  });\n+}\n+\n+// Helper to parse a diff into per-file diffs\n+export function parsePerFileDiffs(diff: string): { filename: string; diffContent: string }[] {\n+  // regex to capture diff sections, including the last file\n+  const diffPattern = /^diff --git a\\/(.*?) b\\/.*$/gm;\n+  let match: RegExpExecArray | null;\n+  const perFileDiffs = [];\n+  let lastIndex = 0;\n+\n+  // iterate over each file in the diff\n+  while ((match = diffPattern.exec(diff)) !== null) {\n+    const filename = match[1];\n+    const startIndex = match.index;\n+\n+    // if we have pushed a file into the array, \"append\" the diff content\n+    if (perFileDiffs.length > 0) {\n+      perFileDiffs[perFileDiffs.length - 1].diffContent = diff.substring(lastIndex, startIndex).trim();\n+    }\n+\n+    perFileDiffs.push({ filename, diffContent: \"\" });\n+    lastIndex = startIndex;\n+  }\n+  // append the last file's diff content\n+  if (perFileDiffs.length > 0 && lastIndex < diff.length) {\n+    perFileDiffs[perFileDiffs.length - 1].diffContent = diff.substring(lastIndex).trim();\n+  }\n+\n+  return perFileDiffs;\n+}\n+\n+// This speeds things up considerably by skipping non-readable/non-relevant files\n+function isEssentialFile(filename: string): boolean {",
+        "score": {
+          "reward": 3.248,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 57.23363636363638,
+            "syllables": 36,
+            "sentences": 2,
+            "score": 0.9723363636363638
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1825275880,
+        "content": "```suggestion\n    body: issue.body ?? null,\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1825275880",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,99 +1,62 @@\n-import { GithubDiff } from \"github-diff-tool\";\n import { createKey, getAllStreamlinedComments } from \"../handlers/comments\";\n import { Context } from \"../types\";\n import { IssueComments, FetchParams, Issue, LinkedIssues, LinkedPullsToIssue, ReviewComments, SimplifiedComment } from \"../types/github-types\";\n-import { StreamlinedComment } from \"../types/llm\";\n+import { StreamlinedComment, TokenLimits } from \"../types/llm\";\n import { logger } from \"./errors\";\n-import {\n-  dedupeStreamlinedComments,\n-  fetchCodeLinkedFromIssue,\n-  idIssueFromComment,\n-  mergeStreamlinedComments,\n-  pullReadmeFromRepoForIssue,\n-  splitKey,\n-} from \"./issue\";\n+import { dedupeStreamlinedComments, fetchCodeLinkedFromIssue, idIssueFromComment, mergeStreamlinedComments, splitKey } from \"./issue\";\n import { handleIssue, handleSpec, handleSpecAndBodyKeys, throttlePromises } from \"./issue-handling\";\n+import { processPullRequestDiff } from \"./pull-request-parsing\";\n \n-/**\n- * Recursively fetches linked issues and processes them, including fetching comments and specifications.\n- *\n- * @param params - The parameters required to fetch the linked issues, including context and other details.\n- * @returns A promise that resolves to an object containing linked issues, specifications, streamlined comments, and seen issue keys.\n- */\n export async function recursivelyFetchLinkedIssues(params: FetchParams) {\n+  // take a first run at gathering everything we need and package it up\n   const { linkedIssues, seen, specAndBodies, streamlinedComments } = await fetchLinkedIssues(params);\n+  // build promises and throttle them; this calls handleSpec which is a recursive function potentially to great depth\n   const fetchPromises = linkedIssues.map(async (linkedIssue) => await mergeCommentsAndFetchSpec(params, linkedIssue, streamlinedComments, specAndBodies, seen));\n   await throttlePromises(fetchPromises, 10);\n+  // handle the keys that have been gathered\n   const linkedIssuesKeys = linkedIssues.map((issue) => createKey(`${issue.owner}/${issue.repo}/${issue.issueNumber}`));\n+  // exhaustive list of unique keys from the first full pass\n   const specAndBodyKeys = Array.from(new Set([...Object.keys(specAndBodies), ...Object.keys(streamlinedComments), ...linkedIssuesKeys]));\n+  // this fn throttles from within but again, be weary of the rate limit\n   await handleSpecAndBodyKeys(specAndBodyKeys, params, dedupeStreamlinedComments(streamlinedComments), seen);\n   return { linkedIssues, specAndBodies, streamlinedComments };\n }\n \n-/**\n- * Fetches linked issues recursively and processes them.\n- *\n- * @param params - The parameters required to fetch the linked issues, including context and other details.\n- * @returns A promise that resolves to an object containing linked issues, specifications, streamlined comments, and seen issue keys.\n- */\n export async function fetchLinkedIssues(params: FetchParams) {\n   const { comments, issue } = await fetchIssueComments(params);\n   if (!issue) {\n     return { streamlinedComments: {}, linkedIssues: [], specAndBodies: {}, seen: new Set<string>() };\n   }\n-  if (!issue.body || !issue.html_url) {\n-    throw logger.error(\"Issue body or URL not found\", { issueUrl: issue.html_url });\n-  }\n \n   if (!params.owner || !params.repo) {\n     throw logger.error(\"Owner or repo not found\");\n   }\n+\n   const issueKey = createKey(issue.html_url);\n   const [owner, repo, issueNumber] = splitKey(issueKey);\n-  const linkedIssues: LinkedIssues[] = [{ body: issue.body, comments, issueNumber: parseInt(issueNumber), owner, repo, url: issue.html_url }];\n+  const linkedIssues: LinkedIssues[] = [{ body: issue.body || \"\", comments, issueNumber: parseInt(issueNumber), owner, repo, url: issue.html_url }];\n   const specAndBodies: Record<string, string> = {};\n   const seen = new Set<string>([issueKey]);\n \n   comments.push({\n-    body: issue.body,\n+    body: issue.body || \"\",",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1825276053,
+        "content": "Null",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1825276053",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -113,61 +130,75 @@ async function createContextBlockSection(\n         })\n       )?.body || \"No specification or body available\";\n   }\n-  const specOrBodyBlock = [createHeader(specHeader, key), createSpecOrBody(specOrBody), createFooter(specHeader)];\n-  currentContextTokenCount += await context.adapters.openai.completions.findTokenLength(specOrBody);\n-  const header = getCorrectHeaderString(prDiff, issueNumber, isCurrentIssue, true);\n-  const repoString = `${org}/${repo} #${issueNumber}`;\n-  const block = [specOrBodyBlock.join(\"\"), createHeader(header, repoString), createComment({ issueNumber, repo, org, comments }), createFooter(header)];\n-  currentContextTokenCount += await context.adapters.openai.completions.findTokenLength(block.join(\" \"));\n-  if (!prDiff) {\n-    return [currentContextTokenCount, block.join(\"\")];\n+\n+  const specHeader = getCorrectHeaderString(diff, isCurrentIssue, false); //E.g:  === Current Task Specification ===\n+  const blockHeader = getCorrectHeaderString(diff, isCurrentIssue, true); //E.g:  === Linked Task Conversation ===\n+\n+  // contains the actual spec or body\n+  const specBlock = [createHeader(specHeader, key), createSpecOrBody(specOrBody), createFooter(specHeader, key)];\n+  // contains the conversation\n+  const commentSection = createComment({ issueNumber, repo, org, comments }, specOrBody);\n+\n+  let block;\n+  // if we have a conversation, we should include it\n+  if (commentSection) {\n+    block = [specBlock.join(\"\\n\"), createHeader(blockHeader, key), commentSection, createFooter(blockHeader, key)];\n+  } else {\n+    // No need for empty sections in the chat history\n+    block = [specBlock.join(\"\\n\")];\n+  }\n+\n+  // only inject the README if this is the current issue as that's likely most relevant\n+  if (isCurrentIssue) {\n+    const readme = await pullReadmeFromRepoForIssue({ context, owner: org, repo });\n+    // give the readme it's own clear section\n+    if (readme) {\n+      const readmeBlock = readme ? [createHeader(\"README\", key), createSpecOrBody(readme), createFooter(\"README\", key)] : [];\n+      block = block.concat(readmeBlock);\n+    }\n+  }\n+\n+  if (!diff) {\n+    // the diff was already encoded etc but we have added more to the block so we need to re-encode\n+    return [await context.adapters.openai.completions.findTokenLength(block.join(\"\")), block.join(\"\\n\")];\n   }\n-  const diffBlock = [createHeader(\"Linked Pull Request Code Diff\", repoString), prDiff, createFooter(\"\\nLinked Pull Request Code Diff\")];\n-  return [currentContextTokenCount, block.join(\"\") + diffBlock.join(\"\")];\n+\n+  // Build the block with the diff in it's own section\n+  const blockWithDiff = [block.join(\"\\n\"), createHeader(`Pull Request Diff`, key), diff, createFooter(`Pull Request Diff`, key)];\n+  return [await context.adapters.openai.completions.findTokenLength(blockWithDiff.join(\"\")), blockWithDiff.join(\"\\n\")];\n }\n \n-/**\n- * Creates a header string for the given content and repository string.\n- *\n- * @param content - The content to include in the header.\n- * @param repoString - The repository string to include in the header.\n- * @returns A formatted header string.\n- */\n function createHeader(content: string, repoString: string) {\n-  return `=== ${content} === ${repoString} ===\\n\\n`;\n+  return `=== ${content} === ${repoString} ===\\n`;\n }\n \n-/**\n- * Creates a footer string for the given content.\n- *\n- * @param content - The content to include in the footer.\n- * @returns A formatted footer string.\n- */\n-function createFooter(content: string) {\n-  return `=== End ${content} ===\\n\\n`;\n+function createFooter(content: string, repoString: string) {\n+  return `=== End ${content} === ${repoString} ===\\n`;\n }\n \n-/**\n- * Creates a comment string from the StreamlinedComments object.\n- *\n- * @param comment - The StreamlinedComments object.\n- * @returns A string representing the comments.\n- */\n-function createComment(comment: StreamlinedComments) {\n+function createSpecOrBody(specOrBody: string) {\n+  return `${specOrBody}\\n`;\n+}\n+\n+function createComment(comment: StreamlinedComments, specOrBody: string) {\n   if (!comment.comments) {\n     return \"\";",
+        "score": {
+          "reward": 0.072,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": 121.22000000000003,
+            "syllables": 1,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1825276558,
+        "content": "??=\nThis is a new one I've never seen before. Pretty nifty",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1825276558",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -74,15 +77,15 @@ export function createKey(issueUrl: string, issue?: number) {\n  */\n export function streamlineComments(comments: SimplifiedComment[]) {\n   const streamlined: Record<string, StreamlinedComment[]> = {};\n+\n   for (const comment of comments) {\n     const { user, issueUrl: url, body } = comment;\n-    // Skip bot comments\n     if (user?.type === \"Bot\") continue;\n+\n     const key = createKey(url);\n     const [owner, repo] = splitKey(key);\n-    if (!streamlined[key]) {\n-      streamlined[key] = [];\n-    }\n+    streamlined[key] ??= [];",
+        "score": {
+          "reward": 0.756,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 87.94500000000002,
+            "syllables": 16,
+            "sentences": 2,
+            "score": 0.7205499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1825277719,
+        "content": "@UbiquityOS explain the strategy I mentioned",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1825277719",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,261 @@\n+import { encode } from \"gpt-tokenizer\";\n+import { TokenLimits } from \"../types/llm\";\n+import { logger } from \"./errors\";\n+import { EncodeOptions } from \"gpt-tokenizer/esm/GptEncoding\";\n+\n+export async function processPullRequestDiff(diff: string, tokenLimits: TokenLimits) {\n+  const { runningTokenCount, tokensRemaining } = tokenLimits;\n+\n+  // parse the diff into per-file diffs for quicker processing\n+  const perFileDiffs = parsePerFileDiffs(diff);\n+\n+  // filter out obviously non-essential files; .png, .jpg, .pdf, etc.\n+  const essentialFileDiffs = perFileDiffs.filter(({ filename }) => {\n+    return isEssentialFile(filename);\n+  });\n+\n+  // quick estimate using a simple heuristic; 3.5 characters per token\n+  const estimatedFileDiffStats = essentialFileDiffs.map(({ filename, diffContent }) => {\n+    const estimatedTokenCount = Math.ceil(diffContent.length / 3.5);\n+    return { filename, estimatedTokenCount, diffContent };\n+  });\n+\n+  estimatedFileDiffStats.sort((a, b) => a.estimatedTokenCount - b.estimatedTokenCount); // Smallest first\n+\n+  let currentTokenCount = runningTokenCount;\n+  const includedFileDiffs = [];\n+\n+  // Using the quick estimate, include as many files as possible without exceeding token limits\n+  for (const file of estimatedFileDiffStats) {\n+    if (currentTokenCount + file.estimatedTokenCount > tokensRemaining) {\n+      logger.info(`Skipping ${file.filename} to stay within token limits.`);\n+      continue;\n+    }\n+    includedFileDiffs.push(file);\n+    currentTokenCount += file.estimatedTokenCount;\n+  }\n+\n+  // If no files can be included, return null\n+  if (includedFileDiffs.length === 0) {\n+    logger.error(`Cannot include any files from diff without exceeding token limits.`);\n+    return { diff: null };\n+  }\n+\n+  // Accurately calculate token count for included files we have approximated to be under the limit\n+  const accurateFileDiffStats = await Promise.all(\n+    includedFileDiffs.map(async (file) => {\n+      const tokenCountArray = await encodeAsync(file.diffContent, { disallowedSpecial: new Set() });\n+      const tokenCount = tokenCountArray.length;\n+      return { ...file, tokenCount };\n+    })\n+  );\n+\n+  // Take an accurate reading of our current collection of files within the diff\n+  currentTokenCount = accurateFileDiffStats.reduce((sum, file) => sum + file.tokenCount, runningTokenCount);\n+\n+  // Remove files from the end of the list until we are within token limits\n+  while (currentTokenCount > tokensRemaining && accurateFileDiffStats.length > 0) {\n+    const removedFile = accurateFileDiffStats.pop();\n+    currentTokenCount -= removedFile?.tokenCount || 0;\n+    logger.info(`Excluded ${removedFile?.filename || \"Unknown filename\"} after accurate token count exceeded limits.`);\n+  }\n+\n+  if (accurateFileDiffStats.length === 0) {\n+    logger.error(`Cannot include any files from diff after accurate token count calculation.`);\n+    return { diff: null };\n+  }\n+\n+  // Build the diff with the included files\n+  const currentDiff = accurateFileDiffStats.map((file) => file.diffContent).join(\"\\n\");\n+\n+  return { diff: currentDiff };\n+}\n+\n+// Helper to speed up tokenization\n+export async function encodeAsync(text: string, options: EncodeOptions): Promise<number[]> {\n+  return new Promise((resolve) => {\n+    const result = encode(text, options);\n+    resolve(result);\n+  });\n+}\n+\n+// Helper to parse a diff into per-file diffs\n+export function parsePerFileDiffs(diff: string): { filename: string; diffContent: string }[] {\n+  // regex to capture diff sections, including the last file\n+  const diffPattern = /^diff --git a\\/(.*?) b\\/.*$/gm;\n+  let match: RegExpExecArray | null;\n+  const perFileDiffs = [];\n+  let lastIndex = 0;\n+\n+  // iterate over each file in the diff\n+  while ((match = diffPattern.exec(diff)) !== null) {\n+    const filename = match[1];\n+    const startIndex = match.index;\n+\n+    // if we have pushed a file into the array, \"append\" the diff content\n+    if (perFileDiffs.length > 0) {\n+      perFileDiffs[perFileDiffs.length - 1].diffContent = diff.substring(lastIndex, startIndex).trim();\n+    }\n+\n+    perFileDiffs.push({ filename, diffContent: \"\" });\n+    lastIndex = startIndex;\n+  }\n+  // append the last file's diff content\n+  if (perFileDiffs.length > 0 && lastIndex < diff.length) {\n+    perFileDiffs[perFileDiffs.length - 1].diffContent = diff.substring(lastIndex).trim();\n+  }\n+\n+  return perFileDiffs;\n+}\n+\n+// This speeds things up considerably by skipping non-readable/non-relevant files\n+function isEssentialFile(filename: string): boolean {",
+        "score": {
+          "reward": 0.72,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 17.44500000000002,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.5744500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1825277902,
+        "content": "I like to test and see how it performs wherever I can but I haven't been satisfied with the results lately.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1825277902",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,261 @@\n+import { encode } from \"gpt-tokenizer\";\n+import { TokenLimits } from \"../types/llm\";\n+import { logger } from \"./errors\";\n+import { EncodeOptions } from \"gpt-tokenizer/esm/GptEncoding\";\n+\n+export async function processPullRequestDiff(diff: string, tokenLimits: TokenLimits) {\n+  const { runningTokenCount, tokensRemaining } = tokenLimits;\n+\n+  // parse the diff into per-file diffs for quicker processing\n+  const perFileDiffs = parsePerFileDiffs(diff);\n+\n+  // filter out obviously non-essential files; .png, .jpg, .pdf, etc.\n+  const essentialFileDiffs = perFileDiffs.filter(({ filename }) => {\n+    return isEssentialFile(filename);\n+  });\n+\n+  // quick estimate using a simple heuristic; 3.5 characters per token\n+  const estimatedFileDiffStats = essentialFileDiffs.map(({ filename, diffContent }) => {\n+    const estimatedTokenCount = Math.ceil(diffContent.length / 3.5);\n+    return { filename, estimatedTokenCount, diffContent };\n+  });\n+\n+  estimatedFileDiffStats.sort((a, b) => a.estimatedTokenCount - b.estimatedTokenCount); // Smallest first\n+\n+  let currentTokenCount = runningTokenCount;\n+  const includedFileDiffs = [];\n+\n+  // Using the quick estimate, include as many files as possible without exceeding token limits\n+  for (const file of estimatedFileDiffStats) {\n+    if (currentTokenCount + file.estimatedTokenCount > tokensRemaining) {\n+      logger.info(`Skipping ${file.filename} to stay within token limits.`);\n+      continue;\n+    }\n+    includedFileDiffs.push(file);\n+    currentTokenCount += file.estimatedTokenCount;\n+  }\n+\n+  // If no files can be included, return null\n+  if (includedFileDiffs.length === 0) {\n+    logger.error(`Cannot include any files from diff without exceeding token limits.`);\n+    return { diff: null };\n+  }\n+\n+  // Accurately calculate token count for included files we have approximated to be under the limit\n+  const accurateFileDiffStats = await Promise.all(\n+    includedFileDiffs.map(async (file) => {\n+      const tokenCountArray = await encodeAsync(file.diffContent, { disallowedSpecial: new Set() });\n+      const tokenCount = tokenCountArray.length;\n+      return { ...file, tokenCount };\n+    })\n+  );\n+\n+  // Take an accurate reading of our current collection of files within the diff\n+  currentTokenCount = accurateFileDiffStats.reduce((sum, file) => sum + file.tokenCount, runningTokenCount);\n+\n+  // Remove files from the end of the list until we are within token limits\n+  while (currentTokenCount > tokensRemaining && accurateFileDiffStats.length > 0) {\n+    const removedFile = accurateFileDiffStats.pop();\n+    currentTokenCount -= removedFile?.tokenCount || 0;\n+    logger.info(`Excluded ${removedFile?.filename || \"Unknown filename\"} after accurate token count exceeded limits.`);\n+  }\n+\n+  if (accurateFileDiffStats.length === 0) {\n+    logger.error(`Cannot include any files from diff after accurate token count calculation.`);\n+    return { diff: null };\n+  }\n+\n+  // Build the diff with the included files\n+  const currentDiff = accurateFileDiffStats.map((file) => file.diffContent).join(\"\\n\");\n+\n+  return { diff: currentDiff };\n+}\n+\n+// Helper to speed up tokenization\n+export async function encodeAsync(text: string, options: EncodeOptions): Promise<number[]> {\n+  return new Promise((resolve) => {\n+    const result = encode(text, options);\n+    resolve(result);\n+  });\n+}\n+\n+// Helper to parse a diff into per-file diffs\n+export function parsePerFileDiffs(diff: string): { filename: string; diffContent: string }[] {\n+  // regex to capture diff sections, including the last file\n+  const diffPattern = /^diff --git a\\/(.*?) b\\/.*$/gm;\n+  let match: RegExpExecArray | null;\n+  const perFileDiffs = [];\n+  let lastIndex = 0;\n+\n+  // iterate over each file in the diff\n+  while ((match = diffPattern.exec(diff)) !== null) {\n+    const filename = match[1];\n+    const startIndex = match.index;\n+\n+    // if we have pushed a file into the array, \"append\" the diff content\n+    if (perFileDiffs.length > 0) {\n+      perFileDiffs[perFileDiffs.length - 1].diffContent = diff.substring(lastIndex, startIndex).trim();\n+    }\n+\n+    perFileDiffs.push({ filename, diffContent: \"\" });\n+    lastIndex = startIndex;\n+  }\n+  // append the last file's diff content\n+  if (perFileDiffs.length > 0 && lastIndex < diff.length) {\n+    perFileDiffs[perFileDiffs.length - 1].diffContent = diff.substring(lastIndex).trim();\n+  }\n+\n+  return perFileDiffs;\n+}\n+\n+// This speeds things up considerably by skipping non-readable/non-relevant files\n+function isEssentialFile(filename: string): boolean {",
+        "score": {
+          "reward": 1.616,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 65.29590909090909,
+            "syllables": 31,
+            "sentences": 1,
+            "score": 0.9470409090909091
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1826879780,
+        "content": "Actually we essentially have unlimited compute but we have many restrictions on api calls/rate limits so I think it makes sense to optimize for minimal api calls if that's an option.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1826879780",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,104 @@\n+import { encode } from \"gpt-tokenizer\";\n+import { TokenLimits } from \"../types/llm\";\n+import { logger } from \"./errors\";\n+import { EncodeOptions } from \"gpt-tokenizer/esm/GptEncoding\";\n+\n+export async function processPullRequestDiff(diff: string, tokenLimits: TokenLimits) {\n+  const { runningTokenCount, tokensRemaining } = tokenLimits;\n+\n+  // parse the diff into per-file diffs for quicker processing\n+  const perFileDiffs = parsePerFileDiffs(diff);\n+\n+  // quick estimate using a simple heuristic; 3.5 characters per token\n+  const estimatedFileDiffStats = perFileDiffs.map(({ filename, diffContent }) => {",
+        "score": {
+          "reward": 3.486,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 45.158181818181845,
+            "syllables": 50,
+            "sentences": 1,
+            "score": 0.8515818181818184
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2451041437,
+        "content": "A better approach is to potentially use a package to detect binary files and exclude.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2451041437",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.432,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 44.97000000000003,
+            "syllables": 26,
+            "sentences": 1,
+            "score": 0.8497000000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2453092548,
+        "content": "2. What is the 3.5 a reference to?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2453092548",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.224,
+          "formatting": {
+            "content": {
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 1
+              }
+            },
+            "result": 0.1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 97.025,
+            "syllables": 10,
+            "sentences": 2,
+            "score": 0.6297499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2453097732,
+        "content": "You should use their tokenizers for precision instead of following rules of thumb\nYou also need to be mindful of the output tokens.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2453097732",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.69,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 51.07260869565218,
+            "syllables": 36,
+            "sentences": 1,
+            "score": 0.9107260869565218
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2453222121,
+        "content": "Unless it adds extreme time overhead, I think you're making the wrong optimizations.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2453222121",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.086,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 53.639285714285734,
+            "syllables": 23,
+            "sentences": 1,
+            "score": 0.9363928571428574
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2409247050,
+            "effect": {
+              "addition": 676,
+              "deletion": 425
+            },
+            "reward": 22.02,
+            "priority": 2
+          },
+          {
+            "reviewId": 2411760537,
+            "effect": {
+              "addition": 14,
+              "deletion": 186
+            },
+            "reward": 4,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 45.35 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>26.02</td></tr><tr><td>Review</td><td>Comment</td><td>11</td><td>19.33</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28\" target=\"_blank\" rel=\"noopener\">#28</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+676 -425</td><td>2</td><td>22.02</td></tr><tr><td>+14 -186</td><td>2</td><td>4</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1825274107\" target=\"_blank\" rel=\"noopener\">Black listing is definitely the wrong approach. I explained a dy&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.8</td><td>2</td><td>3.248</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1825275880\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionbody: issue.body ?? null,&#96;&#9&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1825276053\" target=\"_blank\" rel=\"noopener\">Null</a></h6></td><td><details><summary>0.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>0.2</td><td>2</td><td>0.072</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1825276558\" target=\"_blank\" rel=\"noopener\">??=This is a new one I've never seen before. Pretty nifty</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.3</td><td>2</td><td>0.756</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1825277719\" target=\"_blank\" rel=\"noopener\">@UbiquityOS explain the strategy I mentioned</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.5</td><td>2</td><td>0.72</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1825277902\" target=\"_blank\" rel=\"noopener\">I like to test and see how it performs wherever I can but I have&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.4</td><td>2</td><td>1.616</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1826879780\" target=\"_blank\" rel=\"noopener\">Actually we essentially have unlimited compute but we have many &hellip;</a></h6></td><td><details><summary>1.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.7</td><td>2</td><td>3.486</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2451041437\" target=\"_blank\" rel=\"noopener\">A better approach is to potentially use a package to detect bina&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.8</td><td>2</td><td>2.432</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2453092548\" target=\"_blank\" rel=\"noopener\">2. What is the 3.5 a reference to?</a></h6></td><td><details><summary>0.86</summary><pre>content:&#13;  content:&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 1&#13;  result: 0.1&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.6</td><td>2</td><td>1.224</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2453097732\" target=\"_blank\" rel=\"noopener\">You should use their tokenizers for precision instead of followi&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.9</td><td>2</td><td>3.69</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#issuecomment-2453222121\" target=\"_blank\" rel=\"noopener\">Unless it adds extreme time overhead, I think you're making the &hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.7</td><td>2</td><td>2.086</td></tr></tbody></table></details>"
+  },
+  "shiv810": {
+    "total": 28.396,
+    "userId": 53160903,
+    "comments": [
+      {
+        "id": 1826879156,
+        "content": "Are we pulling in all the diffs? I'm not sure that's efficient. We’re processing a file with thousands of lines when we could have just made another Octokit call, as the library was doing. With that call, we could get statistics and then pull files based on their diff size. I don't think it's worth saving one or more Octokit calls at the expense of increased memory usage and processing time.\r\nA better approach would be to compare the commit hashes and check the file sizes between them, fetching files selectively instead of the current method.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1826879156",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,104 @@\n+import { encode } from \"gpt-tokenizer\";\n+import { TokenLimits } from \"../types/llm\";\n+import { logger } from \"./errors\";\n+import { EncodeOptions } from \"gpt-tokenizer/esm/GptEncoding\";\n+\n+export async function processPullRequestDiff(diff: string, tokenLimits: TokenLimits) {\n+  const { runningTokenCount, tokensRemaining } = tokenLimits;\n+\n+  // parse the diff into per-file diffs for quicker processing\n+  const perFileDiffs = parsePerFileDiffs(diff);\n+\n+  // quick estimate using a simple heuristic; 3.5 characters per token\n+  const estimatedFileDiffStats = perFileDiffs.map(({ filename, diffContent }) => {",
+        "score": {
+          "reward": 5.94,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 101,
+            "wordValue": 0.1,
+            "result": 2.6
+          },
+          "readability": {
+            "fleschKincaid": 70.80659240924093,
+            "syllables": 142,
+            "sentences": 6,
+            "score": 0.8919340759075907
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1826880193,
+        "content": "Got it, that clarifies the implementation. I thought actions were restricted to 500MB.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1826880193",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,104 @@\n+import { encode } from \"gpt-tokenizer\";\n+import { TokenLimits } from \"../types/llm\";\n+import { logger } from \"./errors\";\n+import { EncodeOptions } from \"gpt-tokenizer/esm/GptEncoding\";\n+\n+export async function processPullRequestDiff(diff: string, tokenLimits: TokenLimits) {\n+  const { runningTokenCount, tokensRemaining } = tokenLimits;\n+\n+  // parse the diff into per-file diffs for quicker processing\n+  const perFileDiffs = parsePerFileDiffs(diff);\n+\n+  // quick estimate using a simple heuristic; 3.5 characters per token\n+  const estimatedFileDiffStats = perFileDiffs.map(({ filename, diffContent }) => {",
+        "score": {
+          "reward": 1.136,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 63.57596153846157,
+            "syllables": 21,
+            "sentences": 2,
+            "score": 0.9642403846153843
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1826882226,
+        "content": "I really appreciate your work on this PR and want to encourage you to continue with it. I don’t have any issues with the changes you’ve made. The refactoring is still a work in progress, as you can see in the draft PR, so we can definitely work together to align everything.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1826882226",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,104 @@\n+import { encode } from \"gpt-tokenizer\";\n+import { TokenLimits } from \"../types/llm\";\n+import { logger } from \"./errors\";\n+import { EncodeOptions } from \"gpt-tokenizer/esm/GptEncoding\";\n+\n+export async function processPullRequestDiff(diff: string, tokenLimits: TokenLimits) {\n+  const { runningTokenCount, tokensRemaining } = tokenLimits;\n+\n+  // parse the diff into per-file diffs for quicker processing\n+  const perFileDiffs = parsePerFileDiffs(diff);\n+\n+  // quick estimate using a simple heuristic; 3.5 characters per token\n+  const estimatedFileDiffStats = perFileDiffs.map(({ filename, diffContent }) => {",
+        "score": {
+          "reward": 1.86,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 54,
+            "wordValue": 0.1,
+            "result": 2.44
+          },
+          "readability": {
+            "fleschKincaid": 69.49833333333333,
+            "syllables": 76,
+            "sentences": 3,
+            "score": 0.9050166666666667
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2411760048,
+            "effect": {
+              "addition": 526,
+              "deletion": 447
+            },
+            "reward": 19.46,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/28"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 28.396 XP ]</a>&nbsp;</h3><h6>@shiv810</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>19.46</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>8.936</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28\" target=\"_blank\" rel=\"noopener\">#28</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+526 -447</td><td>2</td><td>19.46</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1826879156\" target=\"_blank\" rel=\"noopener\">Are we pulling in all the diffs? I'm not sure that's efficient. &hellip;</a></h6></td><td><details><summary>2.6</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 101&#13;  wordValue: 0.1&#13;  result: 2.6&#13;</pre></details></td><td>0.9</td><td>2</td><td>5.94</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1826880193\" target=\"_blank\" rel=\"noopener\">Got it, that clarifies the implementation. I thought actions wer&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.4</td><td>2</td><td>1.136</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/28#discussion_r1826882226\" target=\"_blank\" rel=\"noopener\">I really appreciate your work on this PR and want to encourage y&hellip;</a></h6></td><td><details><summary>2.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 54&#13;  wordValue: 0.1&#13;  result: 2.44&#13;</pre></details></td><td>0.3</td><td>2</td><td>1.86</td></tr></tbody></table></details>"
+  }
+}

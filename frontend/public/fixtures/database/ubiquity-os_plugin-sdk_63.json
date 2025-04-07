@@ -1,0 +1,277 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 103.9,
+    "task": {
+      "reward": 100,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2817070754,
+        "content": "The SDK should be able to post to pull-request threads. The API is a bit different for these as it should directly use `pull` from the REST API.\nWhat happens right now:\n- if \"pull_request\" is present in the payload, try to post to the pull-request itself\n- if we wanted to post to the thread, we would need to use `octokit.rest.pulls.createReplyForReviewComment` or `createReviewComment`\n- same thing goes for updating the comment that needs a different API\n- maybe we could consider having an extra argument in the options to specify a pull-request comment ID",
+        "url": "https://github.com/ubiquity-os/plugin-sdk/issues/63",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.9,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              }
+            },
+            "result": 0.4
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 91,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 64.48622710622713,
+            "syllables": 120,
+            "sentences": 3,
+            "score": 0.9551377289377286
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 103.9 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>100</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.9</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugin-sdk/issues/63\" target=\"_blank\" rel=\"noopener\">The SDK should be able to post to pull-request threads. The API &hellip;</a></h6></td><td><details><summary>3.03</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;  result: 0.4&#13;regex:&#13;  wordCount: 91&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>1</td><td>1</td><td>3.9</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 27.07,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 2596680062,
+        "content": "Otherwise it works fine:\r\nhttps://github.com/ubiquibot-whilefoo-testing/testing/issues/13\r\nhttps://github.com/ubiquibot-whilefoo-testing/testing/pull/10",
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/65#pullrequestreview-2596680062",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.824,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 41.72803030303032,
+            "syllables": 41,
+            "sentences": 3,
+            "score": 0.8172803030303032
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1943486704,
+        "content": "If I use `logger.ok(\"something\", { first: 1, second: 2 })`, the metadata I provided won't be in the comment metadata. Was this intended from the beginning?",
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/65#discussion_r1943486704",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -17,117 +18,192 @@ export interface CommentOptions {\n   updateComment?: boolean;\n }\n \n+type PostedGithubComment =\n+  | RestEndpointMethodTypes[\"issues\"][\"updateComment\"][\"response\"][\"data\"]\n+  | RestEndpointMethodTypes[\"issues\"][\"createComment\"][\"response\"][\"data\"]\n+  | RestEndpointMethodTypes[\"pulls\"][\"createReplyForReviewComment\"][\"response\"][\"data\"];\n+\n type WithIssueNumber<T> = T & {\n   issueNumber: number;\n };\n \n-export type PostComment = {\n-  (\n-    context: Context,\n-    message: LogReturn | Error,\n-    options?: CommentOptions\n-  ): Promise<WithIssueNumber<\n-    RestEndpointMethodTypes[\"issues\"][\"updateComment\"][\"response\"][\"data\"] | RestEndpointMethodTypes[\"issues\"][\"createComment\"][\"response\"][\"data\"]\n-  > | null>;\n-  lastCommentId?: number;\n-};\n+interface IssueContext {\n+  issueNumber: number;\n+  commentId?: number;\n+  owner: string;\n+  repo: string;\n+}\n \n-/**\n- * Posts a comment on a GitHub issue if the issue exists in the context payload, embedding structured metadata to it.\n- */\n-export const postComment: PostComment = async function (\n+async function updateIssueComment(\n   context: Context,\n-  message: LogReturn | Error,\n-  options: CommentOptions = { updateComment: true, raw: false }\n-) {\n-  let issueNumber;\n-\n-  if (\"issue\" in context.payload) {\n-    issueNumber = context.payload.issue.number;\n-  } else if (\"pull_request\" in context.payload) {\n-    issueNumber = context.payload.pull_request.number;\n-  } else if (\"discussion\" in context.payload) {\n-    issueNumber = context.payload.discussion.number;\n-  } else {\n-    context.logger.info(\"Cannot post comment because issue is not found in the payload.\");\n-    return null;\n+  params: { owner: string; repo: string; body: string; issueNumber: number }\n+): Promise<WithIssueNumber<PostedGithubComment>> {\n+  if (!lastCommentId.issueCommentId) {\n+    throw context.logger.error(\"issueCommentId is missing\");\n   }\n+  const commentData = await context.octokit.rest.issues.updateComment({\n+    owner: params.owner,\n+    repo: params.repo,\n+    comment_id: lastCommentId.issueCommentId,\n+    body: params.body,\n+  });\n+  return { ...commentData.data, issueNumber: params.issueNumber };\n+}\n \n-  if (\"repository\" in context.payload && context.payload.repository?.owner?.login) {\n-    const body = await createStructuredMetadataWithMessage(context, message, options);\n-    if (options.updateComment && postComment.lastCommentId) {\n-      const commentData = await context.octokit.rest.issues.updateComment({\n-        owner: context.payload.repository.owner.login,\n-        repo: context.payload.repository.name,\n-        comment_id: postComment.lastCommentId,\n-        body: body,\n-      });\n-      return { ...commentData.data, issueNumber };\n-    } else {\n-      const commentData = await context.octokit.rest.issues.createComment({\n-        owner: context.payload.repository.owner.login,\n-        repo: context.payload.repository.name,\n-        issue_number: issueNumber,\n-        body: body,\n-      });\n-      postComment.lastCommentId = commentData.data.id;\n-      return { ...commentData.data, issueNumber };\n-    }\n-  } else {\n-    context.logger.info(\"Cannot post comment because repository is not found in the payload.\", { payload: context.payload });\n+async function updateReviewComment(\n+  context: Context,\n+  params: { owner: string; repo: string; body: string; issueNumber: number }\n+): Promise<WithIssueNumber<PostedGithubComment>> {\n+  if (!lastCommentId.reviewCommentId) {\n+    throw context.logger.error(\"reviewCommentId is missing\");\n   }\n-  return null;\n-};\n+  const commentData = await context.octokit.rest.pulls.updateReviewComment({\n+    owner: params.owner,\n+    repo: params.repo,\n+    comment_id: lastCommentId.reviewCommentId,\n+    body: params.body,\n+  });\n+  return { ...commentData.data, issueNumber: params.issueNumber };\n+}\n+\n+async function createNewComment(\n+  context: Context,\n+  params: { owner: string; repo: string; body: string; issueNumber: number; commentId?: number }\n+): Promise<WithIssueNumber<PostedGithubComment>> {\n+  if (params.commentId) {\n+    const commentData = await context.octokit.rest.pulls.createReplyForReviewComment({\n+      owner: params.owner,\n+      repo: params.repo,\n+      pull_number: params.issueNumber,\n+      comment_id: params.commentId,\n+      body: params.body,\n+    });\n+    lastCommentId.reviewCommentId = commentData.data.id;\n+    return { ...commentData.data, issueNumber: params.issueNumber };\n+  }\n+\n+  const commentData = await context.octokit.rest.issues.createComment({\n+    owner: params.owner,\n+    repo: params.repo,\n+    issue_number: params.issueNumber,\n+    body: params.body,\n+  });\n+  lastCommentId.issueCommentId = commentData.data.id;\n+  return { ...commentData.data, issueNumber: params.issueNumber };\n+}\n+\n+function getIssueNumber(context: Context): number | undefined {\n+  if (\"issue\" in context.payload) return context.payload.issue.number;\n+  if (\"pull_request\" in context.payload) return context.payload.pull_request.number;\n+  if (\"discussion\" in context.payload) return context.payload.discussion.number;\n+  return undefined;\n+}\n+\n+function getCommentId(context: Context): number | undefined {\n+  return \"pull_request\" in context.payload && \"comment\" in context.payload ? context.payload.comment.id : undefined;\n+}\n+\n+function extractIssueContext(context: Context): IssueContext | null {\n+  if (!(\"repository\" in context.payload) || !context.payload.repository?.owner?.login) {\n+    return null;\n+  }\n+\n+  const issueNumber = getIssueNumber(context);\n+  if (!issueNumber) return null;\n \n-async function createStructuredMetadataWithMessage(context: Context, message: LogReturn | Error, options: CommentOptions) {\n-  let logMessage;\n-  let callingFnName;\n-  let instigatorName;\n-  let metadata: Metadata;\n+  return {\n+    issueNumber,\n+    commentId: getCommentId(context),\n+    owner: context.payload.repository.owner.login,\n+    repo: context.payload.repository.name,\n+  };\n+}\n \n+async function processMessage(context: Context, message: LogReturn | Error) {\n   if (message instanceof Error) {\n-    metadata = {\n+    const metadata = {\n       message: message.message,\n       name: message.name,\n       stack: message.stack,\n     };\n-    callingFnName = message.stack?.split(\"\\n\")[2]?.match(/at (\\S+)/)?.[1] ?? \"anonymous\";\n-    logMessage = context.logger.error(message.message).logMessage;\n-  } else if (message.metadata) {\n-    metadata = {\n-      message: message.metadata.message,\n-      stack: message.metadata.stack || message.metadata.error?.stack,\n-      caller: message.metadata.caller || message.metadata.error?.stack?.split(\"\\n\")[2]?.match(/at (\\S+)/)?.[1],\n-    };\n-    logMessage = message.logMessage;\n-    callingFnName = metadata.caller;\n-  } else {\n-    metadata = { ...message };\n+    return { metadata, logMessage: context.logger.error(message.message).logMessage };\n   }\n-  const jsonPretty = sanitizeMetadata(metadata);\n \n-  if (\"installation\" in context.payload && context.payload.installation && \"account\" in context.payload.installation) {\n-    instigatorName = context.payload.installation?.account?.name;\n-  } else {\n-    instigatorName = context.payload.sender?.login || HEADER_NAME;\n+  const metadata = message.metadata\n+    ? {\n+        message: message.metadata.message,\n+        stack: message.metadata.stack || message.metadata.error?.stack,\n+        caller: message.metadata.caller || message.metadata.error?.stack?.split(\"\\n\")[2]?.match(/at (\\S+)/)?.[1],\n+      }\n+    : { ...message };",
+        "score": {
+          "reward": 2.66,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 65.555,
+            "syllables": 31,
+            "sentences": 2,
+            "score": 0.9444499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1943491583,
+        "content": "I'm concerned that this can lead to some bugs. If I understand correctly Cloudflare workers sometimes run multiple requests in the same instance of the worker , so if two requests were posting comments it would cause some of them to get comment id from another request.",
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/65#discussion_r1943491583",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -5,6 +5,7 @@ import { PluginRuntimeInfo } from \"./helpers/runtime-info\";\n import { sanitizeMetadata } from \"./util\";\n \n const HEADER_NAME = \"UbiquityOS\";\n+const lastCommentId = { reviewCommentId: null as number | null, issueCommentId: null as number | null };",
+        "score": {
+          "reward": 5.436,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 47,
+            "wordValue": 0.1,
+            "result": 2.33
+          },
+          "readability": {
+            "fleschKincaid": 60.58250000000001,
+            "syllables": 68,
+            "sentences": 2,
+            "score": 0.9941749999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1944469981,
+        "content": "Yeah it was like that from beginning but I've only noticed now",
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/65#discussion_r1944469981",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -17,117 +18,192 @@ export interface CommentOptions {\n   updateComment?: boolean;\n }\n \n+type PostedGithubComment =\n+  | RestEndpointMethodTypes[\"issues\"][\"updateComment\"][\"response\"][\"data\"]\n+  | RestEndpointMethodTypes[\"issues\"][\"createComment\"][\"response\"][\"data\"]\n+  | RestEndpointMethodTypes[\"pulls\"][\"createReplyForReviewComment\"][\"response\"][\"data\"];\n+\n type WithIssueNumber<T> = T & {\n   issueNumber: number;\n };\n \n-export type PostComment = {\n-  (\n-    context: Context,\n-    message: LogReturn | Error,\n-    options?: CommentOptions\n-  ): Promise<WithIssueNumber<\n-    RestEndpointMethodTypes[\"issues\"][\"updateComment\"][\"response\"][\"data\"] | RestEndpointMethodTypes[\"issues\"][\"createComment\"][\"response\"][\"data\"]\n-  > | null>;\n-  lastCommentId?: number;\n-};\n+interface IssueContext {\n+  issueNumber: number;\n+  commentId?: number;\n+  owner: string;\n+  repo: string;\n+}\n \n-/**\n- * Posts a comment on a GitHub issue if the issue exists in the context payload, embedding structured metadata to it.\n- */\n-export const postComment: PostComment = async function (\n+async function updateIssueComment(\n   context: Context,\n-  message: LogReturn | Error,\n-  options: CommentOptions = { updateComment: true, raw: false }\n-) {\n-  let issueNumber;\n-\n-  if (\"issue\" in context.payload) {\n-    issueNumber = context.payload.issue.number;\n-  } else if (\"pull_request\" in context.payload) {\n-    issueNumber = context.payload.pull_request.number;\n-  } else if (\"discussion\" in context.payload) {\n-    issueNumber = context.payload.discussion.number;\n-  } else {\n-    context.logger.info(\"Cannot post comment because issue is not found in the payload.\");\n-    return null;\n+  params: { owner: string; repo: string; body: string; issueNumber: number }\n+): Promise<WithIssueNumber<PostedGithubComment>> {\n+  if (!lastCommentId.issueCommentId) {\n+    throw context.logger.error(\"issueCommentId is missing\");\n   }\n+  const commentData = await context.octokit.rest.issues.updateComment({\n+    owner: params.owner,\n+    repo: params.repo,\n+    comment_id: lastCommentId.issueCommentId,\n+    body: params.body,\n+  });\n+  return { ...commentData.data, issueNumber: params.issueNumber };\n+}\n \n-  if (\"repository\" in context.payload && context.payload.repository?.owner?.login) {\n-    const body = await createStructuredMetadataWithMessage(context, message, options);\n-    if (options.updateComment && postComment.lastCommentId) {\n-      const commentData = await context.octokit.rest.issues.updateComment({\n-        owner: context.payload.repository.owner.login,\n-        repo: context.payload.repository.name,\n-        comment_id: postComment.lastCommentId,\n-        body: body,\n-      });\n-      return { ...commentData.data, issueNumber };\n-    } else {\n-      const commentData = await context.octokit.rest.issues.createComment({\n-        owner: context.payload.repository.owner.login,\n-        repo: context.payload.repository.name,\n-        issue_number: issueNumber,\n-        body: body,\n-      });\n-      postComment.lastCommentId = commentData.data.id;\n-      return { ...commentData.data, issueNumber };\n-    }\n-  } else {\n-    context.logger.info(\"Cannot post comment because repository is not found in the payload.\", { payload: context.payload });\n+async function updateReviewComment(\n+  context: Context,\n+  params: { owner: string; repo: string; body: string; issueNumber: number }\n+): Promise<WithIssueNumber<PostedGithubComment>> {\n+  if (!lastCommentId.reviewCommentId) {\n+    throw context.logger.error(\"reviewCommentId is missing\");\n   }\n-  return null;\n-};\n+  const commentData = await context.octokit.rest.pulls.updateReviewComment({\n+    owner: params.owner,\n+    repo: params.repo,\n+    comment_id: lastCommentId.reviewCommentId,\n+    body: params.body,\n+  });\n+  return { ...commentData.data, issueNumber: params.issueNumber };\n+}\n+\n+async function createNewComment(\n+  context: Context,\n+  params: { owner: string; repo: string; body: string; issueNumber: number; commentId?: number }\n+): Promise<WithIssueNumber<PostedGithubComment>> {\n+  if (params.commentId) {\n+    const commentData = await context.octokit.rest.pulls.createReplyForReviewComment({\n+      owner: params.owner,\n+      repo: params.repo,\n+      pull_number: params.issueNumber,\n+      comment_id: params.commentId,\n+      body: params.body,\n+    });\n+    lastCommentId.reviewCommentId = commentData.data.id;\n+    return { ...commentData.data, issueNumber: params.issueNumber };\n+  }\n+\n+  const commentData = await context.octokit.rest.issues.createComment({\n+    owner: params.owner,\n+    repo: params.repo,\n+    issue_number: params.issueNumber,\n+    body: params.body,\n+  });\n+  lastCommentId.issueCommentId = commentData.data.id;\n+  return { ...commentData.data, issueNumber: params.issueNumber };\n+}\n+\n+function getIssueNumber(context: Context): number | undefined {\n+  if (\"issue\" in context.payload) return context.payload.issue.number;\n+  if (\"pull_request\" in context.payload) return context.payload.pull_request.number;\n+  if (\"discussion\" in context.payload) return context.payload.discussion.number;\n+  return undefined;\n+}\n+\n+function getCommentId(context: Context): number | undefined {\n+  return \"pull_request\" in context.payload && \"comment\" in context.payload ? context.payload.comment.id : undefined;\n+}\n+\n+function extractIssueContext(context: Context): IssueContext | null {\n+  if (!(\"repository\" in context.payload) || !context.payload.repository?.owner?.login) {\n+    return null;\n+  }\n+\n+  const issueNumber = getIssueNumber(context);\n+  if (!issueNumber) return null;\n \n-async function createStructuredMetadataWithMessage(context: Context, message: LogReturn | Error, options: CommentOptions) {\n-  let logMessage;\n-  let callingFnName;\n-  let instigatorName;\n-  let metadata: Metadata;\n+  return {\n+    issueNumber,\n+    commentId: getCommentId(context),\n+    owner: context.payload.repository.owner.login,\n+    repo: context.payload.repository.name,\n+  };\n+}\n \n+async function processMessage(context: Context, message: LogReturn | Error) {\n   if (message instanceof Error) {\n-    metadata = {\n+    const metadata = {\n       message: message.message,\n       name: message.name,\n       stack: message.stack,\n     };\n-    callingFnName = message.stack?.split(\"\\n\")[2]?.match(/at (\\S+)/)?.[1] ?? \"anonymous\";\n-    logMessage = context.logger.error(message.message).logMessage;\n-  } else if (message.metadata) {\n-    metadata = {\n-      message: message.metadata.message,\n-      stack: message.metadata.stack || message.metadata.error?.stack,\n-      caller: message.metadata.caller || message.metadata.error?.stack?.split(\"\\n\")[2]?.match(/at (\\S+)/)?.[1],\n-    };\n-    logMessage = message.logMessage;\n-    callingFnName = metadata.caller;\n-  } else {\n-    metadata = { ...message };\n+    return { metadata, logMessage: context.logger.error(message.message).logMessage };\n   }\n-  const jsonPretty = sanitizeMetadata(metadata);\n \n-  if (\"installation\" in context.payload && context.payload.installation && \"account\" in context.payload.installation) {\n-    instigatorName = context.payload.installation?.account?.name;\n-  } else {\n-    instigatorName = context.payload.sender?.login || HEADER_NAME;\n+  const metadata = message.metadata\n+    ? {\n+        message: message.metadata.message,\n+        stack: message.metadata.stack || message.metadata.error?.stack,\n+        caller: message.metadata.caller || message.metadata.error?.stack?.split(\"\\n\")[2]?.match(/at (\\S+)/)?.[1],\n+      }\n+    : { ...message };",
+        "score": {
+          "reward": 1.08,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 83.0092307692308,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0.7699076923076921
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1946744811,
+        "content": "Maybe Context should become a class in the future",
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/65#discussion_r1946744811",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -5,6 +5,7 @@ import { PluginRuntimeInfo } from \"./helpers/runtime-info\";\n import { sanitizeMetadata } from \"./util\";\n \n const HEADER_NAME = \"UbiquityOS\";\n+const lastCommentId = { reviewCommentId: null as number | null, issueCommentId: null as number | null };",
+        "score": {
+          "reward": 1.03,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 84.90000000000003,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.7509999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2596680062,
+            "effect": {
+              "addition": 271,
+              "deletion": 88
+            },
+            "reward": 7.18,
+            "priority": 2
+          },
+          {
+            "reviewId": 2602105157,
+            "effect": {
+              "addition": 164,
+              "deletion": 155
+            },
+            "reward": 6.38,
+            "priority": 2
+          },
+          {
+            "reviewId": 2602106053,
+            "effect": {
+              "addition": 0,
+              "deletion": 0
+            },
+            "reward": 0,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/65"
+      },
+      {
+        "reviews": [
+          {
+            "reviewId": 2606219592,
+            "effect": {
+              "addition": 31,
+              "deletion": 43
+            },
+            "reward": 1.48,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/plugin-template/pull/44"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 27.07 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>4</td><td>15.04</td></tr><tr><td>Review</td><td>Comment</td><td>5</td><td>12.03</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/plugin-sdk/pull/65\" target=\"_blank\" rel=\"noopener\">#65</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+271 -88</td><td>2</td><td>7.18</td></tr><tr><td>+164 -155</td><td>2</td><td>6.38</td></tr><tr><td>+0 -0</td><td>2</td><td>0</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/plugin-template/pull/44\" target=\"_blank\" rel=\"noopener\">#44</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+31 -43</td><td>2</td><td>1.48</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugin-sdk/pull/65#pullrequestreview-2596680062\" target=\"_blank\" rel=\"noopener\">Otherwise it works fine:https://github.com/ubiquibot-whilefoo-&hellip;</a></h6></td><td><details><summary>2.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.3</td><td>2</td><td>1.824</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugin-sdk/pull/65#discussion_r1943486704\" target=\"_blank\" rel=\"noopener\">If I use &#96;logger.ok(\"something\", { first: 1, second: 2 })&#9&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.7</td><td>2</td><td>2.66</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugin-sdk/pull/65#discussion_r1943491583\" target=\"_blank\" rel=\"noopener\">I'm concerned that this can lead to some bugs. If I understand c&hellip;</a></h6></td><td><details><summary>2.33</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 47&#13;  wordValue: 0.1&#13;  result: 2.33&#13;</pre></details></td><td>0.9</td><td>2</td><td>5.436</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugin-sdk/pull/65#discussion_r1944469981\" target=\"_blank\" rel=\"noopener\">Yeah it was like that from beginning but I've only noticed now</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.4</td><td>2</td><td>1.08</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugin-sdk/pull/65#discussion_r1946744811\" target=\"_blank\" rel=\"noopener\">Maybe Context should become a class in the future</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.5</td><td>2</td><td>1.03</td></tr></tbody></table></details>"
+  }
+}

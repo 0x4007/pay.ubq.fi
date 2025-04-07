@@ -1,0 +1,504 @@
+{
+  "gitcoindev": {
+    "userId": 88761781,
+    "total": 238.625,
+    "task": {
+      "reward": 225,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 1827916381,
+        "content": "I _almost_ have it integrated, need still to execute a few tests...",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1827916381",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.693,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 74.805,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0.85195
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1828094908,
+        "content": "hi @pavlovcik I am still experimenting on GitHub actions, need about 1-2 hrs to open a pr.\r\nI discovered that Knip has a quite flexible configuration if it provides false positives: https://knip.dev/guides/handling-issues/\r\nI am currently using  ignored config.ts for testing. It is also possible to get more fine grained ignores, I am currently using a half-baked cfg:\r\n```\r\nimport type { KnipConfig } from \"knip\";\r\nconst config: KnipConfig = {\r\n  entry: [\"src/index.ts\"],\r\n  project: [\"src/**/*.ts\"],\r\n  ignore: [\"src/types/config.ts\"],\r\n  ignoreExportsUsedInFile: true,\r\n  ignoreDependencies: [],\r\n};\r\nexport default config;\r\n```\r\nSo in all we should be able to fine tune it to get the desired output, also check or skip the required GitHub action enum values.\r\nTo be honest today is the first time I have used it but it looks promising. It is also actively developed, v3 was released a month ago.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1828094908",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 3.078,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 112,
+            "wordValue": 0.1,
+            "result": 2.54
+          },
+          "readability": {
+            "fleschKincaid": 64.97584745762714,
+            "syllables": 174,
+            "sentences": 7,
+            "score": 0.9502415254237286
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1828322108,
+        "content": "Yes, sure. Btw. great news! \r\nSo far I have a still dirty (but working) version on my fork. It gives\r\n1) a comment\r\nhttps://github.com/gitcoindev/ubiquibot/pull/17#issuecomment-1828200946 \r\n2) unused class members and class members annotations directly in the source comments\r\nhttps://github.com/gitcoindev/ubiquibot/pull/17/files#diff-17b7f13e2351a5040cebff355503a16fdc9dfbd30045c0d12b26e4c1f57f1c4f\r\nI analysed the extended JSON output from Knip and found out that it also gives pointers to unused exports so this could also potentially be injected directly as comments but they are not parsed in the default GitHub action, yet. I forked the GitHub action and will try to extend it.\r\nAn example for enums:\r\n```\r\n {u'binaries': [],\r\n  u'classMembers': {},\r\n  u'dependencies': [],\r\n  u'devDependencies': [],\r\n  u'duplicates': [],\r\n  u'enumMembers': {u'StateReason': [{u'col': 3,\r\n                                     u'line': 47,\r\n                                     u'name': u'NOT_PLANNED',\r\n                                     u'pos': 1092},\r\n                                    {u'col': 3,\r\n                                     u'line': 48,\r\n                                     u'name': u'REOPENED',\r\n                                     u'pos': 1123}],\r\n                   u'UserType': [{u'col': 3,\r\n                                  u'line': 36,\r\n                                  u'name': u'Organization',\r\n                                  u'pos': 923}]},\r\n  u'exports': [],\r\n  u'file': u'src/types/payload.ts',\r\n  u'files': False,\r\n  u'optionalPeerDependencies': [],\r\n  u'owners': [u'@0xcodercrane'],\r\n  u'types': [],\r\n  u'unlisted': [],\r\n  u'unresolved': []},\r\n```\r\nand also exports:\r\n```\r\n{u'binaries': [],\r\n  u'classMembers': {},\r\n  u'dependencies': [],\r\n  u'devDependencies': [],\r\n  u'duplicates': [],\r\n  u'enumMembers': {},\r\n  u'exports': [{u'col': 14,\r\n                u'line': 334,\r\n                u'name': u'unusedAction',\r\n                u'pos': 11973},\r\n               {u'col': 14,\r\n                u'line': 339,\r\n                u'name': u'unusedAction2',\r\n                u'pos': 12075},\r\n               {u'col': 14,\r\n                u'line': 344,\r\n                u'name': u'unusedAction3',\r\n                u'pos': 12179}],\r\n  u'file': u'src/handlers/payout/action.ts',\r\n  u'files': False,\r\n  u'optionalPeerDependencies': [],\r\n  u'owners': [u'@0xcodercrane'],\r\n  u'types': [],\r\n  u'unlisted': [],\r\n```\r\nI will try to get those working as well and submit a PR based on `refactor/general`.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1828322108",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 4.361,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 8
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 107,
+            "wordValue": 0.1,
+            "result": 2.57
+          },
+          "readability": {
+            "fleschKincaid": 66.39642857142857,
+            "syllables": 188,
+            "sentences": 9,
+            "score": 0.9360357142857143
+          },
+          "multiplier": 0.25,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 1829647763,
+        "content": "All right I have this working. I enabled also unused exports annotations directly in the sources, which was not available before.\r\nI have it running on a GitHub action fork but asked the author if he wants to pull it in. This is pretty cool, I searched GitHub and I am pretty sure we are the first ones to integrate and extend it.\r\n![Screenshot from 2023-11-28 12-23-08](https://github.com/ubiquity/ubiquibot/assets/88761781/a24f73f5-0b7b-4519-9b5e-45e7c6baf942)\r\nI will now prepare a PR based on `refactor/general` and provide QA.\r\nThe only thing remaining will be to configure Knip to give us the desired output and ignore what should be ignored.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1829647763",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.46,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 95,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 74.9957456140351,
+            "syllables": 130,
+            "sentences": 6,
+            "score": 0.850042543859649
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1829716122,
+        "content": "Hi @pavlovcik I opened https://github.com/pavlovcik/ubiquibot/pull/57 this pull request targets directly your `refactor/general` branch. I am fine with leaving this pull request in limbo until `refactor/general` branch is merged to `development`. I will then redirect the pull request to `development` and execute start command after contributions are enabled again.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1829716122",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.862,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 43,
+            "wordValue": 0.1,
+            "result": 2.25
+          },
+          "readability": {
+            "fleschKincaid": 60.4795,
+            "syllables": 79,
+            "sentences": 4,
+            "score": 0.995205
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1918626207,
+        "content": "Thank you, too, for addressing this!",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1918626207",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.171,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 87.94500000000002,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.7205499999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 238.625 XP ]</a>&nbsp;</h3><h6>@gitcoindev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>225</td></tr><tr><td>Issue</td><td>Comment</td><td>6</td><td>13.625</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1827916381\" target=\"_blank\" rel=\"noopener\">I _almost_ have it integrated, need still to execute a few tests&hellip;</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.7</td><td>3</td><td>0.693</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1828094908\" target=\"_blank\" rel=\"noopener\">hi @pavlovcik I am still experimenting on GitHub actions, need a&hellip;</a></h6></td><td><details><summary>3.54</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 112&#13;  wordValue: 0.1&#13;  result: 2.54&#13;</pre></details></td><td>0.9</td><td>3</td><td>3.078</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1828322108\" target=\"_blank\" rel=\"noopener\">Yes, sure. Btw. great news! So far I have a still dirty (but w&hellip;</a></h6></td><td><details><summary>4.77</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 8&#13;    ol:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.2&#13;regex:&#13;  wordCount: 107&#13;  wordValue: 0.1&#13;  result: 2.57&#13;</pre></details></td><td>0.95</td><td>3</td><td>4.361</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1829647763\" target=\"_blank\" rel=\"noopener\">All right I have this working. I enabled also unused exports ann&hellip;</a></h6></td><td><details><summary>2.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;  result: 0&#13;regex:&#13;  wordCount: 95&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>1</td><td>3</td><td>2.46</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1829716122\" target=\"_blank\" rel=\"noopener\">Hi @pavlovcik I opened https://github.com/pavlovcik/ubiquibot/pu&hellip;</a></h6></td><td><details><summary>3.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 43&#13;  wordValue: 0.1&#13;  result: 2.25&#13;</pre></details></td><td>0.9</td><td>3</td><td>2.862</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1918626207\" target=\"_blank\" rel=\"noopener\">Thank you, too, for addressing this!</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.171</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 24.899,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1828058763,
+        "content": "So I realized only today that I have mixed feelings on this. \nKnip is fantastic however there are some identifiers which are used in runtime which I'm not sure how to annotate in knip. \nFor example, issue state enum has three values: opened, closed, reopened (if I recall correctly)\nWe only directly reference opened in the code so knip is satisfied. The other two it complains about. \nWhen I removed the other two, ajv was throwing a validation error on the payload because they were missing. \nAny ideas @gitcoindev",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1828058763",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 9.18,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 90,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 61.890000000000015,
+            "syllables": 138,
+            "sentences": 6,
+            "score": 0.9810999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1828114717,
+        "content": "By the way. For the sake of saving us time with merge conflicts, would you mind working off of my `refactor/general` branch off my fork? \n@wannacfuture is tidying up some final runtime errors and then we should be good to merge and deploy!",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1828114717",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 5.733,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 42,
+            "wordValue": 0.1,
+            "result": 2.23
+          },
+          "readability": {
+            "fleschKincaid": 85.86785714285715,
+            "syllables": 53,
+            "sentences": 3,
+            "score": 0.7413214285714286
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1918179175,
+        "content": "@gitcoindev I just realized that you should have received credit for this task. \nOnce the payout flow is working again let's address this. \nThanks for your contribution!",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1918179175",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.034,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 76.50452380952383,
+            "syllables": 40,
+            "sentences": 3,
+            "score": 0.8349547619047617
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1933877009,
+        "content": "@gitcoindev can you try and claim this reward?",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1933877009",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.282,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 82.39000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.7760999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1946076764,
+        "content": "Just making sure that this has been addressed?",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1946076764",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.273,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 92.965,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.67035
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1946171201,
+        "content": "No problem. I just voided it and will regenerate.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1946171201",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.312,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 80.06750000000002,
+            "syllables": 13,
+            "sentences": 2,
+            "score": 0.7993249999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1946340207,
+        "content": "It lets me claim mine. I realize that the nonce encodes the issue id and your GitHub user id. The wrong wallet was associated to your user ID and I invalidated it I think (I don't remember.)\r\nI'll just send you a manual payment then. https://gnosisscan.io/tx/0x1a576044cb22bff3b54311f6751cfc1ca043bc30c57df8b6491761a15a57cbe1",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1946340207",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.245,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 47,
+            "wordValue": 0.1,
+            "result": 2.33
+          },
+          "readability": {
+            "fleschKincaid": 77.64602564102567,
+            "syllables": 74,
+            "sentences": 6,
+            "score": 0.8235397435897432
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2010896854,
+        "content": "Use [Knip](https://knip.dev/) in a GitHub Action and annotate all of the unused code inside of the code view in pull requests. \r\n```yml\r\non: [push, pull_request]\r\n```\r\nYou can see an example of how to annotate in our `kebab-case.yml` however the annotations should be specific to the line that must be removed. https://github.com/ubiquity/ubiquibot/blob/c015fc791afdec32856d1c30855273b05b587a86/.github/workflows/kebab-case.yml#L42\r\n---\r\nKnip is great to keep code bloat down, but I wasn't sure how to have it automatically run (I don't think it makes sense to as a commit hook, for example.)",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/897",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 5.84,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 78,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 72.78285714285717,
+            "syllables": 130,
+            "sentences": 7,
+            "score": 0.8721714285714284
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 24.899 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>5.84</td></tr><tr><td>Issue</td><td>Comment</td><td>7</td><td>19.059</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/897\" target=\"_blank\" rel=\"noopener\">Use [Knip](https://knip.dev/) in a GitHub Action and annotate al&hellip;</a></h6></td><td><details><summary>4.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 78&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>1</td><td>1</td><td>5.84</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1828058763\" target=\"_blank\" rel=\"noopener\">So I realized only today that I have mixed feelings on this. Kn&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 90&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.9</td><td>3</td><td>9.18</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1828114717\" target=\"_blank\" rel=\"noopener\">By the way. For the sake of saving us time with merge conflicts,&hellip;</a></h6></td><td><details><summary>2.23</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 42&#13;  wordValue: 0.1&#13;  result: 2.23&#13;</pre></details></td><td>0.7</td><td>3</td><td>5.733</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1918179175\" target=\"_blank\" rel=\"noopener\">@gitcoindev I just realized that you should have received credit&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.3</td><td>3</td><td>2.034</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1933877009\" target=\"_blank\" rel=\"noopener\">@gitcoindev can you try and claim this reward?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.282</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1946076764\" target=\"_blank\" rel=\"noopener\">Just making sure that this has been addressed?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.273</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1946171201\" target=\"_blank\" rel=\"noopener\">No problem. I just voided it and will regenerate.</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.312</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/897#issuecomment-1946340207\" target=\"_blank\" rel=\"noopener\">It lets me claim mine. I realize that the nonce encodes the issu&hellip;</a></h6></td><td><details><summary>3.33</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 47&#13;  wordValue: 0.1&#13;  result: 2.33&#13;</pre></details></td><td>0.1</td><td>3</td><td>1.245</td></tr></tbody></table></details>"
+  }
+}

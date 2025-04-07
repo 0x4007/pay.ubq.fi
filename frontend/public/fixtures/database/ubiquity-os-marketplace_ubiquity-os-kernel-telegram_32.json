@@ -1,0 +1,589 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 823.981,
+    "task": {
+      "reward": 800,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2455056888,
+        "content": "I spent an hour reading through inline docs etc last night to try implement repo name autocomplete.\r\nhttps://core.telegram.org/bots/api#inline-mode\r\nhttps://core.telegram.org/bots/inline\r\nI think you want to type `@ubiquitos` and then it pop up an inline modal only you can see and then you press a button or type `newtask` and it 'runs' this logic, is that right?\r\n1. The inline update the server receives won't have context on which message you want. It's purpose is to post something into the chat like a gif, document, link etc.\r\n2. It might capture the message ctx if you initiate a direct reply and then try to use `@ubiquityos` but they seem like separate features, I had to enable `inline mode` via the botfather and haven't explored it much.\r\nI'll attempt to implement it, showing why it cannot be done if that's the case and we'll take it from there.",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/32#issuecomment-2455056888",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 10.098,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 7
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.2
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 142,
+            "wordValue": 0.1,
+            "result": 2.31
+          },
+          "readability": {
+            "fleschKincaid": 78.74330769230771,
+            "syllables": 207,
+            "sentences": 10,
+            "score": 0.8125669230769229
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2455709564,
+        "content": "This is the trouble with the inline query; it's that we don't know which comment you are referring to even when direct replying and then mentioning the bot as the update doesn't reference it.\r\n![image](https://github.com/user-attachments/assets/d42cf345-826f-49df-be94-697f851a2c6e)\r\nThe above means that somehow we'd need to capture the original message and then hoist that into the inline_query update and then persist that through the chain of inline_query updates as we need to select which org then which repo. So at least 3 inline_queries to chain after capturing the task inspo comment.\r\nThere are advanced parts of Grammy that allow branching and forking of different ctx and updates and splicing them but that's beyond reach atm, still a lot of learning involved with the APIs and the libs we are using. Two brand new APIs and two libs; one for MTProto, one for BotAPI.\r\n---\r\nLet's ship the feature as a command for V1 and a task can be dedicated to upgrading it to an 'inline function', as it'll require more research and quite a bit of work as mentioned above. Do you agree?",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/32#issuecomment-2455709564",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 4.392,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 185,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 60.65540540540543,
+            "syllables": 261,
+            "sentences": 7,
+            "score": 0.9934459459459457
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2631681533,
+        "content": "A new admin controlled command that allows the creation of GitHub tasks direct from telegram.\r\n- available to use in any type of chat\r\n- only available to use by admins of the bot\r\n- An admin must reply directly to the message they want to convert into a task\r\nWe lack the same context that we do on GitHub so it's required that the invoker pass in the `repository.full_name` (ubiquity-os-marketplace/ubiquity-os-kernel-telegram) so that we deliver the issue to the correct repo. This makes sense as admins will know immediately where they'd want it opened.",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/32",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.65,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              }
+            },
+            "result": 0.3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 98,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 45.05180272108845,
+            "syllables": 149,
+            "sentences": 3,
+            "score": 0.8505180272108845
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2159949391,
+        "content": "Resolves https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/32\r\nthis PR introduces the `/newtask` command which is used by bot admins to create new tasks in the correct repository.\r\nUsage: `/newtask ubiquity-os-marketplace/ubiquity-os-kernel-telegram`\r\n- The admin must reply to the message which they want to turn into a task spec\r\n- They must include the `repo.full_name` after the command in order to open it in the correct repo\r\n- Only admins are able to use this new command\r\n- New tasks are currently opened under my alt account because the org secret `APP_PRIVATE_KEY` issue, no one has replied to me about it so I'm assuming it's still unresolved. It needs fixed ASAP.\r\nQA: https://github.com/ubq-testing/telegram--bot/issues/9\r\nTask creation comment:\r\n![image](https://github.com/user-attachments/assets/ab40270b-67fc-4df8-88bf-d9b44f623623)",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 5.841,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 10
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.4
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 100,
+            "wordValue": 0.1,
+            "result": 2.6
+          },
+          "readability": {
+            "fleschKincaid": 59.11624655647384,
+            "syllables": 182,
+            "sentences": 6,
+            "score": 0.9911624655647384
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1846631030,
+        "content": "`/ask` defaults to 10k, it was 8k before and telegram with huge blocks of texts is uneasy on the eyes at times\r\nhttps://github.com/ubiquity-os-marketplace/command-ask/blob/782c838eae61d977133d4b071987cb213ab6182a/src/types/plugin-inputs.ts#L26",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31#discussion_r1846631030",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -20,6 +20,7 @@ export const pluginSettingsSchema = T.Object({\n     .Encode((value) => value.toString()),\n   shouldUseGithubStorage: T.Boolean({ default: false }),\n   storageOwner: T.String({ default: \"ubiquity-os-marketplace\" }),\n+  maxCompletionTokens: T.Number({ default: 7000 }),",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 66.27342342342342,
+            "syllables": 56,
+            "sentences": 3,
+            "score": 0.9372657657657658
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1847447538,
+        "content": "cool will do.\r\nCan you price this task for me?\r\nAnd is there any chance you could message me on TG?",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31#discussion_r1847447538",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -20,6 +20,7 @@ export const pluginSettingsSchema = T.Object({\n     .Encode((value) => value.toString()),\n   shouldUseGithubStorage: T.Boolean({ default: false }),\n   storageOwner: T.String({ default: \"ubiquity-os-marketplace\" }),\n+  maxCompletionTokens: T.Number({ default: 7000 }),",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 111.10142857142858,
+            "syllables": 22,
+            "sentences": 3,
+            "score": 1
+          },
+          "multiplier": 0,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2453728597,
+        "content": "1. Using GPT to structure a proper spec. \r\n2. Using `Directives` and `Constraints` to guide, please offer suggestions on improvements.\r\n3. With embeddings I expect the specs to be more insightful and less generic.\r\nBroke this into it's own PR and task via a task list, I think that's the right thing to do here. Once I get the embeddings data I can make moves on the other.",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31#issuecomment-2453728597",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0.3
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 65,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 80.40615384615387,
+            "syllables": 87,
+            "sentences": 5,
+            "score": 0.7959384615384613
+          },
+          "multiplier": 0,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2460104809,
+        "content": "I saw the thumbs up on the task to my comment so I'll take that as a go-ahead and I'll merge this <del>today</del> tomorrow.\r\nI fell into a rabbit whole with the logger error debugging and stacks in gh comments trying various solutions, found a few will PR that and close this tmrw",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31#issuecomment-2460104809",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 58,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 68.00344827586208,
+            "syllables": 75,
+            "sentences": 2,
+            "score": 0.9199655172413792
+          },
+          "multiplier": 0,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2483149321,
+        "content": "Could do that no probs\r\nI had planned on using the inline feature to list the repos and you just select one, it sends and we post on that message' update but fuzzy sounds good.",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31#issuecomment-2483149321",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 67.37285714285714,
+            "syllables": 43,
+            "sentences": 1,
+            "score": 0.9262714285714285
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2495472498,
+        "content": "@0x4007 I noticed you priced the task but decided to not message me on telegram, idk why you are ignoring me but there are things that need cleared up:\r\n1. Previously I was merging my PRs into `development` myself and without proper review, Rndquu told me to stop that until you had replied to me and let me know the circumstances, although progress will continue to be very slow if that's the case.\r\n2. The ORG readme shows `kernel-telegram: Keyrxng` implying I should be building this instead of `plugin-installer` but:\r\n- You are not pricing tasks and I am not to work on anything unpriced\r\n- Reviews are way too slow to gain any sort of momentum I imagine due to the complexity of the plugin/workload of reviewers\r\nCan you let me know what's going on please as I've been left in the dark for months now and a little bit of communication would go a long way, thanks.",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31#issuecomment-2495472498",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0.4
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 155,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 16.827983870967756,
+            "syllables": 204,
+            "sentences": 2,
+            "score": 0.5682798387096776
+          },
+          "multiplier": 0,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2504750250,
+        "content": "For the sake of QA I didn't create the issue in the repo instead just logged where it would have been created in the reply in the footer:\r\n- `/newtask pay.ubq`\r\n![image](https://github.com/user-attachments/assets/bb90a0d7-e8a2-469f-9fab-e35211321cc2)\r\n- `/newtask pricing` >> `ubiquity-os-marketplace/daemon-pricing`\r\n![image](https://github.com/user-attachments/assets/19fa1228-7ac0-4598-89e1-c58a2fcf3fa5)",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31#issuecomment-2504750250",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 78.2137931034483,
+            "syllables": 34,
+            "sentences": 1,
+            "score": 0.817862068965517
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 823.981 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>800</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.65</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>14.49</td></tr><tr><td>Review</td><td>Comment</td><td>8</td><td>5.841</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/32\" target=\"_blank\" rel=\"noopener\">A new admin controlled command that allows the creation of GitHu&hellip;</a></h6></td><td><details><summary>2.91</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;  result: 0.3&#13;regex:&#13;  wordCount: 98&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>1</td><td>1</td><td>3.65</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/32#issuecomment-2455056888\" target=\"_blank\" rel=\"noopener\">I spent an hour reading through inline docs etc last night to tr&hellip;</a></h6></td><td><details><summary>4.51</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 7&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.2&#13;regex:&#13;  wordCount: 142&#13;  wordValue: 0.1&#13;  result: 2.31&#13;</pre></details></td><td>0.9</td><td>2</td><td>10.098</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/32#issuecomment-2455709564\" target=\"_blank\" rel=\"noopener\">This is the trouble with the inline query; it's that we don't kn&hellip;</a></h6></td><td><details><summary>1.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 185&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.9</td><td>2</td><td>4.392</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31\" target=\"_blank\" rel=\"noopener\">Resolves https://github.com/ubiquity-os-marketplace/ubiquity-os-&hellip;</a></h6></td><td><details><summary>5</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 10&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.4&#13;regex:&#13;  wordCount: 100&#13;  wordValue: 0.1&#13;  result: 2.6&#13;</pre></details></td><td>0.9</td><td>1</td><td>5.841</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31#discussion_r1846631030\" target=\"_blank\" rel=\"noopener\">&#96;/ask&#96; defaults to 10k, it was 8k before and telegram wi&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31#discussion_r1847447538\" target=\"_blank\" rel=\"noopener\">cool will do.Can you price this task for me?And is there any&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.2</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31#issuecomment-2453728597\" target=\"_blank\" rel=\"noopener\">1. Using GPT to structure a proper spec. 2. Using &#96;Directi&hellip;</a></h6></td><td><details><summary>0.3</summary><pre>content:&#13;  content:&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0.3&#13;regex:&#13;  wordCount: 65&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31#issuecomment-2460104809\" target=\"_blank\" rel=\"noopener\">I saw the thumbs up on the task to my comment so I'll take that &hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 58&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31#issuecomment-2483149321\" target=\"_blank\" rel=\"noopener\">Could do that no probsI had planned on using the inline featur&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31#issuecomment-2495472498\" target=\"_blank\" rel=\"noopener\">@0x4007 I noticed you priced the task but decided to not message&hellip;</a></h6></td><td><details><summary>0.4</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0.4&#13;regex:&#13;  wordCount: 155&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.1</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31#issuecomment-2504750250\" target=\"_blank\" rel=\"noopener\">For the sake of QA I didn't create the issue in the repo instead&hellip;</a></h6></td><td><details><summary>0.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>2</td><td>0</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 14.322,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2454832946,
+        "content": "Should be inlined \"inline function\" as we discussed before.",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/32#issuecomment-2454832946",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.944,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 66.10000000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.9389999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1846211175,
+        "content": "Why 7000",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31#discussion_r1846211175",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -20,6 +20,7 @@ export const pluginSettingsSchema = T.Object({\n     .Encode((value) => value.toString()),\n   shouldUseGithubStorage: T.Boolean({ default: false }),\n   storageOwner: T.String({ default: \"ubiquity-os-marketplace\" }),\n+  maxCompletionTokens: T.Number({ default: 7000 }),",
+        "score": {
+          "reward": 0.33,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 120.20500000000001,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1846907064,
+        "content": "I think if you don't put anything it defaults to max which makes more sense to use.",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31#discussion_r1846907064",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -20,6 +20,7 @@ export const pluginSettingsSchema = T.Object({\n     .Encode((value) => value.toString()),\n   shouldUseGithubStorage: T.Boolean({ default: false }),\n   storageOwner: T.String({ default: \"ubiquity-os-marketplace\" }),\n+  maxCompletionTokens: T.Number({ default: 7000 }),",
+        "score": {
+          "reward": 2.338,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 89.865,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 0.70135
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2482471518,
+        "content": "This is very hostile UX. Perhaps we should fuzzy match so we can write something like \"/newtask kernel-telegram\" and it'll pick from a list of the repos in the devpool-directory.",
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31#issuecomment-2482471518",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.59,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 64.4693181818182,
+            "syllables": 49,
+            "sentences": 2,
+            "score": 0.9553068181818181
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2442053650,
+            "effect": {
+              "addition": 251,
+              "deletion": 5
+            },
+            "reward": 5.12,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 14.322 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>5.12</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.944</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>7.258</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31\" target=\"_blank\" rel=\"noopener\">#31</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+251 -5</td><td>2</td><td>5.12</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/issues/32#issuecomment-2454832946\" target=\"_blank\" rel=\"noopener\">Should be inlined \"inline function\" as we discussed before.</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.9</td><td>2</td><td>1.944</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31#discussion_r1846211175\" target=\"_blank\" rel=\"noopener\">Why 7000</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.5</td><td>2</td><td>0.33</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31#discussion_r1846907064\" target=\"_blank\" rel=\"noopener\">I think if you don't put anything it defaults to max which makes&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.7</td><td>2</td><td>2.338</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/31#issuecomment-2482471518\" target=\"_blank\" rel=\"noopener\">This is very hostile UX. Perhaps we should fuzzy match so we can&hellip;</a></h6></td><td><details><summary>1.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.9</td><td>2</td><td>4.59</td></tr></tbody></table></details>"
+  }
+}

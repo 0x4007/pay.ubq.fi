@@ -1,0 +1,256 @@
+{
+  "zugdev": {
+    "userId": 155616000,
+    "total": 12,
+    "task": {
+      "reward": 6,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2472005095,
+        "content": "Wrangler only looks specifically inside the directory given, so even though HTML changes are captured, typescript ones aren't. Therefore it is extremely unreliable to get global `ts` changes for example. So I've deprecated the server in favor of wrangler and wrote an observer using esbuild API that watches and rebuilds based on file change.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/164#issuecomment-2472005095",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.936,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 55,
+            "wordValue": 0.1,
+            "result": 2.46
+          },
+          "readability": {
+            "fleschKincaid": 45.175757575757615,
+            "syllables": 93,
+            "sentences": 3,
+            "score": 0.8517575757575762
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2653444921,
+        "content": "We've recently changed this repo's `package.json` start command to use wrangler pages because of the referral tracker kv implementation. \r\n```json\r\n\"start\": \"wrangler pages dev --port 8080\"\r\n```\r\nThis killed the live reload feature, and https://github.com/cloudflare/workers-sdk/issues/4824 we have to pass in a directory after wrangler pages dev to hear changes from. However, passing in `./` wont work since it only reads inside the received directory (non-recursive).",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/164",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.52,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 57,
+            "wordValue": 0.1,
+            "result": 2.48
+          },
+          "readability": {
+            "fleschKincaid": 60.18740384615384,
+            "syllables": 100,
+            "sentences": 4,
+            "score": 0.9981259615384616
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 12 XP ]</a>&nbsp;</h3><h6>@zugdev</h6></b></summary><h6>⚠️ Your rewards have been limited to the task price of 6 XP.</h6><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>6</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.52</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>2.936</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/164\" target=\"_blank\" rel=\"noopener\">We've recently changed this repo's &#96;package.json&#96; start &hellip;</a></h6></td><td><details><summary>3.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 57&#13;  wordValue: 0.1&#13;  result: 2.48&#13;</pre></details></td><td>1</td><td>1</td><td>4.52</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/164#issuecomment-2472005095\" target=\"_blank\" rel=\"noopener\">Wrangler only looks specifically inside the directory given, so &hellip;</a></h6></td><td><details><summary>2.46</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 55&#13;  wordValue: 0.1&#13;  result: 2.46&#13;</pre></details></td><td>0.95</td><td>1</td><td>2.936</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 2.144,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2482387874,
+        "content": "@gentlementlegen first time I've seen this in a long time. Production should be stable.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/164#issuecomment-2482387874",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.152,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 75.14250000000001,
+            "syllables": 22,
+            "sentences": 2,
+            "score": 0.8485749999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1842286149,
+        "content": "```suggestion\n    \"start\": \"run-s start-wrangler watch\",\n```\nWe use npm-run-all for exactly situations like these",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/165#discussion_r1842286149",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -9,8 +9,9 @@\n     \"node\": \">=20.10.0\"\n   },\n   \"scripts\": {\n-    \"start\": \"wrangler pages dev --port 8080\",\n-    \"watch\": \"tsx build/esbuild-server.ts\",\n+    \"start\": \"concurrently \\\"yarn start-wrangler\\\" \\\"yarn watch\\\"\",",
+        "score": {
+          "reward": 1.008,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 78.24500000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.8175499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1842286824,
+        "content": "```suggestion\n```\nRemove and uninstall so lock file is up to date",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/165#discussion_r1842286824",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -46,6 +47,7 @@\n     \"@types/node\": \"^20.10.0\",\n     \"@typescript-eslint/eslint-plugin\": \"^6.13.1\",\n     \"@typescript-eslint/parser\": \"^6.13.1\",\n+    \"concurrently\": \"^9.1.0\",",
+        "score": {
+          "reward": 0.784,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 78.24500000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.8175499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2436191797,
+            "effect": {
+              "addition": 15,
+              "deletion": 2
+            },
+            "reward": 0.17,
+            "priority": 1
+          },
+          {
+            "reviewId": 2441959796,
+            "effect": {
+              "addition": 1,
+              "deletion": 2
+            },
+            "reward": 0.03,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/165"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 2.144 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>0.2</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.152</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>1.792</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/work.ubq.fi/pull/165\" target=\"_blank\" rel=\"noopener\">#165</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+15 -2</td><td>1</td><td>0.17</td></tr><tr><td>+1 -2</td><td>1</td><td>0.03</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/164#issuecomment-2482387874\" target=\"_blank\" rel=\"noopener\">@gentlementlegen first time I've seen this in a long time. Produ&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.152</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/165#discussion_r1842286149\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion\"start\": \"run-s start-wrangler wat&hellip;</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.008</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/165#discussion_r1842286824\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion&#96;&#96;&#96;Remove and uninstall s&hellip;</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.784</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 1.358,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2483366496,
+        "content": "@0x4007 Since the prompt was changed within the last 7 days it is possible that something went wrong, I'll investigate.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/164#issuecomment-2483366496",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.358,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 68.69142857142859,
+            "syllables": 29,
+            "sentences": 1,
+            "score": 0.9130857142857142
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/165"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 1.358 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.358</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/164#issuecomment-2483366496\" target=\"_blank\" rel=\"noopener\">@0x4007 Since the prompt was changed within the last 7 days it i&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.358</td></tr></tbody></table></details>"
+  }
+}

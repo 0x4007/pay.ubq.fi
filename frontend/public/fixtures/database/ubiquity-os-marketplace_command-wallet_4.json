@@ -1,0 +1,595 @@
+{
+  "ariesgun": {
+    "userId": 10436502,
+    "total": 50,
+    "task": {
+      "reward": 50,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 50 XP ]</a>&nbsp;</h3><h6>@ariesgun</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>50</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "wolfmic": {
+    "total": 0,
+    "userId": 1028208,
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/command-wallet/pull/19"
+      }
+    ]
+  },
+  "gentlementlegen": {
+    "total": 17.731,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2295290301,
+        "content": "@wolfmic I think using `logger.error` instead of warn is fine for now.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-wallet/issues/4#issuecomment-2295290301",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.944,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 87.99727272727276,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.7200272727272724
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2418439866,
+        "content": "Marketplace needs both otherwise the runs won't work, you will get the `installation is disabled` error.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-wallet/issues/4#issuecomment-2418439866",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.145,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 77.81071428571428,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.8218928571428572
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2394760599,
+        "content": "Currently the logs are handled manually with `console` messages. They should use our logger package to follow our usual display standards and logic.\r\nhttps://github.com/ubiquity/ubiquibot-logger\r\nC.f. https://github.com/ubiquibot/command-wallet/pull/2#discussion_r1668052899 and https://github.com/ubiquibot/command-wallet/pull/2#discussion_r1668051345",
+        "url": "https://github.com/ubiquity-os-marketplace/command-wallet/issues/4",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.74,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 53.86302295918372,
+            "syllables": 85,
+            "sentences": 8,
+            "score": 0.9386302295918373
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1808042281,
+        "content": "If you use the logger you should not have to manually build these string, use the returned value of the logger instead.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#discussion_r1808042281",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -30,15 +31,21 @@ export async function registerWallet(context: Context, body: string) {\n   }\n \n   if (!address) {\n-    return context.logger.info(\"Skipping to register a wallet address because both address/ens doesn't exist\");\n+    const message = \"Skipping to register a wallet address because both address/ens doesn't exist\";\n+    await addCommentToIssue(context, `\\`\\`\\`diff\\n# ${message}`);",
+        "score": {
+          "reward": 1.782,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 72.9868181818182,
+            "syllables": 29,
+            "sentences": 1,
+            "score": 0.8701318181818181
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1808042409,
+        "content": "Delete comments",
+        "url": "https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#discussion_r1808042409",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -17,12 +18,13 @@ export interface Context<T extends SupportedEventsU = SupportedEventsU, TU exten\n   adapters: ReturnType<typeof createAdapters>;\n   config: PluginSettings;\n   env: Env;\n-  logger: {\n-    fatal: (message: unknown, ...optionalParams: unknown[]) => void;\n-    error: (message: unknown, ...optionalParams: unknown[]) => Promise<void>;\n-    warn: (message: unknown, ...optionalParams: unknown[]) => void;\n-    info: (message: unknown, ...optionalParams: unknown[]) => Promise<void>;\n-    ok: (message: unknown, ...optionalParams: unknown[]) => Promise<void>;\n-    debug: (message: unknown, ...optionalParams: unknown[]) => void;\n-  };\n+  logger: Logs;\n+  // {",
+        "score": {
+          "reward": 0.217,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 35.60500000000002,
+            "syllables": 4,
+            "sentences": 1,
+            "score": 0.7560500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1809702970,
+        "content": "```suggestion\r\n    await addCommentToIssue(context, logger.info(\"Skipping to register a wallet address because both address/ens doesn't exist\").logMessage.diff);\r\n```\r\nyou can directly inline it to male it simpler.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#discussion_r1809702970",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -21,24 +22,29 @@ export async function registerWallet(context: Context, body: string) {\n   const ensName = extractEnsName(body.replace(\"/wallet\", \"\").trim());\n \n   if (!address && ensName) {\n-    context.logger.debug(\"Trying to resolve address from ENS name\", { ensName });\n+    logger.debug(\"Trying to resolve address from ENS name\", { ensName });\n     address = await resolveAddress(ensName);\n     if (!address) {\n       throw new Error(`Resolving address from ENS name failed: ${ensName}`);\n     }\n-    context.logger.debug(\"Resolved address from ENS name\", { ensName, address });\n+    logger.debug(\"Resolved address from ENS name\", { ensName, address });\n   }\n \n   if (!address) {\n-    return context.logger.info(\"Skipping to register a wallet address because both address/ens doesn't exist\");\n+    const logMessage = logger.info(\"Skipping to register a wallet address because both address/ens doesn't exist\");\n+    await addCommentToIssue(context, logMessage.logMessage.diff);",
+        "score": {
+          "reward": 1.026,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 66.10000000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.9389999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 1814280459,
+        "content": "```suggestion\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#discussion_r1814280459",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -89,5 +91,6 @@\n     \"extends\": [\n       \"@commitlint/config-conventional\"\n     ]\n-  }\n+  },\n+  \"packageManager\": \"yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e\"",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1814281797,
+        "content": "I think it would make more sense to just use `passthrough` from `mwjs` and actually use our real RPC package if possible.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#discussion_r1814281797",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -31,7 +34,12 @@ describe(\"Wallet command tests\", () => {\n   });\n \n   it(\"Should link a wallet\", async () => {\n-    const spy = jest.spyOn(console, \"log\");\n+    jest\n+      .spyOn(RPCHandler.prototype, \"getFirstAvailableRpcProvider\")\n+      .mockResolvedValue(new JsonRpcProvider({ url: \"https://fastethrpc.com\", skipFetchSetup: true }, Number(1)));",
+        "score": {
+          "reward": 1.464,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 80.78500000000003,
+            "syllables": 25,
+            "sentences": 1,
+            "score": 0.7921499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1814533847,
+        "content": "Yes this happens. I guess it's fine for tests, but ideally our RPC shouldn't fail.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#discussion_r1814533847",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -31,7 +34,12 @@ describe(\"Wallet command tests\", () => {\n   });\n \n   it(\"Should link a wallet\", async () => {\n-    const spy = jest.spyOn(console, \"log\");\n+    jest\n+      .spyOn(RPCHandler.prototype, \"getFirstAvailableRpcProvider\")\n+      .mockResolvedValue(new JsonRpcProvider({ url: \"https://fastethrpc.com\", skipFetchSetup: true }, Number(1)));",
+        "score": {
+          "reward": 0.936,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 98.67808823529413,
+            "syllables": 20,
+            "sentences": 2,
+            "score": 0.6132191176470587
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1814536859,
+        "content": "@0x4007 What do you think would be the best approach? In the context of testing, hardcoding an RPC that we are sure works seems ok, but having our RPCs would be preferable but more unstable.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#discussion_r1814536859",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -31,7 +34,12 @@ describe(\"Wallet command tests\", () => {\n   });\n \n   it(\"Should link a wallet\", async () => {\n-    const spy = jest.spyOn(console, \"log\");\n+    jest\n+      .spyOn(RPCHandler.prototype, \"getFirstAvailableRpcProvider\")\n+      .mockResolvedValue(new JsonRpcProvider({ url: \"https://fastethrpc.com\", skipFetchSetup: true }, Number(1)));",
+        "score": {
+          "reward": 1.778,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 77.8839285714286,
+            "syllables": 46,
+            "sentences": 2,
+            "score": 0.821160714285714
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2428543283,
+        "content": "@ariesgun I am okay with the changes, however the `Jest` testing suite is failing, please fix it first.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#issuecomment-2428543283",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.344,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 70.14470588235295,
+            "syllables": 24,
+            "sentences": 1,
+            "score": 0.8985529411764704
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2436533426,
+        "content": "QA: https://github.com/Meniole/command-wallet/issues/5#issuecomment-2436531033\r\nPlease provide your own QA as well next time.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#issuecomment-2436533426",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.205,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 69.78500000000001,
+            "syllables": 30,
+            "sentences": 2,
+            "score": 0.9021499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2380806340,
+            "effect": {
+              "addition": 72,
+              "deletion": 76
+            },
+            "reward": 1.48,
+            "priority": 1
+          },
+          {
+            "reviewId": 2383543914,
+            "effect": {
+              "addition": 9,
+              "deletion": 19
+            },
+            "reward": 0.28,
+            "priority": 1
+          },
+          {
+            "reviewId": 2391323471,
+            "effect": {
+              "addition": 17,
+              "deletion": 8
+            },
+            "reward": 0.25,
+            "priority": 1
+          },
+          {
+            "reviewId": 2393894474,
+            "effect": {
+              "addition": 2,
+              "deletion": 12
+            },
+            "reward": 0.14,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-wallet/pull/19"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 17.731 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>4</td><td>2.15</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.74</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>1.089</td></tr><tr><td>Review</td><td>Comment</td><td>9</td><td>9.752</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-wallet/pull/19\" target=\"_blank\" rel=\"noopener\">#19</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+72 -76</td><td>1</td><td>1.48</td></tr><tr><td>+9 -19</td><td>1</td><td>0.28</td></tr><tr><td>+17 -8</td><td>1</td><td>0.25</td></tr><tr><td>+2 -12</td><td>1</td><td>0.14</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-wallet/issues/4\" target=\"_blank\" rel=\"noopener\">Currently the logs are handled manually with &#96;console&#96; m&hellip;</a></h6></td><td><details><summary>3.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>1</td><td>1</td><td>4.74</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-wallet/issues/4#issuecomment-2295290301\" target=\"_blank\" rel=\"noopener\">@wolfmic I think using &#96;logger.error&#96; instead of warn is&hellip;</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.944</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-wallet/issues/4#issuecomment-2418439866\" target=\"_blank\" rel=\"noopener\">Marketplace needs both otherwise the runs won't work, you will g&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.145</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#discussion_r1808042281\" target=\"_blank\" rel=\"noopener\">If you use the logger you should not have to manually build thes&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.782</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#discussion_r1808042409\" target=\"_blank\" rel=\"noopener\">Delete comments</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.217</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#discussion_r1809702970\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionawait addCommentToIssue(context, &hellip;</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.95</td><td>1</td><td>1.026</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#discussion_r1814280459\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion&#96;&#96;&#96;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.2</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#discussion_r1814281797\" target=\"_blank\" rel=\"noopener\">I think it would make more sense to just use &#96;passthrough&#9&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.464</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#discussion_r1814533847\" target=\"_blank\" rel=\"noopener\">Yes this happens. I guess it's fine for tests, but ideally our R&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.936</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#discussion_r1814536859\" target=\"_blank\" rel=\"noopener\">@0x4007 What do you think would be the best approach? In the con&hellip;</a></h6></td><td><details><summary>2.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.778</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#issuecomment-2428543283\" target=\"_blank\" rel=\"noopener\">@ariesgun I am okay with the changes, however the &#96;Jest&#96;&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.344</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#issuecomment-2436533426\" target=\"_blank\" rel=\"noopener\">QA: https://github.com/Meniole/command-wallet/issues/5#issuecomm&hellip;</a></h6></td><td><details><summary>1.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.5</td><td>1</td><td>1.205</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 5.831,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2417969178,
+        "content": "@gentlementlegen @whilefoo can one bot be disabled now? Do we just need to empty out one of the configs?\r\nLet's make @ubiquity use production,\r\nand @ubiquity-os, @ubiquity-os-marketplace use development?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-wallet/issues/4#issuecomment-2417969178",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 46.97909090909093,
+            "syllables": 58,
+            "sentences": 3,
+            "score": 0.8697909090909093
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 1814988437,
+        "content": "I'm not sure if its valid to skip implementing this test temporarily until we fix our RPC provider. I plan to work on it on the plane ride all day tomorrow so hopefully I have something to show for it. I might be able to push support for ENS only first and then work on generalizing the encoding/decoding of any contract method.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#discussion_r1814988437",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -31,7 +34,12 @@ describe(\"Wallet command tests\", () => {\n   });\n \n   it(\"Should link a wallet\", async () => {\n-    const spy = jest.spyOn(console, \"log\");\n+    jest\n+      .spyOn(RPCHandler.prototype, \"getFirstAvailableRpcProvider\")\n+      .mockResolvedValue(new JsonRpcProvider({ url: \"https://fastethrpc.com\", skipFetchSetup: true }, Number(1)));",
+        "score": {
+          "reward": 2.317,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 64,
+            "wordValue": 0.1,
+            "result": 2.55
+          },
+          "readability": {
+            "fleschKincaid": 59.603541666666686,
+            "syllables": 95,
+            "sentences": 3,
+            "score": 0.9960354166666668
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1817926092,
+        "content": "I was notified that some fixes were made to either the RPC manager or one of the interfaces that implements it, but I would always think that an RPC manager would be more stable than a single RPC endpoint. \nRPC endpoints seem to not have one hundred percent up time.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#discussion_r1817926092",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -31,7 +34,12 @@ describe(\"Wallet command tests\", () => {\n   });\n \n   it(\"Should link a wallet\", async () => {\n-    const spy = jest.spyOn(console, \"log\");\n+    jest\n+      .spyOn(RPCHandler.prototype, \"getFirstAvailableRpcProvider\")\n+      .mockResolvedValue(new JsonRpcProvider({ url: \"https://fastethrpc.com\", skipFetchSetup: true }, Number(1)));",
+        "score": {
+          "reward": 1.824,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 50,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 68.096,
+            "syllables": 67,
+            "sentences": 2,
+            "score": 0.91904
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2392507617,
+            "effect": {
+              "addition": 75,
+              "deletion": 80
+            },
+            "reward": 1.55,
+            "priority": 1
+          },
+          {
+            "reviewId": 2397353624,
+            "effect": {
+              "addition": 2,
+              "deletion": 12
+            },
+            "reward": 0.14,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-wallet/pull/19"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 5.831 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>1.69</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>4.141</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-wallet/pull/19\" target=\"_blank\" rel=\"noopener\">#19</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+75 -80</td><td>1</td><td>1.55</td></tr><tr><td>+2 -12</td><td>1</td><td>0.14</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-wallet/issues/4#issuecomment-2417969178\" target=\"_blank\" rel=\"noopener\">@gentlementlegen @whilefoo can one bot be disabled now? Do we ju&hellip;</a></h6></td><td><details><summary>1.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#discussion_r1814988437\" target=\"_blank\" rel=\"noopener\">I'm not sure if its valid to skip implementing this test tempora&hellip;</a></h6></td><td><details><summary>2.55</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 64&#13;  wordValue: 0.1&#13;  result: 2.55&#13;</pre></details></td><td>0.7</td><td>1</td><td>2.317</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-wallet/pull/19#discussion_r1817926092\" target=\"_blank\" rel=\"noopener\">I was notified that some fixes were made to either the RPC manag&hellip;</a></h6></td><td><details><summary>2.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 50&#13;  wordValue: 0.1&#13;  result: 2.38&#13;</pre></details></td><td>0.6</td><td>1</td><td>1.824</td></tr></tbody></table></details>"
+  }
+}

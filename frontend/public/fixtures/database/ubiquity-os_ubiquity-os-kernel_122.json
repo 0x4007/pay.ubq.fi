@@ -1,0 +1,278 @@
+{
+  "whilefoo": {
+    "userId": 139262667,
+    "total": 101.72,
+    "task": {
+      "reward": 100,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2395366372,
+        "content": "we could have two configs `.ubiquibot-config.yml` and `.ubiquibot-config.dev.yml` and env variable that switches the bot between production and development",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/122#issuecomment-2395366372",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.72,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 60.19176470588238,
+            "syllables": 26,
+            "sentences": 1,
+            "score": 0.9980823529411762
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 101.72 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>100</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.72</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/122#issuecomment-2395366372\" target=\"_blank\" rel=\"noopener\">we could have two configs &#96;.ubiquibot-config.yml&#96; and &#&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>1</td><td>4</td><td>1.72</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 20.998,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2395340584,
+        "content": "@whilefoo perhaps you can take this one on?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/122#issuecomment-2395340584",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.632,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 82.39000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.7760999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2567748984,
+        "content": "_Originally posted by @0x4007 in https://github.com/ubiquity/work.ubq.fi/issues/54#issuecomment-2394988488_\r\nThe problem to solve is that we can't have both bots installed normally on an org or else we have both responding to user actions and it gets noisy. We need to install both to be able to dispatch actions/events on the ubiquity-os-marketplace. But we need to disable the config for one or the other so that it won't respond to user actions like comments/commands. \r\nLets do that.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/122",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.59,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 79,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 71.58500000000001,
+            "syllables": 130,
+            "sentences": 7,
+            "score": 0.8841499999999999
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1790131228,
+        "content": "Do you think we should define the strings and import them for implementation?\r\n```typescript\r\nexport const environments = {\r\n  PRODUCTION: \"production\",\r\n  DEVELOPMENT: \"development\"\r\n};\r\n```\r\nAlthough this can probably be done cleaner with some type of `as const` or `enum`",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/123#discussion_r1790131228",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -143,7 +144,7 @@ async function download({ context, repository, owner }: { context: GitHubContext\n     const { data } = await context.octokit.rest.repos.getContent({\n       owner,\n       repo: repository,\n-      path: CONFIG_FULL_PATH,\n+      path: context.eventHandler.environment === \"production\" ? CONFIG_FULL_PATH : DEV_CONFIG_FULL_PATH,",
+        "score": {
+          "reward": 6.816,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 75.70750000000002,
+            "syllables": 35,
+            "sentences": 2,
+            "score": 0.8429249999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1791178070,
+        "content": "```suggestion\n  owner: { login: \"ubiquity-os-marketplace\" },\n```",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/123#discussion_r1791178070",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -12,6 +12,15 @@ import { shouldSkipPlugin } from \"../src/github/handlers\";\n config({ path: \".dev.vars\" });\n \n const issueOpened = \"issues.opened\";\n+const manifestPath = \"manifest.json\";\n+const repo = {\n+  owner: { login: \"ubiquity\" },",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2396797227,
+        "content": "I've been re-adding collaborators on an as-needed basis. Let me know which repo(s) you need elevated permissions for!",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/123#issuecomment-2396797227",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.6,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 68.77000000000002,
+            "syllables": 33,
+            "sentences": 2,
+            "score": 0.9122999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2351806267,
+            "effect": {
+              "addition": 113,
+              "deletion": 21
+            },
+            "reward": 5.36,
+            "priority": 4
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/123"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 20.998 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>5.36</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.59</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>2.632</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>8.416</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/123\" target=\"_blank\" rel=\"noopener\">#123</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+113 -21</td><td>4</td><td>5.36</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/122\" target=\"_blank\" rel=\"noopener\">_Originally posted by @0x4007 in https://github.com/ubiquity/wor&hellip;</a></h6></td><td><details><summary>3.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 79&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>1</td><td>1</td><td>4.59</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/122#issuecomment-2395340584\" target=\"_blank\" rel=\"noopener\">@whilefoo perhaps you can take this one on?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.7</td><td>4</td><td>2.632</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/123#discussion_r1790131228\" target=\"_blank\" rel=\"noopener\">Do you think we should define the strings and import them for im&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.8</td><td>4</td><td>6.816</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/123#discussion_r1791178070\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionowner: { login: \"ubiquity-os-marketp&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/123#issuecomment-2396797227\" target=\"_blank\" rel=\"noopener\">I've been re-adding collaborators on an as-needed basis. Let me &hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.2</td><td>4</td><td>1.6</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 3.712,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2403839427,
+        "content": "Shouldn't it default to `\"production\"`? Also, the `.dev.vars.example` has not been updated.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/123#issuecomment-2403839427",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.712,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 93.57977272727274,
+            "syllables": 14,
+            "sentences": 2,
+            "score": 0.6642022727272726
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/123"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 3.712 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>1</td><td>3.712</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/123#issuecomment-2403839427\" target=\"_blank\" rel=\"noopener\">Shouldn't it default to &#96;\"production\"&#96;? Also, the &#96;.&hellip;</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.8</td><td>4</td><td>3.712</td></tr></tbody></table></details>"
+  }
+}

@@ -1,0 +1,908 @@
+{
+  "gitcoindev": {
+    "userId": 88761781,
+    "total": 300.384,
+    "task": {
+      "reward": 300,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2061122913,
+        "content": "Good point, I remember that quite a few issues were detected with different fuzzers on top of manual code reviews.",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/925#issuecomment-2061122913",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.384,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 63.86500000000004,
+            "syllables": 29,
+            "sentences": 1,
+            "score": 0.9613499999999996
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 300.384 XP ]</a>&nbsp;</h3><h6>@gitcoindev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>300</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.384</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/925#issuecomment-2061122913\" target=\"_blank\" rel=\"noopener\">Good point, I remember that quite a few issues were detected wit&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.384</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 6.242,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2059999194,
+        "content": "I thought there was a reason why we didn't implement echidna when I asked about it",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/925#issuecomment-2059999194",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.162,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 75.12117647058825,
+            "syllables": 23,
+            "sentences": 1,
+            "score": 0.8487882352941175
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1629125698,
+        "content": "2% seems steep? Why was this decided to be the default? Please tag me in your response since these days I'm not on GitHub much and receive a lot of notifications.",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/940#discussion_r1629125698",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -240,47 +240,42 @@ contract UbiquityPoolFacetFuzzTest is DiamondTestSetup {\n     }\n \n     function testMintDollar_FuzzCollateralAmountSlippage(\n-        uint256 collateralAmount\n+        uint256 maxCollateralIn\n     ) public {\n+        vm.assume(maxCollateralIn <= 100e18);\n         vm.prank(admin);\n-        ubiquityPoolFacet.setPriceThresholds(\n-            1000000, // mint threshold\n-            990000 // redeem threshold\n-        );\n-\n+        curveDollarPlainPool.updateMockParams(1.01e18);\n         vm.prank(user);\n         vm.expectRevert(\"Collateral slippage\");\n         ubiquityPoolFacet.mintDollar(\n             0, // collateral index\n             100e18, // Dollar amount\n             90e18, // min amount of Dollars to mint\n-            10e18, // max collateral to send\n+            maxCollateralIn, // max collateral to send\n             0, // max Governance tokens to send\n             false // force 1-to-1 mint (i.e. provide only collateral without Governance tokens)\n         );\n     }\n \n     function testMintDollar_FuzzGovernanceAmountSlippage(\n-        uint256 governanceAmount\n+        uint256 maxGovernanceIn\n     ) public {\n+        vm.assume(maxGovernanceIn <= 110e18);\n         vm.prank(admin);\n-        ubiquityPoolFacet.setPriceThresholds(\n-            1000000, // mint threshold\n-            990000 // redeem threshold\n-        );\n-\n+        curveDollarPlainPool.updateMockParams(1.01e18);\n+        // set ETH/Governance initial price to 2k in Curve pool mock (2k GOV == 1 ETH, 1 GOV == 1 USD)\n+        curveGovernanceEthPool.updateMockParams(2_000e18);\n         // admin sets collateral ratio to 0%\n         vm.prank(admin);\n         ubiquityPoolFacet.setCollateralRatio(0);\n-\n         vm.prank(user);\n         vm.expectRevert(\"Governance slippage\");\n         ubiquityPoolFacet.mintDollar(\n             0, // collateral index\n             100e18, // Dollar amount\n-            90e18, // min amount of Dollars to mint\n-            10e18, // max collateral to send\n-            0, // max Governance tokens to send\n+            98e18, // min amount of Dollars to mint (2% fee included)",
+        "score": {
+          "reward": 1.896,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 87.61458333333336,
+            "syllables": 41,
+            "sentences": 3,
+            "score": 0.7238541666666665
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2187015052,
+        "content": "Can try a binary search and just push a few commits.",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/940#issuecomment-2187015052",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.354,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 87.99727272727276,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.7200272727272724
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2101424710,
+            "effect": {
+              "addition": 283,
+              "deletion": 0
+            },
+            "reward": 2.83,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/940"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 6.242 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>2.83</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.162</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>2.25</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/940\" target=\"_blank\" rel=\"noopener\">#940</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+283 -0</td><td>1</td><td>2.83</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/925#issuecomment-2059999194\" target=\"_blank\" rel=\"noopener\">I thought there was a reason why we didn't implement echidna whe&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.162</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/940#discussion_r1629125698\" target=\"_blank\" rel=\"noopener\">2% seems steep? Why was this decided to be the default? Please t&hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.896</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/940#issuecomment-2187015052\" target=\"_blank\" rel=\"noopener\">Can try a binary search and just push a few commits.</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.354</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 38.01,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2060890915,
+        "content": "At that time we didn't have a clear scope of what to fuzz. Now we have the [LibUbiquityPool](https://github.com/ubiquity/ubiquity-dollar/blob/a1b11e1b944227144d7cc19ab320220d9fce8b69/packages/contracts/src/dollar/libraries/LibUbiquityPool.sol) which is going to be deployed on mainnet, so the contract scope is clear.",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/925#issuecomment-2060890915",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 3.65,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 84.9784090909091,
+            "syllables": 41,
+            "sentences": 2,
+            "score": 0.7502159090909091
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2060950453,
+        "content": "I think that auditors from our 1st Sherlock audit have already performed all of the fuzz, invariant and formal verification tests so it makes sense to set a normal priority for:\r\n- https://github.com/ubiquity/ubiquity-dollar/issues/925\r\n- https://github.com/ubiquity/ubiquity-dollar/issues/563\r\n- https://github.com/ubiquity/ubiquity-dollar/issues/926",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/925#issuecomment-2060950453",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 4.536,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 40.598749999999995,
+            "syllables": 99,
+            "sentences": 4,
+            "score": 0.8059875
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2128980569,
+        "content": "Sounds good. The same \"properties\" could be later converted to [invariants](https://book.getfoundry.sh/forge/invariant-testing).",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/925#issuecomment-2128980569",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 70.50704545454548,
+            "syllables": 17,
+            "sentences": 2,
+            "score": 0.8949295454545453
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2246025594,
+        "content": "We should implement fuzzing tests for [LibUbiquityPool](https://github.com/ubiquity/ubiquity-dollar/blob/a1b11e1b944227144d7cc19ab320220d9fce8b69/packages/contracts/src/dollar/libraries/LibUbiquityPool.sol). I think it would be enough to fuzz only \"user scenarios\":\r\n- [Dollar token mint](https://github.com/ubiquity/ubiquity-dollar/blob/a1b11e1b944227144d7cc19ab320220d9fce8b69/packages/contracts/src/dollar/libraries/LibUbiquityPool.sol#L486)\r\n- [Dollar token redeem](https://github.com/ubiquity/ubiquity-dollar/blob/a1b11e1b944227144d7cc19ab320220d9fce8b69/packages/contracts/src/dollar/libraries/LibUbiquityPool.sol#L594)\r\n- [collecting redemption](https://github.com/ubiquity/ubiquity-dollar/blob/a1b11e1b944227144d7cc19ab320220d9fce8b69/packages/contracts/src/dollar/libraries/LibUbiquityPool.sol#L710)\r\nPossible solutions for fuzzing tests (I would simply start with foundry since we're using it as a development framework + it also contains invariant testing):\r\n- https://book.getfoundry.sh/forge/fuzz-testing\r\n- https://github.com/crytic/echidna\r\n- https://github.com/crytic/medusa\r\nWhat should be done:\r\n1. Impelent fuzzing tests for the scenarios described above (you may create them in a separate test file like `UbiquityPoolFacet.fuzz.t.sol` so we could distinguish unit and fuzz tests)\r\n2. Setup testing CI this way:\r\na) On PR fuzzing tests should run with a small number of runs (so that we could merge PRs fast)\r\nb) On merge to the `development` branch fuzzing tests should run with a great number of runs to test many cases (keep in mind that github action runnners can run for 6 hours)",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/925",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 9.19,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 13
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 8
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 4
+              }
+            },
+            "result": 4.8
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 138,
+            "wordValue": 0.1,
+            "result": 2.34
+          },
+          "readability": {
+            "fleschKincaid": 55.62448924731184,
+            "syllables": 229,
+            "sentences": 6,
+            "score": 0.9562448924731184
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1629225602,
+        "content": "@0x4007 \r\nThat 2% fee is used solely in the test files.\r\nMint and redeem fees were [set](https://github.com/ubiquity/ubiquity-dollar/blob/e4c1fae5ef5e9ba40bcb84c671f2ba39f0ab5208/packages/contracts/migrations/development/Deploy001_Diamond_Dollar_Governance.s.sol#L316-L317) to 0% on deployment + they are adjustable.",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/940#discussion_r1629225602",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -240,47 +240,42 @@ contract UbiquityPoolFacetFuzzTest is DiamondTestSetup {\n     }\n \n     function testMintDollar_FuzzCollateralAmountSlippage(\n-        uint256 collateralAmount\n+        uint256 maxCollateralIn\n     ) public {\n+        vm.assume(maxCollateralIn <= 100e18);\n         vm.prank(admin);\n-        ubiquityPoolFacet.setPriceThresholds(\n-            1000000, // mint threshold\n-            990000 // redeem threshold\n-        );\n-\n+        curveDollarPlainPool.updateMockParams(1.01e18);\n         vm.prank(user);\n         vm.expectRevert(\"Collateral slippage\");\n         ubiquityPoolFacet.mintDollar(\n             0, // collateral index\n             100e18, // Dollar amount\n             90e18, // min amount of Dollars to mint\n-            10e18, // max collateral to send\n+            maxCollateralIn, // max collateral to send\n             0, // max Governance tokens to send\n             false // force 1-to-1 mint (i.e. provide only collateral without Governance tokens)\n         );\n     }\n \n     function testMintDollar_FuzzGovernanceAmountSlippage(\n-        uint256 governanceAmount\n+        uint256 maxGovernanceIn\n     ) public {\n+        vm.assume(maxGovernanceIn <= 110e18);\n         vm.prank(admin);\n-        ubiquityPoolFacet.setPriceThresholds(\n-            1000000, // mint threshold\n-            990000 // redeem threshold\n-        );\n-\n+        curveDollarPlainPool.updateMockParams(1.01e18);\n+        // set ETH/Governance initial price to 2k in Curve pool mock (2k GOV == 1 ETH, 1 GOV == 1 USD)\n+        curveGovernanceEthPool.updateMockParams(2_000e18);\n         // admin sets collateral ratio to 0%\n         vm.prank(admin);\n         ubiquityPoolFacet.setCollateralRatio(0);\n-\n         vm.prank(user);\n         vm.expectRevert(\"Governance slippage\");\n         ubiquityPoolFacet.mintDollar(\n             0, // collateral index\n             100e18, // Dollar amount\n-            90e18, // min amount of Dollars to mint\n-            10e18, // max collateral to send\n-            0, // max Governance tokens to send\n+            98e18, // min amount of Dollars to mint (2% fee included)",
+        "score": {
+          "reward": 1.986,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 78.33000000000001,
+            "syllables": 33,
+            "sentences": 2,
+            "score": 0.8166999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1630218011,
+        "content": "@gitcoindev How did you come up with the `90000` number? By default it is [set](https://book.getfoundry.sh/reference/config/testing#max_test_rejects) to `65536`. Why do we need to increase it to this exact number?",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/940#discussion_r1630218011",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -42,3 +42,4 @@ src = 'src/dollar'\n \n [profile.intense.fuzz]\n runs = 100000\n+max_test_rejects = 90000",
+        "score": {
+          "reward": 2.648,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 90.66141025641029,
+            "syllables": 33,
+            "sentences": 3,
+            "score": 0.6933858974358971
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2151579900,
+        "content": "This seems to be a low severity issue but keeping in mind that nobody from the Sherlock audit have reported this bug it seems that nobody fuzzed the `UbiquityPoolFacet` contract extensively.",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/940#issuecomment-2151579900",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.175,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 43.84500000000003,
+            "syllables": 47,
+            "sentences": 1,
+            "score": 0.8384500000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2153428646,
+        "content": "@gitcoindev \r\n1. Could you add 2 more fuzz tests:\r\na) If user mints X Dollars he gets exactly X Dollars (minus fee)\r\nb) If user redeems X Dollars exactly X Dollars are subtracted from user balance\r\n2. Pls notice the original issue spec also describe setting up CI\r\nOverall the PR looks great, we will iterate on the fuzzing tests later",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/940#issuecomment-2153428646",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.862,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 59,
+            "wordValue": 0.1,
+            "result": 2.51
+          },
+          "readability": {
+            "fleschKincaid": 17.899152542372917,
+            "syllables": 90,
+            "sentences": 1,
+            "score": 0.5789915254237292
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2185776167,
+        "content": "@gitcoindev Did you experiment with how long the deep fuzz [workflow](https://github.com/ubiquity/ubiquity-dollar/blob/64ab8b9e378abe7cc019924bd43e7891d6d9d884/.github/workflows/deep-fuzz.yml) runs for, let's say, `1_000_000` [runs](https://github.com/ubiquity/ubiquity-dollar/blob/64ab8b9e378abe7cc019924bd43e7891d6d9d884/packages/contracts/foundry.toml#L44) ? I want to find out a value so that deep fuzz workflow could run for the amount of hours close to github max CI limit (6 hours).",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/940#issuecomment-2185776167",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.514,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 44,
+            "wordValue": 0.1,
+            "result": 2.27
+          },
+          "readability": {
+            "fleschKincaid": 78.755,
+            "syllables": 55,
+            "sentences": 2,
+            "score": 0.81245
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 2188103351,
+        "content": "https://github.com/ubiquity/ubiquity-dollar/issues/943",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/940#issuecomment-2188103351",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.119,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 23.00000000000003,
+            "syllables": 17,
+            "sentences": 2,
+            "score": 0.6300000000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2101554866,
+            "effect": {
+              "addition": 283,
+              "deletion": 0
+            },
+            "reward": 2.83,
+            "priority": 1
+          },
+          {
+            "reviewId": 2103177734,
+            "effect": {
+              "addition": 157,
+              "deletion": 20
+            },
+            "reward": 1.77,
+            "priority": 1
+          },
+          {
+            "reviewId": 2134850761,
+            "effect": {
+              "addition": 64,
+              "deletion": 9
+            },
+            "reward": 0.73,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/940"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 38.01 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>5.33</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>9.19</td></tr><tr><td>Issue</td><td>Comment</td><td>3</td><td>10.186</td></tr><tr><td>Review</td><td>Comment</td><td>6</td><td>13.304</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/940\" target=\"_blank\" rel=\"noopener\">#940</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+283 -0</td><td>1</td><td>2.83</td></tr><tr><td>+157 -20</td><td>1</td><td>1.77</td></tr><tr><td>+64 -9</td><td>1</td><td>0.73</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/925\" target=\"_blank\" rel=\"noopener\">We should implement fuzzing tests for [LibUbiquityPool](https://&hellip;</a></h6></td><td><details><summary>7.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 13&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 8&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 4&#13;  result: 4.8&#13;regex:&#13;  wordCount: 138&#13;  wordValue: 0.1&#13;  result: 2.34&#13;</pre></details></td><td>1</td><td>1</td><td>9.19</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/925#issuecomment-2060890915\" target=\"_blank\" rel=\"noopener\">At that time we didn't have a clear scope of what to fuzz. Now w&hellip;</a></h6></td><td><details><summary>2.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>1</td><td>1</td><td>3.65</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/925#issuecomment-2060950453\" target=\"_blank\" rel=\"noopener\">I think that auditors from our 1st Sherlock audit have already p&hellip;</a></h6></td><td><details><summary>5.22</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.3&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.7</td><td>1</td><td>4.536</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/925#issuecomment-2128980569\" target=\"_blank\" rel=\"noopener\">Sounds good. The same \"properties\" could be later converted to [&hellip;</a></h6></td><td><details><summary>1.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.8</td><td>1</td><td>2</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/940#discussion_r1629225602\" target=\"_blank\" rel=\"noopener\">@0x4007 That 2% fee is used solely in the test files.Mint an&hellip;</a></h6></td><td><details><summary>2.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.6</td><td>1</td><td>1.986</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/940#discussion_r1630218011\" target=\"_blank\" rel=\"noopener\">@gitcoindev How did you come up with the &#96;90000&#96; number?&hellip;</a></h6></td><td><details><summary>2.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.8</td><td>1</td><td>2.648</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/940#issuecomment-2151579900\" target=\"_blank\" rel=\"noopener\">This seems to be a low severity issue but keeping in mind that n&hellip;</a></h6></td><td><details><summary>1.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.5</td><td>1</td><td>1.175</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/940#issuecomment-2153428646\" target=\"_blank\" rel=\"noopener\">@gitcoindev 1. Could you add 2 more fuzz tests:a) If user mi&hellip;</a></h6></td><td><details><summary>2.71</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ol:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 59&#13;  wordValue: 0.1&#13;  result: 2.51&#13;</pre></details></td><td>0.9</td><td>1</td><td>2.862</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/940#issuecomment-2185776167\" target=\"_blank\" rel=\"noopener\">@gitcoindev Did you experiment with how long the deep fuzz [work&hellip;</a></h6></td><td><details><summary>4.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 44&#13;  wordValue: 0.1&#13;  result: 2.27&#13;</pre></details></td><td>0.85</td><td>1</td><td>4.514</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/940#issuecomment-2188103351\" target=\"_blank\" rel=\"noopener\">https://github.com/ubiquity/ubiquity-dollar/issues/943</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.119</td></tr></tbody></table></details>"
+  },
+  "3scava1i3r": {
+    "total": 0.433,
+    "userId": 52003051,
+    "comments": [
+      {
+        "id": 2100254992,
+        "content": "@gitcoindev do you mind if i work on this one,if you have other tasks?",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/925#issuecomment-2100254992",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.259,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 90.09000000000002,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.6990999999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2100360356,
+        "content": "No sir,I will find something else to work on then",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/925#issuecomment-2100360356",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.174,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 95.68818181818183,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.6431181818181817
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/940"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 0.433 XP ]</a>&nbsp;</h3><h6>@3scava1i3r</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>2</td><td>0.433</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/925#issuecomment-2100254992\" target=\"_blank\" rel=\"noopener\">@gitcoindev do you mind if i work on this one,if you have other &hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.259</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/925#issuecomment-2100360356\" target=\"_blank\" rel=\"noopener\">No sir,I will find something else to work on then</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.174</td></tr></tbody></table></details>"
+  },
+  "0xJoichiro": {
+    "total": 0.129,
+    "userId": 119509722,
+    "comments": [
+      {
+        "id": 2100349749,
+        "content": "Hey there! @gitcoindev  👋 I've been working on the 'Better Security' tasks and wanted to ask for some assistance. I tried using the 'start' command to pick a task, but it doesn't seem to be working for me.\r\nI've made some progress and don't want to interrupt the workflow or cause any issues. Could you please guide me on how \r\nto pick a task properly, so we can ensure a smooth collaboration?\r\nThank you so much for your time and help! 🙏 Really excited to contribute to this project!",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/925#issuecomment-2100349749",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.081,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 91,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 82.07956043956047,
+            "syllables": 120,
+            "sentences": 7,
+            "score": 0.7792043956043954
+          },
+          "multiplier": 0.25,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2100412688,
+        "content": "understood currently working on https://github.com/ubiquity/ubiquity-dollar/issues/927 using openzeplin defender",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/925#issuecomment-2100412688",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.048,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 1.822499999999991,
+            "syllables": 35,
+            "sentences": 2,
+            "score": 0.4182249999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/940"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 0.129 XP ]</a>&nbsp;</h3><h6>@0xJoichiro</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>2</td><td>0.129</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/925#issuecomment-2100349749\" target=\"_blank\" rel=\"noopener\">Hey there! @gitcoindev  👋 I've been working on the 'Better Secu&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 91&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.081</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/925#issuecomment-2100412688\" target=\"_blank\" rel=\"noopener\">understood currently working on https://github.com/ubiquity/ubiq&hellip;</a></h6></td><td><details><summary>1.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.048</td></tr></tbody></table></details>"
+  },
+  "molecula451": {
+    "total": 6.876,
+    "userId": 41552663,
+    "comments": [
+      {
+        "id": 2124842830,
+        "content": "fuzzing testing upcoming? @gitcoindev",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/925#issuecomment-2124842830",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.077,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": -6.694999999999993,
+            "syllables": 10,
+            "sentences": 2,
+            "score": 0
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2133904446,
+        "content": "the foundry standard library allow us to use `assume()` as an abstraction to meet certain conditions on functionality, to fuzz input and get a corresponding value according to the data\r\nwe have [moved](https://github.com/ubiquity/ubiquity-dollar/tree/7dce7be237666ed7c62a1d0baae2bec66ebe5ac1/packages/contracts/test/fuzz) the files and structured a new way for proper fuzzing tests file in the future\r\nthis PR meets the correct condition at issue #925 implementing\r\n- Correct foundry.toml profile for fuzzing selection\r\nMinting: https://github.com/ubiquity/ubiquity-dollar/blob/7dce7be237666ed7c62a1d0baae2bec66ebe5ac1/packages/contracts/test/fuzz/diamond/facets/UbiquityPoolFacet.fuzz.t.sol#L154\r\nReedeeming:  https://github.com/ubiquity/ubiquity-dollar/blob/7dce7be237666ed7c62a1d0baae2bec66ebe5ac1/packages/contracts/test/fuzz/diamond/facets/UbiquityPoolFacet.fuzz.t.sol#L333\r\nof the corresponding user https://github.com/ubiquity/ubiquity-dollar/blob/7dce7be237666ed7c62a1d0baae2bec66ebe5ac1/packages/contracts/test/fuzz/diamond/facets/UbiquityPoolFacet.fuzz.t.sol#L32 and assuming arbitrary input, therefore i am approving this PR",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/940#pullrequestreview-2133904446",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.278,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 80,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 25.849945255474466,
+            "syllables": 277,
+            "sentences": 14,
+            "score": 0.6584994525547446
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2177012948,
+        "content": "hi @gitcoindev can we instead organize the tests inside a \"fuzz\" folder,\r\n`packages/contracts/test/fuzz/diamond/facets/UbiquityPoolFacet.fuzz.t.sol` or something similar\r\ni think this is our initial sketching/drawing for fuzzing inside the repo, besides the SMTChecker we've done before, but untouching the .sol files, this is the first so it would be nice the addition of the folder for future development",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/940#issuecomment-2177012948",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.624,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 57,
+            "wordValue": 0.1,
+            "result": 2.48
+          },
+          "readability": {
+            "fleschKincaid": 47.29697368421054,
+            "syllables": 88,
+            "sentences": 2,
+            "score": 0.8729697368421054
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2187131928,
+        "content": "i think in part we're going to see the runs with new upcoming PRs and improve the addition workflow from there",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/940#issuecomment-2187131928",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.147,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 76.83227272727274,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.8316772727272727
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2133904446,
+            "effect": {
+              "addition": 475,
+              "deletion": 0
+            },
+            "reward": 4.75,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/940"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 6.876 XP ]</a>&nbsp;</h3><h6>@molecula451</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>4.75</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.077</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>2.049</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/940\" target=\"_blank\" rel=\"noopener\">#940</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+475 -0</td><td>1</td><td>4.75</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/925#issuecomment-2124842830\" target=\"_blank\" rel=\"noopener\">fuzzing testing upcoming? @gitcoindev</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.077</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/940#pullrequestreview-2133904446\" target=\"_blank\" rel=\"noopener\">the foundry standard library allow us to use &#96;assume()&#96; &hellip;</a></h6></td><td><details><summary>4.73</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.1&#13;regex:&#13;  wordCount: 80&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.278</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/940#issuecomment-2177012948\" target=\"_blank\" rel=\"noopener\">hi @gitcoindev can we instead organize the tests inside a \"fuzz\"&hellip;</a></h6></td><td><details><summary>2.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 57&#13;  wordValue: 0.1&#13;  result: 2.48&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.624</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/940#issuecomment-2187131928\" target=\"_blank\" rel=\"noopener\">i think in part we're going to see the runs with new upcoming PR&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.147</td></tr></tbody></table></details>"
+  }
+}

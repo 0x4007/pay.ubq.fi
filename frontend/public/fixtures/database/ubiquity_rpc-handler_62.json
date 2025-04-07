@@ -1,0 +1,1315 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 311.193,
+    "task": {
+      "reward": 300,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2659974260,
+        "content": "The only providers/explorers missing from the RPC handler which are included in the link are these listed below so it's redundant in my opinion.\n- https://rpc.worldchain.network\n- https://explorer.worldchain.network\n- https://blast.drpc.org\nBoth `worldchain` urls are broken links that lead to `This domain is registered at Dynadot.com.` but the `RPC-handler` does support `oneworldchain` and has multiple entries for provider and explorers. Idk if the links are broken just for me or everyone, might be my ISP.\nI just fresh installed the `RPC-handler` package and used `ctrl + f` to detect which rpcs and explorers are in the current build via `index.js` using that list you linked.\n---\nIf we were to add our own endpoints that we host or something then it might make sense but public endpoints are pretty much covered and I'd say this task can be closed. \nI'm unaware of the package bugging out and not finding a provider but if a task was opened regarding it I'd be happy to investigate.\nThis should be impossible for the top chains that most use but once we start to deal with less popular chains then it's possible it could but we'd never be able to host whitelisted rpcs for all chains anyway.",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2659974260",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.966,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.3
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 188,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 76.1636153846154,
+            "syllables": 272,
+            "sentences": 13,
+            "score": 0.8383638461538461
+          },
+          "multiplier": 0.25,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2661296552,
+        "content": "I can't say I experienced this personally while building/stabilising the test suites while I was `pay.ubq.fi`'s maintainer. I'm assuming this edge-case only exists in the test suite and it hasn't been a problem in a prod setting?\nFirst of all, `pay.ubq.fi` test env extracts an RPC and then tries to init `Anvil.fork(rpc)` so it does not benefit from retry-reselect which anybody using `rpc-handler` in production would benefit from.\n`Anvil.Fork` is a vm essentially and is prone to weird errors within it's infra - see https://www.github.com/foundry-rs/foundry/issues/4082 as one example.\nIt seems that OS can play into things and I'm a Windows dweeb, which may be why I never experienced it?\nAlthough based on the video (which btw ty) I can make educated guesses.\n1. The logic for `rpc-handler` largely remains untouched so I'm inclined to believe at first that it's an Anvil or RPC-specific issue.\n2. Based on the error given `Fork Error.. \"invalid number\"` - I'd begin debugging there, starting with using the RPCs which bugged out and running them n times to see how often they fail. I'd then see if changing the numbers either in terms of value or how they are fed as input (E.G. hex/dec) makes a difference. It's a pretty shit error message but maybe it's talking about a number unrelated to the payload we provide and it's something anvil is inserting for gas for example.\n3. Potentially a `cache` issue that's causing it, again on the Anvil side.\n4. The fact it succeeds against RPC-A and fails against RPC-B with the same payload, could be that the RPC API is different in some way (which does happen, most commonly with methods tho not input schema).\nThe fact that `rpc-handler` successful performed it's health-check against those RPC and it was deemed the fastest to respond followed by Anvil's failure to execute a forked tx, I'd lean on it being Anvil more so than `rpc-handler`. Ofc I'm basically stabbing in the dark without looking into things properly.\nIf needed, open a task and tag me and I'll look into things, happy to help.",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2661296552",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.536,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.4
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 355,
+            "wordValue": 0.1,
+            "result": 0.6
+          },
+          "readability": {
+            "fleschKincaid": 69.78644013880857,
+            "syllables": 506,
+            "sentences": 19,
+            "score": 0.9021355986119143
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2661301890,
+        "content": "Which of the below options is the spec implying?\nA) `rpc-handler` was not able to find a _singular_ provider for a specific network as-in no suitable providers were found post-health check?\nB) A read/write op failed with the given provider(s) and we'd like to fallback to \"official\" ones in the case where the op failed?\nThe code reads like A, `rpc-handler` could not find even one provider for that network.\nIn either case, I think your example @EresDev (without knowledge of it happening through intended usage of `rpc-handler`) doesn't quite apply due to the fact we extract the `RPC` and then the error happens within `Anvil`. I could be wrong tho it would need debugged specifically for me to know for sure.",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2661301890",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.638,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 123,
+            "wordValue": 0.1,
+            "result": 2.47
+          },
+          "readability": {
+            "fleschKincaid": 69.7884756097561,
+            "syllables": 169,
+            "sentences": 6,
+            "score": 0.9021152439024389
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2661620862,
+        "content": "Again, the problem by my estimation lies with Anvil, not `rpc-handler`. \nAny \"official\" RPCs that you guys add, are already inside `rpc-handler`.  The problem presented by @EresDev is detached from the `rpc-handler`'s main logic because we extract the RPC URL to init anvil with it, so no retry or reselect.",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2661620862",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.596,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 48,
+            "wordValue": 0.1,
+            "result": 2.35
+          },
+          "readability": {
+            "fleschKincaid": 63.69500000000001,
+            "syllables": 72,
+            "sentences": 3,
+            "score": 0.96305
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2665652750,
+        "content": "The reason `rpc-handler` was built was to avoid building a `blacklist` of RPCs that didn't work (for `pay.ubq.fi`), so to me we should avoid manually marking providers if we can.\nIt's still unclear what the problem question is:\n1. `rpc-handler` could not find any providers? The footage shows providers returned successfully.\n2. `rpc-handler` fails to handle tx failures? The footage does not have retry-reselect logic and was relying on Anvil internals to fake broadcast txs.\nDifficult for us to determine sync but maybe we can use the majority value of `blocknumbers` and eliminate outliers that way?\nYou made a comment which sort of attests to the fact even our whitelisted rpcs might fail for some, it feels like a losing battle.\n---\nAlso it appears that the \"fallback\" logic was leftover and not removed once they got a hang of using `rpc-handler` within `allowance.ubq.fi` so I'm assuming that can be removed (I briefly scanned the commits).\n---\nGreat idea yeah. I'm confident that in a production setting without Anvil, your retry-reselect logic will kick in and your tx will go through.\nIt's still unconfirmed if anyone has spotted issues in a prod setting, so my opinion is based on the fact there has been none.",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2665652750",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.538,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "h2": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 200,
+            "wordValue": 0.1,
+            "result": 1.73
+          },
+          "readability": {
+            "fleschKincaid": 67.82545454545455,
+            "syllables": 285,
+            "sentences": 11,
+            "score": 0.9217454545454545
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2665871712,
+        "content": "1. Sync we can semi-estimate comparing `blocknumbers` I'd think, ofc it relies on a given network having a surplus of providers and the majority being in sync.\n2. I'd expect the initial health-check to fail in such a case but either way the expectation of `rpc-handler` would be to activate it's internal retry-reselect logic I'd think. Perhaps it should be looked at if it's failing in those cases.\n3. That's tricky. I guess we could `best out of three` for each provider? Pros and cons with this idk if it's optimal for the likes of ETH with 15+ providers etc.\nWe could call `_getBlock` to eliminate outliers then use an \"expensive\" read with an immutable return value to further knockout any that might hang, something like `permit2` or whatever comes to mind.",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2665871712",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.322,
+          "formatting": {
+            "content": {
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              }
+            },
+            "result": 0.3
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 131,
+            "wordValue": 0.1,
+            "result": 2.4
+          },
+          "readability": {
+            "fleschKincaid": 67.0751145038168,
+            "syllables": 187,
+            "sentences": 7,
+            "score": 0.929248854961832
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2667697865,
+        "content": "Where did we land on things then since this is priced and ready to go?",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2667697865",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.351,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 101.37000000000002,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2667871314,
+        "content": "I just realized it's `Priority: 3 (High)` so I'm excluded from this task actually lmao. \nThe task access is pretty grim rn, especially with marketing contacting hundreds of devs as we speak. Any that are decent will be restricted to menial tasks which won't excite them to partake. \nI know it was a temp fix to stop the team from being overloaded by sub-par PRs from new contributors but maybe things need reviewed a bit.",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2667871314",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.246,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 76,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 75.12105263157896,
+            "syllables": 101,
+            "sentences": 4,
+            "score": 0.8487894736842104
+          },
+          "multiplier": 0.25,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 311.193 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>300</td></tr><tr><td>Issue</td><td>Comment</td><td>8</td><td>11.193</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2659974260\" target=\"_blank\" rel=\"noopener\">The only providers/explorers missing from the RPC handler which &hellip;</a></h6></td><td><details><summary>5.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.3&#13;regex:&#13;  wordCount: 188&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.966</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2661296552\" target=\"_blank\" rel=\"noopener\">I can't say I experienced this personally while building/stabili&hellip;</a></h6></td><td><details><summary>2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.4&#13;regex:&#13;  wordCount: 355&#13;  wordValue: 0.1&#13;  result: 0.6&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.536</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2661301890\" target=\"_blank\" rel=\"noopener\">Which of the below options is the spec implying?A) &#96;rpc-han&hellip;</a></h6></td><td><details><summary>2.47</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 123&#13;  wordValue: 0.1&#13;  result: 2.47&#13;</pre></details></td><td>0.7</td><td>3</td><td>1.638</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2661620862\" target=\"_blank\" rel=\"noopener\">Again, the problem by my estimation lies with Anvil, not &#96;rp&hellip;</a></h6></td><td><details><summary>2.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 48&#13;  wordValue: 0.1&#13;  result: 2.35&#13;</pre></details></td><td>0.7</td><td>3</td><td>1.596</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2665652750\" target=\"_blank\" rel=\"noopener\">The reason &#96;rpc-handler&#96; was built was to avoid building&hellip;</a></h6></td><td><details><summary>2.93</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    h2:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.2&#13;regex:&#13;  wordCount: 200&#13;  wordValue: 0.1&#13;  result: 1.73&#13;</pre></details></td><td>0.9</td><td>3</td><td>2.538</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2665871712\" target=\"_blank\" rel=\"noopener\">1. Sync we can semi-estimate comparing &#96;blocknumbers&#96; I'&hellip;</a></h6></td><td><details><summary>2.7</summary><pre>content:&#13;  content:&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;  result: 0.3&#13;regex:&#13;  wordCount: 131&#13;  wordValue: 0.1&#13;  result: 2.4&#13;</pre></details></td><td>0.9</td><td>3</td><td>2.322</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2667697865\" target=\"_blank\" rel=\"noopener\">Where did we land on things then since this is priced and ready &hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.351</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2667871314\" target=\"_blank\" rel=\"noopener\">I just realized it's &#96;Priority: 3 (High)&#96; so I'm exclude&hellip;</a></h6></td><td><details><summary>2.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 76&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.246</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 132.765,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2659706828,
+        "content": "@Keyrxng Pls check the description and confirm if it's relevant",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2659706828",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.732,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 72.61545454545457,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.8738454545454544
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2665103531,
+        "content": "Overall there're at least 2 repos ([one](https://github.com/ubiquity/permit2-allowance.ubq.fi/blob/04587e0f5324e794e587b9ee59a8246984c4d00f/static/constants.ts), [two](https://github.com/ubiquity/pay.ubq.fi/blob/d0a31486cfc3ebe0bf122dc511a9c5a71cedb6fb/shared/use-rpc-handler.ts#L48)) that use their own RPCs in case `rpc-handler` fails which is not a good sign.\nAs far as I understand `rpc-handler` works this way:\n1. Fetch RPCs from https://chainid.network/chains.json for a given network\n2. Send `eth_getBlockByNumber` for each RPC and measure latency\n3. Return RPC with the lowest latency\nThe thing is that any latency <500ms looks good for an end user so this parameter is important but not the most crucial one. What's more important is the correct latest block number which means that RPC node is in sync with the latest state. Check this screenshot which highlights RPC with low latency but wrong latest block number:\n<img width=\"1512\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/559abfac-09cb-42f5-89f3-07a75b4b0cf2\" />\nSo the fastest RPC may not be reliable in the end (for example I regularly have issues with https://eth.drpc.org RPC).\nWe've already discarded the following options:\n1. Use self-hosted RPC node (had issues with cloudflare setup)\n2. Use private RPC nodes from alchemy or similar services (have to expose API keys in the frontend)\nWe could mark certain RPC nodes as \"stable\". I mean that I personally sure that `https://eth.llamarpc.com` is a pretty stable choice for mainnet while `https://rpc.gnosischain.com` is stable for gnosis chain although their latencies may not be the fastest. \nWe could change the sorting algorithm of `rpc-handler` to:\n1. Send `eth_getBlockByNumber` for each \"stable\" RPC and measure latency\n2. If there is at least 1 live \"stable\" RPC then return it\n3. Fetch RPCs from https://chainid.network/chains.json for a given network (excluding \"stable\" RPCs from that list)\n4. Send `eth_getBlockByNumber` for each \"unstable\" RPC and measure latency\n5. Simply return RPC with the lowest latency",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2665103531",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 35.04,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 10
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 7
+              }
+            },
+            "result": 8
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 262,
+            "wordValue": 0.1,
+            "result": 1.17
+          },
+          "readability": {
+            "fleschKincaid": 68.70763937282231,
+            "syllables": 398,
+            "sentences": 14,
+            "score": 0.9129236062717768
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2665754969,
+        "content": "`rpc-handler` may return RPC node which is:\n- out of sync (i.e. not on the latest block) \n- not accessible for the end user (like https://eth.llamarpc.com for me which works only via VPN)\n- not reliable like `https://eth.drpc.org` (which responds to `eth_getBlock` but hangs for further requests which [causes](https://github.com/ubiquity-os-marketplace/text-conversation-rewards/actions/runs/13383655396/job/37376464060) `text-conversation-rewards` plugin to compute rewards for ~15 minutes instead of 15 seconds)",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2665754969",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 21.21,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.3
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 54,
+            "wordValue": 0.1,
+            "result": 2.44
+          },
+          "readability": {
+            "fleschKincaid": 82.74720689655173,
+            "syllables": 77,
+            "sentences": 5,
+            "score": 0.7725279310344827
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2667860324,
+        "content": "I've removed fallback to a whitelisted RPC from the issue description. Now it simply describes 3 `rpc-handler` issues that should be solved.",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2667860324",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 4.752,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 72.61545454545457,
+            "syllables": 32,
+            "sentences": 2,
+            "score": 0.8738454545454544
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2854111258,
+        "content": "`rpc-handler` may return RPC node which is:\n- out of sync (i.e.     not on the latest block) \n- not accessible for the end user (like https://eth.llamarpc.com for me which works only via VPN)\n- not reliable like `https://eth.drpc.org` (which responds to `eth_getBlock` but hangs for further requests which [causes](https://github.com/ubiquity-os-marketplace/text-conversation-rewards/actions/runs/13383655396/job/37376464060) `text-conversation-rewards` plugin to compute rewards for ~15 minutes instead of 15 seconds)\nAs a part of this task we should fix all of the above issues.",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/62",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 7.24,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 68,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 82.94399999999999,
+            "syllables": 93,
+            "sentences": 5,
+            "score": 0.7705600000000001
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2632281512,
+        "content": "To sum up `rpc-handler` now works this way:\r\n1. Fetch RPCs from https://chainid.network/chains.json for a given network\r\n2. Send `eth_getBlockByNumber` and `eth_getCode` (to fetch permit2 smart contract bytecode) for each RPC and measure latency\r\n3. Find most common block and exclude RPCs out of sync (even if difference is 1 block)\r\n4. Return RPC with the lowest latency and with the most common block\r\nRegarding the issues mentioned in the original task description:\r\n- out of sync, not on the latest block (now `rpc-handler` compares block heights for RPCs)\r\n- not accessible for the end user, like https://eth.llamarpc.com/ for me which works only via VPN (in this case `rpc-handler` simply won't return the RPC as operational since it wouldn't be able to measure latency)\r\n- not reliable like https://eth.drpc.org which responds to `eth_getBlock` but hangs for further requests (now `rpc-handler` also reads the state, in particular tries to fetch permit2 bytecode)",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/63#pullrequestreview-2632281512",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 20.952,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 9
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 7
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.7
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 136,
+            "wordValue": 0.1,
+            "result": 2.36
+          },
+          "readability": {
+            "fleschKincaid": 66.5628859060403,
+            "syllables": 209,
+            "sentences": 7,
+            "score": 0.9343711409395971
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2670821833,
+        "content": "@Keyrxng Now `rpc-handler` works this way:\r\n1. Fetch RPCs from https://chainid.network/chains.json for a given network\r\n2. Send `eth_getBlockByNumber` and `permit2.nonceBitmap()` for each RPC and measure latency\r\n3. Find most common block and exclude RPCs out of sync (even if difference is 1 block)\r\n4. Return RPC with the lowest latency and with the most common block\r\nCorrect?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/63#issuecomment-2670821833",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 11.328,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.4
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 49,
+            "wordValue": 0.1,
+            "result": 2.37
+          },
+          "readability": {
+            "fleschKincaid": 75.76500000000001,
+            "syllables": 72,
+            "sentences": 3,
+            "score": 0.8423499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2671038396,
+        "content": "This is `true` for ethereum mainnet unless I'm doing smth wrong:\r\n<img width=\"1512\" alt=\"Screenshot 2025-02-20 at 13 08 38\" src=\"https://github.com/user-attachments/assets/e93be718-5eb9-4513-87e7-1b35683c199f\" />",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/63#issuecomment-2671038396",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.976,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 77.8839285714286,
+            "syllables": 46,
+            "sentences": 2,
+            "score": 0.821160714285714
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2671113952,
+        "content": "Yes, either read storage from a known smart contract either check none empty bytecode for [precompiled](https://github.com/sauravchamoli17/Notes-on-Solidity-and-Ethereum/blob/main/Advanced%20Solidity:%20Precompiles%2C%20signatures%2C%20and%20bytecode.md#what-precompiles-are-available) contracts",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/63#issuecomment-2671113952",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 6.258,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 55.21529411764709,
+            "syllables": 27,
+            "sentences": 1,
+            "score": 0.9521529411764709
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2673816042,
+        "content": "@Keyrxng For `mainnet` I'm getting this RPC provider as the best one: `https://rpc.tenderly.co/fork/c63af728-a183-4cfb-b24e-a92801463484`\r\nI don't fully understand how tenderly fork appeared here since it can be a fork with literally any blockchain state.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/63#issuecomment-2673816042",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 9.767,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 55.41272727272728,
+            "syllables": 46,
+            "sentences": 1,
+            "score": 0.9541272727272728
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2632281512,
+            "effect": {
+              "addition": 234,
+              "deletion": 83
+            },
+            "reward": 9.51,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/rpc-handler/pull/63"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 132.765 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>9.51</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>7.24</td></tr><tr><td>Issue</td><td>Comment</td><td>4</td><td>61.734</td></tr><tr><td>Review</td><td>Comment</td><td>5</td><td>54.281</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/rpc-handler/pull/63\" target=\"_blank\" rel=\"noopener\">#63</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+234 -83</td><td>3</td><td>9.51</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/62\" target=\"_blank\" rel=\"noopener\">&#96;rpc-handler&#96; may return RPC node which is:- out of syn&hellip;</a></h6></td><td><details><summary>5.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.3&#13;regex:&#13;  wordCount: 68&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>1</td><td>1</td><td>7.24</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2659706828\" target=\"_blank\" rel=\"noopener\">@Keyrxng Pls check the description and confirm if it's relevant</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.732</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2665103531\" target=\"_blank\" rel=\"noopener\">Overall there're at least 2 repos ([one](https://github.com/ubiq&hellip;</a></h6></td><td><details><summary>9.17</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 10&#13;    a:&#13;      score: 1&#13;      elementCount: 7&#13;  result: 8&#13;regex:&#13;  wordCount: 262&#13;  wordValue: 0.1&#13;  result: 1.17&#13;</pre></details></td><td>1</td><td>3</td><td>35.04</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2665754969\" target=\"_blank\" rel=\"noopener\">&#96;rpc-handler&#96; may return RPC node which is:- out of syn&hellip;</a></h6></td><td><details><summary>5.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.3&#13;regex:&#13;  wordCount: 54&#13;  wordValue: 0.1&#13;  result: 2.44&#13;</pre></details></td><td>1</td><td>3</td><td>21.21</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2667860324\" target=\"_blank\" rel=\"noopener\">I've removed fallback to a whitelisted RPC from the issue descri&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.752</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/63#pullrequestreview-2632281512\" target=\"_blank\" rel=\"noopener\">To sum up &#96;rpc-handler&#96; now works this way:1. Fetch RP&hellip;</a></h6></td><td><details><summary>6.06</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 9&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 7&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.7&#13;regex:&#13;  wordCount: 136&#13;  wordValue: 0.1&#13;  result: 2.36&#13;</pre></details></td><td>0.9</td><td>3</td><td>20.952</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/63#issuecomment-2670821833\" target=\"_blank\" rel=\"noopener\">@Keyrxng Now &#96;rpc-handler&#96; works this way:1. Fetch RPC&hellip;</a></h6></td><td><details><summary>3.77</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.4&#13;regex:&#13;  wordCount: 49&#13;  wordValue: 0.1&#13;  result: 2.37&#13;</pre></details></td><td>0.8</td><td>3</td><td>11.328</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/63#issuecomment-2671038396\" target=\"_blank\" rel=\"noopener\">This is &#96;true&#96; for ethereum mainnet unless I'm doing smt&hellip;</a></h6></td><td><details><summary>2.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.6</td><td>3</td><td>5.976</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/63#issuecomment-2671113952\" target=\"_blank\" rel=\"noopener\">Yes, either read storage from a known smart contract either chec&hellip;</a></h6></td><td><details><summary>2.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.7</td><td>3</td><td>6.258</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/63#issuecomment-2673816042\" target=\"_blank\" rel=\"noopener\">@Keyrxng For &#96;mainnet&#96; I'm getting this RPC provider as &hellip;</a></h6></td><td><details><summary>2.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.85</td><td>3</td><td>9.767</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 21.348,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2660582255,
+        "content": "This doesn't make sense because the main functionality of the rpc manager is to fall back until it finds a suitable provider. I agree this should be closed as unplanned.",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2660582255",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 5.88,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 68.2960483870968,
+            "syllables": 45,
+            "sentences": 2,
+            "score": 0.917039516129032
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2661619653,
+        "content": "Funded because 25% is not a good success rate https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2661285278\nObviously its preferred we fix the rpc-manager but that will be much more complex than implementing this task.",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2661619653",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 10.86,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 56.19736842105266,
+            "syllables": 59,
+            "sentences": 2,
+            "score": 0.9619736842105265
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2666326247,
+        "content": "I did an implementation that compared permit2 bytecode. That seemed very reliable.",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2666326247",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 3.483,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 38.595,
+            "syllables": 23,
+            "sentences": 2,
+            "score": 0.78595
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2674887605,
+        "content": "https://github.com/0x4007/ubiquity-rpc-provider/blob/2acc66088ac9eecf395d29b6d3526cce4161e012/src/rpc-provider.ts#L47",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/63#issuecomment-2674887605",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.125,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 44.98404761904763,
+            "syllables": 26,
+            "sentences": 3,
+            "score": 0.8498404761904763
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/rpc-handler/pull/63"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 21.348 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>3</td><td>20.223</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>1.125</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2660582255\" target=\"_blank\" rel=\"noopener\">This doesn't make sense because the main functionality of the rp&hellip;</a></h6></td><td><details><summary>1.92</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.8</td><td>3</td><td>5.88</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2661619653\" target=\"_blank\" rel=\"noopener\">Funded because 25% is not a good success rate https://github.com&hellip;</a></h6></td><td><details><summary>2.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>1</td><td>3</td><td>10.86</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2666326247\" target=\"_blank\" rel=\"noopener\">I did an implementation that compared permit2 bytecode. That see&hellip;</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.9</td><td>3</td><td>3.483</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/63#issuecomment-2674887605\" target=\"_blank\" rel=\"noopener\">https://github.com/0x4007/ubiquity-rpc-provider/blob/2acc66088ac&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.125</td></tr></tbody></table></details>"
+  },
+  "EresDev": {
+    "total": 28.26,
+    "userId": 11886219,
+    "comments": [
+      {
+        "id": 2661285278,
+        "content": "I have to always use [fallback](https://github.com/ubiquity/pay.ubq.fi/blob/d0a31486cfc3ebe0bf122dc511a9c5a71cedb6fb/shared/use-rpc-handler.ts#L48) around rpc-handler. It is unreliable or the rpcs it provides. \nI have run some tests to show you that rpc-handler needs improvement.\nI am running tests using `pay.ubq.fi` test funding using anvil.  What it does? it forks gnosis chains, and does some UUSD transfers. \nTest compares the same operations using rpc provided by rpc-handler, vs simple official `https://rpc.gnosischain.com`\nI will put results first, then you can see the video below  me running tests:\n- Using official rpc, tests passed: 3/3 times. 100% success rate\n- Using rpc-handler's rpc: tests passed: 1/4 times. 25% success rate\nNow, there could be problem with some rpc, maybe my ISP blocking some rpc. But it has been very difficult for me to use rpc-handler. \nhttps://github.com/user-attachments/assets/567c6ac3-27bd-4c78-96d4-10439f954df2",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2661285278",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 5.22,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 130,
+            "wordValue": 0.1,
+            "result": 2.41
+          },
+          "readability": {
+            "fleschKincaid": 79.70875000000001,
+            "syllables": 192,
+            "sentences": 12,
+            "score": 0.8029124999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2661999369,
+        "content": "maybe we should run the same tests without anvil? do the similar transfers for very small amounts and see what is the result. Gnosis chain is very inexpensive to run such tests.  I will run some more tests without anvil and share the results here.",
+        "url": "https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2661999369",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 1.704,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 45,
+            "wordValue": 0.1,
+            "result": 2.29
+          },
+          "readability": {
+            "fleschKincaid": 80.73625000000003,
+            "syllables": 61,
+            "sentences": 4,
+            "score": 0.7926374999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2633892058,
+        "content": "- can we improve this when running tests? \r\n```\r\nA worker process has failed to exit gracefully and has been force exited. This is likely caused by tests leaking due to improper teardown. Try running with --detectOpenHandles to find leaks. Active timers can also cause this, ensure that .unref() was called on them.\r\n```\r\n- `https://gnosis-pokt.nodies.app` is the most troublesome RPC for me (espcially with anvil), and rpc-handler finds it fastest most of the time.\r\nSome info to improve the code quality. You don't need to do this now but something useful to consider for the future I think.\r\n- naming needs improvement. we should reduce the use of terms like Service, Handler, Managers. These are too generic. Name of class or function should indicate clear intent and should follow Single Responsibility Principle.\r\n- if all functions were going to be static, then use functions instead of class I think. Even though I believe class would be more useful but with minimum statics. This will enable inheritance and we can offer more to users like class FastestRpc, AnonymousRpc, SecureRpc that can inherit from class AnyRpc.\r\n- use immutability. do not change objects passed in arguments to functions. Clone them if you must before changing, and return them from function. A function should almost never change an object pass in arguments. This can introduce hard to debug problems.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/63#pullrequestreview-2633892058",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 2.997,
+          "formatting": {
+            "content": {
+              "ul": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.5
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 177,
+            "wordValue": 0.1,
+            "result": 1.96
+          },
+          "readability": {
+            "fleschKincaid": 66.07774894067796,
+            "syllables": 271,
+            "sentences": 16,
+            "score": 0.9392225105932204
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1965980528,
+        "content": "does this need 999999 timeout? This doesn't look like a test either. It has no expectation `expect(true/false/something)`",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/63#discussion_r1965980528",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -48,7 +48,7 @@ describe(\"RPCHandler\", () => {\n \n     console.log(\"slowestRpc: without an rpc timeout > \", slowestRpc);\n     console.log(\"fastestRpc: without an rpc timeout > \", fastestRpcUrl);\n-  }, 15000);\n+  }, 999999);",
+        "score": {
+          "reward": 0.96,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 86.62450980392158,
+            "syllables": 23,
+            "sentences": 3,
+            "score": 0.7337549019607842
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1966056831,
+        "content": "`blockNumberCounts` is sometimes {} and `yarn test:anvil` fails. We should improve this. Handle it being empty with retry maybe?\r\n```\r\n$ npx tsx ./tests/anvil.ts\r\nTypeError: Reduce of empty array with no initial value\r\n    at Array.reduce (<anonymous>)\r\n    at Function.testRpcPerformance (/rpc-handler/types/rpc-service.ts:99:66)\r\n```\r\nthis also happens sometimes during `yarn test`.\r\n```\r\nCall Handler › createProviderProxy › should make a successful get_blockNumber call\r\n    TypeError: Reduce of empty array with no initial value\r\n        at Array.reduce (<anonymous>)\r\n       97 |     rpcResults.forEach((result) => this._processRpcResult({ result, networkId, latencies, runtimeRpcs, blockNumberCounts, blockNumberResults, rpcHandler }));\r\n```",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/63#discussion_r1966056831",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -47,36 +63,151 @@ export class RPCService {\n     latencies: Record<string, number>,\n     runtimeRpcs: string[],\n     rpcHeader: object,\n-    rpcTimeout: number\n+    rpcTimeout: number,\n+    rpcHandler: RPCHandler\n   ): Promise<{ latencies: Record<string, number>; runtimeRpcs: string[] }> {\n-    async function requestEndpoint(rpcUrl: string) {\n+    async function requestEndpoint(rpcUrl: string, isBlockReq = true): Promise<PromiseResult> {\n       try {\n-        return await RPCService.makeRpcRequest(rpcUrl, rpcTimeout, rpcHeader);\n+        return await RPCService.makeRpcRequest(rpcUrl, rpcTimeout, rpcHeader, isBlockReq);\n       } catch (err) {\n-        console.error(`Failed to reach endpoint. ${err}`);\n+        rpcHandler.log(\"error\", \"[RPCService] Failed to make RPC request\", { rpcUrl, err: String(err) });\n         throw new Error(rpcUrl);\n       }\n     }\n \n-    const promises = runtimeRpcs.map((rpcUrl) => requestEndpoint(rpcUrl));\n-    const allResults = await Promise.allSettled(promises);\n-\n-    allResults.forEach((result) => {\n-      if (result.status === \"fulfilled\" && result.value.success) {\n-        latencies[`${networkId}__${result.value.rpcUrl}`] = result.value.duration;\n-      } else if (result.status === \"fulfilled\") {\n-        const fulfilledResult = result.value;\n-        const index = runtimeRpcs.indexOf(fulfilledResult.rpcUrl);\n-        if (index > -1) {\n-          runtimeRpcs.splice(index, 1);\n-        }\n+    const rpcPromises: Record<string, Promise<PromiseResult>[]> = {};\n+    runtimeRpcs.forEach((rpcUrl) => {\n+      rpcPromises[rpcUrl] = [requestEndpoint(rpcUrl, true), requestEndpoint(rpcUrl, false)];\n+    });\n+\n+    const rpcResults = await Promise.allSettled(Object.values(rpcPromises).flat());\n+\n+    /**\n+     * We need to detect providers which are out of sync. This is done\n+     * by comparing all blocknumber results. If the blocknumber is the same\n+     * for all providers, we can assume that they are in sync.\n+     *\n+     * So, detect across all providers which blocknumber was returned most,\n+     * we assume this is the correct blocknumber.\n+     */\n+\n+    const blockNumberCounts: Record<string, number> = {};\n+    const blockNumberResults: Record<string, string> = {};\n+\n+    rpcResults.forEach((result) => this._processRpcResult({ result, networkId, latencies, runtimeRpcs, blockNumberCounts, blockNumberResults, rpcHandler }));\n+\n+    const mostCommonBlockNumber = Object.keys(blockNumberCounts).reduce((a, b) => (blockNumberCounts[a] > blockNumberCounts[b] ? a : b));",
+        "score": {
+          "reward": 1.269,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 70.63000000000002,
+            "syllables": 31,
+            "sentences": 4,
+            "score": 0.8936999999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1966604503,
+        "content": "No, I am using same code without any change.  And it fails sometimes. Works mostly fine. \r\nBut I see `blockNumberCounts` can be prevented from being empty by increasing the timeout. So, I think it is ok. You can skip this.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/63#discussion_r1966604503",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -47,36 +63,151 @@ export class RPCService {\n     latencies: Record<string, number>,\n     runtimeRpcs: string[],\n     rpcHeader: object,\n-    rpcTimeout: number\n+    rpcTimeout: number,\n+    rpcHandler: RPCHandler\n   ): Promise<{ latencies: Record<string, number>; runtimeRpcs: string[] }> {\n-    async function requestEndpoint(rpcUrl: string) {\n+    async function requestEndpoint(rpcUrl: string, isBlockReq = true): Promise<PromiseResult> {\n       try {\n-        return await RPCService.makeRpcRequest(rpcUrl, rpcTimeout, rpcHeader);\n+        return await RPCService.makeRpcRequest(rpcUrl, rpcTimeout, rpcHeader, isBlockReq);\n       } catch (err) {\n-        console.error(`Failed to reach endpoint. ${err}`);\n+        rpcHandler.log(\"error\", \"[RPCService] Failed to make RPC request\", { rpcUrl, err: String(err) });\n         throw new Error(rpcUrl);\n       }\n     }\n \n-    const promises = runtimeRpcs.map((rpcUrl) => requestEndpoint(rpcUrl));\n-    const allResults = await Promise.allSettled(promises);\n-\n-    allResults.forEach((result) => {\n-      if (result.status === \"fulfilled\" && result.value.success) {\n-        latencies[`${networkId}__${result.value.rpcUrl}`] = result.value.duration;\n-      } else if (result.status === \"fulfilled\") {\n-        const fulfilledResult = result.value;\n-        const index = runtimeRpcs.indexOf(fulfilledResult.rpcUrl);\n-        if (index > -1) {\n-          runtimeRpcs.splice(index, 1);\n-        }\n+    const rpcPromises: Record<string, Promise<PromiseResult>[]> = {};\n+    runtimeRpcs.forEach((rpcUrl) => {\n+      rpcPromises[rpcUrl] = [requestEndpoint(rpcUrl, true), requestEndpoint(rpcUrl, false)];\n+    });\n+\n+    const rpcResults = await Promise.allSettled(Object.values(rpcPromises).flat());\n+\n+    /**\n+     * We need to detect providers which are out of sync. This is done\n+     * by comparing all blocknumber results. If the blocknumber is the same\n+     * for all providers, we can assume that they are in sync.\n+     *\n+     * So, detect across all providers which blocknumber was returned most,\n+     * we assume this is the correct blocknumber.\n+     */\n+\n+    const blockNumberCounts: Record<string, number> = {};\n+    const blockNumberResults: Record<string, string> = {};\n+\n+    rpcResults.forEach((result) => this._processRpcResult({ result, networkId, latencies, runtimeRpcs, blockNumberCounts, blockNumberResults, rpcHandler }));\n+\n+    const mostCommonBlockNumber = Object.keys(blockNumberCounts).reduce((a, b) => (blockNumberCounts[a] > blockNumberCounts[b] ? a : b));",
+        "score": {
+          "reward": 0.975,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 39,
+            "wordValue": 0.1,
+            "result": 2.15
+          },
+          "readability": {
+            "fleschKincaid": 91.77596153846154,
+            "syllables": 50,
+            "sentences": 6,
+            "score": 0.6822403846153846
+          },
+          "multiplier": 0.25,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1966620019,
+        "content": "Rename `processBytecodeResponse()` to `isBytecodeValid()`.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/63#discussion_r1966620019",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -47,36 +63,161 @@ export class RPCService {\n     latencies: Record<string, number>,\n     runtimeRpcs: string[],\n     rpcHeader: object,\n-    rpcTimeout: number\n+    rpcTimeout: number,\n+    rpcHandler: RPCHandler\n   ): Promise<{ latencies: Record<string, number>; runtimeRpcs: string[] }> {\n-    async function requestEndpoint(rpcUrl: string) {\n+    async function requestEndpoint(rpcUrl: string, isBlockReq = true): Promise<PromiseResult> {\n       try {\n-        return await RPCService.makeRpcRequest(rpcUrl, rpcTimeout, rpcHeader);\n+        return await RPCService.makeRpcRequest(rpcUrl, rpcTimeout, rpcHeader, isBlockReq);\n       } catch (err) {\n-        console.error(`Failed to reach endpoint. ${err}`);\n+        rpcHandler.log(\"error\", \"[RPCService] Failed to make RPC request\", { rpcUrl, err: String(err) });\n         throw new Error(rpcUrl);\n       }\n     }\n \n-    const promises = runtimeRpcs.map((rpcUrl) => requestEndpoint(rpcUrl));\n-    const allResults = await Promise.allSettled(promises);\n-\n-    allResults.forEach((result) => {\n-      if (result.status === \"fulfilled\" && result.value.success) {\n-        latencies[`${networkId}__${result.value.rpcUrl}`] = result.value.duration;\n-      } else if (result.status === \"fulfilled\") {\n-        const fulfilledResult = result.value;\n-        const index = runtimeRpcs.indexOf(fulfilledResult.rpcUrl);\n-        if (index > -1) {\n-          runtimeRpcs.splice(index, 1);\n-        }\n+    const rpcPromises: Record<string, Promise<PromiseResult>[]> = {};\n+    runtimeRpcs.forEach((rpcUrl) => {\n+      rpcPromises[rpcUrl] = [requestEndpoint(rpcUrl, true), requestEndpoint(rpcUrl, false)];\n+    });\n+\n+    const rpcResults = await Promise.allSettled(Object.values(rpcPromises).flat());\n+\n+    /**\n+     * We need to detect providers which are out of sync. This is done\n+     * by comparing all blocknumber results. If the blocknumber is the same\n+     * for all providers, we can assume that they are in sync.\n+     *\n+     * So, detect across all providers which blocknumber was returned most,\n+     * we assume this is the correct blocknumber.\n+     */\n+\n+    const blockNumberCounts: Record<string, number> = {};\n+    const blockNumberResults: Record<string, string> = {};\n+\n+    if (!rpcResults.length) {\n+      rpcHandler.log(\"error\", \"[RPCService] No RPC results found\", { rpcResults });\n+      return { latencies, runtimeRpcs };\n+    }\n+\n+    rpcResults.forEach((result) => this._processRpcResult({ result, networkId, latencies, runtimeRpcs, blockNumberCounts, blockNumberResults, rpcHandler }));\n+    const bncKeys = Object.keys(blockNumberCounts);\n+    if (!bncKeys.length) {\n+      rpcHandler.log(\"error\", \"[RPCService] No blocknumber counts found\", { blockNumberCounts });\n+      return { latencies, runtimeRpcs };\n+    }\n+\n+    const mostCommonBlockNumber = bncKeys.reduce((a, b) => (blockNumberCounts[a] > blockNumberCounts[b] ? a : b));\n+    runtimeRpcs = Object.keys(blockNumberResults).filter((rpcUrl) => {\n+      if (blockNumberResults[rpcUrl] !== mostCommonBlockNumber) {\n+        rpcHandler.log(\n+          \"info\",\n+          `[RPCService] Detected out of sync provider: ${rpcUrl} with blocknumber: ${formatHexToDecimal(blockNumberResults[rpcUrl])} vs ${formatHexToDecimal(mostCommonBlockNumber)}`,\n+          {\n+            rpcUrl,\n+            blockNumber: blockNumberResults[rpcUrl],\n+            mostCommonBlockNumber,\n+          }\n+        );\n+        return false;\n       }\n+      return true;\n     });\n \n+    rpcHandler.log(\n+      \"ok\",\n+      `[RPCService] Detected most common blocknumber: ${formatHexToDecimal(mostCommonBlockNumber)} with ${runtimeRpcs.length} providers in sync`\n+    );\n+\n     return { latencies, runtimeRpcs };\n   }\n \n-  static async findFastestRpc(latencies: Record<string, number>, networkId: NetworkId): Promise<string | null> {\n+  static _processRpcResult({\n+    result,\n+    networkId,\n+    latencies,\n+    runtimeRpcs,\n+    blockNumberCounts,\n+    blockNumberResults,\n+    rpcHandler,\n+  }: {\n+    result: PromiseSettledResult<PromiseResult>;\n+    networkId: NetworkId;\n+    latencies: Record<string, number>;\n+    runtimeRpcs: string[];\n+    blockNumberCounts: Record<string, number>;\n+    blockNumberResults: Record<string, string>;\n+    rpcHandler: RPCHandler;\n+  }) {\n+    if (result.status === \"fulfilled\" && result.value.success) {\n+      if (result.value.isBlockReq) {\n+        this.processBlockReqResult({ result, blockNumberCounts, blockNumberResults, rpcHandler });\n+      } else if (!this.processBytecodeResponse({ result, rpcHandler })) {\n+        return;\n+      }\n+      latencies[`${networkId}__${result.value.rpcUrl}`] = result.value.duration;\n+    } else if (result.status === \"fulfilled\") {\n+      const fulfilledResult = result.value;\n+      const index = runtimeRpcs.indexOf(fulfilledResult.rpcUrl);\n+      if (index > -1) {\n+        runtimeRpcs.splice(index, 1);\n+      }\n+    }\n+  }\n+\n+  static processBytecodeResponse({ result, rpcHandler }: { result: PromiseFulfilledResult<PromiseResult>; rpcHandler: RPCHandler }) {",
+        "score": {
+          "reward": 0.168,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 77.90500000000002,
+            "syllables": 3,
+            "sentences": 1,
+            "score": 0.8209499999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1966621831,
+        "content": "do we need this try/catch?",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/63#discussion_r1966621831",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -47,36 +63,161 @@ export class RPCService {\n     latencies: Record<string, number>,\n     runtimeRpcs: string[],\n     rpcHeader: object,\n-    rpcTimeout: number\n+    rpcTimeout: number,\n+    rpcHandler: RPCHandler\n   ): Promise<{ latencies: Record<string, number>; runtimeRpcs: string[] }> {\n-    async function requestEndpoint(rpcUrl: string) {\n+    async function requestEndpoint(rpcUrl: string, isBlockReq = true): Promise<PromiseResult> {\n       try {\n-        return await RPCService.makeRpcRequest(rpcUrl, rpcTimeout, rpcHeader);\n+        return await RPCService.makeRpcRequest(rpcUrl, rpcTimeout, rpcHeader, isBlockReq);\n       } catch (err) {\n-        console.error(`Failed to reach endpoint. ${err}`);\n+        rpcHandler.log(\"error\", \"[RPCService] Failed to make RPC request\", { rpcUrl, err: String(err) });\n         throw new Error(rpcUrl);\n       }\n     }\n \n-    const promises = runtimeRpcs.map((rpcUrl) => requestEndpoint(rpcUrl));\n-    const allResults = await Promise.allSettled(promises);\n-\n-    allResults.forEach((result) => {\n-      if (result.status === \"fulfilled\" && result.value.success) {\n-        latencies[`${networkId}__${result.value.rpcUrl}`] = result.value.duration;\n-      } else if (result.status === \"fulfilled\") {\n-        const fulfilledResult = result.value;\n-        const index = runtimeRpcs.indexOf(fulfilledResult.rpcUrl);\n-        if (index > -1) {\n-          runtimeRpcs.splice(index, 1);\n-        }\n+    const rpcPromises: Record<string, Promise<PromiseResult>[]> = {};\n+    runtimeRpcs.forEach((rpcUrl) => {\n+      rpcPromises[rpcUrl] = [requestEndpoint(rpcUrl, true), requestEndpoint(rpcUrl, false)];\n+    });\n+\n+    const rpcResults = await Promise.allSettled(Object.values(rpcPromises).flat());\n+\n+    /**\n+     * We need to detect providers which are out of sync. This is done\n+     * by comparing all blocknumber results. If the blocknumber is the same\n+     * for all providers, we can assume that they are in sync.\n+     *\n+     * So, detect across all providers which blocknumber was returned most,\n+     * we assume this is the correct blocknumber.\n+     */\n+\n+    const blockNumberCounts: Record<string, number> = {};\n+    const blockNumberResults: Record<string, string> = {};\n+\n+    if (!rpcResults.length) {\n+      rpcHandler.log(\"error\", \"[RPCService] No RPC results found\", { rpcResults });\n+      return { latencies, runtimeRpcs };\n+    }\n+\n+    rpcResults.forEach((result) => this._processRpcResult({ result, networkId, latencies, runtimeRpcs, blockNumberCounts, blockNumberResults, rpcHandler }));\n+    const bncKeys = Object.keys(blockNumberCounts);\n+    if (!bncKeys.length) {\n+      rpcHandler.log(\"error\", \"[RPCService] No blocknumber counts found\", { blockNumberCounts });\n+      return { latencies, runtimeRpcs };\n+    }\n+\n+    const mostCommonBlockNumber = bncKeys.reduce((a, b) => (blockNumberCounts[a] > blockNumberCounts[b] ? a : b));\n+    runtimeRpcs = Object.keys(blockNumberResults).filter((rpcUrl) => {\n+      if (blockNumberResults[rpcUrl] !== mostCommonBlockNumber) {\n+        rpcHandler.log(\n+          \"info\",\n+          `[RPCService] Detected out of sync provider: ${rpcUrl} with blocknumber: ${formatHexToDecimal(blockNumberResults[rpcUrl])} vs ${formatHexToDecimal(mostCommonBlockNumber)}`,\n+          {\n+            rpcUrl,\n+            blockNumber: blockNumberResults[rpcUrl],\n+            mostCommonBlockNumber,\n+          }\n+        );\n+        return false;\n       }\n+      return true;\n     });\n \n+    rpcHandler.log(\n+      \"ok\",\n+      `[RPCService] Detected most common blocknumber: ${formatHexToDecimal(mostCommonBlockNumber)} with ${runtimeRpcs.length} providers in sync`\n+    );\n+\n     return { latencies, runtimeRpcs };\n   }\n \n-  static async findFastestRpc(latencies: Record<string, number>, networkId: NetworkId): Promise<string | null> {\n+  static _processRpcResult({\n+    result,\n+    networkId,\n+    latencies,\n+    runtimeRpcs,\n+    blockNumberCounts,\n+    blockNumberResults,\n+    rpcHandler,\n+  }: {\n+    result: PromiseSettledResult<PromiseResult>;\n+    networkId: NetworkId;\n+    latencies: Record<string, number>;\n+    runtimeRpcs: string[];\n+    blockNumberCounts: Record<string, number>;\n+    blockNumberResults: Record<string, string>;\n+    rpcHandler: RPCHandler;\n+  }) {\n+    if (result.status === \"fulfilled\" && result.value.success) {\n+      if (result.value.isBlockReq) {\n+        this.processBlockReqResult({ result, blockNumberCounts, blockNumberResults, rpcHandler });\n+      } else if (!this.processBytecodeResponse({ result, rpcHandler })) {\n+        return;\n+      }\n+      latencies[`${networkId}__${result.value.rpcUrl}`] = result.value.duration;\n+    } else if (result.status === \"fulfilled\") {\n+      const fulfilledResult = result.value;\n+      const index = runtimeRpcs.indexOf(fulfilledResult.rpcUrl);\n+      if (index > -1) {\n+        runtimeRpcs.splice(index, 1);\n+      }\n+    }\n+  }\n+\n+  static processBytecodeResponse({ result, rpcHandler }: { result: PromiseFulfilledResult<PromiseResult>; rpcHandler: RPCHandler }) {\n+    const { rpcUrl, data } = result.value;\n+    let bytecode: string | null = null;\n+\n+    if (typeof data === \"string\") {\n+      bytecode = data;\n+    } else if (typeof data === \"object\" && data && \"result\" in data) {\n+      bytecode = String(data.result);\n+    }\n+\n+    if (!bytecode) {\n+      rpcHandler.log(\"error\", `[RPCService] Could not find Permit2 bytecode.`, { rpcUrl, data });\n+      return false;\n+    }\n+\n+    const expected = \"0x604060808152600\";\n+\n+    try {",
+        "score": {
+          "reward": 0.36,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 116.14500000000001,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2676436836,
+        "content": "[Here](https://javascript.plainenglish.io/why-mutating-input-parameters-of-functions-in-javascript-is-bad-61bb8afae7bf) is what I am trying to say.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/63#issuecomment-2676436836",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.197,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 114.11500000000001,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2676655418,
+        "content": "You should read the book Clean Code by Bob Martin. I think you will enjoy writing code a lot more after reading that.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/63#issuecomment-2676655418",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.864,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 92.17119565217394,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.6782880434782607
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2676693312,
+        "content": "@Keyrxng \r\nWhy `yarn test:anvil` does not print logs when it fails sometimes? There are lines like the below that should be printed I think. \r\n`rpcHandler.log(\"error\", \"[RPCService] Failed to find fastest RPC\", { er: String(error) });`\r\nBut it ignore them and doesn't print them. Only thing you get is\r\n```\r\n$ npx tsx ./tests/anvil.ts\r\nundefined\r\nerror Command failed with exit code 1.\r\ninfo Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.\r\n```\r\nYou can reproduce this by trying to run `yarn test:anvil` a few times until it fails, or maybe disable the internet.",
+        "url": "https://github.com/ubiquity/rpc-handler/pull/63#issuecomment-2676693312",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.776,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 55,
+            "wordValue": 0.1,
+            "result": 2.46
+          },
+          "readability": {
+            "fleschKincaid": 89.82056818181817,
+            "syllables": 67,
+            "sentences": 4,
+            "score": 0.7017943181818183
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2633892058,
+            "effect": {
+              "addition": 234,
+              "deletion": 83
+            },
+            "reward": 9.51,
+            "priority": 3
+          },
+          {
+            "reviewId": 2635342084,
+            "effect": {
+              "addition": 11,
+              "deletion": 1
+            },
+            "reward": 0.36,
+            "priority": 3
+          },
+          {
+            "reviewId": 2635493255,
+            "effect": {
+              "addition": 14,
+              "deletion": 16
+            },
+            "reward": 0.9,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/rpc-handler/pull/63"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 28.26 XP ]</a>&nbsp;</h3><h6>@EresDev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>10.77</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>6.924</td></tr><tr><td>Review</td><td>Comment</td><td>9</td><td>10.566</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/rpc-handler/pull/63\" target=\"_blank\" rel=\"noopener\">#63</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+234 -83</td><td>3</td><td>9.51</td></tr><tr><td>+11 -1</td><td>3</td><td>0.36</td></tr><tr><td>+14 -16</td><td>3</td><td>0.9</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2661285278\" target=\"_blank\" rel=\"noopener\">I have to always use [fallback](https://github.com/ubiquity/pay.&hellip;</a></h6></td><td><details><summary>5.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.2&#13;regex:&#13;  wordCount: 130&#13;  wordValue: 0.1&#13;  result: 2.41&#13;</pre></details></td><td>1</td><td>3</td><td>5.22</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/issues/62#issuecomment-2661999369\" target=\"_blank\" rel=\"noopener\">maybe we should run the same tests without anvil? do the similar&hellip;</a></h6></td><td><details><summary>2.29</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 45&#13;  wordValue: 0.1&#13;  result: 2.29&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.704</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/63#pullrequestreview-2633892058\" target=\"_blank\" rel=\"noopener\">- can we improve this when running tests? &#96;&#96;&#96;A w&hellip;</a></h6></td><td><details><summary>3.46</summary><pre>content:&#13;  content:&#13;    ul:&#13;      score: 0&#13;      elementCount: 3&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.5&#13;regex:&#13;  wordCount: 177&#13;  wordValue: 0.1&#13;  result: 1.96&#13;</pre></details></td><td>0.9</td><td>3</td><td>2.997</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/63#discussion_r1965980528\" target=\"_blank\" rel=\"noopener\">does this need 999999 timeout? This doesn't look like a test eit&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.8</td><td>3</td><td>0.96</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/63#discussion_r1966056831\" target=\"_blank\" rel=\"noopener\">&#96;blockNumberCounts&#96; is sometimes {} and &#96;yarn test:a&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.9</td><td>3</td><td>1.269</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/63#discussion_r1966604503\" target=\"_blank\" rel=\"noopener\">No, I am using same code without any change.  And it fails somet&hellip;</a></h6></td><td><details><summary>2.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 39&#13;  wordValue: 0.1&#13;  result: 2.15&#13;</pre></details></td><td>0.5</td><td>3</td><td>0.975</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/63#discussion_r1966620019\" target=\"_blank\" rel=\"noopener\">Rename &#96;processBytecodeResponse()&#96; to &#96;isBytecodeVal&hellip;</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.7</td><td>3</td><td>0.168</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/63#discussion_r1966621831\" target=\"_blank\" rel=\"noopener\">do we need this try/catch?</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.6</td><td>3</td><td>0.36</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/63#issuecomment-2676436836\" target=\"_blank\" rel=\"noopener\">[Here](https://javascript.plainenglish.io/why-mutating-input-par&hellip;</a></h6></td><td><details><summary>1.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.7</td><td>3</td><td>1.197</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/63#issuecomment-2676655418\" target=\"_blank\" rel=\"noopener\">You should read the book Clean Code by Bob Martin. I think you w&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.6</td><td>3</td><td>0.864</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/rpc-handler/pull/63#issuecomment-2676693312\" target=\"_blank\" rel=\"noopener\">@Keyrxng Why &#96;yarn test:anvil&#96; does not print logs whe&hellip;</a></h6></td><td><details><summary>2.46</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;  result: 0&#13;regex:&#13;  wordCount: 55&#13;  wordValue: 0.1&#13;  result: 2.46&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.776</td></tr></tbody></table></details>"
+  }
+}

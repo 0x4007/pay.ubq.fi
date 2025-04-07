@@ -1,0 +1,160 @@
+{
+  "0x4007": {
+    "userId": 4975670,
+    "total": 316.105,
+    "task": {
+      "reward": 300,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 1923727286,
+        "content": "@wannacfuture this is yours to take",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/917#issuecomment-1923727286",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.462,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 73.84500000000001,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.8615499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1923997184,
+        "content": "Just did a test. Once not linked, and once linked. \r\nhttps://github.com/pavlovcik/link-pulls/blob/development/static/link-pull.ts\r\n```sh\r\nm1:static nv$ yarn tsx static/link-pull.ts\r\nyarn run v1.22.21\r\n$ /Users/nv/repos/pavlovcik/link-pull-request-prototype/node_modules/.bin/tsx static/link-pull.ts\r\nTrace: { isLinked: true }\r\n    at main (/Users/nv/repos/pavlovcik/link-pull-request-prototype/static/link-pull.ts:53:13)\r\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\r\n✨  Done in 1.47s.\r\nm1:static nv$\r\n```",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/917#issuecomment-1923997184",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 6.183,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 90.8508181818182,
+            "syllables": 29,
+            "sentences": 5,
+            "score": 0.691491818181818
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2114841077,
+        "content": "Our old approach involved scraping the DOM from a public issue view. This does not work on private repositories (we could not extract an auth token from the app private key authenticated octokit client.)\r\nAfter some research by @wannacfuture and I, we came to the conclusion that the only way to do this is to read the events of an issue and pull request e.g. https://api.github.com/repos/ubiquibot/production/issues/77/timeline https://api.github.com/repos/ubiquibot/production/issues/78/timeline \r\nAnd cross reference the `connected` or `cross-referenced` events e.g.\r\n### Issue\r\n```json\r\n  {\r\n    \"id\": 11683241476,\r\n    \"node_id\": \"COE_lADOJkXFU85-DOthzwAAAAK4YB4E\",\r\n    \"url\": \"https://api.github.com/repos/ubiquibot/production/issues/events/11683241476\",\r\n    \"actor\": {\r\n      \"login\": \"pavlovcik\",\r\n      \"id\": 4975670,\r\n      \"node_id\": \"MDQ6VXNlcjQ5NzU2NzA=\",\r\n      \"avatar_url\": \"https://avatars.githubusercontent.com/u/4975670?v=4\",\r\n      \"gravatar_id\": \"\",\r\n      \"url\": \"https://api.github.com/users/pavlovcik\",\r\n      \"html_url\": \"https://github.com/pavlovcik\",\r\n      \"followers_url\": \"https://api.github.com/users/pavlovcik/followers\",\r\n      \"following_url\": \"https://api.github.com/users/pavlovcik/following{/other_user}\",\r\n      \"gists_url\": \"https://api.github.com/users/pavlovcik/gists{/gist_id}\",\r\n      \"starred_url\": \"https://api.github.com/users/pavlovcik/starred{/owner}{/repo}\",\r\n      \"subscriptions_url\": \"https://api.github.com/users/pavlovcik/subscriptions\",\r\n      \"organizations_url\": \"https://api.github.com/users/pavlovcik/orgs\",\r\n      \"repos_url\": \"https://api.github.com/users/pavlovcik/repos\",\r\n      \"events_url\": \"https://api.github.com/users/pavlovcik/events{/privacy}\",\r\n      \"received_events_url\": \"https://api.github.com/users/pavlovcik/received_events\",\r\n      \"type\": \"User\",\r\n      \"site_admin\": false\r\n    },\r\n    \"event\": \"connected\",\r\n    \"commit_id\": null,\r\n    \"commit_url\": null,\r\n    \"created_at\": \"2024-02-02T12:00:52Z\",\r\n    \"performed_via_github_app\": null\r\n  }\r\n```\r\n### Pull Request\r\n```json\r\n  {\r\n    \"id\": 11683241469,\r\n    \"node_id\": \"COE_lADOJkXFU85-DO11zwAAAAK4YB39\",\r\n    \"url\": \"https://api.github.com/repos/ubiquibot/production/issues/events/11683241469\",\r\n    \"actor\": {\r\n      \"login\": \"pavlovcik\",\r\n      \"id\": 4975670,\r\n      \"node_id\": \"MDQ6VXNlcjQ5NzU2NzA=\",\r\n      \"avatar_url\": \"https://avatars.githubusercontent.com/u/4975670?v=4\",\r\n      \"gravatar_id\": \"\",\r\n      \"url\": \"https://api.github.com/users/pavlovcik\",\r\n      \"html_url\": \"https://github.com/pavlovcik\",\r\n      \"followers_url\": \"https://api.github.com/users/pavlovcik/followers\",\r\n      \"following_url\": \"https://api.github.com/users/pavlovcik/following{/other_user}\",\r\n      \"gists_url\": \"https://api.github.com/users/pavlovcik/gists{/gist_id}\",\r\n      \"starred_url\": \"https://api.github.com/users/pavlovcik/starred{/owner}{/repo}\",\r\n      \"subscriptions_url\": \"https://api.github.com/users/pavlovcik/subscriptions\",\r\n      \"organizations_url\": \"https://api.github.com/users/pavlovcik/orgs\",\r\n      \"repos_url\": \"https://api.github.com/users/pavlovcik/repos\",\r\n      \"events_url\": \"https://api.github.com/users/pavlovcik/events{/privacy}\",\r\n      \"received_events_url\": \"https://api.github.com/users/pavlovcik/received_events\",\r\n      \"type\": \"User\",\r\n      \"site_admin\": false\r\n    },\r\n    \"event\": \"connected\",\r\n    \"commit_id\": null,\r\n    \"commit_url\": null,\r\n    \"created_at\": \"2024-02-02T12:00:52Z\",\r\n    \"performed_via_github_app\": null\r\n  }\r\n```\r\nWe can see that the only thing matching here is the `created_at` property. \r\nBe sure to invalidate pairing disconnected and un-cross-referenced events (not sure the exact names.)\r\n### Glossary\r\n`connected` refers to when a collaborator selects the issue from the pull request UI (sidebar) \r\n`cross-referenced` is when a contributor who opens the pull request, opens with a \"closing\" keyword e.g. Resolves #1234",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/917",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 9.46,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 7
+              },
+              "h3": {
+                "score": 1,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 5
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 138,
+            "wordValue": 0.1,
+            "result": 2.34
+          },
+          "readability": {
+            "fleschKincaid": 63.88923628691984,
+            "syllables": 247,
+            "sentences": 15,
+            "score": 0.9611076371308016
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 316.105 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>300</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>9.46</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>6.645</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/917\" target=\"_blank\" rel=\"noopener\">Our old approach involved scraping the DOM from a public issue v&hellip;</a></h6></td><td><details><summary>7.34</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 7&#13;    h3:&#13;      score: 1&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 5&#13;regex:&#13;  wordCount: 138&#13;  wordValue: 0.1&#13;  result: 2.34&#13;</pre></details></td><td>1</td><td>1</td><td>9.46</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/917#issuecomment-1923727286\" target=\"_blank\" rel=\"noopener\">@wannacfuture this is yours to take</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.462</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/917#issuecomment-1923997184\" target=\"_blank\" rel=\"noopener\">Just did a test. Once not linked, and once linked. https://git&hellip;</a></h6></td><td><details><summary>1.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.9</td><td>3</td><td>6.183</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 9.153,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 1970521514,
+        "content": "@pavlovcik I already stumbled upon this before, and the problem with `cross-referenced` is that referencing another issue in a comment also creates that same event. `connected` does not always happen either, depending on some scenarios. I've seen somewhere that the GraphQl API actually does make it possible to retrieve, but didn't test myself. Second problem is that the timeline is paginated and could eventually get tedious to parse. I can have a look if @wannacfuture has something else on his plate.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/917#issuecomment-1970521514",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 9.153,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 81,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 56.70311111111113,
+            "syllables": 128,
+            "sentences": 5,
+            "score": 0.9670311111111113
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 9.153 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>9.153</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/917#issuecomment-1970521514\" target=\"_blank\" rel=\"noopener\">@pavlovcik I already stumbled upon this before, and the problem &hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 81&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.9</td><td>3</td><td>9.153</td></tr></tbody></table></details>"
+  }
+}

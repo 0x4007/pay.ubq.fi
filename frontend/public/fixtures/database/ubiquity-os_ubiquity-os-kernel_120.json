@@ -1,0 +1,110 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 54.65,
+    "task": {
+      "reward": 50,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2556461382,
+        "content": "The `command-start-stop` was never called which is why it never worked. The reason is that a plugin is failing on a fatal error because of the new orgs that have been created and somehow doesn't have the proper access level\r\n```json\r\n{\r\n      \"message\": [\r\n        \"Calling handler {\\\"owner\\\":\\\"ubiquibot\\\",\\\"repo\\\":\\\"user-activity-watcher\\\",\\\"workflowId\\\":\\\"compute.yml\\\",\\\"ref\\\":\\\"development\\\"} for event issue_comment\"\r\n      ],\r\n      \"level\": \"log\",\r\n      \"timestamp\": 1727697850120\r\n},\r\n{\r\n      \"message\": [\r\n        \"Error in event handler\",\r\n        \"HttpError: Resource not accessible by integration - https://docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event\"\r\n      ],\r\n      \"level\": \"error\",\r\n      \"timestamp\": 1727697850679\r\n}\r\n```\r\nI fixed by making the plugin higher on the list. I believe the loop should not break if a plugin is not working properly but just log the error. Also maintaining 4 repos is complex, these repos won't get moved?\r\n_Originally posted by @gentlementlegen in https://github.com/ubiquity/ubiquity-dollar/issues/965#issuecomment-2383007493_\r\nIf a plugin is not reachable or does not start properly, the loop should continue as plugins are independent.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/120",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.65,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 105,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 59.377355072463786,
+            "syllables": 174,
+            "sentences": 6,
+            "score": 0.9937735507246379
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 54.65 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>50</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.65</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/120\" target=\"_blank\" rel=\"noopener\">The &#96;command-start-stop&#96; was never called which is why i&hellip;</a></h6></td><td><details><summary>3.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 105&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>1</td><td>1</td><td>4.65</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 8.462,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1807218564,
+        "content": "Just curious but does it make sense to Promise.all and invoke all requests concurrently?\nAlternatively we should make the ordering more explicit in our config so that its more apparent we intend to take outputs from one and make it accessible to the others? \nThe concept of plugin chains is useful but seems very abstract with our current config layout. Hence why im inquiring about concurrency. \nIt could be interesting to support in series for configs that explicitly need that, and concurrency by default?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/156#discussion_r1807218564",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -98,16 +98,21 @@ async function handleEvent(event: EmitterWebhookEvent, eventHandler: InstanceTyp\n     state.inputs[0] = inputs;\n     await eventHandler.pluginChainState.put(stateId, state);\n \n-    if (!isGithubPluginObject) {\n-      await dispatchWorker(plugin, await inputs.getWorkerInputs());\n-    } else {\n-      await dispatchWorkflow(context, {\n-        owner: plugin.owner,\n-        repository: plugin.repo,\n-        workflowId: plugin.workflowId,\n-        ref: plugin.ref,\n-        inputs: await inputs.getWorkflowInputs(),\n-      });\n+    // We wrap the dispatch so a failing plugin doesn't break the whole execution\n+    try {\n+      if (!isGithubPluginObject) {\n+        await dispatchWorker(plugin, await inputs.getWorkerInputs());",
+        "score": {
+          "reward": 2.712,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 85,
+            "wordValue": 0.1,
+            "result": 2.64
+          },
+          "readability": {
+            "fleschKincaid": 54.10995098039217,
+            "syllables": 139,
+            "sentences": 6,
+            "score": 0.9410995098039217
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2379265250,
+            "effect": {
+              "addition": 481,
+              "deletion": 94
+            },
+            "reward": 5.75,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/156"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 8.462 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>5.75</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>2.712</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/156\" target=\"_blank\" rel=\"noopener\">#156</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+481 -94</td><td>1</td><td>5.75</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/156#discussion_r1807218564\" target=\"_blank\" rel=\"noopener\">Just curious but does it make sense to Promise.all and invoke al&hellip;</a></h6></td><td><details><summary>2.64</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 85&#13;  wordValue: 0.1&#13;  result: 2.64&#13;</pre></details></td><td>0.8</td><td>1</td><td>2.712</td></tr></tbody></table></details>"
+  }
+}

@@ -1,0 +1,529 @@
+{
+  "gitcoindev": {
+    "userId": 88761781,
+    "total": 404.158,
+    "task": {
+      "reward": 400,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2056498153,
+        "content": "I did a research on this today. Starting from where and why it happens to how to solve:\r\n1. The root cause for late limit is that number of queued calls for JsonRPCProvider used crosses the 500 calls in the queue limit.\r\n2. The actual rate limit error from the `permit-generation` RPC provider was thrown by Nethermind client \r\nhttps://github.com/NethermindEth/nethermind/blob/489f3277eddfba5b514d2c7779094b6981ec629e/src/Nethermind/Nethermind.JsonRpc/Modules/BoundedModulePool.cs#L34\r\nwhich is set to 500 calls as a default on the client side:\r\nhttps://github.com/NethermindEth/nethermind/blob/489f3277eddfba5b514d2c7779094b6981ec629e/src/Nethermind/Nethermind.Init/Steps/RegisterRpcModules.cs#L113\r\nhttps://github.com/NethermindEth/nethermind/blob/489f3277eddfba5b514d2c7779094b6981ec629e/src/Nethermind/Nethermind.JsonRpc/JsonRpcConfig.cs#L18\r\nOne of the ways to circumvent this is to use ethers module throttling feature, but as discovered in the ethers implementation, kicks in *only* if the `429` error code is returned in the response header, see:\r\nhttps://github.com/ethers-io/ethers.js/commit/7d435453039f009b339d835ddee47e35a843711b\r\nand `if (response.statusCode === 429 && attempt < attemptLimit)`\r\n3. Since different providers may use different error codes (Nethermind returned -32005 error) and different rate limits, I propose to use https://github.com/ubiquity/rpc-handler which is able to return the fastest provider and array of available providers for a given network. \r\nWe can use the current provider as a default. If rate limit is reached, use rpc-handler to try next fastest provider from the list.\r\nI can experiment, first try to reproduce and error on a fork or using a test and submit a fix today / tomorrow.",
+        "url": "https://github.com/ubiquity-os/permit-generation/issues/12#issuecomment-2056498153",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 4.158,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 12
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 5
+              }
+            },
+            "result": 5.3
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 188,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 57.27293634727849,
+            "syllables": 396,
+            "sentences": 18,
+            "score": 0.9727293634727849
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 404.158 XP ]</a>&nbsp;</h3><h6>@gitcoindev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>400</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>4.158</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/permit-generation/issues/12#issuecomment-2056498153\" target=\"_blank\" rel=\"noopener\">I did a research on this today. Starting from where and why it h&hellip;</a></h6></td><td><details><summary>7.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 12&#13;    ol:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 5&#13;  result: 5.3&#13;regex:&#13;  wordCount: 188&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.9</td><td>2</td><td>4.158</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 14.468,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2049162463,
+        "content": "Since this repo should be soon deprecated, do you want a fix here? I guess this problem is also relevant to the new system as well.",
+        "url": "https://github.com/ubiquity-os/permit-generation/issues/12#issuecomment-2049162463",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 3.424,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 83.0092307692308,
+            "syllables": 34,
+            "sentences": 2,
+            "score": 0.7699076923076921
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2056625384,
+        "content": "@gitcoindev nop just did some research but no work done, all yours!",
+        "url": "https://github.com/ubiquity-os/permit-generation/issues/12#issuecomment-2056625384",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.512,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 88.905,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.71095
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2068410743,
+        "content": "@gitcoindev thanks for your research. While this works, it really depends on the endpoint for the duration you have to wait until the next call is successful. I had cases where it was seconds, and other where it was minutes. Benefits of switching RPC is to have it available right away. Would this make the implementation way more complex?",
+        "url": "https://github.com/ubiquity-os/permit-generation/issues/12#issuecomment-2068410743",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 5.724,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 59,
+            "wordValue": 0.1,
+            "result": 2.51
+          },
+          "readability": {
+            "fleschKincaid": 71.54274576271189,
+            "syllables": 86,
+            "sentences": 5,
+            "score": 0.8845725423728811
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2072688086,
+        "content": "I am fine with the code itself, but would love some associated tests with it because it is actually not easy to setup to see if it works properly.",
+        "url": "https://github.com/ubiquibot/comment-incentives/pull/35#issuecomment-2072688086",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.808,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 63.62758620689657,
+            "syllables": 39,
+            "sentences": 1,
+            "score": 0.9637241379310343
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquibot/comment-incentives/pull/35"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 14.468 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>3</td><td>10.66</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>3.808</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/permit-generation/issues/12#issuecomment-2049162463\" target=\"_blank\" rel=\"noopener\">Since this repo should be soon deprecated, do you want a fix her&hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.8</td><td>2</td><td>3.424</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/permit-generation/issues/12#issuecomment-2056625384\" target=\"_blank\" rel=\"noopener\">@gitcoindev nop just did some research but no work done, all you&hellip;</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.6</td><td>2</td><td>1.512</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/permit-generation/issues/12#issuecomment-2068410743\" target=\"_blank\" rel=\"noopener\">@gitcoindev thanks for your research. While this works, it reall&hellip;</a></h6></td><td><details><summary>2.51</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 59&#13;  wordValue: 0.1&#13;  result: 2.51&#13;</pre></details></td><td>0.9</td><td>2</td><td>5.724</td></tr><tr><td><h6><a href=\"https://github.com/ubiquibot/comment-incentives/pull/35#issuecomment-2072688086\" target=\"_blank\" rel=\"noopener\">I am fine with the code itself, but would love some associated t&hellip;</a></h6></td><td><details><summary>1.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.8</td><td>2</td><td>3.808</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 11.386,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2053554285,
+        "content": "Yeah research and implementation should be handled wherever possible and can be ported easily later if needed.",
+        "url": "https://github.com/ubiquity-os/permit-generation/issues/12#issuecomment-2053554285",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.324,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 45.26235294117649,
+            "syllables": 29,
+            "sentences": 1,
+            "score": 0.8526235294117649
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2068426438,
+        "content": "Good research but I'm always skeptical of \"time based\" solutions compared to \"event based\"\nWhat @gentlementlegen mentions is an example of why this solution might not be the best approach.",
+        "url": "https://github.com/ubiquity-os/permit-generation/issues/12#issuecomment-2068426438",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 4.302,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 41.64741935483872,
+            "syllables": 49,
+            "sentences": 1,
+            "score": 0.8164741935483871
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2233699079,
+        "content": "We got rate limited https://github.com/ubiquibot/comment-incentives/actions/runs/8617933701/job/23619113189\r\nSeems like this can be a problem as we pick up on activity in our network.\r\n_Originally posted by @0x4007 in https://github.com/ubiquibot/permit-generation/issues/5#issuecomment-2045442568_",
+        "url": "https://github.com/ubiquity-os/permit-generation/issues/12",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.76,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 55.38858695652178,
+            "syllables": 76,
+            "sentences": 4,
+            "score": 0.9538858695652178
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquibot/comment-incentives/pull/35"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 11.386 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.76</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>6.626</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/permit-generation/issues/12\" target=\"_blank\" rel=\"noopener\">We got rate limited https://github.com/ubiquibot/comment-incenti&hellip;</a></h6></td><td><details><summary>3.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>1</td><td>1</td><td>4.76</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/permit-generation/issues/12#issuecomment-2053554285\" target=\"_blank\" rel=\"noopener\">Yeah research and implementation should be handled wherever poss&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.7</td><td>2</td><td>2.324</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/permit-generation/issues/12#issuecomment-2068426438\" target=\"_blank\" rel=\"noopener\">Good research but I'm always skeptical of \"time based\" solutions&hellip;</a></h6></td><td><details><summary>1.92</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.9</td><td>2</td><td>4.302</td></tr></tbody></table></details>"
+  },
+  "Keyrxng": {
+    "total": 2.808,
+    "userId": 106303466,
+    "comments": [
+      {
+        "id": 2066147225,
+        "content": "1. https://www.npmjs.com/package/@keyrxng/rpc-handler (I've published the polymorphic pkg already under my name, maybe that'll respond better for you) but yeah the updated package is better\r\n2. a server-side integration I have not done yet no, closest is the test cases. I noticed in the feeble stress tests I done that first touch was always far slower/error prone than subsequent touches. I assume you are being rate limited after a few successful calls to a particular RPC or is it erroneously returning a provider which cannot be called in the first place?\r\n3. This is implemented in the upgrade already yeah (I click test multiple times which is why they are changing)\r\n</hr>\r\nhttps://github.com/ubiquibot/permit-generation/assets/106303466/8aab5a24-689d-470b-ab73-3dcce3f736ed",
+        "url": "https://github.com/ubiquity-os/permit-generation/issues/12#issuecomment-2066147225",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 2.808,
+          "formatting": {
+            "content": {
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.3
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 111,
+            "wordValue": 0.1,
+            "result": 2.55
+          },
+          "readability": {
+            "fleschKincaid": 63.99954545454548,
+            "syllables": 193,
+            "sentences": 7,
+            "score": 0.9600045454545452
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquibot/comment-incentives/pull/35"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 2.808 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>2.808</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/permit-generation/issues/12#issuecomment-2066147225\" target=\"_blank\" rel=\"noopener\">1. https://www.npmjs.com/package/@keyrxng/rpc-handler (I've publ&hellip;</a></h6></td><td><details><summary>4.85</summary><pre>content:&#13;  content:&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.3&#13;regex:&#13;  wordCount: 111&#13;  wordValue: 0.1&#13;  result: 2.55&#13;</pre></details></td><td>0.9</td><td>2</td><td>2.808</td></tr></tbody></table></details>"
+  },
+  "molecula451": {
+    "total": 4.212,
+    "userId": 41552663,
+    "comments": [
+      {
+        "id": 2015365994,
+        "content": "Approving looks good",
+        "url": "https://github.com/ubiquibot/comment-incentives/pull/35#pullrequestreview-2015365994",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.066,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 62.79000000000002,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.9720999999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2072620249,
+        "content": "you reviewing here @gentlementlegen ?",
+        "url": "https://github.com/ubiquibot/comment-incentives/pull/35#issuecomment-2072620249",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.044,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": -8.724999999999994,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 0.25,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2072721534,
+        "content": "i think you can handle it @gitcoindev ?",
+        "url": "https://github.com/ubiquibot/comment-incentives/pull/35#issuecomment-2072721534",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.042,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 78.87285714285717,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.8112714285714283
+          },
+          "multiplier": 0.25,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2073086730,
+        "content": "mergin, it looks like @gitcoindev handle tests, https://github.com/ubiquibot/permit-generation/issues/12#issuecomment-2068181273 at the comment, this can be imported later on another PR",
+        "url": "https://github.com/ubiquibot/comment-incentives/pull/35#issuecomment-2073086730",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.9,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 44.57500000000002,
+            "syllables": 49,
+            "sentences": 2,
+            "score": 0.8457500000000002
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2015365994,
+            "effect": {
+              "addition": 113,
+              "deletion": 45
+            },
+            "reward": 3.16,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquibot/comment-incentives/pull/35"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 4.212 XP ]</a>&nbsp;</h3><h6>@molecula451</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>3.16</td></tr><tr><td>Review</td><td>Comment</td><td>4</td><td>1.052</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquibot/comment-incentives/pull/35\" target=\"_blank\" rel=\"noopener\">#35</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+113 -45</td><td>2</td><td>3.16</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquibot/comment-incentives/pull/35#pullrequestreview-2015365994\" target=\"_blank\" rel=\"noopener\">Approving looks good</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.3</td><td>2</td><td>0.066</td></tr><tr><td><h6><a href=\"https://github.com/ubiquibot/comment-incentives/pull/35#issuecomment-2072620249\" target=\"_blank\" rel=\"noopener\">you reviewing here @gentlementlegen ?</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.2</td><td>2</td><td>0.044</td></tr><tr><td><h6><a href=\"https://github.com/ubiquibot/comment-incentives/pull/35#issuecomment-2072721534\" target=\"_blank\" rel=\"noopener\">i think you can handle it @gitcoindev ?</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.1</td><td>2</td><td>0.042</td></tr><tr><td><h6><a href=\"https://github.com/ubiquibot/comment-incentives/pull/35#issuecomment-2073086730\" target=\"_blank\" rel=\"noopener\">mergin, it looks like @gitcoindev handle tests, https://github.c&hellip;</a></h6></td><td><details><summary>2.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.6</td><td>2</td><td>0.9</td></tr></tbody></table></details>"
+  }
+}

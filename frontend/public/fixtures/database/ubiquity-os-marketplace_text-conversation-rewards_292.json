@@ -1,0 +1,227 @@
+{
+  "hhio618": {
+    "userId": 1272158,
+    "total": 12,
+    "task": {
+      "reward": 12,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 12 XP ]</a>&nbsp;</h3><h6>@hhio618</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>12</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 4.356,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2698840882,
+        "content": "The only time toFixed should be used is at the very end to display the results. Internally we should never be rounding. It doesn't make any sense to me to do that.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/292#issuecomment-2698840882",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 4.356,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 85.4336363636364,
+            "syllables": 43,
+            "sentences": 3,
+            "score": 0.7456636363636361
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/293"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 4.356 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>4.356</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/292#issuecomment-2698840882\" target=\"_blank\" rel=\"noopener\">The only time toFixed should be used is at the very end to displ&hellip;</a></h6></td><td><details><summary>1.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.9</td><td>2</td><td>4.356</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 12,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2699564073,
+        "content": "It is fine to use rounding in this code because this only has display purposes, however the root of the problem is not the rounding itself but JS having problems with floating points operations, because the current code:\n`result: Object.values(formatting).reduce((acc, curr) => acc + curr.score * curr.elementCount, 0)`\nShould never yield results with infinite decimal points like we've seen. A proposer fix is to use the Decimal library like we do in the rest of the codebase.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/292#issuecomment-2699564073",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 5.868,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 68,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 47.91323529411767,
+            "syllables": 100,
+            "sentences": 2,
+            "score": 0.8791323529411766
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2886272406,
+        "content": "## What happened\nIn some cases, the decimals displayed for `formatting score` display too many decimals when they should only display up to 3, like seen here: https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/51#issuecomment-2687656756\n## What was expected\n0 to 3 decimals should be displayed for floating point numbers.\n## How to reproduce\n- run the server locally for `text-conversation-rewards`\n- run it through the UI targeting `ubiquity-os-marketplace`, `daemon-disqualifier`, `51`\n- notice the improper number display for formatting score under user `@gentlementlegen`",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/292",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 8.58,
+          "formatting": {
+            "content": {
+              "h2": {
+                "score": 1,
+                "elementCount": 3
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 4.3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 62,
+            "wordValue": 0.1,
+            "result": 2.54
+          },
+          "readability": {
+            "fleschKincaid": 44.60914414414415,
+            "syllables": 120,
+            "sentences": 3,
+            "score": 0.8460914414414415
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2698331341,
+        "content": "Could you please add a test or at least a QA with the problematic issue?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/293#issuecomment-2698331341",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.072,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 84.45000000000003,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.7554999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2709887735,
+        "content": "Tested with the changes, results display properly:\r\n<img width=\"728\" alt=\"image\" src=\"https://github.com/user-attachments/assets/44e42c3e-2296-43d6-ae3f-5faaa15ae6df\" />",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/293#issuecomment-2709887735",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.216,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 67.75500000000001,
+            "syllables": 36,
+            "sentences": 2,
+            "score": 0.9224499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2670242211,
+            "effect": {
+              "addition": 47,
+              "deletion": 2
+            },
+            "reward": 0.98,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/293"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 12 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>⚠️ Your rewards have been limited to the task price of 12 XP.</h6><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>0.98</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>8.58</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>5.868</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>5.288</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/293\" target=\"_blank\" rel=\"noopener\">#293</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+47 -2</td><td>2</td><td>0.98</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/292\" target=\"_blank\" rel=\"noopener\">## What happenedIn some cases, the decimals displayed for &#96;&hellip;</a></h6></td><td><details><summary>6.84</summary><pre>content:&#13;  content:&#13;    h2:&#13;      score: 1&#13;      elementCount: 3&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 4.3&#13;regex:&#13;  wordCount: 62&#13;  wordValue: 0.1&#13;  result: 2.54&#13;</pre></details></td><td>1</td><td>1</td><td>8.58</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/292#issuecomment-2699564073\" target=\"_blank\" rel=\"noopener\">It is fine to use rounding in this code because this only has di&hellip;</a></h6></td><td><details><summary>2.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 68&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>0.9</td><td>2</td><td>5.868</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/293#issuecomment-2698331341\" target=\"_blank\" rel=\"noopener\">Could you please add a test or at least a QA with the problemati&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.7</td><td>2</td><td>2.072</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/293#issuecomment-2709887735\" target=\"_blank\" rel=\"noopener\">Tested with the changes, results display properly:&lt;img widt&hellip;</a></h6></td><td><details><summary>2.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.6</td><td>2</td><td>3.216</td></tr></tbody></table></details>"
+  }
+}

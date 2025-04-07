@@ -1,0 +1,156 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 54.65,
+    "task": {
+      "reward": 50,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2768429306,
+        "content": "@whilefoo maybe we could simplify to just `collaborator` and `contributor`, and then map a group of roles to these two? Admin would just have no limits. I can do that in a secondary pull-request. @0x4007 rfc\r\n_Originally posted by @gentlementlegen in https://github.com/ubiquity-os-marketplace/command-start-stop/issues/116#issuecomment-2569982989_\r\nTo simplify the roles and avoid a long and complex configuration, we should regroup roles under `collaborator` (anyone with write access or from the organization) and `contributor` (everyone else). Admins should have no limits.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/118",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.65,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 72,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 56.1005392156863,
+            "syllables": 137,
+            "sentences": 6,
+            "score": 0.961005392156863
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 54.65 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>50</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.65</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/118\" target=\"_blank\" rel=\"noopener\">@whilefoo maybe we could simplify to just &#96;collaborator&#96;&hellip;</a></h6></td><td><details><summary>3.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 72&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>1</td><td>1</td><td>4.65</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 16.474,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 1912293463,
+        "content": "since admin is not in settings anymore how would one restrict a label to just admins?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/119#discussion_r1912293463",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -23,47 +28,24 @@ const rolesWithReviewAuthority = T.Array(T.Enum(Role), {\n   ],\n });\n \n-const maxConcurrentTasks = T.Transform(\n-  T.Record(T.String(), T.Integer(), {\n-    default: { member: 10, contributor: 2 },\n+const maxConcurrentTasks = T.Object(\n+  { collaborator: T.Number({ default: 10 }), contributor: T.Number({ default: 2 }) },\n+  {\n     description: \"The maximum number of tasks a user can have assigned to them at once, based on their role.\",\n-    examples: [{ member: 5, contributor: 1 }],\n-  })\n-)\n-  .Decode((obj) => {\n-    // normalize the role keys to lowercase\n-    obj = Object.keys(obj).reduce(\n-      (acc, key) => {\n-        acc[key.toLowerCase()] = obj[key];\n-        return acc;\n-      },\n-      {} as Record<string, number>\n-    );\n-\n-    // If admin is omitted, defaults to infinity\n-    if (!obj[\"admin\"]) {\n-      obj[\"admin\"] = Infinity;\n-    }\n-\n-    return obj;\n-  })\n-  .Encode((value) => value);\n-\n-type IntoStringLiteralUnion<T> = { [K in keyof T]: T[K] extends string ? TLiteral<T[K]> : never };\n-\n-export function stringLiteralUnion<T extends string[]>(values: [...T]): Union<IntoStringLiteralUnion<T>> {\n-  const literals = values.map((value) => T.Literal(value));\n-  return T.Union(literals) as Union<IntoStringLiteralUnion<T>>;\n-}\n+    examples: [{ collaborator: 10, contributor: 2 }],\n+    default: {},\n+  }\n+);\n \n-const roles = stringLiteralUnion([\"admin\", \"member\", \"collaborator\", \"contributor\", \"owner\", \"billing_manager\", \"read\", \"write\"]);\n+const roles = T.KeyOf(maxConcurrentTasks);\n \n const requiredLabel = T.Object({\n   name: T.String({ description: \"The name of the required labels to start the task.\" }),\n-  roles: T.Array(roles, {\n+  allowedRoles: T.Array(roles, {\n     description: \"The list of allowed roles to start the task with the given label.\",\n     uniqueItems: true,\n-    default: [\"admin\", \"member\", \"collaborator\", \"contributor\", \"owner\", \"billing_manager\", \"write\", \"read\"],\n+    default: [\"collaborator\", \"contributor\"],\n+    examples: [[\"collaborator\", \"contributor\"]],\n   }),",
+        "score": {
+          "reward": 2.592,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 68.9825,
+            "syllables": 23,
+            "sentences": 1,
+            "score": 0.910175
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1912421338,
+        "content": "Maybe I'm missing something but for example if I set empty array and I'm a collaborator then this [if](https://github.com/ubiquity-os-marketplace/command-start-stop/pull/119/files#diff-47224fac5bab974df0f6fb9704d6fbb0f06375b3e98285797826104537bda3ccR34-R38) would evaluate to `false` so it would let me start the task",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/119#discussion_r1912421338",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -23,47 +28,24 @@ const rolesWithReviewAuthority = T.Array(T.Enum(Role), {\n   ],\n });\n \n-const maxConcurrentTasks = T.Transform(\n-  T.Record(T.String(), T.Integer(), {\n-    default: { member: 10, contributor: 2 },\n+const maxConcurrentTasks = T.Object(\n+  { collaborator: T.Number({ default: 10 }), contributor: T.Number({ default: 2 }) },\n+  {\n     description: \"The maximum number of tasks a user can have assigned to them at once, based on their role.\",\n-    examples: [{ member: 5, contributor: 1 }],\n-  })\n-)\n-  .Decode((obj) => {\n-    // normalize the role keys to lowercase\n-    obj = Object.keys(obj).reduce(\n-      (acc, key) => {\n-        acc[key.toLowerCase()] = obj[key];\n-        return acc;\n-      },\n-      {} as Record<string, number>\n-    );\n-\n-    // If admin is omitted, defaults to infinity\n-    if (!obj[\"admin\"]) {\n-      obj[\"admin\"] = Infinity;\n-    }\n-\n-    return obj;\n-  })\n-  .Encode((value) => value);\n-\n-type IntoStringLiteralUnion<T> = { [K in keyof T]: T[K] extends string ? TLiteral<T[K]> : never };\n-\n-export function stringLiteralUnion<T extends string[]>(values: [...T]): Union<IntoStringLiteralUnion<T>> {\n-  const literals = values.map((value) => T.Literal(value));\n-  return T.Union(literals) as Union<IntoStringLiteralUnion<T>>;\n-}\n+    examples: [{ collaborator: 10, contributor: 2 }],\n+    default: {},\n+  }\n+);\n \n-const roles = stringLiteralUnion([\"admin\", \"member\", \"collaborator\", \"contributor\", \"owner\", \"billing_manager\", \"read\", \"write\"]);\n+const roles = T.KeyOf(maxConcurrentTasks);\n \n const requiredLabel = T.Object({\n   name: T.String({ description: \"The name of the required labels to start the task.\" }),\n-  roles: T.Array(roles, {\n+  allowedRoles: T.Array(roles, {\n     description: \"The list of allowed roles to start the task with the given label.\",\n     uniqueItems: true,\n-    default: [\"admin\", \"member\", \"collaborator\", \"contributor\", \"owner\", \"billing_manager\", \"write\", \"read\"],\n+    default: [\"collaborator\", \"contributor\"],\n+    examples: [[\"collaborator\", \"contributor\"]],\n   }),",
+        "score": {
+          "reward": 6.822,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 55.38625000000003,
+            "syllables": 45,
+            "sentences": 1,
+            "score": 0.9538625000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2545305750,
+            "effect": {
+              "addition": 150,
+              "deletion": 165
+            },
+            "reward": 6.3,
+            "priority": 2
+          },
+          {
+            "reviewId": 2545465764,
+            "effect": {
+              "addition": 27,
+              "deletion": 11
+            },
+            "reward": 0.76,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/119"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 16.474 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>7.06</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>9.414</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/119\" target=\"_blank\" rel=\"noopener\">#119</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+150 -165</td><td>2</td><td>6.3</td></tr><tr><td>+27 -11</td><td>2</td><td>0.76</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/119#discussion_r1912293463\" target=\"_blank\" rel=\"noopener\">since admin is not in settings anymore how would one restrict a &hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.8</td><td>2</td><td>2.592</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/119#discussion_r1912421338\" target=\"_blank\" rel=\"noopener\">Maybe I'm missing something but for example if I set empty array&hellip;</a></h6></td><td><details><summary>2.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.9</td><td>2</td><td>6.822</td></tr></tbody></table></details>"
+  }
+}

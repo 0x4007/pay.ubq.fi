@@ -1,0 +1,2763 @@
+{
+  "ariesgun": {
+    "userId": 10436502,
+    "total": 152.241,
+    "task": {
+      "reward": 150,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2409080077,
+        "content": "@0x4007, Is it possible to check https://raw.githubusercontent.com/ubiquity/devpool-directory/refs/heads/development/devpool-issues.json for assigness?\r\nIt seems that the json file does not contain issues that have been assigned.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/64#issuecomment-2409080077",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.241,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 54.70142857142861,
+            "syllables": 60,
+            "sentences": 5,
+            "score": 0.947014285714286
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 152.241 XP ]</a>&nbsp;</h3><h6>@ariesgun</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>150</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>2.241</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/64#issuecomment-2409080077\" target=\"_blank\" rel=\"noopener\">@0x4007, Is it possible to check https://raw.githubusercontent.c&hellip;</a></h6></td><td><details><summary>2.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.9</td><td>3</td><td>2.241</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 100.548,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2404329585,
+        "content": "```\r\ncurl -H \"Authorization: bearer $GITHUB_TOKEN\" -X POST -d @- https://api.github.com/graphql <<EOF | jq '.data.search.nodes[].url'\r\n{\r\n  \"query\": \"query AssignedIssues { search(query: \\\"assignee:0x4007 is:open is:issue\\\", type: ISSUE, first: 100) { nodes { ... on Issue { url } } } }\"\r\n}\r\n```\r\nReturns URLs. \r\n---\r\nI'm not sure if it asks the GitHub API for any assigned issue but thats a bad approach, it should be only within the network (devpool directory) or at the very least the same org.\r\nCheck https://raw.githubusercontent.com/ubiquity/devpool-directory/refs/heads/development/devpool-issues.json for assignees then.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/64#issuecomment-2404329585",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 11.232,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 42,
+            "wordValue": 0.1,
+            "result": 2.23
+          },
+          "readability": {
+            "fleschKincaid": 63.70901515151516,
+            "syllables": 87,
+            "sentences": 6,
+            "score": 0.9629098484848484
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2409088066,
+        "content": "Then you query the API for those issue node ids if they are assigned",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/64#issuecomment-2409088066",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 3.36,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 89.89642857142859,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0.7010357142857141
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2414581585,
+        "content": "This counts against my limit and its archived so I cant really do much about it. Once we only count against tasks in our network this problem will be resolved: https://github.com/ubiquity/uad-ui-archived/issues/15",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/64#issuecomment-2414581585",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 7.602,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 74.33230769230771,
+            "syllables": 55,
+            "sentences": 3,
+            "score": 0.8566769230769229
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2577897569,
+        "content": "This needs to:\r\n1. Change to warning syntax vs diff syntax\r\n2. Link all the issues I'm currently assigned to in a comment so I can unassign myself or close them out. \r\n3. Only check assigned issues within the network, but this should be configurable to either be just within the repo, org, or network\r\n---\r\n```diff\r\n! You have reached your max task limit. Please close out some tasks before assigning new ones.\r\n```\r\n_Originally posted by @ubiquity-os[bot] in https://github.com/ubiquity/work.ubq.fi/issues/120#issuecomment-2404264757_",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/64",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.95,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 60,
+            "wordValue": 0.1,
+            "result": 2.52
+          },
+          "readability": {
+            "fleschKincaid": 61.35157746478873,
+            "syllables": 110,
+            "sentences": 5,
+            "score": 0.9864842253521127
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1807858828,
+        "content": "I think the most robust way to get all \"within network\" is to get the list of orgs that installed the bot",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1807858828",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -15,7 +15,7 @@ export async function getAssignedIssues(context: Context, username: string): Pro\n   try {\n     return await context.octokit\n       .paginate(context.octokit.search.issuesAndPullRequests, {\n-        q: `org:${payload.repository.owner.login} assignee:${username} is:open is:issue`,\n+        q: `org:ubiquity org:ubiquity-os-marketplace org:ubiquity-os assignee:${username} is:open is:issue`,",
+        "score": {
+          "reward": 5.211,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 84.52318181818181,
+            "syllables": 26,
+            "sentences": 1,
+            "score": 0.7547681818181818
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1808320249,
+        "content": "Here too",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1808320249",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -173,7 +179,7 @@ export async function addAssignees(context: Context, issueNo: number, assignees:\n export async function getAllPullRequests(context: Context, state: \"open\" | \"closed\" | \"all\" = \"open\", username: string) {\n   const { payload } = context;\n   const query: RestEndpointMethodTypes[\"search\"][\"issuesAndPullRequests\"][\"parameters\"] = {\n-    q: `org:${payload.repository.owner.login} author:${username} state:${state}`,\n+    q: `org:ubiquity org:ubiquity-os-marketplace org:ubiquity-os author:${username} state:${state}`,",
+        "score": {
+          "reward": 0.693,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 120.20500000000001,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1808383806,
+        "content": "This is what I meant by here too https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1807858828",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1808383806",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -173,7 +179,7 @@ export async function addAssignees(context: Context, issueNo: number, assignees:\n export async function getAllPullRequests(context: Context, state: \"open\" | \"closed\" | \"all\" = \"open\", username: string) {\n   const { payload } = context;\n   const query: RestEndpointMethodTypes[\"search\"][\"issuesAndPullRequests\"][\"parameters\"] = {\n-    q: `org:${payload.repository.owner.login} author:${username} state:${state}`,\n+    q: `org:ubiquity org:ubiquity-os-marketplace org:ubiquity-os author:${username} state:${state}`,",
+        "score": {
+          "reward": 3.315,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 74.01500000000001,
+            "syllables": 29,
+            "sentences": 2,
+            "score": 0.8598499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1810165148,
+        "content": "What we've done in the past is get it passed in from GitHub Actions. \r\nGet: https://github.com/ubiquity/cloudflare-deploy-action/blob/main/action.yml#L50-L56\r\nUse: https://github.com/ubiquity/cloudflare-deploy-action/blob/main/action.yml#L62",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1810165148",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -6,17 +6,27 @@ import { createAdapters } from \"./adapters\";\n import { userPullRequest, userSelfAssign, userStartStop, userUnassigned } from \"./handlers/user-start-stop\";\n import { Context, Env, PluginInputs } from \"./types\";\n import { addCommentToIssue } from \"./utils/issue\";\n+import { createAppAuth } from \"@octokit/auth-app\";\n \n export async function startStopTask(inputs: PluginInputs, env: Env) {\n   const customOctokit = Octokit.plugin(paginateGraphQL);\n   const octokit = new customOctokit({ auth: inputs.authToken });\n   const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n \n+  const jwtOctokit = new Octokit({",
+        "score": {
+          "reward": 7.776,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 78.87285714285717,
+            "syllables": 60,
+            "sentences": 6,
+            "score": 0.8112714285714283
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1817944877,
+        "content": "Seems suspiciously wrong. Should be dynamic based on installations.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1817944877",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -634,6 +632,7 @@ export function createContext(\n     },\n     octokit: new octokit.Octokit(),\n     eventName: \"issue_comment.created\" as SupportedEventsU,\n+    organizations: [\"ubiquity\"],",
+        "score": {
+          "reward": 2.448,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 33.067500000000024,
+            "syllables": 18,
+            "sentences": 2,
+            "score": 0.7306750000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1817945176,
+        "content": "I wish we had a mechanism to detect if this breaks to respond quickly because that system may be changed without notice in the future. I suppose for now you should throw a specific and descriptive error if it 404.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1817945176",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -4,18 +4,36 @@ import { createClient } from \"@supabase/supabase-js\";\n import { LogReturn, Logs } from \"@ubiquity-os/ubiquity-os-logger\";\n import { createAdapters } from \"./adapters\";\n import { userPullRequest, userSelfAssign, userStartStop, userUnassigned } from \"./handlers/user-start-stop\";\n-import { Context, Env, PluginInputs } from \"./types\";\n+import { Context, Env, GitHubIssueSearch, PluginInputs } from \"./types\";\n import { addCommentToIssue } from \"./utils/issue\";\n \n+async function listOrganizations(): Promise<string[]> {\n+  const res = await fetch(\"https://raw.githubusercontent.com/ubiquity/devpool-directory/refs/heads/__STORAGE__/devpool-issues.json\");",
+        "score": {
+          "reward": 7.506,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 40,
+            "wordValue": 0.1,
+            "result": 2.18
+          },
+          "readability": {
+            "fleschKincaid": 68.09500000000004,
+            "syllables": 56,
+            "sentences": 2,
+            "score": 0.9190499999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1817945734,
+        "content": "Try this. `APP_ID` and `APP_PRIVATE_KEY` have now been added to the @ubiquity-os-marketplace org secrets. \r\nGET: https://github.com/ubiquity/cloudflare-deploy-action/blob/3e07491a4785469af9eee58bf697203428c0f8ee/action.yml#L50-L56\r\nSET: https://github.com/ubiquity/cloudflare-deploy-action/blob/3e07491a4785469af9eee58bf697203428c0f8ee/action.yml#L62\r\nJust make sure to get from secrets instead of it being \"passed in\" like it is here.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1817945734",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -15,7 +15,7 @@ export async function getAssignedIssues(context: Context, username: string): Pro\n   try {\n     return await context.octokit\n       .paginate(context.octokit.search.issuesAndPullRequests, {\n-        q: `org:${payload.repository.owner.login} assignee:${username} is:open is:issue`,\n+        q: `org:ubiquity org:ubiquity-os-marketplace org:ubiquity-os assignee:${username} is:open is:issue`,",
+        "score": {
+          "reward": 10.368,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 64.23189655172416,
+            "syllables": 92,
+            "sentences": 7,
+            "score": 0.9576810344827584
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2425015823,
+        "content": "You also should post QA",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2425015823",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.828,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 100.24000000000002,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2425043370,
+        "content": "Prove that it works on your org. This would be a link to a github comment",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2425043370",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.97,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 103.54,
+            "syllables": 18,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2428563574,
+        "content": "Currently looking into adjusting the display format:\r\n---\r\n- ###### [ubiquity-os-marketplace/command-start-stop - Task Limit Improvements #64](https://www.github.com/ubiquity-os-marketplace/command-start-stop/issues/64)\r\n```\r\n- ###### [ubiquity-os-marketplace/command-start-stop - Task Limit Improvements #64](https://www.github.com/ubiquity-os-marketplace/command-start-stop/issues/64)\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2428563574",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 8.379,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 1
+              },
+              "h6": {
+                "score": 1,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 2.1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 15.403529411764737,
+            "syllables": 35,
+            "sentences": 1,
+            "score": 0.5540352941176474
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2440204611,
+        "content": "Need to specifically handle 404",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2440204611",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.56,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 32.56000000000003,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.7256000000000004
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2441698801,
+        "content": "A lot of work is being done on the devpool-directory backend so I anticipate that this file name will eventually be changed or removed so the faster we can diagnose this problem the better.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2441698801",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.376,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 45.61857142857143,
+            "syllables": 52,
+            "sentences": 1,
+            "score": 0.8561857142857143
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2450022368,
+        "content": "Should be configurable \nRepo\nOrg\nNetwork\nAlso that's wild that I can't delete or hide your review comment",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2450022368",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.184,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 59.63500000000003,
+            "syllables": 30,
+            "sentences": 1,
+            "score": 0.9963500000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2452397623,
+        "content": "Your review comment is the exact same content",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2452397623",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.576,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 71.81500000000001,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.8818499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2452903812,
+        "content": "![image](https://github.com/user-attachments/assets/b7e74626-ef69-4f13-9df8-dc876388545a)",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2452903812",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2453452510,
+        "content": "Can we merge @gentlementlegen @whilefoo",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2453452510",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.744,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 15.640000000000015,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.5564000000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2380527794,
+            "effect": {
+              "addition": 29,
+              "deletion": 8
+            },
+            "reward": 1.11,
+            "priority": 3
+          },
+          {
+            "reviewId": 2381293833,
+            "effect": {
+              "addition": 41,
+              "deletion": 4
+            },
+            "reward": 1.35,
+            "priority": 3
+          },
+          {
+            "reviewId": 2384270241,
+            "effect": {
+              "addition": 12,
+              "deletion": 5
+            },
+            "reward": 0.51,
+            "priority": 3
+          },
+          {
+            "reviewId": 2397370223,
+            "effect": {
+              "addition": 62,
+              "deletion": 74
+            },
+            "reward": 4.08,
+            "priority": 3
+          },
+          {
+            "reviewId": 2397370970,
+            "effect": {
+              "addition": 0,
+              "deletion": 0
+            },
+            "reward": 0,
+            "priority": 3
+          },
+          {
+            "reviewId": 2400324301,
+            "effect": {
+              "addition": 84,
+              "deletion": 30
+            },
+            "reward": 3.42,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 100.548 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>6</td><td>10.47</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.95</td></tr><tr><td>Issue</td><td>Comment</td><td>3</td><td>22.194</td></tr><tr><td>Review</td><td>Comment</td><td>16</td><td>62.934</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66\" target=\"_blank\" rel=\"noopener\">#66</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+29 -8</td><td>3</td><td>1.11</td></tr><tr><td>+41 -4</td><td>3</td><td>1.35</td></tr><tr><td>+12 -5</td><td>3</td><td>0.51</td></tr><tr><td>+62 -74</td><td>3</td><td>4.08</td></tr><tr><td>+0 -0</td><td>3</td><td>0</td></tr><tr><td>+84 -30</td><td>3</td><td>3.42</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/64\" target=\"_blank\" rel=\"noopener\">This needs to:1. Change to warning syntax vs diff syntax2. L&hellip;</a></h6></td><td><details><summary>3.82</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.3&#13;regex:&#13;  wordCount: 60&#13;  wordValue: 0.1&#13;  result: 2.52&#13;</pre></details></td><td>1</td><td>1</td><td>4.95</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/64#issuecomment-2404329585\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;curl -H \"Authorization: bearer $GITHUB_TOKEN\" -&hellip;</a></h6></td><td><details><summary>3.23</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 42&#13;  wordValue: 0.1&#13;  result: 2.23&#13;</pre></details></td><td>0.9</td><td>3</td><td>11.232</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/64#issuecomment-2409088066\" target=\"_blank\" rel=\"noopener\">Then you query the API for those issue node ids if they are assi&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.8</td><td>3</td><td>3.36</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/64#issuecomment-2414581585\" target=\"_blank\" rel=\"noopener\">This counts against my limit and its archived so I cant really d&hellip;</a></h6></td><td><details><summary>2.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.7</td><td>3</td><td>7.602</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1807858828\" target=\"_blank\" rel=\"noopener\">I think the most robust way to get all \"within network\" is to ge&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.9</td><td>3</td><td>5.211</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1808320249\" target=\"_blank\" rel=\"noopener\">Here too</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.7</td><td>3</td><td>0.693</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1808383806\" target=\"_blank\" rel=\"noopener\">This is what I meant by here too https://github.com/ubiquity-os-&hellip;</a></h6></td><td><details><summary>1.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.5</td><td>3</td><td>3.315</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1810165148\" target=\"_blank\" rel=\"noopener\">What we've done in the past is get it passed in from GitHub Acti&hellip;</a></h6></td><td><details><summary>2.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.9</td><td>3</td><td>7.776</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1817944877\" target=\"_blank\" rel=\"noopener\">Seems suspiciously wrong. Should be dynamic based on installatio&hellip;</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.8</td><td>3</td><td>2.448</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1817945176\" target=\"_blank\" rel=\"noopener\">I wish we had a mechanism to detect if this breaks to respond qu&hellip;</a></h6></td><td><details><summary>2.18</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 40&#13;  wordValue: 0.1&#13;  result: 2.18&#13;</pre></details></td><td>0.9</td><td>3</td><td>7.506</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1817945734\" target=\"_blank\" rel=\"noopener\">Try this. &#96;APP_ID&#96; and &#96;APP_PRIVATE_KEY&#96; have no&hellip;</a></h6></td><td><details><summary>2.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.9</td><td>3</td><td>10.368</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2425015823\" target=\"_blank\" rel=\"noopener\">You also should post QA</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.4</td><td>3</td><td>0.828</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2425043370\" target=\"_blank\" rel=\"noopener\">Prove that it works on your org. This would be a link to a githu&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.6</td><td>3</td><td>2.97</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2428563574\" target=\"_blank\" rel=\"noopener\">Currently looking into adjusting the display format:---- ###&hellip;</a></h6></td><td><details><summary>3.42</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 1&#13;    h6:&#13;      score: 1&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 2.1&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.7</td><td>3</td><td>8.379</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2440204611\" target=\"_blank\" rel=\"noopener\">Need to specifically handle 404</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.56</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2441698801\" target=\"_blank\" rel=\"noopener\">A lot of work is being done on the devpool-directory backend so &hellip;</a></h6></td><td><details><summary>2.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>0.7</td><td>3</td><td>5.376</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2450022368\" target=\"_blank\" rel=\"noopener\">Should be configurable RepoOrgNetworkAlso that's wild that I&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.9</td><td>3</td><td>5.184</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2452397623\" target=\"_blank\" rel=\"noopener\">Your review comment is the exact same content</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.576</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2452903812\" target=\"_blank\" rel=\"noopener\">![image](https://github.com/user-attachments/assets/b7e74626-ef6&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2453452510\" target=\"_blank\" rel=\"noopener\">Can we merge @gentlementlegen @whilefoo</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.4</td><td>3</td><td>0.744</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 1.692,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2424122848,
+        "content": "@0x4007 Could you assign @ariesgun (related [comment](https://t.me/UbiquityDevPool/2885))? Only org owners can set github issue assignees.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/64#issuecomment-2424122848",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.692,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 52.58250000000001,
+            "syllables": 26,
+            "sentences": 2,
+            "score": 0.9258250000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 1.692 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.692</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/64#issuecomment-2424122848\" target=\"_blank\" rel=\"noopener\">@0x4007 Could you assign @ariesgun (related [comment](https://t.&hellip;</a></h6></td><td><details><summary>2.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.2</td><td>3</td><td>1.692</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 83.283,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2463652190,
+        "content": "@whilefoo the comment generation failed due to an invalid signature: https://github.com/ubiquity-os-marketplace/text-conversation-rewards/actions/runs/11735148935/job/32692347908\r\nHowever the signature for dev bot seems to have been sent properly, any ideas?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/64#issuecomment-2463652190",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.99,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 40.613157894736844,
+            "syllables": 66,
+            "sentences": 2,
+            "score": 0.8061315789473684
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1808331679,
+        "content": "Hardcoding these means third parties won't be able to use this plugin.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1808331679",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -173,7 +179,7 @@ export async function addAssignees(context: Context, issueNo: number, assignees:\n export async function getAllPullRequests(context: Context, state: \"open\" | \"closed\" | \"all\" = \"open\", username: string) {\n   const { payload } = context;\n   const query: RestEndpointMethodTypes[\"search\"][\"issuesAndPullRequests\"][\"parameters\"] = {\n-    q: `org:${payload.repository.owner.login} author:${username} state:${state}`,\n+    q: `org:ubiquity org:ubiquity-os-marketplace org:ubiquity-os author:${username} state:${state}`,",
+        "score": {
+          "reward": 3.726,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 76.50153846153849,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.8349846153846151
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1809177319,
+        "content": "I don't think this is correct. Why would we need two Octokit instances?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1809177319",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -6,17 +6,27 @@ import { createAdapters } from \"./adapters\";\n import { userPullRequest, userSelfAssign, userStartStop, userUnassigned } from \"./handlers/user-start-stop\";\n import { Context, Env, PluginInputs } from \"./types\";\n import { addCommentToIssue } from \"./utils/issue\";\n+import { createAppAuth } from \"@octokit/auth-app\";\n \n export async function startStopTask(inputs: PluginInputs, env: Env) {\n   const customOctokit = Octokit.plugin(paginateGraphQL);\n   const octokit = new customOctokit({ auth: inputs.authToken });\n   const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n \n+  const jwtOctokit = new Octokit({",
+        "score": {
+          "reward": 3.36,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 90.95857142857145,
+            "syllables": 18,
+            "sentences": 2,
+            "score": 0.6904142857142855
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1809700303,
+        "content": "The octokit is logged in using a Github App token.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1809700303",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -6,17 +6,27 @@ import { createAdapters } from \"./adapters\";\n import { userPullRequest, userSelfAssign, userStartStop, userUnassigned } from \"./handlers/user-start-stop\";\n import { Context, Env, PluginInputs } from \"./types\";\n import { addCommentToIssue } from \"./utils/issue\";\n+import { createAppAuth } from \"@octokit/auth-app\";\n \n export async function startStopTask(inputs: PluginInputs, env: Env) {\n   const customOctokit = Octokit.plugin(paginateGraphQL);\n   const octokit = new customOctokit({ auth: inputs.authToken });\n   const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n \n+  const jwtOctokit = new Octokit({",
+        "score": {
+          "reward": 2.394,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 69.78500000000001,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.9021499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1811658530,
+        "content": "Do not use `any` and format properly.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1811658530",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -64,23 +64,49 @@ export async function start(\n   teammates.push(sender.login);\n \n   const toAssign = [];\n+  let assignedIssues : any[]= [];",
+        "score": {
+          "reward": 1.964,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 73.84500000000001,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.8615499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1811659991,
+        "content": "Still feels wrong to me that we need two octokit instances with different auth and private keys. @whilefoo rfc",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1811659991",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -6,17 +6,27 @@ import { createAdapters } from \"./adapters\";\n import { userPullRequest, userSelfAssign, userStartStop, userUnassigned } from \"./handlers/user-start-stop\";\n import { Context, Env, PluginInputs } from \"./types\";\n import { addCommentToIssue } from \"./utils/issue\";\n+import { createAppAuth } from \"@octokit/auth-app\";\n \n export async function startStopTask(inputs: PluginInputs, env: Env) {\n   const customOctokit = Octokit.plugin(paginateGraphQL);\n   const octokit = new customOctokit({ auth: inputs.authToken });\n   const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n \n+  const jwtOctokit = new Octokit({",
+        "score": {
+          "reward": 4.028,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 76.97144736842105,
+            "syllables": 27,
+            "sentences": 2,
+            "score": 0.8302855263157894
+          },
+          "multiplier": 1,
+          "relevance": 0.75
+        }
+      },
+      {
+        "id": 1811662428,
+        "content": "```suggestion\r\n`)\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1811662428",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -64,23 +64,49 @@ export async function start(\n   teammates.push(sender.login);\n \n   const toAssign = [];\n+  let assignedIssues : any[]= [];\n   // check max assigned issues\n   for (const user of teammates) {\n     if (await handleTaskLimitChecks(user, context, logger, sender.login)) {\n       toAssign.push(user);\n+    } else {\n+      const issues = await getAssignedIssues(context, user);\n+      assignedIssues = issues.map((el) => {\n+        return {\n+          title: el.title,\n+          html_url: el.html_url,\n+        }\n+      })\n     }\n   }\n \n   let error: string | null = null;\n \n   if (toAssign.length === 0 && teammates.length > 1) {\n     error = \"All teammates have reached their max task limit. Please close out some tasks before assigning new ones.\";\n+    throw logger.error(error, { issueNumber: issue.number });\n   } else if (toAssign.length === 0) {\n     error = \"You have reached your max task limit. Please close out some tasks before assigning new ones.\";\n-  }\n+    let issues = \"\"\n+    const urlPattern = /https:\\/\\/(github.com\\/(\\S+)\\/(\\S+)\\/issues\\/(\\d+))/g;\n+    assignedIssues.forEach((el) => {\n+      const matches = [...el.html_url.matchAll(urlPattern)][0]\n+      if (matches) {\n+        issues = issues.concat(`- ###### [${matches[2]}/${matches[3]} - ${el.title} #${matches[4]}](https://www.${matches[1]})\\n`)\n+      } else {\n+        issues = issues.concat(`- ###### [${el.title}](${el.html_url})\\n`)\n+      }\n+    })\n \n-  if (error) {\n-    throw logger.error(error, { issueNumber: issue.number });\n+    await addCommentToIssue(context, `\n+      \n+> [!WARNING]\n+> ${error}\n+\n+${issues}\n+\n+    `)",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1819993620,
+        "content": "@0x4007 Don't we want this? It can be `1.22` but setting it avoids collaborator to use the wrong package manager and encounter strange errors.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1819993620",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -83,6 +83,5 @@\n     \"extends\": [\n       \"@commitlint/config-conventional\"\n     ]\n-  },\n-  \"packageManager\": \"yarn@4.2.2\"",
+        "score": {
+          "reward": 3.18,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 67.75500000000001,
+            "syllables": 36,
+            "sentences": 2,
+            "score": 0.9224499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1827688460,
+        "content": "This should not be here but in the configuration.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1827688460",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -16,6 +53,7 @@ export async function startStopTask(inputs: PluginInputs, env: Env) {\n     eventName: inputs.eventName,\n     payload: inputs.eventPayload,\n     config: inputs.settings,\n+    organizations: [],",
+        "score": {
+          "reward": 2.678,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 75.50000000000003,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.8449999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1827688873,
+        "content": "Since you use the organizations with a `search`, it is possible that the user has a private profile which will result in a `422` error when querying the search API. You need to provide a fallback for this.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1827688873",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -11,13 +11,20 @@ export function isParentIssue(body: string) {\n   return body.match(parentPattern);\n }\n \n-export async function getAssignedIssues(context: Context, username: string) {\n-  const payload = context.payload;\n+export async function getAssignedIssues(context: Context, username: string): Promise<GitHubIssueSearch[\"items\"]> {\n+  let repoOrgQuery = \"\";\n+  if (context.config.checkAssignedIssues === \"repo\") {\n+    repoOrgQuery = `repo:${context.payload.repository.full_name}`;\n+  } else {\n+    context.organizations.forEach((org) => {\n+      repoOrgQuery += `org:${org} `;\n+    });\n+  }\n \n   try {\n-    return await context.octokit\n+    return context.octokit\n       .paginate(context.octokit.rest.search.issuesAndPullRequests, {\n-        q: `org:${payload.repository.owner.login} assignee:${username} is:open is:issue`,\n+        q: `${repoOrgQuery} assignee:${username} is:open is:issue`,",
+        "score": {
+          "reward": 7.524,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 68.715,
+            "syllables": 51,
+            "sentences": 2,
+            "score": 0.9128499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 1830320648,
+        "content": "The spec  states:\r\nShouldn't this be configurable? And even if not, putting it in the config also allows to add defaults on decode which would ensure it is properly initialized and types as well.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1830320648",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -16,6 +53,7 @@ export async function startStopTask(inputs: PluginInputs, env: Env) {\n     eventName: inputs.eventName,\n     payload: inputs.eventPayload,\n     config: inputs.settings,\n+    organizations: [],",
+        "score": {
+          "reward": 7.101,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 63.381071428571445,
+            "syllables": 52,
+            "sentences": 2,
+            "score": 0.9661892857142855
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1830321044,
+        "content": "When I tested with a user having a private profile, the run crashed on a 422 error. I will test again.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1830321044",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -11,13 +11,20 @@ export function isParentIssue(body: string) {\n   return body.match(parentPattern);\n }\n \n-export async function getAssignedIssues(context: Context, username: string) {\n-  const payload = context.payload;\n+export async function getAssignedIssues(context: Context, username: string): Promise<GitHubIssueSearch[\"items\"]> {\n+  let repoOrgQuery = \"\";\n+  if (context.config.checkAssignedIssues === \"repo\") {\n+    repoOrgQuery = `repo:${context.payload.repository.full_name}`;\n+  } else {\n+    context.organizations.forEach((org) => {\n+      repoOrgQuery += `org:${org} `;\n+    });\n+  }\n \n   try {\n-    return await context.octokit\n+    return context.octokit\n       .paginate(context.octokit.rest.search.issuesAndPullRequests, {\n-        q: `org:${payload.repository.owner.login} assignee:${username} is:open is:issue`,\n+        q: `${repoOrgQuery} assignee:${username} is:open is:issue`,",
+        "score": {
+          "reward": 4.488,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 83.37750000000003,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.7662249999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2451188922,
+        "content": "@0x4007 Why did you hide my comment (if that was you)?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2451188922",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.378,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 103.37909090909093,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2452891595,
+        "content": "@0x4007 maybe you are confused because I first posted my comment with the wrong account and then hid it to repost with my own? I can't seem to find twice the same comment from myself.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2452891595",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.512,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 87.515,
+            "syllables": 43,
+            "sentences": 2,
+            "score": 0.72485
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2452907464,
+        "content": "Yes that was with the wrong account, I hid that comment.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2452907464",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.348,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 95.68818181818183,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.6431181818181817
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2453456304,
+        "content": "@0x4007 The conflicts still need to be resolved first.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2453456304",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.818,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 94.30000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.6569999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2458667558,
+        "content": "Last QA looks ok: https://github.com/Meniole/command-start-stop/issues/46\r\nHowever when using `network` option to scan for PRs, I could go beyond the limit of one assigned issue: https://github.com/Meniole/command-start-stop/issues/47\r\n@ariesgun What does `network` look for?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2458667558",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 11.544,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 69.41000000000003,
+            "syllables": 65,
+            "sentences": 3,
+            "score": 0.9058999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2381312738,
+            "effect": {
+              "addition": 68,
+              "deletion": 10
+            },
+            "reward": 2.34,
+            "priority": 3
+          },
+          {
+            "reviewId": 2382711841,
+            "effect": {
+              "addition": 12,
+              "deletion": 5
+            },
+            "reward": 0.51,
+            "priority": 3
+          },
+          {
+            "reviewId": 2386740769,
+            "effect": {
+              "addition": 8,
+              "deletion": 8
+            },
+            "reward": 0.48,
+            "priority": 3
+          },
+          {
+            "reviewId": 2400574941,
+            "effect": {
+              "addition": 80,
+              "deletion": 70
+            },
+            "reward": 4.5,
+            "priority": 3
+          },
+          {
+            "reviewId": 2412992892,
+            "effect": {
+              "addition": 411,
+              "deletion": 38
+            },
+            "reward": 13.47,
+            "priority": 3
+          },
+          {
+            "reviewId": 2419935718,
+            "effect": {
+              "addition": 90,
+              "deletion": 75
+            },
+            "reward": 4.95,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 83.283 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>6</td><td>26.25</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.99</td></tr><tr><td>Review</td><td>Comment</td><td>16</td><td>56.043</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66\" target=\"_blank\" rel=\"noopener\">#66</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+68 -10</td><td>3</td><td>2.34</td></tr><tr><td>+12 -5</td><td>3</td><td>0.51</td></tr><tr><td>+8 -8</td><td>3</td><td>0.48</td></tr><tr><td>+80 -70</td><td>3</td><td>4.5</td></tr><tr><td>+411 -38</td><td>3</td><td>13.47</td></tr><tr><td>+90 -75</td><td>3</td><td>4.95</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/64#issuecomment-2463652190\" target=\"_blank\" rel=\"noopener\">@whilefoo the comment generation failed due to an invalid signat&hellip;</a></h6></td><td><details><summary>2.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.99</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1808331679\" target=\"_blank\" rel=\"noopener\">Hardcoding these means third parties won't be able to use this p&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.9</td><td>3</td><td>3.726</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1809177319\" target=\"_blank\" rel=\"noopener\">I don't think this is correct. Why would we need two Octokit ins&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.8</td><td>3</td><td>3.36</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1809700303\" target=\"_blank\" rel=\"noopener\">The octokit is logged in using a Github App token.</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.394</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1811658530\" target=\"_blank\" rel=\"noopener\">Do not use &#96;any&#96; and format properly.</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.85</td><td>3</td><td>1.964</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1811659991\" target=\"_blank\" rel=\"noopener\">Still feels wrong to me that we need two octokit instances with &hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.75</td><td>3</td><td>4.028</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1811662428\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion&#96;)&#96;&#96;&#96;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1819993620\" target=\"_blank\" rel=\"noopener\">@0x4007 Don't we want this? It can be &#96;1.22&#96; but setting&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.5</td><td>3</td><td>3.18</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1827688460\" target=\"_blank\" rel=\"noopener\">This should not be here but in the configuration.</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.85</td><td>3</td><td>2.678</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1827688873\" target=\"_blank\" rel=\"noopener\">Since you use the organizations with a &#96;search&#96;, it is p&hellip;</a></h6></td><td><details><summary>2.07</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.95</td><td>3</td><td>7.524</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1830320648\" target=\"_blank\" rel=\"noopener\">The spec  states:Shouldn't this be configurable? And even if n&hellip;</a></h6></td><td><details><summary>2.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>0.9</td><td>3</td><td>7.101</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1830321044\" target=\"_blank\" rel=\"noopener\">When I tested with a user having a private profile, the run cras&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.8</td><td>3</td><td>4.488</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2451188922\" target=\"_blank\" rel=\"noopener\">@0x4007 Why did you hide my comment (if that was you)?</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.378</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2452891595\" target=\"_blank\" rel=\"noopener\">@0x4007 maybe you are confused because I first posted my comment&hellip;</a></h6></td><td><details><summary>2.07</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.2</td><td>3</td><td>1.512</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2452907464\" target=\"_blank\" rel=\"noopener\">Yes that was with the wrong account, I hid that comment.</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.348</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2453456304\" target=\"_blank\" rel=\"noopener\">@0x4007 The conflicts still need to be resolved first.</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.6</td><td>3</td><td>1.818</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#issuecomment-2458667558\" target=\"_blank\" rel=\"noopener\">Last QA looks ok: https://github.com/Meniole/command-start-stop/&hellip;</a></h6></td><td><details><summary>3.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>0.8</td><td>3</td><td>11.544</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 89.35,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 2465815678,
+        "content": "refer to https://github.com/ubiquity-os/ubiquity-os-kernel/issues/194",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/64#issuecomment-2465815678",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.413,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 45.64500000000001,
+            "syllables": 22,
+            "sentences": 2,
+            "score": 0.8564500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2397562681,
+        "content": "forgot to submit review :D",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#pullrequestreview-2397562681",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.204,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 66.40000000000003,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.9359999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1813598759,
+        "content": "Do we need bot's token just to list all installations or also installation tokens from each installation?\r\nOne option would be an API endpoint on the kernel to list installations, I'd avoid using bot's private key other than in kernel if possible.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1813598759",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -6,17 +6,27 @@ import { createAdapters } from \"./adapters\";\n import { userPullRequest, userSelfAssign, userStartStop, userUnassigned } from \"./handlers/user-start-stop\";\n import { Context, Env, PluginInputs } from \"./types\";\n import { addCommentToIssue } from \"./utils/issue\";\n+import { createAppAuth } from \"@octokit/auth-app\";\n \n export async function startStopTask(inputs: PluginInputs, env: Env) {\n   const customOctokit = Octokit.plugin(paginateGraphQL);\n   const octokit = new customOctokit({ auth: inputs.authToken });\n   const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n \n+  const jwtOctokit = new Octokit({",
+        "score": {
+          "reward": 5.694,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 45,
+            "wordValue": 0.1,
+            "result": 2.29
+          },
+          "readability": {
+            "fleschKincaid": 52.39750000000001,
+            "syllables": 70,
+            "sentences": 2,
+            "score": 0.9239750000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.65
+        }
+      },
+      {
+        "id": 1815722316,
+        "content": "Actually the kernel/SDK exports the app id and user ID of the production bot. I was thinking that maybe this would be actually sent along to the plugin because it can change if you run your own kernel\nThis is the api: https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28#get-a-user-using-their-id",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1815722316",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -15,7 +15,7 @@ export async function getAssignedIssues(context: Context, username: string): Pro\n   try {\n     return await context.octokit\n       .paginate(context.octokit.search.issuesAndPullRequests, {\n-        q: `org:${payload.repository.owner.login} assignee:${username} is:open is:issue`,\n+        q: `org:ubiquity org:ubiquity-os-marketplace org:ubiquity-os assignee:${username} is:open is:issue`,",
+        "score": {
+          "reward": 9.696,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 43,
+            "wordValue": 0.1,
+            "result": 2.25
+          },
+          "readability": {
+            "fleschKincaid": 79.34052459016394,
+            "syllables": 83,
+            "sentences": 5,
+            "score": 0.8065947540983607
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1818108651,
+        "content": "it's a unit test",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1818108651",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -634,6 +632,7 @@ export function createContext(\n     },\n     octokit: new octokit.Octokit(),\n     eventName: \"issue_comment.created\" as SupportedEventsU,\n+    organizations: [\"ubiquity\"],",
+        "score": {
+          "reward": 0.828,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 100.24000000000002,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1818109834,
+        "content": "why is this throw necessary?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1818109834",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -64,23 +64,46 @@ export async function start(\n   teammates.push(sender.login);\n \n   const toAssign = [];\n+  let assignedIssues: GitHubIssueSearch[\"items\"] = [];\n   // check max assigned issues\n   for (const user of teammates) {\n-    if (await handleTaskLimitChecks(user, context, logger, sender.login)) {\n+    const { isWithinLimit, issues } = await handleTaskLimitChecks(user, context, logger, sender.login);\n+    if (isWithinLimit) {\n       toAssign.push(user);\n+    } else {\n+      assignedIssues = assignedIssues.concat(issues);\n     }\n   }\n \n   let error: string | null = null;\n-\n   if (toAssign.length === 0 && teammates.length > 1) {\n     error = \"All teammates have reached their max task limit. Please close out some tasks before assigning new ones.\";\n+    throw logger.error(error, { issueNumber: issue.number });\n   } else if (toAssign.length === 0) {\n     error = \"You have reached your max task limit. Please close out some tasks before assigning new ones.\";\n-  }\n+    let issues = \"\";\n+    const urlPattern = /https:\\/\\/(github.com\\/(\\S+)\\/(\\S+)\\/issues\\/(\\d+))/g;\n+    assignedIssues.forEach((el) => {\n+      const matches = [...el.html_url.matchAll(urlPattern)][0];\n+      if (matches) {\n+        issues = issues.concat(`- ###### [${matches[2]}/${matches[3]} - ${el.title} #${matches[4]}](https://www.${matches[1]})\\n`);\n+      } else {\n+        issues = issues.concat(`- ###### [${el.title}](${el.html_url})\\n`);\n+      }\n+    });\n \n-  if (error) {\n-    throw logger.error(error, { issueNumber: issue.number });\n+    await addCommentToIssue(\n+      context,\n+      `\n+      \n+> [!WARNING]\n+> ${error}\n+\n+${issues}\n+\n+`\n+    );\n+    throw new Error(logger.error(error, { issueNumber: issue.number }).logMessage.raw);",
+        "score": {
+          "reward": 1.53,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 66.40000000000003,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.9359999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.75
+        }
+      },
+      {
+        "id": 1818112236,
+        "content": "why global regex if you just take the first match?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1818112236",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -4,18 +4,36 @@ import { createClient } from \"@supabase/supabase-js\";\n import { LogReturn, Logs } from \"@ubiquity-os/ubiquity-os-logger\";\n import { createAdapters } from \"./adapters\";\n import { userPullRequest, userSelfAssign, userStartStop, userUnassigned } from \"./handlers/user-start-stop\";\n-import { Context, Env, PluginInputs } from \"./types\";\n+import { Context, Env, GitHubIssueSearch, PluginInputs } from \"./types\";\n import { addCommentToIssue } from \"./utils/issue\";\n \n+async function listOrganizations(): Promise<string[]> {\n+  const res = await fetch(\"https://raw.githubusercontent.com/ubiquity/devpool-directory/refs/heads/__STORAGE__/devpool-issues.json\");\n+  const devpoolIssues: GitHubIssueSearch[\"items\"] = await res.json();\n+  const orgsSet: Set<string> = new Set();\n+\n+  const urlPattern = /https:\\/\\/(github.com\\/(\\S+)\\/(\\S+)\\/issues\\/(\\d+))/g;\n+  devpoolIssues.forEach((issue) => {\n+    const matches = [...issue.html_url.matchAll(urlPattern)][0];",
+        "score": {
+          "reward": 2.268,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 95.165,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.64835
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1820805301,
+        "content": "move this code to the try/catch block below to avoid duplicating catch block",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1820805301",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -24,6 +50,20 @@ export async function startStopTask(inputs: PluginInputs, env: Env) {\n \n   context.adapters = createAdapters(supabase, context);\n \n+  try {\n+    const organizations = await listOrganizations(context.logger);\n+    context.organizations = organizations;\n+  } catch (err) {\n+    let errorMessage;\n+    if (err instanceof LogReturn) {\n+      errorMessage = err;\n+      await addCommentToIssue(context, `${errorMessage?.logMessage.diff}\\n<!--\\n${sanitizeMetadata(errorMessage?.metadata)}\\n-->`);\n+    } else {\n+      context.logger.error(\"An error occurred\", { err });\n+    }\n+    return;\n+  }",
+        "score": {
+          "reward": 3.698,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 77.81071428571428,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.8218928571428572
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1828082899,
+        "content": "in the SDK it will log even normal Errors so its better to return here",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1828082899",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -64,23 +64,46 @@ export async function start(\n   teammates.push(sender.login);\n \n   const toAssign = [];\n+  let assignedIssues: GitHubIssueSearch[\"items\"] = [];\n   // check max assigned issues\n   for (const user of teammates) {\n-    if (await handleTaskLimitChecks(user, context, logger, sender.login)) {\n+    const { isWithinLimit, issues } = await handleTaskLimitChecks(user, context, logger, sender.login);\n+    if (isWithinLimit) {\n       toAssign.push(user);\n+    } else {\n+      assignedIssues = assignedIssues.concat(issues);\n     }\n   }\n \n   let error: string | null = null;\n-\n   if (toAssign.length === 0 && teammates.length > 1) {\n     error = \"All teammates have reached their max task limit. Please close out some tasks before assigning new ones.\";\n+    throw logger.error(error, { issueNumber: issue.number });\n   } else if (toAssign.length === 0) {\n     error = \"You have reached your max task limit. Please close out some tasks before assigning new ones.\";\n-  }\n+    let issues = \"\";\n+    const urlPattern = /https:\\/\\/(github.com\\/(\\S+)\\/(\\S+)\\/issues\\/(\\d+))/g;\n+    assignedIssues.forEach((el) => {\n+      const matches = [...el.html_url.matchAll(urlPattern)][0];\n+      if (matches) {\n+        issues = issues.concat(`- ###### [${matches[2]}/${matches[3]} - ${el.title} #${matches[4]}](https://www.${matches[1]})\\n`);\n+      } else {\n+        issues = issues.concat(`- ###### [${el.title}](${el.html_url})\\n`);\n+      }\n+    });\n \n-  if (error) {\n-    throw logger.error(error, { issueNumber: issue.number });\n+    await addCommentToIssue(\n+      context,\n+      `\n+      \n+> [!WARNING]\n+> ${error}\n+\n+${issues}\n+\n+`\n+    );\n+    throw new Error(logger.error(error, { issueNumber: issue.number }).logMessage.raw);",
+        "score": {
+          "reward": 4.05,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 78.81000000000003,
+            "syllables": 20,
+            "sentences": 1,
+            "score": 0.8118999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1828090638,
+        "content": "```suggestion\r\n    assignedIssueScope: T.Union([T.Literal(\"org\"), T.Literal(\"repo\"), T.Literal(\"network\")], { default: \"org\" }),\r\n```\r\nor even better create an Enum and use it everywhere:\r\n```ts\r\nenum AssignedIssueScope {\r\n  ORG = \"org\",\r\n  REPO = \"repo\",\r\n  NETWORK = \"network\"\r\n}\r\nassignedIssueScope: T.Enum(AssignedIssueScope, { default: AssignedIssueScope.ORG }),\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1828090638",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -41,6 +41,7 @@ export const pluginSettingsSchema = T.Object(\n     taskStaleTimeoutDuration: T.String({ default: \"30 Days\" }),\n     startRequiresWallet: T.Boolean({ default: true }),\n     maxConcurrentTasks: maxConcurrentTasks(),\n+    checkAssignedIssues: T.String({ default: \"org\" }),",
+        "score": {
+          "reward": 3.335,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 61.32500000000002,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.9867499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 1828098370,
+        "content": "try to avoid `as`",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1828098370",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -29,7 +36,7 @@ export async function getAssignedIssues(context: Context, username: string) {\n       );\n   } catch (err) {\n     context.logger.info(\"Will try re-fetching assigned issues...\", { error: err as Error });\n-    return getAssignedIssuesFallback(context, username);\n+    return getAssignedIssuesFallback(context, username) as Promise<GitHubIssueSearch[\"items\"]>;",
+        "score": {
+          "reward": 1.008,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 90.99000000000004,
+            "syllables": 4,
+            "sentences": 1,
+            "score": 0.6900999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1828101717,
+        "content": "I think the reasoning is that it's needed at multiple places so they just put it in the context",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1828101717",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -16,6 +53,7 @@ export async function startStopTask(inputs: PluginInputs, env: Env) {\n     eventName: inputs.eventName,\n     payload: inputs.eventPayload,\n     config: inputs.settings,\n+    organizations: [],",
+        "score": {
+          "reward": 3.843,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 80.78500000000003,
+            "syllables": 25,
+            "sentences": 1,
+            "score": 0.7921499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1828415077,
+        "content": "TS enum is better in the way it also creates a type, but in your case you have to do `typeof AssignedIssueScope[keyof typeof AssignedIssueScope]`. I think `const enum` basically generates an object like yours",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1828415077",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -41,6 +41,7 @@ export const pluginSettingsSchema = T.Object(\n     taskStaleTimeoutDuration: T.String({ default: \"30 Days\" }),\n     startRequiresWallet: T.Boolean({ default: true }),\n     maxConcurrentTasks: maxConcurrentTasks(),\n+    checkAssignedIssues: T.String({ default: \"org\" }),",
+        "score": {
+          "reward": 5.04,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 80.83214285714287,
+            "syllables": 37,
+            "sentences": 2,
+            "score": 0.7916785714285713
+          },
+          "multiplier": 1,
+          "relevance": 0.75
+        }
+      },
+      {
+        "id": 1829724142,
+        "content": "are you making this manually? We have a [workflow](https://github.com/ubiquity-os-marketplace/command-start-stop/blob/development/.github/workflows/update-configuration.yml) that automatically updates it, it should include the enum here",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1829724142",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -46,7 +46,7 @@\n           }\n         }\n       },\n-      \"checkAssignedIssues\": {\n+      \"assignedIssueScope\": {\n         \"default\": \"org\",\n         \"type\": \"string\"\n       },",
+        "score": {
+          "reward": 8.505,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 59.16092105263158,
+            "syllables": 31,
+            "sentences": 2,
+            "score": 0.9916092105263158
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1829855110,
+        "content": "let the workflow generate it",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1829855110",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -46,7 +46,7 @@\n           }\n         }\n       },\n-      \"checkAssignedIssues\": {\n+      \"assignedIssueScope\": {\n         \"default\": \"org\",\n         \"type\": \"string\"\n       },",
+        "score": {
+          "reward": 1.734,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 66.40000000000003,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.9359999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1831694643,
+        "content": "maybe I'm missing something, but the config item `assignedIssueScope` can be set to `repo`, `org` or `network`, this `configuration` property gets filled based on `assignedIssueScope` when the plugin starts",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1831694643",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -16,6 +53,7 @@ export async function startStopTask(inputs: PluginInputs, env: Env) {\n     eventName: inputs.eventName,\n     payload: inputs.eventPayload,\n     config: inputs.settings,\n+    organizations: [],",
+        "score": {
+          "reward": 5.064,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 69.67500000000004,
+            "syllables": 32,
+            "sentences": 1,
+            "score": 0.9032499999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2390658096,
+            "effect": {
+              "addition": 75,
+              "deletion": 10
+            },
+            "reward": 2.55,
+            "priority": 3
+          },
+          {
+            "reviewId": 2393750266,
+            "effect": {
+              "addition": 11,
+              "deletion": 18
+            },
+            "reward": 0.87,
+            "priority": 3
+          },
+          {
+            "reviewId": 2397561562,
+            "effect": {
+              "addition": 57,
+              "deletion": 62
+            },
+            "reward": 3.57,
+            "priority": 3
+          },
+          {
+            "reviewId": 2397562681,
+            "effect": {
+              "addition": 30,
+              "deletion": 7
+            },
+            "reward": 1.11,
+            "priority": 3
+          },
+          {
+            "reviewId": 2413638329,
+            "effect": {
+              "addition": 0,
+              "deletion": 0
+            },
+            "reward": 0,
+            "priority": 3
+          },
+          {
+            "reviewId": 2413650819,
+            "effect": {
+              "addition": 411,
+              "deletion": 38
+            },
+            "reward": 13.47,
+            "priority": 3
+          },
+          {
+            "reviewId": 2416241056,
+            "effect": {
+              "addition": 92,
+              "deletion": 72
+            },
+            "reward": 4.92,
+            "priority": 3
+          },
+          {
+            "reviewId": 2419396470,
+            "effect": {
+              "addition": 0,
+              "deletion": 0
+            },
+            "reward": 0,
+            "priority": 3
+          },
+          {
+            "reviewId": 2421602788,
+            "effect": {
+              "addition": 90,
+              "deletion": 75
+            },
+            "reward": 4.95,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 89.35 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>9</td><td>31.44</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.413</td></tr><tr><td>Review</td><td>Comment</td><td>15</td><td>56.497</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66\" target=\"_blank\" rel=\"noopener\">#66</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+75 -10</td><td>3</td><td>2.55</td></tr><tr><td>+11 -18</td><td>3</td><td>0.87</td></tr><tr><td>+57 -62</td><td>3</td><td>3.57</td></tr><tr><td>+30 -7</td><td>3</td><td>1.11</td></tr><tr><td>+0 -0</td><td>3</td><td>0</td></tr><tr><td>+411 -38</td><td>3</td><td>13.47</td></tr><tr><td>+92 -72</td><td>3</td><td>4.92</td></tr><tr><td>+0 -0</td><td>3</td><td>0</td></tr><tr><td>+90 -75</td><td>3</td><td>4.95</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/64#issuecomment-2465815678\" target=\"_blank\" rel=\"noopener\">refer to https://github.com/ubiquity-os/ubiquity-os-kernel/issue&hellip;</a></h6></td><td><details><summary>1.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.413</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#pullrequestreview-2397562681\" target=\"_blank\" rel=\"noopener\">forgot to submit review :D</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.204</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1813598759\" target=\"_blank\" rel=\"noopener\">Do we need bot's token just to list all installations or also in&hellip;</a></h6></td><td><details><summary>2.29</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 45&#13;  wordValue: 0.1&#13;  result: 2.29&#13;</pre></details></td><td>0.65</td><td>3</td><td>5.694</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1815722316\" target=\"_blank\" rel=\"noopener\">Actually the kernel/SDK exports the app id and user ID of the pr&hellip;</a></h6></td><td><details><summary>3.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 43&#13;  wordValue: 0.1&#13;  result: 2.25&#13;</pre></details></td><td>0.8</td><td>3</td><td>9.696</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1818108651\" target=\"_blank\" rel=\"noopener\">it's a unit test</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.4</td><td>3</td><td>0.828</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1818109834\" target=\"_blank\" rel=\"noopener\">why is this throw necessary?</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.75</td><td>3</td><td>1.53</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1818112236\" target=\"_blank\" rel=\"noopener\">why global regex if you just take the first match?</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.268</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1820805301\" target=\"_blank\" rel=\"noopener\">move this code to the try/catch block below to avoid duplicating&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.85</td><td>3</td><td>3.698</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1828082899\" target=\"_blank\" rel=\"noopener\">in the SDK it will log even normal Errors so its better to retur&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.9</td><td>3</td><td>4.05</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1828090638\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionassignedIssueScope: T.Union([T.Li&hellip;</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.95</td><td>3</td><td>3.335</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1828098370\" target=\"_blank\" rel=\"noopener\">try to avoid &#96;as&#96;</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.008</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1828101717\" target=\"_blank\" rel=\"noopener\">I think the reasoning is that it's needed at multiple places so &hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.7</td><td>3</td><td>3.843</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1828415077\" target=\"_blank\" rel=\"noopener\">TS enum is better in the way it also creates a type, but in your&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.75</td><td>3</td><td>5.04</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1829724142\" target=\"_blank\" rel=\"noopener\">are you making this manually? We have a [workflow](https://githu&hellip;</a></h6></td><td><details><summary>2.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.9</td><td>3</td><td>8.505</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1829855110\" target=\"_blank\" rel=\"noopener\">let the workflow generate it</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.85</td><td>3</td><td>1.734</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1831694643\" target=\"_blank\" rel=\"noopener\">maybe I'm missing something, but the config item &#96;assignedIs&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.8</td><td>3</td><td>5.064</td></tr></tbody></table></details>"
+  },
+  "ubiquity-ubiquibot": {
+    "total": 6.792,
+    "userId": 163369652,
+    "comments": [
+      {
+        "id": 2401101568,
+        "content": "I can't test this because there is no way to set the organizations you want to look for assigned items, and it seems to always target `ubiquity` related repos so it always let me assign to tasks without any limit. I set it to `1` in the configuration, yet I could start in two issues:\r\nhttps://github.com/Meniole/command-start-stop/issues/39\r\nhttps://github.com/Meniole/command-start-stop/issues/40\r\nThere is nothing in the configuration that let's me change the targeted repos, which doesn't seem to fulfill point three of the spec. Am I misunderstanding something? @0x4007 rfc",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#pullrequestreview-2401101568",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 3.552,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 85,
+            "wordValue": 0.1,
+            "result": 2.64
+          },
+          "readability": {
+            "fleschKincaid": 68.67102750809065,
+            "syllables": 147,
+            "sentences": 6,
+            "score": 0.9132897249190935
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2401101568,
+            "effect": {
+              "addition": 92,
+              "deletion": 16
+            },
+            "reward": 3.24,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 6.792 XP ]</a>&nbsp;</h3><h6>@ubiquity-ubiquibot</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>3.24</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>3.552</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66\" target=\"_blank\" rel=\"noopener\">#66</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+92 -16</td><td>3</td><td>3.24</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#pullrequestreview-2401101568\" target=\"_blank\" rel=\"noopener\">I can't test this because there is no way to set the organizatio&hellip;</a></h6></td><td><details><summary>4.64</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 85&#13;  wordValue: 0.1&#13;  result: 2.64&#13;</pre></details></td><td>0.8</td><td>3</td><td>3.552</td></tr></tbody></table></details>"
+  },
+  "Keyrxng": {
+    "total": 39.816,
+    "userId": 106303466,
+    "comments": [
+      {
+        "id": 1809758308,
+        "content": "Afaik this isn't feasible @0x4007 because we need the kernel' private key which has been spoken about across a few issues. It was ofc the telegram bot most recently https://github.com/ubiquity-os-marketplace/ubiquity-os-kernel-telegram/pull/2#discussion_r1766516363",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1809758308",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -15,7 +15,7 @@ export async function getAssignedIssues(context: Context, username: string): Pro\n   try {\n     return await context.octokit\n       .paginate(context.octokit.search.issuesAndPullRequests, {\n-        q: `org:${payload.repository.owner.login} assignee:${username} is:open is:issue`,\n+        q: `org:ubiquity org:ubiquity-os-marketplace org:ubiquity-os assignee:${username} is:open is:issue`,",
+        "score": {
+          "reward": 1.656,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 52.59829457364344,
+            "syllables": 71,
+            "sentences": 3,
+            "score": 0.9259829457364345
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1809760251,
+        "content": "to list installs we need app private key do we not?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1809760251",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -6,17 +6,27 @@ import { createAdapters } from \"./adapters\";\n import { userPullRequest, userSelfAssign, userStartStop, userUnassigned } from \"./handlers/user-start-stop\";\n import { Context, Env, PluginInputs } from \"./types\";\n import { addCommentToIssue } from \"./utils/issue\";\n+import { createAppAuth } from \"@octokit/auth-app\";\n \n export async function startStopTask(inputs: PluginInputs, env: Env) {\n   const customOctokit = Octokit.plugin(paginateGraphQL);\n   const octokit = new customOctokit({ auth: inputs.authToken });\n   const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n \n+  const jwtOctokit = new Octokit({",
+        "score": {
+          "reward": 0.435,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 95.68818181818183,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.6431181818181817
+          },
+          "multiplier": 0.25,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1810508513,
+        "content": "fair enough\r\nI want to add that the telegram bot PR was held back for weeks with the team debating exposing the kernel' private key, so if it's not to be used there then surely that also applies to here?\r\nSee [this](https://github.com/ubiquity-os/ubiquity-os-kernel/issues/164#issuecomment-2429171392) comment for one solution I can think of to all of this, since all orgs will install the storage app and we can track installs via that.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1810508513",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -6,17 +6,27 @@ import { createAdapters } from \"./adapters\";\n import { userPullRequest, userSelfAssign, userStartStop, userUnassigned } from \"./handlers/user-start-stop\";\n import { Context, Env, PluginInputs } from \"./types\";\n import { addCommentToIssue } from \"./utils/issue\";\n+import { createAppAuth } from \"@octokit/auth-app\";\n \n export async function startStopTask(inputs: PluginInputs, env: Env) {\n   const customOctokit = Octokit.plugin(paginateGraphQL);\n   const octokit = new customOctokit({ auth: inputs.authToken });\n   const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n \n+  const jwtOctokit = new Octokit({",
+        "score": {
+          "reward": 2.436,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 70,
+            "wordValue": 0.1,
+            "result": 2.6
+          },
+          "readability": {
+            "fleschKincaid": 63.747142857142876,
+            "syllables": 89,
+            "sentences": 2,
+            "score": 0.9625285714285713
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1811941376,
+        "content": "listing installs is for sure the most convenient and effective way to find out the entire partner network\r\nhack 1: use `ubiquityos_app_slug` against the search API for comments and then filter a `Set` of the orgs which it has appeared in\r\nhack 2: install a secondary app to avoid exposing kernel' pk (guaranteed it seems partner's will have to do this anyway)\r\nhack 3: Auth as the kernel with `clientId` but I think that's the same as exposing the PK",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1811941376",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -6,17 +6,27 @@ import { createAdapters } from \"./adapters\";\n import { userPullRequest, userSelfAssign, userStartStop, userUnassigned } from \"./handlers/user-start-stop\";\n import { Context, Env, PluginInputs } from \"./types\";\n import { addCommentToIssue } from \"./utils/issue\";\n+import { createAppAuth } from \"@octokit/auth-app\";\n \n export async function startStopTask(inputs: PluginInputs, env: Env) {\n   const customOctokit = Octokit.plugin(paginateGraphQL);\n   const octokit = new customOctokit({ auth: inputs.authToken });\n   const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n \n+  const jwtOctokit = new Octokit({",
+        "score": {
+          "reward": 1.824,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 79,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 10.99430379746839,
+            "syllables": 108,
+            "sentences": 1,
+            "score": 0.5099430379746839
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1813106198,
+        "content": "1. partner's will use the same app slug, if you mean forks/development then they'd change to their own app slug.\r\n2. That is also an effective suggestion",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1813106198",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -6,17 +6,27 @@ import { createAdapters } from \"./adapters\";\n import { userPullRequest, userSelfAssign, userStartStop, userUnassigned } from \"./handlers/user-start-stop\";\n import { Context, Env, PluginInputs } from \"./types\";\n import { addCommentToIssue } from \"./utils/issue\";\n+import { createAppAuth } from \"@octokit/auth-app\";\n \n export async function startStopTask(inputs: PluginInputs, env: Env) {\n   const customOctokit = Octokit.plugin(paginateGraphQL);\n   const octokit = new customOctokit({ auth: inputs.authToken });\n   const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n \n+  const jwtOctokit = new Octokit({",
+        "score": {
+          "reward": 0.744,
+          "formatting": {
+            "content": {
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 80.83214285714287,
+            "syllables": 37,
+            "sentences": 2,
+            "score": 0.7916785714285713
+          },
+          "multiplier": 0.25,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1815472576,
+        "content": "To get a better picture of how over-assigned the contributor might be across multiple partners (eventually we'll have loads).\r\n---\r\n1. Global storage would enable us to track a userbase across all partners. The user object can be updated any time they are assigned an issue within the network and we can track with ease. This can serve us in hundreds of ways not just with this use-case.\r\n2. Parse devpool json (better with all issues filled, theres a task for it) + search API for `username: pull_requests`, filter those that match devpool orgs.\r\n3. Depending on the user' visibility settings you'll likely be able to do it with GraphQL API but I'm not as knowledgeable with that API, I use the official [GitHub GQL Explorer](https://docs.github.com/en/graphql/overview/explorer) to investigate when I need to.\r\n---\r\n`author:keyrxng is:pr` returns all of my PRs. It's trivial to match devpool json orgs to the orgs returned by this query.\r\n`author:keyrxng is:pr -org:ubq-testing` this is how to exclude an org. (166 PRs returned by this lmao, only ~10-15 are not PRs into the Ubiquity ecosystem, I like that)",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1815472576",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -15,7 +15,7 @@ export async function getAssignedIssues(context: Context, username: string): Pro\n   try {\n     return await context.octokit\n       .paginate(context.octokit.search.issuesAndPullRequests, {\n-        q: `org:${payload.repository.owner.login} assignee:${username} is:open is:issue`,\n+        q: `org:ubiquity org:ubiquity-os-marketplace org:ubiquity-os assignee:${username} is:open is:issue`,",
+        "score": {
+          "reward": 2.808,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.3
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 176,
+            "wordValue": 0.1,
+            "result": 1.97
+          },
+          "readability": {
+            "fleschKincaid": 69.7619090909091,
+            "syllables": 248,
+            "sentences": 10,
+            "score": 0.902380909090909
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1815507774,
+        "content": "Whichever query you feel is most effective dude go for it.\r\nhttps://github.com/ubiquity-os-marketplace/command-start-stop/blob/1ceebb363cf414b5a9ad00c101ea5e1d706424fb/src/types/env.ts#L9\r\nUse this variable to find out the bot's name instead of a new config item but if not then I guess you'd need a new config item if using that approach but I feel the right thing to do is use it's ID vs a new config item.\r\nPretty sure the REST api does not provide a method to search for a user with their `user.id` or `node_id` so you'd need to use the GQL API.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1815507774",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -15,7 +15,7 @@ export async function getAssignedIssues(context: Context, username: string): Pro\n   try {\n     return await context.octokit\n       .paginate(context.octokit.search.issuesAndPullRequests, {\n-        q: `org:${payload.repository.owner.login} assignee:${username} is:open is:issue`,\n+        q: `org:ubiquity org:ubiquity-os-marketplace org:ubiquity-os assignee:${username} is:open is:issue`,",
+        "score": {
+          "reward": 2.394,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 89,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 75.94285714285715,
+            "syllables": 136,
+            "sentences": 5,
+            "score": 0.8405714285714285
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1815691475,
+        "content": "ohh I was hoping that wasn't the case. You could use `author: <xx> is:pr` and do an org comparison that way instead otherwise @0x4007 or @gentlementlegen will approve the new config item.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1815691475",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -15,7 +15,7 @@ export async function getAssignedIssues(context: Context, username: string): Pro\n   try {\n     return await context.octokit\n       .paginate(context.octokit.search.issuesAndPullRequests, {\n-        q: `org:${payload.repository.owner.login} assignee:${username} is:open is:issue`,\n+        q: `org:ubiquity org:ubiquity-os-marketplace org:ubiquity-os assignee:${username} is:open is:issue`,",
+        "score": {
+          "reward": 0.9,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 67.53000000000003,
+            "syllables": 44,
+            "sentences": 2,
+            "score": 0.9246999999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1815716849,
+        "content": "Storage has it's own [branch](https://github.com/ubiquity/devpool-directory/tree/__STORAGE__).\r\nThis fn is trying to find assigned issues so\r\n- using search API to get all PRs, then filter, then get the linked issue via GQL or PR body parsing\r\n- using search API with `assignee:keyrxng is:issue`, then just filter is another but it doesn't take PRs into consideration (not sure if that's something we should consider in this context)\r\noption two is probably best. (a lot of cases exist where a user is assigned to a task after it's closed as completed etc too which probably should be considered when filtering the results)",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1815716849",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -15,7 +15,7 @@ export async function getAssignedIssues(context: Context, username: string): Pro\n   try {\n     return await context.octokit\n       .paginate(context.octokit.search.issuesAndPullRequests, {\n-        q: `org:${payload.repository.owner.login} assignee:${username} is:open is:issue`,\n+        q: `org:ubiquity org:ubiquity-os-marketplace org:ubiquity-os assignee:${username} is:open is:issue`,",
+        "score": {
+          "reward": 2.952,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 99,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 57.1218181818182,
+            "syllables": 136,
+            "sentences": 3,
+            "score": 0.971218181818182
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1828246438,
+        "content": "update the return type annotation of `getAssignedIssues` to include the `listfor` type that the fallback returns, making it a union of either search or list results",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1828246438",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -29,7 +36,7 @@ export async function getAssignedIssues(context: Context, username: string) {\n       );\n   } catch (err) {\n     context.logger.info(\"Will try re-fetching assigned issues...\", { error: err as Error });\n-    return getAssignedIssuesFallback(context, username);\n+    return getAssignedIssuesFallback(context, username) as Promise<GitHubIssueSearch[\"items\"]>;",
+        "score": {
+          "reward": 1.431,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 55.57500000000003,
+            "syllables": 36,
+            "sentences": 1,
+            "score": 0.9557500000000003
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1828254727,
+        "content": "Usually it's better to use \r\n```ts\r\nconst AssignedIssueScope = {\r\n  ORG: \"org\",\r\n  REPO: \"repo\",\r\n  NETWORK: \"network\"\r\n} as const\r\n```\r\nover enums, they are debated to be a bad practice and TS themselves said they regret adding it into the language. It results in less performant JS (because enums don't exist in JS) and can be lost during runtime in libs are not built correctly\r\nThey both represent a simple object where `Enum` adds a burden that can be avoided but it's dev preference in this regard as it's a point of debate in the TS world.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1828254727",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -41,6 +41,7 @@ export const pluginSettingsSchema = T.Object(\n     taskStaleTimeoutDuration: T.String({ default: \"30 Days\" }),\n     startRequiresWallet: T.Boolean({ default: true }),\n     maxConcurrentTasks: maxConcurrentTasks(),\n+    checkAssignedIssues: T.String({ default: \"org\" }),",
+        "score": {
+          "reward": 1.992,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 85,
+            "wordValue": 0.1,
+            "result": 2.64
+          },
+          "readability": {
+            "fleschKincaid": 47.24808823529415,
+            "syllables": 117,
+            "sentences": 2,
+            "score": 0.8724808823529415
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1828257612,
+        "content": "Can you place this in with the handlers or helpers to keep the entry tidy my friend?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1828257612",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -4,9 +4,46 @@ import { createClient } from \"@supabase/supabase-js\";\n import { LogReturn, Logs } from \"@ubiquity-os/ubiquity-os-logger\";\n import { createAdapters } from \"./adapters\";\n import { userPullRequest, userSelfAssign, userStartStop, userUnassigned } from \"./handlers/user-start-stop\";\n-import { Context, Env, PluginInputs } from \"./types\";\n+import { Context, Env, GitHubIssueSearch, PluginInputs } from \"./types\";\n import { addCommentToIssue } from \"./utils/issue\";\n \n+async function listOrganizations(context: Context): Promise<string[]> {",
+        "score": {
+          "reward": 0.84,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 85.07411764705884,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 0.7492588235294115
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1828424317,
+        "content": "https://www.typescriptlang.org/docs/handbook/enums.html#const-enum-pitfalls\r\nconst enum is fine here I'm sure because this plugin is not used as a lib but if it was and placed inside a `.ts` file it would be lost at compile time after the file was converted into `.d.ts`. The values will be inlined where they are used.\r\nI agree it's a cleaner type definition it just has gotchas with using them so I like to avoid, but dev preference for sure I'm not against them.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1828424317",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -41,6 +41,7 @@ export const pluginSettingsSchema = T.Object(\n     taskStaleTimeoutDuration: T.String({ default: \"30 Days\" }),\n     startRequiresWallet: T.Boolean({ default: true }),\n     maxConcurrentTasks: maxConcurrentTasks(),\n+    checkAssignedIssues: T.String({ default: \"org\" }),",
+        "score": {
+          "reward": 2.034,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 78,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 77.7117509363296,
+            "syllables": 120,
+            "sentences": 6,
+            "score": 0.822882490636704
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1828428872,
+        "content": "[TS Playground](https://www.typescriptlang.org/play/#code/MYewdgzgLgBAghCBLA5mApgEwJKIK7oDKoADujALwwDeAUDDAPIBKA4gFwwBEIATilwA09GMwCiABUacuvdCRBCRAOTEAVAOosA0jIxQA7nwDWXWgF8YAQwgxQkKLXvQY0eQEZK3NyXdmn4C7oYHgAtvCIqBg4+ESk6ADCgVBiIeF0DCysXjz8SgziUjlyCvkwqpo6OfpGvKYWAQ6uUPIATDk+rf60wWERyGhYuBAExCBkqX0ZTGw5fALCBZKMxfKKi+XqWsza1eiGJmbmtLRAA)\r\nthis shows how the three enums are compiled:\r\n![image](https://github.com/user-attachments/assets/c259293d-bd38-4b1a-a3e4-0c0139aa7db3)\r\nThis also works surprisingly, less verbose but looks hacky\r\n```ts\r\nexport type AssignedIssueScopes = typeof AssignedIssueScope[][number];\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1828428872",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -41,6 +41,7 @@ export const pluginSettingsSchema = T.Object(\n     taskStaleTimeoutDuration: T.String({ default: \"30 Days\" }),\n     startRequiresWallet: T.Boolean({ default: true }),\n     maxConcurrentTasks: maxConcurrentTasks(),\n+    checkAssignedIssues: T.String({ default: \"org\" }),",
+        "score": {
+          "reward": 1.17,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 62.87631578947371,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.971236842105263
+          },
+          "multiplier": 0.25,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2383627210,
+            "effect": {
+              "addition": 29,
+              "deletion": 8
+            },
+            "reward": 1.11,
+            "priority": 3
+          },
+          {
+            "reviewId": 2383629790,
+            "effect": {
+              "addition": 49,
+              "deletion": 5
+            },
+            "reward": 1.62,
+            "priority": 3
+          },
+          {
+            "reviewId": 2393337870,
+            "effect": {
+              "addition": 0,
+              "deletion": 0
+            },
+            "reward": 0,
+            "priority": 3
+          },
+          {
+            "reviewId": 2413899913,
+            "effect": {
+              "addition": 411,
+              "deletion": 38
+            },
+            "reward": 13.47,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 39.816 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>4</td><td>16.2</td></tr><tr><td>Review</td><td>Comment</td><td>14</td><td>23.616</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66\" target=\"_blank\" rel=\"noopener\">#66</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+29 -8</td><td>3</td><td>1.11</td></tr><tr><td>+49 -5</td><td>3</td><td>1.62</td></tr><tr><td>+0 -0</td><td>3</td><td>0</td></tr><tr><td>+411 -38</td><td>3</td><td>13.47</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1809758308\" target=\"_blank\" rel=\"noopener\">Afaik this isn't feasible @0x4007 because we need the kernel' pr&hellip;</a></h6></td><td><details><summary>2.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.6</td><td>3</td><td>1.656</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1809760251\" target=\"_blank\" rel=\"noopener\">to list installs we need app private key do we not?</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.5</td><td>3</td><td>0.435</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1810508513\" target=\"_blank\" rel=\"noopener\">fair enoughI want to add that the telegram bot PR was held bac&hellip;</a></h6></td><td><details><summary>3.6</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 70&#13;  wordValue: 0.1&#13;  result: 2.6&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.436</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1811941376\" target=\"_blank\" rel=\"noopener\">listing installs is for sure the most convenient and effective w&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 79&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.824</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1813106198\" target=\"_blank\" rel=\"noopener\">1. partner's will use the same app slug, if you mean forks/devel&hellip;</a></h6></td><td><details><summary>2.01</summary><pre>content:&#13;  content:&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.4</td><td>3</td><td>0.744</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1815472576\" target=\"_blank\" rel=\"noopener\">To get a better picture of how over-assigned the contributor mig&hellip;</a></h6></td><td><details><summary>3.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    hr:&#13;      score: 0&#13;      elementCount: 2&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.3&#13;regex:&#13;  wordCount: 176&#13;  wordValue: 0.1&#13;  result: 1.97&#13;</pre></details></td><td>0.9</td><td>3</td><td>2.808</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1815507774\" target=\"_blank\" rel=\"noopener\">Whichever query you feel is most effective dude go for it.http&hellip;</a></h6></td><td><details><summary>3.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 89&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.394</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1815691475\" target=\"_blank\" rel=\"noopener\">ohh I was hoping that wasn't the case. You could use &#96;author&hellip;</a></h6></td><td><details><summary>1.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.5</td><td>3</td><td>0.9</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1815716849\" target=\"_blank\" rel=\"noopener\">Storage has it's own [branch](https://github.com/ubiquity/devpoo&hellip;</a></h6></td><td><details><summary>3.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.2&#13;regex:&#13;  wordCount: 99&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.8</td><td>3</td><td>2.952</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1828246438\" target=\"_blank\" rel=\"noopener\">update the return type annotation of &#96;getAssignedIssues&#96;&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.9</td><td>3</td><td>1.431</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1828254727\" target=\"_blank\" rel=\"noopener\">Usually it's better to use &#96;&#96;&#96;tsconst AssignedIs&hellip;</a></h6></td><td><details><summary>2.64</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 85&#13;  wordValue: 0.1&#13;  result: 2.64&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.992</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1828257612\" target=\"_blank\" rel=\"noopener\">Can you place this in with the handlers or helpers to keep the e&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.7</td><td>3</td><td>0.84</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1828424317\" target=\"_blank\" rel=\"noopener\">https://www.typescriptlang.org/docs/handbook/enums.html#const-en&hellip;</a></h6></td><td><details><summary>3.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 78&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.6</td><td>3</td><td>2.034</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/66#discussion_r1828428872\" target=\"_blank\" rel=\"noopener\">[TS Playground](https://www.typescriptlang.org/play/#code/MYewdg&hellip;</a></h6></td><td><details><summary>2.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.5</td><td>3</td><td>1.17</td></tr></tbody></table></details>"
+  }
+}

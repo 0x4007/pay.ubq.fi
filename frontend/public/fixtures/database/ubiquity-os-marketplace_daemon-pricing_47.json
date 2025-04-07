@@ -1,0 +1,317 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 6.28,
+    "task": {
+      "reward": 6,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2441187175,
+        "content": "I'll take care of it I guess since I am familiar with that.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/47#issuecomment-2441187175",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.28,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 95.93928571428573,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.6406071428571427
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 6.28 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>6</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.28</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/47#issuecomment-2441187175\" target=\"_blank\" rel=\"noopener\">I'll take care of it I guess since I am familiar with that.</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.28</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 6,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2428007686,
+        "content": "Time estimate?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/47#issuecomment-2428007686",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.217,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 35.60500000000002,
+            "syllables": 4,
+            "sentences": 1,
+            "score": 0.7560500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1819194273,
+        "content": "@Ubiquityos what is `--experimental-vm-modules` and is it necessary here?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-pricing/pull/50#discussion_r1819194273",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -18,7 +19,7 @@\n     \"knip\": \"knip --config .github/knip.ts\",\n     \"knip-ci\": \"knip --no-exit-code --reporter json --config .github/knip.ts\",\n     \"prepare\": \"husky install\",\n-    \"test\": \"jest --setupFiles dotenv/config --coverage\",\n+    \"test\": \"NODE_OPTIONS=\\\"$NODE_OPTIONS --experimental-vm-modules\\\" jest --setupFiles dotenv/config --coverage\",",
+        "score": {
+          "reward": 0.825,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 50.66500000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.9066500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1819430470,
+        "content": "Shouldn't this be enabled?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-pricing/pull/50#discussion_r1819430470",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,74 +1,31 @@\n-import manifest from \"../manifest.json\";\n-import { validateAndDecodeSchemas } from \"./handlers/validator\";\n+import { createClient } from \"@supabase/supabase-js\";\n+import { createPlugin } from \"@ubiquity-os/ubiquity-os-kernel\";\n+import type { ExecutionContext } from \"hono\";\n+import { createAdapters } from \"./adapters\";\n import { run } from \"./run\";\n-import { Env } from \"./types/env\";\n+import { SupportedEvents } from \"./types/context\";\n+import { Env, envSchema } from \"./types/env\";\n+import { AssistivePricingSettings, pluginSettingsSchema } from \"./types/plugin-input\";\n+import manifest from \"../manifest.json\";\n \n export default {\n-  async fetch(request: Request, env: Env): Promise<Response> {\n-    try {\n-      const url = new URL(request.url);\n-      if (url.pathname === \"/manifest.json\" && request.method === \"GET\") {\n-        return new Response(JSON.stringify(manifest), {\n-          headers: { \"content-type\": \"application/json\" },\n+  async fetch(request: Request, env: Env, executionCtx?: ExecutionContext) {\n+    return createPlugin<AssistivePricingSettings, Env, SupportedEvents>(\n+      (context) => {\n+        return run({\n+          ...context,\n+          adapters: createAdapters(createClient(context.env.SUPABASE_URL, context.env.SUPABASE_KEY), context),\n         });\n+      },\n+      //@ts-expect-error types are ok\n+      manifest,\n+      {\n+        envSchema: envSchema,\n+        postCommentOnError: true,\n+        settingsSchema: pluginSettingsSchema,\n+        logLevel: env.LOG_LEVEL,\n+        kernelPublicKey: env.KERNEL_PUBLIC_KEY,\n       }\n-      if (request.method !== \"POST\") {\n-        return new Response(JSON.stringify({ error: `Only POST requests are supported.` }), {\n-          status: 405,\n-          headers: { \"content-type\": \"application/json\", Allow: \"POST\" },\n-        });\n-      }\n-      const contentType = request.headers.get(\"content-type\");\n-      if (contentType !== \"application/json\") {\n-        return new Response(JSON.stringify({ error: `Bad request: ${contentType} is not a valid content type` }), {\n-          status: 400,\n-          headers: { \"content-type\": \"application/json\" },\n-        });\n-      }\n-      const webhookPayload = await request.json();\n-      // TODO: temporarily disabled, should be added back with the proper key in the configuration.\n-      // const signature = webhookPayload.signature;\n-      // delete webhookPayload.signature;\n-      // if (!(await verifySignature(env.UBIQUIBOT_PUBLIC_KEY, webhookPayload, signature))) {\n-      //   return new Response(JSON.stringify({ error: `Forbidden: Signature verification failed` }), {\n-      //     status: 403,\n-      //     headers: { \"content-type\": \"application/json\" },\n-      //   });\n-      // }\n-      const result = validateAndDecodeSchemas(env, webhookPayload.settings);\n-\n-      webhookPayload.settings = result.decodedSettings;\n-      await run(webhookPayload, result.decodedEnv);\n-      return new Response(JSON.stringify(\"OK\"), { status: 200, headers: { \"content-type\": \"application/json\" } });\n-    } catch (error) {\n-      return handleUncaughtError(error);\n-    }\n+    ).fetch(request, env, executionCtx);\n   },\n };\n-\n-function handleUncaughtError(errors: unknown) {\n-  console.error(errors);\n-  const status = 500;\n-  return new Response(JSON.stringify(errors), { status: status, headers: { \"content-type\": \"application/json\" } });\n-}\n-\n-// async function verifySignature(publicKeyPem: string, payload: unknown, signature: string) {",
+        "score": {
+          "reward": 0.483,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 100.24000000000002,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1819431433,
+        "content": "Seems very unusual that we have to wrap it in an object",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-pricing/pull/50#discussion_r1819431433",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -109,6 +109,6 @@ async function updateLabelColor(context: Context, labelName: string, color: stri\n       color,\n     });\n   } catch (e: unknown) {\n-    context.logger.error(\"Updating label color failed!\", e);\n+    context.logger.error(\"Updating label color failed!\", { e });",
+        "score": {
+          "reward": 0.768,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 81.85500000000002,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.7814499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2399303149,
+            "effect": {
+              "addition": 466,
+              "deletion": 246
+            },
+            "reward": 7.12,
+            "priority": 1
+          },
+          {
+            "reviewId": 2399685076,
+            "effect": {
+              "addition": 85,
+              "deletion": 89
+            },
+            "reward": 1.74,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-pricing/pull/50"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 6 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>8.86</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.217</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>2.076</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/daemon-pricing/pull/50\" target=\"_blank\" rel=\"noopener\">#50</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+466 -246</td><td>1</td><td>7.12</td></tr><tr><td>+85 -89</td><td>1</td><td>1.74</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/47#issuecomment-2428007686\" target=\"_blank\" rel=\"noopener\">Time estimate?</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.217</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-pricing/pull/50#discussion_r1819194273\" target=\"_blank\" rel=\"noopener\">@Ubiquityos what is &#96;--experimental-vm-modules&#96; and is i&hellip;</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.85</td><td>1</td><td>0.825</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-pricing/pull/50#discussion_r1819430470\" target=\"_blank\" rel=\"noopener\">Shouldn't this be enabled?</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.483</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-pricing/pull/50#discussion_r1819431433\" target=\"_blank\" rel=\"noopener\">Seems very unusual that we have to wrap it in an object</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.768</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 1.76,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 2428389010,
+        "content": "I can't seem to set labels. 15 minutes sounds about right",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/47#issuecomment-2428389010",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.496,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 94.995,
+            "syllables": 15,
+            "sentences": 2,
+            "score": 0.6500499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2602992162,
+        "content": "Modify this plugin to use the SDK",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/47",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 0.86,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 78.87285714285717,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.8112714285714283
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2442045992,
+        "content": "I was looking at the code right as you changed to `KERNEL_PUBLIC_KEY` and I couldn't find the reason why it's not working :D",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-pricing/pull/50#issuecomment-2442045992",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.404,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 87.30000000000003,
+            "syllables": 27,
+            "sentences": 1,
+            "score": 0.7269999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-pricing/pull/50"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 1.76 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>0.86</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.496</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>0.404</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/47\" target=\"_blank\" rel=\"noopener\">Modify this plugin to use the SDK</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>1</td><td>1</td><td>0.86</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/47#issuecomment-2428389010\" target=\"_blank\" rel=\"noopener\">I can't seem to set labels. 15 minutes sounds about right</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.496</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-pricing/pull/50#issuecomment-2442045992\" target=\"_blank\" rel=\"noopener\">I was looking at the code right as you changed to &#96;KERNEL_PU&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.404</td></tr></tbody></table></details>"
+  }
+}

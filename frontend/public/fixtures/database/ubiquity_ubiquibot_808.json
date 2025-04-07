@@ -1,0 +1,1822 @@
+{
+  "0x4007": {
+    "userId": 4975670,
+    "total": 119.6,
+    "task": {
+      "reward": 112.5,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 1909876004,
+        "content": "## **Settlements**\r\nRepresents the overarching record of a financial activity. Each entry can have references to either a credit or a debit.\r\n| Field    | Type         | Description                                    |\r\n|----------|--------------|------------------------------------------------|\r\n| `id`       | int8      | Unique identifier for the settlement.          |\r\n| `created`  | timestamptz     | Timestamp when the settlement was created.     |\r\n| `updated`  | timestamptz     | Timestamp when the settlement was last updated.|\r\n| `user_id`       | int8      | GitHub `id` of the user penalized.                         | 139262667                      |\r\n| `org_id`        | int8      | GitHub `id` of the organization.                           | 76412717                       |\r\n| `repo_id`       | int8      | GitHub `id` of the repository where the issue is located.  | 534616569                      |\r\n| `issue_id`      | int8      | GitHub `id` of the issue related to the penalty.           | 1868425596                     |\r\n| `credit_id` | int8      | Foreign key to the Credits table.              |\r\n| `debit_id`  | int8      | Foreign key to the Debits table.               |",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/808",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.65,
+          "formatting": {
+            "content": {
+              "h2": {
+                "score": 1,
+                "elementCount": 1
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 12
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 92,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 53.76202898550727,
+            "syllables": 158,
+            "sentences": 12,
+            "score": 0.9376202898550727
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1481783728,
+        "content": "Resolves #574\r\nRefactoring to clean up the codebase.\r\nBased on #643\r\n- Bounties -> Tasks\r\n- Removed all Telegram bot code\r\nSecrets\r\n`PROJECT_ID` -> `SUPABASE_PROJECT_ID`\r\nI'm not great at the database side. I realized I changed some property names and might have broken the permits database at 03466d6348592006c50731120f4222d457dd1c94\r\nIncluded most of @whilefoo's end to end tests but a few dont work like `allow` and `start/stop` those are commented out",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 2.45,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 9
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 63,
+            "wordValue": 0.1,
+            "result": 2.55
+          },
+          "readability": {
+            "fleschKincaid": 68.69142857142859,
+            "syllables": 87,
+            "sentences": 3,
+            "score": 0.9130857142857142
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1326503005,
+        "content": "Just rebuild this because its not worth solving these merge conflicts.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#discussion_r1326503005",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 80.30636363636367,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.7969363636363633
+          },
+          "multiplier": 0,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1361834544,
+        "content": "I'm working on your issue [now](https://github.com/pavlovcik/ubiquibot/compare/refactor/general...pavlovcik:ubiquibot:feat/event-context-array?expand=1), because I noticed it as well. Although I'm tempted to work on it in another pull request.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#discussion_r1361834544",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -0,0 +1,60 @@\n+import { Context } from \"probot\";\n+import { BotConfig } from \"../types\";\n+import { createAdapters } from \"../adapters\";\n+import { Logs } from \"../adapters/supabase\";\n+\n+class Runtime {",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 82.47550000000001,
+            "syllables": 33,
+            "sentences": 2,
+            "score": 0.7752449999999999
+          },
+          "multiplier": 0,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1420040290,
+        "content": "This is a hack to access the current commit hash only during Netlify build time, and saving it to be loaded in the runtime later.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#discussion_r1420040290",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -1,6 +1,5 @@\n [Settings]\n ID = \"d2668848-c2a6-411f-b884-004faee1942f\"\n [build]\n-functions = \"./.netlify/functions\"\n-# Specify is-core-module/package.json as an external dependency\n-ignore = \"is-core-module/package.json\"\n\\ No newline at end of file\n+  command = \"echo \\\"export const COMMIT_HASH = '$COMMIT_REF';\\\" > src/commit-hash.ts\"",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 63.020000000000024,
+            "syllables": 35,
+            "sentences": 1,
+            "score": 0.9697999999999998
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1420047006,
+        "content": "We should throw an error to force them to set a wallet address before self assignment.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#discussion_r1420047006",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -0,0 +1,43 @@\n+import Runtime from \"../../../../bindings/bot-runtime\";\n+import { Context } from \"../../../../types/context\";\n+import { Payload } from \"../../../../types/payload\";\n+\n+const options: Intl.DateTimeFormatOptions = {\n+  weekday: \"short\",\n+  month: \"short\",\n+  day: \"numeric\",\n+  hour: \"numeric\",\n+  minute: \"numeric\",\n+  timeZone: \"UTC\",\n+  timeZoneName: \"short\",\n+};\n+\n+export async function generateAssignmentComment(context: Context, payload: Payload, duration: number | null = null) {\n+  const runtime = Runtime.getState();\n+  const startTime = new Date().getTime();\n+  let endTime: null | Date = null;\n+  let deadline: null | string = null;\n+  if (duration) {\n+    endTime = new Date(startTime + duration * 1000);\n+    deadline = endTime.toLocaleString(\"en-US\", options);\n+  }\n+\n+  const issueCreationTime = payload.issue?.created_at;\n+  if (!issueCreationTime) {\n+    throw context.logger.fatal(\"Issue creation time is not defined\");\n+  }\n+\n+  return {\n+    daysElapsedSinceTaskCreation: Math.floor((startTime - new Date(issueCreationTime).getTime()) / 1000 / 60 / 60 / 24),\n+    deadline,\n+    registeredWallet:\n+      (await runtime.adapters.supabase.wallet.getAddress(payload.sender.id)) ||\n+      \"Please set your wallet address to use `/wallet 0x0000...0000`\",",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 74.27000000000001,
+            "syllables": 22,
+            "sentences": 1,
+            "score": 0.8573
+          },
+          "multiplier": 0,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1720134866,
+        "content": "This should have merged this in weeks ago. The number of outstanding pull requests is growing every month and this is unacceptable. Most of these code changes in this pull request were simple renaming of variables. It would have taken 15 minutes to review and approve @0xcodercrane \r\nI did a pass at it because I know the code I wrote, and I've also been looking at all the pull requests so I have sufficient context. I did it quickly in the GitHub UI though. Please ensure that it builds etc.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1720134866",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 91,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 76.16171245421245,
+            "syllables": 124,
+            "sentences": 6,
+            "score": 0.8383828754578755
+          },
+          "multiplier": 0,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1720953247,
+        "content": "@0xcodercrane In this case you should consider just regenerating the lock file and merging instead of kicking the can down the road. I'm not at home so I don't have the capability to from my phone.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1720953247",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 67.32894736842107,
+            "syllables": 54,
+            "sentences": 2,
+            "score": 0.9267105263157893
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1725069434,
+        "content": "Don't think it matters the order regarding conflicts but technically speaking this is branched off of #643 head.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1725069434",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 62.87631578947371,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.971236842105263
+          },
+          "multiplier": 0,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1734604181,
+        "content": "Will need to e2e test and merge",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1734604181",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 115.13000000000002,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1753403047,
+        "content": "Review comments at https://github.com/ubiquity/ubiquibot/pull/849",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1753403047",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 41.02000000000004,
+            "syllables": 19,
+            "sentences": 2,
+            "score": 0.8102000000000004
+          },
+          "multiplier": 0,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1774539892,
+        "content": "There are many dimensions of your proposal to consider so it's hard for me to choose with confidence. However based on the existing schema, I think that an RPC call is the right move. \nAlternatively we do the two API calls but there's a good chance that one or the other might fail which can lead to an inconsistent database state. As long as we have a maintainable solution for that, then we can do this approach as it might be simpler.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1774539892",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 84,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 68.69142857142859,
+            "syllables": 116,
+            "sentences": 4,
+            "score": 0.9130857142857142
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1780455280,
+        "content": "This should work on personal accounts (not just organizations) as well now. I forgot to mention I implemented that a week or two ago.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1780455280",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 71.28000000000002,
+            "syllables": 35,
+            "sentences": 2,
+            "score": 0.8871999999999999
+          },
+          "multiplier": 0,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1788227257,
+        "content": "Notes to self on incentive calculation architecture:\n- work backwards to determine essential data (design incentive tables for every type first)\n- consider firing off events to decouple the code",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1788227257",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 15.257857142857176,
+            "syllables": 54,
+            "sentences": 1,
+            "score": 0.5525785714285718
+          },
+          "multiplier": 0,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1794194756,
+        "content": "I think next week. It feels really close to being done but I'm adding in some time for unknowns during the rollout which I feel is inevitable.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1794194756",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 80.83214285714287,
+            "syllables": 37,
+            "sentences": 2,
+            "score": 0.7916785714285713
+          },
+          "multiplier": 0,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1839969023,
+        "content": "@wannacfuture its better that you branch from here instead of pushing to mine in case I want to work.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1839969023",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 76.2342105263158,
+            "syllables": 25,
+            "sentences": 1,
+            "score": 0.8376578947368419
+          },
+          "multiplier": 0,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1849352039,
+        "content": "I asked them to fix this. We will take a new approach. We will pass in minimal information (repository name, organization name, issue number) and then fetch the data from the GitHub API instead on the delegated compute side. \r\nI got started on it over at \r\nhttps://github.com/pavlovcik/ubiquibot-config/compare/feat/pass-less-info-in?expand=1\r\nhttps://github.com/pavlovcik/ubiquibot/compare/refactor/general...pavlovcik:ubiquibot:refactor/move-to-delegated-compute",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1849352039",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 46,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 51.80737500000001,
+            "syllables": 129,
+            "sentences": 8,
+            "score": 0.91807375
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1859382570,
+        "content": "You guys should make sure you're using the same version of Node. This is the only environment related concern that I can think of to explain why it works for gitcoindev and not whilefoo. It looks like we first must identify which version works and then enforce it here:\r\nhttps://github.com/ubiquity/ubiquibot/blob/c015fc791afdec32856d1c30855273b05b587a86/package.json#L88\r\nFor CI purposes I set the node version to LTS. @gitcoindev you should strive to make this work with this version of node.\r\nhttps://github.com/ubiquity/ubiquibot/blob/development/.nvmrc#L1",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1859382570",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 73,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 72.31814009661836,
+            "syllables": 135,
+            "sentences": 9,
+            "score": 0.8768185990338163
+          },
+          "multiplier": 0,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1949921669,
+        "content": "@gitcoindev maybe you can help fix the knip CI here",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1949921669",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 95.165,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.64835
+          },
+          "multiplier": 0,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 119.6 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>112.5</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.65</td></tr><tr><td>Review</td><td>Comment</td><td>18</td><td>2.45</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/808\" target=\"_blank\" rel=\"noopener\">## **Settlements**Represents the overarching record of a finan&hellip;</a></h6></td><td><details><summary>3.63</summary><pre>content:&#13;  content:&#13;    h2:&#13;      score: 1&#13;      elementCount: 1&#13;    p:&#13;      score: 0&#13;      elementCount: 12&#13;  result: 1&#13;regex:&#13;  wordCount: 92&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>1</td><td>1</td><td>4.65</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644\" target=\"_blank\" rel=\"noopener\">Resolves #574Refactoring to clean up the codebase.Based on #&hellip;</a></h6></td><td><details><summary>2.75</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 9&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 63&#13;  wordValue: 0.1&#13;  result: 2.55&#13;</pre></details></td><td>0.7</td><td>1</td><td>2.45</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#discussion_r1326503005\" target=\"_blank\" rel=\"noopener\">Just rebuild this because its not worth solving these merge conf&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.2</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#discussion_r1361834544\" target=\"_blank\" rel=\"noopener\">I'm working on your issue [now](https://github.com/pavlovcik/ubi&hellip;</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#discussion_r1420040290\" target=\"_blank\" rel=\"noopener\">This is a hack to access the current commit hash only during Net&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#discussion_r1420047006\" target=\"_blank\" rel=\"noopener\">We should throw an error to force them to set a wallet address b&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1720134866\" target=\"_blank\" rel=\"noopener\">This should have merged this in weeks ago. The number of outstan&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 91&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.4</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1720953247\" target=\"_blank\" rel=\"noopener\">@0xcodercrane In this case you should consider just regenerating&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1725069434\" target=\"_blank\" rel=\"noopener\">Don't think it matters the order regarding conflicts but technic&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1734604181\" target=\"_blank\" rel=\"noopener\">Will need to e2e test and merge</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.2</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1753403047\" target=\"_blank\" rel=\"noopener\">Review comments at https://github.com/ubiquity/ubiquibot/pull/849</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1774539892\" target=\"_blank\" rel=\"noopener\">There are many dimensions of your proposal to consider so it's h&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 84&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1780455280\" target=\"_blank\" rel=\"noopener\">This should work on personal accounts (not just organizations) a&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1788227257\" target=\"_blank\" rel=\"noopener\">Notes to self on incentive calculation architecture:- work back&hellip;</a></h6></td><td><details><summary>0.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.5</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1794194756\" target=\"_blank\" rel=\"noopener\">I think next week. It feels really close to being done but I'm a&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.1</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1839969023\" target=\"_blank\" rel=\"noopener\">@wannacfuture its better that you branch from here instead of pu&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.4</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1849352039\" target=\"_blank\" rel=\"noopener\">I asked them to fix this. We will take a new approach. We will p&hellip;</a></h6></td><td><details><summary>2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 46&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1859382570\" target=\"_blank\" rel=\"noopener\">You guys should make sure you're using the same version of Node.&hellip;</a></h6></td><td><details><summary>2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 73&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1949921669\" target=\"_blank\" rel=\"noopener\">@gitcoindev maybe you can help fix the knip CI here</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>3</td><td>0</td></tr></tbody></table></details>"
+  },
+  "seprintour": {
+    "total": 5.685,
+    "userId": 51956013,
+    "comments": [
+      {
+        "id": 1733515599,
+        "content": "@GaryThisSidee This depends on the Credit and Debit table, you'd have to set up a constraint and make sure it can only have a credit id or a debit id (not both)\r\nfrom the description: https://github.com/ubiquity/ubiquibot/issues/787#issue-1904968117\r\nCredit and Debit have to merged and then you need to add a function to create a table in `permit`, `credit` and `settlement` tables for every permit generated",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/808#issuecomment-1733515599",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 3.33,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 61,
+            "wordValue": 0.1,
+            "result": 2.53
+          },
+          "readability": {
+            "fleschKincaid": 46.82714285714286,
+            "syllables": 103,
+            "sentences": 2,
+            "score": 0.8682714285714286
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1733518857,
+        "content": "So you'd have to wait for #810 and #811, and maybe #819 to be merged in for this to work",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/808#issuecomment-1733518857",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 1.323,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 100.92000000000002,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1733653318,
+        "content": "Yea, you can start working on it.. It also depends on #811 though..\nThere's a field for permitId",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/808#issuecomment-1733653318",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 1.032,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 93.54350877192984,
+            "syllables": 24,
+            "sentences": 3,
+            "score": 0.6645649122807016
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 5.685 XP ]</a>&nbsp;</h3><h6>@seprintour</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>3</td><td>5.685</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/808#issuecomment-1733515599\" target=\"_blank\" rel=\"noopener\">@GaryThisSidee This depends on the Credit and Debit table, you'd&hellip;</a></h6></td><td><details><summary>3.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 61&#13;  wordValue: 0.1&#13;  result: 2.53&#13;</pre></details></td><td>1</td><td>3</td><td>3.33</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/808#issuecomment-1733518857\" target=\"_blank\" rel=\"noopener\">So you'd have to wait for #810 and #811, and maybe #819 to be me&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.9</td><td>3</td><td>1.323</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/808#issuecomment-1733653318\" target=\"_blank\" rel=\"noopener\">Yea, you can start working on it.. It also depends on #811 thoug&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.032</td></tr></tbody></table></details>"
+  },
+  "GaryThisSidee": {
+    "total": 0,
+    "userId": 144094016,
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644"
+      }
+    ]
+  },
+  "0xcodercrane": {
+    "total": 2.682,
+    "userId": 108444211,
+    "comments": [
+      {
+        "id": 1628513965,
+        "content": "We shouldn't delete yarn.lock because it's being used in github ci / netlify ci. Due to permission, we couldn't generate it on both platform. That's why we've been keeping it from the beginning.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#pullrequestreview-1628513965",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.56,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 83.65039473684212,
+            "syllables": 51,
+            "sentences": 4,
+            "score": 0.7634960526315788
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1327010342,
+        "content": "but shouldn't delete it from the repo",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#discussion_r1327010342",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 0.414,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 92.965,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.67035
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1722669398,
+        "content": "should I merge https://github.com/ubiquity/ubiquibot/pull/643 in prior to this PR? @pavlovcik",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1722669398",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.708,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 69.23416666666668,
+            "syllables": 25,
+            "sentences": 3,
+            "score": 0.9076583333333332
+          },
+          "multiplier": 0.25,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1628513965,
+            "effect": {
+              "addition": 0,
+              "deletion": 0
+            },
+            "reward": 0,
+            "priority": 3
+          },
+          {
+            "reviewId": 1628515130,
+            "effect": {
+              "addition": 0,
+              "deletion": 0
+            },
+            "reward": 0,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 2.682 XP ]</a>&nbsp;</h3><h6>@0xcodercrane</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>-</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>2.682</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquibot/pull/644\" target=\"_blank\" rel=\"noopener\">#644</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+0 -0</td><td>3</td><td>0</td></tr><tr><td>+0 -0</td><td>3</td><td>0</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#pullrequestreview-1628513965\" target=\"_blank\" rel=\"noopener\">We shouldn't delete yarn.lock because it's being used in github &hellip;</a></h6></td><td><details><summary>2.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.56</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#discussion_r1327010342\" target=\"_blank\" rel=\"noopener\">but shouldn't delete it from the repo</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.6</td><td>3</td><td>0.414</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1722669398\" target=\"_blank\" rel=\"noopener\">should I merge https://github.com/ubiquity/ubiquibot/pull/643 in&hellip;</a></h6></td><td><details><summary>1.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.4</td><td>3</td><td>0.708</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 28.338,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 1361780246,
+        "content": "this will still cause the issue described in #732 because there's only one instance of Runtime and multiple requests will override each other. this is fine for adapters and logger because they should only be initialized once, but event context and config should not be global/singleton",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#discussion_r1361780246",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,60 @@\n+import { Context } from \"probot\";\n+import { BotConfig } from \"../types\";\n+import { createAdapters } from \"../adapters\";\n+import { Logs } from \"../adapters/supabase\";\n+\n+class Runtime {",
+        "score": {
+          "reward": 8.1,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 48,
+            "wordValue": 0.1,
+            "result": 2.35
+          },
+          "readability": {
+            "fleschKincaid": 52.05000000000001,
+            "syllables": 74,
+            "sentences": 2,
+            "score": 0.9205000000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1849065264,
+        "content": "I'm trying to use the new version with workflow dispatcher and I'm getting an error: `{\"message\":\"inputs are too large.\",\"documentation_url\":\"https://docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event\"}`. \r\nIt's trying to pass all comments from the issue and PR so for large issues this is gonna be a problem.\r\n@wannacfuture",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1849065264",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 9.48,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 40,
+            "wordValue": 0.1,
+            "result": 2.18
+          },
+          "readability": {
+            "fleschKincaid": 79.09166666666668,
+            "syllables": 54,
+            "sentences": 3,
+            "score": 0.8090833333333332
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1849889154,
+        "content": "There also seems to be an issue with ubiquibot-logger\r\n```\r\nconst ubiquibot_logger_1 = require(\"ubiquibot-logger\");\r\n                           ^\r\nError [ERR_REQUIRE_ESM]: require() of ES Module /Users/whilefoo/ubiquity/ubiquibot/node_modules/ubiquibot-logger/dist/logs.js from /Users/whilefoo/ubiquity/ubiquibot/dist/adapters/adapters.js not supported.\r\nInstead change the require of logs.js in /Users/whilefoo/ubiquity/ubiquibot/dist/adapters/adapters.js to a dynamic import() which is available in all CommonJS modules.\r\n```",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1849889154",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.159,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 61.32500000000002,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.9867499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1850189172,
+        "content": "it is imported with `import`\r\nhttps://github.com/ubiquity/ubiquibot/blob/3ca8fada16fcfef43b3a8409d1b4f7e343afda4c/src/adapters/adapters.ts#L5\r\nThe problem is probably because `ubiquibot-logger` package is not converted to CommonJS because TS transpiles our code from ESM to CommonJS",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1850189172",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.922,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 39.55500000000001,
+            "syllables": 66,
+            "sentences": 3,
+            "score": 0.7955500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1859155851,
+        "content": "I tried v0.3.1 but it's still the same error",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1859155851",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.215,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 111.12500000000001,
+            "syllables": 13,
+            "sentences": 3,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1872954224,
+        "content": "@gitcoindev it's working now, thanks!",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1872954224",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.462,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 73.84500000000001,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.8615499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1681786964,
+            "effect": {
+              "addition": 0,
+              "deletion": 0
+            },
+            "reward": 0,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 28.338 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>-</td></tr><tr><td>Review</td><td>Comment</td><td>6</td><td>28.338</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquibot/pull/644\" target=\"_blank\" rel=\"noopener\">#644</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+0 -0</td><td>3</td><td>0</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#discussion_r1361780246\" target=\"_blank\" rel=\"noopener\">this will still cause the issue described in #732 because there'&hellip;</a></h6></td><td><details><summary>2.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 48&#13;  wordValue: 0.1&#13;  result: 2.35&#13;</pre></details></td><td>0.9</td><td>3</td><td>8.1</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1849065264\" target=\"_blank\" rel=\"noopener\">I'm trying to use the new version with workflow dispatcher and I&hellip;</a></h6></td><td><details><summary>3.18</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 40&#13;  wordValue: 0.1&#13;  result: 2.18&#13;</pre></details></td><td>0.8</td><td>3</td><td>9.48</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1849889154\" target=\"_blank\" rel=\"noopener\">There also seems to be an issue with ubiquibot-logger&#96;&#96&hellip;</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.9</td><td>3</td><td>3.159</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1850189172\" target=\"_blank\" rel=\"noopener\">it is imported with &#96;import&#96;https://github.com/ubiquit&hellip;</a></h6></td><td><details><summary>2.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.6</td><td>3</td><td>5.922</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1859155851\" target=\"_blank\" rel=\"noopener\">I tried v0.3.1 but it's still the same error</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.215</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1872954224\" target=\"_blank\" rel=\"noopener\">@gitcoindev it's working now, thanks!</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.462</td></tr></tbody></table></details>"
+  },
+  "wannacfuture": {
+    "total": 112.5,
+    "userId": 119157793,
+    "comments": [
+      {
+        "id": 1410695609,
+        "content": "```suggestion\r\n      if (response) {\r\n        const uncompressedComment = zlib.gunzipSync(Buffer.from(response));\r\n```",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#discussion_r1410695609",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -1,146 +1,266 @@\n-import { Context } from \"probot\";\n-import { createAdapters } from \"../adapters\";\n+import OpenAI from \"openai\";\n+import { Context as ProbotContext } from \"probot\";\n+import zlib from \"zlib\";\n+import { createAdapters, supabaseClient } from \"../adapters/adapters\";\n+import { LogMessage, LogReturn, Logs } from \"../adapters/supabase/helpers/tables/logs\";\n import { processors, wildcardProcessors } from \"../handlers/processors\";\n-import { shouldSkip } from \"../helpers\";\n-import { BotConfig, GithubEvent, Payload, PayloadSchema, LogLevel } from \"../types\";\n-import { Adapters } from \"../types/adapters\";\n-import { ajv } from \"../utils\";\n-import { loadConfig } from \"./config\";\n-import { GitHubLogger } from \"../adapters/supabase\";\n-import { validateConfigChange } from \"../handlers/push\";\n-\n-let botContext: Context = {} as Context;\n-export const getBotContext = () => botContext;\n-\n-let botConfig: BotConfig = {} as BotConfig;\n-export const getBotConfig = () => botConfig;\n-\n-let adapters: Adapters = {} as Adapters;\n-export const getAdapters = () => adapters;\n-\n-export type Logger = {\n-  info: (msg: string | object, options?: JSON) => void;\n-  debug: (msg: string | object, options?: JSON) => void;\n-  warn: (msg: string | object, options?: JSON) => void;\n-  error: (msg: string | object, options?: JSON) => void;\n-};\n-\n-let logger: Logger;\n-export const getLogger = (): Logger => logger;\n-\n-const NO_VALIDATION = [GithubEvent.INSTALLATION_ADDED_EVENT as string, GithubEvent.PUSH_EVENT as string];\n-\n-export const bindEvents = async (context: Context): Promise<void> => {\n-  const { id, name } = context;\n-  botContext = context;\n-  const payload = context.payload as Payload;\n-  const allowedEvents = Object.values(GithubEvent) as string[];\n-  const eventName = payload.action ? `${name}.${payload.action}` : name; // some events wont have actions as this grows\n-\n-  let botConfigError;\n-  try {\n-    botConfig = await loadConfig(context);\n-  } catch (err) {\n-    botConfigError = err;\n-  }\n+import { validateConfigChange } from \"../handlers/push/push\";\n+import structuredMetadata from \"../handlers/shared/structured-metadata\";\n+import { BotConfig } from \"../types/configuration-types\";\n \n-  adapters = createAdapters(botConfig);\n+import { addCommentToIssue } from \"../helpers/issue\";\n+import { shouldSkip } from \"../helpers/shared\";\n+import { Context } from \"../types/context\";\n+import {\n+  HandlerReturnValuesNoVoid,\n+  MainActionHandler,\n+  PostActionHandler,\n+  PreActionHandler,\n+  WildCardHandler,\n+} from \"../types/handlers\";\n+import { GitHubEvent, Payload, payloadSchema } from \"../types/payload\";\n+import { ajv } from \"../utils/ajv\";\n+import { generateConfiguration } from \"../utils/generate-configuration\";\n+import Runtime from \"./bot-runtime\";\n+import { env } from \"./env\";\n \n-  const options = {\n-    app: \"UbiquiBot\",\n-    // level: botConfig.log.level,\n-  };\n+const allowedEvents = Object.values(GitHubEvent) as string[];\n \n-  logger = new GitHubLogger(\n-    options.app,\n-    botConfig?.log?.logEnvironment ?? \"development\",\n-    botConfig?.log?.level ?? LogLevel.DEBUG,\n-    botConfig?.log?.retryLimit ?? 0,\n-    botConfig.logNotification\n-  ); // contributors will see logs in console while on development env\n-  if (!logger) {\n-    return;\n-  }\n+const NO_VALIDATION = [GitHubEvent.INSTALLATION_ADDED_EVENT, GitHubEvent.PUSH_EVENT] as string[];\n+type PreHandlerWithType = { type: string; actions: PreActionHandler[] };\n+type HandlerWithType = { type: string; actions: MainActionHandler[] };\n+type WildCardHandlerWithType = { type: string; actions: WildCardHandler[] };\n+type PostHandlerWithType = { type: string; actions: PostActionHandler[] };\n+type AllHandlersWithTypes = PreHandlerWithType | HandlerWithType | PostHandlerWithType;\n+type AllHandlers = PreActionHandler | MainActionHandler | PostActionHandler;\n \n-  if (botConfigError) {\n-    logger.error(botConfigError.toString());\n-    if (eventName === GithubEvent.PUSH_EVENT) {\n-      await validateConfigChange();\n-    }\n-    return;\n-  }\n+const validatePayload = ajv.compile(payloadSchema);\n \n-  // Create adapters for telegram, supabase, twitter, discord, etc\n-  logger.info(\"Creating adapters for supabase, telegram, twitter, etc...\");\n+const runtime = Runtime.getState();\n+runtime.adapters = createAdapters();\n+runtime.logger = runtime.adapters.supabase.logs;\n \n-  logger.info(\n-    `Config loaded! config: ${JSON.stringify({\n-      price: botConfig.price,\n-      unassign: botConfig.unassign,\n-      mode: botConfig.mode,\n-      log: botConfig.log,\n-      wallet: botConfig.wallet,\n-    })}`\n-  );\n+export async function bindEvents(eventContext: ProbotContext) {\n+  const payload = eventContext.payload as Payload;\n+  const eventName = payload?.action ? `${eventContext.name}.${payload?.action}` : eventContext.name; // some events wont have actions as this grows\n+  const logger = new Logs(supabaseClient, env.LOG_ENVIRONMENT, env.LOG_RETRY_LIMIT, env.LOG_LEVEL, eventContext);\n \n-  logger.info(`Started binding events... id: ${id}, name: ${eventName}, allowedEvents: ${allowedEvents}`);\n+  logger.info(\"Event received\", { id: eventContext.id, name: eventName });\n \n-  if (!allowedEvents.includes(eventName)) {\n+  if (!allowedEvents.includes(eventName) && eventContext.name !== \"repository_dispatch\") {\n     // just check if its on the watch list\n-    logger.info(`Skipping the event. reason: not configured`);\n-    return;\n+    return logger.info(`Skipping the event. reason: not configured`);\n   }\n \n   // Skip validation for installation event and push\n   if (!NO_VALIDATION.includes(eventName)) {\n     // Validate payload\n-    const validate = ajv.compile(PayloadSchema);\n-    const valid = validate(payload);\n-    if (!valid) {\n-      logger.info(\"Payload schema validation failed!!!\", payload);\n-      if (validate.errors) logger.warn(validate.errors);\n-      return;\n+    const isValid = validatePayload(payload);\n+    if (!isValid && validatePayload.errors) {\n+      return logger.error(\"Payload schema validation failed!\", validatePayload.errors);\n     }\n \n     // Check if we should skip the event\n-    const { skip, reason } = shouldSkip();\n-    if (skip) {\n-      logger.info(`Skipping the event. reason: ${reason}`);\n-      return;\n+    const should = shouldSkip(eventContext);\n+    if (should.stop) {\n+      return logger.info(\"Skipping the event.\", { reason: should.reason });\n     }\n   }\n \n-  // Get the handlers for the action\n-  const handlers = processors[eventName];\n-  if (!handlers) {\n-    logger.warn(`No handler configured for event: ${eventName}`);\n+  if (eventName === GitHubEvent.PUSH_EVENT) {\n+    await validateConfigChange(eventContext);\n+  }\n+\n+  let botConfig: BotConfig;\n+  try {\n+    botConfig = await generateConfiguration(eventContext);\n+  } catch (error) {\n     return;\n   }\n+  const context: Context = {\n+    event: eventContext,\n+    config: botConfig,\n+    openAi: botConfig.keys.openAi ? new OpenAI({ apiKey: botConfig.keys.openAi }) : null,\n+    logger: logger,\n+    payload: payload,\n+    octokit: eventContext.octokit,\n+  };\n+\n+  if (!context.config.keys.evmPrivateEncrypted) {\n+    context.logger.warn(\"No EVM private key found\");\n+  }\n \n-  const { pre, action, post } = handlers;\n-  // Run pre-handlers\n-  logger.info(`Running pre handlers: ${pre.map((fn) => fn.name)}, event: ${eventName}`);\n-  for (const preAction of pre) {\n-    await preAction();\n+  if (!context.logger) {\n+    throw new Error(\"Failed to create logger\");\n   }\n-  // Run main handlers\n-  logger.info(`Running main handlers: ${action.map((fn) => fn.name)}, event: ${eventName}`);\n-  for (const mainAction of action) {\n-    await mainAction();\n+\n+  if (eventContext.name === GitHubEvent.REPOSITORY_DISPATCH) {\n+    const dispatchPayload = payload as any;\n+    if (payload.action === \"issueClosed\") {\n+      //This is response for issueClosed request\n+      const response = dispatchPayload.client_payload.result;\n+      if (response.comment as Comment) {\n+        const uncompressedComment = zlib.gunzipSync(Buffer.from(response.comment));",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1718635536,
+        "content": "should I resolve the conflicts? @pavlovcik",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1718635536",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.12,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 62.79000000000002,
+            "syllables": 10,
+            "sentences": 2,
+            "score": 0.9720999999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1757503648,
+            "effect": {
+              "addition": 4711,
+              "deletion": 2799
+            },
+            "reward": 225.3,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 112.5 XP ]</a>&nbsp;</h3><h6>@wannacfuture</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>225.3</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>0.12</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquibot/pull/644\" target=\"_blank\" rel=\"noopener\">#644</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+4711 -2799</td><td>3</td><td>225.3</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#discussion_r1410695609\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionif (response) {const &hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1718635536\" target=\"_blank\" rel=\"noopener\">should I resolve the conflicts? @pavlovcik</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.12</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 70.53,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 1771338153,
+        "content": "@pavlovcik \r\nThere is the supabase [diff tool](https://supabase.com/docs/reference/cli/supabase-db-diff) which can create \"diff\" migrations between DB schemas.\r\nSo I took your local DB dump (which you DMed me) and created this [migration script](https://github.com/rndquu/bounty-bot/blob/f09ba3a1363c01417fc236b1242a7c32f96603b2/supabase/migrations/20231019155701_refactor_general.sql).\r\nHere is how I generated it:\r\n1. Start supabase locally (migrations are applied automatically on start)\r\n```\r\nyarn supabase start\r\n```\r\n2. Create a remote supabase project at https://supabase.com/dashboard/projects\r\n3. Connect to a remote DB (at supabase) with [pgAdmin](https://www.pgadmin.org/)\r\n4. Restore DB from a sql dump of the updated DB schema. Select the `public` schema in `pgAdmin`, open `psql` tool from `pgAdmin` and run sql dump script via `\\i  /Users/username/Downloads/updated_schema.sql`.\r\n5. Link a remote project\r\n```\r\nyarn supabase link -p PASSWORD --project-ref PROJECT_REF\r\n``` \r\n6. Run the diff tool between a local DB (without changes) and a remote DB from supabase (with updated schema)\r\n```\r\nyarn supabase db diff --linked -f refactor_general\r\n```\r\n7. Apply newly generate \"diff\" migration\r\n```\r\nyarn supabase db reset\r\n```\r\nThis \"diff\" migration should be generated and debugged when you're finished with the current refactor. So when you're finished you could share a sql dump of your final DB schema and I would generate and debug the \"diff\" migration.\r\nTomorrow I will check [supabase triggers](https://supabase.com/docs/guides/database/postgres/triggers) and how we can use them to populate the `locations` (i.e. metadata) table.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1771338153",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 26.892,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 10
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 7
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 5
+              }
+            },
+            "result": 5.7
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 173,
+            "wordValue": 0.1,
+            "result": 2
+          },
+          "readability": {
+            "fleschKincaid": 62.3432808988764,
+            "syllables": 266,
+            "sentences": 10,
+            "score": 0.976567191011236
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1772995713,
+        "content": "@pavlovcik \r\nRegarding the `locations` and metadata.\r\nThis is how the schema looks like right now:\r\n<img width=\"1117\" alt=\"2be1a71c-1239-4033-856a-7586359e9691\" src=\"https://github.com/ubiquity/ubiquibot/assets/119500907/dcd7359d-4808-48b3-90f4-3966bb4b90e7\">\r\nEach table has the `location_id` field which is a reference to the `location` entity which is basically some fields from the github event that caused the row to be inserted in the original table. \r\nWe have 3 DB operations which cause an update:\r\n1. create\r\n2. update\r\n3. delete\r\nThe issue with the current schema is that it reflects only `create` DB operations. For example, when user registers a new wallet then a new corresponding `location` entity is created and `wallet.location_id` is populated. But when a user updates a wallet then it is not clear what we should do with the `wallet.location_id` field, rewrite it or keep the old value.\r\nIt is weird, but supabase does not support insertions with relations which leaves us with 3 options:\r\n1. Use postgres [RPC calls](https://supabase.com/docs/reference/javascript/rpc). So for each model update we should write a separate RPC method which is really hard to a maintain.\r\n2. Use postgres [triggers](https://supabase.com/docs/guides/database/postgres/triggers). This approach adds redundancy because for each table we should add a new virtual field `location` which we should keep in mind on all create/update/delete operations (ex: `await supabase.from(\"wallets\").upsert({...walletObj, ...locationObj}`)\r\n3. Use 2 separate API calls\r\nThe original issue sounds like \"we should save github event metadata to all DB create/update/delete operations\". We could do it this way:\r\n1. Remove `location_id` from all of the tables\r\n2. Add `uuid` field to all of the tables\r\n3. Modify the `locations` table to have the following fields: `id serial`, `entity_uuid uuid`, `operation text`, `github_event jsonb`\r\n4. Hook into the original `supabase client SDK` to send a 2nd API call to the `locations` table on each create/update/delete operation\r\n## Example (user registers a new wallet):\r\n### wallet\r\n| uuid  | address |\r\n| ------------- | ------------- |\r\n| 1111-2222  | 0x01  |\r\n### locations\r\n| id  | entity_uuid | operation | github_event |\r\n| ------------- | ------------- | --- | --- |\r\n| 1  | 1111-2222  | create | `{node_id:1,node_html:\"https://github.com\",issue_id:3,etc...}` |\r\n## Example (user updates a wallet):\r\n### wallet\r\n| uuid  | address |\r\n| ------------- | ------------- |\r\n| 1111-2222  | 0x02  |\r\n### locations\r\n| id  | entity_uuid | operation | github_event |\r\n| ------------- | ------------- | --- | --- |\r\n| 1  | 1111-2222  | create | `{node_id:1,node_html:\"https://github.com\",issue_id:3,etc...}` |\r\n| 2  | 1111-2222  | update | `{node_id:2,node_html:\"https://github.com\",issue_id:3,etc...}` |\r\nOverall this issue of tracking corresponding metadata (i.e. github event context object) can be safely moved to a separate issue in order not to blow the current PR.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1772995713",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 42.18,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 33
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 10
+              },
+              "h2": {
+                "score": 1,
+                "elementCount": 2
+              },
+              "h3": {
+                "score": 1,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 4
+              }
+            },
+            "result": 11
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 339,
+            "wordValue": 0.1,
+            "result": 0.67
+          },
+          "readability": {
+            "fleschKincaid": 49.276153846153846,
+            "syllables": 540,
+            "sentences": 13,
+            "score": 0.8927615384615385
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 1774543320,
+        "content": "We can start simple for now and then implement some retry strategy for failed metadata updates.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1774543320",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.458,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 53.120000000000005,
+            "syllables": 26,
+            "sentences": 1,
+            "score": 0.9312
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 70.53 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>3</td><td>70.53</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1771338153\" target=\"_blank\" rel=\"noopener\">@pavlovcik There is the supabase [diff tool](https://supabase.&hellip;</a></h6></td><td><details><summary>7.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 10&#13;    ol:&#13;      score: 0&#13;      elementCount: 4&#13;    li:&#13;      score: 0.1&#13;      elementCount: 7&#13;    a:&#13;      score: 1&#13;      elementCount: 5&#13;  result: 5.7&#13;regex:&#13;  wordCount: 173&#13;  wordValue: 0.1&#13;  result: 2&#13;</pre></details></td><td>0.9</td><td>3</td><td>26.892</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1772995713\" target=\"_blank\" rel=\"noopener\">@pavlovcik Regarding the &#96;locations&#96; and metadata.Th&hellip;</a></h6></td><td><details><summary>11.67</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 33&#13;    ol:&#13;      score: 0&#13;      elementCount: 3&#13;    li:&#13;      score: 0.1&#13;      elementCount: 10&#13;    h2:&#13;      score: 1&#13;      elementCount: 2&#13;    h3:&#13;      score: 1&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 4&#13;  result: 11&#13;regex:&#13;  wordCount: 339&#13;  wordValue: 0.1&#13;  result: 0.67&#13;</pre></details></td><td>0.95</td><td>3</td><td>42.18</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1774543320\" target=\"_blank\" rel=\"noopener\">We can start simple for now and then implement some retry strate&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.458</td></tr></tbody></table></details>"
+  },
+  "EtherealGlow": {
+    "total": 0.723,
+    "userId": 139999816,
+    "comments": [
+      {
+        "id": 1783856208,
+        "content": "I pray for the refactor to be done quickly 🙏",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1783856208",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.078,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 84.90000000000003,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.7509999999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1792385039,
+        "content": "Do you guys have any estimate on when the refactor will be done",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1792385039",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.306,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 83.0092307692308,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0.7699076923076921
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1807904469,
+        "content": "Any new estimate for how much time is left?",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1807904469",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.225,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 94.30000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.6569999999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1823077738,
+        "content": "🙏",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1823077738",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 0.25,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 1840080819,
+        "content": "When will the refactor be done 😭",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1840080819",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.114,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 87.94500000000002,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.7205499999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 0.723 XP ]</a>&nbsp;</h3><h6>@EtherealGlow</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>5</td><td>0.723</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1783856208\" target=\"_blank\" rel=\"noopener\">I pray for the refactor to be done quickly 🙏</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.078</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1792385039\" target=\"_blank\" rel=\"noopener\">Do you guys have any estimate on when the refactor will be done</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.306</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1807904469\" target=\"_blank\" rel=\"noopener\">Any new estimate for how much time is left?</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.225</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1823077738\" target=\"_blank\" rel=\"noopener\">🙏</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1840080819\" target=\"_blank\" rel=\"noopener\">When will the refactor be done 😭</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.2</td><td>3</td><td>0.114</td></tr></tbody></table></details>"
+  },
+  "gitcoindev": {
+    "total": 12.006,
+    "userId": 88761781,
+    "comments": [
+      {
+        "id": 1849925306,
+        "content": "Hi @whilefoo , the `ubiquibot-logger` is an ESM module https://nodejs.org/api/esm.html#modules-ecmascript-modules which is now a default, please import the module using `import` statement instead of `require` and the error should be gone.\r\nhttps://medium.com/@chamin.njay/require-vs-import-in-node-js-abdf5427d7b0",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1849925306",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 3.186,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 71.08416666666669,
+            "syllables": 71,
+            "sentences": 6,
+            "score": 0.889158333333333
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1850313688,
+        "content": "I see, I will check today / tomorrow if this module can be shipped as a both CommonJS and ESM package and update it.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1850313688",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.765,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 69.46391304347827,
+            "syllables": 31,
+            "sentences": 1,
+            "score": 0.9053608695652173
+          },
+          "multiplier": 0.25,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1850924443,
+        "content": "Hi @whilefoo I checked in `tsconfig.json` of the ubiquibot-logger module, `esModuleInterop` is enabled:\r\n\"esModuleInterop\": true /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */,\r\nFollowing the article https://dev.to/tigawanna/building-and-publishing-npm-packages-with-typescript-multiple-entry-points-tailwind-tsup-and-npm-9e7 I enabled 'require' and 'import' in tsup exports and published v0.3.1 , let's check if this solves the import error.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1850924443",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 2.568,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 57,
+            "wordValue": 0.1,
+            "result": 2.48
+          },
+          "readability": {
+            "fleschKincaid": 35.909912280701775,
+            "syllables": 142,
+            "sentences": 6,
+            "score": 0.7590991228070177
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1859205609,
+        "content": "hi @whilefoo I will give this priority and try to fix till Monday EOD.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1859205609",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.324,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 77.81071428571428,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.8218928571428572
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1865255430,
+        "content": "@whilefoo I am on v0.3.4 already, so far no luck but closer and understand now where it fails as I can reproduce easily now on E2E tests on my fork's experimental branch based on refactor/general. I will continue tomorrow on this and try to provide a proper solution.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1865255430",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.386,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 52,
+            "wordValue": 0.1,
+            "result": 2.41
+          },
+          "readability": {
+            "fleschKincaid": 65.11307692307696,
+            "syllables": 79,
+            "sentences": 4,
+            "score": 0.9488692307692304
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1866926749,
+        "content": "hi @whilefoo could you please check ubiquibot-logger v0.3.5  ? I switched to cjs module format in tsup config, the same format as in ubiquibot's tsconfig.json `\"module\": \"commonjs\"` setting and I no longer see the import error in my fork's E2E tests. If you can still reproduce the error with v0.3.5, please guide me how to reproduce and/ or find the error logs and I will be happy to help and fix this.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1866926749",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 2.16,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 77,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 83.89939123376627,
+            "syllables": 103,
+            "sentences": 8,
+            "score": 0.7610060876623373
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1866934804,
+        "content": "Btw, about @pavlovcik 's last comment, I agree that we should sync all repositories to use v20.3.0 LTS node version if this was selected for development and use the same version both in workspace settings and GitHub actions if possible. Just a side note: for ubiquibot-logger I checked v20.3.0 and v20.10.0.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1866934804",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.617,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 58,
+            "wordValue": 0.1,
+            "result": 2.49
+          },
+          "readability": {
+            "fleschKincaid": 78.41073275862071,
+            "syllables": 83,
+            "sentences": 8,
+            "score": 0.8158926724137929
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 12.006 XP ]</a>&nbsp;</h3><h6>@gitcoindev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>7</td><td>12.006</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1849925306\" target=\"_blank\" rel=\"noopener\">Hi @whilefoo , the &#96;ubiquibot-logger&#96; is an ESM module h&hellip;</a></h6></td><td><details><summary>3.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.9</td><td>3</td><td>3.186</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1850313688\" target=\"_blank\" rel=\"noopener\">I see, I will check today / tomorrow if this module can be shipp&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.5</td><td>3</td><td>0.765</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1850924443\" target=\"_blank\" rel=\"noopener\">Hi @whilefoo I checked in &#96;tsconfig.json&#96; of the ubiquib&hellip;</a></h6></td><td><details><summary>3.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 57&#13;  wordValue: 0.1&#13;  result: 2.48&#13;</pre></details></td><td>0.8</td><td>3</td><td>2.568</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1859205609\" target=\"_blank\" rel=\"noopener\">hi @whilefoo I will give this priority and try to fix till Monda&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.324</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1865255430\" target=\"_blank\" rel=\"noopener\">@whilefoo I am on v0.3.4 already, so far no luck but closer and &hellip;</a></h6></td><td><details><summary>2.41</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 52&#13;  wordValue: 0.1&#13;  result: 2.41&#13;</pre></details></td><td>0.6</td><td>3</td><td>1.386</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1866926749\" target=\"_blank\" rel=\"noopener\">hi @whilefoo could you please check ubiquibot-logger v0.3.5  ? I&hellip;</a></h6></td><td><details><summary>2.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 77&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.9</td><td>3</td><td>2.16</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1866934804\" target=\"_blank\" rel=\"noopener\">Btw, about @pavlovcik 's last comment, I agree that we should sy&hellip;</a></h6></td><td><details><summary>2.49</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 58&#13;  wordValue: 0.1&#13;  result: 2.49&#13;</pre></details></td><td>0.7</td><td>3</td><td>1.617</td></tr></tbody></table></details>"
+  },
+  "BeanieMen": {
+    "total": 0,
+    "userId": 62057938,
+    "comments": [
+      {
+        "id": 1949927579,
+        "content": "🎉",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644#issuecomment-1949927579",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 0.25,
+          "relevance": 0
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/ubiquibot/pull/644"
+      }
+    ]
+  }
+}

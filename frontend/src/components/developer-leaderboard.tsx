@@ -19,6 +19,10 @@ import "./leaderboard-styles.css"; // Import styles
 
 const REPO_COLORS: Record<string, string> = {}; // Will be filled dynamically
 
+function displayRepoName(repoId: string): string {
+  return repoId.replace("_", "/");
+}
+
 // Helper to generate a color palette
 function generateColor(index: number): string {
   const colors = [
@@ -181,7 +185,7 @@ export function DeveloperLeaderboard() {
               <option value="">All Repositories</option>
               {availableRepositories.map(repo => (
                 <option key={repo} value={repo}>
-                  {repo.split('/').pop() || repo}
+                  {displayRepoName(repo)}
                 </option>
               ))}
             </select>
@@ -255,11 +259,11 @@ export function DeveloperLeaderboard() {
             disabled={isLoading}
           >
             <option value="">All Repositories</option>
-            {availableRepositories.map(repo => (
-              <option key={repo} value={repo}>
-                {repo.split('/').pop() || repo} {/* Show just repo name, not full path */}
-              </option>
-            ))}
+              {availableRepositories.map(repo => (
+                <option key={repo} value={repo}>
+                  {displayRepoName(repo)}
+                </option>
+              ))}
           </select>
         </label>
         {/* Time Range Radio Buttons */}
@@ -332,7 +336,7 @@ export function DeveloperLeaderboard() {
                   dataKey={`xpByRepository.${sanitizedRepo}`}
                   stackId="a"
                   fill={REPO_COLORS[sanitizedRepo]}
-                  name={repo.split('/').pop() || repo}
+                  name={displayRepoName(repo)}
                 />
               );
             })}

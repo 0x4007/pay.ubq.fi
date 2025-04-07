@@ -1,0 +1,298 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 150,
+    "task": {
+      "reward": 150,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 150 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>150</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 15.914,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2334936734,
+        "content": "Requires price label to be a funded task. I suppose this should be configurable, with the default being off.\r\n_Originally posted by @0x4007 in https://github.com/ubiquity/ubiquibot-kernel/issues/43#issuecomment-2148880396_",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/31",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.41,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 53.889852941176486,
+            "syllables": 58,
+            "sentences": 4,
+            "score": 0.9388985294117649
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1632609123,
+        "content": "`requirePriceLabel` has less cognitive overhead. Default to `true` in case the property doesn't exist.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/32#discussion_r1632609123",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -42,3 +42,81 @@ Be sure to review all `*.test.*` files for implementation details.\n ```\n \n Reward formula: `((count * wordValue) * (score * formattingMultiplier) * n) * relevance + task.reward = total`\n+\n+## Plugin configuration\n+\n+Here is a possible valid configuration to enable this plugin.\n+\n+\n+```yaml\n+plugin: ubiquibot/conversation-rewards\n+with:\n+    evmNetworkId: 100\n+    evmPrivateEncrypted: \"encrypted-key\"\n+    incentives:\n+      enabled: true",
+        "score": {
+          "reward": 3.621,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 63.57596153846157,
+            "syllables": 21,
+            "sentences": 2,
+            "score": 0.9642403846153843
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1632623409,
+        "content": "I think we should rename this property to `roles`, `targets`, or `affects`",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/32#discussion_r1632623409",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -42,3 +42,82 @@ Be sure to review all `*.test.*` files for implementation details.\n ```\n \n Reward formula: `((count * wordValue) * (score * formattingMultiplier) * n) * relevance + task.reward = total`\n+\n+## Plugin configuration\n+\n+Here is a possible valid configuration to enable this plugin.\n+\n+\n+```yaml\n+plugin: ubiquibot/conversation-rewards\n+with:\n+    evmNetworkId: 100\n+    evmPrivateEncrypted: \"encrypted-key\"\n+    incentives:\n+      enabled: true\n+      generateOnMissingPriceLabel: false\n+      contentEvaluator:\n+        enabled: true\n+      userExtractor:\n+        enabled: true\n+        redeemTask: true\n+      dataPurge:\n+        enabled: true\n+      formattingEvaluator:\n+        enabled: true\n+        scores:\n+          br: 0\n+          code: 1\n+          p: 1\n+          em: 0\n+          img: 0\n+          strong: 0\n+          blockquote: 0\n+          h1: 1\n+          h2: 1\n+          h3: 1\n+          h4: 1\n+          h5: 1\n+          h6: 1\n+          a: 1\n+          li: 1\n+          td: 1\n+          hr: 0\n+        multipliers:\n+          - type: [ ISSUE, ISSUER, SPECIFICATION ]",
+        "score": {
+          "reward": 2.163,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 84.90000000000003,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.7509999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2106678361,
+            "effect": {
+              "addition": 186,
+              "deletion": 37
+            },
+            "reward": 6.69,
+            "priority": 3
+          },
+          {
+            "reviewId": 2106699937,
+            "effect": {
+              "addition": 1,
+              "deletion": 0
+            },
+            "reward": 0.03,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/32"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 15.914 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>6.72</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.41</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>5.784</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/32\" target=\"_blank\" rel=\"noopener\">#32</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+186 -37</td><td>3</td><td>6.69</td></tr><tr><td>+1 -0</td><td>3</td><td>0.03</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/31\" target=\"_blank\" rel=\"noopener\">Requires price label to be a funded task. I suppose this should &hellip;</a></h6></td><td><details><summary>2.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>1</td><td>1</td><td>3.41</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/32#discussion_r1632609123\" target=\"_blank\" rel=\"noopener\">&#96;requirePriceLabel&#96; has less cognitive overhead. Default&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.85</td><td>3</td><td>3.621</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/32#discussion_r1632623409\" target=\"_blank\" rel=\"noopener\">I think we should rename this property to &#96;roles&#96;, &#96;&hellip;</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.163</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 8.187,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2106896087,
+        "content": "[Works](https://github.com/rndquu-org/test-repo/issues/55) fine",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/32#pullrequestreview-2106896087",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.467,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 120.20500000000001,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2106896087,
+            "effect": {
+              "addition": 187,
+              "deletion": 37
+            },
+            "reward": 6.72,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/32"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 8.187 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>6.72</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>1.467</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/32\" target=\"_blank\" rel=\"noopener\">#32</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+187 -37</td><td>3</td><td>6.72</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/32#pullrequestreview-2106896087\" target=\"_blank\" rel=\"noopener\">[Works](https://github.com/rndquu-org/test-repo/issues/55) fine</a></h6></td><td><details><summary>1.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.467</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 11.79,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 1632306155,
+        "content": "FYI you don't need to add T.Optional if you set default value",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/32#discussion_r1632306155",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -25,6 +25,10 @@ export const incentivesConfigurationSchema = T.Object({\n      * Optionally specify a file to write the results in\n      */\n     file: T.Optional(T.String()),\n+    /**\n+     * If set to true, the plugin runs even if the price label is missing, and will evaluate comments.\n+     */\n+    generateOnMissingPriceLabel: T.Optional(T.Boolean({ default: false })),",
+        "score": {
+          "reward": 3.78,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 90.95857142857145,
+            "syllables": 18,
+            "sentences": 2,
+            "score": 0.6904142857142855
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1632306543,
+        "content": "add `generateOnMissingPriceLabel` to the example",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/32#discussion_r1632306543",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -42,3 +42,81 @@ Be sure to review all `*.test.*` files for implementation details.\n ```\n \n Reward formula: `((count * wordValue) * (score * formattingMultiplier) * n) * relevance + task.reward = total`\n+\n+## Plugin configuration\n+\n+Here is a possible valid configuration to enable this plugin.\n+\n+\n+```yaml\n+plugin: ubiquibot/conversation-rewards\n+with:\n+    evmNetworkId: 100\n+    evmPrivateEncrypted: \"encrypted-key\"\n+    incentives:\n+      enabled: true",
+        "score": {
+          "reward": 1.32,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 75.87500000000001,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 0.8412499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2106237244,
+            "effect": {
+              "addition": 186,
+              "deletion": 37
+            },
+            "reward": 6.69,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/32"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 11.79 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>6.69</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>5.1</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/32\" target=\"_blank\" rel=\"noopener\">#32</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+186 -37</td><td>3</td><td>6.69</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/32#discussion_r1632306155\" target=\"_blank\" rel=\"noopener\">FYI you don't need to add T.Optional if you set default value</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.9</td><td>3</td><td>3.78</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/32#discussion_r1632306543\" target=\"_blank\" rel=\"noopener\">add &#96;generateOnMissingPriceLabel&#96; to the example</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.32</td></tr></tbody></table></details>"
+  }
+}

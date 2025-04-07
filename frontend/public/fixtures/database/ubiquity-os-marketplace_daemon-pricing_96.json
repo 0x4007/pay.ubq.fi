@@ -1,0 +1,343 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 110.31,
+    "task": {
+      "reward": 100,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2920993577,
+        "content": "_Originally posted by @ubiquity-os-beta in [#23](https://github.com/ubiquity-os-marketplace/daemon-pull-review/issues/23#issuecomment-2724274650)_\n## What happened\nAn error was displayed when only one label was set. I should not be shown, and be a warning most likely. \n## What was expected\nNo error should be shown.\n## How to reproduce\n- create an issue\n- add only one label\n- observe the error being posted\n# Required changes\nThe plugin should be able to recognize a pattern in the priority labels, and check them accordingly.  Example:\n- \"(Low) p0\"\n- \"(Medium) p1\"\n- \"(High) p2\"\nCould be checked because they all respect the pattern \"p{number}\". In our organization, they could all be recognized by \"Priority: {number}'.  From there, the order can also be deduced (lowest to highest or opposite).\nThis in turn would easily allow us to check for pricing attempts with outdated tags, like when we remove priorities for example.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/96",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 10.31,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "h2": {
+                "score": 1,
+                "elementCount": 3
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 6
+              },
+              "h1": {
+                "score": 1,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 5.6
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 137,
+            "wordValue": 0.1,
+            "result": 2.35
+          },
+          "readability": {
+            "fleschKincaid": 61.00932937956205,
+            "syllables": 208,
+            "sentences": 8,
+            "score": 0.9899067062043795
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 110.31 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>100</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>10.31</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/96\" target=\"_blank\" rel=\"noopener\">_Originally posted by @ubiquity-os-beta in [#23](https://github.&hellip;</a></h6></td><td><details><summary>7.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    h2:&#13;      score: 1&#13;      elementCount: 3&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 6&#13;    h1:&#13;      score: 1&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 5.6&#13;regex:&#13;  wordCount: 137&#13;  wordValue: 0.1&#13;  result: 2.35&#13;</pre></details></td><td>1</td><td>1</td><td>10.31</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 25.276,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2738498803,
+        "content": "It's not so complex. \n- Time is formalized. \n- Priority needs a number at least. \n- Price is formalized. \nMaybe we can make an algo to predict their priority system based on a couple of inputs. \nWhat I've seen in the wild is stuff like \"p0\" and \"p4\"\nPriority always seems to have a number. It's just the direction needs to be set like does p0 mean the most important?  \nWe can have two inputs\nLowest priority level: p4\nHighest priority level: p0\nAnd interpolate kind of like how google sheets does it when you extend some columns and it figures out the pattern between the numbers.  \n---\nI realize that we can safely enforce our time and price labels. \nBut they should be dynamic, meaning even if a time label doesn't exist in the config, the system should be able to work with any input. \nThe config should only exist for prepopulating the labels for convenience.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/96#issuecomment-2738498803",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 5.909,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "br": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0.3
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 157,
+            "wordValue": 0.1,
+            "result": 2.16
+          },
+          "readability": {
+            "fleschKincaid": 71.64499710480604,
+            "syllables": 224,
+            "sentences": 11,
+            "score": 0.8835500289519396
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2739837927,
+        "content": "Okay\nTime: <duration> which should be parsed by ms library. I've never seen teams use \"time\" labels in the wild so we can safely assume we're the only ones doing it, and can expect that its exactly in the format we know. \nhttps://github.com/OriginProtocol/origin-dollar/labels",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/96#issuecomment-2739837927",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 6.672,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 44,
+            "wordValue": 0.1,
+            "result": 2.27
+          },
+          "readability": {
+            "fleschKincaid": 67.8231617647059,
+            "syllables": 76,
+            "sentences": 4,
+            "score": 0.921768382352941
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2743447082,
+        "content": "Highest priority level: p0\nThe algorithm more or less:\nConst Lowest: number = First < second ? First : second",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/96#issuecomment-2743447082",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.31,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 61.24000000000001,
+            "syllables": 26,
+            "sentences": 2,
+            "score": 0.9875999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2743994522,
+        "content": "I guess it's a safe assumption but with a little math we can make it bullet proof",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/96#issuecomment-2743994522",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.197,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 85.16499999999999,
+            "syllables": 22,
+            "sentences": 1,
+            "score": 0.7483500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.65
+        }
+      },
+      {
+        "id": 2753222909,
+        "content": "Time for deno deploy",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/96#issuecomment-2753222909",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.22,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 75.87500000000001,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 0.8412499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2012160048,
+        "content": "```suggestion\r\n    throw new Error(\"Some tags seem to not have any number value, please check your configuration.\");\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-pricing/pull/99#discussion_r2012160048",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,68 @@\n+import { AssistivePricingSettings } from \"../types/plugin-input\";\n+\n+type Labels = AssistivePricingSettings[\"labels\"][\"priority\" | \"time\"];\n+\n+function extractCommonPattern(labels: Labels): string {\n+  const labelParts = labels.map((label) => {\n+    const numberMatch = RegExp(/(\\D*)(\\d*\\.?\\d+)(\\D*)/).exec(label.name);\n+    if (!numberMatch) {\n+      throw new Error(\"Labels do not seem to contain any number value, please check your configuration.\");\n+    }\n+    return {\n+      prefix: numberMatch[1],\n+      number: numberMatch[2],\n+      suffix: numberMatch[3],\n+    };\n+  });\n+\n+  const prefixes = labelParts.map((p) => p.prefix);\n+  const suffixes = labelParts.map((p) => p.suffix);\n+\n+  const commonPrefixes = prefixes.reduce<string>((acc, curr) => (acc === curr ? acc : \"\"), prefixes[0]);\n+  const commonSuffixes = suffixes.reduce<string>((acc, curr) => (acc === curr ? acc : \"\"), suffixes[0]);\n+\n+  if (!commonPrefixes && !commonSuffixes) {\n+    throw new Error(\"No common prefixes or suffixes have been found for the label list, please check your configuration.\");\n+  }\n+\n+  return `${commonPrefixes.replace(/[.*+?^${}()|[\\]\\\\]/g, \"\\\\$&\")}(\\\\d*\\\\.?\\\\d+)${commonSuffixes.replace(/[.*+?^${}()|[\\]\\\\]/g, \"\\\\$&\")}`;\n+}\n+\n+function extractNumbers(labels: Labels) {\n+  return labels.map((tag) => {\n+    const match = RegExp(/\\d*\\.?\\d+/).exec(tag.name);\n+    return match ? parseInt(match[0], 10) : null;\n+  });\n+}\n+\n+function extractLabelPattern(labels: Labels) {\n+  const priorities = extractNumbers(labels);\n+\n+  if (priorities.some((p) => p === null)) {\n+    throw new Error(\"Some tags seem to not have any decimal value, please check your configuration.\");",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2012165138,
+        "content": "Can you explain the logic of where exactly it determines the number order and if its higher priority or lower?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-pricing/pull/99#discussion_r2012165138",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 3.008,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 51.17500000000004,
+            "syllables": 32,
+            "sentences": 1,
+            "score": 0.9117500000000004
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2713860092,
+            "effect": {
+              "addition": 195,
+              "deletion": 49
+            },
+            "reward": 4.88,
+            "priority": 2
+          },
+          {
+            "reviewId": 2715863458,
+            "effect": {
+              "addition": 2,
+              "deletion": 2
+            },
+            "reward": 0.08,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-pricing/pull/99"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 25.276 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>4.96</td></tr><tr><td>Issue</td><td>Comment</td><td>5</td><td>17.308</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>3.008</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/daemon-pricing/pull/99\" target=\"_blank\" rel=\"noopener\">#99</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+195 -49</td><td>2</td><td>4.88</td></tr><tr><td>+2 -2</td><td>2</td><td>0.08</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/96#issuecomment-2738498803\" target=\"_blank\" rel=\"noopener\">It's not so complex. - Time is formalized. - Priority needs a &hellip;</a></h6></td><td><details><summary>2.46</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    br:&#13;      score: 0&#13;      elementCount: 1&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0.3&#13;regex:&#13;  wordCount: 157&#13;  wordValue: 0.1&#13;  result: 2.16&#13;</pre></details></td><td>0.95</td><td>2</td><td>5.909</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/96#issuecomment-2739837927\" target=\"_blank\" rel=\"noopener\">OkayTime: &lt;duration&gt; which should be parsed by ms library&hellip;</a></h6></td><td><details><summary>3.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 44&#13;  wordValue: 0.1&#13;  result: 2.27&#13;</pre></details></td><td>0.8</td><td>2</td><td>6.672</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/96#issuecomment-2743447082\" target=\"_blank\" rel=\"noopener\">Highest priority level: p0The algorithm more or less:Const Low&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.7</td><td>2</td><td>2.31</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/96#issuecomment-2743994522\" target=\"_blank\" rel=\"noopener\">I guess it's a safe assumption but with a little math we can mak&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.65</td><td>2</td><td>2.197</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-pricing/issues/96#issuecomment-2753222909\" target=\"_blank\" rel=\"noopener\">Time for deno deploy</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.2</td><td>2</td><td>0.22</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-pricing/pull/99#discussion_r2012160048\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionthrow new Error(\"Some tags seem t&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-pricing/pull/99#discussion_r2012165138\" target=\"_blank\" rel=\"noopener\">Can you explain the logic of where exactly it determines the num&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.8</td><td>2</td><td>3.008</td></tr></tbody></table></details>"
+  }
+}

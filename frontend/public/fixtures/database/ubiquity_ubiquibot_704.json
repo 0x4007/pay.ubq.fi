@@ -1,0 +1,1084 @@
+{
+  "devpanther": {
+    "userId": 42383942,
+    "total": 100,
+    "task": {
+      "reward": 100,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 100 XP ]</a>&nbsp;</h3><h6>@devpanther</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>100</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 24.936,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 1704744330,
+        "content": "@devpanther Sorry for the inconvenience. The spec has been updated with those 2 edge cases:\r\n```\r\nThera are 2 exceptions:\r\n1. Issue solver shouldn't get issue commenter rewards\r\n2. Issue creator shouldn't get issue commenter rewards\r\n```",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/704#issuecomment-1704744330",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.52,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 75.14250000000001,
+            "syllables": 22,
+            "sentences": 2,
+            "score": 0.8485749999999999
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1877717132,
+        "content": "Check this [issue](https://github.com/rndquu-org/test-repo/issues/21)\r\nWhen issue is solved then the following participants get rewards:\r\n- issue creator\r\n- issue solver\r\n- issue commenter\r\nWhen the same person creates an issue and comments in an issue then we need to generate 2 permits for that user (issue creator + issue commenter). We should consolidate such permits in a single one. So when an issue is closed then all permits should be grouped by users.\r\nThera are 2 exceptions:\r\n1. Issue solver shouldn't get issue commenter rewards\r\n2. Issue creator shouldn't get issue commenter rewards\r\nWhat should be done:\r\n- combine all generated permits by user\r\n- remove [type](https://github.com/devpanther/bounty-bot/blob/6729f81eadc8504871657bdd432cc0621beef9ad/src/helpers/permit.ts#L60) from permit generation method (it was initially implemented [here](https://github.com/ubiquity/ubiquibot/pull/692) as a kind of a hotfix) and use `keccak256(issue.node_id . bountyHunter.node_id)` for permit nonces\r\n- combined permits should have a caption that states the reason behind the generated permit, ex: \"Issue creator and issue solver rewards\"",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/704",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 7.53,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 13
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 8
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.8
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 141,
+            "wordValue": 0.1,
+            "result": 2.31
+          },
+          "readability": {
+            "fleschKincaid": 37.25625000000002,
+            "syllables": 223,
+            "sentences": 4,
+            "score": 0.7725625000000003
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1323142891,
+        "content": "In the early days of the github REST API all entities (issue, user, comment, etc...) used the `id` property. As far as I understand `issue.id`, `user.id` and `comment.id` can intersect while the `node_id` property is globally unique across all entities. That is why [here](https://github.com/ubiquity/ubiquibot/blob/08a2dfb1ffbf426fd984a97fe583a310a7c1e43a/src/handlers/payout/action.ts#L186) `issue.node_id` was used. \r\nThe 2nd useful thing regarding the `node_id` property is that some APIs are missing from the github REST API while exist in the graphql API where you can fetch entities by `node_id`.\r\nThat is why I think it is better to use `node_id` whenever possible compared to the `id` property.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1323142891",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -127,78 +168,236 @@ export const handleIssueClosed = async () => {\n \n   if (paymentPermitMaxPrice == 0 || !paymentPermitMaxPrice) {\n     logger.info(`Skipping to generate permit2 url, reason: { paymentPermitMaxPrice: ${paymentPermitMaxPrice}}`);\n-    return `Permit generation skipped since paymentPermitMaxPrice is 0`;\n+    return { error: `Permit generation skipped since paymentPermitMaxPrice is 0` };\n   }\n \n   const issueDetailed = bountyInfo(issue);\n   if (!issueDetailed.isBounty) {\n     logger.info(`Skipping... its not a bounty`);\n-    return `Permit generation skipped since this issue didn't qualify as bounty`;\n+    return { error: `Permit generation skipped since this issue didn't qualify as bounty` };\n   }\n \n   const assignees = issue?.assignees ?? [];\n   const assignee = assignees.length > 0 ? assignees[0] : undefined;\n   if (!assignee) {\n     logger.info(\"Skipping to proceed the payment because `assignee` is undefined\");\n-    return `Permit generation skipped since assignee is undefined`;\n+    return { error: `Permit generation skipped since assignee is undefined` };\n   }\n \n   if (!issueDetailed.priceLabel) {\n     logger.info(\"Skipping to proceed the payment because price not set\");\n-    return `Permit generation skipped since price label is not set`;\n+    return { error: `Permit generation skipped since price label is not set` };\n   }\n \n   const recipient = await getWalletAddress(assignee.login);\n   if (!recipient || recipient?.trim() === \"\") {\n     logger.info(`Recipient address is missing`);\n-    return;\n+    return { error: `Permit generation skipped since recipient address is missing` };\n   }\n \n   const { value: multiplier } = await getWalletMultiplier(assignee.login, id?.toString());\n \n   if (multiplier === 0) {\n     const errMsg = \"Refusing to generate the payment permit because \" + `@${assignee.login}` + \"'s payment `multiplier` is `0`\";\n     logger.info(errMsg);\n-    return errMsg;\n+    return { error: errMsg };\n   }\n \n-  let priceInEth = new Decimal(issueDetailed.priceLabel.substring(7, issueDetailed.priceLabel.length - 4)).mul(multiplier);\n-  if (priceInEth.gt(paymentPermitMaxPrice)) {\n+  const tokenSymbol = await getTokenSymbol(paymentToken, rpc);\n+\n+  return {\n+    error: \"\",\n+    paymentToken,\n+    rpc,\n+    networkId,\n+    privateKey,\n+    recipient,\n+    multiplier,\n+    paymentPermitMaxPrice,\n+    baseMultiplier,\n+    incentives,\n+    issueCreatorMultiplier,\n+    issue,\n+    payload,\n+    comments,\n+    issueDetailed,\n+    assignee,\n+    tokenSymbol,\n+  };\n+};\n+\n+/**\n+ * Calculate the reward for the assignee\n+ */\n+\n+export const calculateIssueAssigneeReward = async (incentivesCalculation: IncentivesCalculationResult): Promise<RewardsResponse> => {\n+  const logger = getLogger();\n+  const assigneeLogin = incentivesCalculation.assignee!.login;\n+\n+  let priceInEth = new Decimal(incentivesCalculation.issueDetailed!.priceLabel!.substring(7, incentivesCalculation.issueDetailed!.priceLabel!.length - 4)).mul(\n+    incentivesCalculation.multiplier!\n+  );\n+  if (priceInEth.gt(incentivesCalculation.paymentPermitMaxPrice!)) {\n     logger.info(\"Skipping to proceed the payment because bounty payout is higher than paymentPermitMaxPrice\");\n-    return `Permit generation skipped since issue's bounty is higher than ${paymentPermitMaxPrice}`;\n+    return { error: `Permit generation skipped since issue's bounty is higher than ${incentivesCalculation.paymentPermitMaxPrice}` };\n   }\n \n   // if bounty hunter has any penalty then deduct it from the bounty\n-  const penaltyAmount = await getPenalty(assignee.login, payload.repository.full_name, paymentToken, networkId.toString());\n+  const penaltyAmount = await getPenalty(\n+    assigneeLogin,\n+    incentivesCalculation.payload!.repository.full_name,\n+    incentivesCalculation.paymentToken!,\n+    incentivesCalculation.networkId!.toString()\n+  );\n   if (penaltyAmount.gt(0)) {\n     logger.info(`Deducting penalty from bounty`);\n     const bountyAmount = ethers.utils.parseUnits(priceInEth.toString(), 18);\n     const bountyAmountAfterPenalty = bountyAmount.sub(penaltyAmount);\n     if (bountyAmountAfterPenalty.lte(0)) {\n-      await removePenalty(assignee.login, payload.repository.full_name, paymentToken, networkId.toString(), bountyAmount);\n+      await removePenalty(\n+        assigneeLogin,\n+        incentivesCalculation.payload!.repository.full_name,\n+        incentivesCalculation.paymentToken!,\n+        incentivesCalculation.networkId!.toString(),\n+        bountyAmount\n+      );\n       const msg = `Permit generation skipped because bounty amount after penalty is 0`;\n       logger.info(msg);\n-      return msg;\n+      return { error: msg };\n     }\n     priceInEth = new Decimal(ethers.utils.formatUnits(bountyAmountAfterPenalty, 18));\n   }\n \n-  const { txData, payoutUrl } = await generatePermit2Signature(recipient, priceInEth, issue.node_id, assignee.node_id, \"ISSUE_ASSIGNEE\");\n-  const tokenSymbol = await getTokenSymbol(paymentToken, rpc);\n-  const shortenRecipient = shortenEthAddress(recipient, `[ CLAIM ${priceInEth} ${tokenSymbol.toUpperCase()} ]`.length);\n-  logger.info(`Posting a payout url to the issue, url: ${payoutUrl}`);\n-  const comment =\n-    `#### Task Assignee Reward\\n### [ **[ CLAIM ${priceInEth} ${tokenSymbol.toUpperCase()} ]** ](${payoutUrl})\\n` + \"```\" + shortenRecipient + \"```\";\n-  const permitComments = comments.filter((content) => content.body.includes(\"https://pay.ubq.fi?claim=\") && content.user.type == UserType.Bot);\n-  if (permitComments.length > 0) {\n-    logger.info(`Skip to generate a permit url because it has been already posted`);\n-    return `Permit generation skipped because it was already posted to this issue.`;\n-  }\n-  await deleteLabel(issueDetailed.priceLabel);\n-  await addLabelToIssue(\"Permitted\");\n-  await savePermitToDB(assignee.id, txData);\n-  if (penaltyAmount.gt(0)) {\n-    await removePenalty(assignee.login, payload.repository.full_name, paymentToken, networkId.toString(), penaltyAmount);\n+  const account = await getWalletAddress(assigneeLogin);\n+\n+  return {\n+    error: \"\",\n+    user_id: incentivesCalculation.assignee!.node_id,",
+        "score": {
+          "reward": 3.736,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 87,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 64.73129310344828,
+            "syllables": 131,
+            "sentences": 6,
+            "score": 0.9526870689655172
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1616224760,
+            "effect": {
+              "addition": 291,
+              "deletion": 327
+            },
+            "reward": 6.18,
+            "priority": 1
+          },
+          {
+            "reviewId": 1622413441,
+            "effect": {
+              "addition": 379,
+              "deletion": 218
+            },
+            "reward": 5.97,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 24.936 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>12.15</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>7.53</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.52</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>3.736</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquibot/pull/714\" target=\"_blank\" rel=\"noopener\">#714</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+291 -327</td><td>1</td><td>6.18</td></tr><tr><td>+379 -218</td><td>1</td><td>5.97</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/704\" target=\"_blank\" rel=\"noopener\">Check this [issue](https://github.com/rndquu-org/test-repo/issue&hellip;</a></h6></td><td><details><summary>6.11</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 13&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 8&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.8&#13;regex:&#13;  wordCount: 141&#13;  wordValue: 0.1&#13;  result: 2.31&#13;</pre></details></td><td>1</td><td>1</td><td>7.53</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/704#issuecomment-1704744330\" target=\"_blank\" rel=\"noopener\">@devpanther Sorry for the inconvenience. The spec has been updat&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>1</td><td>1</td><td>1.52</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1323142891\" target=\"_blank\" rel=\"noopener\">In the early days of the github REST API all entities (issue, us&hellip;</a></h6></td><td><details><summary>3.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 87&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.8</td><td>1</td><td>3.736</td></tr></tbody></table></details>"
+  },
+  "Draeieg": {
+    "total": 0.568,
+    "userId": 88983138,
+    "comments": [
+      {
+        "id": 1722557440,
+        "content": "@devpanther Sorry for ANOTHER inconvenience lol \r\nissue solver and creator getting commenter rewards should be a setting we can turn on or off for a given repository, this is to make Non code bounties/tasks like research possible \r\nidk if this should be within the scope of this bounty of another one @pavlovcik",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/704#issuecomment-1722557440",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.568,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 53,
+            "wordValue": 0.1,
+            "result": 2.43
+          },
+          "readability": {
+            "fleschKincaid": 18.956981132075498,
+            "syllables": 84,
+            "sentences": 1,
+            "score": 0.589569811320755
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 0.568 XP ]</a>&nbsp;</h3><h6>@Draeieg</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.568</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/704#issuecomment-1722557440\" target=\"_blank\" rel=\"noopener\">@devpanther Sorry for ANOTHER inconvenience lol issue solver a&hellip;</a></h6></td><td><details><summary>2.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 53&#13;  wordValue: 0.1&#13;  result: 2.43&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.568</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 2.169,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1722558729,
+        "content": "No more scope changes here. \n- We already have https://github.com/ubiquity/ubiquibot/issues/752",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/704#issuecomment-1722558729",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.169,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 60.76000000000002,
+            "syllables": 25,
+            "sentences": 3,
+            "score": 0.9923999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 2.169 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>2.169</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/704#issuecomment-1722558729\" target=\"_blank\" rel=\"noopener\">No more scope changes here. - We already have https://github.co&hellip;</a></h6></td><td><details><summary>1.86</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.1&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.9</td><td>1</td><td>2.169</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 34.975,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 1617141540,
+        "content": "Currently I feel like the code is messy and unreadable. Could you refactor it to make it easier to read? I feel like the names for some variables and functions are off.\r\nIdeally I'd like to see a top level function `incentivesCalculation` that first checks if all conditions are met (not empty private key, issued closed as completed, is bounty, autopay is not off, and so on), then it should get all the issue comments (to avoid retrieving them multiple times). \r\nAfter that it should call three function `calculateIssueCreatorReward`, `calculateIssueConversationReward` and `calculateIssueAssigneeReward`, all of them receive comments and return something like `{ user_id, username, reward }[]`, then the main function can aggregate all rewards together, apply multipliers, deduct penalties, retrieve user's wallet and generate permits.\r\nI hope you understand what I mean. Let me know if you have questions",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#pullrequestreview-1617141540",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.763,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 132,
+            "wordValue": 0.1,
+            "result": 2.39
+          },
+          "readability": {
+            "fleschKincaid": 64.64045454545457,
+            "syllables": 192,
+            "sentences": 7,
+            "score": 0.9535954545454542
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1618793189,
+        "content": "can you avoid using `!` assertion?",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#pullrequestreview-1618793189",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.469,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 49.48000000000002,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.8948000000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1320737957,
+        "content": "```suggestion\r\n  userId?: string;\r\n```",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1320737957",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -36,6 +43,21 @@ export * from \"./help\";\n export * from \"./multiplier\";\n export * from \"./query\";\n \n+export interface RewardsResponse {\n+  error: string | null;\n+  title?: string;\n+  user_id?: string;",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1320738058,
+        "content": "```suggestion\r\n    user_id: incentivesCalculation.assignee!.id,\r\n```\r\nwe use id, not node_id",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1320738058",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -127,78 +168,236 @@ export const handleIssueClosed = async () => {\n \n   if (paymentPermitMaxPrice == 0 || !paymentPermitMaxPrice) {\n     logger.info(`Skipping to generate permit2 url, reason: { paymentPermitMaxPrice: ${paymentPermitMaxPrice}}`);\n-    return `Permit generation skipped since paymentPermitMaxPrice is 0`;\n+    return { error: `Permit generation skipped since paymentPermitMaxPrice is 0` };\n   }\n \n   const issueDetailed = bountyInfo(issue);\n   if (!issueDetailed.isBounty) {\n     logger.info(`Skipping... its not a bounty`);\n-    return `Permit generation skipped since this issue didn't qualify as bounty`;\n+    return { error: `Permit generation skipped since this issue didn't qualify as bounty` };\n   }\n \n   const assignees = issue?.assignees ?? [];\n   const assignee = assignees.length > 0 ? assignees[0] : undefined;\n   if (!assignee) {\n     logger.info(\"Skipping to proceed the payment because `assignee` is undefined\");\n-    return `Permit generation skipped since assignee is undefined`;\n+    return { error: `Permit generation skipped since assignee is undefined` };\n   }\n \n   if (!issueDetailed.priceLabel) {\n     logger.info(\"Skipping to proceed the payment because price not set\");\n-    return `Permit generation skipped since price label is not set`;\n+    return { error: `Permit generation skipped since price label is not set` };\n   }\n \n   const recipient = await getWalletAddress(assignee.login);\n   if (!recipient || recipient?.trim() === \"\") {\n     logger.info(`Recipient address is missing`);\n-    return;\n+    return { error: `Permit generation skipped since recipient address is missing` };\n   }\n \n   const { value: multiplier } = await getWalletMultiplier(assignee.login, id?.toString());\n \n   if (multiplier === 0) {\n     const errMsg = \"Refusing to generate the payment permit because \" + `@${assignee.login}` + \"'s payment `multiplier` is `0`\";\n     logger.info(errMsg);\n-    return errMsg;\n+    return { error: errMsg };\n   }\n \n-  let priceInEth = new Decimal(issueDetailed.priceLabel.substring(7, issueDetailed.priceLabel.length - 4)).mul(multiplier);\n-  if (priceInEth.gt(paymentPermitMaxPrice)) {\n+  const tokenSymbol = await getTokenSymbol(paymentToken, rpc);\n+\n+  return {\n+    error: \"\",\n+    paymentToken,\n+    rpc,\n+    networkId,\n+    privateKey,\n+    recipient,\n+    multiplier,\n+    paymentPermitMaxPrice,\n+    baseMultiplier,\n+    incentives,\n+    issueCreatorMultiplier,\n+    issue,\n+    payload,\n+    comments,\n+    issueDetailed,\n+    assignee,\n+    tokenSymbol,\n+  };\n+};\n+\n+/**\n+ * Calculate the reward for the assignee\n+ */\n+\n+export const calculateIssueAssigneeReward = async (incentivesCalculation: IncentivesCalculationResult): Promise<RewardsResponse> => {\n+  const logger = getLogger();\n+  const assigneeLogin = incentivesCalculation.assignee!.login;\n+\n+  let priceInEth = new Decimal(incentivesCalculation.issueDetailed!.priceLabel!.substring(7, incentivesCalculation.issueDetailed!.priceLabel!.length - 4)).mul(\n+    incentivesCalculation.multiplier!\n+  );\n+  if (priceInEth.gt(incentivesCalculation.paymentPermitMaxPrice!)) {\n     logger.info(\"Skipping to proceed the payment because bounty payout is higher than paymentPermitMaxPrice\");\n-    return `Permit generation skipped since issue's bounty is higher than ${paymentPermitMaxPrice}`;\n+    return { error: `Permit generation skipped since issue's bounty is higher than ${incentivesCalculation.paymentPermitMaxPrice}` };\n   }\n \n   // if bounty hunter has any penalty then deduct it from the bounty\n-  const penaltyAmount = await getPenalty(assignee.login, payload.repository.full_name, paymentToken, networkId.toString());\n+  const penaltyAmount = await getPenalty(\n+    assigneeLogin,\n+    incentivesCalculation.payload!.repository.full_name,\n+    incentivesCalculation.paymentToken!,\n+    incentivesCalculation.networkId!.toString()\n+  );\n   if (penaltyAmount.gt(0)) {\n     logger.info(`Deducting penalty from bounty`);\n     const bountyAmount = ethers.utils.parseUnits(priceInEth.toString(), 18);\n     const bountyAmountAfterPenalty = bountyAmount.sub(penaltyAmount);\n     if (bountyAmountAfterPenalty.lte(0)) {\n-      await removePenalty(assignee.login, payload.repository.full_name, paymentToken, networkId.toString(), bountyAmount);\n+      await removePenalty(\n+        assigneeLogin,\n+        incentivesCalculation.payload!.repository.full_name,\n+        incentivesCalculation.paymentToken!,\n+        incentivesCalculation.networkId!.toString(),\n+        bountyAmount\n+      );\n       const msg = `Permit generation skipped because bounty amount after penalty is 0`;\n       logger.info(msg);\n-      return msg;\n+      return { error: msg };\n     }\n     priceInEth = new Decimal(ethers.utils.formatUnits(bountyAmountAfterPenalty, 18));\n   }\n \n-  const { txData, payoutUrl } = await generatePermit2Signature(recipient, priceInEth, issue.node_id, assignee.node_id, \"ISSUE_ASSIGNEE\");\n-  const tokenSymbol = await getTokenSymbol(paymentToken, rpc);\n-  const shortenRecipient = shortenEthAddress(recipient, `[ CLAIM ${priceInEth} ${tokenSymbol.toUpperCase()} ]`.length);\n-  logger.info(`Posting a payout url to the issue, url: ${payoutUrl}`);\n-  const comment =\n-    `#### Task Assignee Reward\\n### [ **[ CLAIM ${priceInEth} ${tokenSymbol.toUpperCase()} ]** ](${payoutUrl})\\n` + \"```\" + shortenRecipient + \"```\";\n-  const permitComments = comments.filter((content) => content.body.includes(\"https://pay.ubq.fi?claim=\") && content.user.type == UserType.Bot);\n-  if (permitComments.length > 0) {\n-    logger.info(`Skip to generate a permit url because it has been already posted`);\n-    return `Permit generation skipped because it was already posted to this issue.`;\n-  }\n-  await deleteLabel(issueDetailed.priceLabel);\n-  await addLabelToIssue(\"Permitted\");\n-  await savePermitToDB(assignee.id, txData);\n-  if (penaltyAmount.gt(0)) {\n-    await removePenalty(assignee.login, payload.repository.full_name, paymentToken, networkId.toString(), penaltyAmount);\n+  const account = await getWalletAddress(assigneeLogin);\n+\n+  return {\n+    error: \"\",\n+    user_id: incentivesCalculation.assignee!.node_id,",
+        "score": {
+          "reward": 0.52,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 83.32000000000004,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 0.7667999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1322400597,
+        "content": "Well we should try to be consistent and use camelCase everywhere",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1322400597",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -36,6 +43,21 @@ export * from \"./help\";\n export * from \"./multiplier\";\n export * from \"./query\";\n \n+export interface RewardsResponse {\n+  error: string | null;\n+  title?: string;\n+  user_id?: string;",
+        "score": {
+          "reward": 0.625,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 57.23363636363638,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.9723363636363638
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1322630560,
+        "content": "Yes, it doesn't much difference, but I think we should at least try to keep it the same everywhere.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1322630560",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -127,78 +168,236 @@ export const handleIssueClosed = async () => {\n \n   if (paymentPermitMaxPrice == 0 || !paymentPermitMaxPrice) {\n     logger.info(`Skipping to generate permit2 url, reason: { paymentPermitMaxPrice: ${paymentPermitMaxPrice}}`);\n-    return `Permit generation skipped since paymentPermitMaxPrice is 0`;\n+    return { error: `Permit generation skipped since paymentPermitMaxPrice is 0` };\n   }\n \n   const issueDetailed = bountyInfo(issue);\n   if (!issueDetailed.isBounty) {\n     logger.info(`Skipping... its not a bounty`);\n-    return `Permit generation skipped since this issue didn't qualify as bounty`;\n+    return { error: `Permit generation skipped since this issue didn't qualify as bounty` };\n   }\n \n   const assignees = issue?.assignees ?? [];\n   const assignee = assignees.length > 0 ? assignees[0] : undefined;\n   if (!assignee) {\n     logger.info(\"Skipping to proceed the payment because `assignee` is undefined\");\n-    return `Permit generation skipped since assignee is undefined`;\n+    return { error: `Permit generation skipped since assignee is undefined` };\n   }\n \n   if (!issueDetailed.priceLabel) {\n     logger.info(\"Skipping to proceed the payment because price not set\");\n-    return `Permit generation skipped since price label is not set`;\n+    return { error: `Permit generation skipped since price label is not set` };\n   }\n \n   const recipient = await getWalletAddress(assignee.login);\n   if (!recipient || recipient?.trim() === \"\") {\n     logger.info(`Recipient address is missing`);\n-    return;\n+    return { error: `Permit generation skipped since recipient address is missing` };\n   }\n \n   const { value: multiplier } = await getWalletMultiplier(assignee.login, id?.toString());\n \n   if (multiplier === 0) {\n     const errMsg = \"Refusing to generate the payment permit because \" + `@${assignee.login}` + \"'s payment `multiplier` is `0`\";\n     logger.info(errMsg);\n-    return errMsg;\n+    return { error: errMsg };\n   }\n \n-  let priceInEth = new Decimal(issueDetailed.priceLabel.substring(7, issueDetailed.priceLabel.length - 4)).mul(multiplier);\n-  if (priceInEth.gt(paymentPermitMaxPrice)) {\n+  const tokenSymbol = await getTokenSymbol(paymentToken, rpc);\n+\n+  return {\n+    error: \"\",\n+    paymentToken,\n+    rpc,\n+    networkId,\n+    privateKey,\n+    recipient,\n+    multiplier,\n+    paymentPermitMaxPrice,\n+    baseMultiplier,\n+    incentives,\n+    issueCreatorMultiplier,\n+    issue,\n+    payload,\n+    comments,\n+    issueDetailed,\n+    assignee,\n+    tokenSymbol,\n+  };\n+};\n+\n+/**\n+ * Calculate the reward for the assignee\n+ */\n+\n+export const calculateIssueAssigneeReward = async (incentivesCalculation: IncentivesCalculationResult): Promise<RewardsResponse> => {\n+  const logger = getLogger();\n+  const assigneeLogin = incentivesCalculation.assignee!.login;\n+\n+  let priceInEth = new Decimal(incentivesCalculation.issueDetailed!.priceLabel!.substring(7, incentivesCalculation.issueDetailed!.priceLabel!.length - 4)).mul(\n+    incentivesCalculation.multiplier!\n+  );\n+  if (priceInEth.gt(incentivesCalculation.paymentPermitMaxPrice!)) {\n     logger.info(\"Skipping to proceed the payment because bounty payout is higher than paymentPermitMaxPrice\");\n-    return `Permit generation skipped since issue's bounty is higher than ${paymentPermitMaxPrice}`;\n+    return { error: `Permit generation skipped since issue's bounty is higher than ${incentivesCalculation.paymentPermitMaxPrice}` };\n   }\n \n   // if bounty hunter has any penalty then deduct it from the bounty\n-  const penaltyAmount = await getPenalty(assignee.login, payload.repository.full_name, paymentToken, networkId.toString());\n+  const penaltyAmount = await getPenalty(\n+    assigneeLogin,\n+    incentivesCalculation.payload!.repository.full_name,\n+    incentivesCalculation.paymentToken!,\n+    incentivesCalculation.networkId!.toString()\n+  );\n   if (penaltyAmount.gt(0)) {\n     logger.info(`Deducting penalty from bounty`);\n     const bountyAmount = ethers.utils.parseUnits(priceInEth.toString(), 18);\n     const bountyAmountAfterPenalty = bountyAmount.sub(penaltyAmount);\n     if (bountyAmountAfterPenalty.lte(0)) {\n-      await removePenalty(assignee.login, payload.repository.full_name, paymentToken, networkId.toString(), bountyAmount);\n+      await removePenalty(\n+        assigneeLogin,\n+        incentivesCalculation.payload!.repository.full_name,\n+        incentivesCalculation.paymentToken!,\n+        incentivesCalculation.networkId!.toString(),\n+        bountyAmount\n+      );\n       const msg = `Permit generation skipped because bounty amount after penalty is 0`;\n       logger.info(msg);\n-      return msg;\n+      return { error: msg };\n     }\n     priceInEth = new Decimal(ethers.utils.formatUnits(bountyAmountAfterPenalty, 18));\n   }\n \n-  const { txData, payoutUrl } = await generatePermit2Signature(recipient, priceInEth, issue.node_id, assignee.node_id, \"ISSUE_ASSIGNEE\");\n-  const tokenSymbol = await getTokenSymbol(paymentToken, rpc);\n-  const shortenRecipient = shortenEthAddress(recipient, `[ CLAIM ${priceInEth} ${tokenSymbol.toUpperCase()} ]`.length);\n-  logger.info(`Posting a payout url to the issue, url: ${payoutUrl}`);\n-  const comment =\n-    `#### Task Assignee Reward\\n### [ **[ CLAIM ${priceInEth} ${tokenSymbol.toUpperCase()} ]** ](${payoutUrl})\\n` + \"```\" + shortenRecipient + \"```\";\n-  const permitComments = comments.filter((content) => content.body.includes(\"https://pay.ubq.fi?claim=\") && content.user.type == UserType.Bot);\n-  if (permitComments.length > 0) {\n-    logger.info(`Skip to generate a permit url because it has been already posted`);\n-    return `Permit generation skipped because it was already posted to this issue.`;\n-  }\n-  await deleteLabel(issueDetailed.priceLabel);\n-  await addLabelToIssue(\"Permitted\");\n-  await savePermitToDB(assignee.id, txData);\n-  if (penaltyAmount.gt(0)) {\n-    await removePenalty(assignee.login, payload.repository.full_name, paymentToken, networkId.toString(), penaltyAmount);\n+  const account = await getWalletAddress(assigneeLogin);\n+\n+  return {\n+    error: \"\",\n+    user_id: incentivesCalculation.assignee!.node_id,",
+        "score": {
+          "reward": 0.732,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 80.78500000000003,
+            "syllables": 25,
+            "sentences": 1,
+            "score": 0.7921499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1328098708,
+        "content": "this would be better as an interface",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1328098708",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -127,78 +170,336 @@ export const handleIssueClosed = async () => {\n \n   if (paymentPermitMaxPrice == 0 || !paymentPermitMaxPrice) {\n     logger.info(`Skipping to generate permit2 url, reason: { paymentPermitMaxPrice: ${paymentPermitMaxPrice}}`);\n-    return `Permit generation disabled because paymentPermitMaxPrice is 0.`;\n+    throw new Error(`Permit generation disabled because paymentPermitMaxPrice is 0.`);\n   }\n \n   const issueDetailed = bountyInfo(issue);\n   if (!issueDetailed.isBounty) {\n-    logger.info(`Skipping... its not a bounty.`);\n-    return `Permit generation disabled because this issue didn't qualify as bounty.`;\n+    logger.info(`Skipping... its not a bounty`);\n+    throw new Error(`Permit generation disabled because this issue didn't qualify as bounty.`);\n+  }\n+\n+  if (!issueDetailed.priceLabel || !issueDetailed.priorityLabel || !issueDetailed.timelabel) {\n+    logger.info(`Skipping... its not a bounty`);\n+    throw new Error(`Permit generation disabled because this issue didn't qualify as bounty.`);\n   }\n \n   const assignees = issue?.assignees ?? [];\n   const assignee = assignees.length > 0 ? assignees[0] : undefined;\n   if (!assignee) {\n-    logger.info(\"Skipping to proceed the payment because `assignee` is undefined.\");\n-    return `Permit generation disabled because assignee is undefined.`;\n+    logger.info(\"Skipping to proceed the payment because `assignee` is undefined\");\n+    throw new Error(`Permit generation disabled because assignee is undefined.`);\n   }\n \n   if (!issueDetailed.priceLabel) {\n     logger.info(\"Skipping to proceed the payment because price not set\");\n-    return `Permit generation disabled because price label is not set.`;\n+    throw new Error(`Permit generation disabled because price label is not set.`);\n   }\n \n   const recipient = await getWalletAddress(assignee.login);\n   if (!recipient || recipient?.trim() === \"\") {\n     logger.info(`Recipient address is missing`);\n-    return;\n+    throw new Error(`Permit generation skipped because recipient address is missing`);\n   }\n \n   const { value: multiplier } = await getWalletMultiplier(assignee.login, id?.toString());\n \n   if (multiplier === 0) {\n     const errMsg = \"Refusing to generate the payment permit because \" + `@${assignee.login}` + \"'s payment `multiplier` is `0`\";\n     logger.info(errMsg);\n-    return errMsg;\n+    throw new Error(errMsg);\n   }\n \n-  let priceInEth = new Decimal(issueDetailed.priceLabel.substring(7, issueDetailed.priceLabel.length - 4)).mul(multiplier);\n-  if (priceInEth.gt(paymentPermitMaxPrice)) {\n+  const tokenSymbol = await getTokenSymbol(paymentToken, rpc);\n+\n+  return {\n+    paymentToken,\n+    rpc,\n+    networkId,\n+    privateKey,\n+    recipient,\n+    multiplier,\n+    paymentPermitMaxPrice,\n+    baseMultiplier,\n+    incentives,\n+    issueCreatorMultiplier,\n+    issue,\n+    payload,\n+    comments,\n+    issueDetailed: {\n+      isBounty: issueDetailed.isBounty,\n+      timelabel: issueDetailed.timelabel,\n+      priorityLabel: issueDetailed.priorityLabel,\n+      priceLabel: issueDetailed.priceLabel,\n+    },\n+    assignee,\n+    tokenSymbol,\n+  };\n+};\n+\n+/**\n+ * Calculate the reward for the assignee\n+ */\n+\n+export const calculateIssueAssigneeReward = async (incentivesCalculation: IncentivesCalculationResult): Promise<RewardsResponse> => {\n+  const logger = getLogger();\n+  const assigneeLogin = incentivesCalculation.assignee.login;\n+\n+  let priceInEth = new Decimal(incentivesCalculation.issueDetailed.priceLabel.substring(7, incentivesCalculation.issueDetailed.priceLabel.length - 4)).mul(\n+    incentivesCalculation.multiplier\n+  );\n+  if (priceInEth.gt(incentivesCalculation.paymentPermitMaxPrice)) {\n     logger.info(\"Skipping to proceed the payment because bounty payout is higher than paymentPermitMaxPrice.\");\n-    return `Permit generation disabled because issue's bounty is higher than ${paymentPermitMaxPrice}.`;\n+    return { error: `Permit generation disabled because issue's bounty is higher than ${incentivesCalculation.paymentPermitMaxPrice}` };\n   }\n \n   // if bounty hunter has any penalty then deduct it from the bounty\n-  const penaltyAmount = await getPenalty(assignee.login, payload.repository.full_name, paymentToken, networkId.toString());\n+  const penaltyAmount = await getPenalty(\n+    assigneeLogin,\n+    incentivesCalculation.payload.repository.full_name,\n+    incentivesCalculation.paymentToken,\n+    incentivesCalculation.networkId.toString()\n+  );\n   if (penaltyAmount.gt(0)) {\n     logger.info(`Deducting penalty from bounty`);\n     const bountyAmount = ethers.utils.parseUnits(priceInEth.toString(), 18);\n     const bountyAmountAfterPenalty = bountyAmount.sub(penaltyAmount);\n     if (bountyAmountAfterPenalty.lte(0)) {\n-      await removePenalty(assignee.login, payload.repository.full_name, paymentToken, networkId.toString(), bountyAmount);\n+      await removePenalty(\n+        assigneeLogin,\n+        incentivesCalculation.payload.repository.full_name,\n+        incentivesCalculation.paymentToken,\n+        incentivesCalculation.networkId.toString(),\n+        bountyAmount\n+      );\n       const msg = `Permit generation disabled because bounty amount after penalty is 0.`;\n       logger.info(msg);\n-      return msg;\n+      return { error: msg };\n     }\n     priceInEth = new Decimal(ethers.utils.formatUnits(bountyAmountAfterPenalty, 18));\n   }\n \n-  const { txData, payoutUrl } = await generatePermit2Signature(recipient, priceInEth, issue.node_id, assignee.node_id, \"ISSUE_ASSIGNEE\");\n-  const tokenSymbol = await getTokenSymbol(paymentToken, rpc);\n-  const shortenRecipient = shortenEthAddress(recipient, `[ CLAIM ${priceInEth} ${tokenSymbol.toUpperCase()} ]`.length);\n-  logger.info(`Posting a payout url to the issue, url: ${payoutUrl}`);\n-  const comment =\n-    `#### Task Assignee Reward\\n### [ **[ CLAIM ${priceInEth} ${tokenSymbol.toUpperCase()} ]** ](${payoutUrl})\\n` + \"```\" + shortenRecipient + \"```\";\n-  const permitComments = comments.filter((content) => content.body.includes(\"https://pay.ubq.fi?claim=\") && content.user.type == UserType.Bot);\n-  if (permitComments.length > 0) {\n-    logger.info(`Skip to generate a permit url because it has been already posted.`);\n-    return `Permit generation disabled because it was already posted to this issue.`;\n-  }\n-  await deleteLabel(issueDetailed.priceLabel);\n-  await addLabelToIssue(\"Permitted\");\n-  await savePermitToDB(assignee.id, txData);\n-  if (penaltyAmount.gt(0)) {\n-    await removePenalty(assignee.login, payload.repository.full_name, paymentToken, networkId.toString(), penaltyAmount);\n+  const account = await getWalletAddress(assigneeLogin);\n+\n+  return {\n+    error: \"\",\n+    userId: incentivesCalculation.assignee.node_id,\n+    username: assigneeLogin,\n+    reward: [\n+      {\n+        priceInEth,\n+        penaltyAmount,\n+        account: account || \"0x\",\n+        user: \"\",\n+        userId: \"\",\n+      },\n+    ],\n+  };\n+};\n+\n+export const handleIssueClosed = async (\n+  creatorReward: RewardsResponse,\n+  assigneeReward: RewardsResponse,\n+  conversationRewards: RewardsResponse,\n+  pullRequestReviewersReward: RewardsResponse,\n+  incentivesCalculation: IncentivesCalculationResult\n+): Promise<{ error: string }> => {\n+  const logger = getLogger();\n+  const { comments } = getBotConfig();\n+  const issueNumber = incentivesCalculation.issue.number;\n+\n+  let commentersComment = \"\",\n+    title = \"Task Assignee\",\n+    assigneeComment = \"\",\n+    creatorComment = \"\",\n+    mergedComment = \"\",\n+    pullRequestReviewerComment = \"\";\n+  // The mapping between gh handle and comment with a permit url\n+  const commentersReward: Record<string, string> = {};\n+  const prReviewersReward: Record<string, string> = {};\n+\n+  // Rewards by user\n+  const rewardByUser: {\n+    account: string;\n+    priceInEth: Decimal;\n+    userId: string | undefined;\n+    issueId: string;\n+    type: string | undefined;\n+    user: string | undefined;\n+  }[] = [];",
+        "score": {
+          "reward": 0.602,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 78.87285714285717,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.8112714285714283
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1328098846,
+        "content": "can you also replace this error with `throw Error`?",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1328098846",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -37,6 +45,21 @@ export * from \"./help\";\n export * from \"./multiplier\";\n export * from \"./query\";\n \n+export interface RewardsResponse {\n+  error: string | null;",
+        "score": {
+          "reward": 0.602,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 78.87285714285717,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.8112714285714283
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1715229590,
+        "content": "That's a problem because you're returning an object with error string and other properties that can be undefined. Wouldn't it better if you use `throw Error` and return object that can't have undefined properties so you don't need to check.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#issuecomment-1715229590",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.312,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 43,
+            "wordValue": 0.1,
+            "result": 2.25
+          },
+          "readability": {
+            "fleschKincaid": 64.99854651162792,
+            "syllables": 61,
+            "sentences": 2,
+            "score": 0.9500145348837208
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1617141540,
+            "effect": {
+              "addition": 156,
+              "deletion": 83
+            },
+            "reward": 2.39,
+            "priority": 1
+          },
+          {
+            "reviewId": 1618793189,
+            "effect": {
+              "addition": 514,
+              "deletion": 462
+            },
+            "reward": 9.76,
+            "priority": 1
+          },
+          {
+            "reviewId": 1621265311,
+            "effect": {
+              "addition": 2,
+              "deletion": 2
+            },
+            "reward": 0.04,
+            "priority": 1
+          },
+          {
+            "reviewId": 1621603064,
+            "effect": {
+              "addition": 0,
+              "deletion": 0
+            },
+            "reward": 0,
+            "priority": 1
+          },
+          {
+            "reviewId": 1630086499,
+            "effect": {
+              "addition": 839,
+              "deletion": 359
+            },
+            "reward": 11.98,
+            "priority": 1
+          },
+          {
+            "reviewId": 1633951911,
+            "effect": {
+              "addition": 129,
+              "deletion": 89
+            },
+            "reward": 2.18,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 34.975 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>6</td><td>26.35</td></tr><tr><td>Review</td><td>Comment</td><td>9</td><td>8.625</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquibot/pull/714\" target=\"_blank\" rel=\"noopener\">#714</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+156 -83</td><td>1</td><td>2.39</td></tr><tr><td>+514 -462</td><td>1</td><td>9.76</td></tr><tr><td>+2 -2</td><td>1</td><td>0.04</td></tr><tr><td>+0 -0</td><td>1</td><td>0</td></tr><tr><td>+839 -359</td><td>1</td><td>11.98</td></tr><tr><td>+129 -89</td><td>1</td><td>2.18</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#pullrequestreview-1617141540\" target=\"_blank\" rel=\"noopener\">Currently I feel like the code is messy and unreadable. Could yo&hellip;</a></h6></td><td><details><summary>2.39</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 132&#13;  wordValue: 0.1&#13;  result: 2.39&#13;</pre></details></td><td>0.9</td><td>1</td><td>2.763</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#pullrequestreview-1618793189\" target=\"_blank\" rel=\"noopener\">can you avoid using &#96;!&#96; assertion?</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.469</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1320737957\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionuserId?: string;&#96;&#96;&#96;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.6</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1320738058\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionuser_id: incentivesCalculation.as&hellip;</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.52</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1322400597\" target=\"_blank\" rel=\"noopener\">Well we should try to be consistent and use camelCase everywhere</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.625</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1322630560\" target=\"_blank\" rel=\"noopener\">Yes, it doesn't much difference, but I think we should at least &hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.732</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1328098708\" target=\"_blank\" rel=\"noopener\">this would be better as an interface</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.602</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1328098846\" target=\"_blank\" rel=\"noopener\">can you also replace this error with &#96;throw Error&#96;?</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.602</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#issuecomment-1715229590\" target=\"_blank\" rel=\"noopener\">That's a problem because you're returning an object with error s&hellip;</a></h6></td><td><details><summary>2.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 43&#13;  wordValue: 0.1&#13;  result: 2.25&#13;</pre></details></td><td>0.8</td><td>1</td><td>2.312</td></tr></tbody></table></details>"
+  },
+  "0xcodercrane": {
+    "total": 20.741,
+    "userId": 108444211,
+    "comments": [
+      {
+        "id": 1623503687,
+        "content": "Looks good so far. Left a couple of request changes.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#pullrequestreview-1623503687",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.087,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 100.24000000000002,
+            "syllables": 12,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1323828994,
+        "content": "I don't have a clear idea about this function in terms of input/output values. \r\nLets define the return type and update the relevant lines.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1323828994",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -84,160 +68,125 @@ export const incentivizeComments = async () => {\n     }\n     issueCommentsByUser[user.login].comments.push(issueComment.body_html);\n   }\n-  const tokenSymbol = await getTokenSymbol(paymentToken, rpc);\n   logger.info(`Filtering by the user type done. commentsByUser: ${JSON.stringify(issueCommentsByUser)}`);\n \n-  // The mapping between gh handle and comment with a permit url\n-  const reward: Record<string, string> = {};\n-\n   // The mapping between gh handle and amount in ETH\n   const fallbackReward: Record<string, Decimal> = {};\n-  let comment = `#### Conversation Rewards\\n`;\n+\n+  // array of awaiting permits to generate\n+  const reward: { account: string; priceInEth: Decimal; userId: string; user: string; penaltyAmount: BigNumber }[] = [];\n+\n   for (const user of Object.keys(issueCommentsByUser)) {\n     const commentsByUser = issueCommentsByUser[user];\n     const commentsByNode = await parseComments(commentsByUser.comments, ItemsToExclude);\n-    const rewardValue = calculateRewardValue(commentsByNode, incentives);\n+    const rewardValue = calculateRewardValue(commentsByNode, calculateIncentives.incentives);\n     if (rewardValue.equals(0)) {\n       logger.info(`Skipping to generate a permit url because the reward value is 0. user: ${user}`);\n       continue;\n     }\n     logger.debug(`Comment parsed for the user: ${user}. comments: ${JSON.stringify(commentsByNode)}, sum: ${rewardValue}`);\n     const account = await getWalletAddress(user);\n-    const amountInETH = rewardValue.mul(baseMultiplier);\n-    if (amountInETH.gt(paymentPermitMaxPrice)) {\n+    const priceInEth = rewardValue.mul(calculateIncentives.baseMultiplier);\n+    if (priceInEth.gt(calculateIncentives.paymentPermitMaxPrice)) {\n       logger.info(`Skipping comment reward for user ${user} because reward is higher than payment permit max price`);\n       continue;\n     }\n     if (account) {\n-      const { payoutUrl } = await generatePermit2Signature(account, amountInETH, issue.node_id, commentsByUser.id, \"ISSUE_COMMENTER\");\n-      comment = `${comment}### [ **${user}: [ CLAIM ${amountInETH} ${tokenSymbol.toUpperCase()} ]** ](${payoutUrl})\\n`;\n-      reward[user] = payoutUrl;\n+      reward.push({ account, priceInEth, userId: commentsByUser.id, user, penaltyAmount: BigNumber.from(0) });\n     } else {\n-      fallbackReward[user] = amountInETH;\n+      fallbackReward[user] = priceInEth;\n     }\n   }\n \n-  logger.info(`Permit url generated for contributors. reward: ${JSON.stringify(reward)}`);\n-  logger.info(`Skipping to generate a permit url for missing accounts. fallback: ${JSON.stringify(fallbackReward)}`);\n-\n-  await addCommentToIssue(comment, issue.number);\n+  return { error: \"\", title, reward, fallbackReward };\n };\n \n-export const incentivizeCreatorComment = async () => {\n+export const calculateIssueCreatorReward = async (incentivesCalculation: IncentivesCalculationResult): Promise<RewardsResponse> => {\n+  const title = `Task Creator Reward`;\n   const logger = getLogger();\n-  const {\n-    mode: { incentiveMode, paymentPermitMaxPrice },\n-    price: { incentives, issueCreatorMultiplier },\n-    payout: { paymentToken, rpc },\n-  } = getBotConfig();\n-  if (!incentiveMode) {\n-    logger.info(`No incentive mode. skipping to process`);\n-    return;\n-  }\n-  const context = getBotContext();\n-  const payload = context.payload as Payload;\n-  const issue = payload.issue;\n-  if (!issue) {\n-    logger.info(`Incomplete payload. issue: ${issue}`);\n-    return;\n-  }\n-\n-  if (issue.state_reason !== StateReason.COMPLETED) {\n-    logger.info(\"incentivizeCreatorComment: comment incentives disabled because the issue was not closed as completed.\");\n-    return;\n-  }\n-\n-  if (paymentPermitMaxPrice == 0 || !paymentPermitMaxPrice) {\n-    logger.info(`incentivizeCreatorComment: skipping to generate permit2 url, reason: { paymentPermitMaxPrice: ${paymentPermitMaxPrice}}`);\n-    return;\n-  }\n \n-  const issueDetailed = bountyInfo(issue);\n+  const issueDetailed = bountyInfo(incentivesCalculation.issue);\n   if (!issueDetailed.isBounty) {\n     logger.info(`incentivizeCreatorComment: its not a bounty`);\n-    return;\n+    return { error: `incentivizeCreatorComment: its not a bounty` };\n   }\n \n-  const comments = await getAllIssueComments(issue.number);\n+  const comments = await getAllIssueComments(incentivesCalculation.issue.number);\n   const permitComments = comments.filter(\n     (content) => content.body.includes(\"Task Creator Reward\") && content.body.includes(\"https://pay.ubq.fi?claim=\") && content.user.type == UserType.Bot\n   );\n   if (permitComments.length > 0) {\n     logger.info(`incentivizeCreatorComment: skip to generate a permit url because it has been already posted`);\n-    return;\n+    return { error: `incentivizeCreatorComment: skip to generate a permit url because it has been already posted` };\n   }\n \n-  const assignees = issue.assignees ?? [];\n+  const assignees = incentivesCalculation.issue.assignees ?? [];\n   const assignee = assignees.length > 0 ? assignees[0] : undefined;\n   if (!assignee) {\n     logger.info(\"incentivizeCreatorComment: skipping payment permit generation because `assignee` is `undefined`.\");\n-    return;\n+    return { error: \"incentivizeCreatorComment: skipping payment permit generation because `assignee` is `undefined`.\" };\n   }\n \n-  const description = await getIssueDescription(issue.number, \"html\");\n+  const description = await getIssueDescription(incentivesCalculation.issue.number, \"html\");\n   if (!description) {\n     logger.info(`Skipping to generate a permit url because issue description is empty. description: ${description}`);\n-    return;\n+    return { error: `Skipping to generate a permit url because issue description is empty. description: ${description}` };\n   }\n   logger.info(`Getting the issue description done. description: ${description}`);\n-  const creator = issue.user;\n-  if (creator.type === UserType.Bot || creator.login === issue.assignee) {\n+  const creator = incentivesCalculation.issue.user;\n+  if (creator.type === UserType.Bot || creator.login === incentivesCalculation.issue.assignee) {\n     logger.info(\"Issue creator assigneed himself or Bot created this issue.\");\n-    return;\n+    return { error: \"Issue creator assigneed himself or Bot created this issue.\" };\n   }\n \n-  const tokenSymbol = await getTokenSymbol(paymentToken, rpc);\n   const result = await generatePermitForComments(\n     creator.login,\n-    creator.node_id,\n     [description],\n-    issueCreatorMultiplier,\n-    incentives,\n-    tokenSymbol,\n-    issue.node_id,\n-    paymentPermitMaxPrice\n+    incentivesCalculation.issueCreatorMultiplier,\n+    incentivesCalculation.incentives,\n+    incentivesCalculation.paymentPermitMaxPrice\n   );\n \n-  if (result.payoutUrl) {\n-    logger.info(`Permit url generated for creator. reward: ${result.payoutUrl}`);\n-    await addCommentToIssue(result.comment, issue.number);\n-  }\n-  if (result.amountInETH) {\n-    logger.info(`Skipping to generate a permit url for missing account. fallback: ${result.amountInETH}`);\n-  }\n+  if (!result || !result.account || !result.amountInETH) {\n+    throw new Error(\"Failed to generate permit for issue creator\");\n+  }\n+\n+  return {\n+    error: \"\",\n+    title,\n+    userId: creator.node_id,\n+    username: creator.login,\n+    reward: [\n+      {\n+        priceInEth: result?.amountInETH ?? new Decimal(0),\n+        account: result?.account,\n+        userId: \"\",\n+        user: \"\",\n+        penaltyAmount: BigNumber.from(0),\n+      },\n+    ],\n+  };\n };\n \n-const generatePermitForComments = async (\n-  user: string,\n-  userId: string,\n-  comments: string[],\n-  multiplier: number,\n-  incentives: Incentives,\n-  tokenSymbol: string,\n-  node_id: string,\n-  paymentPermitMaxPrice: number\n-): Promise<{ comment: string; payoutUrl?: string; amountInETH?: Decimal }> => {\n+const generatePermitForComments = async (user: string, comments: string[], multiplier: number, incentives: Incentives, paymentPermitMaxPrice: number) => {",
+        "score": {
+          "reward": 0.495,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 73.24769230769233,
+            "syllables": 37,
+            "sentences": 2,
+            "score": 0.8675230769230766
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1323830554,
+        "content": "need to include the detailed error string here.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1323830554",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -84,160 +68,125 @@ export const incentivizeComments = async () => {\n     }\n     issueCommentsByUser[user.login].comments.push(issueComment.body_html);\n   }\n-  const tokenSymbol = await getTokenSymbol(paymentToken, rpc);\n   logger.info(`Filtering by the user type done. commentsByUser: ${JSON.stringify(issueCommentsByUser)}`);\n \n-  // The mapping between gh handle and comment with a permit url\n-  const reward: Record<string, string> = {};\n-\n   // The mapping between gh handle and amount in ETH\n   const fallbackReward: Record<string, Decimal> = {};\n-  let comment = `#### Conversation Rewards\\n`;\n+\n+  // array of awaiting permits to generate\n+  const reward: { account: string; priceInEth: Decimal; userId: string; user: string; penaltyAmount: BigNumber }[] = [];\n+\n   for (const user of Object.keys(issueCommentsByUser)) {\n     const commentsByUser = issueCommentsByUser[user];\n     const commentsByNode = await parseComments(commentsByUser.comments, ItemsToExclude);\n-    const rewardValue = calculateRewardValue(commentsByNode, incentives);\n+    const rewardValue = calculateRewardValue(commentsByNode, calculateIncentives.incentives);\n     if (rewardValue.equals(0)) {\n       logger.info(`Skipping to generate a permit url because the reward value is 0. user: ${user}`);\n       continue;\n     }\n     logger.debug(`Comment parsed for the user: ${user}. comments: ${JSON.stringify(commentsByNode)}, sum: ${rewardValue}`);\n     const account = await getWalletAddress(user);\n-    const amountInETH = rewardValue.mul(baseMultiplier);\n-    if (amountInETH.gt(paymentPermitMaxPrice)) {\n+    const priceInEth = rewardValue.mul(calculateIncentives.baseMultiplier);\n+    if (priceInEth.gt(calculateIncentives.paymentPermitMaxPrice)) {\n       logger.info(`Skipping comment reward for user ${user} because reward is higher than payment permit max price`);\n       continue;\n     }\n     if (account) {\n-      const { payoutUrl } = await generatePermit2Signature(account, amountInETH, issue.node_id, commentsByUser.id, \"ISSUE_COMMENTER\");\n-      comment = `${comment}### [ **${user}: [ CLAIM ${amountInETH} ${tokenSymbol.toUpperCase()} ]** ](${payoutUrl})\\n`;\n-      reward[user] = payoutUrl;\n+      reward.push({ account, priceInEth, userId: commentsByUser.id, user, penaltyAmount: BigNumber.from(0) });\n     } else {\n-      fallbackReward[user] = amountInETH;\n+      fallbackReward[user] = priceInEth;\n     }\n   }\n \n-  logger.info(`Permit url generated for contributors. reward: ${JSON.stringify(reward)}`);\n-  logger.info(`Skipping to generate a permit url for missing accounts. fallback: ${JSON.stringify(fallbackReward)}`);\n-\n-  await addCommentToIssue(comment, issue.number);\n+  return { error: \"\", title, reward, fallbackReward };\n };\n \n-export const incentivizeCreatorComment = async () => {\n+export const calculateIssueCreatorReward = async (incentivesCalculation: IncentivesCalculationResult): Promise<RewardsResponse> => {\n+  const title = `Task Creator Reward`;\n   const logger = getLogger();\n-  const {\n-    mode: { incentiveMode, paymentPermitMaxPrice },\n-    price: { incentives, issueCreatorMultiplier },\n-    payout: { paymentToken, rpc },\n-  } = getBotConfig();\n-  if (!incentiveMode) {\n-    logger.info(`No incentive mode. skipping to process`);\n-    return;\n-  }\n-  const context = getBotContext();\n-  const payload = context.payload as Payload;\n-  const issue = payload.issue;\n-  if (!issue) {\n-    logger.info(`Incomplete payload. issue: ${issue}`);\n-    return;\n-  }\n-\n-  if (issue.state_reason !== StateReason.COMPLETED) {\n-    logger.info(\"incentivizeCreatorComment: comment incentives disabled because the issue was not closed as completed.\");\n-    return;\n-  }\n-\n-  if (paymentPermitMaxPrice == 0 || !paymentPermitMaxPrice) {\n-    logger.info(`incentivizeCreatorComment: skipping to generate permit2 url, reason: { paymentPermitMaxPrice: ${paymentPermitMaxPrice}}`);\n-    return;\n-  }\n \n-  const issueDetailed = bountyInfo(issue);\n+  const issueDetailed = bountyInfo(incentivesCalculation.issue);\n   if (!issueDetailed.isBounty) {\n     logger.info(`incentivizeCreatorComment: its not a bounty`);\n-    return;\n+    return { error: `incentivizeCreatorComment: its not a bounty` };\n   }\n \n-  const comments = await getAllIssueComments(issue.number);\n+  const comments = await getAllIssueComments(incentivesCalculation.issue.number);\n   const permitComments = comments.filter(\n     (content) => content.body.includes(\"Task Creator Reward\") && content.body.includes(\"https://pay.ubq.fi?claim=\") && content.user.type == UserType.Bot\n   );\n   if (permitComments.length > 0) {\n     logger.info(`incentivizeCreatorComment: skip to generate a permit url because it has been already posted`);\n-    return;\n+    return { error: `incentivizeCreatorComment: skip to generate a permit url because it has been already posted` };\n   }\n \n-  const assignees = issue.assignees ?? [];\n+  const assignees = incentivesCalculation.issue.assignees ?? [];\n   const assignee = assignees.length > 0 ? assignees[0] : undefined;\n   if (!assignee) {\n     logger.info(\"incentivizeCreatorComment: skipping payment permit generation because `assignee` is `undefined`.\");\n-    return;\n+    return { error: \"incentivizeCreatorComment: skipping payment permit generation because `assignee` is `undefined`.\" };\n   }\n \n-  const description = await getIssueDescription(issue.number, \"html\");\n+  const description = await getIssueDescription(incentivesCalculation.issue.number, \"html\");\n   if (!description) {\n     logger.info(`Skipping to generate a permit url because issue description is empty. description: ${description}`);\n-    return;\n+    return { error: `Skipping to generate a permit url because issue description is empty. description: ${description}` };\n   }\n   logger.info(`Getting the issue description done. description: ${description}`);\n-  const creator = issue.user;\n-  if (creator.type === UserType.Bot || creator.login === issue.assignee) {\n+  const creator = incentivesCalculation.issue.user;\n+  if (creator.type === UserType.Bot || creator.login === incentivesCalculation.issue.assignee) {\n     logger.info(\"Issue creator assigneed himself or Bot created this issue.\");\n-    return;\n+    return { error: \"Issue creator assigneed himself or Bot created this issue.\" };\n   }\n \n-  const tokenSymbol = await getTokenSymbol(paymentToken, rpc);\n   const result = await generatePermitForComments(\n     creator.login,\n-    creator.node_id,\n     [description],\n-    issueCreatorMultiplier,\n-    incentives,\n-    tokenSymbol,\n-    issue.node_id,\n-    paymentPermitMaxPrice\n+    incentivesCalculation.issueCreatorMultiplier,\n+    incentivesCalculation.incentives,\n+    incentivesCalculation.paymentPermitMaxPrice\n   );\n \n-  if (result.payoutUrl) {\n-    logger.info(`Permit url generated for creator. reward: ${result.payoutUrl}`);\n-    await addCommentToIssue(result.comment, issue.number);\n-  }\n-  if (result.amountInETH) {\n-    logger.info(`Skipping to generate a permit url for missing account. fallback: ${result.amountInETH}`);\n-  }\n+  if (!result || !result.account || !result.amountInETH) {\n+    throw new Error(\"Failed to generate permit for issue creator\");",
+        "score": {
+          "reward": 0.184,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 82.39000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.7760999999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1323832752,
+        "content": "unnecessary line",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1323832752",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -65,12 +87,22 @@ export const commentParser = (body: string): IssueCommentCommands[] => {\n \n export const issueClosedCallback = async (): Promise<void> => {\n   const { payload: _payload } = getBotContext();\n-  const { comments } = getBotConfig();\n   const issue = (_payload as Payload).issue;\n   if (!issue) return;\n   try {\n-    const comment = await handleIssueClosed();\n-    if (comment) await addCommentToIssue(comment + comments.promotionComment, issue.number);\n+    // assign function incentivesCalculation to a variable\n+    const calculateIncentives = await incentivesCalculation();\n+\n+    const creatorReward = await calculateIssueCreatorReward(calculateIncentives);\n+    const assigneeReward = await calculateIssueAssigneeReward(calculateIncentives);\n+    const conversationRewards = await calculateIssueConversationReward(calculateIncentives);\n+\n+    const { error } = await handleIssueClosed(creatorReward, assigneeReward, conversationRewards, calculateIncentives);\n+\n+    if (error) {\n+      await addCommentToIssue(error, issue.number);\n+      return;",
+        "score": {
+          "reward": 0.042,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": -48.994999999999976,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1323833314,
+        "content": "unnecessary line",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1323833314",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -38,8 +44,20 @@ export const payout = async (body: string) => {\n     return;\n   }\n \n-  const response = await handleIssueClosed();\n-  return response;\n+  // assign function incentivesCalculation to a variable\n+  const calculateIncentives = await incentivesCalculation();\n+\n+  const creatorReward = await calculateIssueCreatorReward(calculateIncentives);\n+  const assigneeReward = await calculateIssueAssigneeReward(calculateIncentives);\n+  const conversationRewards = await calculateIssueConversationReward(calculateIncentives);\n+\n+  const { error } = await handleIssueClosed(creatorReward, assigneeReward, conversationRewards, calculateIncentives);\n+\n+  if (error) {\n+    return error;\n+  }\n+\n+  return;",
+        "score": {
+          "reward": 0.042,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": -48.994999999999976,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1323842851,
+        "content": "the docstrings seems stalled",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1323842851",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -12,19 +12,51 @@ import {\n   savePermitToDB,\n   wasIssueReopened,\n   getAllIssueAssignEvents,\n+  addCommentToIssue,\n } from \"../../helpers\";\n-import { UserType, Payload, StateReason } from \"../../types\";\n+import { UserType, Payload, StateReason, Comment, User, Incentives, Issue } from \"../../types\";\n import { shortenEthAddress } from \"../../utils\";\n import { bountyInfo } from \"../wildcard\";\n import Decimal from \"decimal.js\";\n import { GLOBAL_STRINGS } from \"../../configs\";\n import { isParentIssue } from \"../pricing\";\n+import { RewardsResponse } from \"../comment\";\n+import { isEmpty } from \"lodash\";\n \n-export const handleIssueClosed = async () => {\n+export interface IncentivesCalculationResult {\n+  paymentToken: string;\n+  rpc: string;\n+  networkId: number;\n+  privateKey: string;\n+  paymentPermitMaxPrice: number;\n+  baseMultiplier: number;\n+  incentives: Incentives;\n+  issueCreatorMultiplier: number;\n+  recipient: string;\n+  multiplier: number;\n+  issue: Issue;\n+  payload: Payload;\n+  comments: Comment[];\n+  issueDetailed: {\n+    isBounty: boolean;\n+    timelabel: string;\n+    priorityLabel: string;\n+    priceLabel: string;\n+  };\n+  assignee: User;\n+  tokenSymbol: string;\n+}\n+\n+/**\n+ * Function to check payment conditions\n+ */\n+",
+        "score": {
+          "reward": 0.078,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 97.025,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.6297499999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1719532820,
+        "content": "Let me handle the merge https://github.com/ubiquity/ubiquibot/pull/657 first.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#issuecomment-1719532820",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.104,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 63.57596153846157,
+            "syllables": 21,
+            "sentences": 2,
+            "score": 0.9642403846153843
+          },
+          "multiplier": 0.25,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1722857502,
+        "content": "It's been merged but waiting for other reviewer's approval.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#issuecomment-1722857502",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.031,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 64.9245454545455,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0.9507545454545451
+          },
+          "multiplier": 0.25,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1726213885,
+        "content": "I still can see your requests have not been resolved yet @whilefoo.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#issuecomment-1726213885",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.128,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 81.85500000000002,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.7814499999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1623503687,
+            "effect": {
+              "addition": 948,
+              "deletion": 596
+            },
+            "reward": 15.44,
+            "priority": 1
+          },
+          {
+            "reviewId": 1633876384,
+            "effect": {
+              "addition": 340,
+              "deletion": 71
+            },
+            "reward": 4.11,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 20.741 XP ]</a>&nbsp;</h3><h6>@0xcodercrane</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>19.55</td></tr><tr><td>Review</td><td>Comment</td><td>9</td><td>1.191</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquibot/pull/714\" target=\"_blank\" rel=\"noopener\">#714</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+948 -596</td><td>1</td><td>15.44</td></tr><tr><td>+340 -71</td><td>1</td><td>4.11</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#pullrequestreview-1623503687\" target=\"_blank\" rel=\"noopener\">Looks good so far. Left a couple of request changes.</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.087</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1323828994\" target=\"_blank\" rel=\"noopener\">I don't have a clear idea about this function in terms of input/&hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.495</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1323830554\" target=\"_blank\" rel=\"noopener\">need to include the detailed error string here.</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.184</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1323832752\" target=\"_blank\" rel=\"noopener\">unnecessary line</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.042</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1323833314\" target=\"_blank\" rel=\"noopener\">unnecessary line</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.042</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#discussion_r1323842851\" target=\"_blank\" rel=\"noopener\">the docstrings seems stalled</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.078</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#issuecomment-1719532820\" target=\"_blank\" rel=\"noopener\">Let me handle the merge https://github.com/ubiquity/ubiquibot/pu&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.104</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#issuecomment-1722857502\" target=\"_blank\" rel=\"noopener\">It's been merged but waiting for other reviewer's approval.</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.031</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#issuecomment-1726213885\" target=\"_blank\" rel=\"noopener\">I still can see your requests have not been resolved yet @whilef&hellip;</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.128</td></tr></tbody></table></details>"
+  },
+  "wannacfuture": {
+    "total": 21.883,
+    "userId": 119157793,
+    "comments": [
+      {
+        "id": 1624687690,
+        "content": "Can we just wait till incentives for PR reviewer finished?\r\nThen you can consolidate rewards for PR reviewers.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#pullrequestreview-1624687690",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.135,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 61.400000000000034,
+            "syllables": 29,
+            "sentences": 2,
+            "score": 0.9859999999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1721544022,
+        "content": "will be great if you can consolidate rewards on pr reviewers on this pr. 👍",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#issuecomment-1721544022",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.144,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 78.87285714285717,
+            "syllables": 20,
+            "sentences": 2,
+            "score": 0.8112714285714283
+          },
+          "multiplier": 0.25,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1721580340,
+        "content": "Cool, could you provide a QA for consolidation of all?",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714#issuecomment-1721580340",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.174,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 69.78500000000001,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.9021499999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1624687690,
+            "effect": {
+              "addition": 948,
+              "deletion": 596
+            },
+            "reward": 15.44,
+            "priority": 1
+          },
+          {
+            "reviewId": 1629536733,
+            "effect": {
+              "addition": 234,
+              "deletion": 46
+            },
+            "reward": 2.8,
+            "priority": 1
+          },
+          {
+            "reviewId": 1634994249,
+            "effect": {
+              "addition": 212,
+              "deletion": 107
+            },
+            "reward": 3.19,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquibot/pull/714"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 21.883 XP ]</a>&nbsp;</h3><h6>@wannacfuture</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>21.43</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>0.453</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquibot/pull/714\" target=\"_blank\" rel=\"noopener\">#714</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+948 -596</td><td>1</td><td>15.44</td></tr><tr><td>+234 -46</td><td>1</td><td>2.8</td></tr><tr><td>+212 -107</td><td>1</td><td>3.19</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#pullrequestreview-1624687690\" target=\"_blank\" rel=\"noopener\">Can we just wait till incentives for PR reviewer finished?Then&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.135</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#issuecomment-1721544022\" target=\"_blank\" rel=\"noopener\">will be great if you can consolidate rewards on pr reviewers on &hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.144</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/714#issuecomment-1721580340\" target=\"_blank\" rel=\"noopener\">Cool, could you provide a QA for consolidation of all?</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.174</td></tr></tbody></table></details>"
+  }
+}

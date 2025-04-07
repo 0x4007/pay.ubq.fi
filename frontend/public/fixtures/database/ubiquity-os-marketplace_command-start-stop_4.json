@@ -1,0 +1,1348 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 25,
+    "task": {
+      "reward": 25,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 25 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>25</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 22.778,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2188320521,
+        "content": "Interesting that this problem persisted in both versions. I assumed this logic was rewritten from scratch",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/4#issuecomment-2188320521",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.65,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 61.24000000000001,
+            "syllables": 26,
+            "sentences": 2,
+            "score": 0.9875999999999999
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2290316185,
+        "content": "@gentlementlegen  the assignee should not be eligible for review rewards. I assume our config supports this already. Can you make the necessary adjustments for both organizations and link the commits here?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/4#issuecomment-2290316185",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 40.791827956989266,
+            "syllables": 57,
+            "sentences": 3,
+            "score": 0.8079182795698927
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2290937032,
+        "content": "Okay let's see how relevance scoring works. Perhaps I am biased but I am expecting something closer to v1 scoring, just because I fine tuned its config over some months to get what I think kind of makes sense. \r\nLet's run this again once that capability is merged in.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/4#issuecomment-2290937032",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 51,
+            "wordValue": 0.1,
+            "result": 2.4
+          },
+          "readability": {
+            "fleschKincaid": 73.46235294117649,
+            "syllables": 70,
+            "sentences": 3,
+            "score": 0.8653764705882351
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 1689100762,
+        "content": "I always open up my pull body with \"Resolves #0\". Are we sure that GitHub correctly links the pull if \"Resolves\" is located elsewhere? \r\n`^Resolves\\s#\\d+?\\D`",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1689100762",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -169,3 +194,38 @@ async function getOpenedPullRequests(context: Context, username: string): Promis\n   const prs = await getAllPullRequests(context, \"open\");\n   return prs.filter((pr) => !pr.draft && (pr.user?.login === username || !username));\n }\n+\n+/**\n+ * Extracts the task id from the PR body. The format is:\n+ * `Resolves #123`\n+ * `Requires https://www.github.com/.../issue/123`\n+ * `Fixes https://github.com/.../issues/123`\n+ * `Closes #123`\n+ * `Depends on #123`\n+ * `Related to #123`\n+ */\n+export function issueLinkedViaPrBody(prBody: string | null, issueNumber: number): boolean {\n+  const regex = // eslint-disable-next-line no-useless-escape\n+    /(?:Resolves|Fixes|Closes|Depends on|Related to) #(\\d+)|https:\\/\\/(?:www\\.)?github.com\\/([^\\/]+)\\/([^\\/]+)\\/(issue|issues)\\/(\\d+)|#(\\d+)/gi;\n+  const matches = prBody?.match(regex);",
+        "score": {
+          "reward": 1.68,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 71.28000000000002,
+            "syllables": 35,
+            "sentences": 2,
+            "score": 0.8871999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1694070255,
+        "content": "Seems unusual that you added this directive. I suppose it doesn't automatically pick up mjs files?\r\nAlso why mjs? We don't normally use this format according to the template.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1694070255",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,126 @@\n+// @ts-check",
+        "score": {
+          "reward": 1.729,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 65.24616935483871,
+            "syllables": 49,
+            "sentences": 4,
+            "score": 0.9475383064516129
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1694070797,
+        "content": "This enabled stuff should be removed.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1694070797",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -10,8 +10,8 @@ export async function userStartStop(context: Context): Promise<{ output: string\n   const { isEnabled } = config;",
+        "score": {
+          "reward": 0.666,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 87.94500000000002,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.7205499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1694567552,
+        "content": "Can you demonstrate how the config would look if you wanted to disable it on a repo?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1694567552",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -10,8 +10,8 @@ export async function userStartStop(context: Context): Promise<{ output: string\n   const { isEnabled } = config;",
+        "score": {
+          "reward": 0.996,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 75.12117647058825,
+            "syllables": 23,
+            "sentences": 1,
+            "score": 0.8487882352941175
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1694920035,
+        "content": "This doesn't seem right. Configuration merging should be at the resolution of the plugin ID level. And I would have expected that in order to disable this we would have something like \r\n```yml\r\nplugins:\r\n   issues_comment.created:\r\n      - id: ubiquibot/command-start-stop\r\n        with: \r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1694920035",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -10,8 +10,8 @@ export async function userStartStop(context: Context): Promise<{ output: string\n   const { isEnabled } = config;",
+        "score": {
+          "reward": 2.259,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 70.0518181818182,
+            "syllables": 49,
+            "sentences": 3,
+            "score": 0.8994818181818179
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1696228019,
+        "content": "The bot has access to private repositories. Using the bot authentication, you should be able to access the organization config. \r\nI understand now. Although I think it makes more sense to consolidate the plugin url into the ID. But ultimately I want to follow GitHub Actions syntax as closely as possible.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1696228019",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -10,8 +10,8 @@ export async function userStartStop(context: Context): Promise<{ output: string\n   const { isEnabled } = config;",
+        "score": {
+          "reward": 2.432,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 51,
+            "wordValue": 0.1,
+            "result": 2.4
+          },
+          "readability": {
+            "fleschKincaid": 48.84670588235295,
+            "syllables": 89,
+            "sentences": 5,
+            "score": 0.8884670588235295
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2229641347,
+        "content": "Ideally we should have support for all the above scenarios. Cross org indeed is rare. If its too complicated then perhaps we can make a new task for it (if needed in the future.)",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#issuecomment-2229641347",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.47,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 34,
+            "wordValue": 0.1,
+            "result": 2.01
+          },
+          "readability": {
+            "fleschKincaid": 86.23691176470591,
+            "syllables": 45,
+            "sentences": 4,
+            "score": 0.7376308823529409
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2254348781,
+        "content": "After my comments are addressed I'm okay to merge.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#issuecomment-2254348781",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.336,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 78.24500000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.8175499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2195610497,
+            "effect": {
+              "addition": 364,
+              "deletion": 100
+            },
+            "reward": 4.64,
+            "priority": 1
+          },
+          {
+            "reviewId": 2203387036,
+            "effect": {
+              "addition": 344,
+              "deletion": 148
+            },
+            "reward": 4.92,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 22.778 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>9.56</td></tr><tr><td>Issue</td><td>Comment</td><td>3</td><td>1.65</td></tr><tr><td>Review</td><td>Comment</td><td>8</td><td>11.568</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10\" target=\"_blank\" rel=\"noopener\">#10</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+364 -100</td><td>1</td><td>4.64</td></tr><tr><td>+344 -148</td><td>1</td><td>4.92</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/4#issuecomment-2188320521\" target=\"_blank\" rel=\"noopener\">Interesting that this problem persisted in both versions. I assu&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>1</td><td>1</td><td>1.65</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/4#issuecomment-2290316185\" target=\"_blank\" rel=\"noopener\">@gentlementlegen  the assignee should not be eligible for review&hellip;</a></h6></td><td><details><summary>1.92</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/4#issuecomment-2290937032\" target=\"_blank\" rel=\"noopener\">Okay let's see how relevance scoring works. Perhaps I am biased &hellip;</a></h6></td><td><details><summary>2.4</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 51&#13;  wordValue: 0.1&#13;  result: 2.4&#13;</pre></details></td><td>0</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1689100762\" target=\"_blank\" rel=\"noopener\">I always open up my pull body with \"Resolves #0\". Are we sure th&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.68</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1694070255\" target=\"_blank\" rel=\"noopener\">Seems unusual that you added this directive. I suppose it doesn'&hellip;</a></h6></td><td><details><summary>1.92</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.729</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1694070797\" target=\"_blank\" rel=\"noopener\">This enabled stuff should be removed.</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.666</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1694567552\" target=\"_blank\" rel=\"noopener\">Can you demonstrate how the config would look if you wanted to d&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.996</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1694920035\" target=\"_blank\" rel=\"noopener\">This doesn't seem right. Configuration merging should be at the &hellip;</a></h6></td><td><details><summary>1.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.9</td><td>1</td><td>2.259</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1696228019\" target=\"_blank\" rel=\"noopener\">The bot has access to private repositories. Using the bot authen&hellip;</a></h6></td><td><details><summary>2.4</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 51&#13;  wordValue: 0.1&#13;  result: 2.4&#13;</pre></details></td><td>0.8</td><td>1</td><td>2.432</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#issuecomment-2229641347\" target=\"_blank\" rel=\"noopener\">Ideally we should have support for all the above scenarios. Cros&hellip;</a></h6></td><td><details><summary>2.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 34&#13;  wordValue: 0.1&#13;  result: 2.01&#13;</pre></details></td><td>0.6</td><td>1</td><td>1.47</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#issuecomment-2254348781\" target=\"_blank\" rel=\"noopener\">After my comments are addressed I'm okay to merge.</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.336</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 25,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2255768948,
+        "content": "Seems to be a little formatting issue, will open a ticket about it.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/4#issuecomment-2255768948",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.284,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 63.486153846153854,
+            "syllables": 20,
+            "sentences": 1,
+            "score": 0.9651384615384615
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2290647501,
+        "content": "@0x4007 So you mean that Keyrxng here should have had `0` for `Review comments` correct?\r\n---\r\nChanged [here](https://github.com/ubiquity/ubiquibot-config/commit/52e4225d77312a367e23c36485d12ae345c0c46c) and [here](https://github.com/ubiquibot/ubiquibot-config/commit/1370b5213c207fe6fe4bb543342fd4e383b94796).",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/4#issuecomment-2290647501",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.425,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 108.82750000000001,
+            "syllables": 17,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2290926160,
+        "content": "@0x4007 Is that what you intended?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/4#issuecomment-2290926160",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.079,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 102.045,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1687252178,
+        "content": "Why are these ignored?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1687252178",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -3,10 +3,10 @@ import type { KnipConfig } from \"knip\";\n const config: KnipConfig = {\n   entry: [\"build/index.ts\"],\n   project: [\"src/**/*.ts\"],\n-  ignore: [\"src/types/config.ts\", \"**/__mocks__/**\", \"**/__fixtures__/**\", \"src/worker.ts\"],\n+  ignore: [\"src/types/config.ts\", \"**/__mocks__/**\", \"**/__fixtures__/**\", \"src/worker.ts\", \"src/types/plugin-input.ts\", \"src/main.ts\", \"src/plugin.ts\"],",
+        "score": {
+          "reward": 0.26,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 97.025,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.6297499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1687253855,
+        "content": "```suggestion\r\n  const userToUnassign = assignees.find((assignee) => assignee?.login.toLowerCase() === sender.login.toLowerCase());\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1687253855",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -7,23 +7,17 @@ export async function stop(context: Context, issue: Context[\"payload\"][\"issue\"],\n \n   // is there an assignee?\n   const assignees = issue.assignees ?? [];\n-  if (assignees.length == 0) {\n-    logger.error(\"No assignees found for issue\", { issueNumber });\n-    await addCommentToIssue(context, \"````diff\\n! You are not assigned to this task.\\n````\");\n-    return { output: \"No assignees found for this task\" };\n-  }\n-\n   // should unassign?\n-  const shouldUnassign = assignees[0]?.login.toLowerCase() == sender.login.toLowerCase();\n+  const whoToUnassign = assignees.find((assignee) => assignee?.login.toLowerCase() === sender.login.toLowerCase());",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1687255722,
+        "content": "The problem I noticed with this, is that in our issue template we have a comment that contains `Resolves #1234`. This matches the regex as well because comments are not filtered out, which I believe is also the case here.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1687255722",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -169,3 +194,38 @@ async function getOpenedPullRequests(context: Context, username: string): Promis\n   const prs = await getAllPullRequests(context, \"open\");\n   return prs.filter((pr) => !pr.draft && (pr.user?.login === username || !username));\n }\n+\n+/**\n+ * Extracts the task id from the PR body. The format is:\n+ * `Resolves #123`\n+ * `Requires https://www.github.com/.../issue/123`\n+ * `Fixes https://github.com/.../issues/123`\n+ * `Closes #123`\n+ * `Depends on #123`\n+ * `Related to #123`\n+ */\n+export function issueLinkedViaPrBody(prBody: string | null, issueNumber: number): boolean {\n+  const regex = // eslint-disable-next-line no-useless-escape\n+    /(?:Resolves|Fixes|Closes|Depends on|Related to) #(\\d+)|https:\\/\\/(?:www\\.)?github.com\\/([^\\/]+)\\/([^\\/]+)\\/(issue|issues)\\/(\\d+)|#(\\d+)/gi;\n+  const matches = prBody?.match(regex);",
+        "score": {
+          "reward": 2.136,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 76.2342105263158,
+            "syllables": 50,
+            "sentences": 2,
+            "score": 0.8376578947368419
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1687258019,
+        "content": "```suggestion\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1687258019",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -196,6 +240,7 @@ describe(\"User start/stop\", () => {\n   });\n \n   test(\"User can't start another issue if they have reached the max limit\", async () => {\n+    // getAvailableOpenedPullRequests()",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1687263958,
+        "content": "You are correct I put plural by accident, singular makes sense.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1687263958",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -7,23 +7,17 @@ export async function stop(context: Context, issue: Context[\"payload\"][\"issue\"],\n \n   // is there an assignee?\n   const assignees = issue.assignees ?? [];\n-  if (assignees.length == 0) {\n-    logger.error(\"No assignees found for issue\", { issueNumber });\n-    await addCommentToIssue(context, \"````diff\\n! You are not assigned to this task.\\n````\");\n-    return { output: \"No assignees found for this task\" };\n-  }\n-\n   // should unassign?\n-  const shouldUnassign = assignees[0]?.login.toLowerCase() == sender.login.toLowerCase();\n+  const whoToUnassign = assignees.find((assignee) => assignee?.login.toLowerCase() === sender.login.toLowerCase());",
+        "score": {
+          "reward": 0.625,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 64.9245454545455,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0.9507545454545451
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1687272960,
+        "content": "I meant that the `prBody` would be like:\r\n```\r\nResolves #12\r\n```\r\nSecond one is a comment and should be ignored.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1687272960",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -169,3 +194,38 @@ async function getOpenedPullRequests(context: Context, username: string): Promis\n   const prs = await getAllPullRequests(context, \"open\");\n   return prs.filter((pr) => !pr.draft && (pr.user?.login === username || !username));\n }\n+\n+/**\n+ * Extracts the task id from the PR body. The format is:\n+ * `Resolves #123`\n+ * `Requires https://www.github.com/.../issue/123`\n+ * `Fixes https://github.com/.../issues/123`\n+ * `Closes #123`\n+ * `Depends on #123`\n+ * `Related to #123`\n+ */\n+export function issueLinkedViaPrBody(prBody: string | null, issueNumber: number): boolean {\n+  const regex = // eslint-disable-next-line no-useless-escape\n+    /(?:Resolves|Fixes|Closes|Depends on|Related to) #(\\d+)|https:\\/\\/(?:www\\.)?github.com\\/([^\\/]+)\\/([^\\/]+)\\/(issue|issues)\\/(\\d+)|#(\\d+)/gi;\n+  const matches = prBody?.match(regex);",
+        "score": {
+          "reward": 1.078,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 90.13250000000001,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.6986749999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1687273632,
+        "content": "Are these actually used?\r\nIs knip actually running on this branch during the tests? I suspect it runs on the `development` branch to post this.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1687273632",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -3,10 +3,10 @@ import type { KnipConfig } from \"knip\";\n const config: KnipConfig = {\n   entry: [\"build/index.ts\"],\n   project: [\"src/**/*.ts\"],\n-  ignore: [\"src/types/config.ts\", \"**/__mocks__/**\", \"**/__fixtures__/**\", \"src/worker.ts\"],\n+  ignore: [\"src/types/config.ts\", \"**/__mocks__/**\", \"**/__fixtures__/**\", \"src/worker.ts\", \"src/types/plugin-input.ts\", \"src/main.ts\", \"src/plugin.ts\"],",
+        "score": {
+          "reward": 1.206,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 89.44,
+            "syllables": 31,
+            "sentences": 3,
+            "score": 0.7056
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1687287576,
+        "content": "This issue also exists in other repos sadly.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1687287576",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -169,3 +194,38 @@ async function getOpenedPullRequests(context: Context, username: string): Promis\n   const prs = await getAllPullRequests(context, \"open\");\n   return prs.filter((pr) => !pr.draft && (pr.user?.login === username || !username));\n }\n+\n+/**\n+ * Extracts the task id from the PR body. The format is:\n+ * `Resolves #123`\n+ * `Requires https://www.github.com/.../issue/123`\n+ * `Fixes https://github.com/.../issues/123`\n+ * `Closes #123`\n+ * `Depends on #123`\n+ * `Related to #123`\n+ */\n+export function issueLinkedViaPrBody(prBody: string | null, issueNumber: number): boolean {\n+  const regex = // eslint-disable-next-line no-useless-escape\n+    /(?:Resolves|Fixes|Closes|Depends on|Related to) #(\\d+)|https:\\/\\/(?:www\\.)?github.com\\/([^\\/]+)\\/([^\\/]+)\\/(issue|issues)\\/(\\d+)|#(\\d+)/gi;\n+  const matches = prBody?.match(regex);",
+        "score": {
+          "reward": 0.388,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 50.66500000000002,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.9066500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1688398642,
+        "content": "Isn't the logger supposed to also generate the diff?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1688398642",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -7,23 +7,17 @@ export async function stop(context: Context, issue: Context[\"payload\"][\"issue\"],\n \n   // is there an assignee?\n   const assignees = issue.assignees ?? [];\n-  if (assignees.length == 0) {\n-    logger.error(\"No assignees found for issue\", { issueNumber });\n-    await addCommentToIssue(context, \"````diff\\n! You are not assigned to this task.\\n````\");\n-    return { output: \"No assignees found for this task\" };\n-  }\n-\n   // should unassign?\n-  const shouldUnassign = assignees[0]?.login.toLowerCase() == sender.login.toLowerCase();\n+  const userToUnassign = assignees.find((assignee) => assignee?.login.toLowerCase() === sender.login.toLowerCase());\n \n-  if (!shouldUnassign) {\n+  if (!whoToUnassign) {\n     logger.error(\"You are not assigned to this task\", { issueNumber, user: sender.login });\n+    await addCommentToIssue(context, \"```diff\\n! You are not assigned to this task.\\n```\");",
+        "score": {
+          "reward": 0.798,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 69.78500000000001,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.9021499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1689063529,
+        "content": "If the `main` is not recognized possibly some files will be considered as unused because they are reference through the main. But in other projects we never needed to ignore these files.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1689063529",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -3,10 +3,10 @@ import type { KnipConfig } from \"knip\";\n const config: KnipConfig = {\n   entry: [\"build/index.ts\"],\n   project: [\"src/**/*.ts\"],\n-  ignore: [\"src/types/config.ts\", \"**/__mocks__/**\", \"**/__fixtures__/**\", \"src/worker.ts\"],\n+  ignore: [\"src/types/config.ts\", \"**/__mocks__/**\", \"**/__fixtures__/**\", \"src/worker.ts\", \"src/types/plugin-input.ts\", \"src/main.ts\", \"src/plugin.ts\"],",
+        "score": {
+          "reward": 1.488,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 62.837983870967776,
+            "syllables": 47,
+            "sentences": 2,
+            "score": 0.9716201612903222
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1689064144,
+        "content": "I think a quick fix that would be reliable is to remove comment, by using a substring with a regex, so comments are ignored, then your logic should be good.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1689064144",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -169,3 +194,38 @@ async function getOpenedPullRequests(context: Context, username: string): Promis\n   const prs = await getAllPullRequests(context, \"open\");\n   return prs.filter((pr) => !pr.draft && (pr.user?.login === username || !username));\n }\n+\n+/**\n+ * Extracts the task id from the PR body. The format is:\n+ * `Resolves #123`\n+ * `Requires https://www.github.com/.../issue/123`\n+ * `Fixes https://github.com/.../issues/123`\n+ * `Closes #123`\n+ * `Depends on #123`\n+ * `Related to #123`\n+ */\n+export function issueLinkedViaPrBody(prBody: string | null, issueNumber: number): boolean {\n+  const regex = // eslint-disable-next-line no-useless-escape\n+    /(?:Resolves|Fixes|Closes|Depends on|Related to) #(\\d+)|https:\\/\\/(?:www\\.)?github.com\\/([^\\/]+)\\/([^\\/]+)\\/(issue|issues)\\/(\\d+)|#(\\d+)/gi;\n+  const matches = prBody?.match(regex);",
+        "score": {
+          "reward": 1.936,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 63.585000000000036,
+            "syllables": 40,
+            "sentences": 1,
+            "score": 0.9641499999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1689121092,
+        "content": "It does resolve it properly wherever it is located, except HTML comments that are also properly ignored.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1689121092",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -169,3 +194,38 @@ async function getOpenedPullRequests(context: Context, username: string): Promis\n   const prs = await getAllPullRequests(context, \"open\");\n   return prs.filter((pr) => !pr.draft && (pr.user?.login === username || !username));\n }\n+\n+/**\n+ * Extracts the task id from the PR body. The format is:\n+ * `Resolves #123`\n+ * `Requires https://www.github.com/.../issue/123`\n+ * `Fixes https://github.com/.../issues/123`\n+ * `Closes #123`\n+ * `Depends on #123`\n+ * `Related to #123`\n+ */\n+export function issueLinkedViaPrBody(prBody: string | null, issueNumber: number): boolean {\n+  const regex = // eslint-disable-next-line no-useless-escape\n+    /(?:Resolves|Fixes|Closes|Depends on|Related to) #(\\d+)|https:\\/\\/(?:www\\.)?github.com\\/([^\\/]+)\\/([^\\/]+)\\/(issue|issues)\\/(\\d+)|#(\\d+)/gi;\n+  const matches = prBody?.match(regex);",
+        "score": {
+          "reward": 0.83,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 45.26235294117649,
+            "syllables": 29,
+            "sentences": 1,
+            "score": 0.8526235294117649
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1692782551,
+        "content": "@Keyrxng So in the end are these needed?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1692782551",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -6,7 +6,7 @@ const config: KnipConfig = {\n   ignore: [\"src/types/config.ts\", \"**/__mocks__/**\", \"**/__fixtures__/**\", \"src/worker.ts\"],\n   ignoreExportsUsedInFile: true,\n   // eslint can also be safely ignored as per the docs: https://knip.dev/guides/handling-issues#eslint--jest\n-  ignoreDependencies: [\"eslint-config-prettier\", \"eslint-plugin-prettier\", \"@types/jest\"],\n+  ignoreDependencies: [\"eslint-config-prettier\", \"eslint-plugin-prettier\", \"@types/jest\", \"@actions/core\", \"@actions/github\"],",
+        "score": {
+          "reward": 0.594,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 114.11500000000001,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1693709052,
+        "content": "@Keyrxng Yes but these dependencies are actually never imported anywhere in the codebase from what I see, so Knip message makes sense, they can be removed from `package.json`.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1693709052",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -6,7 +6,7 @@ const config: KnipConfig = {\n   ignore: [\"src/types/config.ts\", \"**/__mocks__/**\", \"**/__fixtures__/**\", \"src/worker.ts\"],\n   ignoreExportsUsedInFile: true,\n   // eslint can also be safely ignored as per the docs: https://knip.dev/guides/handling-issues#eslint--jest\n-  ignoreDependencies: [\"eslint-config-prettier\", \"eslint-plugin-prettier\", \"@types/jest\"],\n+  ignoreDependencies: [\"eslint-config-prettier\", \"eslint-plugin-prettier\", \"@types/jest\", \"@actions/core\", \"@actions/github\"],",
+        "score": {
+          "reward": 1.596,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 54.09666666666669,
+            "syllables": 40,
+            "sentences": 1,
+            "score": 0.940966666666667
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1694073055,
+        "content": "This is the recommended format from [the docs](https://typescript-eslint.io/getting-started/#step-2-configuration). And indeed the `ts-check` enforces the same checks as the other files (would not by default since it is `js`).\r\nThis is now used everywhere when `eslint` was updated to the latest version, as it became the standard.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1694073055",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,126 @@\n+// @ts-check",
+        "score": {
+          "reward": 2.035,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 43,
+            "wordValue": 0.1,
+            "result": 2.25
+          },
+          "readability": {
+            "fleschKincaid": 76.20759689922484,
+            "syllables": 59,
+            "sentences": 3,
+            "score": 0.8379240310077516
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1694094078,
+        "content": "I guess this was to mimic the v1 that actually had a field to disable the start stop command, which I don't think is needed for v2.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1694094078",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -10,8 +10,8 @@ export async function userStartStop(context: Context): Promise<{ output: string\n   const { isEnabled } = config;",
+        "score": {
+          "reward": 1.362,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 75.6864285714286,
+            "syllables": 34,
+            "sentences": 1,
+            "score": 0.8431357142857139
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1694217749,
+        "content": "Currently, the repo configuration will override the organization repo. There is an issue on that topic [here](https://github.com/ubiquity/ubiquibot-kernel/issues/54).\r\nI would say that if in the target repository configuration, the plugin is not mentioned, it won't run (or be disabled if you will). If it is present, the target repo configuration will be used.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1694217749",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -10,8 +10,8 @@ export async function userStartStop(context: Context): Promise<{ output: string\n   const { isEnabled } = config;",
+        "score": {
+          "reward": 3.073,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 53,
+            "wordValue": 0.1,
+            "result": 2.43
+          },
+          "readability": {
+            "fleschKincaid": 52.918325471698125,
+            "syllables": 88,
+            "sentences": 4,
+            "score": 0.9291832547169813
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1694221964,
+        "content": "No. If it is enabled organization level, it will be enabled in every repo. I a repo defines a configuration with `command-start-stop` in it, it will override totally the organization configuration. If a repo defines a configuration without `command-start-stop` then it will never run on that repo.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1694221964",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -10,8 +10,8 @@ export async function userStartStop(context: Context): Promise<{ output: string\n   const { isEnabled } = config;",
+        "score": {
+          "reward": 2.28,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 45,
+            "wordValue": 0.1,
+            "result": 2.29
+          },
+          "readability": {
+            "fleschKincaid": 41.25625000000002,
+            "syllables": 82,
+            "sentences": 4,
+            "score": 0.8125625000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1694229369,
+        "content": "Yes, implemented [here for example](https://github.com/ubiquibot/conversation-rewards/pull/75#issuecomment-2253656887).",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1694229369",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -10,8 +10,8 @@ export async function userStartStop(context: Context): Promise<{ output: string\n   const { isEnabled } = config;",
+        "score": {
+          "reward": 0.97,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 49.48000000000002,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.8948000000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1694572780,
+        "content": "```yml\r\nplugins:\r\n    # any plugin you want except command-start-stop\r\n```\r\nI still have to think on the configuration merging because we changed the whole shape of the configuration file.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1694572780",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -10,8 +10,8 @@ export async function userStartStop(context: Context): Promise<{ output: string\n   const { isEnabled } = config;",
+        "score": {
+          "reward": 1.086,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 49.518421052631595,
+            "syllables": 31,
+            "sentences": 1,
+            "score": 0.8951842105263159
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1695035846,
+        "content": "The thing is the id is arbitrary, and not even required. Plus, each plugin can pack a plugin chain where execution is chained with a list of plugins so they pass down their data to the next one.\r\n```yml\r\nplugins:\r\n    - id: plugin-1\r\n      name: First plugin chain\r\n      with:\r\n        - uses: ubiquibot/conversation-rewards\r\n        - uses: ubiquibot/autoamted-merging\r\n    - id: plugin-2\r\n      name: Second plugin chain\r\n      with:\r\n        - uses: https://ubiquit-assistive-pricing.workers.dev\r\n        - uses: ubiquibot/conversation-rewards\r\n```\r\nI think merging by `id` would simplify a lot the problem, however you cannot guess what id was used by the Org configuration if you cannot see the configuration file.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1695035846",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -10,8 +10,8 @@ export async function userStartStop(context: Context): Promise<{ output: string\n   const { isEnabled } = config;",
+        "score": {
+          "reward": 2.331,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 67,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 62.9487562189055,
+            "syllables": 96,
+            "sentences": 3,
+            "score": 0.970512437810945
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2255750147,
+        "content": "@Keyrxng Yes, the merge issue is unrelated to this and will be addressed within the kernel. I am fine with this pull-request.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#issuecomment-2255750147",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.985,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 84.8146739130435,
+            "syllables": 30,
+            "sentences": 2,
+            "score": 0.7518532608695649
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2192721228,
+            "effect": {
+              "addition": 364,
+              "deletion": 100
+            },
+            "reward": 4.64,
+            "priority": 1
+          },
+          {
+            "reviewId": 2194541795,
+            "effect": {
+              "addition": 1,
+              "deletion": 2
+            },
+            "reward": 0.03,
+            "priority": 1
+          },
+          {
+            "reviewId": 2195539005,
+            "effect": {
+              "addition": 0,
+              "deletion": 0
+            },
+            "reward": 0,
+            "priority": 1
+          },
+          {
+            "reviewId": 2201369897,
+            "effect": {
+              "addition": 345,
+              "deletion": 147
+            },
+            "reward": 4.92,
+            "priority": 1
+          },
+          {
+            "reviewId": 2203084843,
+            "effect": {
+              "addition": 1,
+              "deletion": 3
+            },
+            "reward": 0.04,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 25 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>⚠️ Your rewards have been limited to the task price of 25 XP.</h6><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>5</td><td>9.63</td></tr><tr><td>Issue</td><td>Comment</td><td>3</td><td>0.788</td></tr><tr><td>Review</td><td>Comment</td><td>22</td><td>27.057</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10\" target=\"_blank\" rel=\"noopener\">#10</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+364 -100</td><td>1</td><td>4.64</td></tr><tr><td>+1 -2</td><td>1</td><td>0.03</td></tr><tr><td>+0 -0</td><td>1</td><td>0</td></tr><tr><td>+345 -147</td><td>1</td><td>4.92</td></tr><tr><td>+1 -3</td><td>1</td><td>0.04</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/4#issuecomment-2255768948\" target=\"_blank\" rel=\"noopener\">Seems to be a little formatting issue, will open a ticket about &hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.284</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/4#issuecomment-2290647501\" target=\"_blank\" rel=\"noopener\">@0x4007 So you mean that Keyrxng here should have had &#96;0&#96&hellip;</a></h6></td><td><details><summary>3.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.425</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/4#issuecomment-2290926160\" target=\"_blank\" rel=\"noopener\">@0x4007 Is that what you intended?</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.079</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1687252178\" target=\"_blank\" rel=\"noopener\">Why are these ignored?</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.26</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1687253855\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionconst userToUnassign = assignees.fi&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1687255722\" target=\"_blank\" rel=\"noopener\">The problem I noticed with this, is that in our issue template w&hellip;</a></h6></td><td><details><summary>2.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.8</td><td>1</td><td>2.136</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1687258019\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion&#96;&#96;&#96;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1687263958\" target=\"_blank\" rel=\"noopener\">You are correct I put plural by accident, singular makes sense.</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.625</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1687272960\" target=\"_blank\" rel=\"noopener\">I meant that the &#96;prBody&#96; would be like:&#96;&#96;&#96&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.078</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1687273632\" target=\"_blank\" rel=\"noopener\">Are these actually used?Is knip actually running on this branc&hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.6</td><td>1</td><td>1.206</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1687287576\" target=\"_blank\" rel=\"noopener\">This issue also exists in other repos sadly.</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.388</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1688398642\" target=\"_blank\" rel=\"noopener\">Isn't the logger supposed to also generate the diff?</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.798</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1689063529\" target=\"_blank\" rel=\"noopener\">If the &#96;main&#96; is not recognized possibly some files will&hellip;</a></h6></td><td><details><summary>1.92</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.6</td><td>1</td><td>1.488</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1689064144\" target=\"_blank\" rel=\"noopener\">I think a quick fix that would be reliable is to remove comment,&hellip;</a></h6></td><td><details><summary>1.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.936</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1689121092\" target=\"_blank\" rel=\"noopener\">It does resolve it properly wherever it is located, except HTML &hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.83</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1692782551\" target=\"_blank\" rel=\"noopener\">@Keyrxng So in the end are these needed?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.594</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1693709052\" target=\"_blank\" rel=\"noopener\">@Keyrxng Yes but these dependencies are actually never imported &hellip;</a></h6></td><td><details><summary>1.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.596</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1694073055\" target=\"_blank\" rel=\"noopener\">This is the recommended format from [the docs](https://typescrip&hellip;</a></h6></td><td><details><summary>3.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 43&#13;  wordValue: 0.1&#13;  result: 2.25&#13;</pre></details></td><td>0.5</td><td>1</td><td>2.035</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1694094078\" target=\"_blank\" rel=\"noopener\">I guess this was to mimic the v1 that actually had a field to di&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.6</td><td>1</td><td>1.362</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1694217749\" target=\"_blank\" rel=\"noopener\">Currently, the repo configuration will override the organization&hellip;</a></h6></td><td><details><summary>3.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 53&#13;  wordValue: 0.1&#13;  result: 2.43&#13;</pre></details></td><td>0.7</td><td>1</td><td>3.073</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1694221964\" target=\"_blank\" rel=\"noopener\">No. If it is enabled organization level, it will be enabled in e&hellip;</a></h6></td><td><details><summary>2.29</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 45&#13;  wordValue: 0.1&#13;  result: 2.29&#13;</pre></details></td><td>0.8</td><td>1</td><td>2.28</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1694229369\" target=\"_blank\" rel=\"noopener\">Yes, implemented [here for example](https://github.com/ubiquibot&hellip;</a></h6></td><td><details><summary>1.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.97</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1694572780\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;ymlplugins:# any plugin you want except c&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.6</td><td>1</td><td>1.086</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#discussion_r1695035846\" target=\"_blank\" rel=\"noopener\">The thing is the id is arbitrary, and not even required. Plus, e&hellip;</a></h6></td><td><details><summary>2.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 67&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>0.7</td><td>1</td><td>2.331</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10#issuecomment-2255750147\" target=\"_blank\" rel=\"noopener\">@Keyrxng Yes, the merge issue is unrelated to this and will be a&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.985</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 5.66,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2371788156,
+        "content": "Depends on https://github.com/ubiquibot/command-start-stop/pull/1\r\nCheck [this](https://github.com/rndquu-org/test-repo/issues/55#issuecomment-2188079534) `/stop` command. The bot (i.e. `ubiquibot/command-start-stop` plugin) closed the issue but also [tried](https://github.com/rndquu-org/test-repo/issues/55#issuecomment-2188079603) to close a linked PR although this PR is from a different repo with different assignee.\r\nWhat should be done:\r\n- make sure the plugin closes the correct linked PRs\r\n- write a regression test",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/issues/4",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 5.66,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 49,
+            "wordValue": 0.1,
+            "result": 2.37
+          },
+          "readability": {
+            "fleschKincaid": 80.33367816091955,
+            "syllables": 80,
+            "sentences": 6,
+            "score": 0.7966632183908046
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/10"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 5.66 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>5.66</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/issues/4\" target=\"_blank\" rel=\"noopener\">Depends on https://github.com/ubiquibot/command-start-stop/pull/&hellip;</a></h6></td><td><details><summary>4.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.2&#13;regex:&#13;  wordCount: 49&#13;  wordValue: 0.1&#13;  result: 2.37&#13;</pre></details></td><td>1</td><td>1</td><td>5.66</td></tr></tbody></table></details>"
+  }
+}

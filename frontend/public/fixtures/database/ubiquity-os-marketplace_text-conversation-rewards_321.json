@@ -1,0 +1,131 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 30,
+    "task": {
+      "reward": 30,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 30 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>30</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 30,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2746034581,
+        "content": "@gentlementlegen",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/321#issuecomment-2746034581",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.14,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": -217.17999999999998,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2940943842,
+        "content": "Did some thorough testing (I set up a sandbox environment and everything) this is what the formula is supposed to be. We can normalize the config to multiplier 1 after we enable this. \n```js\nfunction calculateExponentialScore(wordCount: number): number {\n  return Math.pow(wordCount, 0.85) * Math.exp(-wordCount / 100);\n}\n```\nThis is needed for more accurate XP calculation.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/321",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 2.84,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 41,
+            "wordValue": 0.1,
+            "result": 2.2
+          },
+          "readability": {
+            "fleschKincaid": 56.7779674796748,
+            "syllables": 66,
+            "sentences": 3,
+            "score": 0.967779674796748
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2709339341,
+        "content": "Now that the exponent is fixed, this implies we must normalize all word count to $1 across every element and contributor designation. \r\nWe also need to support capturing double posting. Consolidate both comments into a single score to prevent gaming this exponent. \r\nUsing relevance and priority level we can reduce the score accordingly. Regarding word score:\r\n```\r\nP5=1.0\r\np4=0.8\r\np3=0.6\r\np2=0.4\r\np1=0.2\r\n```\r\nAnd relevance of course multiplies.\r\nRelevance prompt can be simplified quite a bit. I think we should only compare the spec and the comment. If the conversation veers off topic (by definition the spec) then even if the contributor is helping to answer a question we shouldn't apply a high relevance score. We can have a separate system for that like helpfulness and answering other peoples questions.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/323#pullrequestreview-2709339341",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 12.56,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              }
+            },
+            "result": 0
+          },
+          "priority": 5,
+          "words": {
+            "wordCount": 124,
+            "wordValue": 0.1,
+            "result": 2.46
+          },
+          "readability": {
+            "fleschKincaid": 52.30539426523299,
+            "syllables": 206,
+            "sentences": 9,
+            "score": 0.9230539426523299
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2709339341,
+            "effect": {
+              "addition": 1016,
+              "deletion": 1002
+            },
+            "reward": 100.9,
+            "priority": 5
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/323"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 30 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>100.9</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>2.84</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.14</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>12.56</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/323\" target=\"_blank\" rel=\"noopener\">#323</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+1016 -1002</td><td>5</td><td>100.9</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/321\" target=\"_blank\" rel=\"noopener\">Did some thorough testing (I set up a sandbox environment and ev&hellip;</a></h6></td><td><details><summary>2.2</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 41&#13;  wordValue: 0.1&#13;  result: 2.2&#13;</pre></details></td><td>1</td><td>1</td><td>2.84</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/321#issuecomment-2746034581\" target=\"_blank\" rel=\"noopener\">@gentlementlegen</a></h6></td><td><details><summary>0.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>0.2</td><td>5</td><td>0.14</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/323#pullrequestreview-2709339341\" target=\"_blank\" rel=\"noopener\">Now that the exponent is fixed, this implies we must normalize a&hellip;</a></h6></td><td><details><summary>2.46</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;  result: 0&#13;regex:&#13;  wordCount: 124&#13;  wordValue: 0.1&#13;  result: 2.46&#13;</pre></details></td><td>0.8</td><td>5</td><td>12.56</td></tr></tbody></table></details>"
+  }
+}

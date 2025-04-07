@@ -1,0 +1,298 @@
+{
+  "shiv810": {
+    "userId": 53160903,
+    "total": 75,
+    "task": {
+      "reward": 75,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 75 XP ]</a>&nbsp;</h3><h6>@shiv810</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>75</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 15.93,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2842165266,
+        "content": "Thinking is not posted in the [review thread](https://github.com/ubiquity-os-marketplace/personal-agent/pull/1#discussion_r1948903492).    Also should have the tip syntax:\r\n---\r\n@shiv810 can you address these",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/issues/66",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 2.94,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 90.32934210526317,
+            "syllables": 24,
+            "sentences": 2,
+            "score": 0.6967065789473683
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2616988326,
+        "content": "If I was able to commit my suggestions I would have and merged so please do so. \nWe can think on the loading gif idea another time.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/67#pullrequestreview-2616988326",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.942,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 83.46583333333336,
+            "syllables": 35,
+            "sentences": 2,
+            "score": 0.7653416666666664
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1955669859,
+        "content": "```suggestion\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/67#discussion_r1955669859",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -22,7 +22,25 @@ export async function processCommentCallback(context: Context<\"issue_comment.cre\n   }\n \n   try {\n-    await addCommentToIssue(context, `${env.UBIQUITY_OS_APP_NAME} is thinking...`);\n+    // Determine if this is a pull request review comment by checking the event type\n+    const isPullRequestReviewComment = context.eventName === \"pull_request_review_comment.created\";\n+\n+    // Add thinking message with proper comment type\n+    const commentOptions = isPullRequestReviewComment\n+      ? {\n+          inReplyTo: {\n+            commentId: isPullRequestReviewComment ? payload.comment.id : undefined,\n+          },\n+        }\n+      : undefined;\n+\n+    await addCommentToIssue(\n+      context,\n+      `> [!TIP]\n+> ${env.UBIQUITY_OS_APP_NAME} is thinking...`,",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1955671233,
+        "content": "We should replicate ChatGPT UI. Maybe we can including a tiny loading gif of sorts. \nIt's redundant to put their name juxtaposed right next to their display name",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/67#discussion_r1955671233",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -22,7 +22,25 @@ export async function processCommentCallback(context: Context<\"issue_comment.cre\n   }\n \n   try {\n-    await addCommentToIssue(context, `${env.UBIQUITY_OS_APP_NAME} is thinking...`);\n+    // Determine if this is a pull request review comment by checking the event type\n+    const isPullRequestReviewComment = context.eventName === \"pull_request_review_comment.created\";\n+\n+    // Add thinking message with proper comment type\n+    const commentOptions = isPullRequestReviewComment\n+      ? {\n+          inReplyTo: {\n+            commentId: isPullRequestReviewComment ? payload.comment.id : undefined,\n+          },\n+        }\n+      : undefined;\n+\n+    await addCommentToIssue(\n+      context,\n+      `> [!TIP]\n+> ${env.UBIQUITY_OS_APP_NAME} is thinking...`,",
+        "score": {
+          "reward": 3.435,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 80.33367816091955,
+            "syllables": 40,
+            "sentences": 3,
+            "score": 0.7966632183908046
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1955671648,
+        "content": "```suggestion\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/67#discussion_r1955671648",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -31,6 +31,11 @@ describe(\"Log post message test\", () => {\n     } as never;\n \n     await processCommentCallback(context);\n-    expect(addCommentToIssue).toHaveBeenCalledWith(expect.anything(), \"UbiquityOS is thinking...\");\n+    expect(addCommentToIssue).toHaveBeenCalledWith(\n+      expect.anything(),\n+      `> [!TIP]\n+> UbiquityOS is thinking...`,",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1955695193,
+        "content": "https://github.com/ubiquity-os-marketplace/.github/issues/1",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/67#discussion_r1955695193",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -22,7 +22,25 @@ export async function processCommentCallback(context: Context<\"issue_comment.cre\n   }\n \n   try {\n-    await addCommentToIssue(context, `${env.UBIQUITY_OS_APP_NAME} is thinking...`);\n+    // Determine if this is a pull request review comment by checking the event type\n+    const isPullRequestReviewComment = context.eventName === \"pull_request_review_comment.created\";\n+\n+    // Add thinking message with proper comment type\n+    const commentOptions = isPullRequestReviewComment\n+      ? {\n+          inReplyTo: {\n+            commentId: isPullRequestReviewComment ? payload.comment.id : undefined,\n+          },\n+        }\n+      : undefined;\n+\n+    await addCommentToIssue(\n+      context,\n+      `> [!TIP]\n+> ${env.UBIQUITY_OS_APP_NAME} is thinking...`,",
+        "score": {
+          "reward": 1.125,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 43.99000000000004,
+            "syllables": 17,
+            "sentences": 3,
+            "score": 0.8399000000000004
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1955696564,
+        "content": "`202` seems accurate so let's use !TIP",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/67#discussion_r1955696564",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -22,7 +22,25 @@ export async function processCommentCallback(context: Context<\"issue_comment.cre\n   }\n \n   try {\n-    await addCommentToIssue(context, `${env.UBIQUITY_OS_APP_NAME} is thinking...`);\n+    // Determine if this is a pull request review comment by checking the event type\n+    const isPullRequestReviewComment = context.eventName === \"pull_request_review_comment.created\";\n+\n+    // Add thinking message with proper comment type\n+    const commentOptions = isPullRequestReviewComment\n+      ? {\n+          inReplyTo: {\n+            commentId: isPullRequestReviewComment ? payload.comment.id : undefined,\n+          },\n+        }\n+      : undefined;\n+\n+    await addCommentToIssue(\n+      context,\n+      `> [!TIP]\n+> ${env.UBIQUITY_OS_APP_NAME} is thinking...`,",
+        "score": {
+          "reward": 1.992,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 94.51107142857143,
+            "syllables": 9,
+            "sentences": 2,
+            "score": 0.6548892857142857
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2658510230,
+        "content": "Looks like it can't edit a review comment.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/67#issuecomment-2658510230",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.236,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 84.90000000000003,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.7509999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2616944040,
+            "effect": {
+              "addition": 28,
+              "deletion": 14
+            },
+            "reward": 1.26,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/67"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 15.93 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>1.26</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>2.94</td></tr><tr><td>Review</td><td>Comment</td><td>7</td><td>11.73</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/67\" target=\"_blank\" rel=\"noopener\">#67</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+28 -14</td><td>3</td><td>1.26</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/issues/66\" target=\"_blank\" rel=\"noopener\">Thinking is not posted in the [review thread](https://github.com&hellip;</a></h6></td><td><details><summary>2.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>1</td><td>1</td><td>2.94</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/67#pullrequestreview-2616988326\" target=\"_blank\" rel=\"noopener\">If I was able to commit my suggestions I would have and merged s&hellip;</a></h6></td><td><details><summary>1.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>0.6</td><td>3</td><td>3.942</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/67#discussion_r1955669859\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion&#96;&#96;&#96;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/67#discussion_r1955671233\" target=\"_blank\" rel=\"noopener\">We should replicate ChatGPT UI. Maybe we can including a tiny lo&hellip;</a></h6></td><td><details><summary>1.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.5</td><td>3</td><td>3.435</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/67#discussion_r1955671648\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion&#96;&#96;&#96;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/67#discussion_r1955695193\" target=\"_blank\" rel=\"noopener\">https://github.com/ubiquity-os-marketplace/.github/issues/1</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.125</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/67#discussion_r1955696564\" target=\"_blank\" rel=\"noopener\">&#96;202&#96; seems accurate so let's use !TIP</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.992</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/67#issuecomment-2658510230\" target=\"_blank\" rel=\"noopener\">Looks like it can't edit a review comment.</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.4</td><td>3</td><td>1.236</td></tr></tbody></table></details>"
+  }
+}

@@ -1,0 +1,301 @@
+{
+  "0x4007": {
+    "userId": 4975670,
+    "total": 104.566,
+    "task": {
+      "reward": 100,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2556859560,
+        "content": "Been getting this a lot. We need to run `Find associated pull request` with authentication. We can authenticate as our app as we do in some of the other CI/CD.\r\n```sh\r\nRun ubiquity/cloudflare-deploy-action@main\r\nRun actions/setup-node@v4\r\nAttempting to download 20.10.0...\r\nAcquiring 20.10.0 - x64 from https://github.com/actions/node-versions/releases/download/20.10.0-6972104774/node-20.10.0-linux-x64.tar.gz\r\nExtracting ...\r\n/usr/bin/tar xz --strip 1 --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/02ddd055-ac64-455c-a47e-8689c59c5216 -f /home/runner/work/_temp/8609a306-01ae-4aa8-a7d3-bf05bcc491dd\r\nAdding to the cache ...\r\nEnvironment details\r\nRun actions/github-script@v7\r\n  with:\r\n    script: const response = await github.rest.search.issuesAndPullRequests({\r\n    q: 'repo:ubiquity/work.ubq.fi is:pr sha:02fc36d24c14d68f65d0fca6b7abaa022a2980e9',\r\n    per_page: 1,\r\n  })\r\n  const items = response.data.items\r\n  if (items.length < 1) {\r\n    console.error('No PRs found')\r\n    return {forcePreviewDeploy: false, pullRequestNumber: null }\r\n  }\r\n  const pullRequestNumber = items[0].number\r\n  const forcePreviewDeploy = pullRequestNumber > 0  && items[0].pull_request.merged_at == null\r\n  console.info(\"Pull request number is\", pullRequestNumber)\r\n  console.info(\"forcePreviewDeploy\", forcePreviewDeploy)\r\n  return {forcePreviewDeploy: forcePreviewDeploy, pullRequestNumber: pullRequestNumber }\r\n    github-token: ***\r\n    debug: false\r\n    user-agent: actions/github-script\r\n    result-encoding: json\r\n    retries: 0\r\n    retry-exempt-status-codes: 400,401,403,404,422\r\nRequestError [HttpError]: You have exceeded a secondary rate limit. Please wait a few minutes before you try again. If you reach out to GitHub Support for help, please include the request ID 2410:34C107:144A7C4:27B0A69:66FAB445.\r\n    at /home/runner/work/_actions/actions/github-script/v7/dist/index.js:9537:21\r\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\r\n    at async eval (eval at callAsyncFunction (/home/runner/work/_actions/actions/github-script/v7/dist/index.js:35424:16), <anonymous>:3:[18](https://github.com/ubiquity/work.ubq.fi/actions/runs/11108125855/job/30860345343#step:2:20))\r\n    at async main (/home/runner/work/_actions/actions/github-script/v7/dist/index.js:35522:[20](https://github.com/ubiquity/work.ubq.fi/actions/runs/11108125855/job/30860345343#step:2:22)) {\r\n  status: 403,\r\n  response: {\r\n    url: 'https://api.github.com/search/issues?q=repo%3Aubiquity%2Fwork.ubq.fi%20is%3Apr%20sha%3A02fc36d24c14d68f65d0fca6b7abaa022a2980e9&per_page=1',\r\n    status: 403,\r\n    headers: {\r\n      'access-control-allow-origin': '*',\r\n      'access-control-expose-headers': 'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, Deprecation, Sunset',\r\n      'content-encoding': 'gzip',\r\n      'content-security-policy': \"default-src 'none'\",\r\n      'content-type': 'application/json; charset=utf-8',\r\n      date: 'Mon, 30 Sep 2024 14:23:01 GMT',\r\n      'referrer-policy': 'origin-when-cross-origin, strict-origin-when-cross-origin',\r\n      server: 'github.com',\r\n      'strict-transport-security': 'max-age=31536000; includeSubdomains; preload',\r\n      'transfer-encoding': 'chunked',\r\n      vary: 'Accept-Encoding, Accept, X-Requested-With',\r\n      'x-content-type-options': 'nosniff',\r\n      'x-frame-options': 'deny',\r\n      'x-github-api-version-selected': '20[22](https://github.com/ubiquity/work.ubq.fi/actions/runs/11108125855/job/30860345343#step:2:24)-11-28',\r\n      'x-github-media-type': 'github.v3; format=json',\r\n      'x-github-request-id': '2410:34C107:144A7C4:[27](https://github.com/ubiquity/work.ubq.fi/actions/runs/11108125855/job/30860345343#step:2:30)B0A69:66FAB445',\r\n      'x-ratelimit-limit': '30',\r\n      'x-ratelimit-remaining': '[29](https://github.com/ubiquity/work.ubq.fi/actions/runs/11108125855/job/30860345343#step:2:32)',\r\n      'x-ratelimit-reset': '1727706241',\r\n      'x-ratelimit-resource': 'search',\r\n      'x-ratelimit-used': '1',\r\n      'x-xss-protection': '0'\r\n    },\r\n    data: {\r\n      documentation_url: 'https://docs.github.com/free-pro-team@latest/rest/overview/rate-limits-for-the-rest-api#about-secondary-rate-limits',\r\n      message: 'You have exceeded a secondary rate limit. Please wait a few minutes before you try again. If you reach out to GitHub Support for help, please include the request ID 2410:[34](https://github.com/ubiquity/work.ubq.fi/actions/runs/11108125855/job/30860345343#step:2:37)C107:144A7C4:27B0A69:66FAB445.'\r\n    }\r\n  },\r\n  request: {\r\n    method: 'GET',\r\n    url: 'https://api.github.com/search/issues?q=repo%3Aubiquity%2Fwork.ubq.fi%20is%3Apr%20sha%3A02fc[36](https://github.com/ubiquity/work.ubq.fi/actions/runs/11108125855/job/30860345343#step:2:39)d24c14d68f65d0fca6b7abaa022a2980e9&per_page=1',\r\n    headers: {\r\n      accept: 'application/vnd.github.v3+json',\r\n      'user-agent': 'actions/github-script octokit-core.js/5.0.1 Node.js/20.13.1 (linux; x64)',\r\n      authorization: 'token [REDACTED]'\r\n    },\r\n    request: {\r\n      agent: [Agent],\r\n      fetch: [Function: proxyFetch],\r\n      hook: [Function: bound bound register]\r\n    }\r\n  }\r\n}\r\nError: Unhandled error: HttpError: You have exceeded a secondary rate limit. Please wait a few minutes before you try again. If you reach out to GitHub Support for help, please include the request ID 2[41](https://github.com/ubiquity/work.ubq.fi/actions/runs/11108125855/job/30860345343#step:2:44)0:34C107:144A7C4:27B0A69:66FAB445.\r\n```\r\nFrom https://github.com/ubiquity/work.ubq.fi/actions/runs/11108125855/job/30860345343",
+        "url": "https://github.com/ubiquity/cloudflare-deploy-action/issues/19",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.43,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 86.825,
+            "syllables": 54,
+            "sentences": 7,
+            "score": 0.73175
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2099342595,
+        "content": "Resolves https://github.com/ubiquity/cloudflare-deploy-action/issues/19",
+        "url": "https://github.com/ubiquity/cloudflare-deploy-action/pull/20",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 1.136,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": 41.02000000000004,
+            "syllables": 19,
+            "sentences": 2,
+            "score": 0.8102000000000004
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 104.566 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>100</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.43</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>1.136</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/cloudflare-deploy-action/issues/19\" target=\"_blank\" rel=\"noopener\">Been getting this a lot. We need to run &#96;Find associated pul&hellip;</a></h6></td><td><details><summary>2.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>1</td><td>1</td><td>3.43</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/cloudflare-deploy-action/pull/20\" target=\"_blank\" rel=\"noopener\">Resolves https://github.com/ubiquity/cloudflare-deploy-action/is&hellip;</a></h6></td><td><details><summary>1.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.136</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 13.876,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2383665961,
+        "content": "@0x4007 That's one hell of a reward lol. I guess it counted the content within the `code` which should not have happened, I can look into it. Edit 2: it is not using the latest changes that got merged regarding the rewards.\r\nIt didn't throw because technically the configuration defaulted to a valid version omitting the invalid parts. We cannot throw otherwise we cannot disable modules partially within this plugin, which is why it was acting this way.",
+        "url": "https://github.com/ubiquity/cloudflare-deploy-action/issues/19#issuecomment-2383665961",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.704,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 79,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 64.4334430379747,
+            "syllables": 118,
+            "sentences": 5,
+            "score": 0.9556655696202531
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2383668662,
+        "content": "@0x4007 Since you moved everything to `main` we have to start merging things into the main branch again.",
+        "url": "https://github.com/ubiquity/cloudflare-deploy-action/issues/19#issuecomment-2383668662",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 3.32,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 75.12117647058825,
+            "syllables": 23,
+            "sentences": 1,
+            "score": 0.8487882352941175
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2383698305,
+        "content": "@0x4007 Here you go, seems to make much more sense.",
+        "url": "https://github.com/ubiquity/cloudflare-deploy-action/issues/19#issuecomment-2383698305",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.404,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 112.08500000000001,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2383704697,
+        "content": "That's a new, will have a look. Too many manual merges happened recently.",
+        "url": "https://github.com/ubiquity/cloudflare-deploy-action/issues/19#issuecomment-2383704697",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.272,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 84.9157142857143,
+            "syllables": 19,
+            "sentences": 2,
+            "score": 0.750842857142857
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2383711306,
+        "content": "Hard to tell but that's possible. Since the regex have been deleted and taken out on a higher level the parser might not pick it up.",
+        "url": "https://github.com/ubiquity/cloudflare-deploy-action/issues/19#issuecomment-2383711306",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 3.504,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 83.46583333333336,
+            "syllables": 35,
+            "sentences": 2,
+            "score": 0.7653416666666664
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2384645774,
+        "content": "Adding some `content` to test the results:\r\n```\r\ncontent\r\n```\r\n- content 1\r\n- content 2\r\n- content 3",
+        "url": "https://github.com/ubiquity/cloudflare-deploy-action/issues/19#issuecomment-2384645774",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.672,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              }
+            },
+            "result": 0.3
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 74.805,
+            "syllables": 17,
+            "sentences": 1,
+            "score": 0.85195
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/cloudflare-deploy-action/pull/20"
+      },
+      {
+        "url": "https://github.com/ubiquity/ts-template/pull/59"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 13.876 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>6</td><td>13.876</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/cloudflare-deploy-action/issues/19#issuecomment-2383665961\" target=\"_blank\" rel=\"noopener\">@0x4007 That's one hell of a reward lol. I guess it counted the &hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 79&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.2</td><td>4</td><td>2.704</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/cloudflare-deploy-action/issues/19#issuecomment-2383668662\" target=\"_blank\" rel=\"noopener\">@0x4007 Since you moved everything to &#96;main&#96; we have to &hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.5</td><td>4</td><td>3.32</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/cloudflare-deploy-action/issues/19#issuecomment-2383698305\" target=\"_blank\" rel=\"noopener\">@0x4007 Here you go, seems to make much more sense.</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.3</td><td>4</td><td>1.404</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/cloudflare-deploy-action/issues/19#issuecomment-2383704697\" target=\"_blank\" rel=\"noopener\">That's a new, will have a look. Too many manual merges happened &hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.4</td><td>4</td><td>2.272</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/cloudflare-deploy-action/issues/19#issuecomment-2383711306\" target=\"_blank\" rel=\"noopener\">Hard to tell but that's possible. Since the regex have been dele&hellip;</a></h6></td><td><details><summary>1.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>0.4</td><td>4</td><td>3.504</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/cloudflare-deploy-action/issues/19#issuecomment-2384645774\" target=\"_blank\" rel=\"noopener\">Adding some &#96;content&#96; to test the results:&#96;&#96;&#&hellip;</a></h6></td><td><details><summary>1.34</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;  result: 0.3&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.1</td><td>4</td><td>0.672</td></tr></tbody></table></details>"
+  }
+}

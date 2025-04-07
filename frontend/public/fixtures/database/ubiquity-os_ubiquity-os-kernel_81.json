@@ -1,0 +1,134 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 27.64,
+    "task": {
+      "reward": 25,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2435578397,
+        "content": "When a specific branch or version is specified for a Github Action plugin, the Kernel tries to look within the default branch if the `manifest.json` exists. It should use the specified branch to retrieve the configuration.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/81",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 2.64,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 58.54678571428573,
+            "syllables": 54,
+            "sentences": 2,
+            "score": 0.9854678571428573
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 27.64 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>25</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>2.64</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/81\" target=\"_blank\" rel=\"noopener\">When a specific branch or version is specified for a Github Acti&hellip;</a></h6></td><td><details><summary>2.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>1</td><td>1</td><td>2.64</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 3.127,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1740569764,
+        "content": "Empty string always seems like a bad idea. This seems to be extremely error prone compared to explicitly handling this with `null` and skipping the subsequent code blocks that use this value. It's why I have the proposal in ts-template to flag empty strings.",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/99#discussion_r1740569764",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -17,8 +17,8 @@ export function getManifest(context: GitHubContext, plugin: string | GithubPlugi\n   return isGithubPlugin(plugin) ? fetchActionManifest(context, plugin) : fetchWorkerManifest(plugin);\n }\n \n-async function fetchActionManifest(context: GitHubContext<\"issue_comment.created\">, { owner, repo }: GithubPlugin): Promise<Manifest | null> {\n-  const manifestKey = `${owner}:${repo}`;\n+async function fetchActionManifest(context: GitHubContext<\"issue_comment.created\">, { owner, repo, ref }: GithubPlugin): Promise<Manifest | null> {\n+  const manifestKey = `${owner}:${repo}:${ref ?? \"\"}`;",
+        "score": {
+          "reward": 2.328,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 45,
+            "wordValue": 0.1,
+            "result": 2.29
+          },
+          "readability": {
+            "fleschKincaid": 69.41000000000003,
+            "syllables": 65,
+            "sentences": 3,
+            "score": 0.9058999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2325278533,
+        "content": "Merge after 3.5 days?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/99#issuecomment-2325278533",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.069,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 102.77750000000002,
+            "syllables": 6,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2275078705,
+            "effect": {
+              "addition": 71,
+              "deletion": 2
+            },
+            "reward": 0.73,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/99"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 3.127 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>0.73</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>2.397</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/99\" target=\"_blank\" rel=\"noopener\">#99</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+71 -2</td><td>1</td><td>0.73</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/99#discussion_r1740569764\" target=\"_blank\" rel=\"noopener\">Empty string always seems like a bad idea. This seems to be extr&hellip;</a></h6></td><td><details><summary>2.29</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 45&#13;  wordValue: 0.1&#13;  result: 2.29&#13;</pre></details></td><td>0.8</td><td>1</td><td>2.328</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/99#issuecomment-2325278533\" target=\"_blank\" rel=\"noopener\">Merge after 3.5 days?</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.069</td></tr></tbody></table></details>"
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 51.035,
+    "task": {
+      "reward": 50,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2188979640,
+        "content": "My guess is that because the package was previously released manually, it doesn't match the version on the repo. Afaik `release-please` will look for the all the commit names, then check the current package version and the repo latest tag. And it seems there is currently no tag inside this repository which would bring it back to `1.0.0` (just a guess).\r\nAlso the package should be changed to https://github.com/googleapis/release-please since the previous one is now deprecated.",
+        "url": "https://github.com/ubiquity-os/permit-generation/issues/28#issuecomment-2188979640",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.035,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 74,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 70.04,
+            "syllables": 114,
+            "sentences": 5,
+            "score": 0.8996
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 51.035 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>50</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.035</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/permit-generation/issues/28#issuecomment-2188979640\" target=\"_blank\" rel=\"noopener\">My guess is that because the package was previously released man&hellip;</a></h6></td><td><details><summary>3.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 74&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.035</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 8.202,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2188132408,
+        "content": "@gentlementlegen Pls check the description",
+        "url": "https://github.com/ubiquity-os/permit-generation/issues/28#issuecomment-2188132408",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.186,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 15.640000000000015,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.5564000000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2219638848,
+        "content": "So this issue should be closed as completed, right?",
+        "url": "https://github.com/ubiquity-os/permit-generation/issues/28#issuecomment-2219638848",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.606,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 94.30000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.6569999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2371853109,
+        "content": "Check [this](https://github.com/ubiquibot/permit-generation/pull/23) PR which was created automatically by [this](https://github.com/ubiquibot/permit-generation/blob/37e28cca5f9a31f62a03e622eeeb7dcfad132aa4/.github/workflows/publish-package.yml) workflow.\r\n[Initially](https://github.com/ubiquibot/permit-generation/pull/23/commits/a43f502d23c00362897b98b21dd2c950cd399941) that PR downgraded the package version to `1.0.0` although the expected behavior was to bump the version.\r\nWhat should be done:\r\n- find out and fix the root cause why [google-github-actions/release-please-action](https://github.com/ubiquibot/permit-generation/blob/37e28cca5f9a31f62a03e622eeeb7dcfad132aa4/.github/workflows/publish-package.yml#L17) downgrades the version instead of bumping it \r\n- make sure that on every new commit with message pattern `feat: *` a new PR is created with a bumped version\r\nP.S. Expected release [flow](https://github.com/ubiquibot/permit-generation/pull/23#issuecomment-2178005450)",
+        "url": "https://github.com/ubiquity-os/permit-generation/issues/28",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 7.41,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 76,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 68.95963157894738,
+            "syllables": 110,
+            "sentences": 5,
+            "score": 0.9104036842105262
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 8.202 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>7.41</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>0.792</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/permit-generation/issues/28\" target=\"_blank\" rel=\"noopener\">Check [this](https://github.com/ubiquibot/permit-generation/pull&hellip;</a></h6></td><td><details><summary>5.82</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.2&#13;regex:&#13;  wordCount: 76&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>1</td><td>1</td><td>7.41</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/permit-generation/issues/28#issuecomment-2188132408\" target=\"_blank\" rel=\"noopener\">@gentlementlegen Pls check the description</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.186</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/permit-generation/issues/28#issuecomment-2219638848\" target=\"_blank\" rel=\"noopener\">So this issue should be closed as completed, right?</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.606</td></tr></tbody></table></details>"
+  }
+}

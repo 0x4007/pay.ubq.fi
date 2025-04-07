@@ -1,0 +1,1426 @@
+{
+  "bojan07": {
+    "userId": 121951004,
+    "total": 200,
+    "task": {
+      "reward": 200,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 200 XP ]</a>&nbsp;</h3><h6>@bojan07</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>200</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 66.869,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 1743394772,
+        "content": "`DebtCouponManager` was renamed to [CreditNftManagerFacet](https://github.com/ubiquity/ubiquity-dollar/blob/dfe0e3f5da6200eb3058a22c3ef9d8d286ceb456/packages/contracts/src/dollar/facets/CreditNftManagerFacet.sol)\r\nYes, I think `creditNftManagerFacet` is even more appropriate than `creditNftManager`",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/785#issuecomment-1743394772",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.771,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 39.55500000000001,
+            "syllables": 22,
+            "sentences": 1,
+            "score": 0.7955500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1744342579,
+        "content": "Yes, can't think of a better place for them right now",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/785#issuecomment-1744342579",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.405,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 103.00500000000001,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1871721368,
+        "content": "Original [issue](https://github.com/ubiquity/ubiquity-dollar/issues/783)\r\nWhat should be done:\r\n- take this [file](https://github.com/ubiquity/ubiquity-dollar/blob/development/packages/dapp/components/lib/hooks/contracts/use-protocol-contracts.ts) and refactor the [staking](https://uad.ubq.fi/staking) page to use contracts from the new diamond architecture",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/785",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 5.93,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 49.91409090909093,
+            "syllables": 35,
+            "sentences": 1,
+            "score": 0.8991409090909093
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1660318505,
+        "content": "1. Naming should be as explicit as possible. This [property](https://github.com/ubiquity/ubiquity-dollar/pull/804/files#diff-7fcb277a6e130377e1cfe7127e1a021b81dd6b445342cf89f426b636b28fae1aR115) should be something like `sushiPoolGovernanceDollarLp` (we have a convention of not using tokens names like `UAD, UBQ, etc..` but rather full names `Dollar, Governance, etc...`). The same thing applies to [metaPool](https://github.com/ubiquity/ubiquity-dollar/pull/804/files#diff-7fcb277a6e130377e1cfe7127e1a021b81dd6b445342cf89f426b636b28fae1aR116) which should be smth like `curveMetaPoolDollarTriPoolLp` (so that it was obvious from the 1st glance what is this contract about) \r\n2. There should not be any errors on start. Either hardcode sushi swap pool and curve metapool addresses on the frontend either update the deployment script. The purpose of this issue is to make staking back to work. We'll refactor hardcoded values later.\r\n3. Even when I hardcoded all of the addresses (sushi swap pool , curve meta poll) I got the following error for the address which doesn't have any staked tokens (pls fix):\r\n<img width=\"1512\" alt=\"Screenshot 2023-10-05 at 19 40 14\" src=\"https://github.com/ubiquity/ubiquity-dollar/assets/119500907/a9b4b174-ecdd-4ab8-84c2-6355642de164\">",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#pullrequestreview-1660318505",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.301,
+          "formatting": {
+            "content": {
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 139,
+            "wordValue": 0.1,
+            "result": 2.33
+          },
+          "readability": {
+            "fleschKincaid": 68.99868421052633,
+            "syllables": 213,
+            "sentences": 8,
+            "score": 0.9100131578947367
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1662200172,
+        "content": "I've hardcoded the following addresses across the code:\r\n1. [sushiPoolGovernanceDollarLp](https://etherscan.io/address/0x41e087485f47538752A1195D984109cB8Dc0E429)\r\n2. [curveMetaPoolDollarTriPoolLp](https://etherscan.io/address/0x20955CB69Ae1515962177D164dfC9522feef567E)\r\n3. [_3crvTokenContract](https://etherscan.io/address/0x6c3F90f043a72FA612cbac8115EE7e52BDe6E490)\r\nThen opened metamask with the following mnemonic `test test test test test test test test test test test junk`, opened http://localhost:3000/staking and got the following error:\r\n<img width=\"1512\" alt=\"Screenshot 2023-10-06 at 18 42 14\" src=\"https://github.com/ubiquity/ubiquity-dollar/assets/119500907/d2beca91-97ca-48b8-ab13-6913eb1aa367\">\r\nBesides there is no such method [sushiSwapPoolContract.pair()](https://github.com/ubiquity/ubiquity-dollar/pull/804/files#diff-7fcb277a6e130377e1cfe7127e1a021b81dd6b445342cf89f426b636b28fae1aR165) where I got another error on RPC call.\r\nI'm asking to fix the staking page so that there were no any errors on start. One of the ways is to hardcode contract addresses which are missing in the deploy script (`sushiPoolGovernanceDollarLp, curveMetaPoolDollarTriPoolLp, _3crvTokenContract`) on the frontend.",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#pullrequestreview-1662200172",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 10.669,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 8
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 6
+              }
+            },
+            "result": 6.3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 90,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 45.95885981308413,
+            "syllables": 176,
+            "sentences": 5,
+            "score": 0.8595885981308413
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 1674212305,
+        "content": "Approving this one because the original issue spec is implemented.\r\nCredits page [error](https://github.com/ubiquity/ubiquity-dollar/pull/809#issuecomment-1752572290) will be solved as a part of this [issue](https://github.com/ubiquity/ubiquity-dollar/issues/786).",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#pullrequestreview-1674212305",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.213,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 64.9245454545455,
+            "syllables": 34,
+            "sentences": 2,
+            "score": 0.9507545454545451
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1746635026,
+        "content": "@bojan07 is it ready for review?",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1746635026",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.231,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 73.84500000000001,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.8615499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1752498356,
+        "content": "@bojan07 Could you provide your output of the `forge --version` command?",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1752498356",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.42,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 75.50000000000003,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.8449999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1752521043,
+        "content": "It seems that foundry changed smth in the latest forge version because right now the deployment script doesn't output (in the `packages/contracts/broadcast/**/run-latest.json` file) addresses for `StakingShare` and `CreditNft` contracts which was causing this [error](https://github.com/ubiquity/ubiquity-dollar/pull/804#pullrequestreview-1662200172). Not sure what exactly we should update, the deployment script or js code. This is on us and will be solved in another PR.\r\nAnyway, when I hardcoded addresses for `StakingShare` and `CreditNft` contracts the staking page opened without errors so I'm approving this PR.",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1752521043",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.831,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 76,
+            "wordValue": 0.1,
+            "result": 2.62
+          },
+          "readability": {
+            "fleschKincaid": 69.55526315789477,
+            "syllables": 106,
+            "sentences": 4,
+            "score": 0.9044473684210523
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1759506708,
+        "content": "@bojan07 \r\nRegarding your questions in telegram DM\r\nNo, not everything is fixed. There's a [huge red error](https://github.com/ubiquity/ubiquity-dollar/pull/809#issuecomment-1752572290) if you open the credits page.\r\nI will definitely review the PR again when the credits page is opened without any errors.\r\nRerarding this PR:\r\n1. As far as I understand this PR resolves 2 issues: https://github.com/ubiquity/ubiquity-dollar/issues/785 and https://github.com/ubiquity/ubiquity-dollar/issues/786. This is not really a good practice because a single PR should correspond to a single issue in order not to transforms PRs in a mess. We can put up with it right now, but for future PRs pls follow the \"1 PR => 1 issue\" rule.\r\n2. Pls fix all of the pavlovcik's comments\r\n3. Regarding this [error](https://github.com/ubiquity/ubiquity-dollar/pull/809#issuecomment-1752572290). You said that you can't solve it so we asked @molecula451 to help with it. So we're waiting for some more info on that issue. We can't merge a PR with runtime errors.",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1759506708",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.648,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 8
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 147,
+            "wordValue": 0.1,
+            "result": 2.26
+          },
+          "readability": {
+            "fleschKincaid": 70.0405547034765,
+            "syllables": 237,
+            "sentences": 12,
+            "score": 0.899594452965235
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1660318505,
+            "effect": {
+              "addition": 601,
+              "deletion": 212
+            },
+            "reward": 8.13,
+            "priority": 1
+          },
+          {
+            "reviewId": 1662200172,
+            "effect": {
+              "addition": 20,
+              "deletion": 22
+            },
+            "reward": 0.42,
+            "priority": 1
+          },
+          {
+            "reviewId": 1663913153,
+            "effect": {
+              "addition": 16,
+              "deletion": 13
+            },
+            "reward": 0.29,
+            "priority": 1
+          },
+          {
+            "reviewId": 1674212305,
+            "effect": {
+              "addition": 1178,
+              "deletion": 983
+            },
+            "reward": 21.61,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 66.869 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>4</td><td>30.45</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>5.93</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>2.176</td></tr><tr><td>Review</td><td>Comment</td><td>7</td><td>28.313</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804\" target=\"_blank\" rel=\"noopener\">#804</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+601 -212</td><td>1</td><td>8.13</td></tr><tr><td>+20 -22</td><td>1</td><td>0.42</td></tr><tr><td>+16 -13</td><td>1</td><td>0.29</td></tr><tr><td>+1178 -983</td><td>1</td><td>21.61</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/785\" target=\"_blank\" rel=\"noopener\">Original [issue](https://github.com/ubiquity/ubiquity-dollar/iss&hellip;</a></h6></td><td><details><summary>4.67</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.1&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>1</td><td>1</td><td>5.93</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/785#issuecomment-1743394772\" target=\"_blank\" rel=\"noopener\">&#96;DebtCouponManager&#96; was renamed to [CreditNftManagerFace&hellip;</a></h6></td><td><details><summary>2.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.771</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/785#issuecomment-1744342579\" target=\"_blank\" rel=\"noopener\">Yes, can't think of a better place for them right now</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.405</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#pullrequestreview-1660318505\" target=\"_blank\" rel=\"noopener\">1. Naming should be as explicit as possible. This [property](htt&hellip;</a></h6></td><td><details><summary>4.63</summary><pre>content:&#13;  content:&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.3&#13;regex:&#13;  wordCount: 139&#13;  wordValue: 0.1&#13;  result: 2.33&#13;</pre></details></td><td>0.9</td><td>1</td><td>5.301</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#pullrequestreview-1662200172\" target=\"_blank\" rel=\"noopener\">I've hardcoded the following addresses across the code:1. [sus&hellip;</a></h6></td><td><details><summary>8.93</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 8&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 6&#13;  result: 6.3&#13;regex:&#13;  wordCount: 90&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.95</td><td>1</td><td>10.669</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#pullrequestreview-1674212305\" target=\"_blank\" rel=\"noopener\">Approving this one because the original issue spec is implemente&hellip;</a></h6></td><td><details><summary>3.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.7</td><td>1</td><td>3.213</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1746635026\" target=\"_blank\" rel=\"noopener\">@bojan07 is it ready for review?</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.231</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1752498356\" target=\"_blank\" rel=\"noopener\">@bojan07 Could you provide your output of the &#96;forge --versi&hellip;</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.42</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1752521043\" target=\"_blank\" rel=\"noopener\">It seems that foundry changed smth in the latest forge version b&hellip;</a></h6></td><td><details><summary>2.62</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 76&#13;  wordValue: 0.1&#13;  result: 2.62&#13;</pre></details></td><td>0.85</td><td>1</td><td>2.831</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1759506708\" target=\"_blank\" rel=\"noopener\">@bojan07 Regarding your questions in telegram DMNo, not ever&hellip;</a></h6></td><td><details><summary>5.56</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 8&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.3&#13;regex:&#13;  wordCount: 147&#13;  wordValue: 0.1&#13;  result: 2.26&#13;</pre></details></td><td>0.8</td><td>1</td><td>5.648</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 35.218,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1673891808,
+        "content": "Overall the code seems fine. Unfortunately I'm not familiar with the context because I haven't worked with this code in several months. \r\nVariable names must be changed according to the link I shared.",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#pullrequestreview-1673891808",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.783,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 66.88476190476192,
+            "syllables": 53,
+            "sentences": 3,
+            "score": 0.9311523809523808
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1356655629,
+        "content": "Seems like a red flag that you're adding a generic Contract type here if its for ERC20 token contracts only.",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1356655629",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,11 +1,11 @@\n-import { BigNumber, ethers } from \"ethers\";\n+import { BigNumber, ethers, Contract } from \"ethers\";\n import { ERC1155Ubiquity, ERC20 } from \"types\";\n \n import { performTransaction } from \"./utils\";\n \n export async function ensureERC20Allowance(\n   logName: string,\n-  contract: ERC20,\n+  contract: ERC20 | Contract,",
+        "score": {
+          "reward": 1.536,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 72.72000000000003,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.8727999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1356656862,
+        "content": "Shouldn't these addresses be passed in as variables?",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1356656862",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -148,6 +159,18 @@ const useProtocolContracts = () => {\n   protocolContracts.twapOracleDollar3poolFacet = new ethers.Contract(diamondAddress, TWAPOracleDollar3poolFacetArtifact.abi, <Provider>provider);\n   protocolContracts.ubiquityPoolFacet = new ethers.Contract(diamondAddress, UbiquityPoolFacetArtifact.abi, <Provider>provider);\n \n+  // other related contracts\n+  // const sushiSwapPool = await protocolContracts.managerFacet.sushiSwapPoolAddress();\n+  // const sushiSwapPoolContract = new ethers.Contract(sushiSwapPool, SushiSwapPoolArtifact.abi, <Provider>provider);\n+  // const UniswapV2PairContract = new ethers.Contract(await sushiSwapPoolContract.pair(), UniswapV2PairABI, <Provider>provider);\n+  const UniswapV2PairContract = new ethers.Contract(\"0x41e087485f47538752A1195D984109cB8Dc0E429\", UniswapV2PairABI, <Provider>provider);",
+        "score": {
+          "reward": 0.721,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 84.90000000000003,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.7509999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1356659339,
+        "content": "We deprecated `bonding` terminology from the codebase in favor of `staking` \r\nThat needs to be fixed.",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1356659339",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -44,60 +44,63 @@ type Actions = {\n const USD_TO_LP = 0.7460387929;\n const LP_TO_USD = 1 / USD_TO_LP;\n \n-export const BondingSharesExplorerContainer = ({ managedContracts, web3Provider, walletAddress, signer }: LoadedContext) => {\n+export const BondingSharesExplorerContainer = ({ protocolContracts, web3Provider, walletAddress, signer }: LoadedContext) => {\n   const [model, setModel] = useState<Model | null>(null);\n   const [, doTransaction] = useTransactionLogger();\n   const [, refreshBalances] = useBalances();\n-  // cspell: disable-next-line\n-  const { staking: bonding, masterChef, stakingToken: bondingToken, dollarMetapool: metaPool } = managedContracts;\n \n   useAsyncInit(fetchSharesInformation);\n   async function fetchSharesInformation(processedShareId?: ShareData[\"id\"]) {\n-    console.time(\"BondingShareExplorerContainer contract loading\");\n-    const currentBlock = await web3Provider.getBlockNumber();\n-    // cspell: disable-next-line\n-    const blockCountInAWeek = +(await bonding.blockCountInAWeek()).toString();\n-    const totalShares = await masterChef.totalShares();\n     // cspell: disable-next-line\n-    const bondingShareIds = await bondingToken.holderTokens(walletAddress);\n-    const walletLpBalance = await metaPool.balanceOf(walletAddress);\n-\n-    const shares: ShareData[] = [];\n-    await Promise.all(\n+    const { stakingFacet, chefFacet, stakingShare: bondingToken, curveMetaPoolDollarTriPoolLp } = await protocolContracts;\n+    if (stakingFacet) {\n+      console.time(\"BondingShareExplorerContainer contract loading\");\n+      const currentBlock = await web3Provider.getBlockNumber();\n       // cspell: disable-next-line\n-      bondingShareIds.map(async (id: BigNumber) => {\n+      const blockCountInAWeek = +(await stakingFacet.blockCountInAWeek()).toString();\n+      const totalShares = await chefFacet?.totalShares();\n+      // cspell: disable-next-line\n+      const bondingShareIds = await bondingToken?.holderTokens(walletAddress);\n+\n+      const walletLpBalance = await curveMetaPoolDollarTriPoolLp?.balanceOf(walletAddress);\n+\n+      const shares: ShareData[] = [];\n+      await Promise.all(\n         // cspell: disable-next-line\n-        const [ugov, bond, bondingShareInfo, tokenBalance] = await Promise.all([\n-          // cspell: disable-next-line\n-          masterChef.pendingGovernance(id),\n+        bondingShareIds.map(async (id: BigNumber) => {",
+        "score": {
+          "reward": 1.341,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 53.639285714285734,
+            "syllables": 23,
+            "sentences": 1,
+            "score": 0.9363928571428574
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1356660433,
+        "content": "We don't use token symbols. Instead change them to what they stand for e.g. `governanceToken`\r\nhttps://github.com/ubiquity/ubiquity-dollar/blob/development/.github/CONTRIBUTING.md",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1356660433",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -44,60 +44,63 @@ type Actions = {\n const USD_TO_LP = 0.7460387929;\n const LP_TO_USD = 1 / USD_TO_LP;\n \n-export const BondingSharesExplorerContainer = ({ managedContracts, web3Provider, walletAddress, signer }: LoadedContext) => {\n+export const BondingSharesExplorerContainer = ({ protocolContracts, web3Provider, walletAddress, signer }: LoadedContext) => {\n   const [model, setModel] = useState<Model | null>(null);\n   const [, doTransaction] = useTransactionLogger();\n   const [, refreshBalances] = useBalances();\n-  // cspell: disable-next-line\n-  const { staking: bonding, masterChef, stakingToken: bondingToken, dollarMetapool: metaPool } = managedContracts;\n \n   useAsyncInit(fetchSharesInformation);\n   async function fetchSharesInformation(processedShareId?: ShareData[\"id\"]) {\n-    console.time(\"BondingShareExplorerContainer contract loading\");\n-    const currentBlock = await web3Provider.getBlockNumber();\n-    // cspell: disable-next-line\n-    const blockCountInAWeek = +(await bonding.blockCountInAWeek()).toString();\n-    const totalShares = await masterChef.totalShares();\n     // cspell: disable-next-line\n-    const bondingShareIds = await bondingToken.holderTokens(walletAddress);\n-    const walletLpBalance = await metaPool.balanceOf(walletAddress);\n-\n-    const shares: ShareData[] = [];\n-    await Promise.all(\n+    const { stakingFacet, chefFacet, stakingShare: bondingToken, curveMetaPoolDollarTriPoolLp } = await protocolContracts;\n+    if (stakingFacet) {\n+      console.time(\"BondingShareExplorerContainer contract loading\");\n+      const currentBlock = await web3Provider.getBlockNumber();\n       // cspell: disable-next-line\n-      bondingShareIds.map(async (id: BigNumber) => {\n+      const blockCountInAWeek = +(await stakingFacet.blockCountInAWeek()).toString();\n+      const totalShares = await chefFacet?.totalShares();\n+      // cspell: disable-next-line\n+      const bondingShareIds = await bondingToken?.holderTokens(walletAddress);\n+\n+      const walletLpBalance = await curveMetaPoolDollarTriPoolLp?.balanceOf(walletAddress);\n+\n+      const shares: ShareData[] = [];\n+      await Promise.all(\n         // cspell: disable-next-line\n-        const [ugov, bond, bondingShareInfo, tokenBalance] = await Promise.all([\n-          // cspell: disable-next-line\n-          masterChef.pendingGovernance(id),\n+        bondingShareIds.map(async (id: BigNumber) => {\n           // cspell: disable-next-line\n-          bondingToken.getStake(id),\n-          masterChef.getStakingShareInfo(id),\n-          // cspell: disable-next-line\n-          bondingToken.balanceOf(walletAddress, id),\n-        ]);\n+          const [ugov, bond, bondingShareInfo, tokenBalance] = await Promise.all([",
+        "score": {
+          "reward": 2.352,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 61.920000000000016,
+            "syllables": 45,
+            "sentences": 7,
+            "score": 0.9807999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1357141148,
+        "content": "You should be able to use the type that is generated from the contract itself using typechain, not a generic `Contract` type.",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1357141148",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,11 +1,11 @@\n-import { BigNumber, ethers } from \"ethers\";\n+import { BigNumber, ethers, Contract } from \"ethers\";\n import { ERC1155Ubiquity, ERC20 } from \"types\";\n \n import { performTransaction } from \"./utils\";\n \n export async function ensureERC20Allowance(\n   logName: string,\n-  contract: ERC20,\n+  contract: ERC20 | Contract,",
+        "score": {
+          "reward": 1.675,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 60.634285714285724,
+            "syllables": 31,
+            "sentences": 1,
+            "score": 0.9936571428571428
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1673884237,
+            "effect": {
+              "addition": 1575,
+              "deletion": 994
+            },
+            "reward": 25.69,
+            "priority": 1
+          },
+          {
+            "reviewId": 1674728600,
+            "effect": {
+              "addition": 58,
+              "deletion": 54
+            },
+            "reward": 1.12,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 35.218 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>26.81</td></tr><tr><td>Review</td><td>Comment</td><td>6</td><td>8.408</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804\" target=\"_blank\" rel=\"noopener\">#804</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+1575 -994</td><td>1</td><td>25.69</td></tr><tr><td>+58 -54</td><td>1</td><td>1.12</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#pullrequestreview-1673891808\" target=\"_blank\" rel=\"noopener\">Overall the code seems fine. Unfortunately I'm not familiar with&hellip;</a></h6></td><td><details><summary>2.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.783</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1356655629\" target=\"_blank\" rel=\"noopener\">Seems like a red flag that you're adding a generic Contract type&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.536</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1356656862\" target=\"_blank\" rel=\"noopener\">Shouldn't these addresses be passed in as variables?</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.721</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1356659339\" target=\"_blank\" rel=\"noopener\">We deprecated &#96;bonding&#96; terminology from the codebase in&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.341</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1356660433\" target=\"_blank\" rel=\"noopener\">We don't use token symbols. Instead change them to what they sta&hellip;</a></h6></td><td><details><summary>2.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.8</td><td>1</td><td>2.352</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1357141148\" target=\"_blank\" rel=\"noopener\">You should be able to use the type that is generated from the co&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.85</td><td>1</td><td>1.675</td></tr></tbody></table></details>"
+  },
+  "molecula451": {
+    "total": 40.269,
+    "userId": 41552663,
+    "comments": [
+      {
+        "id": 1345183483,
+        "content": "this was acceptable on the other PR because is lesser code, but this pattern won't be acceptable on this one, find other way around to achieve this",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1345183483",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -26,24 +28,34 @@ export const BalancesContext = createContext<[Balances | null, RefreshBalances]>\n export const BalancesContextProvider: React.FC<ChildrenShim> = ({ children }) => {\n   const [balances, setBalances] = useState<Balances | null>(null);\n   const [walletAddress] = useWalletAddress();\n-  const managedContracts = useManagerManaged();\n   const namedContracts = useNamedContracts();\n+  const protocolContracts = useProtocolContracts();\n+  const { provider } = useWeb3();\n \n   async function refreshBalances() {\n-    if (walletAddress && managedContracts && namedContracts) {\n+    if (!walletAddress || !namedContracts || !protocolContracts || !provider) {\n+      return;\n+    }\n+\n+    if(protocolContracts.managerFacet && protocolContracts.dollarToken && protocolContracts.creditToken && protocolContracts.governanceToken && protocolContracts.creditNft && protocolContracts.stakingShare) {",
+        "score": {
+          "reward": 0.522,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 54.5364285714286,
+            "syllables": 41,
+            "sentences": 1,
+            "score": 0.945364285714286
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1350847290,
+        "content": "You did not updated this operator, this is forbidden",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1350847290",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -31,10 +31,10 @@ export async function performTransaction(transaction: Promise<ContractTransactio\n }\n \n export async function erc1155BalanceOf(addr: string, erc1155UbiquityCtr: Contract): Promise<BigNumber> {\n-  const treasuryIds = await erc1155UbiquityCtr.holderTokens(addr);\n+  const treasuryIds = await erc1155UbiquityCtr!.holderTokens(addr);\n \n   const balanceOfs = treasuryIds.map((id: string) => {\n-    return erc1155UbiquityCtr.balanceOf(addr, id);\n+    return erc1155UbiquityCtr!.balanceOf(addr, id);",
+        "score": {
+          "reward": 0.216,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 56.70000000000002,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.9670000000000002
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1350847573,
+        "content": "and here",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1350847573",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -31,10 +31,10 @@ export async function performTransaction(transaction: Promise<ContractTransactio\n }\n \n export async function erc1155BalanceOf(addr: string, erc1155UbiquityCtr: Contract): Promise<BigNumber> {\n-  const treasuryIds = await erc1155UbiquityCtr.holderTokens(addr);\n+  const treasuryIds = await erc1155UbiquityCtr!.holderTokens(addr);",
+        "score": {
+          "reward": 0.064,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 120.20500000000001,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1350848631,
+        "content": "operator `!` again",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1350848631",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -17,15 +16,13 @@ const usePrices = (): [BigNumber | null, BigNumber | null, () => Promise<void>]\n         return;\n       }\n \n-      if(protocolContracts.managerFacet && protocolContracts.twapOracleDollar3poolFacet) {\n-        const dollarTokenAddress = await protocolContracts.managerFacet.dollarTokenAddress();\n-        const newTwapPrice = await protocolContracts.twapOracleDollar3poolFacet.consult(dollarTokenAddress);\n-        const dollar3poolMarket = await protocolContracts.managerFacet.stableSwapMetaPoolAddress();\n-        const dollarMetapool = getIMetaPoolContract(dollar3poolMarket, provider)\n-        const newSpotPrice = await dollarMetapool[\"get_dy(int128,int128,uint256)\"](0, 1, utils.parseEther(\"1\"));\n-        setTwapPrice(newTwapPrice);\n-        setSpotPrice(newSpotPrice);\n-      }\n+      const contracts = await protocolContracts;\n+\n+      const dollarTokenAddress = await contracts.managerFacet!.dollarTokenAddress();",
+        "score": {
+          "reward": 0.048,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": -48.994999999999976,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1351966921,
+        "content": "it is for the whole codebase, not just the PR",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1351966921",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -17,15 +16,13 @@ const usePrices = (): [BigNumber | null, BigNumber | null, () => Promise<void>]\n         return;\n       }\n \n-      if(protocolContracts.managerFacet && protocolContracts.twapOracleDollar3poolFacet) {\n-        const dollarTokenAddress = await protocolContracts.managerFacet.dollarTokenAddress();\n-        const newTwapPrice = await protocolContracts.twapOracleDollar3poolFacet.consult(dollarTokenAddress);\n-        const dollar3poolMarket = await protocolContracts.managerFacet.stableSwapMetaPoolAddress();\n-        const dollarMetapool = getIMetaPoolContract(dollar3poolMarket, provider)\n-        const newSpotPrice = await dollarMetapool[\"get_dy(int128,int128,uint256)\"](0, 1, utils.parseEther(\"1\"));\n-        setTwapPrice(newTwapPrice);\n-        setSpotPrice(newSpotPrice);\n-      }\n+      const contracts = await protocolContracts;\n+\n+      const dollarTokenAddress = await contracts.managerFacet!.dollarTokenAddress();",
+        "score": {
+          "reward": 0.189,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 86.70500000000001,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.7329499999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1356853911,
+        "content": "this conditional may still be improved",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1356853911",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -26,24 +28,34 @@ export const BalancesContext = createContext<[Balances | null, RefreshBalances]>\n export const BalancesContextProvider: React.FC<ChildrenShim> = ({ children }) => {\n   const [balances, setBalances] = useState<Balances | null>(null);\n   const [walletAddress] = useWalletAddress();\n-  const managedContracts = useManagerManaged();\n   const namedContracts = useNamedContracts();\n+  const protocolContracts = useProtocolContracts();\n+  const { provider } = useWeb3();\n \n   async function refreshBalances() {\n-    if (walletAddress && managedContracts && namedContracts) {\n+    if (!walletAddress || !namedContracts || !protocolContracts || !provider) {\n+      return;\n+    }\n+\n+    const contracts = await protocolContracts;\n+\n+    if(contracts.creditNft && contracts.stakingShare) {\n+      // const _3crvTokenAddress = await contracts.managerFacet?.curve3PoolTokenAddress();\n+      const _3crvTokenContract = getERC20Contract(_3crvTokenAddress, provider);\n+  \n       const [uad, _3crv, uad3crv, ucr, ubq, ucrNft, stakingShares, usdc, dai, usdt] = await Promise.all([",
+        "score": {
+          "reward": 0.16,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 59.745000000000005,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.9974500000000001
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1356857040,
+        "content": "can you achieve this in other way?",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1356857040",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -67,12 +67,14 @@ const UcrNftRedeem = () => {\n   };\n \n   const redeemUcrNftForUad = async (amount: BigNumber) => {\n-    const { debtCouponManager } = deployedContracts;\n+    const contracts = await protocolContracts;\n     const debtId = debtIds[selectedDebtId];\n-    if (debtId && (await ensureERC1155Allowance(\"uCR-NFT -> DebtCouponManager\", managedContracts.creditNft, signer, debtCouponManager.address))) {\n-      await (await debtCouponManager.connect(signer).redeemCreditNft(debtId, amount)).wait();\n-      refreshBalances();\n-      fetchDebts(walletAddress, managedContracts.creditNft);\n+    if (contracts.creditNft && contracts.creditNftManagerFacet) {",
+        "score": {
+          "reward": 0.147,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 90.95857142857145,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.6904142857142855
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1356872775,
+        "content": "twice `await` why?",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1356872775",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -67,12 +67,14 @@ const UcrNftRedeem = () => {\n   };\n \n   const redeemUcrNftForUad = async (amount: BigNumber) => {\n-    const { debtCouponManager } = deployedContracts;\n+    const contracts = await protocolContracts;\n     const debtId = debtIds[selectedDebtId];\n-    if (debtId && (await ensureERC1155Allowance(\"uCR-NFT -> DebtCouponManager\", managedContracts.creditNft, signer, debtCouponManager.address))) {\n-      await (await debtCouponManager.connect(signer).redeemCreditNft(debtId, amount)).wait();\n-      refreshBalances();\n-      fetchDebts(walletAddress, managedContracts.creditNft);\n+    if (contracts.creditNft && contracts.creditNftManagerFacet) {\n+      if (debtId && (await ensureERC1155Allowance(\"uCR-NFT -> CreditNftManagerFacet\", contracts.creditNft, signer, contracts.creditNftManagerFacet.address))) {\n+        await (await contracts.creditNftManagerFacet.connect(signer).redeemCreditNft(debtId, amount)).wait();",
+        "score": {
+          "reward": 0.072,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 120.20500000000001,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1357389856,
+        "content": "the thing here is diamond architecture is typed as `Contract` and the old type is just a simple [`ERC20`](https://github.com/ubiquity/ubiquity-dollar/blob/000bdb64f645f4338f6d827546a2b5b7b66fff0d/packages/dapp/components/lib/contracts-shortcuts.ts#L8) typed, this should be purged, in fact this whole function should be refactored",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1357389856",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -1,11 +1,11 @@\n-import { BigNumber, ethers } from \"ethers\";\n+import { BigNumber, ethers, Contract } from \"ethers\";\n import { ERC1155Ubiquity, ERC20 } from \"types\";\n \n import { performTransaction } from \"./utils\";\n \n export async function ensureERC20Allowance(\n   logName: string,\n-  contract: ERC20,\n+  contract: ERC20 | Contract,",
+        "score": {
+          "reward": 0.828,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 66.40500000000003,
+            "syllables": 39,
+            "sentences": 1,
+            "score": 0.9359499999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1751941000,
+        "content": "please, deploy the contracts locally, provide a bit of QA to your code",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1751941000",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.272,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 76.50153846153849,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.8349846153846151
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1754845444,
+        "content": "Can you take a look at conflicts? This branch cannot be rebased due to conflicts",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1754845444",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.324,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 92.06250000000001,
+            "syllables": 19,
+            "sentences": 2,
+            "score": 0.6793749999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1754859668,
+        "content": "try to updating the branch (without discarding) if you discard the PR will be automatically closed by github\r\nin vscode check all of your branches are good, maybe copy a save the world (just to make sure) when you discard here on github! your \"tree\" branch are still intact in your vscode by executing git branch you should see that all your changes are still there (even tho after you discarded changes here on github) but also I think you will have to submit the PR again",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1754859668",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.588,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 87,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 52.79974137931035,
+            "syllables": 113,
+            "sentences": 2,
+            "score": 0.9279974137931035
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1754861257,
+        "content": "just try to update the branch first without discarding",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1754861257",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.156,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 75.50000000000003,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.8449999999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1754890805,
+        "content": "```typescript\r\nType error: Argument of type 'Contract' is not assignable to parameter of type 'ERC20'.\r\n  Type 'Contract' is missing the following properties from type 'ERC20': allowance, approve, balanceOf, decimals, and 7 more.\r\n  35 |     if (contracts.dollarToken && contracts.creditNftManagerFacet) {\r\n  36 |       // cspell: disable-next-line\r\n     |                                                                  ^\r\n  38 |       await (await contracts.creditNftManagerFacet.connect(signer).exchangeDollarsForCreditNft(amount)).wait();\r\n  39 |       refreshBalances();\r\n  40 |     }\r\n```",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1754890805",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1756232070,
+        "content": "@bojan07 Look, here's what happens, part of the issues, and bounties is that you bear with us in the PR (as long as we can) we cannot just merge PR's by looking.\r\n## Branch conflictings and changes same PR twice\r\nSecond **your both branch are conflicting #804 & #809 you submitted the same changes twice to the PR**\r\nAnother thing you are working different PR's and then also working on \"development\" branch on your forked repo, this is totally bad and this is why the branch has conflicts\r\nThird rndqnuu approvals is in indeed and good eye, but he also works on other stuff, this task is complex (and imporant) for you and for us, that's why we intense review things even after one approval, if the task were not that complex, then it's OK to almost quickly merge but it's no Ok for the task\r\nIt was good for e.g that you had first do 1 PR, without re-submitting the same changes to both PR, these PR can't be merge and (i won't be closing now) in it's current stage and squashing commits won't help anyone either.\r\nIf you have any suggestions to the **same** changes please say, otherwise bear we us till find a good resolution, because again i notice these 2 PR has same changes.\r\nLastly i suggest you do not work directly on \"**development**\" branch this will cause you these things",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1756232070",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.632,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 7
+              },
+              "h2": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 227,
+            "wordValue": 0.1,
+            "result": 1.47
+          },
+          "readability": {
+            "fleschKincaid": 52.674704845815015,
+            "syllables": 290,
+            "sentences": 5,
+            "score": 0.9267470484581501
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1756252433,
+        "content": "do not open just yet, we will probably do it, but im locally having a look to this PR (even tho it's conflicting) to appropriately help you get it good and merge",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1756252433",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.256,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0.1,
+            "result": 1.98
+          },
+          "readability": {
+            "fleschKincaid": 55.41272727272728,
+            "syllables": 46,
+            "sentences": 1,
+            "score": 0.9541272727272728
+          },
+          "multiplier": 0.25,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1760310541,
+        "content": "it all points that the Uniswap router thing is a package issue that either we have to solve on the front end (on another issue) but it was not really introduced by these changes",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1760310541",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.455,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 34,
+            "wordValue": 0.1,
+            "result": 2.01
+          },
+          "readability": {
+            "fleschKincaid": 57.86617647058826,
+            "syllables": 46,
+            "sentences": 1,
+            "score": 0.9786617647058826
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1760367675,
+        "content": "@rndquu it seems incredible but here is the bug https://github.com/Uniswap/sdk-core/blob/main/src/chains.ts#L1 the package is used by Uniswap-Smart Router, we have to clean many of the lines at `useRouter()` this package is not supporting anvil local testnet nor any \"local\" testnet at all as per see not even 8545 ganache, what we can do is something similar to #788 where we forked and then update, this package altho support mainnet, as when you switch mainnet big **### \"Network Error\"** dissapear",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1760367675",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.053,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 74,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 60.67554263565893,
+            "syllables": 119,
+            "sentences": 3,
+            "score": 0.9932445736434107
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1760378041,
+        "content": "https://github.com/ubiquity/ubiquity-dollar/blob/000bdb64f645f4338f6d827546a2b5b7b66fff0d/packages/dapp/components/lib/hooks/use-router.ts#L27\r\nthis line make use of one of the chains at https://github.com/Uniswap/sdk-core/blob/main/src/chains.ts#L1 , but when we switch to local anvil (where our building is) it pops `Network Error`\r\nso updating part of the package, and replacing `chainId: localAnvil` should do, in any case this whole useRouter() should be refactored, no part of this issue",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1760378041",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.088,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 47,
+            "wordValue": 0.1,
+            "result": 2.33
+          },
+          "readability": {
+            "fleschKincaid": 73.41226315789477,
+            "syllables": 106,
+            "sentences": 5,
+            "score": 0.8658773684210523
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1760383371,
+        "content": "@bojan07 can you make use of https://github.com/ubiquity/ubiquity-dollar/blob/000bdb64f645f4338f6d827546a2b5b7b66fff0d/packages/dapp/.env.example#L4 adding a conditional to the changes so are only visible at \"DEBUG\" env var?",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1760383371",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.56,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 62.58852272727276,
+            "syllables": 53,
+            "sentences": 4,
+            "score": 0.9741147727272724
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1760388749,
+        "content": "Approving this PR because the contributor successfully met the specs, all the bugs and pop ups are coming up from old code",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1760388749",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.459,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 61.45045454545455,
+            "syllables": 32,
+            "sentences": 1,
+            "score": 0.9854954545454545
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1656654016,
+            "effect": {
+              "addition": 571,
+              "deletion": 182
+            },
+            "reward": 7.53,
+            "priority": 1
+          },
+          {
+            "reviewId": 1665381038,
+            "effect": {
+              "addition": 94,
+              "deletion": 93
+            },
+            "reward": 1.87,
+            "priority": 1
+          },
+          {
+            "reviewId": 1674224122,
+            "effect": {
+              "addition": 1178,
+              "deletion": 983
+            },
+            "reward": 21.61,
+            "priority": 1
+          },
+          {
+            "reviewId": 1675147500,
+            "effect": {
+              "addition": 0,
+              "deletion": 0
+            },
+            "reward": 0,
+            "priority": 1
+          },
+          {
+            "reviewId": 1675235100,
+            "effect": {
+              "addition": 60,
+              "deletion": 57
+            },
+            "reward": 1.17,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/804"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 40.269 XP ]</a>&nbsp;</h3><h6>@molecula451</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>5</td><td>32.18</td></tr><tr><td>Review</td><td>Comment</td><td>21</td><td>8.089</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804\" target=\"_blank\" rel=\"noopener\">#804</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+571 -182</td><td>1</td><td>7.53</td></tr><tr><td>+94 -93</td><td>1</td><td>1.87</td></tr><tr><td>+1178 -983</td><td>1</td><td>21.61</td></tr><tr><td>+0 -0</td><td>1</td><td>0</td></tr><tr><td>+60 -57</td><td>1</td><td>1.17</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1345183483\" target=\"_blank\" rel=\"noopener\">this was acceptable on the other PR because is lesser code, but &hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.522</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1350847290\" target=\"_blank\" rel=\"noopener\">You did not updated this operator, this is forbidden</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.216</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1350847573\" target=\"_blank\" rel=\"noopener\">and here</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.064</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1350848631\" target=\"_blank\" rel=\"noopener\">operator &#96;!&#96; again</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.048</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1351966921\" target=\"_blank\" rel=\"noopener\">it is for the whole codebase, not just the PR</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.189</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1356853911\" target=\"_blank\" rel=\"noopener\">this conditional may still be improved</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.16</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1356857040\" target=\"_blank\" rel=\"noopener\">can you achieve this in other way?</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.147</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1356872775\" target=\"_blank\" rel=\"noopener\">twice &#96;await&#96; why?</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.072</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#discussion_r1357389856\" target=\"_blank\" rel=\"noopener\">the thing here is diamond architecture is typed as &#96;Contract&hellip;</a></h6></td><td><details><summary>2.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.828</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1751941000\" target=\"_blank\" rel=\"noopener\">please, deploy the contracts locally, provide a bit of QA to you&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.272</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1754845444\" target=\"_blank\" rel=\"noopener\">Can you take a look at conflicts? This branch cannot be rebased &hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.324</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1754859668\" target=\"_blank\" rel=\"noopener\">try to updating the branch (without discarding) if you discard t&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 87&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.588</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1754861257\" target=\"_blank\" rel=\"noopener\">just try to update the branch first without discarding</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.156</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1754890805\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;typescriptType error: Argument of type 'Contrac&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1756232070\" target=\"_blank\" rel=\"noopener\">@bojan07 Look, here's what happens, part of the issues, and boun&hellip;</a></h6></td><td><details><summary>2.47</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 7&#13;    h2:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 227&#13;  wordValue: 0.1&#13;  result: 1.47&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.632</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1756252433\" target=\"_blank\" rel=\"noopener\">do not open just yet, we will probably do it, but im locally hav&hellip;</a></h6></td><td><details><summary>1.98</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0.1&#13;  result: 1.98&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.256</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1760310541\" target=\"_blank\" rel=\"noopener\">it all points that the Uniswap router thing is a package issue t&hellip;</a></h6></td><td><details><summary>2.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 34&#13;  wordValue: 0.1&#13;  result: 2.01&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.455</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1760367675\" target=\"_blank\" rel=\"noopener\">@rndquu it seems incredible but here is the bug https://github.c&hellip;</a></h6></td><td><details><summary>3.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 74&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.053</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1760378041\" target=\"_blank\" rel=\"noopener\">https://github.com/ubiquity/ubiquity-dollar/blob/000bdb64f645f43&hellip;</a></h6></td><td><details><summary>4.33</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 47&#13;  wordValue: 0.1&#13;  result: 2.33&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.088</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1760383371\" target=\"_blank\" rel=\"noopener\">@bojan07 can you make use of https://github.com/ubiquity/ubiquit&hellip;</a></h6></td><td><details><summary>2.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.56</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/804#issuecomment-1760388749\" target=\"_blank\" rel=\"noopener\">Approving this PR because the contributor successfully met the s&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.459</td></tr></tbody></table></details>"
+  }
+}

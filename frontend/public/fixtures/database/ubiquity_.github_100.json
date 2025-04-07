@@ -1,0 +1,464 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 110.932,
+    "task": {
+      "reward": 100,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 1998622303,
+        "content": "Sure thing will catch it tomorrow\r\n#### Frontend\r\n- onboarding\r\n- audit\r\n- pay\r\n- staking\r\n#### Backend\r\n- I'll implement it into permit module for when that's in use  but should I add it into any of the current production backend stuff?",
+        "url": "https://github.com/ubiquity/.github/issues/100#issuecomment-1998622303",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.592,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "h4": {
+                "score": 1,
+                "elementCount": 2
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              }
+            },
+            "result": 2.5
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 41.36500000000002,
+            "syllables": 57,
+            "sentences": 1,
+            "score": 0.8136500000000002
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1999690380,
+        "content": "I already have a pull ready for it, if you can allow the build workflow I can abuse the preview deployment and try to reproduce, either way I can add the rpc-handler as part of that PR\r\n- https://github.com/pavlovcik/uad.ubq.fi/pull/2\r\nNo probs",
+        "url": "https://github.com/ubiquity/.github/issues/100#issuecomment-1999690380",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.616,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 40,
+            "wordValue": 0.1,
+            "result": 2.18
+          },
+          "readability": {
+            "fleschKincaid": 82.17676020408165,
+            "syllables": 65,
+            "sentences": 4,
+            "score": 0.7782323979591835
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2000043767,
+        "content": "neither audit nor onboarding actually make use of any RPC calls reviewing the code, onboarding does lean into using the MM provider which the rpc-handler would have no effect on\r\n- audit: `getRandomRpcUrl()` & `getOptimalRPC()` exist but are never used in the codebase\r\n- onboarding: uses `getNetworkName, NetworkIds, Tokens` from `constants.ts` which are also exported from the package but seems redundant installing the pkg just for 3 exports which exist in `constants.ts`\r\n<hr/>\r\n- pay: PR open\r\n- uad: TODO",
+        "url": "https://github.com/ubiquity/.github/issues/100#issuecomment-2000043767",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.72,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              }
+            },
+            "result": 0.4
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 69,
+            "wordValue": 0.1,
+            "result": 2.59
+          },
+          "readability": {
+            "fleschKincaid": 10.513043478260897,
+            "syllables": 103,
+            "sentences": 1,
+            "score": 0.505130434782609
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2000081153,
+        "content": "I'm mistaken anyway there are two calls, decimals and approve, my bad\r\nWill pr it rn",
+        "url": "https://github.com/ubiquity/.github/issues/100#issuecomment-2000081153",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.756,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 70.14470588235295,
+            "syllables": 24,
+            "sentences": 1,
+            "score": 0.8985529411764704
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2000115993,
+        "content": "- https://github.com/ubiquity/onboard.ubq.fi/blob/66b2bcbb3ca21ff2559bf1c33a82359bd0130ea4/static/scripts/onboarding/onboarding.ts#L291\r\nsigner initialized and the chainId is fetched via MM\r\n- https://github.com/ubiquity/onboard.ubq.fi/blob/66b2bcbb3ca21ff2559bf1c33a82359bd0130ea4/static/scripts/onboarding/onboarding.ts#L389\r\nsigner initialized, chainId and decimals fetched via MM although there's a signer-attached contract fetch and signer-required call to approve in the same function\r\nWhat could be replaced:\r\n- first chainId fetch\r\n- chainId fetch and decimals, but then we'd need to instantiate a signer to call approve (which seems messier than as-is)\r\nI'm unsure if it's worth it but that's the only reads that are happening, thought I'd ask before firing in a PR",
+        "url": "https://github.com/ubiquity/.github/issues/100#issuecomment-2000115993",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.58,
+          "formatting": {
+            "content": {
+              "ul": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 4
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.4
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 90,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 66.40166666666669,
+            "syllables": 180,
+            "sentences": 9,
+            "score": 0.9359833333333332
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2171928241,
+        "content": "Last PR open in [`permit-generation` ](https://github.com/ubiquibot/permit-generation/pulls)",
+        "url": "https://github.com/ubiquity/.github/issues/100#issuecomment-2171928241",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.688,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 97.025,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.6297499999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2211759440,
+        "content": "@0x4007 yeah just need this [PR](https://github.com/ubiquibot/permit-generation/pull/19) merged and I'm sure this is complete.",
+        "url": "https://github.com/ubiquity/.github/issues/100#issuecomment-2211759440",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.98,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 101.98214285714286,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 110.932 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>100</td></tr><tr><td>Issue</td><td>Comment</td><td>7</td><td>10.932</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/.github/issues/100#issuecomment-1998622303\" target=\"_blank\" rel=\"noopener\">Sure thing will catch it tomorrow#### Frontend- onboarding&hellip;</a></h6></td><td><details><summary>4.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    h4:&#13;      score: 1&#13;      elementCount: 2&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;  result: 2.5&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.9</td><td>2</td><td>2.592</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/.github/issues/100#issuecomment-1999690380\" target=\"_blank\" rel=\"noopener\">I already have a pull ready for it, if you can allow the build w&hellip;</a></h6></td><td><details><summary>3.28</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.1&#13;regex:&#13;  wordCount: 40&#13;  wordValue: 0.1&#13;  result: 2.18&#13;</pre></details></td><td>0.8</td><td>2</td><td>1.616</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/.github/issues/100#issuecomment-2000043767\" target=\"_blank\" rel=\"noopener\">neither audit nor onboarding actually make use of any RPC calls &hellip;</a></h6></td><td><details><summary>2.99</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;  result: 0.4&#13;regex:&#13;  wordCount: 69&#13;  wordValue: 0.1&#13;  result: 2.59&#13;</pre></details></td><td>1</td><td>2</td><td>1.72</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/.github/issues/100#issuecomment-2000081153\" target=\"_blank\" rel=\"noopener\">I'm mistaken anyway there are two calls, decimals and approve, m&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.9</td><td>2</td><td>0.756</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/.github/issues/100#issuecomment-2000115993\" target=\"_blank\" rel=\"noopener\">- https://github.com/ubiquity/onboard.ubq.fi/blob/66b2bcbb3ca21f&hellip;</a></h6></td><td><details><summary>4.03</summary><pre>content:&#13;  content:&#13;    ul:&#13;      score: 0&#13;      elementCount: 3&#13;    li:&#13;      score: 0.1&#13;      elementCount: 4&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.4&#13;regex:&#13;  wordCount: 90&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>1</td><td>2</td><td>2.58</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/.github/issues/100#issuecomment-2171928241\" target=\"_blank\" rel=\"noopener\">Last PR open in [&#96;permit-generation&#96; ](https://github.co&hellip;</a></h6></td><td><details><summary>1.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.8</td><td>2</td><td>0.688</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/.github/issues/100#issuecomment-2211759440\" target=\"_blank\" rel=\"noopener\">@0x4007 yeah just need this [PR](https://github.com/ubiquibot/pe&hellip;</a></h6></td><td><details><summary>2.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.7</td><td>2</td><td>0.98</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 14.41,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1998639364,
+        "content": "As in uAD.ubq.fi? I think there's an issue open for it you can handle that separately because I expect that to be its own big project. It's significantly more complicated codebase. \nDon't think it's necessary for anything in production currently. Besides I can't think of where it's even being used.",
+        "url": "https://github.com/ubiquity/.github/issues/100#issuecomment-1998639364",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 4.41,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 58,
+            "wordValue": 0.1,
+            "result": 2.49
+          },
+          "readability": {
+            "fleschKincaid": 71.52500000000002,
+            "syllables": 87,
+            "sentences": 7,
+            "score": 0.8847499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2000073596,
+        "content": "The built in RPC sucks for speed. Let's use our custom ones if its for reading data on chain.",
+        "url": "https://github.com/ubiquity/.github/issues/100#issuecomment-2000073596",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.8,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 99.39500000000001,
+            "syllables": 23,
+            "sentences": 2,
+            "score": 0.6060499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2168719952,
+        "content": "@Keyrxng heres a follow up",
+        "url": "https://github.com/ubiquity/.github/issues/100#issuecomment-2168719952",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.828,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 100.24000000000002,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2211738422,
+        "content": "@Keyrxng seems that it's the last step before closing this out?",
+        "url": "https://github.com/ubiquity/.github/issues/100#issuecomment-2211738422",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 2.232,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 95.955,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.64045
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2187423492,
+        "content": "@Keyrxng you think you can swap out the logic in the repos using the old version with your package? I'm not sure which all have it off hand but I assume onboard, audit, and pay have this logic. \n_Originally posted by @pavlovcik in https://github.com/ubiquity/rpc-handler/issues/3#issuecomment-1998617039_",
+        "url": "https://github.com/ubiquity/.github/issues/100",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.14,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 44,
+            "wordValue": 0.1,
+            "result": 2.27
+          },
+          "readability": {
+            "fleschKincaid": 70.93250000000003,
+            "syllables": 78,
+            "sentences": 4,
+            "score": 0.8906749999999997
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 14.41 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.14</td></tr><tr><td>Issue</td><td>Comment</td><td>4</td><td>10.27</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/.github/issues/100\" target=\"_blank\" rel=\"noopener\">@Keyrxng you think you can swap out the logic in the repos using&hellip;</a></h6></td><td><details><summary>3.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 44&#13;  wordValue: 0.1&#13;  result: 2.27&#13;</pre></details></td><td>1</td><td>1</td><td>4.14</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/.github/issues/100#issuecomment-1998639364\" target=\"_blank\" rel=\"noopener\">As in uAD.ubq.fi? I think there's an issue open for it you can h&hellip;</a></h6></td><td><details><summary>2.49</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 58&#13;  wordValue: 0.1&#13;  result: 2.49&#13;</pre></details></td><td>0.7</td><td>2</td><td>4.41</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/.github/issues/100#issuecomment-2000073596\" target=\"_blank\" rel=\"noopener\">The built in RPC sucks for speed. Let's use our custom ones if i&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.8</td><td>2</td><td>2.8</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/.github/issues/100#issuecomment-2168719952\" target=\"_blank\" rel=\"noopener\">@Keyrxng heres a follow up</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.6</td><td>2</td><td>0.828</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/.github/issues/100#issuecomment-2211738422\" target=\"_blank\" rel=\"noopener\">@Keyrxng seems that it's the last step before closing this out?</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.9</td><td>2</td><td>2.232</td></tr></tbody></table></details>"
+  }
+}

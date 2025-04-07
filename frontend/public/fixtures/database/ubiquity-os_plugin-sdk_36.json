@@ -1,0 +1,272 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 22.07,
+    "task": {
+      "reward": 18,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2714041706,
+        "content": "When no `KERNEL_PUBLIC_KEY` is supplied, the runs fail saying the given key is too short. My suspicion is that the default key is not used but `\"\"` is used instead. See this run for reference: https://github.com/ubiquity-os-marketplace/daemon-pricing/actions/runs/12128570532/job/33815214041\r\nSDKs will need to get updated across plugins as well.",
+        "url": "https://github.com/ubiquity-os/plugin-sdk/issues/36",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.07,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 43,
+            "wordValue": 0.1,
+            "result": 2.25
+          },
+          "readability": {
+            "fleschKincaid": 76.30000000000001,
+            "syllables": 77,
+            "sentences": 4,
+            "score": 0.8369999999999999
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 22.07 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>18</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.07</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugin-sdk/issues/36\" target=\"_blank\" rel=\"noopener\">When no &#96;KERNEL_PUBLIC_KEY&#96; is supplied, the runs fail s&hellip;</a></h6></td><td><details><summary>3.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 43&#13;  wordValue: 0.1&#13;  result: 2.25&#13;</pre></details></td><td>1</td><td>1</td><td>4.07</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 18,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2513824998,
+        "content": "What is the difference between [context.env](https://github.com/ubiquity-os-marketplace/daemon-pricing/blob/74bd780f45d74ab567df8d35b5abb3ac708fa5bf/src/worker.ts#L19) and [env](https://github.com/ubiquity-os-marketplace/daemon-pricing/blob/74bd780f45d74ab567df8d35b5abb3ac708fa5bf/src/worker.ts#L28)? As far as I understand [env](https://github.com/ubiquity-os-marketplace/daemon-pricing/blob/74bd780f45d74ab567df8d35b5abb3ac708fa5bf/src/worker.ts#L28) contains variables from cloudflare worker and I'm not sure if it contains variables from github secrets.",
+        "url": "https://github.com/ubiquity-os/plugin-sdk/issues/36#issuecomment-2513824998",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 10.125,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 69.10833333333336,
+            "syllables": 48,
+            "sentences": 3,
+            "score": 0.9089166666666664
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1867240335,
+        "content": "When env variable is not defined it defaults to empty string so this particular test makes sense.\r\n@gentlementlegen Why do we allow plugins to set [KERNEL_PUBLIC_KEY](https://github.com/ubiquity-os-marketplace/daemon-pricing/blob/74bd780f45d74ab567df8d35b5abb3ac708fa5bf/src/worker.ts#L28)? Shouldn't we simply always use the default value from the sdk?",
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/37#discussion_r1867240335",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -404,4 +406,13 @@ describe(\"SDK actions tests\", () => {\n       },\n     });\n   });\n+\n+  it(\"Should return the proper Kernel Key\", () => {\n+    let options = getPluginOptions({ kernelPublicKey: \"\" });",
+        "score": {
+          "reward": 9.768,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 60.39938596491231,
+            "syllables": 60,
+            "sentences": 3,
+            "score": 0.9960061403508769
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2474877423,
+            "effect": {
+              "addition": 51,
+              "deletion": 53
+            },
+            "reward": 3.12,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/37"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 18 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>⚠️ Your rewards have been limited to the task price of 18 XP.</h6><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>3.12</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>10.125</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>9.768</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/plugin-sdk/pull/37\" target=\"_blank\" rel=\"noopener\">#37</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+51 -53</td><td>3</td><td>3.12</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugin-sdk/issues/36#issuecomment-2513824998\" target=\"_blank\" rel=\"noopener\">What is the difference between [context.env](https://github.com/&hellip;</a></h6></td><td><details><summary>2.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.9</td><td>3</td><td>10.125</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugin-sdk/pull/37#discussion_r1867240335\" target=\"_blank\" rel=\"noopener\">When env variable is not defined it defaults to empty string so &hellip;</a></h6></td><td><details><summary>3.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.8</td><td>3</td><td>9.768</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 18,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1867197432,
+        "content": "Why don't you change this to either `null` or a dedicated testing placeholder value?",
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/37#discussion_r1867197432",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -404,4 +406,13 @@ describe(\"SDK actions tests\", () => {\n       },\n     });\n   });\n+\n+  it(\"Should return the proper Kernel Key\", () => {\n+    let options = getPluginOptions({ kernelPublicKey: \"\" });",
+        "score": {
+          "reward": 3.171,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 59.68214285714288,
+            "syllables": 22,
+            "sentences": 1,
+            "score": 0.9968214285714287
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1867206564,
+        "content": "We shouldn't ever pass an empty string in the first place, thats why I made empty string warnings. We should remove that from happening in the first place!\r\nhttps://www.github.com/ubiquity/ts-template/issues/31\r\nEmpty strings are abused in our code, I guess its an artifact of LLMs. \r\nI suppose if it defaults to a valid value then its fine in the context of a test. Can you ensure the default is not an empty string though?",
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/37#discussion_r1867206564",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -404,4 +406,13 @@ describe(\"SDK actions tests\", () => {\n       },\n     });\n   });\n+\n+  it(\"Should return the proper Kernel Key\", () => {\n+    let options = getPluginOptions({ kernelPublicKey: \"\" });",
+        "score": {
+          "reward": 11.961,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 72,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 84.3788888888889,
+            "syllables": 106,
+            "sentences": 7,
+            "score": 0.7562111111111111
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1867209634,
+        "content": "Then we should check inside of the method and throw for an empty string, or undefined.",
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/37#discussion_r1867209634",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -404,4 +406,13 @@ describe(\"SDK actions tests\", () => {\n       },\n     });\n   });\n+\n+  it(\"Should return the proper Kernel Key\", () => {\n+    let options = getPluginOptions({ kernelPublicKey: \"\" });",
+        "score": {
+          "reward": 3.792,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 79.5575,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 0.804425
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2474816591,
+            "effect": {
+              "addition": 51,
+              "deletion": 53
+            },
+            "reward": 3.12,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/plugin-sdk/pull/37"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 18 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>⚠️ Your rewards have been limited to the task price of 18 XP.</h6><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>3.12</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>18.924</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/plugin-sdk/pull/37\" target=\"_blank\" rel=\"noopener\">#37</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+51 -53</td><td>3</td><td>3.12</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugin-sdk/pull/37#discussion_r1867197432\" target=\"_blank\" rel=\"noopener\">Why don't you change this to either &#96;null&#96; or a dedicate&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.7</td><td>3</td><td>3.171</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugin-sdk/pull/37#discussion_r1867206564\" target=\"_blank\" rel=\"noopener\">We shouldn't ever pass an empty string in the first place, thats&hellip;</a></h6></td><td><details><summary>3.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 72&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.9</td><td>3</td><td>11.961</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugin-sdk/pull/37#discussion_r1867209634\" target=\"_blank\" rel=\"noopener\">Then we should check inside of the method and throw for an empty&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.8</td><td>3</td><td>3.792</td></tr></tbody></table></details>"
+  }
+}

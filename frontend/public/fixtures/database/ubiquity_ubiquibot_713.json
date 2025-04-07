@@ -1,0 +1,300 @@
+{
+  "kamaalsultan": {
+    "userId": 103924884,
+    "total": 27.525,
+    "task": {
+      "reward": 25,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 1502420212,
+        "content": "Resolves #713\r\nQA for https://github.com/ubiquibot/staging/issues/177\r\nThe bot that concerns params order for /allow alerts me a message like https://github.com/ubiquibot/staging/issues/176#issuecomment-1706243557\r\nNow I configured the bot to not concern params order and it ignores param order.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/722",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 2.525,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 53.120000000000005,
+            "syllables": 78,
+            "sentences": 3,
+            "score": 0.9312
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1316925494,
+        "content": "`accessType` should be one of [\"priority\", \"time\", \"price\", \"multiplier\"] not starting with set-\r\nAnd do you mean `/allow @example @example true` is right?\r\nIn above case, there's no accessType and it will log error and will end...",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/722#discussion_r1316925494",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -20,13 +20,20 @@ export const setAccess = async (body: string) => {\n     return;\n   }\n \n-  const regex = /^\\/allow set-(\\S+)\\s@(\\S+)\\s(true|false)$/;\n-\n+  const regex = /\\/allow\\s+(\\S+)\\s+(\\S+)\\s+(\\S+)/;\n   const matches = body.match(regex);\n \n   if (matches) {\n-    const [, accessType, username, bool] = matches;\n-\n+    let accessType, username, bool;\n+    matches.slice(1).forEach((part) => {\n+      if (part.startsWith(\"@\")) username = part.slice(1);\n+      else if (part.startsWith(\"set-\")) accessType = part.slice(4);",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 33,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 82.41477272727275,
+            "syllables": 42,
+            "sentences": 2,
+            "score": 0.7758522727272725
+          },
+          "multiplier": 0,
+          "relevance": 0.9
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 27.525 XP ]</a>&nbsp;</h3><h6>@kamaalsultan</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>25</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>2.525</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/722\" target=\"_blank\" rel=\"noopener\">Resolves #713QA for https://github.com/ubiquibot/staging/issue&hellip;</a></h6></td><td><details><summary>3.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.5</td><td>1</td><td>2.525</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/722#discussion_r1316925494\" target=\"_blank\" rel=\"noopener\">&#96;accessType&#96; should be one of [\"priority\", \"time\", \"pric&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 33&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>2</td><td>0</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 1.77,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1880091694,
+        "content": "_Originally posted by @pavlovcik in https://github.com/ubiquity/ubiquibot/issues/711#issuecomment-1705100822_",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/713",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 1.77,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 12.401428571428596,
+            "syllables": 31,
+            "sentences": 2,
+            "score": 0.524014285714286
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/ubiquibot/pull/722"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 1.77 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>1.77</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/713\" target=\"_blank\" rel=\"noopener\">_Originally posted by @pavlovcik in https://github.com/ubiquity/&hellip;</a></h6></td><td><details><summary>1.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>1</td><td>1</td><td>1.77</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 10.512,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 1611659194,
+        "content": "That seems verbose and unreadable. It would be better to just check if it starts with /allow then split the whole string by whitespace, check the length first and then in a for loop check if it's starts with @, \"set-\" or true/false",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/722#pullrequestreview-1611659194",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.92,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 44,
+            "wordValue": 0.1,
+            "result": 2.27
+          },
+          "readability": {
+            "fleschKincaid": 82.60045454545454,
+            "syllables": 53,
+            "sentences": 2,
+            "score": 0.7739954545454546
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1612882722,
+        "content": "QA: https://github.com/ubiquity-whilefoo/ubiquibot/issues/81",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/722#pullrequestreview-1612882722",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.816,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": 23.667500000000018,
+            "syllables": 19,
+            "sentences": 2,
+            "score": 0.6366750000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1316920048,
+        "content": "why `.slice()`? isn't `part` already the full string like `set-multiplier`?\r\nalso you should check if variables are already set (not undefined) because somebody can put username twice like `/allow @example @example true`",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/722#discussion_r1316920048",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -20,13 +20,20 @@ export const setAccess = async (body: string) => {\n     return;\n   }\n \n-  const regex = /^\\/allow set-(\\S+)\\s@(\\S+)\\s(true|false)$/;\n-\n+  const regex = /\\/allow\\s+(\\S+)\\s+(\\S+)\\s+(\\S+)/;\n   const matches = body.match(regex);\n \n   if (matches) {\n-    const [, accessType, username, bool] = matches;\n-\n+    let accessType, username, bool;\n+    matches.slice(1).forEach((part) => {\n+      if (part.startsWith(\"@\")) username = part.slice(1);\n+      else if (part.startsWith(\"set-\")) accessType = part.slice(4);",
+        "score": {
+          "reward": 4.032,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 64.63064102564107,
+            "syllables": 41,
+            "sentences": 3,
+            "score": 0.9536935897435893
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1708041611,
+        "content": "@0xcodercrane I went ahead and merged the PR - @pavlovcik asked me to help with processing PRs.",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/722#issuecomment-1708041611",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.324,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 68.9825,
+            "syllables": 23,
+            "sentences": 1,
+            "score": 0.910175
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1611659194,
+            "effect": {
+              "addition": 30,
+              "deletion": 3
+            },
+            "reward": 0.66,
+            "priority": 2
+          },
+          {
+            "reviewId": 1612772909,
+            "effect": {
+              "addition": 9,
+              "deletion": 29
+            },
+            "reward": 0.76,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquibot/pull/722"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 10.512 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>1.42</td></tr><tr><td>Review</td><td>Comment</td><td>4</td><td>9.092</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquibot/pull/722\" target=\"_blank\" rel=\"noopener\">#722</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+30 -3</td><td>2</td><td>0.66</td></tr><tr><td>+9 -29</td><td>2</td><td>0.76</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/722#pullrequestreview-1611659194\" target=\"_blank\" rel=\"noopener\">That seems verbose and unreadable. It would be better to just ch&hellip;</a></h6></td><td><details><summary>2.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 44&#13;  wordValue: 0.1&#13;  result: 2.27&#13;</pre></details></td><td>0.7</td><td>2</td><td>3.92</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/722#pullrequestreview-1612882722\" target=\"_blank\" rel=\"noopener\">QA: https://github.com/ubiquity-whilefoo/ubiquibot/issues/81</a></h6></td><td><details><summary>1.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>0.3</td><td>2</td><td>0.816</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/722#discussion_r1316920048\" target=\"_blank\" rel=\"noopener\">why &#96;.slice()&#96;? isn't &#96;part&#96; already the full st&hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.9</td><td>2</td><td>4.032</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/722#issuecomment-1708041611\" target=\"_blank\" rel=\"noopener\">@0xcodercrane I went ahead and merged the PR - @pavlovcik asked &hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.1</td><td>2</td><td>0.324</td></tr></tbody></table></details>"
+  }
+}

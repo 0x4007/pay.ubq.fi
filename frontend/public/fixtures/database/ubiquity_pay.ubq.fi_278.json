@@ -1,0 +1,507 @@
+{
+  "hhio618": {
+    "userId": 1272158,
+    "total": 100,
+    "task": {
+      "reward": 100,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 100 XP ]</a>&nbsp;</h3><h6>@hhio618</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>100</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 100,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2298584328,
+        "content": "@ubiquity/software-development suspending ubiquibot (v1) now.\r\nWe just need the ability to set access control for labels.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/278#issuecomment-2298584328",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 28.50000000000003,
+            "syllables": 36,
+            "sentences": 2,
+            "score": 0.6850000000000003
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2472286164,
+        "content": "![image](https://github.com/user-attachments/assets/0040364a-a353-436f-80ad-6f411f827843)\nThis happened to me twice already once on desktop, once on mobile where I noticed that the font is incorrect because it was unable to load the Proxima Nova font file. \nWhen I checked the logs on desktop, it was because I was getting error 422 rate limited. I think we have too many assets and our Cloudflare rate limiting might be too strict. \nWe can consider minifying the assets and serving them in production. For example, combining all the CSS into a single file should solve this particular problem. I'm sure we can handle this in the build settings.\nWe can consider doing the same for JavaScript.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/278",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.28,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 109,
+            "wordValue": 0.1,
+            "result": 2.56
+          },
+          "readability": {
+            "fleschKincaid": 66.84651376146789,
+            "syllables": 160,
+            "sentences": 7,
+            "score": 0.9315348623853211
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2245236437,
+        "content": "The compiled files should be git ignored probably, but otherwise I think this looks mostly good! Debating on if we will actually merge this in because the original problem is due to something else. But we can certainly credit for the work.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/280#pullrequestreview-2245236437",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.296,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 42,
+            "wordValue": 0.1,
+            "result": 2.23
+          },
+          "readability": {
+            "fleschKincaid": 63.71071428571429,
+            "syllables": 64,
+            "sentences": 3,
+            "score": 0.9628928571428571
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1722356258,
+        "content": "This seems wrong. This should be done dynamically. \nBesides this looks like it will append on every build making the file length a problem eventually?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/280#discussion_r1722356258",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -17,10 +17,26 @@ export const esBuildContext: esbuild.BuildOptions = {\n     \".ttf\": \"dataurl\",\n     \".svg\": \"dataurl\",\n   },\n-  outdir: \"static/out\",\n+  outfile: \"static/bundles/bundles.js\",\n+  entryNames: \"bundles\", // Ensure the CSS is named bundles.css\n   define: createEnvDefines([\"SUPABASE_URL\", \"SUPABASE_ANON_KEY\"], {\n     commitHash: execSync(`git rev-parse --short HEAD`).toString().trim(),\n   }),\n+  plugins: [\n+    {\n+      name: \"css-bundle\",\n+      setup(build) {\n+        build.onEnd((result) => {\n+          execSync(`cat static/styles/rewards/pay.css > static/bundles/bundles.css`);\n+          execSync(`cat static/styles/rewards/background.css >> static/bundles/bundles.css`);\n+          execSync(`cat static/styles/toast.css >> static/bundles/bundles.css`);\n+          execSync(`cat static/styles/rewards/claim-table.css >> static/bundles/bundles.css`);\n+          execSync(`cat static/styles/rewards/media-queries.css >> static/bundles/bundles.css`);\n+          execSync(`cat static/styles/rewards/light-mode.css >> static/bundles/bundles.css`);",
+        "score": {
+          "reward": 3.924,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 66.40066666666667,
+            "syllables": 39,
+            "sentences": 3,
+            "score": 0.9359933333333333
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1722790146,
+        "content": "That is a good point to specify the order. \r\nIdeally if we resolved the conflicts (perhaps there is some automated tooling, like Chrome's Lighthouse that can solve for this?)\r\nBut practically speaking this might be the best solution then.\r\nDoes this clear the file contents on every build? It should so that the file length doesn't run forever.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/280#discussion_r1722790146",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -17,10 +17,26 @@ export const esBuildContext: esbuild.BuildOptions = {\n     \".ttf\": \"dataurl\",\n     \".svg\": \"dataurl\",\n   },\n-  outdir: \"static/out\",\n+  outfile: \"static/bundles/bundles.js\",\n+  entryNames: \"bundles\", // Ensure the CSS is named bundles.css\n   define: createEnvDefines([\"SUPABASE_URL\", \"SUPABASE_ANON_KEY\"], {\n     commitHash: execSync(`git rev-parse --short HEAD`).toString().trim(),\n   }),\n+  plugins: [\n+    {\n+      name: \"css-bundle\",\n+      setup(build) {\n+        build.onEnd((result) => {\n+          execSync(`cat static/styles/rewards/pay.css > static/bundles/bundles.css`);\n+          execSync(`cat static/styles/rewards/background.css >> static/bundles/bundles.css`);\n+          execSync(`cat static/styles/toast.css >> static/bundles/bundles.css`);\n+          execSync(`cat static/styles/rewards/claim-table.css >> static/bundles/bundles.css`);\n+          execSync(`cat static/styles/rewards/media-queries.css >> static/bundles/bundles.css`);\n+          execSync(`cat static/styles/rewards/light-mode.css >> static/bundles/bundles.css`);",
+        "score": {
+          "reward": 4.424,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 60,
+            "wordValue": 0.1,
+            "result": 2.52
+          },
+          "readability": {
+            "fleschKincaid": 74.805,
+            "syllables": 85,
+            "sentences": 5,
+            "score": 0.85195
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2296253798,
+        "content": "I just checked on my computer now and it doesn't appear that the rate limiting is the problem now. The first time I noticed the font falling back to Helvetica, it was because I was rate limited to download the hosted Proxima Nova font. \r\nI'm not sure why the fonts are not displaying correctly now. \r\nSomething is wrong with the font files suddenly.\r\n```\r\nd44efcc1.pay-ubq-fi.pages.dev/:1 Failed to decode downloaded font: https://d44efcc1.pay-ubq-fi.pages.dev/bundles/fonts/ubiquity-nova-standard.ttf\r\nd44efcc1.pay-ubq-fi.pages.dev/:1 OTS parsing error: invalid sfntVersion: 1008821359\r\n```",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/280#issuecomment-2296253798",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 5.184,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 65,
+            "wordValue": 0.1,
+            "result": 2.56
+          },
+          "readability": {
+            "fleschKincaid": 71.90125000000002,
+            "syllables": 91,
+            "sentences": 4,
+            "score": 0.8809874999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2245236437,
+            "effect": {
+              "addition": 74221,
+              "deletion": 9
+            },
+            "reward": 1484.6,
+            "priority": 2
+          },
+          {
+            "reviewId": 2246471784,
+            "effect": {
+              "addition": 8,
+              "deletion": 2
+            },
+            "reward": 0.2,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/280"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 100 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>1484.8</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.28</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0</td></tr><tr><td>Review</td><td>Comment</td><td>4</td><td>15.828</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/280\" target=\"_blank\" rel=\"noopener\">#280</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+74221 -9</td><td>2</td><td>1484.6</td></tr><tr><td>+8 -2</td><td>2</td><td>0.2</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/278\" target=\"_blank\" rel=\"noopener\">![image](https://github.com/user-attachments/assets/0040364a-a35&hellip;</a></h6></td><td><details><summary>2.56</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 109&#13;  wordValue: 0.1&#13;  result: 2.56&#13;</pre></details></td><td>1</td><td>1</td><td>3.28</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/278#issuecomment-2298584328\" target=\"_blank\" rel=\"noopener\">@ubiquity/software-development suspending ubiquibot (v1) now.W&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/280#pullrequestreview-2245236437\" target=\"_blank\" rel=\"noopener\">The compiled files should be git ignored probably, but otherwise&hellip;</a></h6></td><td><details><summary>2.23</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 42&#13;  wordValue: 0.1&#13;  result: 2.23&#13;</pre></details></td><td>0.4</td><td>2</td><td>2.296</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/280#discussion_r1722356258\" target=\"_blank\" rel=\"noopener\">This seems wrong. This should be done dynamically. Besides this&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.9</td><td>2</td><td>3.924</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/280#discussion_r1722790146\" target=\"_blank\" rel=\"noopener\">That is a good point to specify the order. Ideally if we resol&hellip;</a></h6></td><td><details><summary>2.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 60&#13;  wordValue: 0.1&#13;  result: 2.52&#13;</pre></details></td><td>0.7</td><td>2</td><td>4.424</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/280#issuecomment-2296253798\" target=\"_blank\" rel=\"noopener\">I just checked on my computer now and it doesn't appear that the&hellip;</a></h6></td><td><details><summary>2.56</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 65&#13;  wordValue: 0.1&#13;  result: 2.56&#13;</pre></details></td><td>0.8</td><td>2</td><td>5.184</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 6.336,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2300621645,
+        "content": "This broke builds on Windows (sorry if I am the only hipster here). `cat` command is only Unix compliant. I'd suggest using cross platform commands or directly Node which is sure to run on any platform. Guilty code:\r\nhttps://github.com/ubiquity/pay.ubq.fi/blob/ec2fd20faab31b6ff1b924fa13ceea5ad15f90ea/build/esbuild-build.ts#L30",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/278#issuecomment-2300621645",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 6.336,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 71.71057692307696,
+            "syllables": 79,
+            "sentences": 8,
+            "score": 0.8828942307692305
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/280"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 6.336 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>6.336</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/278#issuecomment-2300621645\" target=\"_blank\" rel=\"noopener\">This broke builds on Windows (sorry if I am the only hipster her&hellip;</a></h6></td><td><details><summary>3.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.8</td><td>2</td><td>6.336</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 0.762,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 2373448111,
+        "content": "As far as I understand this is already [implemented](https://github.com/ubiquity-os-marketplace/assistive-pricing/blob/9984131a66eb9167dd0f60147a99e41ae382c43b/src/adapters/supabase/helpers/tables/access.ts#L13-L27) in the https://github.com/ubiquity-os-marketplace/assistive-pricing plugin.",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/issues/278#issuecomment-2373448111",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.762,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 44.405,
+            "syllables": 36,
+            "sentences": 2,
+            "score": 0.84405
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/280"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 0.762 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.762</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/issues/278#issuecomment-2373448111\" target=\"_blank\" rel=\"noopener\">As far as I understand this is already [implemented](https://git&hellip;</a></h6></td><td><details><summary>3.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.1</td><td>2</td><td>0.762</td></tr></tbody></table></details>"
+  },
+  "Keyrxng": {
+    "total": 100,
+    "userId": 106303466,
+    "comments": [
+      {
+        "id": 2245054823,
+        "content": "The UI on the right is [pay.ubq.fi](https://pay.ubq.fi) and there is a difference in font between these two images\r\nText on the left appears taller and emboldened to my eyes than what's on the right\r\nThe intention is that the UI shouldn't look different from the live portal\r\n![image](https://github.com/user-attachments/assets/8aad9bb9-ca08-45c7-be1d-78f2fecd60b9)\r\nIt appears that this task may not be as simple as bundle all CSS and we are good to go, it may be a little more involved than that",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/280#pullrequestreview-2245054823",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 2.052,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 80,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 75.07583333333335,
+            "syllables": 99,
+            "sentences": 3,
+            "score": 0.8492416666666665
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1722895727,
+        "content": "I had the same problem when rebuilding for [`NextJS`](https://github.com/ubiquity/safe.ubq.fi/blob/c2eb9823ed6836694ca4150df5101d3eeaba9372/app/globals.css). My implementation caused a few changes too though so it's not a good point of ref for what to do but I'd appreciate a working solution as it would save me time down the line",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/280#discussion_r1722895727",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -17,10 +17,26 @@ export const esBuildContext: esbuild.BuildOptions = {\n     \".ttf\": \"dataurl\",\n     \".svg\": \"dataurl\",\n   },\n-  outdir: \"static/out\",\n+  outfile: \"static/bundles/bundles.js\",\n+  entryNames: \"bundles\", // Ensure the CSS is named bundles.css\n   define: createEnvDefines([\"SUPABASE_URL\", \"SUPABASE_ANON_KEY\"], {\n     commitHash: execSync(`git rev-parse --short HEAD`).toString().trim(),\n   }),\n+  plugins: [\n+    {\n+      name: \"css-bundle\",\n+      setup(build) {\n+        build.onEnd((result) => {\n+          execSync(`cat static/styles/rewards/pay.css > static/bundles/bundles.css`);\n+          execSync(`cat static/styles/rewards/background.css >> static/bundles/bundles.css`);\n+          execSync(`cat static/styles/toast.css >> static/bundles/bundles.css`);\n+          execSync(`cat static/styles/rewards/claim-table.css >> static/bundles/bundles.css`);\n+          execSync(`cat static/styles/rewards/media-queries.css >> static/bundles/bundles.css`);\n+          execSync(`cat static/styles/rewards/light-mode.css >> static/bundles/bundles.css`);",
+        "score": {
+          "reward": 1.442,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 45,
+            "wordValue": 0.1,
+            "result": 2.29
+          },
+          "readability": {
+            "fleschKincaid": 76.83750000000002,
+            "syllables": 57,
+            "sentences": 2,
+            "score": 0.8316249999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2296193533,
+        "content": "Great. Any optimizations that you spot and feel like including please do.\r\n@hhio618 as a side note, we use conventional commits and CI must pass in order to merge so going forward any changes could you use these please?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/280#issuecomment-2296193533",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.528,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 39,
+            "wordValue": 0.1,
+            "result": 2.15
+          },
+          "readability": {
+            "fleschKincaid": 83.0092307692308,
+            "syllables": 51,
+            "sentences": 3,
+            "score": 0.7699076923076921
+          },
+          "multiplier": 0.25,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2296205663,
+        "content": "If you open up the actual deployment at [pay.ubq.fi](https://pay.ubq.fi) and then open your local instance or our preview deployments above and switch between the two quickly you can see some issues still persist. \r\nhttps://github.com/user-attachments/assets/cf8638c3-3caf-4d6c-bb99-755a2543793c\r\n@0x4007 what is the intention here with this? The end result should look identical to the current prod deployment?",
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/280#issuecomment-2296205663",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 2.24,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 54,
+            "wordValue": 0.1,
+            "result": 2.44
+          },
+          "readability": {
+            "fleschKincaid": 73.49455128205129,
+            "syllables": 94,
+            "sentences": 6,
+            "score": 0.8650544871794871
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2245054823,
+            "effect": {
+              "addition": 74067,
+              "deletion": 9
+            },
+            "reward": 1481.52,
+            "priority": 2
+          },
+          {
+            "reviewId": 2247299894,
+            "effect": {
+              "addition": 8,
+              "deletion": 1
+            },
+            "reward": 0.18,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity/pay.ubq.fi/pull/280"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 100 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>1481.7</td></tr><tr><td>Review</td><td>Comment</td><td>4</td><td>6.262</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/280\" target=\"_blank\" rel=\"noopener\">#280</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+74067 -9</td><td>2</td><td>1481.52</td></tr><tr><td>+8 -1</td><td>2</td><td>0.18</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/280#pullrequestreview-2245054823\" target=\"_blank\" rel=\"noopener\">The UI on the right is [pay.ubq.fi](https://pay.ubq.fi) and ther&hellip;</a></h6></td><td><details><summary>3.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 80&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.9</td><td>2</td><td>2.052</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/280#discussion_r1722895727\" target=\"_blank\" rel=\"noopener\">I had the same problem when rebuilding for [&#96;NextJS&#96;](ht&hellip;</a></h6></td><td><details><summary>3.29</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 45&#13;  wordValue: 0.1&#13;  result: 2.29&#13;</pre></details></td><td>0.7</td><td>2</td><td>1.442</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/280#issuecomment-2296193533\" target=\"_blank\" rel=\"noopener\">Great. Any optimizations that you spot and feel like including p&hellip;</a></h6></td><td><details><summary>2.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 39&#13;  wordValue: 0.1&#13;  result: 2.15&#13;</pre></details></td><td>0.4</td><td>2</td><td>0.528</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/pay.ubq.fi/pull/280#issuecomment-2296205663\" target=\"_blank\" rel=\"noopener\">If you open up the actual deployment at [pay.ubq.fi](https://pay&hellip;</a></h6></td><td><details><summary>4.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 54&#13;  wordValue: 0.1&#13;  result: 2.44&#13;</pre></details></td><td>0.8</td><td>2</td><td>2.24</td></tr></tbody></table></details>"
+  }
+}

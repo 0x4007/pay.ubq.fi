@@ -1,0 +1,222 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 54.39,
+    "task": {
+      "reward": 50,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2512180399,
+        "content": "@0x4007 It seems that when a carriage return is in the body, it gets stripped on display by GitHub but is not recognized as a command by the kernel. I my two commands above I used:\r\n```\r\n/start\r\n```\r\nand\r\n```\r\n/start\r\n```\r\nThe latter one should be valid as well.\r\n_Originally posted by @gentlementlegen in https://github.com/ubiquity/devpool-directory-bounties/issues/27#issuecomment-2336533065_",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/105",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.39,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 50,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 59.6021516393443,
+            "syllables": 95,
+            "sentences": 4,
+            "score": 0.9960215163934429
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 54.39 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>50</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.39</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/105\" target=\"_blank\" rel=\"noopener\">@0x4007 It seems that when a carriage return is in the body, it &hellip;</a></h6></td><td><details><summary>3.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 50&#13;  wordValue: 0.1&#13;  result: 2.38&#13;</pre></details></td><td>1</td><td>1</td><td>4.39</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 13.24,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2337825174,
+        "content": "Two error messages doesn't look right. Can you address that?",
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/issues/105#issuecomment-2337825174",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.784,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 93.57977272727274,
+            "syllables": 14,
+            "sentences": 2,
+            "score": 0.6642022727272726
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1750300268,
+        "content": "This uses a database? It should be querying the GitHub api only.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/44#discussion_r1750300268",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -44,7 +46,20 @@ describe(\"User start/stop\", () => {\n \n     const { content } = await userStartStop(context);\n \n-    expect(content).toEqual(\"Task assigned successfully\");\n+    expect(content).toEqual(SUCCESS_MESSAGE);\n+  });\n+\n+  test(\"User can start an issue with trimmed command\", async () => {\n+    const issue = db.issue.findFirst({ where: { id: { equals: 1 } } }) as unknown as Issue;\n+    const sender = db.users.findFirst({ where: { id: { equals: 1 } } }) as unknown as PayloadSender;",
+        "score": {
+          "reward": 3.612,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 80.89500000000001,
+            "syllables": 17,
+            "sentences": 2,
+            "score": 0.7910499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1750347181,
+        "content": "That doesn't seem to make sense to me. We should be using a mock http server not a database.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/44#discussion_r1750347181",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -44,7 +46,20 @@ describe(\"User start/stop\", () => {\n \n     const { content } = await userStartStop(context);\n \n-    expect(content).toEqual(\"Task assigned successfully\");\n+    expect(content).toEqual(SUCCESS_MESSAGE);\n+  });\n+\n+  test(\"User can start an issue with trimmed command\", async () => {\n+    const issue = db.issue.findFirst({ where: { id: { equals: 1 } } }) as unknown as Issue;\n+    const sender = db.users.findFirst({ where: { id: { equals: 1 } } }) as unknown as PayloadSender;",
+        "score": {
+          "reward": 5.664,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 95.165,
+            "syllables": 24,
+            "sentences": 2,
+            "score": 0.64835
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1750396312,
+        "content": "No idea about all this",
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/44#discussion_r1750396312",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -44,7 +46,20 @@ describe(\"User start/stop\", () => {\n \n     const { content } = await userStartStop(context);\n \n-    expect(content).toEqual(\"Task assigned successfully\");\n+    expect(content).toEqual(SUCCESS_MESSAGE);\n+  });\n+\n+  test(\"User can start an issue with trimmed command\", async () => {\n+    const issue = db.issue.findFirst({ where: { id: { equals: 1 } } }) as unknown as Issue;\n+    const sender = db.users.findFirst({ where: { id: { equals: 1 } } }) as unknown as PayloadSender;",
+        "score": {
+          "reward": 0.26,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 83.32000000000004,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 0.7667999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2289976463,
+            "effect": {
+              "addition": 18,
+              "deletion": 3
+            },
+            "reward": 0.84,
+            "priority": 4
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-start-stop/pull/44"
+      },
+      {
+        "reviews": [
+          {
+            "reviewId": 2289873925,
+            "effect": {
+              "addition": 1,
+              "deletion": 1
+            },
+            "reward": 0.08,
+            "priority": 4
+          }
+        ],
+        "url": "https://github.com/ubiquity-os/ubiquity-os-kernel/pull/109"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 13.24 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>0.92</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>2.784</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>9.536</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/44\" target=\"_blank\" rel=\"noopener\">#44</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+18 -3</td><td>4</td><td>0.84</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/pull/109\" target=\"_blank\" rel=\"noopener\">#109</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+1 -1</td><td>4</td><td>0.08</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/ubiquity-os-kernel/issues/105#issuecomment-2337825174\" target=\"_blank\" rel=\"noopener\">Two error messages doesn't look right. Can you address that?</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.6</td><td>4</td><td>2.784</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/44#discussion_r1750300268\" target=\"_blank\" rel=\"noopener\">This uses a database? It should be querying the GitHub api only.</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.7</td><td>4</td><td>3.612</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/44#discussion_r1750347181\" target=\"_blank\" rel=\"noopener\">That doesn't seem to make sense to me. We should be using a mock&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.8</td><td>4</td><td>5.664</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-start-stop/pull/44#discussion_r1750396312\" target=\"_blank\" rel=\"noopener\">No idea about all this</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.1</td><td>4</td><td>0.26</td></tr></tbody></table></details>"
+  }
+}

@@ -1,0 +1,1825 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 200.68,
+    "task": {
+      "reward": 200,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2225292028,
+        "content": "Is this to replace `/ask` or is this a new plugin entirely @0x4007?\r\nI refactored the old `/ask` plugin to V2 standards (slightly outdated again now). Can I refactor it to meet this spec or would you prefer another standalone?",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/29#issuecomment-2225292028",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 0.68,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 67.07833333333336,
+            "syllables": 57,
+            "sentences": 3,
+            "score": 0.9292166666666664
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 200.68 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>200</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.68</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/29#issuecomment-2225292028\" target=\"_blank\" rel=\"noopener\">Is this to replace &#96;/ask&#96; or is this a new plugin entire&hellip;</a></h6></td><td><details><summary>2.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>1</td><td>1</td><td>0.68</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 75.052,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2225294388,
+        "content": "Seems easier to redo we have a ton of new functions to borrow like how we authenticate and collect the comment data is totally different from the old version and new version.",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/29#issuecomment-2225294388",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.968,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 47.45500000000003,
+            "syllables": 48,
+            "sentences": 1,
+            "score": 0.8745500000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2340242913,
+        "content": "It's been two months since the last activity on that pull so it seems fine, except that it should've closed the pull",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/29#issuecomment-2340242913",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.816,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0.1,
+            "result": 1.66
+          },
+          "readability": {
+            "fleschKincaid": 83.77500000000002,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.7622499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2402769945,
+        "content": "# Overview\r\n- Similar to an old proposal for `/ask`.\r\n- The goal is to ask a context-aware question.\r\n- Feed the entire conversation context into ChatGPT4o.\r\n- Include any linked pull requests or issues and their entire conversation context.\r\n- Prioritize the issue specification to set the topic, then add comments.\r\n- Simplify comments by showing the username prepending the comment.\r\n- Divide conversations in the prompt using headers and footers.\r\n# Prompt Template\r\n**=== Start Project Specification === ubiquibot/plugins-wishlist #[Issue Number] ===**\r\n```\r\n[GitHub issue specification body]\r\n```\r\n**=== End Project Specification ===**\r\n**=== Start Issue Conversation === ubiquibot/plugins-wishlist #[Issue Number] ===**\r\n```\r\n[Comment ID] [Username]: [Comment]\r\n[Comment ID] [Username]: [Comment]\r\n...\r\n```\r\n**=== End Issue Conversation ===**\r\n**=== Start Linked Pull Request Conversation === ubiquibot/plugins-wishlist #[Pull Request Number] ===**\r\n```\r\n[Comment ID] [Username]: [Comment]\r\n[Comment ID] [Username]: [Comment]\r\n...\r\n```\r\n**=== End Linked Pull Request Conversation ===**\r\n**=== Start Linked Pull Request Code Diff === ubiquibot/plugins-wishlist #[Pull Request Number] ===**\r\n```diff\r\n- [Old Code]\r\n+ [New Code]\r\n```\r\n**=== End Linked Pull Request Code Diff ===**\r\n# Example\r\n**=== Start Project Specification === ubiquibot/plugins-wishlist #29 ===**\r\n```\r\nAdd a new feature to support XYZ plugins.\r\n```\r\n**=== End Project Specification ===**\r\n**=== Start Issue Conversation === ubiquibot/plugins-wishlist #29 ===**\r\n```\r\n2222517181 0x4007: We should consider adding support for plugins to enhance functionality.\r\n2222517182 rndquu: I agree, this would be beneficial.\r\n2222517184 gentlementlegen: Do we have any specific plugins in mind?\r\n```\r\n**=== End Issue Conversation ===**\r\n**=== Start Linked Pull Request Conversation === ubiquibot/plugins-wishlist #30 ===**\r\n```\r\n2222517187 devuser1: Implemented basic support for plugins.\r\n2222517189 devuser2: This looks good, but needs more testing.\r\n```\r\n**=== End Linked Pull Request Conversation ===**\r\n**=== Start Linked Pull Request Code Diff === ubiquibot/plugins-wishlist #30 ===**\r\n```diff\r\n- // insert log\r\n+ console.log(\"test\");\r\n```\r\n**=== End Linked Pull Request Code Diff ===**\r\n# Notes\r\n- Include the org/repo/issue to help ChatGPT understand references to other issues/pulls.\r\n- Annotate comments with their IDs so that ChatGPT can produce outputs with links to other comments for references.",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/29",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 9.56,
+          "formatting": {
+            "content": {
+              "h1": {
+                "score": 1,
+                "elementCount": 4
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 9
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 25
+              }
+            },
+            "result": 4.9
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 100,
+            "wordValue": 0.1,
+            "result": 2.6
+          },
+          "readability": {
+            "fleschKincaid": 51.73722222222224,
+            "syllables": 170,
+            "sentences": 9,
+            "score": 0.9173722222222225
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1676753876,
+        "content": "```suggestion\nname: \"command-gpt\"\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676753876",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,4 +1,4 @@\n-name: \"the name of the plugin\"\n+name: \"ubiquibot-gpt-command\"",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1676754128,
+        "content": "Definitely just ignore all bot comments as we do in conversation rewards.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676754128",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,239 @@\n+import OpenAI from \"openai\";\n+import { Context } from \"../types\";\n+import { fetchIssue, fetchIssueComments, getLinkedIssueContextFromComments, idIssueFromComment } from \"../utils/issue\";\n+import { IssueComments } from \"../types/github\";\n+import { StreamlinedComment } from \"../types/gpt\";\n+import { createChatHistory, formatChatHistory } from \"../utils/format-chat-history\";\n+import { addCommentToIssue } from \"./add-comment\";\n+\n+export async function askQuestion(context: Context, question: string) {\n+  const {\n+    logger,\n+    payload: { issue: currentIssue },\n+  } = context;\n+\n+  if (!question) {\n+    logger.error(`No question provided`);\n+    await addCommentToIssue(context, \"No question provided\", true, \"error\");\n+    return;\n+  }\n+\n+  const { body: issueSpecOrPullBody, repository_url } = currentIssue;\n+  const org = repository_url.split(\"/\")[4];\n+\n+  const { specReferencedIssueBody, specReferencedIssueKey, streamlinedSpecReferencedIssueComments } = await getSpecReferencedContext(\n+    context,\n+    org,\n+    issueSpecOrPullBody\n+  );\n+\n+  const issueComments = await fetchIssueComments({ context });\n+  const linkedIssueContext = await getLinkedIssueContextFromComments(context, issueComments);\n+  const { linkedIssues, linkedIssueComments } = linkedIssueContext;\n+\n+  // we are only going one level deep with the linked issue context fetching\n+  for (const issue of linkedIssues) {\n+    const fetched = await fetchIssueComments({ context, issueNum: issue.issueNumber, repo: issue.repo });\n+    linkedIssueComments.push(...fetched);\n+  }\n+\n+  const streamlinedComments = await getAllStreamlinedComments(issueComments, streamlinedSpecReferencedIssueComments, linkedIssueComments);\n+  const { linkedPulls, specAndBodies } = await getSpecBodiesAndLinkedPulls(\n+    context,\n+    repository_url,\n+    currentIssue.number,\n+    issueSpecOrPullBody,\n+    specReferencedIssueBody,\n+    specReferencedIssueKey,\n+    linkedIssues\n+  );\n+  const formattedChat = formatChatHistory(context, streamlinedComments, specAndBodies, linkedPulls);\n+\n+  return await askGpt(context, formattedChat);\n+}\n+\n+async function getAllStreamlinedComments(\n+  issueComments: IssueComments,\n+  streamlinedSpecReferencedIssueComments: Record<string, StreamlinedComment[]> | undefined,\n+  linkedIssueComments: IssueComments\n+) {\n+  const streamlinedComments = streamlineComments(issueComments) ?? {};\n+\n+  if (streamlinedSpecReferencedIssueComments && Object.keys(streamlinedSpecReferencedIssueComments).length > 0) {\n+    for (const [key, value] of Object.entries(streamlinedSpecReferencedIssueComments)) {\n+      if (!streamlinedComments[key]) {\n+        streamlinedComments[key] = value;\n+        continue;\n+      }\n+\n+      const previous = streamlinedComments[key] || [];\n+      streamlinedComments[key] = [...previous, ...value];\n+    }\n+  }\n+\n+  if (linkedIssueComments.length > 0) {\n+    const linkedStreamlinedComments = streamlineComments(linkedIssueComments);\n+\n+    if (linkedStreamlinedComments) {\n+      for (const [key, value] of Object.entries(linkedStreamlinedComments)) {\n+        if (!streamlinedComments[key]) {\n+          streamlinedComments[key] = value;\n+          continue;\n+        }\n+\n+        const previous = streamlinedComments[key] || [];\n+        streamlinedComments[key] = [...previous, ...value];\n+      }\n+    }\n+  }\n+\n+  return streamlinedComments;\n+}\n+\n+async function getSpecBodiesAndLinkedPulls(\n+  context: Context,\n+  currentIssueUrl: string,\n+  currentIssueNumber: number,\n+  issueSpecOrPullBody: string | null,\n+  specReferencedIssueBody: string | null | undefined,\n+  specReferencedIssueKey: string | null | undefined,\n+  linkedIssues: { issueNumber: number; repo: string }[]\n+) {\n+  const linkedPulls: Record<string, boolean> = {};\n+  const currentIssueKey = createKey(currentIssueUrl, currentIssueNumber);\n+  // collect specifically all of the spec and PR bodies\n+  const specAndBodies: Record<string, string> = {};\n+  specAndBodies[currentIssueKey] = issueSpecOrPullBody || \"\";\n+  specAndBodies[specReferencedIssueKey as string] = specReferencedIssueBody || \"\";\n+\n+  for (const linkedIssue of linkedIssues) {\n+    const issue = await fetchIssue({ context, issueNum: linkedIssue.issueNumber, repo: linkedIssue.repo });\n+    const { body, repository_url, pull_request } = issue;\n+    const linkedIssueKey = createKey(repository_url, linkedIssue.issueNumber);\n+    specAndBodies[linkedIssueKey] = body || \"\";\n+\n+    if (pull_request) {\n+      linkedPulls[linkedIssueKey] = true;\n+    }\n+  }\n+\n+  return { specAndBodies, linkedPulls };\n+}\n+\n+async function getSpecReferencedContext(context: Context, org: string, issueSpecOrPullBody: string | null) {\n+  // fetch the spec referenced issue if it exists\n+  const specReferencedIssueId = idIssueFromComment(org, issueSpecOrPullBody);\n+  let specReferencedIssue,\n+    specReferencedIssueBody,\n+    specReferencedIssueRepoUrl,\n+    specReferencedIssueComments,\n+    specReferencedIssueKey,\n+    streamlinedSpecReferencedIssueComments;\n+\n+  if (specReferencedIssueId) {\n+    specReferencedIssue = await fetchIssue({ context, issueNum: specReferencedIssueId.issueNumber });\n+    specReferencedIssueBody = specReferencedIssue.body;\n+    specReferencedIssueRepoUrl = specReferencedIssue.repository_url;\n+    specReferencedIssueComments = await fetchIssueComments({ context, issueNum: specReferencedIssueId.issueNumber, repo: specReferencedIssueId.repo });\n+    specReferencedIssueKey = createKey(specReferencedIssueRepoUrl, specReferencedIssueId?.issueNumber);\n+    streamlinedSpecReferencedIssueComments = streamlineComments(specReferencedIssueComments) ?? {};\n+  }\n+\n+  return {\n+    specReferencedIssue,\n+    specReferencedIssueBody,\n+    specReferencedIssueRepoUrl,\n+    specReferencedIssueComments,\n+    specReferencedIssueKey,\n+    streamlinedSpecReferencedIssueComments,\n+  };\n+}\n+\n+function createKey(issueUrl: string, issue?: number) {\n+  const splitUrl = issueUrl?.split(\"/\");\n+  const issueNumber = issue || parseInt(splitUrl?.pop() || \"\");\n+  const issueRepo = splitUrl?.slice(-2).join(\"/\");\n+  const issueOrg = splitUrl?.slice(-3, -2).join(\"/\");\n+\n+  if (issueOrg.startsWith(\"repos\")) {\n+    return `${issueRepo}/issues/${issueNumber}`;\n+  }\n+\n+  return `${issueOrg}/${issueRepo}/${issueNumber}`;\n+}\n+\n+function streamlineComments(comments: IssueComments) {\n+  const streamlined: Record<string, StreamlinedComment[]> = {};\n+\n+  for (const comment of comments) {\n+    const user = comment.user?.login;\n+    if (\n+      user === \"ubiquibot\" ||\n+      user === \"ubiquibot[bot]\" ||\n+      user === \"ubiquibot-v2-testing\" ||\n+      user === \"ubiquibot-dev[bot]\" ||\n+      user === \"ubqbot[bot]\" || // TODO: remove this\n+      user === \"github-actions[bot]\"\n+    ) {",
+        "score": {
+          "reward": 1.032,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 39.55500000000001,
+            "syllables": 22,
+            "sentences": 1,
+            "score": 0.7955500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1676754228,
+        "content": "Will this be a problem? It is not clear to me if the kernel will invoke this on any new comment.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676754228",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,47 +1,70 @@\n import { Octokit } from \"@octokit/rest\";\n-import { createClient } from \"@supabase/supabase-js\";\n-import { createAdapters } from \"./adapters\";\n-import { Env, PluginInputs } from \"./types\";\n+import { Env, PluginInputs, SupportedEventsU } from \"./types\";\n import { Context } from \"./types\";\n+import { askQuestion } from \"./handlers/ask-gpt\";\n+import { addCommentToIssue } from \"./handlers/add-comment\";\n+import { Logs } from \"@ubiquity-dao/ubiquibot-logger\";\n \n /**\n  * How a worker executes the plugin.\n  */\n export async function plugin(inputs: PluginInputs, env: Env) {\n   const octokit = new Octokit({ auth: inputs.authToken });\n-  const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n \n   const context: Context = {\n     eventName: inputs.eventName,\n     payload: inputs.eventPayload,\n     config: inputs.settings,\n     octokit,\n     env,\n-    logger: {\n-      debug(message: unknown, ...optionalParams: unknown[]) {\n-        console.debug(message, ...optionalParams);\n-      },\n-      info(message: unknown, ...optionalParams: unknown[]) {\n-        console.log(message, ...optionalParams);\n-      },\n-      warn(message: unknown, ...optionalParams: unknown[]) {\n-        console.warn(message, ...optionalParams);\n-      },\n-      error(message: unknown, ...optionalParams: unknown[]) {\n-        console.error(message, ...optionalParams);\n-      },\n-      fatal(message: unknown, ...optionalParams: unknown[]) {\n-        console.error(message, ...optionalParams);\n-      },\n-    },\n-    adapters: {} as ReturnType<typeof createAdapters>,\n+    logger: new Logs(\"info\"),\n+    adapters: {} as never,\n   };\n+  const {\n+    logger,\n+    config: { isEnabled },\n+  } = context;\n \n-  context.adapters = createAdapters(supabase, context);\n+  if (isSupportedEvent(context.eventName)) {\n+    const comment = context.payload.comment.body;\n \n-  if (context.eventName === \"issue_comment.created\") {\n-    // do something\n+    if (!comment.startsWith(\"/gpt\")) {\n+      logger.info(\"Comment does not start with /gpt. Skipping.\");",
+        "score": {
+          "reward": 1.629,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 95.4632142857143,
+            "syllables": 25,
+            "sentences": 2,
+            "score": 0.6453678571428569
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1676754270,
+        "content": "Shouldn't this be fully removed instead of `never`?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676754270",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -14,14 +14,8 @@ export interface Context<T extends SupportedEventsU = SupportedEventsU, TU exten\n   eventName: T;\n   payload: TU[\"payload\"];\n   octokit: InstanceType<typeof Octokit>;\n-  adapters: ReturnType<typeof createAdapters>;\n+  adapters: never;",
+        "score": {
+          "reward": 0.752,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 82.39000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.7760999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1676754450,
+        "content": "Use a `string[]` as the buffer and `.join(\"\\n\")` at the end. += is too error prone.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676754450",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,111 @@\n+import { ChatCompletionMessageParam } from \"openai/resources\";\n+import { Context } from \"../types\";\n+import { StreamlinedComment, StreamlinedComments } from \"../types/gpt\";\n+import { fetchPullRequestDiff } from \"./issue\";\n+\n+export function formatChatHistory(\n+  context: Context,\n+  streamlined: Record<string, StreamlinedComment[]>,\n+  specAndBodies: Record<string, string>,\n+  linkedPulls: Record<string, boolean>\n+) {\n+  const convoKeys = Object.keys(streamlined);\n+  const specAndBodyKeys = Object.keys(specAndBodies);\n+\n+  const curIssue = {\n+    convo: streamlined[convoKeys[0]],\n+    specOrBody: specAndBodies[specAndBodyKeys[0]],\n+  };\n+\n+  let issueSpecBlock = \"\";\n+  issueSpecBlock += createHeader(\"Project Specification\", specAndBodyKeys[0]);\n+  issueSpecBlock += createSpecOrBody(curIssue.specOrBody);\n+  issueSpecBlock += createFooter(\"Project Specification\");",
+        "score": {
+          "reward": 1.287,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 102.62211538461541,
+            "syllables": 15,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1676754745,
+        "content": "It would be useful context to explain the purpose of the plugin, and that it is being invoked inside of GitHub comments in order to help the contributors with their research.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676754745",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,111 @@\n+import { ChatCompletionMessageParam } from \"openai/resources\";\n+import { Context } from \"../types\";\n+import { StreamlinedComment, StreamlinedComments } from \"../types/gpt\";\n+import { fetchPullRequestDiff } from \"./issue\";\n+\n+export function formatChatHistory(\n+  context: Context,\n+  streamlined: Record<string, StreamlinedComment[]>,\n+  specAndBodies: Record<string, string>,\n+  linkedPulls: Record<string, boolean>\n+) {\n+  const convoKeys = Object.keys(streamlined);\n+  const specAndBodyKeys = Object.keys(specAndBodies);\n+\n+  const curIssue = {\n+    convo: streamlined[convoKeys[0]],\n+    specOrBody: specAndBodies[specAndBodyKeys[0]],\n+  };\n+\n+  let issueSpecBlock = \"\";\n+  issueSpecBlock += createHeader(\"Project Specification\", specAndBodyKeys[0]);\n+  issueSpecBlock += createSpecOrBody(curIssue.specOrBody);\n+  issueSpecBlock += createFooter(\"Project Specification\");\n+\n+  let issueCommentBlock = \"\";\n+  issueCommentBlock += createHeader(\"Issue Conversation\", convoKeys[0]);\n+  issueCommentBlock += createComment({\n+    issue: parseInt(convoKeys[0].split(\"/\")[2]),\n+    repo: convoKeys[0].split(\"/\")[1],\n+    org: convoKeys[0].split(\"/\")[0],\n+    comments: curIssue.convo,\n+  });\n+  issueCommentBlock += createFooter(\"Issue Conversation\");\n+\n+  delete convoKeys[0];\n+\n+  const linkedContextBlocks = convoKeys.map(async (key) => {\n+    const comments = streamlined[key];\n+    const [org, repo, _issues, issue] = key.split(\"/\");\n+    const isPull = linkedPulls[key];\n+    const specHeader = isPull ? `Linked Pull #${issue} Request Body` : `Linked Issue #${issue} Specification`;\n+\n+    const specOrBody = specAndBodies[key];\n+    let specOrBodyBlock = createHeader(specHeader, key);\n+    specOrBodyBlock += createSpecOrBody(specOrBody);\n+    specOrBodyBlock += createFooter(specHeader);\n+\n+    const header = isPull ? `Linked Pull #${issue} Request Conversation` : `Linked Issue #${issue} Conversation`;\n+    const repoString = `${org}/${repo} #${issue}`;\n+    const diff = isPull ? await fetchPullRequestDiff(context, org, repo, issue) : null;\n+\n+    let block = \"\";\n+    block += specOrBodyBlock;\n+    block += createHeader(header, repoString);\n+    block += createComment({ issue: parseInt(issue), repo, org, comments });\n+    block += createFooter(header);\n+\n+    if (!isPull) {\n+      return block;\n+    }\n+\n+    let diffBlock = \"\";\n+    diffBlock += createHeader(\"Linked Pull Request Code Diff\", repoString);\n+    diffBlock += diff ? diff : \"No diff available\";\n+    diffBlock += createFooter(\"Linked Pull Request Code Diff\");\n+    return block + diffBlock;\n+  });\n+\n+  return issueSpecBlock + issueCommentBlock + linkedContextBlocks.join(\"\");\n+}\n+\n+function createHeader(content: string, repoString: string) {\n+  return `=== ${content} === ${repoString} ===\\n\\n`;\n+}\n+\n+function createFooter(content: string) {\n+  return `=== End ${content} ===\\n\\n`;\n+}\n+\n+function createComment(comment: StreamlinedComments) {\n+  let comments = \"\";\n+  for (const c of comment.comments) {\n+    comments += `${c.id} ${c.user}: ${c.body}\\n`;\n+  }\n+  return comments;\n+}\n+\n+function createSpecOrBody(specOrBody: string) {\n+  return `${specOrBody}\\n`;\n+}\n+\n+export function createChatHistory(formattedChat: string) {\n+  const chatHistory: ChatCompletionMessageParam[] = [];\n+\n+  const systemMessage: ChatCompletionMessageParam = {\n+    role: \"system\",\n+\n+    content: `Using the provided context, address the question being asked and make sure to provide a clear and concise answer with no follow-up statements.\n+        The LAST comment in 'Issue Conversation' is the most recent one, focus on it as that is the question being asked.\n+        Use GitHub flavoured markdown in your response making effective use of lists, code blocks and other supported GitHub md features.`,",
+        "score": {
+          "reward": 1.952,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 49.83451612903227,
+            "syllables": 46,
+            "sentences": 1,
+            "score": 0.8983451612903227
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1676754853,
+        "content": "Why not all? Context length is not a problem anymore.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676754853",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,200 @@\n+import { Context } from \"../types\";\n+import { Issue, IssueComments } from \"../types/github\";\n+\n+type FetchParams = {\n+  context: Context;\n+  issueNum?: number;\n+  owner?: string;\n+  repo?: string;\n+};\n+\n+/**\n+ * Because in the eyes of the GitHub api Pull Requests are also\n+ * issues, we can use the same functions for both.\n+ */\n+\n+export async function fetchIssue(params: FetchParams) {\n+  const { octokit, payload } = params.context;\n+  const { issueNum, owner, repo } = params;\n+\n+  return await octokit.issues\n+    .get({\n+      owner: owner || payload.repository.owner.login,\n+      repo: repo || payload.repository.name,\n+      issue_number: issueNum || payload.issue.number,\n+    })\n+    .then(({ data }) => data as Issue);\n+}\n+\n+export async function fetchIssueComments(params: FetchParams) {\n+  const { octokit, payload } = params.context;\n+  const { issueNum, owner, repo } = params;\n+\n+  return await octokit\n+    .paginate(octokit.issues.listComments, {\n+      owner: owner || payload.repository.owner.login,\n+      repo: repo || payload.repository.name,\n+      issue_number: issueNum || payload.issue.number,\n+    })\n+    .then((comments) => comments as IssueComments);\n+}\n+\n+export async function fetchLinkedIssues(params: FetchParams, comments?: IssueComments) {\n+  let issueComments: IssueComments | undefined = comments;\n+  const linkedIssues: {\n+    issueNumber: number;\n+    repo: string;\n+  }[] = [];\n+\n+  if (!issueComments && !params) {\n+    throw new Error(\"Either issueComments or params must be provided\");\n+  }\n+\n+  if (!issueComments) {\n+    issueComments = await fetchIssueComments(params);\n+  }\n+\n+  const {\n+    context: {\n+      logger,\n+      payload: {\n+        repository: {\n+          owner: { login },\n+        },\n+      },\n+    },\n+  } = params;\n+\n+  if (!issueComments) {\n+    logger.info(\"No comments found on issue\");\n+    return linkedIssues;\n+  }\n+\n+  for (const comment of issueComments) {\n+    const linkedIssue = idIssueFromComment(login, comment.body);\n+    if (linkedIssue) {\n+      linkedIssues.push(linkedIssue);\n+    }\n+  }\n+\n+  return await filterLinkedIssues(params, linkedIssues);\n+}\n+\n+async function filterLinkedIssues(params: FetchParams, linkedIssues: { issueNumber: number; repo: string }[]) {\n+  const {\n+    context: {\n+      logger,\n+      payload: {\n+        repository: {\n+          owner: { login },\n+        },\n+      },\n+    },\n+  } = params;\n+\n+  const contextIssues: {\n+    issueNumber: number;\n+    repo: string;\n+  }[] = [];\n+\n+  for (const issue of linkedIssues) {\n+    if (issue && issue.issueNumber && issue.repo) {\n+      if (await isRepoFromSameOrg(params.context, issue.repo, login)) {\n+        contextIssues.push({\n+          issueNumber: issue.issueNumber,\n+          repo: issue.repo,\n+        });\n+      } else {\n+        logger.info(`Ignoring linked issue ${issue.issueNumber} from ${issue.repo} as it is not from the same org`);\n+      }\n+    }\n+  }\n+\n+  return contextIssues;\n+}\n+\n+export async function getLinkedIssueContextFromComments(context: Context, issueComments: IssueComments) {\n+  // find any linked issues in comments by parsing the comments and enforcing that the\n+  // linked issue is from the same org that the current issue is from\n+  const linkedIssues = await fetchLinkedIssues({ context }, issueComments);\n+\n+  // the conversational history of the linked issues\n+  const linkedIssueComments: IssueComments = [];\n+\n+  // we are only going one level deep with the linked issue context fetching",
+        "score": {
+          "reward": 0.666,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 83.32000000000004,
+            "syllables": 14,
+            "sentences": 2,
+            "score": 0.7667999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1676754902,
+        "content": "I think that recursion is not a problem due to generous context length for 4o",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676754902",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,200 @@\n+import { Context } from \"../types\";\n+import { Issue, IssueComments } from \"../types/github\";\n+\n+type FetchParams = {\n+  context: Context;\n+  issueNum?: number;\n+  owner?: string;\n+  repo?: string;\n+};\n+\n+/**\n+ * Because in the eyes of the GitHub api Pull Requests are also\n+ * issues, we can use the same functions for both.\n+ */\n+\n+export async function fetchIssue(params: FetchParams) {\n+  const { octokit, payload } = params.context;\n+  const { issueNum, owner, repo } = params;\n+\n+  return await octokit.issues\n+    .get({\n+      owner: owner || payload.repository.owner.login,\n+      repo: repo || payload.repository.name,\n+      issue_number: issueNum || payload.issue.number,\n+    })\n+    .then(({ data }) => data as Issue);\n+}\n+\n+export async function fetchIssueComments(params: FetchParams) {\n+  const { octokit, payload } = params.context;\n+  const { issueNum, owner, repo } = params;\n+\n+  return await octokit\n+    .paginate(octokit.issues.listComments, {\n+      owner: owner || payload.repository.owner.login,\n+      repo: repo || payload.repository.name,\n+      issue_number: issueNum || payload.issue.number,\n+    })\n+    .then((comments) => comments as IssueComments);\n+}\n+\n+export async function fetchLinkedIssues(params: FetchParams, comments?: IssueComments) {\n+  let issueComments: IssueComments | undefined = comments;\n+  const linkedIssues: {\n+    issueNumber: number;\n+    repo: string;\n+  }[] = [];\n+\n+  if (!issueComments && !params) {\n+    throw new Error(\"Either issueComments or params must be provided\");\n+  }\n+\n+  if (!issueComments) {\n+    issueComments = await fetchIssueComments(params);\n+  }\n+\n+  const {\n+    context: {\n+      logger,\n+      payload: {\n+        repository: {\n+          owner: { login },\n+        },\n+      },\n+    },\n+  } = params;\n+\n+  if (!issueComments) {\n+    logger.info(\"No comments found on issue\");\n+    return linkedIssues;\n+  }\n+\n+  for (const comment of issueComments) {\n+    const linkedIssue = idIssueFromComment(login, comment.body);\n+    if (linkedIssue) {\n+      linkedIssues.push(linkedIssue);\n+    }\n+  }\n+\n+  return await filterLinkedIssues(params, linkedIssues);\n+}\n+\n+async function filterLinkedIssues(params: FetchParams, linkedIssues: { issueNumber: number; repo: string }[]) {\n+  const {\n+    context: {\n+      logger,\n+      payload: {\n+        repository: {\n+          owner: { login },\n+        },\n+      },\n+    },\n+  } = params;\n+\n+  const contextIssues: {\n+    issueNumber: number;\n+    repo: string;\n+  }[] = [];\n+\n+  for (const issue of linkedIssues) {\n+    if (issue && issue.issueNumber && issue.repo) {\n+      if (await isRepoFromSameOrg(params.context, issue.repo, login)) {\n+        contextIssues.push({\n+          issueNumber: issue.issueNumber,\n+          repo: issue.repo,\n+        });\n+      } else {\n+        logger.info(`Ignoring linked issue ${issue.issueNumber} from ${issue.repo} as it is not from the same org`);\n+      }\n+    }\n+  }\n+\n+  return contextIssues;\n+}\n+\n+export async function getLinkedIssueContextFromComments(context: Context, issueComments: IssueComments) {\n+  // find any linked issues in comments by parsing the comments and enforcing that the\n+  // linked issue is from the same org that the current issue is from\n+  const linkedIssues = await fetchLinkedIssues({ context }, issueComments);\n+\n+  // the conversational history of the linked issues\n+  const linkedIssueComments: IssueComments = [];\n+\n+  // we are only going one level deep with the linked issue context fetching\n+  for (const issue of linkedIssues) {\n+    const fetched = await fetchIssueComments({ context, issueNum: issue.issueNumber, repo: issue.repo });\n+    linkedIssueComments.push(...fetched);\n+  }\n+\n+  return { linkedIssues, linkedIssueComments };\n+}\n+\n+export function idIssueFromComment(owner?: string, comment?: string | null) {\n+  if (!comment) {\n+    return null;\n+  }\n+  if (!owner) {\n+    throw new Error(\"Owner must be provided when parsing linked issues\");\n+  }\n+  // the assumption here is that any special GitHub markdown formatting is converted to an anchor tag\n+  const urlMatch = comment.match(/https:\\/\\/github.com\\/([^/]+)\\/([^/]+)\\/(pull|issue|issues)\\/(\\d+)/);\n+\n+  /**\n+   * I think we should restrict including any linked context which is not of the same org.",
+        "score": {
+          "reward": 1.071,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 73.17000000000003,
+            "syllables": 21,
+            "sentences": 1,
+            "score": 0.8682999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1676754978,
+        "content": "Just be sure to label the section with the org/repo name and ChatGPT should know it's not as relevant",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676754978",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,200 @@\n+import { Context } from \"../types\";\n+import { Issue, IssueComments } from \"../types/github\";\n+\n+type FetchParams = {\n+  context: Context;\n+  issueNum?: number;\n+  owner?: string;\n+  repo?: string;\n+};\n+\n+/**\n+ * Because in the eyes of the GitHub api Pull Requests are also\n+ * issues, we can use the same functions for both.\n+ */\n+\n+export async function fetchIssue(params: FetchParams) {\n+  const { octokit, payload } = params.context;\n+  const { issueNum, owner, repo } = params;\n+\n+  return await octokit.issues\n+    .get({\n+      owner: owner || payload.repository.owner.login,\n+      repo: repo || payload.repository.name,\n+      issue_number: issueNum || payload.issue.number,\n+    })\n+    .then(({ data }) => data as Issue);\n+}\n+\n+export async function fetchIssueComments(params: FetchParams) {\n+  const { octokit, payload } = params.context;\n+  const { issueNum, owner, repo } = params;\n+\n+  return await octokit\n+    .paginate(octokit.issues.listComments, {\n+      owner: owner || payload.repository.owner.login,\n+      repo: repo || payload.repository.name,\n+      issue_number: issueNum || payload.issue.number,\n+    })\n+    .then((comments) => comments as IssueComments);\n+}\n+\n+export async function fetchLinkedIssues(params: FetchParams, comments?: IssueComments) {\n+  let issueComments: IssueComments | undefined = comments;\n+  const linkedIssues: {\n+    issueNumber: number;\n+    repo: string;\n+  }[] = [];\n+\n+  if (!issueComments && !params) {\n+    throw new Error(\"Either issueComments or params must be provided\");\n+  }\n+\n+  if (!issueComments) {\n+    issueComments = await fetchIssueComments(params);\n+  }\n+\n+  const {\n+    context: {\n+      logger,\n+      payload: {\n+        repository: {\n+          owner: { login },\n+        },\n+      },\n+    },\n+  } = params;\n+\n+  if (!issueComments) {\n+    logger.info(\"No comments found on issue\");\n+    return linkedIssues;\n+  }\n+\n+  for (const comment of issueComments) {\n+    const linkedIssue = idIssueFromComment(login, comment.body);\n+    if (linkedIssue) {\n+      linkedIssues.push(linkedIssue);\n+    }\n+  }\n+\n+  return await filterLinkedIssues(params, linkedIssues);\n+}\n+\n+async function filterLinkedIssues(params: FetchParams, linkedIssues: { issueNumber: number; repo: string }[]) {\n+  const {\n+    context: {\n+      logger,\n+      payload: {\n+        repository: {\n+          owner: { login },\n+        },\n+      },\n+    },\n+  } = params;\n+\n+  const contextIssues: {\n+    issueNumber: number;\n+    repo: string;\n+  }[] = [];\n+\n+  for (const issue of linkedIssues) {\n+    if (issue && issue.issueNumber && issue.repo) {\n+      if (await isRepoFromSameOrg(params.context, issue.repo, login)) {\n+        contextIssues.push({\n+          issueNumber: issue.issueNumber,\n+          repo: issue.repo,\n+        });\n+      } else {\n+        logger.info(`Ignoring linked issue ${issue.issueNumber} from ${issue.repo} as it is not from the same org`);\n+      }\n+    }\n+  }\n+\n+  return contextIssues;\n+}\n+\n+export async function getLinkedIssueContextFromComments(context: Context, issueComments: IssueComments) {\n+  // find any linked issues in comments by parsing the comments and enforcing that the\n+  // linked issue is from the same org that the current issue is from\n+  const linkedIssues = await fetchLinkedIssues({ context }, issueComments);\n+\n+  // the conversational history of the linked issues\n+  const linkedIssueComments: IssueComments = [];\n+\n+  // we are only going one level deep with the linked issue context fetching\n+  for (const issue of linkedIssues) {\n+    const fetched = await fetchIssueComments({ context, issueNum: issue.issueNumber, repo: issue.repo });\n+    linkedIssueComments.push(...fetched);\n+  }\n+\n+  return { linkedIssues, linkedIssueComments };\n+}\n+\n+export function idIssueFromComment(owner?: string, comment?: string | null) {\n+  if (!comment) {\n+    return null;\n+  }\n+  if (!owner) {\n+    throw new Error(\"Owner must be provided when parsing linked issues\");\n+  }\n+  // the assumption here is that any special GitHub markdown formatting is converted to an anchor tag\n+  const urlMatch = comment.match(/https:\\/\\/github.com\\/([^/]+)\\/([^/]+)\\/(pull|issue|issues)\\/(\\d+)/);\n+\n+  /**\n+   * I think we should restrict including any linked context which is not of the same org.\n+   *\n+   * In most cases this will be the expected behaviour, I remember a scenario where\n+   * I linked to an issue in a 3rd party org, for extra reviewer context but I also include the\n+   * TL;DR which is always the case. We wouldn't want that full 3rd party PR review or issue to be",
+        "score": {
+          "reward": 1.128,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 80.77714285714288,
+            "syllables": 26,
+            "sentences": 1,
+            "score": 0.7922285714285713
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1676842567,
+        "content": "I prefer to exclude for now.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676842567",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,239 @@\n+import OpenAI from \"openai\";\n+import { Context } from \"../types\";\n+import { fetchIssue, fetchIssueComments, getLinkedIssueContextFromComments, idIssueFromComment } from \"../utils/issue\";\n+import { IssueComments } from \"../types/github\";\n+import { StreamlinedComment } from \"../types/gpt\";\n+import { createChatHistory, formatChatHistory } from \"../utils/format-chat-history\";\n+import { addCommentToIssue } from \"./add-comment\";\n+\n+export async function askQuestion(context: Context, question: string) {\n+  const {\n+    logger,\n+    payload: { issue: currentIssue },\n+  } = context;\n+\n+  if (!question) {\n+    logger.error(`No question provided`);\n+    await addCommentToIssue(context, \"No question provided\", true, \"error\");\n+    return;\n+  }\n+\n+  const { body: issueSpecOrPullBody, repository_url } = currentIssue;\n+  const org = repository_url.split(\"/\")[4];\n+\n+  const { specReferencedIssueBody, specReferencedIssueKey, streamlinedSpecReferencedIssueComments } = await getSpecReferencedContext(\n+    context,\n+    org,\n+    issueSpecOrPullBody\n+  );\n+\n+  const issueComments = await fetchIssueComments({ context });\n+  const linkedIssueContext = await getLinkedIssueContextFromComments(context, issueComments);\n+  const { linkedIssues, linkedIssueComments } = linkedIssueContext;\n+\n+  // we are only going one level deep with the linked issue context fetching\n+  for (const issue of linkedIssues) {\n+    const fetched = await fetchIssueComments({ context, issueNum: issue.issueNumber, repo: issue.repo });\n+    linkedIssueComments.push(...fetched);\n+  }\n+\n+  const streamlinedComments = await getAllStreamlinedComments(issueComments, streamlinedSpecReferencedIssueComments, linkedIssueComments);\n+  const { linkedPulls, specAndBodies } = await getSpecBodiesAndLinkedPulls(\n+    context,\n+    repository_url,\n+    currentIssue.number,\n+    issueSpecOrPullBody,\n+    specReferencedIssueBody,\n+    specReferencedIssueKey,\n+    linkedIssues\n+  );\n+  const formattedChat = formatChatHistory(context, streamlinedComments, specAndBodies, linkedPulls);\n+\n+  return await askGpt(context, formattedChat);\n+}\n+\n+async function getAllStreamlinedComments(\n+  issueComments: IssueComments,\n+  streamlinedSpecReferencedIssueComments: Record<string, StreamlinedComment[]> | undefined,\n+  linkedIssueComments: IssueComments\n+) {\n+  const streamlinedComments = streamlineComments(issueComments) ?? {};\n+\n+  if (streamlinedSpecReferencedIssueComments && Object.keys(streamlinedSpecReferencedIssueComments).length > 0) {\n+    for (const [key, value] of Object.entries(streamlinedSpecReferencedIssueComments)) {\n+      if (!streamlinedComments[key]) {\n+        streamlinedComments[key] = value;\n+        continue;\n+      }\n+\n+      const previous = streamlinedComments[key] || [];\n+      streamlinedComments[key] = [...previous, ...value];\n+    }\n+  }\n+\n+  if (linkedIssueComments.length > 0) {\n+    const linkedStreamlinedComments = streamlineComments(linkedIssueComments);\n+\n+    if (linkedStreamlinedComments) {\n+      for (const [key, value] of Object.entries(linkedStreamlinedComments)) {\n+        if (!streamlinedComments[key]) {\n+          streamlinedComments[key] = value;\n+          continue;\n+        }\n+\n+        const previous = streamlinedComments[key] || [];\n+        streamlinedComments[key] = [...previous, ...value];\n+      }\n+    }\n+  }\n+\n+  return streamlinedComments;\n+}\n+\n+async function getSpecBodiesAndLinkedPulls(\n+  context: Context,\n+  currentIssueUrl: string,\n+  currentIssueNumber: number,\n+  issueSpecOrPullBody: string | null,\n+  specReferencedIssueBody: string | null | undefined,\n+  specReferencedIssueKey: string | null | undefined,\n+  linkedIssues: { issueNumber: number; repo: string }[]\n+) {\n+  const linkedPulls: Record<string, boolean> = {};\n+  const currentIssueKey = createKey(currentIssueUrl, currentIssueNumber);\n+  // collect specifically all of the spec and PR bodies\n+  const specAndBodies: Record<string, string> = {};\n+  specAndBodies[currentIssueKey] = issueSpecOrPullBody || \"\";\n+  specAndBodies[specReferencedIssueKey as string] = specReferencedIssueBody || \"\";\n+\n+  for (const linkedIssue of linkedIssues) {\n+    const issue = await fetchIssue({ context, issueNum: linkedIssue.issueNumber, repo: linkedIssue.repo });\n+    const { body, repository_url, pull_request } = issue;\n+    const linkedIssueKey = createKey(repository_url, linkedIssue.issueNumber);\n+    specAndBodies[linkedIssueKey] = body || \"\";\n+\n+    if (pull_request) {\n+      linkedPulls[linkedIssueKey] = true;\n+    }\n+  }\n+\n+  return { specAndBodies, linkedPulls };\n+}\n+\n+async function getSpecReferencedContext(context: Context, org: string, issueSpecOrPullBody: string | null) {\n+  // fetch the spec referenced issue if it exists\n+  const specReferencedIssueId = idIssueFromComment(org, issueSpecOrPullBody);\n+  let specReferencedIssue,\n+    specReferencedIssueBody,\n+    specReferencedIssueRepoUrl,\n+    specReferencedIssueComments,\n+    specReferencedIssueKey,\n+    streamlinedSpecReferencedIssueComments;\n+\n+  if (specReferencedIssueId) {\n+    specReferencedIssue = await fetchIssue({ context, issueNum: specReferencedIssueId.issueNumber });\n+    specReferencedIssueBody = specReferencedIssue.body;\n+    specReferencedIssueRepoUrl = specReferencedIssue.repository_url;\n+    specReferencedIssueComments = await fetchIssueComments({ context, issueNum: specReferencedIssueId.issueNumber, repo: specReferencedIssueId.repo });\n+    specReferencedIssueKey = createKey(specReferencedIssueRepoUrl, specReferencedIssueId?.issueNumber);\n+    streamlinedSpecReferencedIssueComments = streamlineComments(specReferencedIssueComments) ?? {};\n+  }\n+\n+  return {\n+    specReferencedIssue,\n+    specReferencedIssueBody,\n+    specReferencedIssueRepoUrl,\n+    specReferencedIssueComments,\n+    specReferencedIssueKey,\n+    streamlinedSpecReferencedIssueComments,\n+  };\n+}\n+\n+function createKey(issueUrl: string, issue?: number) {\n+  const splitUrl = issueUrl?.split(\"/\");\n+  const issueNumber = issue || parseInt(splitUrl?.pop() || \"\");\n+  const issueRepo = splitUrl?.slice(-2).join(\"/\");\n+  const issueOrg = splitUrl?.slice(-3, -2).join(\"/\");\n+\n+  if (issueOrg.startsWith(\"repos\")) {\n+    return `${issueRepo}/issues/${issueNumber}`;\n+  }\n+\n+  return `${issueOrg}/${issueRepo}/${issueNumber}`;\n+}\n+\n+function streamlineComments(comments: IssueComments) {\n+  const streamlined: Record<string, StreamlinedComment[]> = {};\n+\n+  for (const comment of comments) {\n+    const user = comment.user?.login;\n+    if (\n+      user === \"ubiquibot\" ||\n+      user === \"ubiquibot[bot]\" ||\n+      user === \"ubiquibot-v2-testing\" ||\n+      user === \"ubiquibot-dev[bot]\" ||\n+      user === \"ubqbot[bot]\" || // TODO: remove this\n+      user === \"github-actions[bot]\"\n+    ) {",
+        "score": {
+          "reward": 0.296,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 87.94500000000002,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.7205499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1676842699,
+        "content": "@gentlementlegen might know.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676842699",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,47 +1,70 @@\n import { Octokit } from \"@octokit/rest\";\n-import { createClient } from \"@supabase/supabase-js\";\n-import { createAdapters } from \"./adapters\";\n-import { Env, PluginInputs } from \"./types\";\n+import { Env, PluginInputs, SupportedEventsU } from \"./types\";\n import { Context } from \"./types\";\n+import { askQuestion } from \"./handlers/ask-gpt\";\n+import { addCommentToIssue } from \"./handlers/add-comment\";\n+import { Logs } from \"@ubiquity-dao/ubiquibot-logger\";\n \n /**\n  * How a worker executes the plugin.\n  */\n export async function plugin(inputs: PluginInputs, env: Env) {\n   const octokit = new Octokit({ auth: inputs.authToken });\n-  const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n \n   const context: Context = {\n     eventName: inputs.eventName,\n     payload: inputs.eventPayload,\n     config: inputs.settings,\n     octokit,\n     env,\n-    logger: {\n-      debug(message: unknown, ...optionalParams: unknown[]) {\n-        console.debug(message, ...optionalParams);\n-      },\n-      info(message: unknown, ...optionalParams: unknown[]) {\n-        console.log(message, ...optionalParams);\n-      },\n-      warn(message: unknown, ...optionalParams: unknown[]) {\n-        console.warn(message, ...optionalParams);\n-      },\n-      error(message: unknown, ...optionalParams: unknown[]) {\n-        console.error(message, ...optionalParams);\n-      },\n-      fatal(message: unknown, ...optionalParams: unknown[]) {\n-        console.error(message, ...optionalParams);\n-      },\n-    },\n-    adapters: {} as ReturnType<typeof createAdapters>,\n+    logger: new Logs(\"info\"),\n+    adapters: {} as never,\n   };\n+  const {\n+    logger,\n+    config: { isEnabled },\n+  } = context;\n \n-  context.adapters = createAdapters(supabase, context);\n+  if (isSupportedEvent(context.eventName)) {\n+    const comment = context.payload.comment.body;\n \n-  if (context.eventName === \"issue_comment.created\") {\n-    // do something\n+    if (!comment.startsWith(\"/gpt\")) {\n+      logger.info(\"Comment does not start with /gpt. Skipping.\");",
+        "score": {
+          "reward": 0.2,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 6.390000000000015,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 0.46390000000000015
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1676842973,
+        "content": "I prefer to try utilizing the most amount of context. We can make assumed optimizations later.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676842973",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,200 @@\n+import { Context } from \"../types\";\n+import { Issue, IssueComments } from \"../types/github\";\n+\n+type FetchParams = {\n+  context: Context;\n+  issueNum?: number;\n+  owner?: string;\n+  repo?: string;\n+};\n+\n+/**\n+ * Because in the eyes of the GitHub api Pull Requests are also\n+ * issues, we can use the same functions for both.\n+ */\n+\n+export async function fetchIssue(params: FetchParams) {\n+  const { octokit, payload } = params.context;\n+  const { issueNum, owner, repo } = params;\n+\n+  return await octokit.issues\n+    .get({\n+      owner: owner || payload.repository.owner.login,\n+      repo: repo || payload.repository.name,\n+      issue_number: issueNum || payload.issue.number,\n+    })\n+    .then(({ data }) => data as Issue);\n+}\n+\n+export async function fetchIssueComments(params: FetchParams) {\n+  const { octokit, payload } = params.context;\n+  const { issueNum, owner, repo } = params;\n+\n+  return await octokit\n+    .paginate(octokit.issues.listComments, {\n+      owner: owner || payload.repository.owner.login,\n+      repo: repo || payload.repository.name,\n+      issue_number: issueNum || payload.issue.number,\n+    })\n+    .then((comments) => comments as IssueComments);\n+}\n+\n+export async function fetchLinkedIssues(params: FetchParams, comments?: IssueComments) {\n+  let issueComments: IssueComments | undefined = comments;\n+  const linkedIssues: {\n+    issueNumber: number;\n+    repo: string;\n+  }[] = [];\n+\n+  if (!issueComments && !params) {\n+    throw new Error(\"Either issueComments or params must be provided\");\n+  }\n+\n+  if (!issueComments) {\n+    issueComments = await fetchIssueComments(params);\n+  }\n+\n+  const {\n+    context: {\n+      logger,\n+      payload: {\n+        repository: {\n+          owner: { login },\n+        },\n+      },\n+    },\n+  } = params;\n+\n+  if (!issueComments) {\n+    logger.info(\"No comments found on issue\");\n+    return linkedIssues;\n+  }\n+\n+  for (const comment of issueComments) {\n+    const linkedIssue = idIssueFromComment(login, comment.body);\n+    if (linkedIssue) {\n+      linkedIssues.push(linkedIssue);\n+    }\n+  }\n+\n+  return await filterLinkedIssues(params, linkedIssues);\n+}\n+\n+async function filterLinkedIssues(params: FetchParams, linkedIssues: { issueNumber: number; repo: string }[]) {\n+  const {\n+    context: {\n+      logger,\n+      payload: {\n+        repository: {\n+          owner: { login },\n+        },\n+      },\n+    },\n+  } = params;\n+\n+  const contextIssues: {\n+    issueNumber: number;\n+    repo: string;\n+  }[] = [];\n+\n+  for (const issue of linkedIssues) {\n+    if (issue && issue.issueNumber && issue.repo) {\n+      if (await isRepoFromSameOrg(params.context, issue.repo, login)) {\n+        contextIssues.push({\n+          issueNumber: issue.issueNumber,\n+          repo: issue.repo,\n+        });\n+      } else {\n+        logger.info(`Ignoring linked issue ${issue.issueNumber} from ${issue.repo} as it is not from the same org`);\n+      }\n+    }\n+  }\n+\n+  return contextIssues;\n+}\n+\n+export async function getLinkedIssueContextFromComments(context: Context, issueComments: IssueComments) {\n+  // find any linked issues in comments by parsing the comments and enforcing that the\n+  // linked issue is from the same org that the current issue is from\n+  const linkedIssues = await fetchLinkedIssues({ context }, issueComments);\n+\n+  // the conversational history of the linked issues\n+  const linkedIssueComments: IssueComments = [];\n+\n+  // we are only going one level deep with the linked issue context fetching",
+        "score": {
+          "reward": 1.134,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 50.66500000000002,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.9066500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1676843159,
+        "content": "I prefer maximizing signal to noise in the context of human communication. \nThese LLMs on the other hand work their magic by dealing with a ton of data. I've seen better results when providing more context than less.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676843159",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,200 @@\n+import { Context } from \"../types\";\n+import { Issue, IssueComments } from \"../types/github\";\n+\n+type FetchParams = {\n+  context: Context;\n+  issueNum?: number;\n+  owner?: string;\n+  repo?: string;\n+};\n+\n+/**\n+ * Because in the eyes of the GitHub api Pull Requests are also\n+ * issues, we can use the same functions for both.\n+ */\n+\n+export async function fetchIssue(params: FetchParams) {\n+  const { octokit, payload } = params.context;\n+  const { issueNum, owner, repo } = params;\n+\n+  return await octokit.issues\n+    .get({\n+      owner: owner || payload.repository.owner.login,\n+      repo: repo || payload.repository.name,\n+      issue_number: issueNum || payload.issue.number,\n+    })\n+    .then(({ data }) => data as Issue);\n+}\n+\n+export async function fetchIssueComments(params: FetchParams) {\n+  const { octokit, payload } = params.context;\n+  const { issueNum, owner, repo } = params;\n+\n+  return await octokit\n+    .paginate(octokit.issues.listComments, {\n+      owner: owner || payload.repository.owner.login,\n+      repo: repo || payload.repository.name,\n+      issue_number: issueNum || payload.issue.number,\n+    })\n+    .then((comments) => comments as IssueComments);\n+}\n+\n+export async function fetchLinkedIssues(params: FetchParams, comments?: IssueComments) {\n+  let issueComments: IssueComments | undefined = comments;\n+  const linkedIssues: {\n+    issueNumber: number;\n+    repo: string;\n+  }[] = [];\n+\n+  if (!issueComments && !params) {\n+    throw new Error(\"Either issueComments or params must be provided\");\n+  }\n+\n+  if (!issueComments) {\n+    issueComments = await fetchIssueComments(params);\n+  }\n+\n+  const {\n+    context: {\n+      logger,\n+      payload: {\n+        repository: {\n+          owner: { login },\n+        },\n+      },\n+    },\n+  } = params;\n+\n+  if (!issueComments) {\n+    logger.info(\"No comments found on issue\");\n+    return linkedIssues;\n+  }\n+\n+  for (const comment of issueComments) {\n+    const linkedIssue = idIssueFromComment(login, comment.body);\n+    if (linkedIssue) {\n+      linkedIssues.push(linkedIssue);\n+    }\n+  }\n+\n+  return await filterLinkedIssues(params, linkedIssues);\n+}\n+\n+async function filterLinkedIssues(params: FetchParams, linkedIssues: { issueNumber: number; repo: string }[]) {\n+  const {\n+    context: {\n+      logger,\n+      payload: {\n+        repository: {\n+          owner: { login },\n+        },\n+      },\n+    },\n+  } = params;\n+\n+  const contextIssues: {\n+    issueNumber: number;\n+    repo: string;\n+  }[] = [];\n+\n+  for (const issue of linkedIssues) {\n+    if (issue && issue.issueNumber && issue.repo) {\n+      if (await isRepoFromSameOrg(params.context, issue.repo, login)) {\n+        contextIssues.push({\n+          issueNumber: issue.issueNumber,\n+          repo: issue.repo,\n+        });\n+      } else {\n+        logger.info(`Ignoring linked issue ${issue.issueNumber} from ${issue.repo} as it is not from the same org`);\n+      }\n+    }\n+  }\n+\n+  return contextIssues;\n+}\n+\n+export async function getLinkedIssueContextFromComments(context: Context, issueComments: IssueComments) {\n+  // find any linked issues in comments by parsing the comments and enforcing that the\n+  // linked issue is from the same org that the current issue is from\n+  const linkedIssues = await fetchLinkedIssues({ context }, issueComments);\n+\n+  // the conversational history of the linked issues\n+  const linkedIssueComments: IssueComments = [];\n+\n+  // we are only going one level deep with the linked issue context fetching\n+  for (const issue of linkedIssues) {\n+    const fetched = await fetchIssueComments({ context, issueNum: issue.issueNumber, repo: issue.repo });\n+    linkedIssueComments.push(...fetched);\n+  }\n+\n+  return { linkedIssues, linkedIssueComments };\n+}\n+\n+export function idIssueFromComment(owner?: string, comment?: string | null) {\n+  if (!comment) {\n+    return null;\n+  }\n+  if (!owner) {\n+    throw new Error(\"Owner must be provided when parsing linked issues\");\n+  }\n+  // the assumption here is that any special GitHub markdown formatting is converted to an anchor tag\n+  const urlMatch = comment.match(/https:\\/\\/github.com\\/([^/]+)\\/([^/]+)\\/(pull|issue|issues)\\/(\\d+)/);\n+\n+  /**\n+   * I think we should restrict including any linked context which is not of the same org.",
+        "score": {
+          "reward": 1.932,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 39,
+            "wordValue": 0.1,
+            "result": 2.15
+          },
+          "readability": {
+            "fleschKincaid": 65.65538461538465,
+            "syllables": 59,
+            "sentences": 3,
+            "score": 0.9434461538461535
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1689084951,
+        "content": "`enabled` seems like a pointless config. Please remove that.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1689084951",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -37,8 +42,8 @@ export async function plugin(inputs: PluginInputs) {\n     }\n \n     if (!isEnabled) {\n-      logger.info(\"Plugin is disabled. Skipping.\");\n-      await addCommentToIssue(context, \"The /gpt command is disabled. Enable it in the plugin settings.\", true, \"warning\");\n+      const log = logger.info(\"The /gpt command is disabled. Enable it in the plugin settings.\");\n+      await addCommentToIssue(context, log?.logMessage.diff as string);\n       return;\n     }",
+        "score": {
+          "reward": 0.744,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 86.45000000000002,
+            "syllables": 11,
+            "sentences": 2,
+            "score": 0.7354999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1689085626,
+        "content": "If it is not a pull shouldn't this revert or throw? Doesn't make sense that it would treat an issue as a pull.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1689085626",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -100,7 +99,7 @@ async function createContextBlockSection(\n \n   const diffBlock = [\n     createHeader(\"Linked Pull Request Code Diff\", repoString),\n-    diff ? diff : \"No diff available\",\n+    isPull ? isPull : \"No diff available\",",
+        "score": {
+          "reward": 1.989,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 102.77950000000001,
+            "syllables": 27,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1689086710,
+        "content": "You can recycle strings with a const in the beginning of this file.\r\n```suggestion\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1689086710",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,11 +1,93 @@\n+/* eslint-disable @typescript-eslint/naming-convention */\n+/* eslint-disable sonarjs/no-duplicate-string */",
+        "score": {
+          "reward": 0.828,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 76.50153846153849,
+            "syllables": 18,
+            "sentences": 1,
+            "score": 0.8349846153846151
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1689087649,
+        "content": "Why? Can't you just write the code to be in line with our styles?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1689087649",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,11 +1,93 @@\n+/* eslint-disable @typescript-eslint/naming-convention */",
+        "score": {
+          "reward": 1.099,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 108.9825,
+            "syllables": 16,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1689088291,
+        "content": "```suggestion\r\n  http.get(\"https://api.github.com/orgs/:org/repos\", ({ params: { org } }: { params: { org: string } }) => HttpResponse.json(db.repo.findMany({ where: { owner: { login: { equals: org } } } }))),\r\n```\r\nYou can make these all one liners succienct like this.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1689088291",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,11 +1,93 @@\n+/* eslint-disable @typescript-eslint/naming-convention */\n+/* eslint-disable sonarjs/no-duplicate-string */\n import { http, HttpResponse } from \"msw\";\n import { db } from \"./db\";\n+import issueTemplate from \"./issue-template\";\n \n /**\n  * Intercepts the routes and returns a custom payload\n  */\n export const handlers = [\n-  http.get(\"https://api.ubiquity.com/users\", () => {\n-    return HttpResponse.json(db.users.getAll());\n+  http.post(\"https://api.openai.com/v1/chat/completions\", () => {\n+    const answer = `This is a mock answer for the chat`;\n+\n+    return HttpResponse.json({\n+      usage: {\n+        completion_tokens: 150,\n+        prompt_tokens: 1000,\n+        total_tokens: 1150,\n+      },\n+      choices: [\n+        {\n+          message: {\n+            content: answer,\n+          },\n+        },\n+      ],\n+    });\n+  }),\n+  //  GET https://api.github.com/repos/ubiquity/test-repo/issues/1\n+  http.get(\"https://api.github.com/repos/:owner/:repo/issues/:issue_number\", ({ params: { owner, repo, issue_number } }) => {\n+    return HttpResponse.json(\n+      db.issue.findFirst({ where: { owner: { equals: owner as string }, repo: { equals: repo as string }, number: { equals: Number(issue_number) } } })\n+    );\n+  }),\n+\n+  // get repo\n+  http.get(\"https://api.github.com/repos/:owner/:repo\", ({ params: { owner, repo } }: { params: { owner: string; repo: string } }) => {\n+    const item = db.repo.findFirst({ where: { name: { equals: repo }, owner: { login: { equals: owner } } } });\n+    if (!item) {\n+      return new HttpResponse(null, { status: 404 });\n+    }\n+    return HttpResponse.json(item);\n+  }),\n+  // get issue\n+  http.get(\"https://api.github.com/repos/:owner/:repo/issues\", ({ params: { owner, repo } }: { params: { owner: string; repo: string } }) => {\n+    return HttpResponse.json(db.issue.findMany({ where: { owner: { equals: owner }, repo: { equals: repo } } }));\n+  }),\n+  // create issue\n+  http.post(\"https://api.github.com/repos/:owner/:repo/issues\", () => {\n+    const id = db.issue.count() + 1;\n+    const newItem = { ...issueTemplate, id };\n+    db.issue.create(newItem);\n+    return HttpResponse.json(newItem);\n+  }),\n+  // get repo issues\n+  http.get(\"https://api.github.com/orgs/:org/repos\", ({ params: { org } }: { params: { org: string } }) => {\n+    return HttpResponse.json(db.repo.findMany({ where: { owner: { login: { equals: org } } } }));\n+  }),",
+        "score": {
+          "reward": 0.864,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 95.165,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.64835
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1689089521,
+        "content": "Why not just use the correct object? Why cast as `any`?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1689089521",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,22 +1,323 @@\n import { db } from \"./__mocks__/db\";\n import { server } from \"./__mocks__/node\";\n import usersGet from \"./__mocks__/users-get.json\";\n-import { expect, describe, beforeAll, beforeEach, afterAll, afterEach, it } from \"@jest/globals\";\n+import { expect, describe, beforeAll, beforeEach, afterAll, afterEach, it, jest } from \"@jest/globals\";\n+import { Logs } from \"@ubiquity-dao/ubiquibot-logger\";\n+import { Context, SupportedEventsU } from \"../src/types\";\n+import { drop } from \"@mswjs/data\";\n+import issueTemplate from \"./__mocks__/issue-template\";\n+import repoTemplate from \"./__mocks__/repo-template\";\n+import { askQuestion } from \"../src/handlers/ask-gpt\";\n+import { plugin } from \"../src/plugin\";\n \n-beforeAll(() => server.listen());\n-afterEach(() => server.resetHandlers());\n+const TEST_QUESTION = \"What is pi?\";\n+const TEST_SLASH_COMMAND = \"/gpt what is pi?\";\n+const LOG_CALLER = \"_Logs.<anonymous>\";\n+\n+type Comment = {\n+  id: number;\n+  user: {\n+    login: string;\n+    type: string;\n+  };\n+  body: string;\n+  url: string;\n+  html_url: string;\n+  owner: string;\n+  repo: string;\n+  issue_number: number;\n+  issue_url?: string;\n+  pull_request_url?: string;\n+};\n+\n+// eslint-disable-next-line @typescript-eslint/no-explicit-any\n+const octokit = jest.requireActual(\"@octokit/rest\") as any;",
+        "score": {
+          "reward": 1.053,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 100.24000000000002,
+            "syllables": 12,
+            "sentences": 2,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1689091491,
+        "content": "```suggestion\r\n          content: `You are a GitHub integrated chatbot tasked with assisting in research and discussion on GitHub issues and pull requests. Using the provided context, address the question being asked providing a clear and concise answer with no follow-up statements. The LAST comment in 'Issue Conversation' is the most recent one, focus on it as that is the question being asked. Use GitHub flavoured markdown in your response making effective use of lists, code blocks and other supported GitHub md features.`,\r\n```\r\nSeem unnecessary.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1689091491",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,22 +1,323 @@\n import { db } from \"./__mocks__/db\";\n import { server } from \"./__mocks__/node\";\n import usersGet from \"./__mocks__/users-get.json\";\n-import { expect, describe, beforeAll, beforeEach, afterAll, afterEach, it } from \"@jest/globals\";\n+import { expect, describe, beforeAll, beforeEach, afterAll, afterEach, it, jest } from \"@jest/globals\";\n+import { Logs } from \"@ubiquity-dao/ubiquibot-logger\";\n+import { Context, SupportedEventsU } from \"../src/types\";\n+import { drop } from \"@mswjs/data\";\n+import issueTemplate from \"./__mocks__/issue-template\";\n+import repoTemplate from \"./__mocks__/repo-template\";\n+import { askQuestion } from \"../src/handlers/ask-gpt\";\n+import { plugin } from \"../src/plugin\";\n \n-beforeAll(() => server.listen());\n-afterEach(() => server.resetHandlers());\n+const TEST_QUESTION = \"What is pi?\";\n+const TEST_SLASH_COMMAND = \"/gpt what is pi?\";\n+const LOG_CALLER = \"_Logs.<anonymous>\";\n+\n+type Comment = {\n+  id: number;\n+  user: {\n+    login: string;\n+    type: string;\n+  };\n+  body: string;\n+  url: string;\n+  html_url: string;\n+  owner: string;\n+  repo: string;\n+  issue_number: number;\n+  issue_url?: string;\n+  pull_request_url?: string;\n+};\n+\n+// eslint-disable-next-line @typescript-eslint/no-explicit-any\n+const octokit = jest.requireActual(\"@octokit/rest\") as any;\n+// eslint-disable-next-line @typescript-eslint/no-explicit-any\n+jest.requireActual(\"openai\") as any;\n+\n+beforeAll(() => {\n+  server.listen();\n+});\n+afterEach(() => {\n+  drop(db);\n+  server.resetHandlers();\n+});\n afterAll(() => server.close());\n \n-describe(\"User tests\", () => {\n-  beforeEach(() => {\n-    for (const item of usersGet) {\n-      db.users.create(item);\n-    }\n+// TESTS\n+\n+describe(\"Ask plugin tests\", () => {\n+  beforeEach(async () => {\n+    await setupTests();\n+  });\n+\n+  it(\"should ask GPT a question\", async () => {\n+    const ctx = createContext(TEST_SLASH_COMMAND);\n+    createComments([transformCommentTemplate(1, 1, TEST_QUESTION, \"ubiquity\", \"test-repo\", true)]);\n+    const res = await askQuestion(ctx, TEST_QUESTION);\n+\n+    expect(res).toBeDefined();\n+\n+    expect(res?.answer).toBe(\"This is a mock answer for the chat\");\n+  });\n+\n+  it(\"should not ask GPT a question if plugin is disabled\", async () => {\n+    const ctx = createContext(TEST_SLASH_COMMAND, false);\n+    const infoSpy = jest.spyOn(ctx.logger, \"info\");\n+\n+    createComments([transformCommentTemplate(1, 1, TEST_QUESTION, \"ubiquity\", \"test-repo\", true)]);\n+    await plugin(ctx);\n+\n+    expect(infoSpy).toHaveBeenCalledWith(\"The /gpt command is disabled. Enable it in the plugin settings.\");\n+  });\n+\n+  it(\"should not ask GPT a question if comment is from a bot\", async () => {\n+    const ctx = createContext(TEST_SLASH_COMMAND);\n+    const infoSpy = jest.spyOn(ctx.logger, \"info\");\n+\n+    createComments([transformCommentTemplate(1, 1, TEST_QUESTION, \"ubiquity\", \"test-repo\", true)]);\n+    if (!ctx.payload.comment.user) return;\n+    ctx.payload.comment.user.type = \"Bot\";\n+    await plugin(ctx);\n+\n+    expect(infoSpy).toHaveBeenCalledWith(\"Comment is from a bot. Skipping.\");\n   });\n \n-  it(\"Should fetch all the users\", async () => {\n-    const res = await fetch(\"https://api.ubiquity.com/users\");\n-    const data = await res.json();\n-    expect(data).toMatchObject(usersGet);\n+  it(\"should not ask GPT a question if comment does not start with /gpt\", async () => {\n+    const ctx = createContext(TEST_QUESTION);\n+    const infoSpy = jest.spyOn(ctx.logger, \"info\");\n+\n+    createComments([transformCommentTemplate(1, 1, TEST_QUESTION, \"ubiquity\", \"test-repo\", true)]);\n+    await plugin(ctx);\n+\n+    expect(infoSpy).toHaveBeenCalledWith(\"Comment does not start with /gpt. Skipping.\");\n+  });\n+\n+  it(\"should not ask GPT a question if no question is provided\", async () => {\n+    const ctx = createContext(\"/gpt\");\n+    const errorSpy = jest.spyOn(ctx.logger, \"error\");\n+\n+    createComments([transformCommentTemplate(1, 1, TEST_QUESTION, \"ubiquity\", \"test-repo\", true)]);\n+    await plugin(ctx);\n+\n+    expect(errorSpy).toHaveBeenCalledWith(\"No question provided\");\n+  });\n+\n+  it(\"should not ask GPT a question if no OpenAI API key is provided\", async () => {\n+    const ctx = createContext(TEST_SLASH_COMMAND);\n+    const errorSpy = jest.spyOn(ctx.logger, \"error\");\n+\n+    createComments([transformCommentTemplate(1, 1, TEST_QUESTION, \"ubiquity\", \"test-repo\", true)]);\n+    ctx.config.openAi_apiKey = \"\";\n+    await plugin(ctx);\n+\n+    expect(errorSpy).toHaveBeenNthCalledWith(1, \"No OpenAI API Key detected!\");\n+    expect(errorSpy).toHaveBeenNthCalledWith(2, \"No response from OpenAI\");\n+  });\n+\n+  it(\"should construct the chat history correctly\", async () => {\n+    const ctx = createContext(TEST_SLASH_COMMAND);\n+    const infoSpy = jest.spyOn(ctx.logger, \"info\");\n+    createComments([transformCommentTemplate(1, 1, TEST_QUESTION, \"ubiquity\", \"test-repo\", true)]);\n+    await plugin(ctx);\n+\n+    expect(infoSpy).toHaveBeenCalledTimes(3);\n+\n+    const prompt = `=== Current Issue #1 Specification === ubiquity/test-repo/1 ===\n+\n+This is a demo spec for a demo task just perfect for testing.\n+=== End Current Issue #1 Specification ===\n+\n+=== Current Issue #1 Conversation === ubiquity/test-repo #1 ===\n+\n+1 ubiquity: What is pi?\n+=== End Current Issue #1 Conversation ===\\n\n+`;\n+\n+    expect(infoSpy).toHaveBeenNthCalledWith(1, \"Asking question: what is pi?\");\n+    expect(infoSpy).toHaveBeenNthCalledWith(2, \"Sending chat to OpenAI\", {\n+      caller: LOG_CALLER,\n+      chat: [\n+        {\n+          role: \"system\",\n+          content:\n+            \"You are a GitHub integrated chatbot tasked with assisting in research and discussion on GitHub issues and pull requests.\\n        Using the provided context, address the question being asked providing a clear and concise answer with no follow-up statements.\\n        The LAST comment in 'Issue Conversation' is the most recent one, focus on it as that is the question being asked.\\n        Use GitHub flavoured markdown in your response making effective use of lists, code blocks and other supported GitHub md features.\",\n+        },\n+        {\n+          role: \"user\",\n+          content: prompt,\n+        },\n+      ],\n+    });\n+\n+    expect(infoSpy).toHaveBeenNthCalledWith(3, \"Answer: This is a mock answer for the chat\", {\n+      caller: LOG_CALLER,\n+      tokenUsage: {\n+        input: 1000,\n+        output: 150,\n+        total: 1150,\n+      },\n+    });\n+  });\n+\n+  it(\"should collect the linked issues correctly\", async () => {\n+    const ctx = createContext(TEST_SLASH_COMMAND);\n+    const infoSpy = jest.spyOn(ctx.logger, \"info\");\n+    createComments([\n+      transformCommentTemplate(1, 1, \"More context here #2\", \"ubiquity\", \"test-repo\", true),\n+      transformCommentTemplate(2, 1, TEST_QUESTION, \"ubiquity\", \"test-repo\", true),\n+      transformCommentTemplate(3, 2, \"More context here #3\", \"ubiquity\", \"test-repo\", true),\n+      transformCommentTemplate(4, 3, \"Just a comment\", \"ubiquity\", \"test-repo\", true),\n+    ]);\n+\n+    await plugin(ctx);\n+\n+    expect(infoSpy).toHaveBeenCalledTimes(3);\n+\n+    expect(infoSpy).toHaveBeenNthCalledWith(1, \"Asking question: what is pi?\");\n+\n+    const prompt = `=== Current Issue #1 Specification === ubiquity/test-repo/1 ===\n+\n+This is a demo spec for a demo task just perfect for testing.\n+=== End Current Issue #1 Specification ===\n+\n+=== Current Issue #1 Conversation === ubiquity/test-repo #1 ===\n+\n+1 ubiquity: More context here #2\n+2 ubiquity: What is pi?\n+=== End Current Issue #1 Conversation ===\n+\n+=== Linked Issue #2 Specification === ubiquity/test-repo/2 ===\n+\n+Related to issue #3\n+=== End Linked Issue #2 Specification ===\n+\n+=== Linked Issue #2 Conversation === ubiquity/test-repo #2 ===\n+\n+3 ubiquity: More context here #3\n+=== End Linked Issue #2 Conversation ===\n+\n+=== Linked Issue #3 Specification === ubiquity/test-repo/3 ===\n+\n+Just another issue\n+=== End Linked Issue #3 Specification ===\n+\n+=== Linked Issue #3 Conversation === ubiquity/test-repo #3 ===\n+\n+4 ubiquity: Just a comment\n+=== End Linked Issue #3 Conversation ===\\n\n+`;\n+\n+    expect(infoSpy).toHaveBeenNthCalledWith(2, \"Sending chat to OpenAI\", {\n+      caller: LOG_CALLER,\n+      chat: [\n+        {\n+          role: \"system\",\n+          content: `You are a GitHub integrated chatbot tasked with assisting in research and discussion on GitHub issues and pull requests.\\n        Using the provided context, address the question being asked providing a clear and concise answer with no follow-up statements.\\n        The LAST comment in 'Issue Conversation' is the most recent one, focus on it as that is the question being asked.\\n        Use GitHub flavoured markdown in your response making effective use of lists, code blocks and other supported GitHub md features.`,",
+        "score": {
+          "reward": 0.175,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": -48.994999999999976,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1776362061,
+        "content": "It's more natural to use it this way",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1776362061",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,5 @@\n+{\n+  \"name\": \"command-ask\",\n+  \"description\": \"A highly context aware organization integrated chatbot\",\n+  \"ubiquity:listeners\": [\"issue_comment.created\"]",
+        "score": {
+          "reward": 0.707,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 94.30000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.6569999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1779440462,
+        "content": "Why don't you downgrade to 1.22.21 so you don't have this problem anymore",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1779440462",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -79,5 +78,6 @@\n     \"extends\": [\n       \"@commitlint/config-conventional\"\n     ]\n-  }\n+  },\n+  \"packageManager\": \"yarn@1.22.22\"",
+        "score": {
+          "reward": 0.785,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 96.57745098039217,
+            "syllables": 21,
+            "sentences": 3,
+            "score": 0.6342254901960783
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1779440674,
+        "content": "Did you test using the openai playground for optimizing the prompt? If not, please do in a new task.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1779440674",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,161 @@\n+import { ChatCompletionMessageParam } from \"openai/resources\";\n+import { Context } from \"../types\";\n+import { StreamlinedComment, StreamlinedComments } from \"../types/gpt\";\n+import { createKey, streamlineComments } from \"../handlers/comments\";\n+import { fetchPullRequestDiff, fetchIssue, fetchIssueComments } from \"./issue-fetching\";\n+import { splitKey } from \"./issue\";\n+\n+export async function formatChatHistory(context: Context, streamlined: Record<string, StreamlinedComment[]>, specAndBodies: Record<string, string>) {\n+  const convoKeys = Object.keys(streamlined);\n+  const specAndBodyKeys = Object.keys(specAndBodies);\n+  const chatHistory: string[] = [];\n+  const currentIssueKey = createKey(context.payload.issue.html_url);\n+  const keys: string[] = Array.from(new Set([...convoKeys, ...specAndBodyKeys, currentIssueKey]));\n+\n+  for (const key of keys) {\n+    const isCurrentIssue = key === currentIssueKey;\n+    const block = await createContextBlockSection(context, key, streamlined, specAndBodies, isCurrentIssue);\n+    chatHistory.push(block);\n+  }\n+\n+  return Array.from(new Set(chatHistory)).join(\"\");\n+}\n+\n+function getCorrectHeaderString(isPull: string | null, issueNumber: number, isCurrentIssue: boolean, isBody: boolean) {\n+  const strings = {\n+    pull: {\n+      linked: `Linked Pull #${issueNumber} Request`,\n+      current: `Current Pull #${issueNumber} Request`,\n+    },\n+    issue: {\n+      linked: `Linked Issue #${issueNumber} Specification`,\n+      current: `Current Issue #${issueNumber} Specification`,\n+    },\n+    convo: {\n+      linked: `Linked Issue #${issueNumber} Conversation`,\n+      current: `Current Issue #${issueNumber} Conversation`,\n+    },\n+  };\n+\n+  let header = \"\";\n+\n+  if (isPull) {\n+    header = isCurrentIssue ? strings.pull.current : strings.pull.linked;\n+  } else {\n+    header = isCurrentIssue ? strings.issue.current : strings.issue.linked;\n+  }\n+\n+  if (isBody) {\n+    header = isCurrentIssue ? strings.convo.current : strings.convo.linked;\n+  }\n+\n+  return header;\n+}\n+\n+async function createContextBlockSection(\n+  context: Context,\n+  key: string,\n+  streamlined: Record<string, StreamlinedComment[]>,\n+  specAndBodies: Record<string, string>,\n+  isCurrentIssue: boolean\n+) {\n+  let comments = streamlined[key];\n+\n+  if (!comments || comments.length === 0) {\n+    const [owner, repo, number] = splitKey(key);\n+    const { comments: comments_ } = await fetchIssueComments({\n+      context,\n+      owner,\n+      repo,\n+      issueNum: parseInt(number),\n+    });\n+\n+    comments = streamlineComments(comments_)[key];\n+  }\n+\n+  const [org, repo, issueNum] = key.split(\"/\");\n+\n+  const issueNumber = parseInt(issueNum);\n+  const prDiff = await fetchPullRequestDiff(context, org, repo, issueNumber);\n+\n+  if (!issueNumber || isNaN(issueNumber)) {\n+    throw context.logger.error(\"Issue number is not valid\");\n+  }\n+\n+  const specHeader = getCorrectHeaderString(prDiff, issueNumber, isCurrentIssue, false);\n+\n+  let specOrBody = specAndBodies[key];\n+  if (!specOrBody) {\n+    specOrBody =\n+      (\n+        await fetchIssue({\n+          context,\n+          owner: org,\n+          repo,\n+          issueNum: issueNumber,\n+        })\n+      )?.body || \"No specification or body available\";\n+  }\n+  const specOrBodyBlock = [createHeader(specHeader, key), createSpecOrBody(specOrBody), createFooter(specHeader)];\n+\n+  const header = getCorrectHeaderString(prDiff, issueNumber, isCurrentIssue, true);\n+  const repoString = `${org}/${repo} #${issueNumber}`;\n+\n+  const block = [specOrBodyBlock.join(\"\"), createHeader(header, repoString), createComment({ issueNumber, repo, org, comments }), createFooter(header)];\n+\n+  if (!prDiff) {\n+    return block.join(\"\");\n+  }\n+\n+  const diffBlock = [createHeader(\"Linked Pull Request Code Diff\", repoString), prDiff, createFooter(\"Linked Pull Request Code Diff\")];\n+\n+  return block.concat(diffBlock).join(\"\");\n+}\n+\n+function createHeader(content: string, repoString: string) {\n+  return `=== ${content} === ${repoString} ===\\n\\n`;\n+}\n+\n+function createFooter(content: string) {\n+  return `=== End ${content} ===\\n\\n`;\n+}\n+\n+function createComment(comment: StreamlinedComments) {\n+  if (!comment.comments) {\n+    return \"\";\n+  }\n+  const comments = [];\n+\n+  // filter dupes\n+  comment.comments = comment.comments?.filter((c, i, a) => a.findIndex((cc) => cc.id === c.id) === i);\n+\n+  for (const c of comment.comments) {\n+    comments.push(`${c.id} ${c.user}: ${c.body}\\n`);\n+  }\n+  return comments.join(\"\");\n+}\n+\n+function createSpecOrBody(specOrBody: string) {\n+  return `${specOrBody}\\n`;\n+}\n+\n+export function createChatHistory(formattedChat: string) {\n+  const chatHistory: ChatCompletionMessageParam[] = [];\n+\n+  const systemMessage: ChatCompletionMessageParam = {\n+    role: \"system\",\n+    content: `You are a GitHub integrated chatbot tasked with assisting in research and discussion on GitHub issues and pull requests.\n+Using the provided context, address the question being asked providing a clear and concise answer with no follow-up statements.\n+The LAST comment in 'Issue Conversation' is the most recent one, focus on it as that is the question being asked.\n+Use GitHub flavoured markdown in your response making effective use of lists, code blocks and other supported GitHub md features.`,",
+        "score": {
+          "reward": 1.416,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 81.42407894736841,
+            "syllables": 26,
+            "sentences": 2,
+            "score": 0.7857592105263158
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1779442458,
+        "content": "Empty string always seems wrong.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1779442458",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -18,7 +18,12 @@ export interface PluginInputs<T extends SupportedEventsU = SupportedEventsU, TU\n  * The kernel will extract those and pass them to the plugin,\n  * which are built into the context object from setup().\n  */\n-export const pluginSettingsSchema = T.Object({});\n+\n+export const pluginSettingsSchema = T.Object({\n+  model: T.String({ default: \"o1-mini\" }),\n+  openAiBaseUrl: T.String({ default: \"\" }),",
+        "score": {
+          "reward": 0.52,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 83.32000000000004,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 0.7667999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1779925947,
+        "content": "No it's not a problem for anybody except your yarn",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1779925947",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -79,5 +78,6 @@\n     \"extends\": [\n       \"@commitlint/config-conventional\"\n     ]\n-  }\n+  },\n+  \"packageManager\": \"yarn@1.22.22\"",
+        "score": {
+          "reward": 0.366,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 72.61545454545457,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.8738454545454544
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1780972176,
+        "content": "I never agreed",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1780972176",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -79,5 +78,6 @@\n     \"extends\": [\n       \"@commitlint/config-conventional\"\n     ]\n-  }\n+  },\n+  \"packageManager\": \"yarn@1.22.22\"",
+        "score": {
+          "reward": 0.09,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 62.79000000000002,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.9720999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2246836103,
+        "content": "Curious to see examples.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#issuecomment-2246836103",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.108,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 33.57500000000002,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.7357500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2362637498,
+        "content": "Maybe let's test in production but let's make it reply to @UbiquityOS instead of /gpt\n1. Make the change\n2. Merge\n3. Install config \nAnd let's go from there",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#issuecomment-2362637498",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.925,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              }
+            },
+            "result": 0.3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 66.5448275862069,
+            "syllables": 38,
+            "sentences": 1,
+            "score": 0.934551724137931
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2370762222,
+        "content": "Merge or delete this repo? @Keyrxng",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#issuecomment-2370762222",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.37,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 90.99000000000004,
+            "syllables": 8,
+            "sentences": 2,
+            "score": 0.6900999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2372782346,
+        "content": "Sure we can rename later",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#issuecomment-2372782346",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.26,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 83.32000000000004,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 0.7667999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2375043874,
+        "content": "`command-ask` is fine for now. Your QA makes it look stable. Can we start using it? Also I want to mention that I have access to o1 from the API now. \r\nhttps://platform.openai.com/docs/guides/reasoning\r\nI'm not sure which model is best. I'm assuming `o1-mini` is pretty solid for our use case though. \r\n---",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#issuecomment-2375043874",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.43,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 49,
+            "wordValue": 0.1,
+            "result": 2.37
+          },
+          "readability": {
+            "fleschKincaid": 92.46928571428575,
+            "syllables": 71,
+            "sentences": 8,
+            "score": 0.6753071428571426
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2375887264,
+        "content": "I think it's fine. A comment responding ten seconds later isn't a problem",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#issuecomment-2375887264",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.75,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 80.78250000000001,
+            "syllables": 21,
+            "sentences": 2,
+            "score": 0.7921749999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2176163612,
+            "effect": {
+              "addition": 679,
+              "deletion": 53
+            },
+            "reward": 7.32,
+            "priority": 1
+          },
+          {
+            "reviewId": 2195598182,
+            "effect": {
+              "addition": 1050,
+              "deletion": 466
+            },
+            "reward": 15.16,
+            "priority": 1
+          },
+          {
+            "reviewId": 2330078610,
+            "effect": {
+              "addition": 734,
+              "deletion": 287
+            },
+            "reward": 10.21,
+            "priority": 1
+          },
+          {
+            "reviewId": 2334966010,
+            "effect": {
+              "addition": 22,
+              "deletion": 24
+            },
+            "reward": 0.46,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 75.052 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>4</td><td>33.15</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>9.56</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>2.784</td></tr><tr><td>Review</td><td>Comment</td><td>32</td><td>29.558</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1\" target=\"_blank\" rel=\"noopener\">#1</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+679 -53</td><td>1</td><td>7.32</td></tr><tr><td>+1050 -466</td><td>1</td><td>15.16</td></tr><tr><td>+734 -287</td><td>1</td><td>10.21</td></tr><tr><td>+22 -24</td><td>1</td><td>0.46</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/29\" target=\"_blank\" rel=\"noopener\"># Overview- Similar to an old proposal for &#96;/ask&#96;.- &hellip;</a></h6></td><td><details><summary>7.5</summary><pre>content:&#13;  content:&#13;    h1:&#13;      score: 1&#13;      elementCount: 4&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 9&#13;    p:&#13;      score: 0&#13;      elementCount: 25&#13;  result: 4.9&#13;regex:&#13;  wordCount: 100&#13;  wordValue: 0.1&#13;  result: 2.6&#13;</pre></details></td><td>1</td><td>1</td><td>9.56</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/29#issuecomment-2225294388\" target=\"_blank\" rel=\"noopener\">Seems easier to redo we have a ton of new functions to borrow li&hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.968</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/29#issuecomment-2340242913\" target=\"_blank\" rel=\"noopener\">It's been two months since the last activity on that pull so it &hellip;</a></h6></td><td><details><summary>1.66</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0.1&#13;  result: 1.66&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.816</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676753876\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionname: \"command-gpt\"&#96;&#96;&#96;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676754128\" target=\"_blank\" rel=\"noopener\">Definitely just ignore all bot comments as we do in conversation&hellip;</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.032</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676754228\" target=\"_blank\" rel=\"noopener\">Will this be a problem? It is not clear to me if the kernel will&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.629</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676754270\" target=\"_blank\" rel=\"noopener\">Shouldn't this be fully removed instead of &#96;never&#96;?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.752</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676754450\" target=\"_blank\" rel=\"noopener\">Use a &#96;string[]&#96; as the buffer and &#96;.join(\"\\n\")&#96;&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.287</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676754745\" target=\"_blank\" rel=\"noopener\">It would be useful context to explain the purpose of the plugin,&hellip;</a></h6></td><td><details><summary>1.92</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.952</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676754853\" target=\"_blank\" rel=\"noopener\">Why not all? Context length is not a problem anymore.</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.666</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676754902\" target=\"_blank\" rel=\"noopener\">I think that recursion is not a problem due to generous context &hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.071</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676754978\" target=\"_blank\" rel=\"noopener\">Just be sure to label the section with the org/repo name and Cha&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.6</td><td>1</td><td>1.128</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676842567\" target=\"_blank\" rel=\"noopener\">I prefer to exclude for now.</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.296</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676842699\" target=\"_blank\" rel=\"noopener\">@gentlementlegen might know.</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.2</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676842973\" target=\"_blank\" rel=\"noopener\">I prefer to try utilizing the most amount of context. We can mak&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.134</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1676843159\" target=\"_blank\" rel=\"noopener\">I prefer maximizing signal to noise in the context of human comm&hellip;</a></h6></td><td><details><summary>2.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 39&#13;  wordValue: 0.1&#13;  result: 2.15&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.932</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1689084951\" target=\"_blank\" rel=\"noopener\">&#96;enabled&#96; seems like a pointless config. Please remove t&hellip;</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.744</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1689085626\" target=\"_blank\" rel=\"noopener\">If it is not a pull shouldn't this revert or throw? Doesn't make&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.989</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1689086710\" target=\"_blank\" rel=\"noopener\">You can recycle strings with a const in the beginning of this fi&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.828</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1689087649\" target=\"_blank\" rel=\"noopener\">Why? Can't you just write the code to be in line with our styles?</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.099</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1689088291\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionhttp.get(\"https://api.github.com/or&hellip;</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.864</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1689089521\" target=\"_blank\" rel=\"noopener\">Why not just use the correct object? Why cast as &#96;any&#96;?</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.053</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1689091491\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestioncontent: &#96;You are a Git&hellip;</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.175</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1776362061\" target=\"_blank\" rel=\"noopener\">It's more natural to use it this way</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.707</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1779440462\" target=\"_blank\" rel=\"noopener\">Why don't you downgrade to 1.22.21 so you don't have this proble&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.785</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1779440674\" target=\"_blank\" rel=\"noopener\">Did you test using the openai playground for optimizing the prom&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.416</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1779442458\" target=\"_blank\" rel=\"noopener\">Empty string always seems wrong.</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.52</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1779925947\" target=\"_blank\" rel=\"noopener\">No it's not a problem for anybody except your yarn</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.366</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1780972176\" target=\"_blank\" rel=\"noopener\">I never agreed</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.09</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#issuecomment-2246836103\" target=\"_blank\" rel=\"noopener\">Curious to see examples.</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.108</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#issuecomment-2362637498\" target=\"_blank\" rel=\"noopener\">Maybe let's test in production but let's make it reply to @Ubiqu&hellip;</a></h6></td><td><details><summary>2.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;  result: 0.3&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.925</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#issuecomment-2370762222\" target=\"_blank\" rel=\"noopener\">Merge or delete this repo? @Keyrxng</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.37</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#issuecomment-2372782346\" target=\"_blank\" rel=\"noopener\">Sure we can rename later</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.26</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#issuecomment-2375043874\" target=\"_blank\" rel=\"noopener\">&#96;command-ask&#96; is fine for now. Your QA makes it look sta&hellip;</a></h6></td><td><details><summary>3.37</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    hr:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 49&#13;  wordValue: 0.1&#13;  result: 2.37&#13;</pre></details></td><td>0.6</td><td>1</td><td>2.43</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#issuecomment-2375887264\" target=\"_blank\" rel=\"noopener\">I think it's fine. A comment responding ten seconds later isn't &hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.75</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 41.229,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2339630460,
+        "content": "It seems that the `user-activity-watcher` ignores when a user opened a pull-request against an issue and considers there is no activity.",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/29#issuecomment-2339630460",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.392,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 56.6057142857143,
+            "syllables": 32,
+            "sentences": 1,
+            "score": 0.966057142857143
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2342425481,
+        "content": "There was an issue opened for this case: https://github.com/ubiquibot/command-start-stop/issues/27",
+        "url": "https://github.com/ubiquity-os/plugins-wishlist/issues/29#issuecomment-2342425481",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.444,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 73.79573529411766,
+            "syllables": 25,
+            "sentences": 2,
+            "score": 0.8620426470588234
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2330005061,
+        "content": "Would be nice to be able to configure the ChatGpt endpoint and model through the configuration (can be inside another issue).",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#pullrequestreview-2330005061",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.344,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 48.54857142857145,
+            "syllables": 34,
+            "sentences": 1,
+            "score": 0.8854857142857145
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1678675275,
+        "content": "I think the kernel will have to be changed because currently plugins can only have one command which is problematic for the ones like `start stop` which is only working for one of the two commands.\r\nSecond, the plugin can be set in the wildcard, or the wrong event, so it is possible that it is called from the wrong event, or the wrong command payload.\r\nTL;DR it is not required but definitely safer to have the checks there.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1678675275",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,47 +1,70 @@\n import { Octokit } from \"@octokit/rest\";\n-import { createClient } from \"@supabase/supabase-js\";\n-import { createAdapters } from \"./adapters\";\n-import { Env, PluginInputs } from \"./types\";\n+import { Env, PluginInputs, SupportedEventsU } from \"./types\";\n import { Context } from \"./types\";\n+import { askQuestion } from \"./handlers/ask-gpt\";\n+import { addCommentToIssue } from \"./handlers/add-comment\";\n+import { Logs } from \"@ubiquity-dao/ubiquibot-logger\";\n \n /**\n  * How a worker executes the plugin.\n  */\n export async function plugin(inputs: PluginInputs, env: Env) {\n   const octokit = new Octokit({ auth: inputs.authToken });\n-  const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n \n   const context: Context = {\n     eventName: inputs.eventName,\n     payload: inputs.eventPayload,\n     config: inputs.settings,\n     octokit,\n     env,\n-    logger: {\n-      debug(message: unknown, ...optionalParams: unknown[]) {\n-        console.debug(message, ...optionalParams);\n-      },\n-      info(message: unknown, ...optionalParams: unknown[]) {\n-        console.log(message, ...optionalParams);\n-      },\n-      warn(message: unknown, ...optionalParams: unknown[]) {\n-        console.warn(message, ...optionalParams);\n-      },\n-      error(message: unknown, ...optionalParams: unknown[]) {\n-        console.error(message, ...optionalParams);\n-      },\n-      fatal(message: unknown, ...optionalParams: unknown[]) {\n-        console.error(message, ...optionalParams);\n-      },\n-    },\n-    adapters: {} as ReturnType<typeof createAdapters>,\n+    logger: new Logs(\"info\"),\n+    adapters: {} as never,\n   };\n+  const {\n+    logger,\n+    config: { isEnabled },\n+  } = context;\n \n-  context.adapters = createAdapters(supabase, context);\n+  if (isSupportedEvent(context.eventName)) {\n+    const comment = context.payload.comment.body;\n \n-  if (context.eventName === \"issue_comment.created\") {\n-    // do something\n+    if (!comment.startsWith(\"/gpt\")) {\n+      logger.info(\"Comment does not start with /gpt. Skipping.\");",
+        "score": {
+          "reward": 3.042,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 78,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 65.47576923076926,
+            "syllables": 106,
+            "sentences": 3,
+            "score": 0.9452423076923074
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1680547173,
+        "content": "Related PR for the fix is [here](https://github.com/ubiquity/ubiquibot-kernel/issues/75).",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1680547173",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,47 +1,70 @@\n import { Octokit } from \"@octokit/rest\";\n-import { createClient } from \"@supabase/supabase-js\";\n-import { createAdapters } from \"./adapters\";\n-import { Env, PluginInputs } from \"./types\";\n+import { Env, PluginInputs, SupportedEventsU } from \"./types\";\n import { Context } from \"./types\";\n+import { askQuestion } from \"./handlers/ask-gpt\";\n+import { addCommentToIssue } from \"./handlers/add-comment\";\n+import { Logs } from \"@ubiquity-dao/ubiquibot-logger\";\n \n /**\n  * How a worker executes the plugin.\n  */\n export async function plugin(inputs: PluginInputs, env: Env) {\n   const octokit = new Octokit({ auth: inputs.authToken });\n-  const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_KEY);\n \n   const context: Context = {\n     eventName: inputs.eventName,\n     payload: inputs.eventPayload,\n     config: inputs.settings,\n     octokit,\n     env,\n-    logger: {\n-      debug(message: unknown, ...optionalParams: unknown[]) {\n-        console.debug(message, ...optionalParams);\n-      },\n-      info(message: unknown, ...optionalParams: unknown[]) {\n-        console.log(message, ...optionalParams);\n-      },\n-      warn(message: unknown, ...optionalParams: unknown[]) {\n-        console.warn(message, ...optionalParams);\n-      },\n-      error(message: unknown, ...optionalParams: unknown[]) {\n-        console.error(message, ...optionalParams);\n-      },\n-      fatal(message: unknown, ...optionalParams: unknown[]) {\n-        console.error(message, ...optionalParams);\n-      },\n-    },\n-    adapters: {} as ReturnType<typeof createAdapters>,\n+    logger: new Logs(\"info\"),\n+    adapters: {} as never,\n   };\n+  const {\n+    logger,\n+    config: { isEnabled },\n+  } = context;\n \n-  context.adapters = createAdapters(supabase, context);\n+  if (isSupportedEvent(context.eventName)) {\n+    const comment = context.payload.comment.body;\n \n-  if (context.eventName === \"issue_comment.created\") {\n-    // do something\n+    if (!comment.startsWith(\"/gpt\")) {\n+      logger.info(\"Comment does not start with /gpt. Skipping.\");",
+        "score": {
+          "reward": 1.32,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 103.04428571428575,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1776309633,
+        "content": "Only `.dev.vars.example` is needed isn't it?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1776309633",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 0.395,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 102.045,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1776310034,
+        "content": "I made little changes on `workflow-delete` and `workflow-create` sorry about that: https://github.com/ubiquity-os/plugin-template/commit/dbb9b22049cdd45bbda0230b61a5095d73771ff5",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1776310034",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "",
+        "score": {
+          "reward": 0.952,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 61.400000000000034,
+            "syllables": 29,
+            "sentences": 2,
+            "score": 0.9859999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1776310379,
+        "content": "It is missing the command definition, how can it run?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1776310379",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,5 @@\n+{\n+  \"name\": \"command-ask\",\n+  \"description\": \"A highly context aware organization integrated chatbot\",\n+  \"ubiquity:listeners\": [\"issue_comment.created\"]",
+        "score": {
+          "reward": 0.912,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 69.78500000000001,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.9021499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1776311319,
+        "content": "Shouldn't this be handle when we decode the env?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1776311319",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,47 @@\n+import OpenAI from \"openai\";\n+import { Context } from \"../types\";\n+import { createChatHistory, formatChatHistory } from \"../helpers/format-chat-history\";\n+import { recursivelyFetchLinkedIssues } from \"../helpers/issue-fetching\";\n+\n+export async function askQuestion(context: Context, question: string) {\n+  if (!question) {\n+    throw context.logger.error(`No question provided`);\n+  }\n+\n+  const { specAndBodies, streamlinedComments } = await recursivelyFetchLinkedIssues({ context });\n+\n+  const formattedChat = await formatChatHistory(context, streamlinedComments, specAndBodies);\n+  return await askGpt(context, formattedChat);\n+}\n+\n+export async function askGpt(context: Context, formattedChat: string) {\n+  const {\n+    logger,\n+    env: { OPENAI_API_KEY },\n+  } = context;\n+\n+  if (!OPENAI_API_KEY) {\n+    throw logger.error(`No OpenAI API Key detected!`);",
+        "score": {
+          "reward": 0.756,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 95.165,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.64835
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1776313300,
+        "content": "Should probably be camelCase",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1776313300",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -18,7 +18,11 @@ export interface PluginInputs<T extends SupportedEventsU = SupportedEventsU, TU\n  * The kernel will extract those and pass them to the plugin,\n  * which are built into the context object from setup().\n  */\n-export const pluginSettingsSchema = T.Object({});\n+\n+export const pluginSettingsSchema = T.Object({\n+  ubiquity_os_app_slug: T.String(),",
+        "score": {
+          "reward": 0.324,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 33.57500000000002,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.7357500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1776329652,
+        "content": "So how is that plugin used? I thought it would be something like `/ask`",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1776329652",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,5 @@\n+{\n+  \"name\": \"command-ask\",\n+  \"description\": \"A highly context aware organization integrated chatbot\",\n+  \"ubiquity:listeners\": [\"issue_comment.created\"]",
+        "score": {
+          "reward": 0.917,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 96.11442307692309,
+            "syllables": 16,
+            "sentences": 2,
+            "score": 0.6388557692307691
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1776353045,
+        "content": "I see. Any reason to do it that way instead of a command?",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1776353045",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,5 @@\n+{\n+  \"name\": \"command-ask\",\n+  \"description\": \"A highly context aware organization integrated chatbot\",\n+  \"ubiquity:listeners\": [\"issue_comment.created\"]",
+        "score": {
+          "reward": 0.655,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 96.11442307692309,
+            "syllables": 16,
+            "sentences": 2,
+            "score": 0.6388557692307691
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1776738139,
+        "content": "Do we need optional with the defaults? Also be careful not sure if it works if you send an empty string to the OpenAI constructor for the base url if it works.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1776738139",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -18,7 +18,12 @@ export interface PluginInputs<T extends SupportedEventsU = SupportedEventsU, TU\n  * The kernel will extract those and pass them to the plugin,\n  * which are built into the context object from setup().\n  */\n-export const pluginSettingsSchema = T.Object({});\n+\n+export const pluginSettingsSchema = T.Object({",
+        "score": {
+          "reward": 1.952,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 76.91375000000001,
+            "syllables": 43,
+            "sentences": 2,
+            "score": 0.8308625
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1776784905,
+        "content": "Because a check is done https://github.com/ubiquity-os-marketplace/conversation-rewards/blob/2da6b868c9700b68e5bbedfb64683e42b384755c/src/parser/content-evaluator-module.ts#L29\r\nIt's fine to use optional, but usually not useful if there is a default because a value will be given either way.",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1776784905",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -18,7 +18,12 @@ export interface PluginInputs<T extends SupportedEventsU = SupportedEventsU, TU\n  * The kernel will extract those and pass them to the plugin,\n  * which are built into the context object from setup().\n  */\n-export const pluginSettingsSchema = T.Object({});\n+\n+export const pluginSettingsSchema = T.Object({",
+        "score": {
+          "reward": 2.124,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 46.85000000000002,
+            "syllables": 77,
+            "sentences": 3,
+            "score": 0.8685000000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2179084017,
+            "effect": {
+              "addition": 679,
+              "deletion": 53
+            },
+            "reward": 7.32,
+            "priority": 1
+          },
+          {
+            "reviewId": 2329998529,
+            "effect": {
+              "addition": 1419,
+              "deletion": 376
+            },
+            "reward": 17.95,
+            "priority": 1
+          },
+          {
+            "reviewId": 2330693263,
+            "effect": {
+              "addition": 19,
+              "deletion": 24
+            },
+            "reward": 0.43,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 41.229 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>25.7</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>0.836</td></tr><tr><td>Review</td><td>Comment</td><td>12</td><td>14.693</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1\" target=\"_blank\" rel=\"noopener\">#1</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+679 -53</td><td>1</td><td>7.32</td></tr><tr><td>+1419 -376</td><td>1</td><td>17.95</td></tr><tr><td>+19 -24</td><td>1</td><td>0.43</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/29#issuecomment-2339630460\" target=\"_blank\" rel=\"noopener\">It seems that the &#96;user-activity-watcher&#96; ignores when a&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.392</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os/plugins-wishlist/issues/29#issuecomment-2342425481\" target=\"_blank\" rel=\"noopener\">There was an issue opened for this case: https://github.com/ubiq&hellip;</a></h6></td><td><details><summary>1.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.444</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#pullrequestreview-2330005061\" target=\"_blank\" rel=\"noopener\">Would be nice to be able to configure the ChatGpt endpoint and m&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.344</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1678675275\" target=\"_blank\" rel=\"noopener\">I think the kernel will have to be changed because currently plu&hellip;</a></h6></td><td><details><summary>2.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 78&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0.9</td><td>1</td><td>3.042</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1680547173\" target=\"_blank\" rel=\"noopener\">Related PR for the fix is [here](https://github.com/ubiquity/ubi&hellip;</a></h6></td><td><details><summary>1.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.6</td><td>1</td><td>1.32</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1776309633\" target=\"_blank\" rel=\"noopener\">Only &#96;.dev.vars.example&#96; is needed isn't it?</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.395</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1776310034\" target=\"_blank\" rel=\"noopener\">I made little changes on &#96;workflow-delete&#96; and &#96;work&hellip;</a></h6></td><td><details><summary>1.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.952</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1776310379\" target=\"_blank\" rel=\"noopener\">It is missing the command definition, how can it run?</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.912</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1776311319\" target=\"_blank\" rel=\"noopener\">Shouldn't this be handle when we decode the env?</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.756</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1776313300\" target=\"_blank\" rel=\"noopener\">Should probably be camelCase</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.324</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1776329652\" target=\"_blank\" rel=\"noopener\">So how is that plugin used? I thought it would be something like&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.917</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1776353045\" target=\"_blank\" rel=\"noopener\">I see. Any reason to do it that way instead of a command?</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.655</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1776738139\" target=\"_blank\" rel=\"noopener\">Do we need optional with the defaults? Also be careful not sure &hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.952</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#discussion_r1776784905\" target=\"_blank\" rel=\"noopener\">Because a check is done https://github.com/ubiquity-os-marketpla&hellip;</a></h6></td><td><details><summary>2.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.6</td><td>1</td><td>2.124</td></tr></tbody></table></details>"
+  },
+  "shiv810": {
+    "total": 1.005,
+    "userId": 53160903,
+    "comments": [
+      {
+        "id": 2395517480,
+        "content": "@Keyrxng I think it would be a good idea for me to continue with this PR, as my #2 PR builds on it.\r\n@0x4007 rfc",
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1#issuecomment-2395517480",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.005,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 99.3955,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.6060450000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/command-ask/pull/1"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 1.005 XP ]</a>&nbsp;</h3><h6>@shiv810</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>1</td><td>1.005</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/command-ask/pull/1#issuecomment-2395517480\" target=\"_blank\" rel=\"noopener\">@Keyrxng I think it would be a good idea for me to continue with&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.5</td><td>1</td><td>1.005</td></tr></tbody></table></details>"
+  }
+}

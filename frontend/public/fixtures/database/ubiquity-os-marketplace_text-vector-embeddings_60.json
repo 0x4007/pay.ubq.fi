@@ -1,0 +1,590 @@
+{
+  "shiv810": {
+    "userId": 53160903,
+    "total": 153.426,
+    "task": {
+      "reward": 150,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2736779525,
+        "content": "The issue matchmaking (issue contributor recommendation) functionality should work across multiple orgs/repos and not be restricted within single repo.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/60",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 1.68,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 4.645000000000039,
+            "syllables": 43,
+            "sentences": 1,
+            "score": 0.4464500000000004
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2232473477,
+        "content": "Resolves #60 \r\n- Allows Issue Matching outside repos and orgs. \r\n- New pg func for handling the issue matching",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 1.746,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 68.81926470588238,
+            "syllables": 26,
+            "sentences": 2,
+            "score": 0.9118073529411762
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1890512227,
+        "content": "It could be any value. Should I add this to config instead ?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61#discussion_r1890512227",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -193,4 +193,34 @@ export class Issue extends SuperSupabase {\n       return null;\n     }\n   }\n+\n+  async findSimilarIssuesToMatch({ markdown, currentId, threshold }: FindSimilarIssuesParams): Promise<IssueSimilaritySearchResult[] | null> {\n+    // Create a new issue embedding\n+    try {\n+      const embedding = await this.context.adapters.voyage.embedding.createEmbedding(markdown);\n+      const { data, error } = await this.supabase.rpc(\"find_similar_issues_to_match\", {\n+        current_id: currentId,\n+        query_embedding: embedding,\n+        threshold,\n+        top_k: 5,",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 94.995,
+            "syllables": 15,
+            "sentences": 2,
+            "score": 0.6500499999999999
+          },
+          "multiplier": 0,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1890523198,
+        "content": "It doesn't matter, it could be any value since we are mocking the GraphQL response anyway, otherwise it would filtered by the node_id",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61#discussion_r1890523198",
+        "commentType": "PULL_AUTHOR",
+        "diffHunk": "@@ -114,6 +114,14 @@ export function createMockAdapters(context: Context) {\n \n           return [];\n         }),\n+        findSimilarIssuesToMatch: jest.fn(async (params: { markdown: string; threshold: number; currentId: string }) => {\n+          if (params.currentId === \"task_complete\") {\n+            return [{ id: \"similar3\", similarity: 0.98 }];",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 24,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 59.10000000000004,
+            "syllables": 35,
+            "sentences": 1,
+            "score": 0.9910000000000003
+          },
+          "multiplier": 0,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2540013899,
+        "content": "QA:\r\nhttps://github.com/sshivaditya2019/test-public/issues/235",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61#issuecomment-2540013899",
+        "commentType": "PULL_AUTHOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 61.26750000000001,
+            "syllables": 15,
+            "sentences": 2,
+            "score": 0.9873249999999999
+          },
+          "multiplier": 0,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 153.426 XP ]</a>&nbsp;</h3><h6>@shiv810</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>150</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>1.68</td></tr><tr><td>Review</td><td>Comment</td><td>4</td><td>1.746</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/60\" target=\"_blank\" rel=\"noopener\">The issue matchmaking (issue contributor recommendation) functio&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>1</td><td>1</td><td>1.68</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61\" target=\"_blank\" rel=\"noopener\">Resolves #60 - Allows Issue Matching outside repos and orgs. &hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.746</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61#discussion_r1890512227\" target=\"_blank\" rel=\"noopener\">It could be any value. Should I add this to config instead ?</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.7</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61#discussion_r1890523198\" target=\"_blank\" rel=\"noopener\">It doesn't matter, it could be any value since we are mocking th&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 24&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>3</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61#issuecomment-2540013899\" target=\"_blank\" rel=\"noopener\">QA:https://github.com/sshivaditya2019/test-public/issues/235</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0&#13;  result: 0&#13;</pre></details></td><td>0.4</td><td>3</td><td>0</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 20.037,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2540367093,
+        "content": "This isn't specific enough please be careful to use precise terminology. \nIs this for issue deduplication or is this for talent recommendation? \nI have some mixed feelings. \nFor issue deduplication:\n- the same issue description in two different repos can be two very different types of projects.\n- I'm leaning towards that it makes sense to scope within a specific repo instead of global because this is intended to automatically close issues that are too similar. If another project did the same feature then obviously this automation doesn't make any sense. \nFor talent recommendation:\n- given that these are suggestions and that the intended flow is that human managers should manually review and then decide to tag makes this more forgiving. \n- the precise use case is if it was implemented in another project you can poach that same talent to solve the same problem for you  \n- this should be global (across all repos and orgs)\nAlso, a new policy will be that issue authors should always set time labels and then admins will set priority level levels",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/60#issuecomment-2540367093",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 9.36,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              }
+            },
+            "result": 0.5
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 177,
+            "wordValue": 0.1,
+            "result": 1.96
+          },
+          "readability": {
+            "fleschKincaid": 49.59168432203393,
+            "syllables": 282,
+            "sentences": 8,
+            "score": 0.8959168432203393
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2553993243,
+        "content": "@gentlementlegen sshivaditya2019 is a collaborator",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/60#issuecomment-2553993243",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.159,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": -68.95999999999995,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1883141150,
+        "content": "Isn't this error prone if a single request fails then everything fails?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61#discussion_r1883141150",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -91,10 +91,14 @@ export async function issueMatching(context: Context<\"issues.opened\" | \"issues.e\n         return null;\n       }\n     });\n-    const issueList = (await Promise.all(fetchPromises)).filter((issue) => issue !== null);\n+    const issueList = await Promise.allSettled(fetchPromises);",
+        "score": {
+          "reward": 3.78,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 69.99384615384618,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.9000615384615382
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1883141356,
+        "content": "Why no analytics",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61#discussion_r1883141356",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -141,7 +141,7 @@ redirect_uri = \"\"\n url = \"\"\n \n [analytics]\n-enabled = true\n+enabled = false",
+        "score": {
+          "reward": 0.645,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 34.59000000000003,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 0.7459000000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1890491733,
+        "content": "Why 5?",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61#discussion_r1890491733",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -193,4 +193,34 @@ export class Issue extends SuperSupabase {\n       return null;\n     }\n   }\n+\n+  async findSimilarIssuesToMatch({ markdown, currentId, threshold }: FindSimilarIssuesParams): Promise<IssueSimilaritySearchResult[] | null> {\n+    // Create a new issue embedding\n+    try {\n+      const embedding = await this.context.adapters.voyage.embedding.createEmbedding(markdown);\n+      const { data, error } = await this.supabase.rpc(\"find_similar_issues_to_match\", {\n+        current_id: currentId,\n+        query_embedding: embedding,\n+        threshold,\n+        top_k: 5,",
+        "score": {
+          "reward": 0.594,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 120.20500000000001,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1890496428,
+        "content": "Why similar3",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61#discussion_r1890496428",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -114,6 +114,14 @@ export function createMockAdapters(context: Context) {\n \n           return [];\n         }),\n+        findSimilarIssuesToMatch: jest.fn(async (params: { markdown: string; threshold: number; currentId: string }) => {\n+          if (params.currentId === \"task_complete\") {\n+            return [{ id: \"similar3\", similarity: 0.98 }];",
+        "score": {
+          "reward": 0.279,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 35.60500000000002,
+            "syllables": 4,
+            "sentences": 1,
+            "score": 0.7560500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1892053022,
+        "content": "Probably not but was just curious why you chose 5 but based on brief research it seems appropriate for our usecase.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61#discussion_r1892053022",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -193,4 +193,34 @@ export class Issue extends SuperSupabase {\n       return null;\n     }\n   }\n+\n+  async findSimilarIssuesToMatch({ markdown, currentId, threshold }: FindSimilarIssuesParams): Promise<IssueSimilaritySearchResult[] | null> {\n+    // Create a new issue embedding\n+    try {\n+      const embedding = await this.context.adapters.voyage.embedding.createEmbedding(markdown);\n+      const { data, error } = await this.supabase.rpc(\"find_similar_issues_to_match\", {\n+        current_id: currentId,\n+        query_embedding: embedding,\n+        threshold,\n+        top_k: 5,",
+        "score": {
+          "reward": 2.34,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 64.66285714285716,
+            "syllables": 30,
+            "sentences": 1,
+            "score": 0.9533714285714283
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2501105755,
+            "effect": {
+              "addition": 78,
+              "deletion": 16
+            },
+            "reward": 2.82,
+            "priority": 3
+          },
+          {
+            "reviewId": 2512273259,
+            "effect": {
+              "addition": 1,
+              "deletion": 1
+            },
+            "reward": 0.06,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 20.037 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>2.88</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>9.519</td></tr><tr><td>Review</td><td>Comment</td><td>5</td><td>7.638</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61\" target=\"_blank\" rel=\"noopener\">#61</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+78 -16</td><td>3</td><td>2.82</td></tr><tr><td>+1 -1</td><td>3</td><td>0.06</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/60#issuecomment-2540367093\" target=\"_blank\" rel=\"noopener\">This isn't specific enough please be careful to use precise term&hellip;</a></h6></td><td><details><summary>2.46</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;  result: 0.5&#13;regex:&#13;  wordCount: 177&#13;  wordValue: 0.1&#13;  result: 1.96&#13;</pre></details></td><td>1</td><td>3</td><td>9.36</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/60#issuecomment-2553993243\" target=\"_blank\" rel=\"noopener\">@gentlementlegen sshivaditya2019 is a collaborator</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.159</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61#discussion_r1883141150\" target=\"_blank\" rel=\"noopener\">Isn't this error prone if a single request fails then everything&hellip;</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.9</td><td>3</td><td>3.78</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61#discussion_r1883141356\" target=\"_blank\" rel=\"noopener\">Why no analytics</a></h6></td><td><details><summary>0.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.5</td><td>3</td><td>0.645</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61#discussion_r1890491733\" target=\"_blank\" rel=\"noopener\">Why 5?</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.6</td><td>3</td><td>0.594</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61#discussion_r1890496428\" target=\"_blank\" rel=\"noopener\">Why similar3</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.279</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61#discussion_r1892053022\" target=\"_blank\" rel=\"noopener\">Probably not but was just curious why you chose 5 but based on b&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.4</td><td>3</td><td>2.34</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 0.48,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2554410073,
+        "content": "I know that the profile is private so probably the bot cannot see the collaborator status.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/60#issuecomment-2554410073",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.48,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 16,
+            "wordValue": 0.1,
+            "result": 1.27
+          },
+          "readability": {
+            "fleschKincaid": 47.83250000000001,
+            "syllables": 27,
+            "sentences": 1,
+            "score": 0.8783250000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 0.48 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.48</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/issues/60#issuecomment-2554410073\" target=\"_blank\" rel=\"noopener\">I know that the profile is private so probably the bot cannot se&hellip;</a></h6></td><td><details><summary>1.27</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 16&#13;  wordValue: 0.1&#13;  result: 1.27&#13;</pre></details></td><td>0.1</td><td>3</td><td>0.48</td></tr></tbody></table></details>"
+  },
+  "sshivaditya": {
+    "total": 3.999,
+    "userId": 43181489,
+    "comments": [
+      {
+        "id": 1890482986,
+        "content": "`allSettled` will always resolve, regardless of whether individual promises fulfill or reject. `all` fails immediately if any one promise rejects.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61#discussion_r1890482986",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -91,10 +91,14 @@ export async function issueMatching(context: Context<\"issues.opened\" | \"issues.e\n         return null;\n       }\n     });\n-    const issueList = (await Promise.all(fetchPromises)).filter((issue) => issue !== null);\n+    const issueList = await Promise.allSettled(fetchPromises);",
+        "score": {
+          "reward": 1.134,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 33.20000000000002,
+            "syllables": 35,
+            "sentences": 2,
+            "score": 0.7320000000000002
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1890485505,
+        "content": "Fixed.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61#discussion_r1890485505",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -141,7 +141,7 @@ redirect_uri = \"\"\n url = \"\"\n \n [analytics]\n-enabled = true\n+enabled = false",
+        "score": {
+          "reward": 0.045,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": 121.22000000000003,
+            "syllables": 1,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2512258250,
+            "effect": {
+              "addition": 78,
+              "deletion": 16
+            },
+            "reward": 2.82,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 3.999 XP ]</a>&nbsp;</h3><h6>@sshivaditya</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>2.82</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>1.179</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61\" target=\"_blank\" rel=\"noopener\">#61</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+78 -16</td><td>3</td><td>2.82</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61#discussion_r1890482986\" target=\"_blank\" rel=\"noopener\">&#96;allSettled&#96; will always resolve, regardless of whether &hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.9</td><td>3</td><td>1.134</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-vector-embeddings/pull/61#discussion_r1890485505\" target=\"_blank\" rel=\"noopener\">Fixed.</a></h6></td><td><details><summary>0.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.045</td></tr></tbody></table></details>"
+  }
+}

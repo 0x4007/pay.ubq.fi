@@ -1,0 +1,487 @@
+{
+  "EtherealGlow": {
+    "userId": 139999816,
+    "total": 50,
+    "task": {
+      "reward": 50,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 50 XP ]</a>&nbsp;</h3><h6>@EtherealGlow</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>50</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 21.788,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1694383107,
+        "content": "I just dug this up from the logs (id: 650)\r\nWhy did this Task Creator Reward add up to be 89 WXDAI?\r\nThis is quite a bit higher than expected\r\n@whilefoo @wannacfuture \r\nLoaded config:\r\n```json\r\n{\r\n    \"price\": {\r\n        \"baseMultiplier\": 1.5,\r\n        \"issueCreatorMultiplier\": 2,\r\n        \"timeLabels\": [\r\n            {\r\n                \"name\": \"Time: <1 Hour\",\r\n                \"weight\": 0.125,\r\n                \"value\": 3600\r\n            },\r\n            {\r\n                \"name\": \"Time: <2 Hours\",\r\n                \"weight\": 0.25,\r\n                \"value\": 7200\r\n            },\r\n            {\r\n                \"name\": \"Time: <4 Hours\",\r\n                \"weight\": 0.5,\r\n                \"value\": 14400\r\n            },\r\n            {\r\n                \"name\": \"Time: <1 Day\",\r\n                \"weight\": 1,\r\n                \"value\": 86400\r\n            },\r\n            {\r\n                \"name\": \"Time: <1 Week\",\r\n                \"weight\": 2,\r\n                \"value\": 604800\r\n            }\r\n        ],\r\n        \"priorityLabels\": [\r\n            {\r\n                \"name\": \"Priority: 0 (Normal)\",\r\n                \"weight\": 1\r\n            },\r\n            {\r\n                \"name\": \"Priority: 1 (Medium)\",\r\n                \"weight\": 2\r\n            },\r\n            {\r\n                \"name\": \"Priority: 2 (High)\",\r\n                \"weight\": 3\r\n            },\r\n            {\r\n                \"name\": \"Priority: 3 (Urgent)\",\r\n                \"weight\": 4\r\n            },\r\n            {\r\n                \"name\": \"Priority: 4 (Emergency)\",\r\n                \"weight\": 5\r\n            }\r\n        ],\r\n        \"incentives\": {\r\n            \"comment\": {\r\n                \"elements\": {\r\n                    \"code\": 5,\r\n                    \"img\": 5,\r\n                    \"h1\": 1,\r\n                    \"li\": 0.5,\r\n                    \"a\": 0.5,\r\n                    \"blockquote\": 0\r\n                },\r\n                \"totals\": {\r\n                    \"word\": 0.1\r\n                }\r\n            }\r\n        },\r\n        \"defaultLabels\": [\r\n            \"Time: <1 Hour\",\r\n            \"Priority: 0 (Normal)\"\r\n        ]\r\n    },\r\n    \"unassign\": {\r\n        \"followUpTime\": 345600000,\r\n        \"disqualifyTime\": 604800000\r\n    },\r\n    \"mode\": {\r\n        \"paymentPermitMaxPrice\": 1000,\r\n        \"disableAnalytics\": true,\r\n        \"incentiveMode\": true,\r\n        \"assistivePricing\": true\r\n    },\r\n    \"log\": {\r\n        \"logEnvironment\": \"production\",\r\n        \"level\": \"info\",\r\n        \"retryLimit\": 0\r\n    },\r\n    \"wallet\": {\r\n        \"registerWalletWithVerification\": false\r\n    }\r\n}\r\n```",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/619#issuecomment-1694383107",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.988,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 34,
+            "wordValue": 0.1,
+            "result": 2.01
+          },
+          "readability": {
+            "fleschKincaid": 80.09764705882354,
+            "syllables": 44,
+            "sentences": 2,
+            "score": 0.7990235294117646
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1694384471,
+        "content": "I also see a suspicious log related to parsing the original specification. Perhaps it is giving credit to the HTML code that GitHub automatically generates?\r\nI think we might need to scrub out all html attributes?\r\n```html\r\n<p dir=\"auto\">Original <a href=\"https://github.com/ubiquibot/ubiquibot-config/pull/2#discussion_r1293969395\" data-hovercard-type=\"pull_request\" data-hovercard-url=\"/ubiquibot/ubiquibot-config/pull/2/hovercard\">discussion</a></p>\r\n<p dir=\"auto\">For QA purposes we need to read <a href=\"https://github.com/ubiquity/ubiquibot/blob/d56a523c81829e17513f7da1f1ccb1bbdca8b180/src/configs/shared.ts#L6\">DEFAULT_TIME_RANGE_FOR_MAX_ISSUE</a> and <a href=\"https://github.com/ubiquity/ubiquibot/blob/d56a523c81829e17513f7da1f1ccb1bbdca8b180/src/configs/shared.ts#L7C14-L7C54\">DEFAULT_TIME_RANGE_FOR_MAX_ISSUE_ENABLED</a> from env variables so that <a class=\"user-mention notranslate\" data-hovercard-type=\"user\" data-hovercard-url=\"/users/Draeieg/hovercard\" data-octo-click=\"hovercard-link-click\" data-octo-dimensions=\"link_type:self\" href=\"https://github.com/Draeieg\">@Draeieg</a> could set them in the netlify dashboard for testing purposes</p>\r\n<p dir=\"auto\">What should be done:</p>\r\n<ol dir=\"auto\">\r\n<li>Read <code class=\"notranslate\">DEFAULT_TIME_RANGE_FOR_MAX_ISSUE</code> and <code class=\"notranslate\">DEFAULT_TIME_RANGE_FOR_MAX_ISSUE_ENABLED</code> from <code class=\"notranslate\">process.env</code></li>\r\n<li>By default set <code class=\"notranslate\">DEFAULT_TIME_RANGE_FOR_MAX_ISSUE</code> to <code class=\"notranslate\">24</code> (if env variable is empty)</li>\r\n<li>By default set <code class=\"notranslate\">DEFAULT_TIME_RANGE_FOR_MAX_ISSUE_ENABLED</code> to <code class=\"notranslate\">true</code> (if env variable is empty)</li>\r\n</ol>\r\n```",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/619#issuecomment-1694384471",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 7.336,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 36,
+            "wordValue": 0.1,
+            "result": 2.07
+          },
+          "readability": {
+            "fleschKincaid": 48.95500000000001,
+            "syllables": 62,
+            "sentences": 3,
+            "score": 0.8895500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1694449318,
+        "content": "I think its okay, but we must scrub the links in the attributes. Only count `href` attribute, I guess.\r\n---\r\n`DEFAULT_TIME_RANGE_FOR_MAX_ISSUE_ENABLED` this should be different than \r\n```\r\nDEFAULT_TIME_RANGE_FOR_MAX_ISSUE_ENABLED\r\n```\r\nWhere the second one should be like $5 a pop. The first one should be like $1\r\n---\r\nI believe that the first one is `<code>` and second one is `<pre><code>` not sure what mdast will be able to help us with here.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/619#issuecomment-1694449318",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 9.856,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "hr": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 63,
+            "wordValue": 0.1,
+            "result": 2.55
+          },
+          "readability": {
+            "fleschKincaid": 90.13446428571429,
+            "syllables": 75,
+            "sentences": 4,
+            "score": 0.6986553571428571
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1694496622,
+        "content": "- Something for you to inspect: https://github.com/ubiquity/ubiquibot/issues/673",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/619#issuecomment-1694496622",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.608,
+          "formatting": {
+            "content": {
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 38.595,
+            "syllables": 23,
+            "sentences": 2,
+            "score": 0.78595
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/ubiquibot/pull/639"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 21.788 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>4</td><td>21.788</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/619#issuecomment-1694383107\" target=\"_blank\" rel=\"noopener\">I just dug this up from the logs (id: 650)Why did this Task Cr&hellip;</a></h6></td><td><details><summary>2.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;  result: 0&#13;regex:&#13;  wordCount: 34&#13;  wordValue: 0.1&#13;  result: 2.01&#13;</pre></details></td><td>0.3</td><td>4</td><td>2.988</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/619#issuecomment-1694384471\" target=\"_blank\" rel=\"noopener\">I also see a suspicious log related to parsing the original spec&hellip;</a></h6></td><td><details><summary>2.07</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 36&#13;  wordValue: 0.1&#13;  result: 2.07&#13;</pre></details></td><td>0.7</td><td>4</td><td>7.336</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/619#issuecomment-1694449318\" target=\"_blank\" rel=\"noopener\">I think its okay, but we must scrub the links in the attributes.&hellip;</a></h6></td><td><details><summary>2.55</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    hr:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 63&#13;  wordValue: 0.1&#13;  result: 2.55&#13;</pre></details></td><td>0.8</td><td>4</td><td>9.856</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/619#issuecomment-1694496622\" target=\"_blank\" rel=\"noopener\">- Something for you to inspect: https://github.com/ubiquity/ubiq&hellip;</a></h6></td><td><details><summary>1.63</summary><pre>content:&#13;  content:&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.1&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.2</td><td>4</td><td>1.608</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 44.624,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 1694394950,
+        "content": "Hmm I guess we can skip links that point to github.com?\r\nAlso github treats `DEFAULT_TIME_RANGE_FOR_MAX_ISSUE_ENABLED` as code even though it's not actual code. Maybe we can limit that only code tags with X minimum characters count as code?",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/619#issuecomment-1694394950",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 7.308,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 39,
+            "wordValue": 0.1,
+            "result": 2.15
+          },
+          "readability": {
+            "fleschKincaid": 88.47721153846153,
+            "syllables": 50,
+            "sentences": 4,
+            "score": 0.7152278846153847
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1694495896,
+        "content": "It only counts tags, attributes don't matter.\r\nWe don't use mdast anymore though. I can make it to stop recursing the HTML DOM when it hits `<pre>` this way we avoid counting additional `<code>` tag and it won't count the text inside the code block.",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/619#issuecomment-1694495896",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 9.152,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 46,
+            "wordValue": 0.1,
+            "result": 2.31
+          },
+          "readability": {
+            "fleschKincaid": 80.92384057971016,
+            "syllables": 60,
+            "sentences": 3,
+            "score": 0.7907615942028984
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1585816935,
+        "content": "Because we are reading from env I think it's better to put these variables in the [loadConfig](https://github.com/ubiquity/ubiquibot/blob/f6e99dfb406559a044969bb82aff478daae172cd/src/bindings/config.ts#L75C6-L75C6) but leave the default values in this file",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/639#pullrequestreview-1585816935",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 12.708,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 63.306538461538494,
+            "syllables": 36,
+            "sentences": 1,
+            "score": 0.966934615384615
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1302586973,
+        "content": "the variable names should be in snakeCase and I think it's better to put them in unassign object because it's related to unassigning",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/639#discussion_r1302586973",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -84,6 +91,14 @@ export const loadConfig = async (context: Context): Promise<BotConfig> => {\n     wallet: {\n       registerWalletWithVerification: registerWalletWithVerification,\n     },\n+    time: {\n+      DEFAULT_TIME_RANGE_FOR_MAX_ISSUE: process.env.DEFAULT_TIME_RANGE_FOR_MAX_ISSUE",
+        "score": {
+          "reward": 6.944,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 52.86800000000002,
+            "syllables": 38,
+            "sentences": 1,
+            "score": 0.9286800000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1302587605,
+        "content": "this is not how you load the config, you should use `getBotConfig`",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/639#discussion_r1302587605",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -631,8 +632,10 @@ export const getCommitsOnPullRequest = async (pullNumber: number) => {\n };\n \n export const getAvailableOpenedPullRequests = async (username: string) => {\n-  if (!DEFAULT_TIME_RANGE_FOR_MAX_ISSUE_ENABLED) return [];\n   const context = getBotContext();\n+  const botConfig = await loadConfig(context);",
+        "score": {
+          "reward": 4.788,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 103.37909090909093,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 1305447817,
+        "content": "```suggestion\r\n  timeRangeForMaxIssueEnabled: Type.Boolean(),\r\n```",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/639#discussion_r1305447817",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -47,6 +47,8 @@ export const PayoutConfigSchema = Type.Object({\n export const UnassignConfigSchema = Type.Object({\n   followUpTime: Type.Number(),\n   disqualifyTime: Type.Number(),\n+  defaultTimeRangeForMaxIssue: Type.Number(),\n+  defaultTimeRangeForMaxIssueEnabled: Type.Boolean(),",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1305447965,
+        "content": "```suggestion\r\n  timeRangeForMaxIssue: Type.Number(),\r\n```",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/639#discussion_r1305447965",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -47,6 +47,8 @@ export const PayoutConfigSchema = Type.Object({\n export const UnassignConfigSchema = Type.Object({\n   followUpTime: Type.Number(),\n   disqualifyTime: Type.Number(),\n+  defaultTimeRangeForMaxIssue: Type.Number(),",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1685996298,
+        "content": "yes but this is internal bot config, not like ubiquibot-config.yaml",
+        "url": "https://github.com/ubiquity/ubiquibot/pull/639#issuecomment-1685996298",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.724,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 4,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 66.79500000000002,
+            "syllables": 19,
+            "sentences": 2,
+            "score": 0.9320499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [],
+        "url": "https://github.com/ubiquity/ubiquibot/pull/639"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 44.624 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>2</td><td>16.46</td></tr><tr><td>Review</td><td>Comment</td><td>6</td><td>28.164</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/619#issuecomment-1694394950\" target=\"_blank\" rel=\"noopener\">Hmm I guess we can skip links that point to github.com?Also gi&hellip;</a></h6></td><td><details><summary>2.15</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 39&#13;  wordValue: 0.1&#13;  result: 2.15&#13;</pre></details></td><td>0.7</td><td>4</td><td>7.308</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/619#issuecomment-1694495896\" target=\"_blank\" rel=\"noopener\">It only counts tags, attributes don't matter.We don't use mdas&hellip;</a></h6></td><td><details><summary>2.31</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 46&#13;  wordValue: 0.1&#13;  result: 2.31&#13;</pre></details></td><td>0.8</td><td>4</td><td>9.152</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/639#pullrequestreview-1585816935\" target=\"_blank\" rel=\"noopener\">Because we are reading from env I think it's better to put these&hellip;</a></h6></td><td><details><summary>2.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.9</td><td>4</td><td>12.708</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/639#discussion_r1302586973\" target=\"_blank\" rel=\"noopener\">the variable names should be in snakeCase and I think it's bette&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.8</td><td>4</td><td>6.944</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/639#discussion_r1302587605\" target=\"_blank\" rel=\"noopener\">this is not how you load the config, you should use &#96;getBotC&hellip;</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.95</td><td>4</td><td>4.788</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/639#discussion_r1305447817\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestiontimeRangeForMaxIssueEnabled: Type.B&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.85</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/639#discussion_r1305447965\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestiontimeRangeForMaxIssue: Type.Number()&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.85</td><td>4</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/pull/639#issuecomment-1685996298\" target=\"_blank\" rel=\"noopener\">yes but this is internal bot config, not like ubiquibot-config.y&hellip;</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.7</td><td>4</td><td>3.724</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 5.32,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 1851071557,
+        "content": "Original [discussion](https://github.com/ubiquibot/ubiquibot-config/pull/2#discussion_r1293969395)\r\nFor QA purposes we need to read [DEFAULT_TIME_RANGE_FOR_MAX_ISSUE](https://github.com/ubiquity/ubiquibot/blob/d56a523c81829e17513f7da1f1ccb1bbdca8b180/src/configs/shared.ts#L6) and [DEFAULT_TIME_RANGE_FOR_MAX_ISSUE_ENABLED](https://github.com/ubiquity/ubiquibot/blob/d56a523c81829e17513f7da1f1ccb1bbdca8b180/src/configs/shared.ts#L7C14-L7C54) from env variables so that @Draeieg could set them in the netlify dashboard for testing purposes\r\nWhat should be done:\r\n1. Read `DEFAULT_TIME_RANGE_FOR_MAX_ISSUE` and `DEFAULT_TIME_RANGE_FOR_MAX_ISSUE_ENABLED` from `process.env`\r\n2. By default set `DEFAULT_TIME_RANGE_FOR_MAX_ISSUE` to `24` (if env variable is empty)\r\n3. By default set `DEFAULT_TIME_RANGE_FOR_MAX_ISSUE_ENABLED` to `true` (if env variable is empty)",
+        "url": "https://github.com/ubiquity/ubiquibot/issues/619",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 5.32,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 53,
+            "wordValue": 0.1,
+            "result": 2.43
+          },
+          "readability": {
+            "fleschKincaid": 1.398490566037765,
+            "syllables": 95,
+            "sentences": 1,
+            "score": 0.41398490566037766
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/ubiquibot/pull/639"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 5.32 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>5.32</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquibot/issues/619\" target=\"_blank\" rel=\"noopener\">Original [discussion](https://github.com/ubiquibot/ubiquibot-con&hellip;</a></h6></td><td><details><summary>4.73</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.3&#13;regex:&#13;  wordCount: 53&#13;  wordValue: 0.1&#13;  result: 2.43&#13;</pre></details></td><td>1</td><td>1</td><td>5.32</td></tr></tbody></table></details>"
+  }
+}

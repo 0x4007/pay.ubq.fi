@@ -1,0 +1,1286 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 36.01,
+    "task": {
+      "reward": 25,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 1997052180,
+        "content": "Looking at the timeline of events, pav opened the issue a couple hours before you merged in my `hide unavailable bounties` pr so I don't think that was the cause of the original issue although the back and forth seems to be because of the unavailable label check (just going by the logs) I think. \r\nIf those labels are unused/planned for removal then I thought that removing the following _may_ resolve this ping/pong effect\r\n```ts\r\n (!isDevpoolUnavailableLabel && projectIssue.assignee?.login) ||\r\n isDevpoolUnavailableLabel && !projectIssue.assignee?.login) ||\r\n```\r\n- https://github.com/ubiquity/devpool-directory-bounties/issues/21",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/22#issuecomment-1997052180",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.071,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 74,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 54.40152610441767,
+            "syllables": 122,
+            "sentences": 3,
+            "score": 0.9440152610441767
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1997411713,
+        "content": "- First run (devpool only had 19): 19 issues only those that are available\r\nJust as that finished the devpool ran a workflow and went from 19 > 28\r\n- Second run (devpool has 28): 19 > 25\r\n- Third run (devpool has 28): 25 > 19\r\n- Fourth run (devpool has 28): 19 > 25\r\n- Fifth run (devpool has 28): 25 > 19\r\n```ts\r\nexport const DEVPOOL_OWNER_NAME = \"keyrxng\";\r\nexport const DEVPOOL_REPO_NAME = \"devpool-directory\";\r\n```\r\nI'll be honest it's a lil hard to wrap my head around from my perspective as a forked instance if this is an effective fix or not because it's still pulling unavailable issues (3 less than the actual devpool)\r\nI don't understand this check as the labels won't match. \r\n```ts\r\ndevpoolIssueLabelsStringified !== projectIssueLabelsStringified\r\n```\r\ndevpool directory labels for `make staking stable`\r\n[id: I_kwDOItLr9s6BECtT](https://github.com/ubiquity/devpool-directory/labels/id%3A%20I_kwDOItLr9s6BECtT)\r\n[Partner: pavlovcik/uad.ubq.fi](https://github.com/ubiquity/devpool-directory/labels/Partner%3A%20pavlovcik%2Fuad.ubq.fi)\r\n[Pricing: 500 USD](https://github.com/ubiquity/devpool-directory/labels/Pricing%3A%20500%20USD)\r\n[Priority: 5 (Emergency)](https://github.com/ubiquity/devpool-directory/labels/Priority%3A%205%20%28Emergency%29)\r\n[Time: <1 Day](https://github.com/ubiquity/devpool-directory/labels/Time%3A%20%3C1%20Day)\r\n[Unavailable](https://github.com/ubiquity/devpool-directory/labels/Unavailable)\r\nthe issue labels\r\n[Price: 500 USD](https://github.com/pavlovcik/uad.ubq.fi/labels/Price%3A%20500%20USD)\r\n[Priority: 5 (Emergency)](https://github.com/pavlovcik/uad.ubq.fi/labels/Priority%3A%205%20%28Emergency%29)\r\n[Time: <1 Day](https://github.com/pavlovcik/uad.ubq.fi/labels/Time%3A%20%3C1%20Day)\r\n<hr/>\r\nThe issue gets closed on first pass because I'm assigned it, so devpool closes it.\r\nSecond pass, the labels don't match because devpool has unavailable, id and partner labels so the check fails and the issue gets updated with ``state: projectIssue.state as \"open\" | \"closed\",``. In the context of the issue it is still open although it is assigned so it should remain closed.\r\nI'm unsure but thought that removing ``devpoolIssueLabelsStringified !== projectIssueLabelsStringified`` was not the way to go, so seeking input @rndquu \r\nSo this doesn't work (went from 19 > 42)\r\n```ts\r\n state: projectIssue.assignee && projectIssue.state === \"open\" ? \"closed\" : \"open\" \r\n```",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/22#issuecomment-1997411713",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 3.53,
+          "formatting": {
+            "content": {
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 23
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 9
+              }
+            },
+            "result": 9.5
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 229,
+            "wordValue": 0.1,
+            "result": 1.45
+          },
+          "readability": {
+            "fleschKincaid": 56.51995633187774,
+            "syllables": 317,
+            "sentences": 7,
+            "score": 0.9651995633187773
+          },
+          "multiplier": 0.25,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1774142193,
+        "content": "Resolves https://github.com/ubiquity/devpool-directory-bounties/issues/22\r\n- refactored the logic a bit\r\n- only two scenarios should reopen a closed devpool bounty\r\nQA\r\n- https://github.com/Keyrxng/devpool-directory/actions/runs/8296972473/job/22707048890 (most recent)\r\n- https://github.com/Keyrxng/devpool-directory/actions/runs/8296652112 5x runs\r\n- my devpool stays at 21 tasks consistently\r\n- I'm just waiting for the devpool workflow to run again and spike up for one last validation",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 6.409,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 8
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 6
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 3
+              }
+            },
+            "result": 3.6
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 45,
+            "wordValue": 0.1,
+            "result": 2.29
+          },
+          "readability": {
+            "fleschKincaid": 53.15479729729731,
+            "syllables": 118,
+            "sentences": 4,
+            "score": 0.9315479729729731
+          },
+          "multiplier": 1,
+          "relevance": 0.85
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 36.01 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>25</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>4.601</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>6.409</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/22#issuecomment-1997052180\" target=\"_blank\" rel=\"noopener\">Looking at the timeline of events, pav opened the issue a couple&hellip;</a></h6></td><td><details><summary>3.71</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.1&#13;regex:&#13;  wordCount: 74&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.071</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/22#issuecomment-1997411713\" target=\"_blank\" rel=\"noopener\">- First run (devpool only had 19): 19 issues only those that are&hellip;</a></h6></td><td><details><summary>10.95</summary><pre>content:&#13;  content:&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;    p:&#13;      score: 0&#13;      elementCount: 23&#13;    a:&#13;      score: 1&#13;      elementCount: 9&#13;  result: 9.5&#13;regex:&#13;  wordCount: 229&#13;  wordValue: 0.1&#13;  result: 1.45&#13;</pre></details></td><td>1</td><td>1</td><td>3.53</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145\" target=\"_blank\" rel=\"noopener\">Resolves https://github.com/ubiquity/devpool-directory-bounties/&hellip;</a></h6></td><td><details><summary>5.89</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 8&#13;    ul:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 6&#13;    a:&#13;      score: 1&#13;      elementCount: 3&#13;  result: 3.6&#13;regex:&#13;  wordCount: 45&#13;  wordValue: 0.1&#13;  result: 2.29&#13;</pre></details></td><td>0.85</td><td>1</td><td>6.409</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 19.107,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1996796101,
+        "content": "Didn't @keyrxng identify the source of the issue being his pull?",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/22#issuecomment-1996796101",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.896,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 81.85500000000002,
+            "syllables": 16,
+            "sentences": 1,
+            "score": 0.7814499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1997837798,
+        "content": "An easy way to identify the root problem is @rndquu just checkout earlier pull merges until it starts working again, starting with @Keyrxng's \nOr another idea is that we can have @EresDev jump in on this if you need to focus on the ubiquity dollar redeploy.",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/22#issuecomment-1997837798",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 2.272,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 47,
+            "wordValue": 0.1,
+            "result": 2.33
+          },
+          "readability": {
+            "fleschKincaid": 33.13000000000001,
+            "syllables": 70,
+            "sentences": 1,
+            "score": 0.7313000000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2020194675,
+        "content": "https://github.com/ubiquity/devpool-directory/pull/1155",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/22#issuecomment-2020194675",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 1.098,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 33.57500000000002,
+            "syllables": 16,
+            "sentences": 2,
+            "score": 0.7357500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1526552017,
+        "content": "That doesn't seem right 0 for assigned.",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1526552017",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,14 +1,14 @@\n {\n   \"rewards\": {\n-    \"notAssigned\": 2875,\n-    \"assigned\": 4574,\n-    \"completed\": 65819,\n-    \"total\": 73268\n+    \"notAssigned\": 2850,\n+    \"assigned\": 0,",
+        "score": {
+          "reward": 0.792,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 103.54,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1526552532,
+        "content": "This seems like too many assigned! It's a separate issue!",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1526552532",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,14 +1,14 @@\n {\n   \"rewards\": {\n-    \"notAssigned\": 2875,\n-    \"assigned\": 4574,\n-    \"completed\": 65819,\n-    \"total\": 73268\n+    \"notAssigned\": 2850,\n+    \"assigned\": 0,\n+    \"completed\": 12035,\n+    \"total\": 14885\n   },\n   \"tasks\": {\n-    \"notAssigned\": 313,\n-    \"assigned\": 284,\n-    \"completed\": 345,\n-    \"total\": 597\n+    \"notAssigned\": 36,\n+    \"assigned\": 32,",
+        "score": {
+          "reward": 0.847,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 78.19795454545455,
+            "syllables": 16,
+            "sentences": 2,
+            "score": 0.8180204545454545
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1526578317,
+        "content": "Interesting stats. Big numbers are always good for marketing.",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1526578317",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,14 +1,14 @@\n {\n   \"rewards\": {\n-    \"notAssigned\": 2875,\n-    \"assigned\": 4574,\n-    \"completed\": 65819,\n-    \"total\": 73268\n+    \"notAssigned\": 2850,\n+    \"assigned\": 0,\n+    \"completed\": 12035,\n+    \"total\": 14885\n   },\n   \"tasks\": {\n-    \"notAssigned\": 313,\n-    \"assigned\": 284,\n-    \"completed\": 345,\n-    \"total\": 597\n+    \"notAssigned\": 36,\n+    \"assigned\": 32,",
+        "score": {
+          "reward": 0.107,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 51.867500000000035,
+            "syllables": 16,
+            "sentences": 2,
+            "score": 0.9186750000000004
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1527137024,
+        "content": "Big funding",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1527137024",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,14 +1,14 @@\n {\n   \"rewards\": {\n-    \"notAssigned\": 2875,\n-    \"assigned\": 4574,\n-    \"completed\": 65819,\n-    \"total\": 73268\n+    \"notAssigned\": 2850,\n+    \"assigned\": 0,\n+    \"completed\": 12035,\n+    \"total\": 14885\n   },\n   \"tasks\": {\n-    \"notAssigned\": 313,\n-    \"assigned\": 284,\n-    \"completed\": 345,\n-    \"total\": 597\n+    \"notAssigned\": 36,\n+    \"assigned\": 32,",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 77.90500000000002,
+            "syllables": 3,
+            "sentences": 1,
+            "score": 0.8209499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 1535377416,
+        "content": "Why are you combining opt out if those are explicitly meant to be excluded",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1535377416",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -16,26 +16,26 @@ describe(\"Devpool Updates\", () => {\n   beforeAll(async () => {\n     // @ts-expect-error main() is only exported for testing\n     main = await (await import(\"../index\")).main;\n-    // silence stderr since we expect errors to be logged\n-    jest.spyOn(console, \"warn\").mockImplementation(jest.fn());\n   });\n \n   beforeEach(() => {\n     drop(db);\n \n     // Add all the default repos of the organization\n-    for (let i = 0; i < opt.out.length; ++i) {\n-      const repoName = opt.out[i].split(\"/\")[1];\n-      db.repo.create({\n-        id: i + 1,\n-        owner: DEVPOOL_OWNER_NAME,\n-        name: repoName,\n-        html_url: `https://github.com/${DEVPOOL_OWNER_NAME}/${repoName}`,\n-      });\n+    const repos = opt.in.concat(opt.out);",
+        "score": {
+          "reward": 1.323,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 71.76785714285715,
+            "syllables": 20,
+            "sentences": 1,
+            "score": 0.8823214285714285
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1536644672,
+        "content": "@EresDev rfc",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1536644672",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -16,26 +16,26 @@ describe(\"Devpool Updates\", () => {\n   beforeAll(async () => {\n     // @ts-expect-error main() is only exported for testing\n     main = await (await import(\"../index\")).main;\n-    // silence stderr since we expect errors to be logged\n-    jest.spyOn(console, \"warn\").mockImplementation(jest.fn());\n   });\n \n   beforeEach(() => {\n     drop(db);\n \n     // Add all the default repos of the organization\n-    for (let i = 0; i < opt.out.length; ++i) {\n-      const repoName = opt.out[i].split(\"/\")[1];\n-      db.repo.create({\n-        id: i + 1,\n-        owner: DEVPOOL_OWNER_NAME,\n-        name: repoName,\n-        html_url: `https://github.com/${DEVPOOL_OWNER_NAME}/${repoName}`,\n-      });\n+    const repos = opt.in.concat(opt.out);",
+        "score": {
+          "reward": 0.062,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 35.60500000000002,
+            "syllables": 4,
+            "sentences": 1,
+            "score": 0.7560500000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1536985030,
+        "content": "No it definitely needs to be able to automatically include new repositories for privileged organizations like @ubiquity. \nThis means that we must support org only syntax.",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1536985030",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -16,26 +16,26 @@ describe(\"Devpool Updates\", () => {\n   beforeAll(async () => {\n     // @ts-expect-error main() is only exported for testing\n     main = await (await import(\"../index\")).main;\n-    // silence stderr since we expect errors to be logged\n-    jest.spyOn(console, \"warn\").mockImplementation(jest.fn());\n   });\n \n   beforeEach(() => {\n     drop(db);\n \n     // Add all the default repos of the organization\n-    for (let i = 0; i < opt.out.length; ++i) {\n-      const repoName = opt.out[i].split(\"/\")[1];\n-      db.repo.create({\n-        id: i + 1,\n-        owner: DEVPOOL_OWNER_NAME,\n-        name: repoName,\n-        html_url: `https://github.com/${DEVPOOL_OWNER_NAME}/${repoName}`,\n-      });\n+    const repos = opt.in.concat(opt.out);",
+        "score": {
+          "reward": 1.442,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 21.18615384615387,
+            "syllables": 53,
+            "sentences": 2,
+            "score": 0.6118615384615387
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1537279235,
+        "content": "Unless you're very partial towards using email, I highly recommend you use github.com/notifications ! This is because you only need to \"pull\" (instead of push) the latest notification in each thread. Emails give you multiple \"push\" notifications for every activity in every thread. So you have a significant higher amount of clutter to sift through. \r\nI don't know maybe somebody else can chime in.",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1537279235",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -16,26 +16,26 @@ describe(\"Devpool Updates\", () => {\n   beforeAll(async () => {\n     // @ts-expect-error main() is only exported for testing\n     main = await (await import(\"../index\")).main;\n-    // silence stderr since we expect errors to be logged\n-    jest.spyOn(console, \"warn\").mockImplementation(jest.fn());\n   });\n \n   beforeEach(() => {\n     drop(db);\n \n     // Add all the default repos of the organization\n-    for (let i = 0; i < opt.out.length; ++i) {\n-      const repoName = opt.out[i].split(\"/\")[1];\n-      db.repo.create({\n-        id: i + 1,\n-        owner: DEVPOOL_OWNER_NAME,\n-        name: repoName,\n-        html_url: `https://github.com/${DEVPOOL_OWNER_NAME}/${repoName}`,\n-      });\n+    const repos = opt.in.concat(opt.out);",
+        "score": {
+          "reward": 0.331,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 67,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 54.079937810945296,
+            "syllables": 112,
+            "sentences": 6,
+            "score": 0.9407993781094529
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 2009505716,
+        "content": "I think the test just might be poorly written. It seems to be checking that price is a specific value etc when really it should be a loose match (every issue has different labels!) @FernandVEYRIER",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#issuecomment-2009505716",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.064,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 71.71904761904764,
+            "syllables": 51,
+            "sentences": 3,
+            "score": 0.8828095238095236
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2011246917,
+        "content": "I'm just going off of rndquu comment\nI thought this throws an error in the test \n```diff\n-     \"body\": \"body\",\n+     \"body\": \"https://github.com/ubiquity/test-repo/issues/1\",\n```\nBut yes I see there was a commit after my comment that passes checks.",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#issuecomment-2011246917",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.44,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 77.12483870967742,
+            "syllables": 36,
+            "sentences": 1,
+            "score": 0.8287516129032259
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2014669338,
+        "content": "`total-rewards.json` probably will also be a headache for future merge conflicts- we should add to .gitignore?",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#issuecomment-2014669338",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.078,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 15,
+            "wordValue": 0.1,
+            "result": 1.21
+          },
+          "readability": {
+            "fleschKincaid": 69.5025,
+            "syllables": 23,
+            "sentences": 2,
+            "score": 0.904975
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2019908301,
+        "content": "Perhaps we should merge this if everything checks out?",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#issuecomment-2019908301",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.315,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 75.50000000000003,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.8449999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1939458671,
+            "effect": {
+              "addition": 86,
+              "deletion": 76
+            },
+            "reward": 1.62,
+            "priority": 1
+          },
+          {
+            "reviewId": 1954474775,
+            "effect": {
+              "addition": 182,
+              "deletion": 160
+            },
+            "reward": 3.42,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 19.107 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>5.04</td></tr><tr><td>Issue</td><td>Comment</td><td>3</td><td>4.266</td></tr><tr><td>Review</td><td>Comment</td><td>12</td><td>9.801</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/devpool-directory/pull/1145\" target=\"_blank\" rel=\"noopener\">#1145</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+86 -76</td><td>1</td><td>1.62</td></tr><tr><td>+182 -160</td><td>1</td><td>3.42</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/22#issuecomment-1996796101\" target=\"_blank\" rel=\"noopener\">Didn't @keyrxng identify the source of the issue being his pull?</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.896</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/22#issuecomment-1997837798\" target=\"_blank\" rel=\"noopener\">An easy way to identify the root problem is @rndquu just checkou&hellip;</a></h6></td><td><details><summary>2.33</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 47&#13;  wordValue: 0.1&#13;  result: 2.33&#13;</pre></details></td><td>0.8</td><td>1</td><td>2.272</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/22#issuecomment-2020194675\" target=\"_blank\" rel=\"noopener\">https://github.com/ubiquity/devpool-directory/pull/1155</a></h6></td><td><details><summary>1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.098</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1526552017\" target=\"_blank\" rel=\"noopener\">That doesn't seem right 0 for assigned.</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.792</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1526552532\" target=\"_blank\" rel=\"noopener\">This seems like too many assigned! It's a separate issue!</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.847</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1526578317\" target=\"_blank\" rel=\"noopener\">Interesting stats. Big numbers are always good for marketing.</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.107</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1527137024\" target=\"_blank\" rel=\"noopener\">Big funding</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0</td><td>1</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1535377416\" target=\"_blank\" rel=\"noopener\">Why are you combining opt out if those are explicitly meant to b&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.323</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1536644672\" target=\"_blank\" rel=\"noopener\">@EresDev rfc</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.062</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1536985030\" target=\"_blank\" rel=\"noopener\">No it definitely needs to be able to automatically include new r&hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.442</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1537279235\" target=\"_blank\" rel=\"noopener\">Unless you're very partial towards using email, I highly recomme&hellip;</a></h6></td><td><details><summary>2.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 67&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.331</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#issuecomment-2009505716\" target=\"_blank\" rel=\"noopener\">I think the test just might be poorly written. It seems to be ch&hellip;</a></h6></td><td><details><summary>2.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>0.8</td><td>1</td><td>2.064</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#issuecomment-2011246917\" target=\"_blank\" rel=\"noopener\">I'm just going off of rndquu commentI thought this throws an er&hellip;</a></h6></td><td><details><summary>1.92</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.6</td><td>1</td><td>1.44</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#issuecomment-2014669338\" target=\"_blank\" rel=\"noopener\">&#96;total-rewards.json&#96; probably will also be a headache fo&hellip;</a></h6></td><td><details><summary>1.21</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 15&#13;  wordValue: 0.1&#13;  result: 1.21&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.078</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#issuecomment-2019908301\" target=\"_blank\" rel=\"noopener\">Perhaps we should merge this if everything checks out?</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.315</td></tr></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 25,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 1996802692,
+        "content": "@Keyrxng help",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/22#issuecomment-1996802692",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.165,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": 120.20500000000001,
+            "syllables": 2,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1999099647,
+        "content": "@Keyrxng I don't know the root cause, hence the issue was created. From a collaborator it is expected to spend 1 hour of time to debug [this](https://github.com/ubiquity/devpool-directory/issues/984#event-12112923776) issue.",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/22#issuecomment-1999099647",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 3.15,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 29,
+            "wordValue": 0.1,
+            "result": 1.85
+          },
+          "readability": {
+            "fleschKincaid": 84.17956896551725,
+            "syllables": 37,
+            "sentences": 2,
+            "score": 0.7582043103448275
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 2020215552,
+        "content": "@Keyrxng help, it seems that https://github.com/ubiquity/devpool-directory/pull/1145 also syncs issues without price labels while the expected behaviour is to skip such issues from syncing\r\nhttps://t.me/UbiquityDAO/31819/32077",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/22#issuecomment-2020215552",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 3.22,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 56.005000000000024,
+            "syllables": 59,
+            "sentences": 3,
+            "score": 0.9600500000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2185551640,
+        "content": "Check this [issue](https://github.com/ubiquity/devpool-directory/issues/984#event-12112923776). You may see that it is constantly opened and closed on every [sync workflow](https://github.com/ubiquity/devpool-directory/blob/development/.github/workflows/sync-issues.yml) run.\r\nWhat should be done:\r\n- find the root cause of why the issue is reopened\r\n- fix the bug",
+        "url": "https://github.com/ubiquity/devpool-directory-tasks/issues/22",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 5.15,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 35,
+            "wordValue": 0.1,
+            "result": 2.04
+          },
+          "readability": {
+            "fleschKincaid": 88.63904761904763,
+            "syllables": 44,
+            "sentences": 3,
+            "score": 0.7136095238095237
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1946237192,
+        "content": "Testing workflow is [failing](https://github.com/ubiquity/devpool-directory/actions/runs/8343918622/job/22835140783?pr=1145)",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#pullrequestreview-1946237192",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.74,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 54.72500000000002,
+            "syllables": 7,
+            "sentences": 1,
+            "score": 0.9472500000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1957864584,
+        "content": "Somehow the code in this PR duplicates issues with the same id although the expected behaviour is to have exactly 1 issue:\r\n<img width=\"1512\" alt=\"Screenshot 2024-03-25 at 17 11 46\" src=\"https://github.com/ubiquity/devpool-directory/assets/119500907/195fc425-127c-4507-9dda-da394db4ed4e\">\r\nPls fix",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#pullrequestreview-1957864584",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.6,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 37,
+            "wordValue": 0.1,
+            "result": 2.1
+          },
+          "readability": {
+            "fleschKincaid": 56.252000000000024,
+            "syllables": 74,
+            "sentences": 2,
+            "score": 0.9625200000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1959613360,
+        "content": "Works fine, @Keyrxng thank you",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#pullrequestreview-1959613360",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.138,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 117.16000000000003,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 2009134166,
+        "content": "Rerun it, the [error](https://github.com/ubiquity/devpool-directory/actions/runs/8343918622/job/22874312148) persists:\r\n```\r\n    @@ -22,24 +22,24 @@\r\n            \"subscriptions_url\": \"\",\r\n            \"type\": \"\",\r\n            \"url\": \"\",\r\n          },\r\n          \"author_association\": \"NONE\",\r\n    -     \"body\": \"body\",\r\n    +     \"body\": \"https://github.com/ubiquity/test-repo/issues/1\",\r\n          \"closed_at\": null,\r\n          \"comments\": 0,\r\n          \"comments_url\": \"\",\r\n          \"created_at\": \"\",\r\n          \"events_url\": \"\",\r\n          \"html_url\": \"https://github.com/ubiquity/devpool-directory/issues/1\",\r\n          \"id\": 1,\r\n          \"labels\": Array [\r\n            Object {\r\n    -         \"name\": \"Pricing: 200 USD\",\r\n    +         \"name\": \"Pricing: not set\",\r\n            },\r\n            Object {\r\n    -         \"name\": \"Time: 1h\",\r\n    +         \"name\": \"Partner: ubiquity/test-repo\",\r\n            },\r\n            Object {\r\n              \"name\": \"id: 1\",\r\n            },\r\n          ],\r\n```",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#issuecomment-2009134166",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.568,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 66.40000000000003,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.9359999999999996
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1942113119,
+            "effect": {
+              "addition": 86,
+              "deletion": 76
+            },
+            "reward": 1.62,
+            "priority": 1
+          },
+          {
+            "reviewId": 1946237192,
+            "effect": {
+              "addition": 8,
+              "deletion": 8
+            },
+            "reward": 0.16,
+            "priority": 1
+          },
+          {
+            "reviewId": 1957864584,
+            "effect": {
+              "addition": 190,
+              "deletion": 168
+            },
+            "reward": 3.58,
+            "priority": 1
+          },
+          {
+            "reviewId": 1959613360,
+            "effect": {
+              "addition": 217,
+              "deletion": 151
+            },
+            "reward": 3.68,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 25 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>4</td><td>9.04</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>5.15</td></tr><tr><td>Issue</td><td>Comment</td><td>3</td><td>6.535</td></tr><tr><td>Review</td><td>Comment</td><td>4</td><td>6.046</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/devpool-directory/pull/1145\" target=\"_blank\" rel=\"noopener\">#1145</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+86 -76</td><td>1</td><td>1.62</td></tr><tr><td>+8 -8</td><td>1</td><td>0.16</td></tr><tr><td>+190 -168</td><td>1</td><td>3.58</td></tr><tr><td>+217 -151</td><td>1</td><td>3.68</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/22\" target=\"_blank\" rel=\"noopener\">Check this [issue](https://github.com/ubiquity/devpool-directory&hellip;</a></h6></td><td><details><summary>4.24</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2.2&#13;regex:&#13;  wordCount: 35&#13;  wordValue: 0.1&#13;  result: 2.04&#13;</pre></details></td><td>1</td><td>1</td><td>5.15</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/22#issuecomment-1996802692\" target=\"_blank\" rel=\"noopener\">@Keyrxng help</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.165</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/22#issuecomment-1999099647\" target=\"_blank\" rel=\"noopener\">@Keyrxng I don't know the root cause, hence the issue was create&hellip;</a></h6></td><td><details><summary>2.85</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 29&#13;  wordValue: 0.1&#13;  result: 1.85&#13;</pre></details></td><td>0.9</td><td>1</td><td>3.15</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory-tasks/issues/22#issuecomment-2020215552\" target=\"_blank\" rel=\"noopener\">@Keyrxng help, it seems that https://github.com/ubiquity/devpool&hellip;</a></h6></td><td><details><summary>3.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.7</td><td>1</td><td>3.22</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#pullrequestreview-1946237192\" target=\"_blank\" rel=\"noopener\">Testing workflow is [failing](https://github.com/ubiquity/devpoo&hellip;</a></h6></td><td><details><summary>1.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.74</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#pullrequestreview-1957864584\" target=\"_blank\" rel=\"noopener\">Somehow the code in this PR duplicates issues with the same id a&hellip;</a></h6></td><td><details><summary>3.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 37&#13;  wordValue: 0.1&#13;  result: 2.1&#13;</pre></details></td><td>0.9</td><td>1</td><td>3.6</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#pullrequestreview-1959613360\" target=\"_blank\" rel=\"noopener\">Works fine, @Keyrxng thank you</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.138</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#issuecomment-2009134166\" target=\"_blank\" rel=\"noopener\">Rerun it, the [error](https://github.com/ubiquity/devpool-direct&hellip;</a></h6></td><td><details><summary>1.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.568</td></tr></tbody></table></details>"
+  },
+  "EresDev": {
+    "total": 4.816,
+    "userId": 11886219,
+    "comments": [
+      {
+        "id": 1536861090,
+        "content": "This part had multiple problems and I tried to address some with this fix I didn't want to put more time into this because the work I was doing was unrelated to this. But let's see what is needed now. \r\n- before you use in, and exclude out, this part needs to deal with out/in with a single value. It was treating properly the fully qualified repository name \"GithubAccountName/RepostioryName\", but if it was just \"GithubAccountName\", it treated it as \"RepostioryName\" That is why I had to put a check to only use a fully qualified repository name. This needs to be fixed. https://github.com/ubiquity/devpool-directory/blob/131e16d78d245c1f4bf03e31b6935ad78900d450/tests/main.test.ts#L28\r\n-  after the above fix, use the in, and exclude the out. \r\n- also move the mocks folder out of the root directory into the test folder. mocks are only used by tests so they should live together.",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1536861090",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -16,26 +16,26 @@ describe(\"Devpool Updates\", () => {\n   beforeAll(async () => {\n     // @ts-expect-error main() is only exported for testing\n     main = await (await import(\"../index\")).main;\n-    // silence stderr since we expect errors to be logged\n-    jest.spyOn(console, \"warn\").mockImplementation(jest.fn());\n   });\n \n   beforeEach(() => {\n     drop(db);\n \n     // Add all the default repos of the organization\n-    for (let i = 0; i < opt.out.length; ++i) {\n-      const repoName = opt.out[i].split(\"/\")[1];\n-      db.repo.create({\n-        id: i + 1,\n-        owner: DEVPOOL_OWNER_NAME,\n-        name: repoName,\n-        html_url: `https://github.com/${DEVPOOL_OWNER_NAME}/${repoName}`,\n-      });\n+    const repos = opt.in.concat(opt.out);",
+        "score": {
+          "reward": 1.035,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 3
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1.3
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 141,
+            "wordValue": 0.1,
+            "result": 2.31
+          },
+          "readability": {
+            "fleschKincaid": 70.11980519480521,
+            "syllables": 223,
+            "sentences": 11,
+            "score": 0.8988019480519479
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1536864570,
+        "content": "One suggestion is always to use a full repository name in opt.json \"GithubAccountName/RepostioryName\", and it will make out/in redundant. This will result in lesser & cleaner code, less requests, and clear intent. But it is just a suggestion as this will require redoing a few parts and I was not the part of initial discussion on this. But @pavlovcik has the final say on this.",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1536864570",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -16,26 +16,26 @@ describe(\"Devpool Updates\", () => {\n   beforeAll(async () => {\n     // @ts-expect-error main() is only exported for testing\n     main = await (await import(\"../index\")).main;\n-    // silence stderr since we expect errors to be logged\n-    jest.spyOn(console, \"warn\").mockImplementation(jest.fn());\n   });\n \n   beforeEach(() => {\n     drop(db);\n \n     // Add all the default repos of the organization\n-    for (let i = 0; i < opt.out.length; ++i) {\n-      const repoName = opt.out[i].split(\"/\")[1];\n-      db.repo.create({\n-        id: i + 1,\n-        owner: DEVPOOL_OWNER_NAME,\n-        name: repoName,\n-        html_url: `https://github.com/${DEVPOOL_OWNER_NAME}/${repoName}`,\n-      });\n+    const repos = opt.in.concat(opt.out);",
+        "score": {
+          "reward": 0.581,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 67,
+            "wordValue": 0.1,
+            "result": 2.58
+          },
+          "readability": {
+            "fleschKincaid": 66.9653432835821,
+            "syllables": 100,
+            "sentences": 5,
+            "score": 0.930346567164179
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1956603110,
+            "effect": {
+              "addition": 176,
+              "deletion": 144
+            },
+            "reward": 3.2,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 4.816 XP ]</a>&nbsp;</h3><h6>@EresDev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>3.2</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>1.616</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/devpool-directory/pull/1145\" target=\"_blank\" rel=\"noopener\">#1145</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+176 -144</td><td>1</td><td>3.2</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1536861090\" target=\"_blank\" rel=\"noopener\">This part had multiple problems and I tried to address some with&hellip;</a></h6></td><td><details><summary>3.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 3&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1.3&#13;regex:&#13;  wordCount: 141&#13;  wordValue: 0.1&#13;  result: 2.31&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.035</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1536864570\" target=\"_blank\" rel=\"noopener\">One suggestion is always to use a full repository name in opt.js&hellip;</a></h6></td><td><details><summary>2.58</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 67&#13;  wordValue: 0.1&#13;  result: 2.58&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.581</td></tr></tbody></table></details>"
+  },
+  "gitcoindev": {
+    "total": 4.44,
+    "userId": 88761781,
+    "comments": [
+      {
+        "id": 1537135232,
+        "content": "I have not looked in this PR for quite some time, but receiving a dozen notification emails a day about closing and reopening tasks I feel I will join the reviewers party.\r\nAbout opt in and opt out, I initially implemented quite a simple solution at https://github.com/ubiquity/devpool-directory/pull/982/files that worked correctly at least to extent to the tests coverage at that time. Perhaps this can be refactored but it did seem to work, first by adding repositories, then deleting opt outs from the set. I did not follow up the recent changes, what was the main issue with the previous approach?",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1537135232",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -16,26 +16,26 @@ describe(\"Devpool Updates\", () => {\n   beforeAll(async () => {\n     // @ts-expect-error main() is only exported for testing\n     main = await (await import(\"../index\")).main;\n-    // silence stderr since we expect errors to be logged\n-    jest.spyOn(console, \"warn\").mockImplementation(jest.fn());\n   });\n \n   beforeEach(() => {\n     drop(db);\n \n     // Add all the default repos of the organization\n-    for (let i = 0; i < opt.out.length; ++i) {\n-      const repoName = opt.out[i].split(\"/\")[1];\n-      db.repo.create({\n-        id: i + 1,\n-        owner: DEVPOOL_OWNER_NAME,\n-        name: repoName,\n-        html_url: `https://github.com/${DEVPOOL_OWNER_NAME}/${repoName}`,\n-      });\n+    const repos = opt.in.concat(opt.out);",
+        "score": {
+          "reward": 0.936,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 99,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 58.01100000000001,
+            "syllables": 162,
+            "sentences": 5,
+            "score": 0.9801100000000001
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1537296247,
+        "content": "The email was good enough till recently. Great tip with the notifications, I will check this out asap!",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1537296247",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -16,26 +16,26 @@ describe(\"Devpool Updates\", () => {\n   beforeAll(async () => {\n     // @ts-expect-error main() is only exported for testing\n     main = await (await import(\"../index\")).main;\n-    // silence stderr since we expect errors to be logged\n-    jest.spyOn(console, \"warn\").mockImplementation(jest.fn());\n   });\n \n   beforeEach(() => {\n     drop(db);\n \n     // Add all the default repos of the organization\n-    for (let i = 0; i < opt.out.length; ++i) {\n-      const repoName = opt.out[i].split(\"/\")[1];\n-      db.repo.create({\n-        id: i + 1,\n-        owner: DEVPOOL_OWNER_NAME,\n-        name: repoName,\n-        html_url: `https://github.com/${DEVPOOL_OWNER_NAME}/${repoName}`,\n-      });\n+    const repos = opt.in.concat(opt.out);",
+        "score": {
+          "reward": 0.132,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 70.80000000000003,
+            "syllables": 27,
+            "sentences": 2,
+            "score": 0.8919999999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2014633341,
+        "content": "The merge conflicts should be resolved then and ready to be merged or is there still anything missing?",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#issuecomment-2014633341",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.172,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 75.76500000000001,
+            "syllables": 24,
+            "sentences": 1,
+            "score": 0.8423499999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1956999510,
+            "effect": {
+              "addition": 176,
+              "deletion": 144
+            },
+            "reward": 3.2,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 4.44 XP ]</a>&nbsp;</h3><h6>@gitcoindev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>1</td><td>3.2</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>1.24</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/devpool-directory/pull/1145\" target=\"_blank\" rel=\"noopener\">#1145</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+176 -144</td><td>1</td><td>3.2</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1537135232\" target=\"_blank\" rel=\"noopener\">I have not looked in this PR for quite some time, but receiving &hellip;</a></h6></td><td><details><summary>3.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 99&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.936</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#discussion_r1537296247\" target=\"_blank\" rel=\"noopener\">The email was good enough till recently. Great tip with the noti&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.132</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#issuecomment-2014633341\" target=\"_blank\" rel=\"noopener\">The merge conflicts should be resolved then and ready to be merg&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.172</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 4.13,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2011074865,
+        "content": "@pavlovcik the test results should be an exact snapshot of what is expected to be answered by the API, otherwise there could be values that change and errors we could not foresee. But I don't understand why you say it is failing, it seems successful on the latest run https://github.com/ubiquity/devpool-directory/actions/runs/8358643627/job/22880364593?pr=1145 and to make sure I pulled the branch and tested on my own repo with the latest commit which also ran fine https://github.com/FernandVEYRIER/devpool-directory/actions/runs/8368745527/job/22913337163",
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145#issuecomment-2011074865",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 4.13,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 72,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 66.61575000000002,
+            "syllables": 137,
+            "sentences": 5,
+            "score": 0.9338424999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/devpool-directory/pull/1145"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 4.13 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>1</td><td>4.13</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/devpool-directory/pull/1145#issuecomment-2011074865\" target=\"_blank\" rel=\"noopener\">@pavlovcik the test results should be an exact snapshot of what &hellip;</a></h6></td><td><details><summary>4.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 72&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.7</td><td>1</td><td>4.13</td></tr></tbody></table></details>"
+  }
+}

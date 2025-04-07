@@ -1,0 +1,764 @@
+{
+  "ishowvel": {
+    "userId": 186167176,
+    "total": 151.392,
+    "task": {
+      "reward": 150,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2436735313,
+        "content": "So the specification for this issue is to\nmake a property in the manifest json to enable aggressive followups based on the priority level and disqualify based on those new aggresive deadlines?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/26#issuecomment-2436735313",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 1.392,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 26.305000000000035,
+            "syllables": 56,
+            "sentences": 1,
+            "score": 0.6630500000000004
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 151.392 XP ]</a>&nbsp;</h3><h6>@ishowvel</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>150</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.392</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/26#issuecomment-2436735313\" target=\"_blank\" rel=\"noopener\">So the specification for this issue is tomake a property in the&hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.392</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 16.07,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2378029614,
+        "content": "Maybe we should make a config manifest (so a file with a different name in each plugin, like `manifest.config.json`) that describes every configurable property and provides a description, their default values, and example of every config property in every plugin? Then we can read this for our plugin configuration GUI. \nPerhaps this was already discussed as it vaguely rings a bell. \nThis will certainly be useful for an AI interface layer to intercept user comments tagging the bot and asking it to do something. It can then use an LLM to read every installed plugin manifest, and their config manifests. It can theoretically adjust the config based on the user request if they are an admin etc. then we no longer have to deal with editing the yml or using a GUI\nWe would need to add this prompt directly inside of the kernel, where it must recognize when a user is potentially trying to change the config of any of the installed plugins. \n---\n@UbiquityOS change follow up time to 1 day and disqualify to 2 days. Also disable the priority level making follow ups faster thing. \nIt could reply with something like:\n```diff\n+ Configuration updated \n```\n<code>\n<a href=\"#\">a1b2c3d</a>\n</code>",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/26#issuecomment-2378029614",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 5.295,
+          "formatting": {
+            "content": {
+              "h2": {
+                "score": 1,
+                "elementCount": 1
+              },
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 198,
+            "wordValue": 0.1,
+            "result": 1.75
+          },
+          "readability": {
+            "fleschKincaid": 54.7107272727273,
+            "syllables": 309,
+            "sentences": 10,
+            "score": 0.947107272727273
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2438873122,
+        "content": "Everything has to do with .ubiquity-os.config.yml actually. Don't worry about the manifest. \nThe manifest bit was a tangent related to infrastructure to support using natural language to reconfigure the behavior of UbiquityOS, which I think makes a lot of sense to support in the future vs raw yml editing.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/26#issuecomment-2438873122",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 6.552,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 53,
+            "wordValue": 0.1,
+            "result": 2.43
+          },
+          "readability": {
+            "fleschKincaid": 54.20878930817611,
+            "syllables": 90,
+            "sentences": 6,
+            "score": 0.9420878930817611
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 2551606597,
+        "content": "Divide the config timeouts by the priority level. This makes follow ups more aggressive based on the priority level. \n`Priority: 5 (Emergency)` Means divide by 5. \n- warning = 3.5 days / 5 = 16.8 hours\n-  disqualify = 7 days / 5 = 33.6 hours\nShould be configurable (priority enabled: Boolean)",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/26",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 3.17,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 44,
+            "wordValue": 0.1,
+            "result": 2.27
+          },
+          "readability": {
+            "fleschKincaid": 65.86409090909095,
+            "syllables": 70,
+            "sentences": 7,
+            "score": 0.9413590909090905
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 2439967271,
+        "content": "You sure you need to publish it to use it?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#issuecomment-2439967271",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.053,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 103.625,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 16.07 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>3.17</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>11.847</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>1.053</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/26\" target=\"_blank\" rel=\"noopener\">Divide the config timeouts by the priority level. This makes fol&hellip;</a></h6></td><td><details><summary>2.47</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 44&#13;  wordValue: 0.1&#13;  result: 2.27&#13;</pre></details></td><td>1</td><td>1</td><td>3.17</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/26#issuecomment-2378029614\" target=\"_blank\" rel=\"noopener\">Maybe we should make a config manifest (so a file with a differe&hellip;</a></h6></td><td><details><summary>2.75</summary><pre>content:&#13;  content:&#13;    h2:&#13;      score: 1&#13;      elementCount: 1&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 1&#13;regex:&#13;  wordCount: 198&#13;  wordValue: 0.1&#13;  result: 1.75&#13;</pre></details></td><td>0.5</td><td>3</td><td>5.295</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/26#issuecomment-2438873122\" target=\"_blank\" rel=\"noopener\">Everything has to do with .ubiquity-os.config.yml actually. Don'&hellip;</a></h6></td><td><details><summary>2.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 53&#13;  wordValue: 0.1&#13;  result: 2.43&#13;</pre></details></td><td>0.7</td><td>3</td><td>6.552</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#issuecomment-2439967271\" target=\"_blank\" rel=\"noopener\">You sure you need to publish it to use it?</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.3</td><td>3</td><td>1.053</td></tr></tbody></table></details>"
+  },
+  "Keyrxng": {
+    "total": 5.055,
+    "userId": 106303466,
+    "comments": [
+      {
+        "id": 2380250879,
+        "content": "I mentioned something very similar on TG and I think it would be better if the standard `manifest.json` contained this info. It could allow external settings validation as opposed to it being bound to inside the plugin because we could take it directly from the manifest.\r\nI think if we are updating the `manifest.json` we should also convert the events into keys so we can dynamically type `SupportedEvents`",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/26#issuecomment-2380250879",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.738,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 65,
+            "wordValue": 0.1,
+            "result": 2.56
+          },
+          "readability": {
+            "fleschKincaid": 54.68948717948717,
+            "syllables": 100,
+            "sentences": 3,
+            "score": 0.9468948717948718
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 2439968672,
+        "content": "You shouldn't have to create a release for this or even your kernel app.\r\nTo QA a plugin:\r\n1. run the kernel locally\r\n2. enter this config into your `.ubiquity-os` configuration repo.\r\n```yml\r\n- plugins: \r\n  - uses:\r\n    - plugin: http:localhost:4000\r\n      with:\r\n        ...plugginSettingsForThisplugin\r\n```\r\n3. run yarn worker inside the plugin repo if it's a worker-friendly plugin.\r\n4. If it's an action plugin, you need to push your changes to the repo and instead of `localhost:4000` you use your repo name so `keyrxng/my-forked-plugin-repo:compute.yml@development` \"compute.yml\" is our workflow entry do not alter this part, \"@dev\" is whatever branch you are working on.\r\n5. Trigger a github webhook event which `manifest.json` lists for the plugin and you should see the kernel catch the event in your terminal logs and then it passes it to `localhost:4000` directly to the plugin.\r\nhope this helps",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#issuecomment-2439968672",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.128,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 8
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 5
+              }
+            },
+            "result": 0.5
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 123,
+            "wordValue": 0.1,
+            "result": 2.47
+          },
+          "readability": {
+            "fleschKincaid": 72.7609756097561,
+            "syllables": 169,
+            "sentences": 7,
+            "score": 0.872390243902439
+          },
+          "multiplier": 0.25,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2444652598,
+        "content": "@ishowvel You need to pass in the full webhook name `\"pull_request.ready_for_review\"` which then gets mapped to it's short name in relation to the timeline.\r\nThis [fn](https://github.com/ubiquity-os-marketplace/daemon-disqualifier/blob/9c6380912757547246e780f358431a8242ef6d13/src/types/plugin-input.ts#L39) takes values from this [object](https://github.com/ubiquity-os-marketplace/daemon-disqualifier/blob/9c6380912757547246e780f358431a8242ef6d13/src/types/plugin-input.ts#L27) which contain the full webhook name. This `map.get(webhook)` passes in the full webhook and the `Map` returns the short name.\r\n[This](https://github.com/ubiquity-os-marketplace/daemon-disqualifier/blob/9c6380912757547246e780f358431a8242ef6d13/src/types/plugin-input.ts#L82) is where the schema is validated and rejected if incorrect.\r\nYour TypeBox error is telling you the value that you've placed at the path `/eventWhitelist` which indicates that what you are passing in there doesn't match. \r\n      'pull_request.review_requested',\r\n      'pull_request.ready_for_review',\r\n      'pull_request_review_comment.created',\r\n      'issue_comment.created',\r\n      'push'\r\n    ],\r\nThis is showing you the default values according to the schema had you not passed anything in via the config, these would be used instead.\r\nhope this helps",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#issuecomment-2444652598",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 2.64,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 6
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 115,
+            "wordValue": 0.1,
+            "result": 2.52
+          },
+          "readability": {
+            "fleschKincaid": 78.34086956521743,
+            "syllables": 152,
+            "sentences": 7,
+            "score": 0.8165913043478257
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2444692232,
+        "content": "@ishowvel Nice catch that's slipped through without being updated, yes you're right they should be updated I thought I remembered updating docs for that part, my mistake dude.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#issuecomment-2444692232",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.549,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 63.585000000000036,
+            "syllables": 40,
+            "sentences": 1,
+            "score": 0.9641499999999996
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 5.055 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.738</td></tr><tr><td>Review</td><td>Comment</td><td>3</td><td>4.317</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/26#issuecomment-2380250879\" target=\"_blank\" rel=\"noopener\">I mentioned something very similar on TG and I think it would be&hellip;</a></h6></td><td><details><summary>2.56</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 65&#13;  wordValue: 0.1&#13;  result: 2.56&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.738</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#issuecomment-2439968672\" target=\"_blank\" rel=\"noopener\">You shouldn't have to create a release for this or even your ker&hellip;</a></h6></td><td><details><summary>2.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 8&#13;    ol:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 5&#13;  result: 0.5&#13;regex:&#13;  wordCount: 123&#13;  wordValue: 0.1&#13;  result: 2.47&#13;</pre></details></td><td>0.4</td><td>3</td><td>1.128</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#issuecomment-2444652598\" target=\"_blank\" rel=\"noopener\">@ishowvel You need to pass in the full webhook name &#96;\"pull_r&hellip;</a></h6></td><td><details><summary>3.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 6&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 115&#13;  wordValue: 0.1&#13;  result: 2.52&#13;</pre></details></td><td>0.8</td><td>3</td><td>2.64</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#issuecomment-2444692232\" target=\"_blank\" rel=\"noopener\">@ishowvel Nice catch that's slipped through without being update&hellip;</a></h6></td><td><details><summary>1.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.549</td></tr></tbody></table></details>"
+  },
+  "gentlementlegen": {
+    "total": 31.824,
+    "userId": 9807008,
+    "comments": [
+      {
+        "id": 2438930724,
+        "content": "It is possible to add more data in the schema such as value restriction, patterns, or descriptions that would end up automatically in the manifest afterwards.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/26#issuecomment-2438930724",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 3.834,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 34.021923076923116,
+            "syllables": 45,
+            "sentences": 1,
+            "score": 0.7402192307692311
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 2411199650,
+        "content": "Please resolve the conflicts and good to go.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#pullrequestreview-2411199650",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.819,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 92.965,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.67035
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1823713163,
+        "content": "Pretty sure this type is defined within `octokit`.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#discussion_r1823713163",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -108,3 +108,45 @@ function parseTimeLabel(\n \n   return taskTimeEstimate;\n }\n+\n+export function parsePriorityLabel(\n+  labels: (",
+        "score": {
+          "reward": 1.806,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 78.87285714285717,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.8112714285714283
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1823713791,
+        "content": "Why not just returning here? Would avoid a `break`",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#discussion_r1823713791",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -108,3 +108,45 @@ function parseTimeLabel(\n \n   return taskTimeEstimate;\n }\n+\n+export function parsePriorityLabel(\n+  labels: (\n+    | string\n+    | {\n+        id?: number;\n+        node_id?: string;\n+        url?: string;\n+        name?: string;\n+        description?: string | null;\n+        color?: string | null;\n+        default?: boolean;\n+      }\n+  )[]\n+): number {\n+  let taskPriorityEstimate = 0;\n+\n+  for (const label of labels) {\n+    let priorityLabel = \"\";\n+    if (typeof label === \"string\") {\n+      priorityLabel = label;\n+    } else {\n+      priorityLabel = label.name || \"\";\n+    }\n+\n+    if (priorityLabel.startsWith(\"Priority:\")) {\n+      const matched = priorityLabel.match(/Priority: (\\d+)/i);\n+      if (!matched) {\n+        return 0;\n+      }\n+\n+      const [_, urgency] = matched;\n+      taskPriorityEstimate = Number(urgency);",
+        "score": {
+          "reward": 2.232,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 86.45000000000002,
+            "syllables": 11,
+            "sentences": 2,
+            "score": 0.7354999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1823714475,
+        "content": "This a a potential division by zero. Should be enforced to have positive values.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#discussion_r1823714475",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -75,13 +76,13 @@ export async function updateTaskReminder(context: ContextPlugin, repo: ListForOr\n   if (lastReminderComment) {\n     const lastReminderTime = DateTime.fromISO(lastReminderComment.created_at);\n     mostRecentActivityDate = lastReminderTime > mostRecentActivityDate ? lastReminderTime : mostRecentActivityDate;\n-    if (mostRecentActivityDate.plus({ milliseconds: disqualificationTimeDifference }) <= now) {\n+    if (mostRecentActivityDate.plus({ milliseconds: prioritySpeed ? disqualificationTimeDifference / priorityLevel : disqualificationTimeDifference }) <= now) {",
+        "score": {
+          "reward": 4.077,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 60.74428571428575,
+            "syllables": 23,
+            "sentences": 2,
+            "score": 0.9925571428571425
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1825371129,
+        "content": "Why is this needed? You seem to remove color to add it again.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#discussion_r1825371129",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -2,6 +2,11 @@ import { DateTime } from \"luxon\";\n import ms from \"ms\";\n import { ListForOrg, ListIssueForRepo } from \"../types/github-types\";\n import { ContextPlugin } from \"../types/plugin-input\";\n+import { RestEndpointMethodTypes } from \"@octokit/rest\";\n+\n+type IssueLabel = Partial<Omit<RestEndpointMethodTypes[\"issues\"][\"listLabelsForRepo\"][\"response\"][\"data\"][0], \"color\">> & {",
+        "score": {
+          "reward": 2.751,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 13,
+            "wordValue": 0.1,
+            "result": 1.1
+          },
+          "readability": {
+            "fleschKincaid": 96.11442307692309,
+            "syllables": 16,
+            "sentences": 2,
+            "score": 0.6388557692307691
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1825371957,
+        "content": "You could use `Math.max` instead.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#discussion_r1825371957",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -46,6 +46,8 @@ export async function updateTaskReminder(context: ContextPlugin, repo: ListForOr\n     .shift();\n \n   const assignedDate = DateTime.fromISO(assignedEvent.created_at);\n+  const priorityValue = parsePriorityLabel(issue.labels);\n+  const priorityLevel = priorityValue === 0 ? priorityValue + 1 : priorityValue;",
+        "score": {
+          "reward": 1.248,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 4,
+            "wordValue": 0.1,
+            "result": 0.44
+          },
+          "readability": {
+            "fleschKincaid": 97.025,
+            "syllables": 5,
+            "sentences": 1,
+            "score": 0.6297499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2440619211,
+        "content": "@whilefoo RFC I think you can use `GITHUB_TOKEN` there.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#issuecomment-2440619211",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.365,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 92.965,
+            "syllables": 10,
+            "sentences": 1,
+            "score": 0.67035
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2443562746,
+        "content": "Both should be required. What is blocking you?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#issuecomment-2443562746",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.08,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 97.025,
+            "syllables": 10,
+            "sentences": 2,
+            "score": 0.6297499999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 2448916753,
+        "content": "@ishowvel Could you please remove the comma [here](https://github.com/ishowvel/daemon-disqualifier/actions/runs/11602651701/job/32308069382#step:4:23) so it doesn't break the URL?\r\nAlso please update the README with the newly added configuration value.",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#issuecomment-2448916753",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 8.352,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 26,
+            "wordValue": 0.1,
+            "result": 1.74
+          },
+          "readability": {
+            "fleschKincaid": 69.99384615384618,
+            "syllables": 38,
+            "sentences": 2,
+            "score": 0.9000615384615382
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2406852169,
+            "effect": {
+              "addition": 65,
+              "deletion": 11
+            },
+            "reward": 2.28,
+            "priority": 3
+          },
+          {
+            "reviewId": 2409386387,
+            "effect": {
+              "addition": 20,
+              "deletion": 44
+            },
+            "reward": 1.92,
+            "priority": 3
+          },
+          {
+            "reviewId": 2411199650,
+            "effect": {
+              "addition": 1,
+              "deletion": 1
+            },
+            "reward": 0.06,
+            "priority": 3
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 31.824 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>4.26</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>3.834</td></tr><tr><td>Review</td><td>Comment</td><td>9</td><td>23.73</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39\" target=\"_blank\" rel=\"noopener\">#39</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+65 -11</td><td>3</td><td>2.28</td></tr><tr><td>+20 -44</td><td>3</td><td>1.92</td></tr><tr><td>+1 -1</td><td>3</td><td>0.06</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/issues/26#issuecomment-2438930724\" target=\"_blank\" rel=\"noopener\">It is possible to add more data in the schema such as value rest&hellip;</a></h6></td><td><details><summary>1.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.6</td><td>3</td><td>3.834</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#pullrequestreview-2411199650\" target=\"_blank\" rel=\"noopener\">Please resolve the conflicts and good to go.</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.3</td><td>3</td><td>0.819</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#discussion_r1823713163\" target=\"_blank\" rel=\"noopener\">Pretty sure this type is defined within &#96;octokit&#96;.</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.7</td><td>3</td><td>1.806</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#discussion_r1823713791\" target=\"_blank\" rel=\"noopener\">Why not just returning here? Would avoid a &#96;break&#96;</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.8</td><td>3</td><td>2.232</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#discussion_r1823714475\" target=\"_blank\" rel=\"noopener\">This a a potential division by zero. Should be enforced to have &hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.9</td><td>3</td><td>4.077</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#discussion_r1825371129\" target=\"_blank\" rel=\"noopener\">Why is this needed? You seem to remove color to add it again.</a></h6></td><td><details><summary>1.1</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 13&#13;  wordValue: 0.1&#13;  result: 1.1&#13;</pre></details></td><td>0.7</td><td>3</td><td>2.751</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#discussion_r1825371957\" target=\"_blank\" rel=\"noopener\">You could use &#96;Math.max&#96; instead.</a></h6></td><td><details><summary>0.44</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 4&#13;  wordValue: 0.1&#13;  result: 0.44&#13;</pre></details></td><td>0.8</td><td>3</td><td>1.248</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#issuecomment-2440619211\" target=\"_blank\" rel=\"noopener\">@whilefoo RFC I think you can use &#96;GITHUB_TOKEN&#96; there.</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.5</td><td>3</td><td>1.365</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#issuecomment-2443562746\" target=\"_blank\" rel=\"noopener\">Both should be required. What is blocking you?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.4</td><td>3</td><td>1.08</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#issuecomment-2448916753\" target=\"_blank\" rel=\"noopener\">@ishowvel Could you please remove the comma [here](https://githu&hellip;</a></h6></td><td><details><summary>2.74</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 26&#13;  wordValue: 0.1&#13;  result: 1.74&#13;</pre></details></td><td>0.8</td><td>3</td><td>8.352</td></tr></tbody></table></details>"
+  },
+  "whilefoo": {
+    "total": 3.432,
+    "userId": 139262667,
+    "comments": [
+      {
+        "id": 2444274606,
+        "content": "This error originates from your Typebox Decode function. \r\nThe values you supplied in the config are: `[ 'review_requested', 'ready_for_review', 'commented', 'committed' ]`,\r\nbut your Decode function is trying searching within `eventWhitelist` which has `[ \"pull_request.review_requested\", \"pull_request.ready_for_review\", \"pull_request_review_comment.created\", \"issue_comment.created\", \"push\"]` so it doesn't find it.\r\nCould you elaborate why you need to map these event names?",
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#issuecomment-2444274606",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.432,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 4
+              }
+            },
+            "result": 0
+          },
+          "priority": 3,
+          "words": {
+            "wordCount": 43,
+            "wordValue": 0.1,
+            "result": 2.25
+          },
+          "readability": {
+            "fleschKincaid": 70.3052713178295,
+            "syllables": 62,
+            "sentences": 3,
+            "score": 0.8969472868217051
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 3.432 XP ]</a>&nbsp;</h3><h6>@whilefoo</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>1</td><td>3.432</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/daemon-disqualifier/pull/39#issuecomment-2444274606\" target=\"_blank\" rel=\"noopener\">This error originates from your Typebox Decode function. The v&hellip;</a></h6></td><td><details><summary>2.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 4&#13;  result: 0&#13;regex:&#13;  wordCount: 43&#13;  wordValue: 0.1&#13;  result: 2.25&#13;</pre></details></td><td>0.4</td><td>3</td><td>3.432</td></tr></tbody></table></details>"
+  }
+}

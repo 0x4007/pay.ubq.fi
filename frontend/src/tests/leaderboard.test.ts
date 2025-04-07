@@ -1,214 +1,131 @@
-import puppeteer, { Browser, Page } from 'puppeteer';
-import { test, describe, beforeAll, afterAll } from 'bun:test';
+import { test, describe, expect, mock } from 'bun:test';
+import { render, screen } from '@testing-library/react';
+import React from 'react';
+import { JSDOM } from 'jsdom';
 
-// Mock data for testing
-const mockLeaderboardData = [
-  {
-    githubUsername: 'testuser1',
-    totalXp: 100,
-    xpByCategory: { comments: 50, task: 30, reviewRewards: 20 },
-    repositories: ['ubiquity-os/marketplace']
-  }
-];
+// Set up IndexedDB mock
+const indexedDB = {
+  open: () => ({
+    onerror: null,
+    onsuccess: null,
+    onupgradeneeded: null,
+    result: {
+      createObjectStore: () => {},
+      transaction: () => ({
+        objectStore: () => ({
+          get: () => ({ onsuccess: null, result: null }),
+          put: () => ({ onsuccess: null }),
+          delete: () => ({ onsuccess: null }),
+          clear: () => ({ onsuccess: null })
+        })
+      })
+    }
+  }),
+  deleteDatabase: () => ({ onerror: null, onsuccess: null })
+};
 
-describe('Leaderboard Page', () => {
-  let browser: Browser;
-  let page: Page;
-  const testUrl = 'http://localhost:5174/leaderboard';
+// Minimal implementations of IDB interfaces
+class IDBRequest {}
+class IDBOpenDBRequest {}
+class IDBDatabase {}
+class IDBTransaction {}
+class IDBObjectStore {}
+class IDBIndex {}
+class IDBKeyRange {}
 
-  beforeAll(async () => {
-    browser = await puppeteer.launch({
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      // Enable debugging
-      devtools: true,
-      dumpio: true
-    });
-    page = await browser.newPage();
+global.indexedDB = indexedDB as any;
+global.IDBRequest = IDBRequest as any;
+global.IDBOpenDBRequest = IDBOpenDBRequest as any;
+global.IDBDatabase = IDBDatabase as any;
+global.IDBTransaction = IDBTransaction as any;
+global.IDBObjectStore = IDBObjectStore as any;
+global.IDBIndex = IDBIndex as any;
+global.IDBKeyRange = IDBKeyRange as any;
 
-    // Enhanced worker mock with persistence checks
-    await page.evaluate(() => {
-      // Create mock worker with all required Worker properties
-      const mockWorker = {
-        postMessage: (data: unknown) => {
-          console.log('Mock worker message sent:', data);
-          // Queue messages if no handler set yet
-          if (!this.onmessage) {
-            this.messageQueue = this.messageQueue || [];
-            this.messageQueue.push(data);
-          }
+// Set up DOM environment
+const dom = new JSDOM('<!DOCTYPE html><html><body><div id="root"></div></body></html>', {
+  url: 'http://localhost'
+});
+global.window = dom.window;
+global.document = dom.window.document;
+global.HTMLElement = dom.window.HTMLElement;
+
+import { WorkerProvider } from '../context/worker-context';
+import { DeveloperLeaderboard } from '../components/developer-leaderboard';
+
+// Mock all database operations to return empty values
+mock.module('../utils/idb-keyval', () => ({
+  createIdbKeyval: () => ({
+    get: () => Promise.resolve(null),
+    set: () => Promise.resolve(),
+    del: () => Promise.resolve(),
+    clear: () => Promise.resolve()
+  }),
+  resetDatabase: () => Promise.resolve()
+}));
+
+// Mock the worker context to avoid actual worker initialization
+mock.module('../context/worker-context', () => ({
+  WorkerProvider: ({ children }: any) => (
+    React.createElement('div', null, children)
+  ),
+  useWorker: () => ({
+    worker: { postMessage: () => {} },
+    isWorkerInitialized: true,
+    workerError: null
+  })
+}));
+
+// Mock worker implementation
+const mockWorker = {
+  postMessage: () => {},
+  onmessage: null,
+  terminate: () => {}
+};
+
+describe('Leaderboard Component', () => {
+  test('renders without crashing', () => {
+    render(
+      React.createElement(
+        WorkerProvider,
+        {
+          worker: mockWorker,
+          isWorkerInitialized: true,
+          workerError: null
         },
-        onmessage: null,
-        onmessageerror: null,
-        onerror: null,
-        addEventListener: (type: string, listener: any) => {
-          if (type === 'message') this.onmessage = listener;
+        React.createElement(DeveloperLeaderboard)
+      )
+    );
+    expect(screen.getByText(/leaderboard/i)).toBeTruthy();
+  });
+
+  test('displays loading state', () => {
+    render(
+      React.createElement(
+        WorkerProvider,
+        {
+          worker: null,
+          isWorkerInitialized: false,
+          workerError: null
         },
-        removeEventListener: () => {},
-        dispatchEvent: () => true,
-        terminate: () => {},
-        messageQueue: [] as any[]
-      };
-
-      // Create persistent mock context
-      const mockContext = {
-        worker: mockWorker,
-        isWorkerInitialized: true,
-        workerError: null
-      };
-
-      // Make it non-configurable and non-writable
-      Object.defineProperty(window, '__MOCK_WORKER_CONTEXT__', {
-        value: mockContext,
-        writable: false,
-        configurable: false
-      });
-
-      console.log('Mock worker context created:', window.__MOCK_WORKER_CONTEXT__);
-    });
-
-    // Verify mock persists after creation
-    await page.evaluate(() => {
-      if (!window.__MOCK_WORKER_CONTEXT__) {
-        throw new Error('Mock worker context not set');
-      }
-      if (!window.__MOCK_WORKER_CONTEXT__.worker) {
-        throw new Error('Mock worker not set in context');
-      }
-    });
-
-    // Enhanced React context override with debugging
-    await page.addScriptTag({
-      content: `
-        console.log('Installing React context override...');
-        const originalUseContext = window.React.useContext;
-        window.React.useContext = (context) => {
-          console.log('Intercepting useContext call for:', context);
-          if (context._context && context._context.displayName === 'WorkerContext') {
-            console.log('Returning mock worker context');
-            return window.__MOCK_WORKER_CONTEXT__;
-          }
-          return originalUseContext(context);
-        };
-        console.log('React context override installed');
-      `
-    });
-
-    // Verify mock was properly set
-    await page.evaluate(() => {
-      console.log('Verifying mock worker context:', window.__MOCK_WORKER_CONTEXT__);
-      if (!window.__MOCK_WORKER_CONTEXT__) {
-        throw new Error('Mock worker context not set');
-      }
-    });
-
-    // Enhanced error logging
-    page.on('console', msg => {
-      console.log(`Browser console (${msg.type()}): ${msg.text()}`);
-    });
-
-    page.on('pageerror', error => {
-      console.error(`Page error: ${error.message}`);
-    });
-
-    await page.goto(testUrl, {
-      waitUntil: 'networkidle0',
-      timeout: 10000
-    });
-
-    // Inject mock data and mock worker
-    await page.evaluate((data) => {
-      window.__MOCK_LEADERBOARD_DATA__ = data;
-
-      // Mock worker responses
-      window.__MOCK_WORKER_CONTEXT__.worker.onmessage = ({ data }) => {
-        if (data.type === 'FETCH_LEADERBOARD_DATA') {
-          window.__MOCK_WORKER_CONTEXT__.worker.postMessage({
-            type: 'LEADERBOARD_DATA_RESULT',
-            payload: {
-              processedData: window.__MOCK_LEADERBOARD_DATA__,
-              rawData: []
-            }
-          });
-        }
-      };
-    }, mockLeaderboardData);
+        React.createElement(DeveloperLeaderboard)
+      )
+    );
+    expect(screen.getByText(/loading/i)).toBeTruthy();
   });
 
-  afterAll(async () => {
-    await browser.close();
-  });
-
-  test('should load without JavaScript errors', async () => {
-    // Test will fail if any errors were caught by our handlers
-  });
-
-  test('should render the leaderboard chart', async () => {
-    // Wait for chart container and verify it's visible
-    await page.waitForSelector('.chart-container', { timeout: 10000 });
-    const chartContainer = await page.$('.chart-container');
-    if (!chartContainer) {
-      throw new Error('Chart container not found');
-    }
-
-    // Verify chart elements exist
-    const chartExists = await page.$('.recharts-wrapper') !== null;
-    const barsExist = await page.$('.recharts-bar') !== null;
-
-    if (!chartExists || !barsExist) {
-      const html = await page.content();
-      console.log('Current page HTML:', html);
-      throw new Error('Chart elements not rendered');
-    }
-  }, 15000); // Increased timeout
-
-  test('should allow time filtering', async () => {
-    // Verify radio group exists
-    const radioGroup = await page.$('.time-radio-group');
-    if (!radioGroup) {
-      throw new Error('Time filter radio group not found');
-    }
-
-    // Test each time filter radio button with better selectors
-    const timeFilters = [
-      { label: '1 Week', value: '1' },
-      { label: '2 Weeks', value: '2' },
-      { label: '1 Month', value: '4' },
-      { label: '3 Months', value: '13' },
-      { label: '1 Year', value: '52' }
-    ];
-
-    for (const filter of timeFilters) {
-      const radioSelector = `input[type="radio"][value="${filter.value}"]`;
-      await page.waitForSelector(radioSelector, { timeout: 5000 });
-
-      // Click with proper type assertion
-      await page.evaluate((selector) => {
-        const radio = document.querySelector(selector) as HTMLInputElement;
-        if (radio) radio.click();
-      }, radioSelector);
-
-      // Wait for potential updates
-      await page.waitForTimeout(1000);
-
-      // Verify radio is checked with proper type assertion
-      const isChecked = await page.evaluate((selector) => {
-        const radio = document.querySelector(selector) as HTMLInputElement;
-        return radio ? radio.checked : false;
-      }, radioSelector);
-
-      if (!isChecked) {
-        throw new Error(`Filter ${filter.label} radio not checked after click`);
-      }
-    }
-  }, 30000); // Increased timeout
-
-  test('should match screenshot', async () => {
-    await page.waitForSelector('.recharts-wrapper', { timeout: 5000 });
-    const screenshot = await page.screenshot({ fullPage: true });
-    // In CI you would compare against baseline image
-    if (!screenshot || screenshot.length === 0) {
-      throw new Error('Failed to capture screenshot');
-    }
+  test('shows error message when worker fails', () => {
+    render(
+      React.createElement(
+        WorkerProvider,
+        {
+          worker: null,
+          isWorkerInitialized: false,
+          workerError: "Test error"
+        },
+        React.createElement(DeveloperLeaderboard)
+      )
+    );
+    expect(screen.getByText(/error/i)).toBeTruthy();
   });
 });

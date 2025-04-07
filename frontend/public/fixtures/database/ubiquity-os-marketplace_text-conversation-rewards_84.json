@@ -1,0 +1,400 @@
+{
+  "gentlementlegen": {
+    "userId": 9807008,
+    "total": 104.51,
+    "task": {
+      "reward": 100,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2473516333,
+        "content": "```diff\r\n! Failed to run comment evaluation. SyntaxError: Unexpected end of JSON input\r\n```\r\n_Originally posted by @ubiquityos[bot] in https://github.com/ubiquity/cloudflare-deploy-action/issues/6#issuecomment-2296724391_\r\nFirst suspect seem to be the answer from OpenAI that seems to be an invalid [JSON output](https://github.com/ubiquibot/conversation-rewards/actions/runs/10455351522/job/28950093653#step:7:113).",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/84",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.51,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "em": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 42.77411764705883,
+            "syllables": 59,
+            "sentences": 2,
+            "score": 0.8277411764705883
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 104.51 XP ]</a>&nbsp;</h3><h6>@gentlementlegen</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>100</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.51</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/issues/84\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;diff! Failed to run comment evaluation. SyntaxE&hellip;</a></h6></td><td><details><summary>3.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    em:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>1</td><td>1</td><td>4.51</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 27.196,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2248488989,
+        "content": "Definitely use `gpt-4o-2024-08-06`",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87#pullrequestreview-2248488989",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.35,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 2,
+            "wordValue": 0.1,
+            "result": 0.25
+          },
+          "readability": {
+            "fleschKincaid": -48.994999999999976,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1722659595,
+        "content": "You need to make sure to also include a buffer on top because the amount of tokens that you're sending in is always less than what's being sent out. \nWhat's being sent out has additional tokens that counts against the quota of the whole transaction. Basically the json response itself costs additional tokens.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87#discussion_r1722659595",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -112,11 +113,18 @@ export class ContentEvaluatorModule implements Module {\n     return commentsWithScore;\n   }\n \n+  async _calculateMaxTokens(prompt: string, totalTokenLimit: number = 4096) {\n+    const tokenizer: Tiktoken = encodingForModel(\"gpt-4o\");\n+    const inputTokens = tokenizer.encode(prompt).length;\n+    return Math.max(totalTokenLimit - inputTokens, 0);\n+  }\n+\n   async _evaluateComments(\n     specification: string,\n     comments: { id: number; comment: string }[]\n   ): Promise<RelevancesByOpenAi> {\n     const prompt = this._generatePrompt(specification, comments);\n+    const maxTokens = await this._calculateMaxTokens(prompt);",
+        "score": {
+          "reward": 5.724,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 56,
+            "wordValue": 0.1,
+            "result": 2.47
+          },
+          "readability": {
+            "fleschKincaid": 64.00976190476193,
+            "syllables": 82,
+            "sentences": 3,
+            "score": 0.9599023809523807
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1722709479,
+        "content": "If I am understanding your code correctly, this reminds me of my first go-around at the implementation. If I recall correctly: I counted the tokens of what I was sending out. However, when you tell ChatGPT that we are using 1000 tokens max, when it replies, its response also counts against the token limit. We can estimate how many tokens will be added to its response, but I don't recall a way to know exactly how much. \r\nRemember that billing works for what comes out as well, not just what goes in, which is why these limits make sense for most use cases for ChatGPT. You will need to estimate how many extra tokens will be included in the output, possibly by counting the amount of comments and tokenizing a dummy array.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87#discussion_r1722709479",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -112,11 +113,18 @@ export class ContentEvaluatorModule implements Module {\n     return commentsWithScore;\n   }\n \n+  async _calculateMaxTokens(prompt: string, totalTokenLimit: number = 4096) {\n+    const tokenizer: Tiktoken = encodingForModel(\"gpt-4o\");\n+    const inputTokens = tokenizer.encode(prompt).length;\n+    return Math.max(totalTokenLimit - inputTokens, 0);\n+  }\n+\n   async _evaluateComments(\n     specification: string,\n     comments: { id: number; comment: string }[]\n   ): Promise<RelevancesByOpenAi> {\n     const prompt = this._generatePrompt(specification, comments);\n+    const maxTokens = await this._calculateMaxTokens(prompt);",
+        "score": {
+          "reward": 4.896,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 134,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 64.84278606965177,
+            "syllables": 189,
+            "sentences": 6,
+            "score": 0.9515721393034824
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1722721691,
+        "content": "My concern is briefly discussed [here](https://community.openai.com/t/can-i-set-max-tokens-for-chatgpt-turbo/81207/13). It has been a long time since I worked on this problem, and the models are always evolving so I am not confident in my knowledge. However if we set max length, perhaps the model will try to pad the reply to fill the full response. I would be most confident if we pre-calculate the token length by encoding a dummy array, unless there is definitive proof otherwise that setting max length will not cause problems. \r\nI realize I didn't quite finish explaining clearly, but we start with 1000 in this example, and the result might be 1200 (200 in the response.)",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87#discussion_r1722721691",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -112,11 +113,18 @@ export class ContentEvaluatorModule implements Module {\n     return commentsWithScore;\n   }\n \n+  async _calculateMaxTokens(prompt: string, totalTokenLimit: number = 4096) {\n+    const tokenizer: Tiktoken = encodingForModel(\"gpt-4o\");\n+    const inputTokens = tokenizer.encode(prompt).length;\n+    return Math.max(totalTokenLimit - inputTokens, 0);\n+  }\n+\n   async _evaluateComments(\n     specification: string,\n     comments: { id: number; comment: string }[]\n   ): Promise<RelevancesByOpenAi> {\n     const prompt = this._generatePrompt(specification, comments);\n+    const maxTokens = await this._calculateMaxTokens(prompt);",
+        "score": {
+          "reward": 5.424,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 110,
+            "wordValue": 0.1,
+            "result": 2.56
+          },
+          "readability": {
+            "fleschKincaid": 70.55575757575761,
+            "syllables": 153,
+            "sentences": 6,
+            "score": 0.8944424242424239
+          },
+          "multiplier": 1,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1722835167,
+        "content": "Generate a dummy response and encode it to estimate the length of the response. I am not sure how many max significant digits exist per element in the array, but you should estimate with a worse case scenario.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87#discussion_r1722835167",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -112,11 +113,18 @@ export class ContentEvaluatorModule implements Module {\n     return commentsWithScore;\n   }\n \n+  async _calculateMaxTokens(prompt: string, totalTokenLimit: number = 4096) {\n+    const tokenizer: Tiktoken = encodingForModel(\"gpt-4o\");\n+    const inputTokens = tokenizer.encode(prompt).length;\n+    return Math.max(totalTokenLimit - inputTokens, 0);\n+  }\n+\n   async _evaluateComments(\n     specification: string,\n     comments: { id: number; comment: string }[]\n   ): Promise<RelevancesByOpenAi> {\n     const prompt = this._generatePrompt(specification, comments);\n+    const maxTokens = await this._calculateMaxTokens(prompt);",
+        "score": {
+          "reward": 3.836,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 38,
+            "wordValue": 0.1,
+            "result": 2.13
+          },
+          "readability": {
+            "fleschKincaid": 56.19736842105266,
+            "syllables": 59,
+            "sentences": 2,
+            "score": 0.9619736842105265
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1723607994,
+        "content": "```suggestion\r\n  _calculateMaxTokens(prompt: string, totalTokenLimit: number = 16384) {\r\n```\r\nModel | Description | Context window | Max output tokens | Training data\r\n-- | -- | -- | -- | --\r\ngpt-4o-2024-08-06 | Latest snapshot that supports Structured Outputs | 128,000 tokens | 16,384 tokens | Up to Oct 2023",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87#discussion_r1723607994",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -112,11 +113,28 @@ export class ContentEvaluatorModule implements Module {\n     return commentsWithScore;\n   }\n \n+  /**\n+   * Will try to predict the maximum of tokens expected, to a maximum of totalTokenLimit.\n+   */\n+  _calculateMaxTokens(prompt: string, totalTokenLimit: number = 4096) {",
+        "score": {
+          "reward": 4.266,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 30,
+            "wordValue": 0.1,
+            "result": 1.88
+          },
+          "readability": {
+            "fleschKincaid": 46.66500000000002,
+            "syllables": 46,
+            "sentences": 1,
+            "score": 0.8666500000000003
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1723608335,
+        "content": "```suggestion\r\n      model: \"gpt-4o-2024-08-06\",\r\n```",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87#discussion_r1723608335",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -112,11 +113,28 @@ export class ContentEvaluatorModule implements Module {\n     return commentsWithScore;\n   }\n \n+  /**\n+   * Will try to predict the maximum of tokens expected, to a maximum of totalTokenLimit.\n+   */\n+  _calculateMaxTokens(prompt: string, totalTokenLimit: number = 4096) {\n+    const tokenizer: Tiktoken = encodingForModel(\"gpt-4o\");\n+    const inputTokens = tokenizer.encode(prompt).length;\n+    return Math.min(inputTokens, totalTokenLimit);\n+  }\n+\n+  _generateDummyResponse(comments: { id: number; comment: string }[]) {\n+    return comments.reduce<Record<string, number>>((acc, curr) => {\n+      return { ...acc, [curr.id]: 0.5 };\n+    }, {});\n+  }\n+\n   async _evaluateComments(\n     specification: string,\n     comments: { id: number; comment: string }[]\n   ): Promise<RelevancesByOpenAi> {\n     const prompt = this._generatePrompt(specification, comments);\n+    const dummyResponse = JSON.stringify(this._generateDummyResponse(comments), null, 2);\n+    const maxTokens = this._calculateMaxTokens(dummyResponse);\n \n     const response: OpenAI.Chat.ChatCompletion = await this._openAi.chat.completions.create({\n       model: \"gpt-4o\",",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {},
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 0,
+            "wordValue": 0.1,
+            "result": 0
+          },
+          "readability": {
+            "fleschKincaid": 0,
+            "syllables": 0,
+            "sentences": 0,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2246928670,
+            "effect": {
+              "addition": 66,
+              "deletion": 20
+            },
+            "reward": 1.72,
+            "priority": 2
+          },
+          {
+            "reviewId": 2248488989,
+            "effect": {
+              "addition": 13,
+              "deletion": 3
+            },
+            "reward": 0.32,
+            "priority": 2
+          },
+          {
+            "reviewId": 2248506062,
+            "effect": {
+              "addition": 9,
+              "deletion": 24
+            },
+            "reward": 0.66,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 27.196 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>2.7</td></tr><tr><td>Review</td><td>Comment</td><td>7</td><td>24.496</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87\" target=\"_blank\" rel=\"noopener\">#87</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+66 -20</td><td>2</td><td>1.72</td></tr><tr><td>+13 -3</td><td>2</td><td>0.32</td></tr><tr><td>+9 -24</td><td>2</td><td>0.66</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87#pullrequestreview-2248488989\" target=\"_blank\" rel=\"noopener\">Definitely use &#96;gpt-4o-2024-08-06&#96;</a></h6></td><td><details><summary>0.25</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 2&#13;  wordValue: 0.1&#13;  result: 0.25&#13;</pre></details></td><td>0.7</td><td>2</td><td>0.35</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87#discussion_r1722659595\" target=\"_blank\" rel=\"noopener\">You need to make sure to also include a buffer on top because th&hellip;</a></h6></td><td><details><summary>2.47</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 56&#13;  wordValue: 0.1&#13;  result: 2.47&#13;</pre></details></td><td>0.9</td><td>2</td><td>5.724</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87#discussion_r1722709479\" target=\"_blank\" rel=\"noopener\">If I am understanding your code correctly, this reminds me of my&hellip;</a></h6></td><td><details><summary>2.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 134&#13;  wordValue: 0.1&#13;  result: 2.38&#13;</pre></details></td><td>0.8</td><td>2</td><td>4.896</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87#discussion_r1722721691\" target=\"_blank\" rel=\"noopener\">My concern is briefly discussed [here](https://community.openai.&hellip;</a></h6></td><td><details><summary>3.56</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 110&#13;  wordValue: 0.1&#13;  result: 2.56&#13;</pre></details></td><td>0.6</td><td>2</td><td>5.424</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87#discussion_r1722835167\" target=\"_blank\" rel=\"noopener\">Generate a dummy response and encode it to estimate the length o&hellip;</a></h6></td><td><details><summary>2.13</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 38&#13;  wordValue: 0.1&#13;  result: 2.13&#13;</pre></details></td><td>0.7</td><td>2</td><td>3.836</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87#discussion_r1723607994\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestion_calculateMaxTokens(prompt: string,&hellip;</a></h6></td><td><details><summary>1.88</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 30&#13;  wordValue: 0.1&#13;  result: 1.88&#13;</pre></details></td><td>0.9</td><td>2</td><td>4.266</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87#discussion_r1723608335\" target=\"_blank\" rel=\"noopener\">&#96;&#96;&#96;suggestionmodel: \"gpt-4o-2024-08-06\",&#&hellip;</a></h6></td><td><details><summary>0</summary><pre>content:&#13;  content: {}&#13;  result: 0&#13;regex:&#13;  wordCount: 0&#13;  wordValue: 0.1&#13;  result: 0&#13;</pre></details></td><td>0.8</td><td>2</td><td>0</td></tr></tbody></table></details>"
+  },
+  "Keyrxng": {
+    "total": 1.992,
+    "userId": 106303466,
+    "comments": [
+      {
+        "id": 2299776199,
+        "content": "I'm certain that the way they operate is the base model version is always the most up to date. I.E `gpt-4o` is whatever the latest version is. This was the case when I was working on AI tasks a while back and the docs confirm this is still the case but it's been a while and this may be outdated.\r\ngpt-4o, gpt-4o-mini, gpt-4-turbo, gpt-4, and gpt-3.5-turbo point to their respective latest model version.",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87#issuecomment-2299776199",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 1.296,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 84,
+            "wordValue": 0.1,
+            "result": 2.64
+          },
+          "readability": {
+            "fleschKincaid": 84.8607142857143,
+            "syllables": 107,
+            "sentences": 6,
+            "score": 0.7513928571428571
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 2300274563,
+        "content": "I was going to also suggest using `Latest` for the package but that might be too dangerous I feel they move pretty quickly over there and break things often",
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87#issuecomment-2300274563",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.696,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 63.600714285714304,
+            "syllables": 38,
+            "sentences": 1,
+            "score": 0.963992857142857
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 1.992 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Comment</td><td>2</td><td>1.992</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87#issuecomment-2299776199\" target=\"_blank\" rel=\"noopener\">I'm certain that the way they operate is the base model version &hellip;</a></h6></td><td><details><summary>2.64</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;  result: 0&#13;regex:&#13;  wordCount: 84&#13;  wordValue: 0.1&#13;  result: 2.64&#13;</pre></details></td><td>0.8</td><td>2</td><td>1.296</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity-os-marketplace/text-conversation-rewards/pull/87#issuecomment-2300274563\" target=\"_blank\" rel=\"noopener\">I was going to also suggest using &#96;Latest&#96; for the packa&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.6</td><td>2</td><td>0.696</td></tr></tbody></table></details>"
+  }
+}

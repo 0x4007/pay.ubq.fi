@@ -1,0 +1,215 @@
+{
+  "zugdev": {
+    "userId": 155616000,
+    "total": 202.94,
+    "task": {
+      "reward": 200,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2570537824,
+        "content": "While working through some issues I noticed there are some caching optimizations pending, redundant calls being made and load time could improve. A clear example was that for each issue the organization's avatar was fetched, meaning that for 144 issues within 3 repos, where 3 calls could have been made we were making 144. This was solved at #106. \r\nSome code parts are also not respecting single responsibility principle, there are tries to set cache outside of a fetch function. This leads to resource waste and subsequently worse performance. \r\nFor example, the following O(n) function where n is issues array length is being called 4 different times in different places:\r\n```\r\nexport function applyAvatarsToIssues() {\r\n  const container = taskManager.getContainer();\r\n  const issueElements = Array.from(container.querySelectorAll(\".issue-element-inner\"));\r\n  issueElements.forEach((issueElement) => {\r\n    const orgName = issueElement.querySelector(\".organization-name\")?.textContent;\r\n    if (orgName) {\r\n      const avatarUrl = organizationImageCache.get(orgName);\r\n      if (avatarUrl) {\r\n        const avatarImg = issueElement.querySelector(\"img\");\r\n        if (avatarImg) {\r\n          avatarImg.src = URL.createObjectURL(avatarUrl);\r\n        }\r\n      }\r\n    }\r\n  });\r\n}\r\n```\r\n![image](https://github.com/user-attachments/assets/a0551a06-f3f4-4fb3-b8b0-4070b1b5e294)\r\nThe code base could benefit from general optimizations and a principle-based approach. I believe a 2-3 hour thorough review should be enough to identify, test and fix some of the problems.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/108",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 2.94,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 145,
+            "wordValue": 0.1,
+            "result": 2.28
+          },
+          "readability": {
+            "fleschKincaid": 56.86793103448278,
+            "syllables": 221,
+            "sentences": 7,
+            "score": 0.9686793103448278
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 202.94 XP ]</a>&nbsp;</h3><h6>@zugdev</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>200</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>2.94</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/108\" target=\"_blank\" rel=\"noopener\">While working through some issues I noticed there are some cachi&hellip;</a></h6></td><td><details><summary>2.28</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;  result: 0&#13;regex:&#13;  wordCount: 145&#13;  wordValue: 0.1&#13;  result: 2.28&#13;</pre></details></td><td>1</td><td>1</td><td>2.94</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 6.544,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 2401022770,
+        "content": "Yes we need GitHub login for two reasons currently:\n1. Private issues. The idea is that partners can add their private repos to our directory. If you want to be able to read them, you need access via your GitHub account. Basically we have another private version of the DevPool directory backend but that's still not really well implemented. \n2. Referral tracking. When you login, we save a referral code for future referral rewards. It's pretty much the only place in our system we can do this.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/108#issuecomment-2401022770",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 2
+              }
+            },
+            "result": 0.2
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 87,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 64.88896551724139,
+            "syllables": 133,
+            "sentences": 7,
+            "score": 0.9511103448275862
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2403866100,
+        "content": "Halfway done setting up UUSD. Gas fees spiked high when I tried yesterday unfortunately.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/issues/108#issuecomment-2403866100",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 60.74428571428575,
+            "syllables": 23,
+            "sentences": 2,
+            "score": 0.9925571428571425
+          },
+          "multiplier": 1,
+          "relevance": 0
+        }
+      },
+      {
+        "id": 2358783686,
+        "content": "Code looks fine and QA seems fine from mobile.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/114#pullrequestreview-2358783686",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.202,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 94.30000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.6569999999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1792637978,
+        "content": "There are some comments that seem like action items. Why not just implement? This pull doesn't seem ready.",
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/114#discussion_r1792637978",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -1,5 +1,6 @@\n import { GitHubIssue } from \"../github-types\";\n \n+// this is not used",
+        "score": {
+          "reward": 2.422,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 89.09087719298246,
+            "syllables": 25,
+            "sentences": 3,
+            "score": 0.7090912280701754
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 2355734339,
+            "effect": {
+              "addition": 14,
+              "deletion": 6
+            },
+            "reward": 0.4,
+            "priority": 2
+          },
+          {
+            "reviewId": 2358783686,
+            "effect": {
+              "addition": 75,
+              "deletion": 101
+            },
+            "reward": 3.52,
+            "priority": 2
+          }
+        ],
+        "url": "https://github.com/ubiquity/work.ubq.fi/pull/114"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 6.544 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>2</td><td>3.92</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>0</td></tr><tr><td>Review</td><td>Comment</td><td>2</td><td>2.624</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/work.ubq.fi/pull/114\" target=\"_blank\" rel=\"noopener\">#114</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+14 -6</td><td>2</td><td>0.4</td></tr><tr><td>+75 -101</td><td>2</td><td>3.52</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/108#issuecomment-2401022770\" target=\"_blank\" rel=\"noopener\">Yes we need GitHub login for two reasons currently:1. Private i&hellip;</a></h6></td><td><details><summary>2.83</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 2&#13;  result: 0.2&#13;regex:&#13;  wordCount: 87&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>0</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/issues/108#issuecomment-2403866100\" target=\"_blank\" rel=\"noopener\">Halfway done setting up UUSD. Gas fees spiked high when I tried &hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0</td><td>2</td><td>0</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/114#pullrequestreview-2358783686\" target=\"_blank\" rel=\"noopener\">Code looks fine and QA seems fine from mobile.</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.1</td><td>2</td><td>0.202</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/work.ubq.fi/pull/114#discussion_r1792637978\" target=\"_blank\" rel=\"noopener\">There are some comments that seem like action items. Why not jus&hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.7</td><td>2</td><td>2.422</td></tr></tbody></table></details>"
+  }
+}

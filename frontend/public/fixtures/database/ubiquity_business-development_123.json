@@ -1,0 +1,174 @@
+{
+  "0x4007": {
+    "userId": 4975670,
+    "total": 56.96,
+    "task": {
+      "reward": 50,
+      "multiplier": 1
+    },
+    "comments": [
+      {
+        "id": 2625381836,
+        "content": "Just paste this into your console. It is designed to be on the first page of contacts and it will scrape all the contacts and go through the pagination. At the end it will automatically download the CSV export!\n<img width=\"1552\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/ad7c0986-90e1-4526-ac7d-16d4985dc3a3\" />\n```javascript\n(async () => {\n  // A simple delay helper\n  function sleep(ms) {\n    return new Promise(resolve => setTimeout(resolve, ms));\n  }\n  // Keep track of rows we've already scraped\n  const seenRowIds = new Set();\n  const allRows = [];\n  // We'll define final columns:\n  // - Name\n  // - TelegramLink\n  // - TwitterLink\n  // - EmailLink\n  // - LinkedInLink\n  // - Company\n  // - Campaign\n  // - ReplyFunnel\n  const colIds = {\n    name: 'name',\n    links: 'links',\n    company: 'company_name',\n    campaign: '0_0', // \"Campaign\" col\n    funnel: 'campaign_replied_funnel',\n  };\n  // Locate the AG Grid's scrollable body container (for row virtualization)\n  function getScrollContainer() {\n    return document.querySelector('.ag-body-viewport');\n  }\n  // Parse out the relevant contacts from the links cell\n  function parseLinks(linksString) {\n    // We'll separate them into arrays based on type\n    const allLinks = linksString.split(/\\s+/).filter(Boolean);\n    const result = {\n      telegram: [],\n      twitter: [],\n      email: [],\n      linkedin: [],\n    };\n    for (const link of allLinks) {\n      const lower = link.toLowerCase();\n      if (lower.includes('t.me/')) {\n        result.telegram.push(link);\n      } else if (lower.includes('twitter.com')) {\n        result.twitter.push(link);\n      } else if (lower.startsWith('mailto:')) {\n        result.email.push(link);\n      } else if (lower.includes('linkedin.com')) {\n        result.linkedin.push(link);\n      }\n    }\n    // Return them as space-joined in case multiple\n    return {\n      telegramLink: result.telegram.join(' '),\n      twitterLink: result.twitter.join(' '),\n      emailLink: result.email.join(' '),\n      linkedInLink: result.linkedin.join(' '),\n    };\n  }\n  // Extract newly visible rows\n  function extractVisibleRows() {\n    const rowNodes = document.querySelectorAll('[role=\"row\"][aria-rowindex]');\n    for (const row of rowNodes) {\n      const rowIndex = parseInt(row.getAttribute('aria-rowindex'), 10);\n      if (rowIndex < 6) continue; // skip any header rows\n      // row-id or aria-rowindex is our unique key\n      const rowKey = row.getAttribute('row-id') || row.getAttribute('aria-rowindex');\n      if (seenRowIds.has(rowKey)) {\n        continue;\n      }\n      seenRowIds.add(rowKey);\n      const nameCell     = row.querySelector(`[col-id=\"${colIds.name}\"]`);\n      const linksCell    = row.querySelector(`[col-id=\"${colIds.links}\"]`);\n      const companyCell  = row.querySelector(`[col-id=\"${colIds.company}\"]`);\n      const campaignCell = row.querySelector(`[col-id=\"${colIds.campaign}\"]`);\n      const funnelCell   = row.querySelector(`[col-id=\"${colIds.funnel}\"]`);\n      const name     = nameCell?.innerText.trim() ?? '';\n      const company  = companyCell?.innerText.trim() ?? '';\n      const campaign = campaignCell?.innerText.trim() ?? '';\n      const funnel   = funnelCell?.innerText.trim() ?? '';\n      // Gather all anchors behind icons, etc.\n      const anchorTags = [...(linksCell?.querySelectorAll('a[href]') || [])];\n      // Join them into a single string to parse\n      const combinedLinks = anchorTags.map(a => a.href).join(' ');\n      const { \n        telegramLink, \n        twitterLink, \n        emailLink, \n        linkedInLink \n      } = parseLinks(combinedLinks);\n      allRows.push({\n        Name: name,\n        TelegramLink: telegramLink,\n        TwitterLink: twitterLink,\n        EmailLink: emailLink,\n        LinkedInLink: linkedInLink,\n        Company: company,\n        Campaign: campaign,\n        ReplyFunnel: funnel,\n      });\n    }\n  }\n  // Scroll the table to capture all rows for the current page\n  async function scrapeCurrentPageRows() {\n    const container = getScrollContainer();\n    if (!container) {\n      console.error(\"Could not find AG Grid's scroll container.\");\n      return;\n    }\n    container.scrollTop = 0;\n    let previousScrollTop = -1;\n    while (true) {\n      extractVisibleRows();\n      await sleep(300);\n      const oldScroll = container.scrollTop;\n      container.scrollTop += container.clientHeight;\n      await sleep(300);\n      if (container.scrollTop === oldScroll || container.scrollTop === previousScrollTop) {\n        break;\n      }\n      previousScrollTop = container.scrollTop;\n    }\n    // one last extraction pass\n    extractVisibleRows();\n  }\n  // We'll navigate pages until we finish\n  let totalPages = parseInt(document.querySelector('[data-ref=\"lbTotal\"]')?.textContent || '1', 10);\n  let currentPage = parseInt(document.querySelector('[data-ref=\"lbCurrent\"]')?.textContent || '1', 10);\n  while (true) {\n    // Scrape the rows on this page\n    await scrapeCurrentPageRows();\n    // If not the final page, click next\n    if (currentPage < totalPages) {\n      const nextBtn = document.querySelector('[data-ref=\"btNext\"]');\n      if (!nextBtn) {\n        console.error(\"Could not find the Next Page button.\");\n        break;\n      }\n      nextBtn.click();\n      await sleep(1000);\n      // refresh current page from DOM\n      currentPage = parseInt(document.querySelector('[data-ref=\"lbCurrent\"]')?.textContent || '1', 10);\n    } else {\n      break; // done\n    }\n  }\n  // Build final CSV\n  const headers = [\n    'Name',\n    'TelegramLink',\n    'TwitterLink',\n    'EmailLink',\n    'LinkedInLink',\n    'Company',\n    'Campaign',\n    'ReplyFunnel',\n  ];\n  const csvRows = [headers];\n  for (const row of allRows) {\n    csvRows.push([\n      row.Name,\n      row.TelegramLink,\n      row.TwitterLink,\n      row.EmailLink,\n      row.LinkedInLink,\n      row.Company,\n      row.Campaign,\n      row.ReplyFunnel,\n    ]);\n  }\n  const csvString = csvRows.map(\n    rowArr => rowArr.map(cell => `\"${String(cell).replace(/\"/g, '\"\"')}\"`).join(',')\n  ).join('\\n');\n  // Download\n  const blobUrl = URL.createObjectURL(new Blob([csvString], { type: 'text/csv' }));\n  const linkEl = document.createElement('a');\n  linkEl.href = blobUrl;\n  linkEl.download = 'contacts.csv';\n  document.body.appendChild(linkEl);\n  linkEl.click();\n  document.body.removeChild(linkEl);\n  console.log(`Done! Scraped ${allRows.length} contacts over ${totalPages} pages.`);\n})();\n```\nQA\n[contacts (6).csv](https://github.com/user-attachments/files/18607752/contacts.6.csv)",
+        "url": "https://github.com/ubiquity/business-development/issues/123#issuecomment-2625381836",
+        "commentType": "ISSUE_ASSIGNEE",
+        "score": {
+          "reward": 2.584,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 49,
+            "wordValue": 0.1,
+            "result": 2.37
+          },
+          "readability": {
+            "fleschKincaid": 79.65500000000002,
+            "syllables": 83,
+            "sentences": 6,
+            "score": 0.8034499999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.95
+        }
+      },
+      {
+        "id": 2307594735,
+        "content": "Resolves #123\r\nJust paste this into your console. It is designed to be on the first page of contacts and it will scrape all the contacts and go through the pagination. At the end it will automatically download the CSV export!\r\n<img width=\"1552\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/ad7c0986-90e1-4526-ac7d-16d4985dc3a3\" />\r\nQA\r\n[contacts (6).csv](https://github.com/user-attachments/files/18607752/contacts.6.csv)",
+        "url": "https://github.com/ubiquity/business-development/pull/124",
+        "commentType": "PULL_SPECIFICATION",
+        "score": {
+          "reward": 4.376,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 5
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 2
+              }
+            },
+            "result": 2
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 51,
+            "wordValue": 0.1,
+            "result": 2.4
+          },
+          "readability": {
+            "fleschKincaid": 78.99827956989247,
+            "syllables": 86,
+            "sentences": 6,
+            "score": 0.8100172043010753
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      }
+    ],
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 56.96 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>50</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>2.584</td></tr><tr><td>Review</td><td>Comment</td><td>1</td><td>4.376</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/business-development/issues/123#issuecomment-2625381836\" target=\"_blank\" rel=\"noopener\">Just paste this into your console. It is designed to be on the f&hellip;</a></h6></td><td><details><summary>4.37</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 49&#13;  wordValue: 0.1&#13;  result: 2.37&#13;</pre></details></td><td>0.95</td><td>2</td><td>2.584</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/business-development/pull/124\" target=\"_blank\" rel=\"noopener\">Resolves #123Just paste this into your console. It is designed&hellip;</a></h6></td><td><details><summary>4.4</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 5&#13;    a:&#13;      score: 1&#13;      elementCount: 2&#13;  result: 2&#13;regex:&#13;  wordCount: 51&#13;  wordValue: 0.1&#13;  result: 2.4&#13;</pre></details></td><td>0.8</td><td>1</td><td>4.376</td></tr></tbody></table></details>"
+  },
+  "v4d33m": {
+    "total": 6.31,
+    "userId": 190347813,
+    "comments": [
+      {
+        "id": 2625138989,
+        "content": "@0x4007 idk what would be a good estimate here, but the importance is not critical, just would make our life easier",
+        "url": "https://github.com/ubiquity/business-development/issues/123#issuecomment-2625138989",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 1.92,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 2,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 72.72000000000003,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.8727999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 2821417656,
+        "content": "Goal: to get results from nReach campaigns to Hubspot by exporting data from campaign metrics page: \nsteps needed to perform: \n- login \n- go to campaign metrics \n![Image](https://github.com/user-attachments/assets/9cd9013a-9912-4123-8ee7-9eb2eee2a255)\n- hover over current campaign, e.g. consensus hk, click manage\n- parse data, make sure that the links behind telegram, mail, linkedin and x profiles copied\n![Image](https://github.com/user-attachments/assets/49952ff8-92b2-45b6-bfe3-d0b9d5e16dd8)\n- return csv with:\n1.  contact name \n2. links (telegram, mail, linkedin and x profiles)\n3. company name \n4. reply funnel",
+        "url": "https://github.com/ubiquity/business-development/issues/123",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 4.39,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 9
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0.9
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 66,
+            "wordValue": 0.1,
+            "result": 2.57
+          },
+          "readability": {
+            "fleschKincaid": 48.63227272727275,
+            "syllables": 106,
+            "sentences": 3,
+            "score": 0.8863227272727275
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/business-development/pull/124"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 6.31 XP ]</a>&nbsp;</h3><h6>@v4d33m</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Specification</td><td>1</td><td>4.39</td></tr><tr><td>Issue</td><td>Comment</td><td>1</td><td>1.92</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/business-development/issues/123\" target=\"_blank\" rel=\"noopener\">Goal: to get results from nReach campaigns to Hubspot by exporti&hellip;</a></h6></td><td><details><summary>3.47</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    li:&#13;      score: 0.1&#13;      elementCount: 9&#13;    ol:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0.9&#13;regex:&#13;  wordCount: 66&#13;  wordValue: 0.1&#13;  result: 2.57&#13;</pre></details></td><td>1</td><td>1</td><td>4.39</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/business-development/issues/123#issuecomment-2625138989\" target=\"_blank\" rel=\"noopener\">@0x4007 idk what would be a good estimate here, but the importan&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.5</td><td>2</td><td>1.92</td></tr></tbody></table></details>"
+  }
+}

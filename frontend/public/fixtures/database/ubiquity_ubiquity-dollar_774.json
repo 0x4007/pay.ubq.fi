@@ -1,0 +1,1602 @@
+{
+  "Keyrxng": {
+    "userId": 106303466,
+    "total": 200,
+    "task": {
+      "reward": 200,
+      "multiplier": 1
+    },
+    "reviewRewards": [],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 200 XP ]</a>&nbsp;</h3><h6>@Keyrxng</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Task</td><td>1</td><td>200</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody></tbody></table></details>"
+  },
+  "rndquu": {
+    "total": 106.813,
+    "userId": 119500907,
+    "comments": [
+      {
+        "id": 1707948406,
+        "content": "@Keyrxng I don't know why the bot refuses to assign you to the issue, pls try with the `/start` command",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/774#issuecomment-1707948406",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.362,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 85.01500000000003,
+            "syllables": 24,
+            "sentences": 1,
+            "score": 0.7498499999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1708273273,
+        "content": "Hard to say, https://github.com/ubiquity/ubiquibot/issues/729",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/774#issuecomment-1708273273",
+        "commentType": "ISSUE_AUTHOR",
+        "score": {
+          "reward": 0.171,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 49.48000000000002,
+            "syllables": 18,
+            "sentences": 2,
+            "score": 0.8948000000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1867333101,
+        "content": "Original [discussion](https://github.com/ubiquity/ubiquity-dollar/discussions/730)\r\nRight now we use the diamond proxy pattern for most of our contracts (implemented as diamond [facets](https://github.com/ubiquity/ubiquity-dollar/tree/development/packages/contracts/src/dollar/facets)).\r\nWe also have the [core](https://github.com/ubiquity/ubiquity-dollar/tree/development/packages/contracts/src/dollar/core) contracts that can't be used with the diamond proxy because of function clashing. Hence the different upgradability pattern should be used.\r\nWhat should be done:\r\n1. Apply UUPS to the core contracts:\r\n- https://github.com/ubiquity/ubiquity-dollar/blob/development/packages/contracts/src/dollar/core/CreditNft.sol\r\n- https://github.com/ubiquity/ubiquity-dollar/blob/development/packages/contracts/src/dollar/core/ERC1155Ubiquity.sol\r\n- https://github.com/ubiquity/ubiquity-dollar/blob/development/packages/contracts/src/dollar/core/ERC20Ubiquity.sol\r\n- https://github.com/ubiquity/ubiquity-dollar/blob/development/packages/contracts/src/dollar/core/StakingShare.sol\r\n- https://github.com/ubiquity/ubiquity-dollar/blob/development/packages/contracts/src/dollar/core/UbiquityCreditToken.sol\r\n- https://github.com/ubiquity/ubiquity-dollar/blob/development/packages/contracts/src/dollar/core/UbiquityDollarToken.sol\r\n- https://github.com/ubiquity/ubiquity-dollar/blob/development/packages/contracts/src/dollar/core/UbiquityGovernanceToken.sol\r\n2. Update [deployment script](https://github.com/ubiquity/ubiquity-dollar/tree/development/packages/contracts/scripts/deploy/dollar/solidityScripting) accordingly\r\n3. Refactor [tests](https://github.com/ubiquity/ubiquity-dollar/tree/development/packages/contracts/test/dollar/core) for core contracts accordingly\r\nP.S. Although [CreditClock](https://github.com/ubiquity/ubiquity-dollar/blob/development/packages/contracts/src/dollar/core/CreditClock.sol) exists in the \"core\" folder it is not a \"core\" contract. We have [plans](https://github.com/ubiquity/ubiquity-dollar/issues/772) for moving it to diamond facets.",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/774",
+        "commentType": "ISSUE_SPECIFICATION",
+        "score": {
+          "reward": 21.51,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 14
+              },
+              "ol": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "li": {
+                "score": 0.1,
+                "elementCount": 10
+              },
+              "ul": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 14
+              }
+            },
+            "result": 15
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 90,
+            "wordValue": 0.1,
+            "result": 2.63
+          },
+          "readability": {
+            "fleschKincaid": 33.41615384615386,
+            "syllables": 378,
+            "sentences": 21,
+            "score": 0.7341615384615386
+          },
+          "multiplier": 1,
+          "relevance": 1
+        }
+      },
+      {
+        "id": 1635183745,
+        "content": "The original spec is implemented, core contracts are upgradeable\r\nThis PR still needs some refactoring (small changes in naming) but I will update it in a separate PR since those changes are not really connected with the UUPS\r\nThe \"Compare test coverage\" workflow is failing but since the current PR does not introduce new features I think it's ok to neglect the failing CI run",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#pullrequestreview-1635183745",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.114,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 66,
+            "wordValue": 0.1,
+            "result": 2.57
+          },
+          "readability": {
+            "fleschKincaid": 18.07227272727276,
+            "syllables": 95,
+            "sentences": 1,
+            "score": 0.5807227272727276
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1316129644,
+        "content": "This contract inherits from `ERC1967Proxy` but doesn't override anything. Why can't we use `ERC1967Proxy` everywhere instead of `UupsProxy`?",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1316129644",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -0,0 +1,11 @@\n+// SPDX-License-Identifier: Apache-2.0\n+pragma solidity ^0.8.19;\n+\n+import \"@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol\";\n+\n+contract UupsProxy is ERC1967Proxy {\n+    constructor(\n+        address _implementation,\n+        bytes memory _data\n+    ) ERC1967Proxy(_implementation, _data) {}",
+        "score": {
+          "reward": 1.539,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 58.8663235294118,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.988663235294118
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1316139304,
+        "content": "This is ambiguous because it's hard to say at a first glance what is the difference between `uDollarToken` and `dollar`.\r\nPerhaps it is better to be more concise:\r\n```solidity\r\nUbiquityDollarToken public dollarToken;\r\ndollarToken = UbiquityDollarToken(\r\n  new UupsProxy(\r\n    address(new UbiquityDollarToken()),\r\n    managerPayload\r\n  )\r\n);\r\n```\r\nThis way we consider all core contracts to be proxy by default + we can get implementation address any time from the proxy directly",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1316139304",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -3,16 +3,29 @@ pragma solidity 0.8.19;\n \n import {IERC20} from \"@openzeppelin/contracts/token/ERC20/IERC20.sol\";\n import \"./01_Diamond.s.sol\";\n+import {UupsProxy} from \"../../../../test/helpers/UupsProxy.sol\";\n \n contract DollarScript is DiamondScript {\n-    UbiquityDollarToken dollar;\n     address metapool;\n \n+    UbiquityDollarToken public uDollarToken;\n+    UbiquityDollarToken public dollar;\n+    UupsProxy public proxyUDollarToken;",
+        "score": {
+          "reward": 2.464,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 50,
+            "wordValue": 0.1,
+            "result": 2.38
+          },
+          "readability": {
+            "fleschKincaid": 57.94400000000002,
+            "syllables": 73,
+            "sentences": 2,
+            "score": 0.9794400000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1316139501,
+        "content": "We have a convention to omit all token symbols like `UAD, UCR, UGOV, etc...`\r\nWhenever possible they should be referenced like `dollarToken`, `creditToken`, `creditNft`, `governanceToken`, etc...\r\nPls refactor accordingly",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1316139501",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -4,18 +4,33 @@ pragma solidity 0.8.19;\n import \"./02_UbiquityDollarToken.s.sol\";\n \n contract GovernanceScript is DollarScript {\n-    UbiquityGovernanceToken governance;\n+    UbiquityGovernanceToken public uGovToken;",
+        "score": {
+          "reward": 1.536,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 47.12035714285716,
+            "syllables": 37,
+            "sentences": 2,
+            "score": 0.8712035714285716
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1316139704,
+        "content": "Pls remove the commented code across the whole PR",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1316139704",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -44,18 +46,27 @@ contract CreditNft is ERC1155Ubiquity, ICreditNft {\n     /// @notice Modifier checks that the method is called by a user with the \"CreditNft manager\" role\n     modifier onlyCreditNftManager() {\n         require(\n-            accessControl.hasRole(CREDIT_NFT_MANAGER_ROLE, msg.sender),\n+            accessControl.hasRole(CREDIT_NFT_MANAGER_ROLE, _msgSender()),\n             \"Caller is not a CreditNft manager\"\n         );\n         _;\n     }\n \n-    /**\n-     * @notice Contract constructor\n-     * @dev URI param is if we want to add an off-chain meta data uri associated with this contract\n-     * @param _manager Access control address\n-     */\n-    constructor(address _manager) ERC1155Ubiquity(_manager, \"URI\") {\n+    // /**",
+        "score": {
+          "reward": 0.735,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 9,
+            "wordValue": 0.1,
+            "result": 0.84
+          },
+          "readability": {
+            "fleschKincaid": 75.50000000000003,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.8449999999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1316139936,
+        "content": "All core contracts and diamond facets should have proper natspec comments for constructors, state variables, methods, etc...\r\nThis way in the end we get natspec generated [docs](https://github.com/ubiquity/ubiquity-dollar/blob/development/packages/contracts/docs/src/SUMMARY.md)",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1316139936",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -44,18 +46,27 @@ contract CreditNft is ERC1155Ubiquity, ICreditNft {\n     /// @notice Modifier checks that the method is called by a user with the \"CreditNft manager\" role\n     modifier onlyCreditNftManager() {\n         require(\n-            accessControl.hasRole(CREDIT_NFT_MANAGER_ROLE, msg.sender),\n+            accessControl.hasRole(CREDIT_NFT_MANAGER_ROLE, _msgSender()),\n             \"Caller is not a CreditNft manager\"\n         );\n         _;\n     }\n \n-    /**\n-     * @notice Contract constructor\n-     * @dev URI param is if we want to add an off-chain meta data uri associated with this contract\n-     * @param _manager Access control address\n-     */\n-    constructor(address _manager) ERC1155Ubiquity(_manager, \"URI\") {\n+    // /**\n+    //  * @notice Contract constructor\n+    //  * @dev URI param is if we want to add an off-chain meta data uri associated with this contract\n+    //  * @param _manager Access control address\n+    //  */\n+    // constructor(address _manager) ERC1155Ubiquity(_manager, \"URI\") {\n+    //     _totalOutstandingDebt = 0;\n+    // }\n+\n+    constructor() {\n+        _disableInitializers();\n+    }\n+\n+    function initialize(address _manager) public initializer {",
+        "score": {
+          "reward": 3.222,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 2
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 64.66583333333335,
+            "syllables": 41,
+            "sentences": 2,
+            "score": 0.9533416666666664
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1319111497,
+        "content": "Missing natspec comments for events",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1319111497",
+        "commentType": "PULL_COLLABORATOR",
+        "diffHunk": "@@ -14,13 +18,26 @@ import {IERC20Ubiquity} from \"../../dollar/interfaces/IERC20Ubiquity.sol\";\n  * - draft-ERC20 permit\n  * - Ubiquity Manager access control\n  */\n-abstract contract ERC20Ubiquity is ERC20Permit, ERC20Pausable, IERC20Ubiquity {\n+abstract contract ERC20Ubiquity is\n+    Initializable,\n+    UUPSUpgradeable,\n+    ERC20Upgradeable,\n+    ERC20PermitUpgradeable,\n+    ERC20PausableUpgradeable\n+{\n     /// @notice Token symbol\n     string private _symbol;\n \n     /// @notice Access control interface\n     IAccessControl public accessControl;\n \n+    event Burning(address indexed _burned, uint256 _amount);",
+        "score": {
+          "reward": 0.536,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 49.48000000000002,
+            "syllables": 9,
+            "sentences": 1,
+            "score": 0.8948000000000002
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1704726202,
+        "content": "@Keyrxng Is it ready for review?",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1704726202",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.222,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 6,
+            "wordValue": 0.1,
+            "result": 0.61
+          },
+          "readability": {
+            "fleschKincaid": 87.94500000000002,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.7205499999999998
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1705469713,
+        "content": "Pls mark the PR as ready for review when it is ready + make sure that CI is passing",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1705469713",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.845,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 85.16499999999999,
+            "syllables": 22,
+            "sentences": 1,
+            "score": 0.7483500000000001
+          },
+          "multiplier": 1,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1705552641,
+        "content": "Slither workflow is running against a PR branch. Slither workflow explicitly states the [error](https://github.com/ubiquity/ubiquity-dollar/actions/runs/5986886375/job/16240516131?pr=779): `Source \"test/helpers/UupstestHelper.sol\" not found `. The `UupstestHelper.sol` file had never existed in the project before this PR was created.",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1705552641",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 2.848,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 27,
+            "wordValue": 0.1,
+            "result": 1.78
+          },
+          "readability": {
+            "fleschKincaid": 66.10000000000002,
+            "syllables": 42,
+            "sentences": 3,
+            "score": 0.9389999999999997
+          },
+          "multiplier": 1,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1707931039,
+        "content": "Pls mark this PR as \"ready for review\" when you're done",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1707931039",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.248,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 95.955,
+            "syllables": 14,
+            "sentences": 1,
+            "score": 0.64045
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      },
+      {
+        "id": 1710789533,
+        "content": "I don't understand how exactly \"the test suite for the UUPS side of things\" will look like. Could you provide an example of what we need to test regarding the UUPS?",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1710789533",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 1.687,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 32,
+            "wordValue": 0.1,
+            "result": 1.95
+          },
+          "readability": {
+            "fleschKincaid": 82.20125,
+            "syllables": 41,
+            "sentences": 2,
+            "score": 0.7779874999999999
+          },
+          "multiplier": 1,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1717993388,
+        "content": "@Keyrxng \r\nThe current issue is about refactoring (i.e. no new features introduced). Test coverage has decreased but we can neglect the failing \"Compare Test Coverage\" workflow in this case and merge the PR anyway because (again) there are no new features introduced.\r\nIt wasn't described in the original issue but it would be really appreciated if you could add a single test file which shows that core contracts are indeed upgradable now.",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1717993388",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 3.042,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 3
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 74,
+            "wordValue": 0.1,
+            "result": 2.61
+          },
+          "readability": {
+            "fleschKincaid": 61.48327027027028,
+            "syllables": 114,
+            "sentences": 5,
+            "score": 0.9851672972972971
+          },
+          "multiplier": 1,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1725066517,
+        "content": "@Keyrxng pls merge https://github.com/Keyrxng/ubiquity-dollar/pull/5",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1725066517",
+        "commentType": "PULL_COLLABORATOR",
+        "score": {
+          "reward": 0.672,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 3,
+            "wordValue": 0.1,
+            "result": 0.35
+          },
+          "readability": {
+            "fleschKincaid": 78.19795454545455,
+            "syllables": 16,
+            "sentences": 2,
+            "score": 0.8180204545454545
+          },
+          "multiplier": 1,
+          "relevance": 0.4
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1611426590,
+            "effect": {
+              "addition": 1639,
+              "deletion": 884
+            },
+            "reward": 25.23,
+            "priority": 1
+          },
+          {
+            "reviewId": 1616230171,
+            "effect": {
+              "addition": 584,
+              "deletion": 686
+            },
+            "reward": 12.7,
+            "priority": 1
+          },
+          {
+            "reviewId": 1635183745,
+            "effect": {
+              "addition": 1629,
+              "deletion": 884
+            },
+            "reward": 25.13,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 106.813 XP ]</a>&nbsp;</h3><h6>@rndquu</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>3</td><td>63.06</td></tr><tr><td>Issue</td><td>Specification</td><td>1</td><td>21.51</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>0.533</td></tr><tr><td>Review</td><td>Comment</td><td>14</td><td>21.71</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779\" target=\"_blank\" rel=\"noopener\">#779</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+1639 -884</td><td>1</td><td>25.23</td></tr><tr><td>+584 -686</td><td>1</td><td>12.7</td></tr><tr><td>+1629 -884</td><td>1</td><td>25.13</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/774\" target=\"_blank\" rel=\"noopener\">Original [discussion](https://github.com/ubiquity/ubiquity-dolla&hellip;</a></h6></td><td><details><summary>17.63</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 14&#13;    ol:&#13;      score: 0&#13;      elementCount: 2&#13;    li:&#13;      score: 0.1&#13;      elementCount: 10&#13;    ul:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 14&#13;  result: 15&#13;regex:&#13;  wordCount: 90&#13;  wordValue: 0.1&#13;  result: 2.63&#13;</pre></details></td><td>1</td><td>1</td><td>21.51</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/774#issuecomment-1707948406\" target=\"_blank\" rel=\"noopener\">@Keyrxng I don't know why the bot refuses to assign you to the i&hellip;</a></h6></td><td><details><summary>1.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.362</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/774#issuecomment-1708273273\" target=\"_blank\" rel=\"noopener\">Hard to say, https://github.com/ubiquity/ubiquibot/issues/729</a></h6></td><td><details><summary>1.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.171</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#pullrequestreview-1635183745\" target=\"_blank\" rel=\"noopener\">The original spec is implemented, core contracts are upgradeable&hellip;</a></h6></td><td><details><summary>2.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 66&#13;  wordValue: 0.1&#13;  result: 2.57&#13;</pre></details></td><td>0.7</td><td>1</td><td>2.114</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1316129644\" target=\"_blank\" rel=\"noopener\">This contract inherits from &#96;ERC1967Proxy&#96; but doesn't o&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.9</td><td>1</td><td>1.539</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1316139304\" target=\"_blank\" rel=\"noopener\">This is ambiguous because it's hard to say at a first glance wha&hellip;</a></h6></td><td><details><summary>2.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 50&#13;  wordValue: 0.1&#13;  result: 2.38&#13;</pre></details></td><td>0.8</td><td>1</td><td>2.464</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1316139501\" target=\"_blank\" rel=\"noopener\">We have a convention to omit all token symbols like &#96;UAD, UC&hellip;</a></h6></td><td><details><summary>1.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.8</td><td>1</td><td>1.536</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1316139704\" target=\"_blank\" rel=\"noopener\">Pls remove the commented code across the whole PR</a></h6></td><td><details><summary>0.84</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 9&#13;  wordValue: 0.1&#13;  result: 0.84&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.735</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1316139936\" target=\"_blank\" rel=\"noopener\">All core contracts and diamond facets should have proper natspec&hellip;</a></h6></td><td><details><summary>2.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 2&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>0.9</td><td>1</td><td>3.222</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1319111497\" target=\"_blank\" rel=\"noopener\">Missing natspec comments for events</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.536</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1704726202\" target=\"_blank\" rel=\"noopener\">@Keyrxng Is it ready for review?</a></h6></td><td><details><summary>0.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 6&#13;  wordValue: 0.1&#13;  result: 0.61&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.222</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1705469713\" target=\"_blank\" rel=\"noopener\">Pls mark the PR as ready for review when it is ready + make sure&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.845</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1705552641\" target=\"_blank\" rel=\"noopener\">Slither workflow is running against a PR branch. Slither workflo&hellip;</a></h6></td><td><details><summary>2.78</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 27&#13;  wordValue: 0.1&#13;  result: 1.78&#13;</pre></details></td><td>0.8</td><td>1</td><td>2.848</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1707931039\" target=\"_blank\" rel=\"noopener\">Pls mark this PR as \"ready for review\" when you're done</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.248</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1710789533\" target=\"_blank\" rel=\"noopener\">I don't understand how exactly \"the test suite for the UUPS side&hellip;</a></h6></td><td><details><summary>1.95</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 32&#13;  wordValue: 0.1&#13;  result: 1.95&#13;</pre></details></td><td>0.7</td><td>1</td><td>1.687</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1717993388\" target=\"_blank\" rel=\"noopener\">@Keyrxng The current issue is about refactoring (i.e. no new f&hellip;</a></h6></td><td><details><summary>2.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 3&#13;  result: 0&#13;regex:&#13;  wordCount: 74&#13;  wordValue: 0.1&#13;  result: 2.61&#13;</pre></details></td><td>0.9</td><td>1</td><td>3.042</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1725066517\" target=\"_blank\" rel=\"noopener\">@Keyrxng pls merge https://github.com/Keyrxng/ubiquity-dollar/pu&hellip;</a></h6></td><td><details><summary>1.35</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 3&#13;  wordValue: 0.1&#13;  result: 0.35&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.672</td></tr></tbody></table></details>"
+  },
+  "Steveantor": {
+    "total": 0.102,
+    "userId": 109317559,
+    "comments": [
+      {
+        "id": 1708235372,
+        "content": "There's a linked PR, why the bot isn't picking up?",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/774#issuecomment-1708235372",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.102,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 103.00500000000001,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 0.102 XP ]</a>&nbsp;</h3><h6>@Steveantor</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>1</td><td>0.102</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/774#issuecomment-1708235372\" target=\"_blank\" rel=\"noopener\">There's a linked PR, why the bot isn't picking up?</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.102</td></tr></tbody></table></details>"
+  },
+  "molecula451": {
+    "total": 56.501,
+    "userId": 41552663,
+    "comments": [
+      {
+        "id": 1710862663,
+        "content": "the bot is a rebel",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/774#issuecomment-1710862663",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.017,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 100.24000000000002,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.1
+        }
+      },
+      {
+        "id": 1712780284,
+        "content": "it looks like keyring it's gonna have this one, albeit it still need more work, let's see",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/774#issuecomment-1712780284",
+        "commentType": "ISSUE_CONTRIBUTOR",
+        "score": {
+          "reward": 0.301,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 19,
+            "wordValue": 0.1,
+            "result": 1.43
+          },
+          "readability": {
+            "fleschKincaid": 89.5921052631579,
+            "syllables": 22,
+            "sentences": 1,
+            "score": 0.7040789473684209
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1636699712,
+        "content": "There are still cosmetic changes that can be done. Good for subsequently PR's overall it looks good and doing the job",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#pullrequestreview-1636699712",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.192,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 22,
+            "wordValue": 0.1,
+            "result": 1.57
+          },
+          "readability": {
+            "fleschKincaid": 84.15181818181821,
+            "syllables": 29,
+            "sentences": 2,
+            "score": 0.7584818181818178
+          },
+          "multiplier": 0.25,
+          "relevance": 0.4
+        }
+      },
+      {
+        "id": 1319128532,
+        "content": "There seem to be a bug in this test, you're pranking once in the `setUp()`. Then pranking twice (overriding it) in 2 tests)\r\n```\r\n[FAIL. Reason: You cannot overwrite `prank` until it is applied at least once] testSetManager_ShouldRevert_WhenNotAdmin() (gas: 3071)\r\n[FAIL. Reason: You cannot overwrite `prank` until it is applied at least once] testSetManager_ShouldSetManager() (gas: 5200)\r\n```",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1319128532",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -11,7 +11,7 @@ contract UbiquityCreditTokenTest is LocalTestHelper {\n         super.setUp();\n \n         vm.prank(admin);",
+        "score": {
+          "reward": 0.432,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 23,
+            "wordValue": 0.1,
+            "result": 1.61
+          },
+          "readability": {
+            "fleschKincaid": 92.17119565217394,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.6782880434782607
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1319148580,
+        "content": "`import \"forge-std/Test.sol\";` seems to be reimported twice, [here](https://github.com/ubiquity/ubiquity-dollar/blob/0dc083e1810dc00eda953e1ebecfa770603e6e7e/packages/contracts/test/helpers/DiamondTestHelper.sol#L16) and the other on `CreditNftManagerFacet.t.sol` make it work with the inheritance, can you re-check?",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1319148580",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -1,12 +1,139 @@\n // SPDX-License-Identifier: MIT\n pragma solidity ^0.8.19;\n \n+import {ERC1967Proxy} from \"@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol\";\n+import {UbiquityGovernanceToken} from \"../../src/dollar/core/UbiquityGovernanceToken.sol\";\n+import {UbiquityDollarToken} from \"../../src/dollar/core/UbiquityDollarToken.sol\";\n+import {UbiquityCreditToken} from \"../../src/dollar/core/UbiquityCreditToken.sol\";\n+import {StakingShare} from \"../../src/dollar/core/StakingShare.sol\";\n+import {CreditNft} from \"../../src/dollar/core/CreditNft.sol\";\n+import {ManagerFacet} from \"../../src/dollar/facets/ManagerFacet.sol\";\n+import {AccessControlFacet} from \"../../src/dollar/facets/AccessControlFacet.sol\";\n+import {ERC1155Ubiquity} from \"../../src/dollar/core/ERC1155Ubiquity.sol\";\n+import \"../../src/dollar/libraries/Constants.sol\";\n+import \"forge-std/Test.sol\";",
+        "score": {
+          "reward": 0.616,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 20,
+            "wordValue": 0.1,
+            "result": 1.48
+          },
+          "readability": {
+            "fleschKincaid": 80.78500000000003,
+            "syllables": 25,
+            "sentences": 1,
+            "score": 0.7921499999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1319159122,
+        "content": "Please separate this contract  `UupsTestHelper` from the same file as `DiamondTestHelper.sol`. And revamp all the statemutability",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1319159122",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -1,12 +1,139 @@\n // SPDX-License-Identifier: MIT\n pragma solidity ^0.8.19;\n \n+import {ERC1967Proxy} from \"@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol\";\n+import {UbiquityGovernanceToken} from \"../../src/dollar/core/UbiquityGovernanceToken.sol\";\n+import {UbiquityDollarToken} from \"../../src/dollar/core/UbiquityDollarToken.sol\";\n+import {UbiquityCreditToken} from \"../../src/dollar/core/UbiquityCreditToken.sol\";\n+import {StakingShare} from \"../../src/dollar/core/StakingShare.sol\";\n+import {CreditNft} from \"../../src/dollar/core/CreditNft.sol\";\n+import {ManagerFacet} from \"../../src/dollar/facets/ManagerFacet.sol\";\n+import {AccessControlFacet} from \"../../src/dollar/facets/AccessControlFacet.sol\";\n+import {ERC1155Ubiquity} from \"../../src/dollar/core/ERC1155Ubiquity.sol\";\n+import \"../../src/dollar/libraries/Constants.sol\";\n+import \"forge-std/Test.sol\";\n+\n import \"forge-std/Test.sol\";\n import \"forge-std/Vm.sol\";\n import \"../../src/dollar/interfaces/IDiamondCut.sol\";\n import \"../../src/dollar/interfaces/IDiamondLoupe.sol\";\n \n-contract DiamondTestHelper is IDiamondCut, IDiamondLoupe, Test {\n+contract UupsTestHelper {",
+        "score": {
+          "reward": 0.296,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 48.65857142857146,
+            "syllables": 25,
+            "sentences": 2,
+            "score": 0.8865857142857146
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1319173044,
+        "content": "also when naming, name everything that applies uups as `UUPSTestHelper`, for e.g",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1319173044",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -1,12 +1,139 @@\n // SPDX-License-Identifier: MIT\n pragma solidity ^0.8.19;\n \n+import {ERC1967Proxy} from \"@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol\";\n+import {UbiquityGovernanceToken} from \"../../src/dollar/core/UbiquityGovernanceToken.sol\";\n+import {UbiquityDollarToken} from \"../../src/dollar/core/UbiquityDollarToken.sol\";\n+import {UbiquityCreditToken} from \"../../src/dollar/core/UbiquityCreditToken.sol\";\n+import {StakingShare} from \"../../src/dollar/core/StakingShare.sol\";\n+import {CreditNft} from \"../../src/dollar/core/CreditNft.sol\";\n+import {ManagerFacet} from \"../../src/dollar/facets/ManagerFacet.sol\";\n+import {AccessControlFacet} from \"../../src/dollar/facets/AccessControlFacet.sol\";\n+import {ERC1155Ubiquity} from \"../../src/dollar/core/ERC1155Ubiquity.sol\";\n+import \"../../src/dollar/libraries/Constants.sol\";\n+import \"forge-std/Test.sol\";\n+\n import \"forge-std/Test.sol\";\n import \"forge-std/Vm.sol\";\n import \"../../src/dollar/interfaces/IDiamondCut.sol\";\n import \"../../src/dollar/interfaces/IDiamondLoupe.sol\";\n \n-contract DiamondTestHelper is IDiamondCut, IDiamondLoupe, Test {\n+contract UupsTestHelper {",
+        "score": {
+          "reward": 0.231,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 12,
+            "wordValue": 0.1,
+            "result": 1.04
+          },
+          "readability": {
+            "fleschKincaid": 73.84500000000001,
+            "syllables": 18,
+            "sentences": 2,
+            "score": 0.8615499999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1320707566,
+        "content": "You must be doing something wrong here, why does it initializes and `diamond` address, when core are separate from diamonds, should have it's own address",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320707566",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -383,4 +388,29 @@ contract StakingShareTest is DepositStakingShare {\n         vm.prank(fifthAccount);\n         stakingShare.setUri(1, stringTest);\n     }\n+\n+    function testUUPS_ShouldUpgradeAndCall() external {\n+        StakingShareOneChange stakingShareOneChange = new StakingShareOneChange();\n+\n+        string\n+            memory uri = \"https://bafybeifibz4fhk4yag5reupmgh5cdbm2oladke4zfd7ldyw7avgipocpmy.ipfs.infura-ipfs.io/\";\n+\n+        vm.startPrank(admin);\n+        bytes memory hasUpgradedCall = abi.encodeWithSignature(\"hasUpgraded()\");\n+\n+        (bool success, ) = address(IStakingShareToken).call(hasUpgradedCall);\n+        assertEq(success, false, \"should not have upgraded yet\");\n+        require(success == false, \"should not have upgraded yet\");\n+\n+        IStakingShareToken.upgradeTo(address(stakingShareOneChange));\n+\n+        (success, ) = address(IStakingShareToken).call(hasUpgradedCall);\n+        assertEq(success, true, \"should have upgraded\");\n+        require(success == true, \"should have upgraded\");\n+\n+        vm.expectRevert();\n+        IStakingShareToken.initialize(address(diamond), uri);",
+        "score": {
+          "reward": 0.495,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 63.020000000000024,
+            "syllables": 35,
+            "sentences": 1,
+            "score": 0.9697999999999998
+          },
+          "multiplier": 0.25,
+          "relevance": 0.9
+        }
+      },
+      {
+        "id": 1320707634,
+        "content": "can you explain this conversion?",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320707634",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -27,7 +26,7 @@ contract CreditNftTest is LocalTestHelper {\n         super.setUp();\n \n         // deploy Credit NFT token\n-        creditNft = new CreditNft(address(diamond));\n+        creditNft = IUbiquityNft;",
+        "score": {
+          "reward": 0.136,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 66.40000000000003,
+            "syllables": 8,
+            "sentences": 1,
+            "score": 0.9359999999999996
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1320708011,
+        "content": "why do we have to pass a interface name to a build command, as part of the building types, it should be from all files at once, this one seems \"hacky\"",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320708011",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -12,7 +12,7 @@\n     \"start\": \"next dev\",\n     \"clean\": \"rimraf next types node_modules\",\n     \"build:next\": \"next build\",\n-    \"build:types\": \"typechain --show-stack-traces --target ethers-v5 ../contracts/out/**/!(test*|Test*|*.t.sol|*.s.sol)/*.json --out-dir=types\"\n+    \"build:types\": \"typechain --show-stack-traces --target ethers-v5 '../contracts/out/**/!(test*|Test*||*.t.sol|*.s.sol|access*)/**/!(*IAccessControl).json' --out-dir types\"",
+        "score": {
+          "reward": 0.42,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 31,
+            "wordValue": 0.1,
+            "result": 1.92
+          },
+          "readability": {
+            "fleschKincaid": 74.39580645161291,
+            "syllables": 37,
+            "sentences": 1,
+            "score": 0.8560419354838709
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1320708147,
+        "content": "you see how you are reimporting here the Test.sol? this should not be imported directly to files, this should be in the helper file and just once",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320708147",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -12,6 +12,8 @@ import {IERC20Ubiquity} from \"../../../src/dollar/interfaces/IERC20Ubiquity.sol\"\n import {CreditNft} from \"../../../src/dollar/core/CreditNft.sol\";\n import {UbiquityCreditToken} from \"../../../src/dollar/core/UbiquityCreditToken.sol\";\n \n+import \"forge-std/Test.sol\";",
+        "score": {
+          "reward": 0.413,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 28,
+            "wordValue": 0.1,
+            "result": 1.81
+          },
+          "readability": {
+            "fleschKincaid": 88.5902380952381,
+            "syllables": 36,
+            "sentences": 3,
+            "score": 0.7140976190476189
+          },
+          "multiplier": 0.25,
+          "relevance": 0.75
+        }
+      },
+      {
+        "id": 1320708671,
+        "content": "also, why you are touching facets, this PR should be only for core files",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320708671",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -12,6 +12,8 @@ import {IERC20Ubiquity} from \"../../../src/dollar/interfaces/IERC20Ubiquity.sol\"\n import {CreditNft} from \"../../../src/dollar/core/CreditNft.sol\";\n import {UbiquityCreditToken} from \"../../../src/dollar/core/UbiquityCreditToken.sol\";\n \n+import \"forge-std/Test.sol\";",
+        "score": {
+          "reward": 0.306,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 77.81071428571428,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.8218928571428572
+          },
+          "multiplier": 0.25,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1320709116,
+        "content": "you may see here this is the original Test.sol",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320709116",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -1,12 +1,139 @@\n // SPDX-License-Identifier: MIT\n pragma solidity ^0.8.19;\n \n+import {ERC1967Proxy} from \"@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol\";\n+import {UbiquityGovernanceToken} from \"../../src/dollar/core/UbiquityGovernanceToken.sol\";\n+import {UbiquityDollarToken} from \"../../src/dollar/core/UbiquityDollarToken.sol\";\n+import {UbiquityCreditToken} from \"../../src/dollar/core/UbiquityCreditToken.sol\";\n+import {StakingShare} from \"../../src/dollar/core/StakingShare.sol\";\n+import {CreditNft} from \"../../src/dollar/core/CreditNft.sol\";\n+import {ManagerFacet} from \"../../src/dollar/facets/ManagerFacet.sol\";\n+import {AccessControlFacet} from \"../../src/dollar/facets/AccessControlFacet.sol\";\n+import {ERC1155Ubiquity} from \"../../src/dollar/core/ERC1155Ubiquity.sol\";\n+import \"../../src/dollar/libraries/Constants.sol\";\n+import \"forge-std/Test.sol\";\n+\n import \"forge-std/Test.sol\";",
+        "score": {
+          "reward": 0.189,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 10,
+            "wordValue": 0.1,
+            "result": 0.9
+          },
+          "readability": {
+            "fleschKincaid": 91.78000000000003,
+            "syllables": 13,
+            "sentences": 2,
+            "score": 0.6821999999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1320709217,
+        "content": "why you are renaming instances as interfaces?",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320709217",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -294,7 +286,7 @@ contract DepositStateChefTest is DepositStateChef {\n         blocks = bound(blocks, 45361, 2 ** 128 - 1);\n         assertEq(IChefFacet.totalShares(), shares);\n \n-        uint256 preBal = governanceToken.balanceOf(fourthAccount);\n+        uint256 preBal = IGovToken.balanceOf(fourthAccount);",
+        "score": {
+          "reward": 0.176,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 7,
+            "wordValue": 0.1,
+            "result": 0.69
+          },
+          "readability": {
+            "fleschKincaid": 54.70142857142861,
+            "syllables": 12,
+            "sentences": 1,
+            "score": 0.947014285714286
+          },
+          "multiplier": 0.25,
+          "relevance": 0.8
+        }
+      },
+      {
+        "id": 1320741473,
+        "content": "can you refactor this to be a conditional?",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320741473",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -7,6 +7,12 @@ import {IMetaPool} from \"../../../src/dollar/interfaces/IMetaPool.sol\";\n import {StakingShare} from \"../../../src/dollar/core/StakingShare.sol\";\n import \"../../../src/dollar/libraries/Constants.sol\";\n \n+contract StakingShareOneChange is StakingShare {\n+    function hasUpgraded() public pure returns (bool) {",
+        "score": {
+          "reward": 0.15,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 61.24000000000001,
+            "syllables": 13,
+            "sentences": 1,
+            "score": 0.9875999999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1320741892,
+        "content": "i think this one could be an override from the original OpenZeppelin implementation? if so then better quality",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320741892",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -2,8 +2,18 @@\n pragma solidity 0.8.19;\n \n import \"../core/ERC1155Ubiquity.sol\";\n+import {Initializable} from \"@openzeppelinUpgradeable/contracts/proxy/utils/Initializable.sol\";\n \n-contract BondingShare is ERC1155Ubiquity {\n+contract BondingShare is Initializable, ERC1155Ubiquity {\n     // solhint-disable-next-line no-empty-blocks\n-    constructor(address _diamond) ERC1155Ubiquity(_diamond, \"URI\") {}\n+    constructor() {\n+        _disableInitializers();\n+    }\n+\n+    function initialize(",
+        "score": {
+          "reward": 0.366,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 18,
+            "wordValue": 0.1,
+            "result": 1.38
+          },
+          "readability": {
+            "fleschKincaid": 37.900000000000034,
+            "syllables": 34,
+            "sentences": 2,
+            "score": 0.7790000000000004
+          },
+          "multiplier": 0.25,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1320742788,
+        "content": "I see, but make it work from inheritance",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320742788",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -12,6 +12,8 @@ import {IERC20Ubiquity} from \"../../../src/dollar/interfaces/IERC20Ubiquity.sol\"\n import {CreditNft} from \"../../../src/dollar/core/CreditNft.sol\";\n import {UbiquityCreditToken} from \"../../../src/dollar/core/UbiquityCreditToken.sol\";\n \n+import \"forge-std/Test.sol\";",
+        "score": {
+          "reward": 0.15,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 8,
+            "wordValue": 0.1,
+            "result": 0.76
+          },
+          "readability": {
+            "fleschKincaid": 82.39000000000001,
+            "syllables": 11,
+            "sentences": 1,
+            "score": 0.7760999999999999
+          },
+          "multiplier": 0.25,
+          "relevance": 0.65
+        }
+      },
+      {
+        "id": 1320743710,
+        "content": "you may add a test (or point me to if it's alrady added) and keep it this way too if it does the intended",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320743710",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -7,6 +7,12 @@ import {IMetaPool} from \"../../../src/dollar/interfaces/IMetaPool.sol\";\n import {StakingShare} from \"../../../src/dollar/core/StakingShare.sol\";\n import \"../../../src/dollar/libraries/Constants.sol\";\n \n+contract StakingShareOneChange is StakingShare {\n+    function hasUpgraded() public pure returns (bool) {",
+        "score": {
+          "reward": 0.39,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 25,
+            "wordValue": 0.1,
+            "result": 1.7
+          },
+          "readability": {
+            "fleschKincaid": 86.708,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.73292
+          },
+          "multiplier": 0.25,
+          "relevance": 0.75
+        }
+      },
+      {
+        "id": 1321989282,
+        "content": "You don't have to import these interfaces to this file",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1321989282",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -0,0 +1,135 @@\n+// SPDX-License-Identifier: MIT\n+pragma solidity 0.8.19;\n+\n+import {ERC1967Proxy} from \"@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol\";\n+import {UbiquityGovernanceToken} from \"../../src/dollar/core/UbiquityGovernanceToken.sol\";\n+import {UbiquityDollarToken} from \"../../src/dollar/core/UbiquityDollarToken.sol\";\n+import {UbiquityCreditToken} from \"../../src/dollar/core/UbiquityCreditToken.sol\";\n+import {StakingShare} from \"../../src/dollar/core/StakingShare.sol\";\n+import {CreditNft} from \"../../src/dollar/core/CreditNft.sol\";\n+import {ManagerFacet} from \"../../src/dollar/facets/ManagerFacet.sol\";\n+import {AccessControlFacet} from \"../../src/dollar/facets/AccessControlFacet.sol\";\n+import {ERC1155Ubiquity} from \"../../src/dollar/core/ERC1155Ubiquity.sol\";\n+import \"../../src/dollar/libraries/Constants.sol\";\n+import \"forge-std/Test.sol\";\n+\n+import \"../../src/dollar/interfaces/IDiamondCut.sol\";",
+        "score": {
+          "reward": 0.21,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 11,
+            "wordValue": 0.1,
+            "result": 0.97
+          },
+          "readability": {
+            "fleschKincaid": 80.30636363636367,
+            "syllables": 15,
+            "sentences": 1,
+            "score": 0.7969363636363633
+          },
+          "multiplier": 0.25,
+          "relevance": 0.7
+        }
+      },
+      {
+        "id": 1332291491,
+        "content": "you can remove this word",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1332291491",
+        "commentType": "PULL_CONTRIBUTOR",
+        "diffHunk": "@@ -144,7 +144,10 @@\n     \"Txpool\",\n     \"nomicfoundation\",\n     \"blockhash\",\n-    \"Merkle\"\n+    \"Merkle\",\n+    \"UUPS\",\n+    \"Initializable\",\n+    \"Uupstest\"",
+        "score": {
+          "reward": 0.051,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 5,
+            "wordValue": 0.1,
+            "result": 0.53
+          },
+          "readability": {
+            "fleschKincaid": 100.24000000000002,
+            "syllables": 6,
+            "sentences": 1,
+            "score": 1
+          },
+          "multiplier": 0.25,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1710785503,
+        "content": "not really \"out\" of a scope for the bounty, all issues are rounded including tests, tests are part of all the issues, there seems to be a good on-going work here, take your time and check the tests if needed it",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1710785503",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.355,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 42,
+            "wordValue": 0.1,
+            "result": 2.23
+          },
+          "readability": {
+            "fleschKincaid": 67.51928571428574,
+            "syllables": 48,
+            "sentences": 1,
+            "score": 0.9248071428571426
+          },
+          "multiplier": 0.25,
+          "relevance": 0.5
+        }
+      },
+      {
+        "id": 1712737881,
+        "content": "Your branch seems to be outdated, the build it's passing, but the PR needs more work",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1712737881",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.234,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 17,
+            "wordValue": 0.1,
+            "result": 1.32
+          },
+          "readability": {
+            "fleschKincaid": 95.02705882352943,
+            "syllables": 19,
+            "sentences": 1,
+            "score": 0.6497294117647057
+          },
+          "multiplier": 0.25,
+          "relevance": 0.6
+        }
+      },
+      {
+        "id": 1714482629,
+        "content": "I'm only seeing [one](https://github.com/ubiquity/ubiquity-dollar/blob/4dad177e879161b1a01245801cdbb4f00d88f303/packages/contracts/test/dollar/core/StakingShare.t.sol#L386) test for a contract, part of the issue #774 is to refactor for all the contracts",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1714482629",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.672,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 21,
+            "wordValue": 0.1,
+            "result": 1.52
+          },
+          "readability": {
+            "fleschKincaid": 72.72000000000003,
+            "syllables": 28,
+            "sentences": 1,
+            "score": 0.8727999999999997
+          },
+          "multiplier": 0.25,
+          "relevance": 0.85
+        }
+      },
+      {
+        "id": 1715788927,
+        "content": "Upgradeability it's core test here. Make upgradeability testing for all core refactored contracts",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1715788927",
+        "commentType": "PULL_CONTRIBUTOR",
+        "score": {
+          "reward": 0.333,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 14,
+            "wordValue": 0.1,
+            "result": 1.16
+          },
+          "readability": {
+            "fleschKincaid": 30.53000000000003,
+            "syllables": 28,
+            "sentences": 2,
+            "score": 0.7053000000000003
+          },
+          "multiplier": 0.25,
+          "relevance": 0.95
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "reviews": [
+          {
+            "reviewId": 1616255830,
+            "effect": {
+              "addition": 1527,
+              "deletion": 882
+            },
+            "reward": 24.09,
+            "priority": 1
+          },
+          {
+            "reviewId": 1618796649,
+            "effect": {
+              "addition": 182,
+              "deletion": 181
+            },
+            "reward": 3.63,
+            "priority": 1
+          },
+          {
+            "reviewId": 1620699978,
+            "effect": {
+              "addition": 299,
+              "deletion": 186
+            },
+            "reward": 4.85,
+            "priority": 1
+          },
+          {
+            "reviewId": 1636664535,
+            "effect": {
+              "addition": 1154,
+              "deletion": 526
+            },
+            "reward": 16.8,
+            "priority": 1
+          }
+        ],
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 56.501 XP ]</a>&nbsp;</h3><h6>@molecula451</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Review</td><td>Code Review</td><td>4</td><td>49.37</td></tr><tr><td>Issue</td><td>Comment</td><td>2</td><td>0.318</td></tr><tr><td>Review</td><td>Comment</td><td>22</td><td>6.813</td></tr></tbody></table><h6>Review Details for&nbsp;<a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779\" target=\"_blank\" rel=\"noopener\">#779</a></h6><table><thead><tr><th>Changes</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td>+1527 -882</td><td>1</td><td>24.09</td></tr><tr><td>+182 -181</td><td>1</td><td>3.63</td></tr><tr><td>+299 -186</td><td>1</td><td>4.85</td></tr><tr><td>+1154 -526</td><td>1</td><td>16.8</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/774#issuecomment-1710862663\" target=\"_blank\" rel=\"noopener\">the bot is a rebel</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.1</td><td>1</td><td>0.017</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/774#issuecomment-1712780284\" target=\"_blank\" rel=\"noopener\">it looks like keyring it's gonna have this one, albeit it still &hellip;</a></h6></td><td><details><summary>1.43</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 19&#13;  wordValue: 0.1&#13;  result: 1.43&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.301</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#pullrequestreview-1636699712\" target=\"_blank\" rel=\"noopener\">There are still cosmetic changes that can be done. Good for subs&hellip;</a></h6></td><td><details><summary>1.57</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 22&#13;  wordValue: 0.1&#13;  result: 1.57&#13;</pre></details></td><td>0.4</td><td>1</td><td>0.192</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1319128532\" target=\"_blank\" rel=\"noopener\">There seem to be a bug in this test, you're pranking once in the&hellip;</a></h6></td><td><details><summary>1.61</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 23&#13;  wordValue: 0.1&#13;  result: 1.61&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.432</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1319148580\" target=\"_blank\" rel=\"noopener\">&#96;import \"forge-std/Test.sol\";&#96; seems to be reimported tw&hellip;</a></h6></td><td><details><summary>2.48</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 20&#13;  wordValue: 0.1&#13;  result: 1.48&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.616</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1319159122\" target=\"_blank\" rel=\"noopener\">Please separate this contract  &#96;UupsTestHelper&#96; from the&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.296</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1319173044\" target=\"_blank\" rel=\"noopener\">also when naming, name everything that applies uups as &#96;UUPS&hellip;</a></h6></td><td><details><summary>1.04</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 12&#13;  wordValue: 0.1&#13;  result: 1.04&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.231</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320707566\" target=\"_blank\" rel=\"noopener\">You must be doing something wrong here, why does it initializes &hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.9</td><td>1</td><td>0.495</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320707634\" target=\"_blank\" rel=\"noopener\">can you explain this conversion?</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.136</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320708011\" target=\"_blank\" rel=\"noopener\">why do we have to pass a interface name to a build command, as p&hellip;</a></h6></td><td><details><summary>1.92</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 31&#13;  wordValue: 0.1&#13;  result: 1.92&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.42</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320708147\" target=\"_blank\" rel=\"noopener\">you see how you are reimporting here the Test.sol? this should n&hellip;</a></h6></td><td><details><summary>1.81</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 28&#13;  wordValue: 0.1&#13;  result: 1.81&#13;</pre></details></td><td>0.75</td><td>1</td><td>0.413</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320708671\" target=\"_blank\" rel=\"noopener\">also, why you are touching facets, this PR should be only for co&hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.85</td><td>1</td><td>0.306</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320709116\" target=\"_blank\" rel=\"noopener\">you may see here this is the original Test.sol</a></h6></td><td><details><summary>0.9</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 10&#13;  wordValue: 0.1&#13;  result: 0.9&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.189</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320709217\" target=\"_blank\" rel=\"noopener\">why you are renaming instances as interfaces?</a></h6></td><td><details><summary>0.69</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 7&#13;  wordValue: 0.1&#13;  result: 0.69&#13;</pre></details></td><td>0.8</td><td>1</td><td>0.176</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320741473\" target=\"_blank\" rel=\"noopener\">can you refactor this to be a conditional?</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.15</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320741892\" target=\"_blank\" rel=\"noopener\">i think this one could be an override from the original OpenZepp&hellip;</a></h6></td><td><details><summary>1.38</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 18&#13;  wordValue: 0.1&#13;  result: 1.38&#13;</pre></details></td><td>0.85</td><td>1</td><td>0.366</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320742788\" target=\"_blank\" rel=\"noopener\">I see, but make it work from inheritance</a></h6></td><td><details><summary>0.76</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 8&#13;  wordValue: 0.1&#13;  result: 0.76&#13;</pre></details></td><td>0.65</td><td>1</td><td>0.15</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1320743710\" target=\"_blank\" rel=\"noopener\">you may add a test (or point me to if it's alrady added) and kee&hellip;</a></h6></td><td><details><summary>1.7</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 25&#13;  wordValue: 0.1&#13;  result: 1.7&#13;</pre></details></td><td>0.75</td><td>1</td><td>0.39</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1321989282\" target=\"_blank\" rel=\"noopener\">You don't have to import these interfaces to this file</a></h6></td><td><details><summary>0.97</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 11&#13;  wordValue: 0.1&#13;  result: 0.97&#13;</pre></details></td><td>0.7</td><td>1</td><td>0.21</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#discussion_r1332291491\" target=\"_blank\" rel=\"noopener\">you can remove this word</a></h6></td><td><details><summary>0.53</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 5&#13;  wordValue: 0.1&#13;  result: 0.53&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.051</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1710785503\" target=\"_blank\" rel=\"noopener\">not really \"out\" of a scope for the bounty, all issues are round&hellip;</a></h6></td><td><details><summary>2.23</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 42&#13;  wordValue: 0.1&#13;  result: 2.23&#13;</pre></details></td><td>0.5</td><td>1</td><td>0.355</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1712737881\" target=\"_blank\" rel=\"noopener\">Your branch seems to be outdated, the build it's passing, but th&hellip;</a></h6></td><td><details><summary>1.32</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 17&#13;  wordValue: 0.1&#13;  result: 1.32&#13;</pre></details></td><td>0.6</td><td>1</td><td>0.234</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1714482629\" target=\"_blank\" rel=\"noopener\">I'm only seeing [one](https://github.com/ubiquity/ubiquity-dolla&hellip;</a></h6></td><td><details><summary>2.52</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 21&#13;  wordValue: 0.1&#13;  result: 1.52&#13;</pre></details></td><td>0.85</td><td>1</td><td>0.672</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/pull/779#issuecomment-1715788927\" target=\"_blank\" rel=\"noopener\">Upgradeability it's core test here. Make upgradeability testing &hellip;</a></h6></td><td><details><summary>1.16</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 14&#13;  wordValue: 0.1&#13;  result: 1.16&#13;</pre></details></td><td>0.95</td><td>1</td><td>0.333</td></tr></tbody></table></details>"
+  },
+  "0x4007": {
+    "total": 1.005,
+    "userId": 4975670,
+    "comments": [
+      {
+        "id": 1730040054,
+        "content": "@molecula451 did not receive comment incentives here. Does anybody know why? Hard to tell from my phone perhaps the config is disabled?\n@0xcodercrane can you check the logs in Supabase?\n@ubiquity/software-development  RFC",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/774#issuecomment-1730040054",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.777,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              }
+            },
+            "result": 0
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 34,
+            "wordValue": 0.1,
+            "result": 2.01
+          },
+          "readability": {
+            "fleschKincaid": 55.615352941176496,
+            "syllables": 58,
+            "sentences": 5,
+            "score": 0.956153529411765
+          },
+          "multiplier": 1,
+          "relevance": 0.3
+        }
+      },
+      {
+        "id": 1730051635,
+        "content": "https://gnosisscan.io/tx/0xf7a1413dd82a60715a1f8bcb38b9e7e920e68d9ab5f27a093fd16b4a6a82398e\n@molecula451",
+        "url": "https://github.com/ubiquity/ubiquity-dollar/issues/774#issuecomment-1730051635",
+        "commentType": "ISSUE_COLLABORATOR",
+        "score": {
+          "reward": 0.228,
+          "formatting": {
+            "content": {
+              "p": {
+                "score": 0,
+                "elementCount": 1
+              },
+              "a": {
+                "score": 1,
+                "elementCount": 1
+              }
+            },
+            "result": 1
+          },
+          "priority": 1,
+          "words": {
+            "wordCount": 1,
+            "wordValue": 0.1,
+            "result": 0.14
+          },
+          "readability": {
+            "fleschKincaid": -78.20999999999998,
+            "syllables": 20,
+            "sentences": 2,
+            "score": 0
+          },
+          "multiplier": 1,
+          "relevance": 0.2
+        }
+      }
+    ],
+    "reviewRewards": [
+      {
+        "url": "https://github.com/ubiquity/ubiquity-dollar/pull/779"
+      }
+    ],
+    "evaluationCommentHtml": "<details><summary><b><h3>&nbsp;<a href=\"undefined\" target=\"_blank\" rel=\"noopener\">[ 1.005 XP ]</a>&nbsp;</h3><h6>@0x4007</h6></b></summary><h6>Contributions Overview</h6><table><thead><tr><th>View</th><th>Contribution</th><th>Count</th><th>Reward</th></tr></thead><tbody><tr><td>Issue</td><td>Comment</td><td>2</td><td>1.005</td></tr></tbody></table><h6>Conversation Incentives</h6><table><thead><tr><th>Comment</th><th>Formatting</th><th>Relevance</th><th>Priority</th><th>Reward</th></tr></thead><tbody><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/774#issuecomment-1730040054\" target=\"_blank\" rel=\"noopener\">@molecula451 did not receive comment incentives here. Does anybo&hellip;</a></h6></td><td><details><summary>2.01</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;  result: 0&#13;regex:&#13;  wordCount: 34&#13;  wordValue: 0.1&#13;  result: 2.01&#13;</pre></details></td><td>0.3</td><td>1</td><td>0.777</td></tr><tr><td><h6><a href=\"https://github.com/ubiquity/ubiquity-dollar/issues/774#issuecomment-1730051635\" target=\"_blank\" rel=\"noopener\">https://gnosisscan.io/tx/0xf7a1413dd82a60715a1f8bcb38b9e7e920e68&hellip;</a></h6></td><td><details><summary>1.14</summary><pre>content:&#13;  content:&#13;    p:&#13;      score: 0&#13;      elementCount: 1&#13;    a:&#13;      score: 1&#13;      elementCount: 1&#13;  result: 1&#13;regex:&#13;  wordCount: 1&#13;  wordValue: 0.1&#13;  result: 0.14&#13;</pre></details></td><td>0.2</td><td>1</td><td>0.228</td></tr></tbody></table></details>"
+  }
+}
