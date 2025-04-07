@@ -1,23 +1,53 @@
-console.log("Worker: Loading leaderboard-aggregator.ts..."); // Add top-level log
+console.log("Worker: Loading leaderboard-aggregator.ts...");
 
-import type { CombinedLeaderboardData } from "./app-worker.ts"; // Updated import path
+import type { CombinedLeaderboardData } from "./app-worker.ts";
 import { fetchAndCacheIssueMetadata, fetchGitHubUserDetails, type GitHubUserDetails } from "./github-data-fetcher.ts";
 import { parseGitHubIssueUrl } from "./leaderboard-helpers.ts";
 
+/**
+ * Build a whitelist of repositories based on JSON filenames in fixtures/database.
+ * Only repositories with explicit JSON files will be included in the UI.
+ */
+export async function getWhitelistedRepositories(): Promise<Set<string>> {
+  const whitelist = new Set<string>();
+
+  const modules = import.meta.glob("../../src/fixtures/database/*.json");
+  console.log("Glob matched modules:", Object.keys(modules));
+  for (const path in modules) {
+    // Extract filename
+    const filename = path.split("/").pop();
+    if (!filename) continue;
+
+    // Remove trailing _issueNumber.json
+    const repoPart = filename.replace(/_\d+\.json$/, "");
+
+    // Reverse sanitization: replace first _ with /
+    const firstUnderscore = repoPart.indexOf("_");
+    if (firstUnderscore === -1) continue;
+
+    const owner = repoPart.slice(0, firstUnderscore);
+    const repo = repoPart.slice(firstUnderscore + 1);
+
+    const canonicalRepo = `${owner}/${repo}`;
+    whitelist.add(canonicalRepo);
+  }
+
+  console.log("Whitelist generated from fixture filenames:", Array.from(whitelist));
+  return whitelist;
+}
+
 // --- Types ---
 
-// Define the structure for aggregated leaderboard data (Final Output)
 export interface LeaderboardEntry {
   githubUsername: string;
   avatarUrl: string;
   totalXp: number;
   xpByCategory: Record<string, number>;
-  xpByRepository: Record<string, number>; // New: XP totals per repository
+  xpByRepository: Record<string, number>;
   permitCount: number;
-  repositories: string[]; // Change from single repository to array of repositories
+  repositories: string[];
 }
 
-// Type for storing aggregated data during processing
 interface AggregatedUserData {
   githubId: number;
   totalXp: number;
@@ -27,25 +57,36 @@ interface AggregatedUserData {
   avatarUrl?: string;
 }
 
-// --- Main Processing Function ---
-
 /**
  * Processes raw permit data, fetches metadata and user details, aggregates XP,
  * and returns the final sorted leaderboard entries.
- * Requires a GitHub token for fetching details.
+ * Only repositories with explicit JSON files are included.
  */
 export const processAndAggregateLeaderboardData = async (
   combinedDataFromDb: CombinedLeaderboardData[],
-  githubToken: string | null // Accept token as parameter
+  githubToken: string | null
 ): Promise<LeaderboardEntry[]> => {
   console.log("Aggregator: processAndAggregateLeaderboardData: Starting...");
+
+  const repoWhitelist = await getWhitelistedRepositories();
+  console.log("Aggregator: Whitelisted repositories (unused now):", Array.from(repoWhitelist));
+
+  const uniquePermitRepos = new Set<string>();
+  combinedDataFromDb.forEach(permit => {
+    if (permit.repository) uniquePermitRepos.add(permit.repository);
+  });
+  console.log("Aggregator: Permit repositories in data:", Array.from(uniquePermitRepos));
+
+  // Do NOT filter permits here; include all permits with a repository
+  const filteredPermits = combinedDataFromDb.filter(permit =>
+    permit.repository
+  );
 
   const aggregatedDataByUser: Record<number, AggregatedUserData> = {};
   const issuesToFetch = new Map<string, { owner: string; repo: string; issueNumber: number }>();
 
   console.log("Aggregator: First pass - identifying users and issues...");
-  for (const permit of combinedDataFromDb) {
-    // Use the github_user.id directly if available
+  for (const permit of filteredPermits) {
     const githubId = permit.github_user?.id;
     if (!githubId) {
       console.warn(`Aggregator: Missing github_user ID for permit nonce ${permit.nonce}`);
@@ -55,7 +96,6 @@ export const processAndAggregateLeaderboardData = async (
     if (!aggregatedDataByUser[githubId]) {
       aggregatedDataByUser[githubId] = { githubId, totalXp: 0, xpByCategory: {}, permitCount: 0 };
     }
-    // Increment permit count here
     aggregatedDataByUser[githubId].permitCount += 1;
 
     if (permit.location?.node_url && !issuesToFetch.has(permit.location.node_url)) {
@@ -71,7 +111,6 @@ export const processAndAggregateLeaderboardData = async (
 
   console.log("Aggregator: Fetching/caching metadata for all unique issues...");
   const metadataPromises = Array.from(issuesToFetch.entries()).map(([url, params]) =>
-    // Pass token to fetcher
     fetchAndCacheIssueMetadata(params.owner, params.repo, params.issueNumber, githubToken)
       .then((metadata) => ({ url, metadata }))
   );
@@ -80,14 +119,12 @@ export const processAndAggregateLeaderboardData = async (
   console.log("Aggregator: Finished fetching/caching metadata.");
 
   console.log("Aggregator: Second pass - extracting XP using cached metadata...");
-  // Reset XP and category breakdown before recalculating
   Object.values(aggregatedDataByUser).forEach((user) => {
     user.totalXp = 0;
     user.xpByCategory = {};
-    // Keep permitCount as it was calculated in the first pass
   });
 
-  for (const permit of combinedDataFromDb) {
+  for (const permit of filteredPermits) {
     const githubId = permit.github_user?.id;
     const issueUrl = permit.location?.node_url;
 
@@ -100,38 +137,30 @@ export const processAndAggregateLeaderboardData = async (
 
       if (userMetadataEntry) {
         let currentPermitTotalXp = 0;
-        const knownCategories = ["task", "comments", "reviewRewards"]; // Define expected keys
+        const knownCategories = ["task", "comments", "reviewRewards"];
 
         knownCategories.forEach((category) => {
           let categoryXp = 0;
           const categoryData = userMetadataEntry[category as keyof typeof userMetadataEntry];
 
           try {
-            // Type guard for task reward
             if (category === "task" && typeof categoryData === 'object' && categoryData !== null && typeof (categoryData as { reward?: unknown }).reward === 'number') {
               categoryXp = (categoryData as { reward: number }).reward;
-            }
-            // Type guard and reduce for comments
-            else if (category === "comments" && Array.isArray(categoryData)) {
-              // Ensure the elements being reduced are of the expected type
+            } else if (category === "comments" && Array.isArray(categoryData)) {
               const commentsArray = categoryData as { score?: { reward?: number } }[];
-              categoryXp = commentsArray.reduce((sum: number, comment) => sum + (comment?.score?.reward || 0), 0);
-            }
-            // Type guard and reduce for reviewRewards
-            else if (category === "reviewRewards" && Array.isArray(categoryData)) {
-               // Ensure the elements being reduced are of the expected type
+              categoryXp = commentsArray.reduce((sum, comment) => sum + (comment?.score?.reward || 0), 0);
+            } else if (category === "reviewRewards" && Array.isArray(categoryData)) {
               const reviewRewardsArray = categoryData as { reviews?: { reward?: number }[] }[];
-              categoryXp = reviewRewardsArray.reduce((sum: number, reviewReward) => {
+              categoryXp = reviewRewardsArray.reduce((sum, reviewReward) => {
                 const reviewSum = Array.isArray(reviewReward?.reviews)
-                  ? reviewReward.reviews.reduce((rSum: number, review: { reward?: number }) => rSum + (review?.reward || 0), 0)
+                  ? reviewReward.reviews.reduce((rSum, review) => rSum + (review?.reward || 0), 0)
                   : 0;
                 return sum + reviewSum;
               }, 0);
             }
           } catch (parseError) {
-             console.error(`Aggregator: Error parsing XP for category ${category} in issue ${issueUrl}, user ${githubId}:`, parseError, categoryData);
+            console.error(`Aggregator: Error parsing XP for category ${category} in issue ${issueUrl}, user ${githubId}:`, parseError, categoryData);
           }
-
 
           if (categoryXp > 0) {
             aggregatedDataByUser[githubId].xpByCategory[category] = (aggregatedDataByUser[githubId].xpByCategory[category] || 0) + categoryXp;
@@ -140,18 +169,15 @@ export const processAndAggregateLeaderboardData = async (
         });
 
         aggregatedDataByUser[githubId].totalXp += currentPermitTotalXp;
-        // console.log(`Aggregator: Processed ${currentPermitTotalXp} XP for user ${githubId} from issue ${issueUrl}`);
       } else {
-         console.warn(`Aggregator: Could not find metadata entry for user ID ${githubId} in issue ${issueUrl}`);
+        console.warn(`Aggregator: Could not find metadata entry for user ID ${githubId} in issue ${issueUrl}`);
       }
     }
   }
   console.log("Aggregator: Finished extracting XP.");
 
-  // Fetch GitHub user details
   const uniqueUserIds = Object.keys(aggregatedDataByUser).map((id) => parseInt(id, 10));
   console.log(`Aggregator: Fetching GitHub user details for ${uniqueUserIds.length} users...`);
-  // Pass token to fetcher
   const userDetailPromises = uniqueUserIds.map(userId => fetchGitHubUserDetails(userId, githubToken));
   const userDetailResults = await Promise.all(userDetailPromises);
   const userDetailsMap = new Map<number, GitHubUserDetails>();
@@ -162,19 +188,19 @@ export const processAndAggregateLeaderboardData = async (
   });
   console.log(`Aggregator: Fetched details for ${userDetailsMap.size} users.`);
 
-  // Final mapping to LeaderboardEntry
   const finalLeaderboard = Object.values(aggregatedDataByUser)
     .map((userData): LeaderboardEntry => {
       const userDetails = userDetailsMap.get(userData.githubId);
-      // Track repositories and XP per repo for this user
       const repositoriesSet = new Set<string>();
       const xpByRepository: Record<string, number> = {};
 
-      combinedDataFromDb.forEach(permit => {
-        if (permit.github_user?.id === userData.githubId && permit.repository) {
+      filteredPermits.forEach(permit => {
+        if (
+          permit.github_user?.id === userData.githubId &&
+          permit.repository
+        ) {
           repositoriesSet.add(permit.repository);
 
-          // Find metadata for this permit
           const issueUrl = permit.location?.node_url;
           const metadata = issueUrl ? metadataByUrl.get(issueUrl) : undefined;
           if (metadata?.output) {
@@ -191,12 +217,12 @@ export const processAndAggregateLeaderboardData = async (
                     categoryXp = (categoryData as { reward: number }).reward;
                   } else if (category === "comments" && Array.isArray(categoryData)) {
                     const commentsArray = categoryData as { score?: { reward?: number } }[];
-                    categoryXp = commentsArray.reduce((sum: number, comment) => sum + (comment?.score?.reward || 0), 0);
+                    categoryXp = commentsArray.reduce((sum, comment) => sum + (comment?.score?.reward || 0), 0);
                   } else if (category === "reviewRewards" && Array.isArray(categoryData)) {
                     const reviewRewardsArray = categoryData as { reviews?: { reward?: number }[] }[];
-                    categoryXp = reviewRewardsArray.reduce((sum: number, reviewReward) => {
+                    categoryXp = reviewRewardsArray.reduce((sum, reviewReward) => {
                       const reviewSum = Array.isArray(reviewReward?.reviews)
-                        ? reviewReward.reviews.reduce((rSum: number, review: { reward?: number }) => rSum + (review?.reward || 0), 0)
+                        ? reviewReward.reviews.reduce((rSum, review) => rSum + (review?.reward || 0), 0)
                         : 0;
                       return sum + reviewSum;
                     }, 0);
@@ -224,10 +250,10 @@ export const processAndAggregateLeaderboardData = async (
         repositories: Array.from(repositoriesSet).map(r => r.replace(/[/.]/g, "_")),
       };
     })
-    .sort((a, b) => b.totalXp - a.totalXp); // Sort descending by total XP
+    .sort((a, b) => b.totalXp - a.totalXp);
 
   console.log("Aggregator: processAndAggregateLeaderboardData: Finished, returning final leaderboard.");
   return finalLeaderboard;
 };
 
-console.log("Worker: Loaded leaderboard-aggregator.ts."); // Add top-level log
+console.log("Worker: Loaded leaderboard-aggregator.ts.");

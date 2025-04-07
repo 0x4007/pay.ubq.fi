@@ -1,4 +1,4 @@
-import React, { useState } from "react"; // Import useState
+import React, { useState, useEffect, useMemo } from "react";
 import {
   Bar,
   BarChart,
@@ -9,21 +9,22 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-// Removed duplicate React/useState import
-import { useMemo } from "react"; // Keep useMemo
-// Correct import path for LeaderboardEntry and hook
 import { useLeaderboardData } from "../hooks/use-leaderboard-data.ts";
 import { leaderboardCache } from "../utils/leaderboard-cache.ts";
 import type { LeaderboardEntry } from "../workers/leaderboard-aggregator.ts";
-import "./leaderboard-styles.css"; // Import styles
+import { getWhitelistedRepositories } from "../workers/leaderboard-aggregator.ts";
+import "./leaderboard-styles.css";
 
-const REPO_COLORS: Record<string, string> = {}; // Will be filled dynamically
+const REPO_COLORS: Record<string, string> = {};
 
 function displayRepoName(repoId: string): string {
-  return repoId.replace("_", "/");
+  const firstUnderscore = repoId.indexOf("_");
+  if (firstUnderscore === -1) return repoId;
+  const owner = repoId.slice(0, firstUnderscore);
+  const rest = repoId.slice(firstUnderscore + 1).replace(/_/g, ".");
+  return `${owner}/${rest}`;
 }
 
-// Helper to generate a color palette
 function generateColor(index: number): string {
   const colors = [
     "#8884d8", "#82ca9d", "#ffc658", "#ff7f50", "#87ceeb", "#da70d6",
@@ -34,20 +35,16 @@ function generateColor(index: number): string {
   return colors[index % colors.length];
 }
 
-// Helper function to format XP (optional) - Keep this if used elsewhere or for tooltip
 function formatXp(xp: number): string {
-  // Add any desired formatting, e.g., thousands separators
   return xp.toLocaleString();
 }
 
-// Helper function to extract unique categories/repos from data
 const getUniqueFilterOptions = (data: LeaderboardEntry[]) => {
   const categories = new Set<string>();
   const repositories = new Set<string>();
 
   data.forEach((entry) => {
     Object.keys(entry.xpByCategory).forEach(cat => categories.add(cat));
-    // Add all repositories from the entry's repositories array
     entry.repositories.forEach(repo => repositories.add(repo));
   });
 
@@ -57,15 +54,17 @@ const getUniqueFilterOptions = (data: LeaderboardEntry[]) => {
   };
 };
 
-
 export function DeveloperLeaderboard() {
-  // State for filters managed locally now
   const [selectedWeeks, setSelectedWeeks] = useState(52);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [selectedRepository, setSelectedRepository] = useState<string | null>(null); // Keep for future use
+  const [selectedRepository, setSelectedRepository] = useState<string | null>(null);
   const [refreshCounter, setRefreshCounter] = useState(0);
+  const [repoWhitelist, setRepoWhitelist] = useState<Set<string>>(new Set());
 
-  // Helper to compute cache key (same as in hook)
+  useEffect(() => {
+    getWhitelistedRepositories().then(setRepoWhitelist);
+  }, []);
+
   const getCacheKey = (weeks: number, repo: string | null | undefined) =>
     repo ? `${weeks}_weeks_repo_${repo}` : `${weeks}_weeks`;
 
@@ -76,55 +75,74 @@ export function DeveloperLeaderboard() {
     setRefreshCounter((prev) => prev + 1);
   };
 
-  // Fetch data using the hook, passing selectedWeeks
   const { leaderboardData: rawLeaderboardData, isLoading, error } = useLeaderboardData({
     selectedWeeks,
     selectedRepository,
     refreshCounter
   });
 
-  // Calculate available filter options based on the fetched data
-  const { availableCategories, availableRepositories } = useMemo(() => {
+  const { availableCategories, availableRepositories: allRepos } = useMemo(() => {
     if (!Array.isArray(rawLeaderboardData)) {
       return { availableCategories: [], availableRepositories: [] };
     }
     return getUniqueFilterOptions(rawLeaderboardData);
   }, [rawLeaderboardData]);
 
-  // Apply filtering locally based on state
+  const whitelistedRepositories = useMemo(() => {
+    console.log("Whitelist (raw):", Array.from(repoWhitelist));
+    console.log("All repos (raw):", allRepos);
+
+    const normalizedWhitelist = new Set(
+      Array.from(repoWhitelist).map(r => r.toLowerCase().replace(/\./g, "_").replace(/\//g, "_"))
+    );
+    console.log("Normalized whitelist:", Array.from(normalizedWhitelist));
+
+    const normalizedAllRepos = allRepos.map(r => r.toLowerCase().replace(/\./g, "_").replace(/\//g, "_"));
+    console.log("Normalized all repos:", normalizedAllRepos);
+
+    const filtered = allRepos.filter((repo, idx) => {
+      const normalized = normalizedAllRepos[idx];
+      return normalizedWhitelist.has(normalized);
+    });
+
+    console.log("Filtered whitelisted repos:", filtered);
+    return filtered;
+  }, [allRepos, repoWhitelist]);
+
   const filteredLeaderboardData = useMemo(() => {
     if (!Array.isArray(rawLeaderboardData)) return [];
 
-    // Apply category and repository filters locally (time filtering is done in worker/hook)
-    return rawLeaderboardData.filter((entry) => {
-      // Category Filter: Check if the entry has XP in the selected category
-      const categoryMatch = !selectedCategory || (entry.xpByCategory[selectedCategory] ?? 0) > 0;
+    return rawLeaderboardData.map(entry => {
+      const filteredRepos = entry.repositories.filter(repo => repoWhitelist.has(repo));
+      const filteredXpByRepo: Record<string, number> = {};
+      let totalXp = 0;
+      Object.entries(entry.xpByRepository).forEach(([repoKey, xp]) => {
+        const repoName = repoKey.replace(/_/g, "/");
+        if (repoWhitelist.has(repoName)) {
+          filteredXpByRepo[repoKey] = xp;
+          totalXp += xp;
+        }
+      });
+      return {
+        ...entry,
+        repositories: filteredRepos,
+        xpByRepository: filteredXpByRepo,
+        totalXpForWhitelist: totalXp
+      };
+    }).filter(entry => entry.totalXpForWhitelist > 0);
+  }, [rawLeaderboardData, repoWhitelist]);
 
-      // Repository Filter - check if entry has the selected repository
-      const repoMatch = !selectedRepository || entry.repositories.includes(selectedRepository);
-
-      return categoryMatch && repoMatch;
-    });
-  }, [rawLeaderboardData, selectedCategory, selectedRepository]); // Remove selectedWeeks dependency
-
-
-  // Add detailed logging for debugging
   console.log("DeveloperLeaderboard render state:", {
-    isLoading, // Hook's loading state (worker fetching/processing)
+    isLoading,
     hasError: !!error,
     errorMessage: error,
-    hasRawData: Array.isArray(rawLeaderboardData),
+    whitelist: Array.from(repoWhitelist),
+    whitelistedRepositories,
     rawDataLength: Array.isArray(rawLeaderboardData) ? rawLeaderboardData.length : 0,
-    filteredDataLength: Array.isArray(filteredLeaderboardData) ? filteredLeaderboardData.length : 0,
-    sampleEntry: filteredLeaderboardData?.[0]
+    filteredDataLength: filteredLeaderboardData.length,
+    sampleEntry: filteredLeaderboardData[0]
   });
 
-  if (filteredLeaderboardData.length > 0) {
-    console.log("Sample xpByRepository for first user:", filteredLeaderboardData[0].xpByRepository);
-  }
-
-
-  // Prioritize error display over loading state if an error exists
   if (error) {
     console.error("DeveloperLeaderboard error:", error);
     return (
@@ -138,7 +156,6 @@ export function DeveloperLeaderboard() {
     );
   }
 
-  // Show loading state for initial load and filter changes
   if (isLoading) {
     return (
       <div className="loading-container">
@@ -148,100 +165,28 @@ export function DeveloperLeaderboard() {
     );
   }
 
-
-  // Handle case where there's no data
-  if (!isLoading && (filteredLeaderboardData.length === 0 || !Array.isArray(rawLeaderboardData) || rawLeaderboardData.length === 0)) {
-    const isFiltered = !!selectedCategory || !!selectedRepository;
-    const message = isFiltered
-      ? "No data matches the current filters"
-      : "No leaderboard data available";
-
-    console.log(`DeveloperLeaderboard: ${message}`);
+  if (!isLoading && filteredLeaderboardData.length === 0) {
     return (
       <div className="leaderboard-container page-container">
         <h2>Developer XP Leaderboard</h2>
-        {/* Keep filter controls visible even when no data */}
-        <div className="filters-container">
-          <label>
-            Category:
-            <select
-              value={selectedCategory ?? ""}
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedCategory(e.target.value || null)}
-              disabled={isLoading}
-            >
-              <option value="">All Categories</option>
-              {availableCategories.map(category => (
-                <option key={category} value={category}>{category}</option>
-              ))}
-            </select>
-          </label>
-          <label>
-            Repository:
-            <select
-              value={selectedRepository ?? ""}
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedRepository(e.target.value || null)}
-              disabled={isLoading}
-            >
-              <option value="">All Repositories</option>
-              {availableRepositories.map(repo => (
-                <option key={repo} value={repo}>
-                  {displayRepoName(repo)}
-                </option>
-              ))}
-            </select>
-          </label>
-          <div className="time-radio-group">
-            <span className="time-radio-label">Time Range:</span>
-            {[
-              { label: "All Time", weeks: 0 },
-              { label: "1 Week", weeks: 1 },
-              { label: "2 Weeks", weeks: 2 },
-              { label: "1 Month", weeks: 4 },
-              { label: "3 Months", weeks: 13 },
-              { label: "1 Year", weeks: 52 },
-            ].map(({ label, weeks }) => (
-              <label key={label} className="radio-label">
-                <input
-                  type="radio"
-                  name="timeRange"
-                  value={weeks}
-                  checked={selectedWeeks === weeks}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedWeeks(parseInt(e.target.value, 10))}
-                  disabled={isLoading}
-                  className="radio-input"
-                />
-                {label}
-              </label>
-            ))}
-          </div>
-        </div>
-        <div className="info-container">
-          <p>{message}</p>
-          {!isFiltered && (
-            <button
-              onClick={refreshLeaderboard}
-              className="retry-button"
-            >
-              Refresh
-            </button>
-          )}
-        </div>
+        <p>No leaderboard data available for whitelisted repositories.</p>
+        <button onClick={refreshLeaderboard} className="retry-button">
+          Refresh
+        </button>
       </div>
     );
   }
 
   return (
-    <div className="leaderboard-container page-container"> {/* Reuse page-container if applicable */}
+    <div className="leaderboard-container page-container">
       <h2>Developer XP Leaderboard</h2>
 
-      {/* Filter Controls */}
       <div className="filters-container">
         <label>
           Category:
           <select
             value={selectedCategory ?? ""}
-            // Explicitly type the event parameter
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedCategory(e.target.value || null)}
+            onChange={(e) => setSelectedCategory(e.target.value || null)}
             disabled={isLoading}
           >
             <option value="">All Categories</option>
@@ -250,61 +195,53 @@ export function DeveloperLeaderboard() {
             ))}
           </select>
         </label>
-        {/* Repository filter */}
         <label>
           Repository:
           <select
             value={selectedRepository ?? ""}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedRepository(e.target.value || null)}
+            onChange={(e) => setSelectedRepository(e.target.value || null)}
             disabled={isLoading}
           >
             <option value="">All Repositories</option>
-              {availableRepositories.map(repo => (
-                <option key={repo} value={repo}>
-                  {displayRepoName(repo)}
-                </option>
-              ))}
+            {whitelistedRepositories.map(repo => (
+              <option key={repo} value={repo}>
+                {displayRepoName(repo)}
+              </option>
+            ))}
           </select>
         </label>
-        {/* Time Range Radio Buttons */}
         <div className="time-radio-group">
           <span className="time-radio-label">Time Range:</span>
-            {[
-              { label: "All Time", weeks: 0 },
-              { label: "1 Week", weeks: 1 },
-              { label: "2 Weeks", weeks: 2 },
-              { label: "1 Month", weeks: 4 },
-              { label: "3 Months", weeks: 13 },
-              { label: "1 Year", weeks: 52 },
-            ].map(({ label, weeks }) => (
-              <label key={label} className="radio-label">
-                <input
-                  type="radio"
-                  name="timeRange"
-                  value={weeks}
-                  checked={selectedWeeks === weeks}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedWeeks(parseInt(e.target.value, 10))}
-                  disabled={isLoading}
-                  className="radio-input"
-                />
-                {label}
-              </label>
-            ))}
+          {[
+            { label: "All Time", weeks: 0 },
+            { label: "1 Week", weeks: 1 },
+            { label: "2 Weeks", weeks: 2 },
+            { label: "1 Month", weeks: 4 },
+            { label: "3 Months", weeks: 13 },
+            { label: "1 Year", weeks: 52 },
+          ].map(({ label, weeks }) => (
+            <label key={label} className="radio-label">
+              <input
+                type="radio"
+                name="timeRange"
+                value={weeks}
+                checked={selectedWeeks === weeks}
+                onChange={(e) => setSelectedWeeks(parseInt(e.target.value, 10))}
+                disabled={isLoading}
+                className="radio-input"
+              />
+              {label}
+            </label>
+          ))}
         </div>
       </div>
 
-      {/* Stacked Bar Chart */}
       <div className="chart-container">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
-            layout="vertical" // Use vertical layout for better readability of usernames
-            data={filteredLeaderboardData} // Use locally filtered data
-            margin={{
-              top: 5,
-              right: 30,
-              left: 100, // Increase left margin for usernames
-              bottom: 5,
-            }}
+            layout="vertical"
+            data={filteredLeaderboardData}
+            margin={{ top: 5, right: 30, left: 100, bottom: 5 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
             <XAxis type="number" stroke="rgba(255, 255, 255, 0.7)" />
@@ -312,8 +249,8 @@ export function DeveloperLeaderboard() {
               dataKey="githubUsername"
               type="category"
               stroke="rgba(255, 255, 255, 0.7)"
-              width={100} // Adjust width based on longest username expected
-              tick={{ fontSize: 10 }} // Smaller font size for Y-axis labels
+              width={100}
+              tick={{ fontSize: 10 }}
             />
             <Tooltip
               contentStyle={{
@@ -321,11 +258,10 @@ export function DeveloperLeaderboard() {
                 borderColor: "rgba(255, 255, 255, 0.3)",
                 color: "white",
               }}
-              formatter={(value: number, name: string) => [formatXp(value), name]} // Format tooltip value
+              formatter={(value: number, name: string) => [formatXp(value), name]}
             />
             <Legend wrapperStyle={{ color: "white", paddingTop: "10px" }} />
-            {/* Define stacked bars for each repository */}
-            {availableRepositories.map((repo, idx) => {
+            {whitelistedRepositories.map((repo, idx) => {
               const sanitizedRepo = repo.replace(/[/.]/g, "_");
               if (!REPO_COLORS[sanitizedRepo]) {
                 REPO_COLORS[sanitizedRepo] = generateColor(idx);
@@ -343,7 +279,6 @@ export function DeveloperLeaderboard() {
           </BarChart>
         </ResponsiveContainer>
       </div>
-      {/* Removed inline style block */}
     </div>
   );
 }
