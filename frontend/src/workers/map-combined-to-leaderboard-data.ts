@@ -1,4 +1,16 @@
-import { CombinedLeaderboardData, RawPermitWithUser, undefined } from "./permit-checker.worker.ts";
+import type { CombinedLeaderboardData } from "./app-worker.ts"; // Import only necessary type
+
+// Define the return type locally as it wasn't exported from app-worker
+type RawPermitWithUser = {
+  nonce: string;
+  networkId: number;
+  amount?: string; // Optional amount
+  githubUsername: string;
+  avatarUrl: string;
+  node_url: string | null; // Include node_url
+  created_at: string | null; // Include creation date if needed
+};
+
 
 // Function to map the *combined* data for the leaderboard hook
 

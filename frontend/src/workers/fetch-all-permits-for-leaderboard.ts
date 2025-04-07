@@ -1,4 +1,4 @@
-import { CombinedLeaderboardData, GitHubUserInfo, PERMITS_TABLE } from "./permit-checker.worker.ts";
+import { CombinedLeaderboardData, GitHubUserInfo, PERMITS_TABLE } from "./app-worker.ts"; // Updated import path
 import { getSupabase } from "./supabase-singleton.ts"; // Add .ts extension
 
 // Function to fetch ALL permits and associated user data using two queries

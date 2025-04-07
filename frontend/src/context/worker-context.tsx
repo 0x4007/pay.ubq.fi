@@ -30,7 +30,8 @@ const initializeSharedWorker = () => {
   workerInitializationState = 'initializing';
 
   try {
-    sharedWorker = new Worker(new URL('../workers/permit-checker.worker.ts', import.meta.url), { type: 'module' });
+    // Use the new unified worker file
+    sharedWorker = new Worker(new URL('../workers/app-worker.ts', import.meta.url), { type: 'module' });
     console.log("WorkerContext Module: Shared worker instance created.");
 
     // Set a timeout for initialization

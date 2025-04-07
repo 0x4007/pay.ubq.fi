@@ -1,6 +1,6 @@
 import { Address } from "viem";
 import type { PermitData } from "../types.ts";
-import type { PermitRow } from "./permit-checker.worker.ts";
+import type { PermitRow } from "./app-worker.ts"; // Updated import path
 
 export function mapDbPermitToPermitData(dbPermit: PermitRow): PermitData {
   const networkId = dbPermit.token?.network ?? 1; // Default to mainnet if not specified

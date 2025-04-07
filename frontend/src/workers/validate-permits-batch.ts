@@ -6,7 +6,7 @@ import { JsonRpcResponse } from "@ubiquity-dao/permit2-rpc-client";
 import { Abi, encodeFunctionData } from "viem";
 import { PermitData } from "../types.ts";
 import { preparePermitPrerequisiteContracts } from "../utils/permit-utils.ts";
-import { JsonRpcRequest, permit2Abi, rpcClient } from "./permit-checker.worker.ts";
+import { JsonRpcRequest, permit2Abi, rpcClient } from "./app-worker.ts"; // Updated import path
 
 export async function validatePermitsBatch(permitsToValidate: PermitData[]): Promise<PermitData[]> {
   if (!rpcClient) throw new Error("RPC client not initialized.");

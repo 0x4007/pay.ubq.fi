@@ -1,4 +1,4 @@
-import { LOCATIONS_TABLE, PARTNERS_TABLE, PermitRow, PERMITS_TABLE, TOKENS_TABLE, WALLETS_TABLE } from "./permit-checker.worker.ts";
+import { LOCATIONS_TABLE, PARTNERS_TABLE, PermitRow, PERMITS_TABLE, TOKENS_TABLE, WALLETS_TABLE } from "./app-worker.ts"; // Updated import path
 import { getSupabase } from "./supabase-singleton";
 
 // Function to fetch permits from Supabase - uses github_id string for beneficiary_id

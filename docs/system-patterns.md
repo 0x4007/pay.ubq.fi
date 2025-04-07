@@ -36,8 +36,8 @@ graph LR
 ```
 
 *   **Frontend:** Handles user interaction via different views managed by **React Router**. Connects wallet (`wagmi`), displays permits/leaderboard, initiates claims. Uses raw CSS.
-*   **Permit Checker Worker (`permit-checker.worker.ts`):** The main worker entry point, instantiated via `worker-context.tsx`. Runs in the browser background. Handles multiple message types by orchestrating helper modules within `frontend/src/workers/`:
-    *   `INIT`: Initializes Supabase/RPC clients.
+*   **Permit Checker Worker (`app-worker.ts`):** The main worker entry point (previously `permit-checker.worker.ts`), instantiated via `worker-context.tsx`. Runs in the browser background. Handles multiple message types by orchestrating helper modules within `frontend/src/workers/`:
+    *   `INIT`: Initializes Supabase clients and stores the provided GitHub token. **Note:** Cache clearing based on token changes during init has been removed; caches now rely solely on their internal TTLs.
     *   `FETCH_NEW_PERMITS`: Fetches (`fetch-permits-from-db.ts`), maps (`map-db-permit-to-permit-data.ts`), and validates (`validate-permits-batch.ts`) permits for the *connected user* based on wallet ID (looked up from address) and timestamp.
     *   `FETCH_LEADERBOARD_DATA`: Fetches all permits/users (`fetch-all-permits-for-leaderboard.ts`) and processes/aggregates (`leaderboard-processing.ts`, using `github-comment-cache.ts`) data for the leaderboard. Returns the final processed `LeaderboardEntry[]`.
 *   **Frontend Hook (`usePermitData`):** Orchestrates fetching and validation for the *connected user's* permits (Dashboard view).
@@ -65,8 +65,8 @@ graph LR
 *   **Database (Supabase):** Stores `permits`, `users` (with GitHub info), `tokens`, etc. Queried by the worker.
 *   **Blockchain:** Source of truth for permit validity (checked via worker's batch RPC calls) and claim execution (initiated by frontend).
 *   **CowSwap API:** External service used for fetching swap quotes and submitting swap orders.
-*   **LocalStorage:** Caches `lastCheckTimestamp`, detailed user permit validation status (`PermitDataCache`), and the user's `preferredRewardToken`.
-*   **IndexedDB:** Caches final processed leaderboard data (`LeaderboardEntry[]`), GitHub user details, and permit metadata via `utils/leaderboard-cache.ts` and `utils/idb-keyval.ts`. Also used by `utils/github-comment-cache.ts`.
+*   **LocalStorage:** Caches `lastCheckTimestamp`, detailed user permit validation status (`PermitDataCache`), and the user's `preferredRewardToken`. Invalidation is managed by the `usePermitData` hook based on the timestamp.
+*   **IndexedDB:** Caches final processed leaderboard data (`LeaderboardEntry[]`), GitHub user details (via `leaderboard-cache.ts`), and GitHub comment data (via `github-comment-cache.ts`). Invalidation is handled internally by these cache utilities based on time-to-live (TTL) settings, independent of token changes.
 
 ## 2. Key Patterns & Decisions
 

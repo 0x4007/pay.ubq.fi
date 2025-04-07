@@ -14,7 +14,7 @@ import {
 import { useMemo } from "react"; // Keep useMemo
 // Correct import path for LeaderboardEntry and hook
 import { useLeaderboardData } from "../hooks/use-leaderboard-data";
-import type { LeaderboardEntry } from "../workers/leaderboard-processing";
+import type { LeaderboardEntry } from "../workers/leaderboard-aggregator"; // Corrected import path
 import "./leaderboard-styles.css"; // Import the new CSS file
 
 // Define colors for categories (adjust as needed for better contrast/aesthetics)
@@ -55,8 +55,8 @@ export function DeveloperLeaderboard() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedRepository, setSelectedRepository] = useState<string | null>(null); // Keep for future use
 
-  // Fetch data using the simplified hook
-  const { leaderboardData: rawLeaderboardData, isLoading, error } = useLeaderboardData();
+  // Fetch data using the hook, passing selectedWeeks
+  const { leaderboardData: rawLeaderboardData, isLoading, error } = useLeaderboardData({ selectedWeeks });
 
   // Calculate available filter options based on the fetched data
   const { availableCategories, availableRepositories } = useMemo(() => {
@@ -67,14 +67,7 @@ export function DeveloperLeaderboard() {
   const filteredLeaderboardData = useMemo(() => {
     if (!rawLeaderboardData) return [];
 
-    // console.log("Filtering data...", { selectedCategory, selectedRepository, selectedWeeks });
-
-    // Calculate cutoff date based on selectedWeeks - NOTE: This requires timestamp info on LeaderboardEntry
-    // Since timestamp isn't available, time filtering is currently disabled here.
-    // const cutoffDate = new Date();
-    // cutoffDate.setDate(cutoffDate.getDate() - selectedWeeks * 7);
-    // console.log(`Filtering permits created on or after: ${cutoffDate.toISOString()}`);
-
+    // Apply category and repository filters locally (time filtering is done in worker/hook)
     return rawLeaderboardData.filter((entry) => {
       // Category Filter: Check if the entry has XP in the selected category
       const categoryMatch = !selectedCategory || (entry.xpByCategory[selectedCategory] ?? 0) > 0;
@@ -82,18 +75,9 @@ export function DeveloperLeaderboard() {
       // Repository Filter (Placeholder - requires repo info on LeaderboardEntry)
       const repoMatch = !selectedRepository; // || entry.repository === selectedRepository;
 
-      // Time Filter (Placeholder - requires timestamp info on LeaderboardEntry)
-      // let timeMatch = true;
-      // if (entry.createdAt) { // Assuming 'createdAt' field exists
-      //   try {
-      //     const entryDate = new Date(entry.createdAt);
-      //     timeMatch = entryDate >= cutoffDate;
-      //   } catch (e) { /* Handle parsing error */ }
-      // }
-
-      return categoryMatch && repoMatch; // && timeMatch;
+      return categoryMatch && repoMatch;
     });
-  }, [rawLeaderboardData, selectedCategory, selectedRepository /*, selectedWeeks */]); // Add selectedWeeks back if time filtering is re-enabled
+  }, [rawLeaderboardData, selectedCategory, selectedRepository]); // Remove selectedWeeks dependency
 
 
   // Add detailed logging for debugging
@@ -108,15 +92,7 @@ export function DeveloperLeaderboard() {
   });
 
 
-  if (isLoading && !rawLeaderboardData?.length) { // Show loading only initially or if data is truly empty
-    return (
-      <div className="loading-container">
-        <div className="loading-spinner"></div>
-        <div>Loading leaderboard data...</div>
-      </div>
-    );
-  }
-
+  // Prioritize error display over loading state if an error exists
   if (error) {
     console.error("DeveloperLeaderboard error:", error);
     return (
@@ -129,6 +105,17 @@ export function DeveloperLeaderboard() {
       </div>
     );
   }
+
+  // Show loading only if not errored and data hasn't loaded yet
+  if (isLoading && !rawLeaderboardData?.length) {
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <div>Loading leaderboard data...</div>
+      </div>
+    );
+  }
+
 
   // Handle case where data is loaded but filtering results in empty list
   if (!isLoading && filteredLeaderboardData.length === 0) {

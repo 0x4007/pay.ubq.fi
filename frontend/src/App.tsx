@@ -1,16 +1,18 @@
+import React from "react";
+import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
 import { useAccount } from "wagmi";
-import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
 
 // Import page components
-import { LoginPage } from "./components/login-page";
-import { DashboardPage } from "./components/dashboard-page";
-import { DeveloperLeaderboard } from "./components/developer-leaderboard"; // Import the new component
+import { DashboardPage } from "./components/dashboard-page.tsx";
+import { LoginPage } from "./components/login-page.tsx";
+import { LeaderboardRoute } from "./components/leaderboard-route.tsx"; // Import LeaderboardRoute
+import { WorkerProvider } from "./context/worker-context.tsx"; // Import WorkerProvider
 
 // A simple layout component for authenticated views
 function AuthenticatedLayout({ children }: { children: React.ReactNode }) {
   return (
     <div>
-      <nav >
+      <nav>
         <Link to="/" style={{ marginRight: '15px' }}>Dashboard</Link>
         <Link to="/leaderboard">Leaderboard</Link>
         {/* Add logout button or other nav items here if needed */}
@@ -31,33 +33,34 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
   return <AuthenticatedLayout>{children}</AuthenticatedLayout>;
 }
 
-
 function App() {
   // useAccount is now used within ProtectedRoute
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <DashboardPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/leaderboard"
-          element={
-            <ProtectedRoute>
-              <DeveloperLeaderboard />
-            </ProtectedRoute>
-          }
-        />
-        {/* Optional: Add a catch-all route or redirect for unknown paths */}
-         <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </BrowserRouter>
+    <WorkerProvider> {/* Wrap the router with WorkerProvider */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/leaderboard"
+            element={
+              <ProtectedRoute> {/* Assume leaderboard also needs protection */}
+                <LeaderboardRoute /> {/* Render the actual leaderboard */}
+              </ProtectedRoute>
+            }
+          />
+          {/* Optional: Add a catch-all route or redirect for unknown paths */}
+           <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </WorkerProvider>
   );
 }
 

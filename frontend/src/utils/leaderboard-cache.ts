@@ -1,5 +1,5 @@
 // Import LeaderboardEntry from its new location
-import type { LeaderboardEntry } from "../workers/leaderboard-processing.ts";
+import type { LeaderboardEntry } from "../workers/leaderboard-aggregator.ts"; // Corrected import path
 import { createIdbKeyval } from "./idb-keyval.ts";
 
 // Removed unused CachedLeaderboardData interface
@@ -58,15 +58,23 @@ const initializeStores = () => {
 
 const stores = initializeStores();
 
+// Helper to generate the cache key based on weeks
+const getProcessedDataKey = (weeks: number): string => `leaderboard_processed_${weeks}_weeks`;
+
 export const leaderboardCache = {
-  async getProcessedData(): Promise<LeaderboardEntry[] | null> {
+  /**
+   * Get processed leaderboard data from cache for a specific week range
+   */
+  async getProcessedData(selectedWeeks: number): Promise<LeaderboardEntry[] | null> {
     if (!stores) return null;
+    const cacheKey = getProcessedDataKey(selectedWeeks);
     try {
-      const cached = await stores.processedLeaderboardStore.get("leaderboard_processed");
+      const cached = await stores.processedLeaderboardStore.get(cacheKey);
       if (!cached) return null;
 
       if (Date.now() - cached.timestamp > cached.ttl) {
-        await stores.processedLeaderboardStore.del("leaderboard_processed");
+        console.log(`Cache expired for ${selectedWeeks} weeks data`);
+        await stores.processedLeaderboardStore.del(cacheKey);
         return null;
       }
       return cached.processedData;
@@ -76,17 +84,21 @@ export const leaderboardCache = {
     }
   },
 
-  async setProcessedData(processedData: LeaderboardEntry[]): Promise<void> {
+  /**
+   * Set processed leaderboard data to cache for a specific week range
+   */
+  async setProcessedData(processedData: LeaderboardEntry[], selectedWeeks: number): Promise<void> {
     if (!stores) return;
+    const cacheKey = getProcessedDataKey(selectedWeeks);
     try {
       const cachedData: CachedProcessedLeaderboardData = {
         processedData,
         timestamp: Date.now(),
-        ttl: ONE_HOUR
+        ttl: ONE_HOUR // Keep TTL as 1 hour
       };
-      await stores.processedLeaderboardStore.set("leaderboard_processed", cachedData);
+      await stores.processedLeaderboardStore.set(cacheKey, cachedData);
     } catch (error) {
-      console.error("Failed to cache processed leaderboard data:", error);
+      console.error(`Failed to cache processed leaderboard data for ${selectedWeeks} weeks:`, error);
     }
   },
 
