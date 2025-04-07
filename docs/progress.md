@@ -29,25 +29,25 @@ Implementation is progressing through multiple phases simultaneously, focusing o
 *   **Background**: Integrated WebGL grid animation from `the-grid.ts` into the `#grid` element defined in `index.html`.
 *   **UI Elements**: Added Ubiquity OS logo (`ubiquity-os-logo.svg`) inline next to the main header text in `LoginPage` and `DashboardPage` by importing raw SVG content (`?raw`) and using `dangerouslySetInnerHTML`. Updated type definitions.
 *   **Bug Fixes**: Resolved multiple permit fetch issue. Resolved incorrect claim button disabling.
-*   **Multicall Utility**: Created `claimMultiplePermitsViaMulticall` function in `frontend/src/utils/multicall-utils.ts` using `viem` and `Multicall3.aggregate3` to bundle permit claims.
+*   **(Missing) Multicall Utility**: The previously mentioned `frontend/src/utils/multicall-utils.ts` file containing `claimMultiplePermitsViaMulticall` is currently missing from the codebase.
 *   **Frontend Server**: Added `frontend/server.ts` to serve built static assets on Deno Deploy, handling SPA routing.
 *   **Deployment Script**: Created `scripts/deploy-frontend.sh` for automated build and deployment to Deno Deploy using `deployctl`. Includes project name sanitization. Added `deploy` script to `frontend/package.json`.
 *   **Frontend Deployment**: Successfully deployed to Deno Deploy via the script.
     *   **Documentation**: Updated `frontend/README.md` with deployment instructions. Updated core docs (`project-brief`, `product-context`, `system-patterns`, `active-context`, `progress`) for Leaderboard feature and chart implementation.
     *   **Developer Leaderboard**:
         *   Worker (`permit-checker.worker.ts`) fetches all permits and user data (`users` table) via `FETCH_LEADERBOARD_DATA` message using a two-step query.
-        *   Hook (`use-leaderboard-data.ts`) aggregates data by developer and calculates total XP. **Added time filtering based on `created_at` and `selectedWeeks` state.**
-        *   Component (`developer-leaderboard.tsx`) **updated to display a stacked bar chart (`recharts`)** showing XP breakdown by category, replacing the previous table view. Added `recharts` dependency. Extracted styles to `leaderboard-styles.css`. **Added a time range slider (1-52 weeks) for filtering.**
+        *   Hook (`use-leaderboard-data.ts`) aggregates data by developer and calculates total XP. **Added time filtering based on `created_at` and `selectedWeeks` state.** (Logic compatible with radio buttons).
+        *   Component (`developer-leaderboard.tsx`) **updated to display a stacked bar chart (`recharts`)** showing XP breakdown by category, replacing the previous table view. Added `recharts` dependency. Extracted styles to `leaderboard-styles.css`. **Replaced time range slider with radio buttons (1W, 2W, 1M, 3M, 1Y) for filtering.**
 *   **Routing**: `App.tsx` uses `react-router-dom` for `/login`, `/` (Dashboard), and `/leaderboard` routes with protected routing.
 
 ## 3. What's Next (High Level)
 
 *   **Verify Pre-Claim Checks**: Confirm frontend balance/allowance checks work correctly and display appropriate warnings/errors.
 *   **Test Single Claim**: Thoroughly test the end-to-end single claim flow, including success and failure cases (due to pre-claim checks or on-chain errors).
-*   **Test Leaderboard**: Verify the leaderboard fetches data correctly, aggregates XP accurately, displays the stacked bar chart visualization correctly, **and filters correctly based on the new time range slider**. Check handling of users with no permits or permits with missing user info, and chart responsiveness/readability.
+*   **Test Leaderboard**: Verify the leaderboard fetches data correctly, aggregates XP accurately, displays the stacked bar chart visualization correctly, **and filters correctly based on the new time range radio buttons**. Check handling of users with no permits or permits with missing user info, and chart responsiveness/readability.
 *   **Address RPC Errors**: Improve backend validation error handling.
 *   **Implement GitHub Scanning**: Add logic to backend to scan GitHub for new permits (Phase 3).
-*   **Integrate Multicall Claiming**: Update UI to allow selecting multiple permits and trigger the `claimMultiplePermitsViaMulticall` function (Phase 5).
+*   **Integrate Multicall Claiming**: Update UI to allow selecting multiple permits and implement/trigger a multicall claim function (Phase 5).
 *   **(Optional)** Implement Backend Status Update: Create `/api/permits/update-status` endpoint (Phase 6).
 *   **UI/UX Polish**: Refine loading states, error messages, overall flow (Phase 6).
 *   **Verify Frontend Deployment**: Check the deployed URLs (e.g., `https://pay-ubq-fi.deno.dev`) to ensure the application is running correctly.
@@ -59,7 +59,7 @@ Implementation is progressing through multiple phases simultaneously, focusing o
 
 *   **RPC Errors**: Intermittent `connection reset` errors from Gnosis RPC during backend on-chain validation.
 *   **GitHub Scanning**: Logic not implemented yet.
-*   **Multicall UI Integration**: UI for selecting and triggering batch claims not implemented yet.
+*   **Multicall Implementation & UI**: Multicall function needs to be created/found, and UI for selecting/triggering batch claims is not implemented yet.
 *   **Token Encryption**: Secure storage for GitHub token not implemented yet (Less relevant now with wallet auth).
 *   **Auth Flow**: Wallet connection flow seems stable, but edge cases could be tested.
 *   **Claim Failures**: `TRANSFER_FROM_FAILED` error was occurring; added pre-claim checks for balance/allowance as a likely fix. Needs verification.

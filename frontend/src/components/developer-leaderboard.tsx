@@ -10,7 +10,11 @@ import {
   Legend,
   // Cell, // If needed for individual bar colors later
 } from "recharts";
-import { useLeaderboardData } from "../hooks/use-leaderboard-data.ts"; // Removed LeaderboardEntry
+// Removed duplicate React/useState import
+import { useMemo } from "react"; // Keep useMemo
+// Correct import path for LeaderboardEntry and hook
+import { useLeaderboardData } from "../hooks/use-leaderboard-data";
+import type { LeaderboardEntry } from "../workers/leaderboard-processing";
 import "./leaderboard-styles.css"; // Import the new CSS file
 
 // Define colors for categories (adjust as needed for better contrast/aesthetics)
@@ -27,32 +31,84 @@ function formatXp(xp: number): string {
   return xp.toLocaleString();
 }
 
-export function DeveloperLeaderboard() {
-  const [selectedWeeks, setSelectedWeeks] = useState(52); // State for the slider (1 to 52 weeks) - Declare BEFORE use
+// Helper function to extract unique categories/repos from data
+const getUniqueFilterOptions = (data: LeaderboardEntry[]) => {
+  const categories = new Set<string>();
+  const repositories = new Set<string>(); // Assuming repository info might be added later
 
-  const {
-    leaderboardData,
-    isLoading,
-    error,
-    availableCategories,
-    availableRepositories,
-    selectedCategory,
-    setSelectedCategory,
-    selectedRepository,
-    setSelectedRepository,
-  } = useLeaderboardData({ selectedWeeks }); // Pass selectedWeeks to the hook
+  data.forEach(entry => {
+    Object.keys(entry.xpByCategory).forEach(cat => categories.add(cat));
+    // If repository info becomes available on LeaderboardEntry, uncomment below
+    // if (entry.repository) repositories.add(entry.repository);
+  });
+
+  return {
+    availableCategories: Array.from(categories).sort(),
+    availableRepositories: Array.from(repositories).sort(),
+  };
+};
+
+
+export function DeveloperLeaderboard() {
+  // State for filters managed locally now
+  const [selectedWeeks, setSelectedWeeks] = useState(52);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedRepository, setSelectedRepository] = useState<string | null>(null); // Keep for future use
+
+  // Fetch data using the simplified hook
+  const { leaderboardData: rawLeaderboardData, isLoading, error } = useLeaderboardData();
+
+  // Calculate available filter options based on the fetched data
+  const { availableCategories, availableRepositories } = useMemo(() => {
+    return getUniqueFilterOptions(rawLeaderboardData || []);
+  }, [rawLeaderboardData]);
+
+  // Apply filtering locally based on state
+  const filteredLeaderboardData = useMemo(() => {
+    if (!rawLeaderboardData) return [];
+
+    // console.log("Filtering data...", { selectedCategory, selectedRepository, selectedWeeks });
+
+    // Calculate cutoff date based on selectedWeeks - NOTE: This requires timestamp info on LeaderboardEntry
+    // Since timestamp isn't available, time filtering is currently disabled here.
+    // const cutoffDate = new Date();
+    // cutoffDate.setDate(cutoffDate.getDate() - selectedWeeks * 7);
+    // console.log(`Filtering permits created on or after: ${cutoffDate.toISOString()}`);
+
+    return rawLeaderboardData.filter((entry) => {
+      // Category Filter: Check if the entry has XP in the selected category
+      const categoryMatch = !selectedCategory || (entry.xpByCategory[selectedCategory] ?? 0) > 0;
+
+      // Repository Filter (Placeholder - requires repo info on LeaderboardEntry)
+      const repoMatch = !selectedRepository; // || entry.repository === selectedRepository;
+
+      // Time Filter (Placeholder - requires timestamp info on LeaderboardEntry)
+      // let timeMatch = true;
+      // if (entry.createdAt) { // Assuming 'createdAt' field exists
+      //   try {
+      //     const entryDate = new Date(entry.createdAt);
+      //     timeMatch = entryDate >= cutoffDate;
+      //   } catch (e) { /* Handle parsing error */ }
+      // }
+
+      return categoryMatch && repoMatch; // && timeMatch;
+    });
+  }, [rawLeaderboardData, selectedCategory, selectedRepository /*, selectedWeeks */]); // Add selectedWeeks back if time filtering is re-enabled
+
 
   // Add detailed logging for debugging
   console.log("DeveloperLeaderboard render state:", {
-    isLoading,
+    isLoading, // Hook's loading state (worker fetching/processing)
     hasError: !!error,
     errorMessage: error,
-    hasData: !!leaderboardData,
-    dataLength: leaderboardData?.length,
-    sampleEntry: leaderboardData?.[0]
+    hasRawData: !!rawLeaderboardData,
+    rawDataLength: rawLeaderboardData?.length,
+    filteredDataLength: filteredLeaderboardData?.length,
+    sampleEntry: filteredLeaderboardData?.[0]
   });
 
-  if (isLoading) {
+
+  if (isLoading && !rawLeaderboardData?.length) { // Show loading only initially or if data is truly empty
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
@@ -74,11 +130,23 @@ export function DeveloperLeaderboard() {
     );
   }
 
-  if (!leaderboardData || leaderboardData.length === 0) {
-    console.log("DeveloperLeaderboard: No data available");
-    return (
-      <div className="info-container">
-        <p>No leaderboard data available</p>
+  // Handle case where data is loaded but filtering results in empty list
+  if (!isLoading && filteredLeaderboardData.length === 0) {
+     console.log("DeveloperLeaderboard: No data available after filtering");
+     // Keep filter controls visible even when no data matches
+     // return (
+     //   <div className="info-container">
+     //     <p>No leaderboard data matches the current filters.</p>
+     //     <button onClick={() => window.location.reload()} className="retry-button">Refresh</button>
+     //   </div>
+     // );
+     // Instead of returning, we'll render the filters and an empty chart area below
+  } else if (!isLoading && !rawLeaderboardData?.length) {
+     // Handle case where initial fetch returned no data at all
+     console.log("DeveloperLeaderboard: No data available from source");
+     return (
+       <div className="info-container">
+         <p>No leaderboard data available</p>
         <button
           onClick={() => {
             console.log("Retrying leaderboard fetch...");
@@ -112,33 +180,46 @@ export function DeveloperLeaderboard() {
             ))}
           </select>
         </label>
-        <label>
-          Repository:
-          <select
-            value={selectedRepository ?? ""}
-            // Explicitly type the event parameter
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedRepository(e.target.value || null)}
-            disabled={isLoading}
-          >
-            <option value="">All Repositories</option>
-            {availableRepositories.map(repo => (
-              <option key={repo} value={repo}>{repo}</option>
-            ))}
-          </select>
-        </label>
-        {/* Time Range Slider */}
-        <label className="time-slider-label">
-          Time Range (Weeks): {selectedWeeks}
-          <input
-            type="range"
-            min="1"
-            max="52"
-            value={selectedWeeks}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedWeeks(parseInt(e.target.value, 10))}
-            className="time-slider"
-            disabled={isLoading}
-          />
-        </label>
+        {/* Repository filter - kept for future use if repo data is added */}
+        {availableRepositories.length > 0 && (
+           <label> {/* Removed duplicate label tag inside */}
+               Repository:
+               <select
+                 value={selectedRepository ?? ""}
+                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedRepository(e.target.value || null)}
+                 disabled={isLoading}
+               >
+                 <option value="">All Repositories</option>
+                 {availableRepositories.map(repo => (
+                   <option key={repo} value={repo}>{repo}</option>
+                 ))}
+               </select>
+           </label> // Closing tag for the outer label
+        )}
+        {/* Time Range Radio Buttons */}
+        <div className="time-radio-group">
+          <span className="time-radio-label">Time Range:</span>
+          {[
+            { label: "1 Week", weeks: 1 },
+            { label: "2 Weeks", weeks: 2 },
+            { label: "1 Month", weeks: 4 },
+            { label: "3 Months", weeks: 13 },
+            { label: "1 Year", weeks: 52 },
+          ].map(({ label, weeks }) => (
+            <label key={weeks} className="radio-label">
+              <input
+                type="radio"
+                name="timeRange"
+                value={weeks}
+                checked={selectedWeeks === weeks}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedWeeks(parseInt(e.target.value, 10))}
+                disabled={isLoading}
+                className="radio-input"
+              />
+              {label}
+            </label>
+          ))}
+        </div>
       </div>
 
       {/* Stacked Bar Chart */}
@@ -146,7 +227,7 @@ export function DeveloperLeaderboard() {
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             layout="vertical" // Use vertical layout for better readability of usernames
-            data={leaderboardData}
+            data={filteredLeaderboardData} // Use locally filtered data
             margin={{
               top: 5,
               right: 30,

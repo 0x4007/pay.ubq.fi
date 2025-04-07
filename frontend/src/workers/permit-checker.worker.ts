@@ -3,11 +3,13 @@ import { createRpcClient } from '@ubiquity-dao/permit2-rpc-client';
 import { type Address, parseAbiItem } from "viem";
 import type { Tables } from "../database.types.ts";
 import type { PermitData } from "../types.ts";
-import { fetchAllPermitsForLeaderboard } from "./fetch-all-permits-for-leaderboard.ts"; // Add .ts
-import { fetchPermitsFromDb } from "./fetch-permits-from-db.ts"; // Add .ts
-import { mapDbPermitsToPermitData } from "./map-db-permit-to-permit-data.ts"; // Import the correct plural function
-import { initializeSupabase } from "./supabase-singleton.ts"; // Add .ts
-import { validatePermitsBatch } from "./validate-permits-batch.ts"; // Add .ts
+import { fetchAllPermitsForLeaderboard } from "./fetch-all-permits-for-leaderboard";
+import { fetchPermitsFromDb } from "./fetch-permits-from-db";
+import { mapDbPermitsToPermitData } from "./map-db-permit-to-permit-data";
+import { getSupabase, initializeSupabase } from "./supabase-singleton"; // Correct function name
+import { validatePermitsBatch } from "./validate-permits-batch";
+// Import the new processing function and type
+import { processAndAggregateLeaderboardData, type LeaderboardEntry } from "./leaderboard-processing";
 
 // --- Worker Setup ---
 let workerInitialized = false;
@@ -28,6 +30,9 @@ export const permit2Abi = parseAbiItem("function nonceBitmap(address owner, uint
 export const rpcClient: ReturnType<typeof createRpcClient> | null = null;
 export const PROXY_BASE_URL = "";
 
+// Store GitHub Token globally in the worker scope after INIT
+let GITHUB_TOKEN_WORKER: string | null = null;
+
 // Handle worker messages
 self.onmessage = async (event: MessageEvent<{ type: string; payload?: WorkerPayload }>) => {
   const { type, payload } = event.data;
@@ -37,6 +42,15 @@ self.onmessage = async (event: MessageEvent<{ type: string; payload?: WorkerPayl
       case 'INIT':
         if (!payload?.supabaseUrl || !payload?.supabaseAnonKey) {
           throw new Error('Missing Supabase credentials');
+        }
+        // Store GitHub token if provided
+        if (payload.githubToken) {
+          GITHUB_TOKEN_WORKER = payload.githubToken;
+          // Make token available to leaderboard-processing module (if needed, though it uses self access)
+          (self as WorkerGlobalScope & { GITHUB_TOKEN?: string }).GITHUB_TOKEN = GITHUB_TOKEN_WORKER;
+          console.log('Worker: GitHub token received.');
+        } else {
+          console.warn('Worker: GitHub token not provided during INIT.');
         }
 
         try {
@@ -59,27 +73,22 @@ self.onmessage = async (event: MessageEvent<{ type: string; payload?: WorkerPayl
         if (!workerInitialized) {
           throw new Error('Worker not initialized');
         }
+        console.log("Worker: Received FETCH_LEADERBOARD_DATA");
 
-        const combinedData: CombinedLeaderboardData[] = await fetchAllPermitsForLeaderboard();
+        // 1. Fetch combined permit and user data from DB
+        const combinedDbData: CombinedLeaderboardData[] = await fetchAllPermitsForLeaderboard();
+        console.log(`Worker: Fetched ${combinedDbData.length} combined entries from DB.`);
 
-        // Map combined data to the format expected by the hook
-        // Explicitly type 'permit' here
-        const mappedData: RawPermitWithUser[] = combinedData.map((permit: CombinedLeaderboardData) => ({
-          nonce: permit.nonce,
-          networkId: permit.token?.network ?? 1, // Default to mainnet if not specified
-          amount: permit.amount ?? '', // Convert null to empty string
-          githubUsername: permit.github_user ? `GitHub ID: ${permit.github_user.id}` : 'Unknown', // Keep placeholder for now
-          avatarUrl: '', // Will be fetched by the hook
-          node_url: permit.location?.node_url ?? null,
-          created_at: permit.created,
-          category: permit.category, // Pass through category
-          repository: permit.repository // Pass through repository
-        }));
+        // 2. Process and aggregate the data (includes GitHub fetching/parsing)
+        const finalLeaderboardData: LeaderboardEntry[] = await processAndAggregateLeaderboardData(combinedDbData);
+        console.log(`Worker: Processed data into ${finalLeaderboardData.length} leaderboard entries.`);
 
+        // 3. Post the final result back
         self.postMessage({
           type: 'LEADERBOARD_DATA_RESULT',
-          payload: mappedData
+          payload: finalLeaderboardData // Send the final processed data
         });
+        console.log("Worker: Sent LEADERBOARD_DATA_RESULT to main thread.");
         break;
       }
 
@@ -93,11 +102,38 @@ self.onmessage = async (event: MessageEvent<{ type: string; payload?: WorkerPayl
         }
 
         try {
-          // Fetch new permits from DB
-          console.log('Worker: Fetching new permits...');
-          // Assuming fetchPermitsFromDb expects address as string
+          // 1. Look up the numeric wallet ID from the address
+          console.log(`Worker: Looking up wallet ID for address ${payload.address}...`);
+          const supabase = getSupabase(); // Use correct function name
+          // No need for null check here as getSupabase throws if not initialized
+          const { data: walletData, error: walletError } = await supabase
+            .from(WALLETS_TABLE)
+            .select('id')
+            .eq('address', payload.address)
+            .single(); // Expecting only one wallet per address
+
+          if (walletError) {
+            console.error('Worker: Error fetching wallet ID:', walletError);
+            throw new Error(`Failed to find wallet ID for address ${payload.address}: ${walletError.message}`);
+          }
+
+          if (!walletData) {
+            console.warn(`Worker: No wallet found in DB for address ${payload.address}`);
+            // If no wallet found, there are no permits to fetch for this address. Post empty array.
+             self.postMessage({
+               type: 'NEW_PERMITS_VALIDATED',
+               permits: [] // Send empty array as no permits can be associated
+             });
+             break; // Exit the case
+          }
+
+          const walletId = walletData.id;
+          console.log(`Worker: Found wallet ID: ${walletId}`);
+
+          // 2. Fetch new permits from DB using the numeric ID
+          console.log('Worker: Fetching new permits using wallet ID...');
           const newPermits = await fetchPermitsFromDb(
-            payload.address,
+            walletId, // Pass the numeric ID
             payload.lastCheckTimestamp as string | null
           );
 
@@ -151,6 +187,7 @@ export interface JsonRpcRequest {
 export interface WorkerPayload {
     supabaseUrl?: string;
     supabaseAnonKey?: string;
+    githubToken?: string; // Add githubToken to payload for INIT
     address?: Address;
     lastCheckTimestamp?: string | null;
     permits?: PermitData[]; // For VALIDATE_PERMITS
@@ -197,19 +234,4 @@ export type CombinedLeaderboardData = FetchedPermitInfo & {
     repository?: string;
 };
 
-// Define the structure expected by the hook
-// NOTE: This RawPermitWithUser might be redundant now if useLeaderboardData directly uses CombinedLeaderboardData
-export interface RawPermitWithUser {
-  // Include necessary fields from PermitData that the hook might use for aggregation
-  nonce: string;
-  networkId: number;
-  amount?: string; // Keep original amount for reference if needed
-  // Add the user info
-  githubUsername: string; // Placeholder like "GitHub ID: 12345"
-  avatarUrl: string;    // Empty string from worker
-  node_url: string | null; // Add node_url
-  // Add any other fields needed for potential future filtering/display
-  created_at?: string;
-  category?: string; // Add category
-  repository?: string; // Add repository
-}
+// Removed RawPermitWithUser as it's no longer needed here

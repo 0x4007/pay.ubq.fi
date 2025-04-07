@@ -1,6 +1,6 @@
 # Active Context: Permit Claiming Application (Rewrite)
 
-**Date:** 2025-04-03 (Updated)
+**Date:** 2025-04-07 (Updated)
 
 ## 1. Current Focus
 
@@ -19,21 +19,26 @@
     *   **Implemented Pre-Claim Checks:** Added checks for owner balance and Permit2 allowance (now in `permit-utils.ts`) before initiating a claim. These checks run after permits are fetched and results are stored in state.
     *   **Updated Claim Logic:** `handleClaimPermit` (in `DashboardPage.tsx`) now re-verifies stored prerequisite check results before calling `writeContractAsync`.
     *   **Enhanced UI Feedback:** The permit table (now `PermitRow.tsx`) displays warnings ("Owner Balance Low", "Permit2 Allowance Low", "Check Failed") and updates button state/text based on prerequisite checks, using CSS classes for styling.
-    *   **Implemented Multicall Utility:** Created `frontend/src/utils/multicall-utils.ts` containing the `claimMultiplePermitsViaMulticall` function. This function uses `viem` and `Multicall3.aggregate3` to bundle multiple `Permit2.permitTransferFrom` calls into a single transaction, accepting `PublicClient`, `WalletClient`, permit details, and contract addresses.
+    *   **(Missing) Multicall Utility:** The previously mentioned `frontend/src/utils/multicall-utils.ts` file containing `claimMultiplePermitsViaMulticall` was not found in the current codebase.
     *   **Refactored Components (Previous):** Extracted `LoginPage`, `DashboardPage`, and `GitHubCallback` from `App.tsx` into `frontend/src/components/`.
     *   **Fixed Fetching Bug:** Resolved issue causing multiple permit fetches by removing redundant fetch calls and adjusting `useEffect` dependencies.
     *   **Fixed Button Disabling:** Corrected logic that incorrectly disabled claim buttons.
     *   **Integrated Grid Background:** Imported and executed the `grid` function from `frontend/src/the-grid.ts` within `main.tsx`, targeting the `#grid` element in `index.html`. Imported `grid-styles.css` and `ubiquity-styles.css`. Verified `index.html` structure includes `<background>` and `<main>`.
     *   **Added Header Logo:** Implemented SVG logo display by importing the raw SVG content (`ubiquity-os-logo.svg?raw`) and rendering it using `dangerouslySetInnerHTML` within a `<span>` in `LoginPage.tsx` and `DashboardPage.tsx`. Updated `vite-env.d.ts` for `?raw` imports. Adjusted CSS (`.header-logo-wrapper svg`) to style the injected SVG. (This approach bypasses issues with `vite-plugin-svgr`).
     *   **Refactored Authentication:** Replaced GitHub OAuth flow with Wallet Connection (`wagmi`) as the primary authentication/access method. Updated `LoginPage.tsx` to use `useConnect`, updated `App.tsx` to use `useAccount` for conditional rendering, removed `auth-context.tsx`, `github-callback.tsx`, and related routing/logic.
-    *   **Optimized Worker Validation & Caching (2025-04-01):**
-        *   Refactored `usePermitData` hook and `permit-checker.worker.ts` to implement caching and optimized fetching/validation.
-        *   The hook now caches full `PermitData` objects (including validation status) and the last check timestamp in `localStorage`.
-        *   On load, the hook displays cached data immediately and sends a single `FETCH_AND_VALIDATE` message to the worker, including the last check timestamp.
-        *   The worker fetches permits from Supabase (all if no valid timestamp, only new if timestamp provided, using `created` column and correct `github_id` for `beneficiary_id`), maps them (assuming ERC20), validates the fetched set via batch RPC (`rpcClient`), and returns the complete validated list.
-        *   The hook receives the validated list, merges it into the cache, saves the cache and new timestamp, and updates the UI.
+    *   **Optimized Worker Validation & Caching (User Permits - `usePermitData`):**
+        *   Refactored `usePermitData` hook and `permit-checker.worker.ts` (the main worker entry point, instantiated in `worker-context.tsx`).
+        *   The hook caches full `PermitData` objects (including validation status) and the `lastCheckTimestamp` in `localStorage`.
+        *   On load, the hook displays cached data immediately and sends `FETCH_NEW_PERMITS` message to the worker with the timestamp.
+        *   The worker (`permit-checker.worker.ts`) orchestrates fetching (via `fetch-permits-from-db.ts`), mapping (`map-db-permit-to-permit-data.ts`), and validation (via `validate-permits-batch.ts`) using the connected user's wallet ID (looked up from address) and timestamp.
+        *   The hook receives the validated list, merges it into the `localStorage` cache, saves the cache and new timestamp, and updates the UI.
         *   The `usePermitClaiming` hook updates the `localStorage` cache immediately on successful claims.
-        *   Worker logic assumes ERC20 only, based on positive amount. NFT logic removed.
+    *   **Leaderboard Caching (`useLeaderboardData`):**
+        *   The `useLeaderboardData` hook uses IndexedDB (via `utils/leaderboard-cache.ts` and `utils/idb-keyval.ts`) to cache the *final processed* `LeaderboardEntry[]` data for 1 hour.
+        *   On load, it checks the IndexedDB cache first. If valid data exists, it's used immediately.
+        *   If the cache is empty/stale, it sends `FETCH_LEADERBOARD_DATA` to the worker.
+        *   The worker (`permit-checker.worker.ts`) orchestrates fetching all permits/users (`fetch-all-permits-for-leaderboard.ts`) and processing/aggregation (`leaderboard-processing.ts`, which uses `utils/github-comment-cache.ts` internally).
+        *   The hook receives the final processed data from the worker and caches it in IndexedDB.
     *   **Reward Preference & CowSwap Integration (Placeholder):**
         *   Added `RewardPreferenceSelector.tsx` component allowing users to select a preferred reward token (saved to `localStorage`).
         *   Created `constants/supported-reward-tokens.ts` to define tokens per chain (using placeholders for Gnosis UUSD).
@@ -46,9 +51,9 @@
     *   **Developer Leaderboard (2025-04-07):**
         *   Created `hooks/use-leaderboard-data.ts` to fetch and aggregate permit data for all developers.
         *   Modified `workers/permit-checker.worker.ts` to handle `FETCH_LEADERBOARD_DATA` message, query all permits, query associated users from the `users` table, combine the data, and return it without validation. Implemented a two-step query process to handle potential type issues with Supabase joins.
-        *   **Updated `components/developer-leaderboard.tsx`:** Replaced the HTML table view with a stacked bar chart using `recharts`. The chart visualizes XP breakdown by category (`comments`, `task`, `reviewRewards`) for each developer. Added `recharts` dependency. Extracted inline styles to `components/leaderboard-styles.css`. **Added a time range slider (1-52 weeks) to filter data.**
-        *   **Updated `hooks/use-leaderboard-data.ts`:** Modified the hook to accept `selectedWeeks` state, calculate a cutoff date, and filter the raw permit data based on `created_at` timestamp before aggregation. Added `selectedWeeks` to the re-processing `useEffect` dependencies.
-        *   **Updated `components/leaderboard-styles.css`:** Added styles for the new time range slider.
+        *   **Updated `components/developer-leaderboard.tsx`:** Replaced the HTML table view with a stacked bar chart using `recharts`. The chart visualizes XP breakdown by category (`comments`, `task`, `reviewRewards`) for each developer. Added `recharts` dependency. Extracted inline styles to `components/leaderboard-styles.css`. **Replaced the time range slider with a radio button group (1 week, 2 weeks, 1 month, 3 months, 1 year) to filter data.**
+        *   **Updated `hooks/use-leaderboard-data.ts`:** Modified the hook to accept `selectedWeeks` state, calculate a cutoff date, and filter the raw permit data based on `created_at` timestamp before aggregation. Added `selectedWeeks` to the re-processing `useEffect` dependencies. (Logic remains compatible with radio button values).
+        *   **Updated `components/leaderboard-styles.css`:** Removed slider styles and added styles for the new time range radio button group.
         *   Refactored `App.tsx` to use `react-router-dom`, adding routes for `/login`, `/` (Dashboard), and `/leaderboard`. Implemented `ProtectedRoute` and `AuthenticatedLayout` components for handling authentication and basic navigation.
 *   **Shared Types**:
     *   Added `ownerBalanceSufficient`, `permit2AllowanceSufficient`, `checkError` fields to `PermitData` for storing prerequisite check results.
@@ -70,13 +75,13 @@
 
 *   **Verify Pre-Claim Checks**: Confirm the new balance/allowance checks accurately reflect on-chain state and prevent claims appropriately.
 *   **Test Claiming**: Thoroughly test the single permit claim flow with the new checks in place.
-*   **Test Leaderboard**: Verify the leaderboard fetches data correctly, aggregates XP accurately, displays the stacked bar chart visualization correctly, **and filters correctly based on the new time range slider**. Check handling of users with no permits or permits with missing user info, and chart responsiveness/readability.
+*   **Test Leaderboard**: Verify the leaderboard fetches data correctly, aggregates XP accurately, displays the stacked bar chart visualization correctly, **and filters correctly based on the new time range radio buttons**. Check handling of users with no permits or permits with missing user info, and chart responsiveness/readability.
 *   **RPC Error Handling**: Improve backend validation functions (`isErc20NonceClaimed`, `isErc721NonceClaimed`) to better handle RPC errors (e.g., return a specific error state instead of fail-safe `true`).
 *   **(Optional)** Implement backend endpoint `/api/permits/update-status` to record successful claims.
 *   **(Backend)** Ensure backend API (`/api/permits`) correctly fetches permits based on the provided `walletAddress` query parameter.
 *   **Implement Real CowSwap Logic**: Replace placeholder functions in `cowswap-utils.ts` with actual SDK calls, including handling signing via `viem` WalletClient.
 *   **Obtain UUSD Address**: Get the correct Gnosis Chain address for UUSD and update `supported-reward-tokens.ts`.
-*   **Refactor to Multicall Claiming (Optional but Recommended)**: Replace sequential claiming in `usePermitClaiming` with a multicall approach (using a library or custom implementation) before triggering swaps for better UX and efficiency. The previously mentioned `multicall-utils.ts` was not found.
+*   **Refactor to Multicall Claiming (Optional but Recommended)**: Replace sequential claiming in `usePermitClaiming` with a multicall approach (using a library or custom implementation) before triggering swaps for better UX and efficiency. The previously mentioned `multicall-utils.ts` file is currently missing.
     *   **Test End-to-End Flow**: Thoroughly test selection, quoting, claiming, and swapping (once implemented).
     *   **Verify Frontend Deployment**: Check deployed URLs.
     *   **Handle Network Mismatch (2025-04-02):** Implemented logic in `PermitRow.tsx` to detect when a permit's network (`permit.networkId`) differs from the connected wallet's network (`chain.id`). If mismatched, the component now displays the correct token amount but renders a "Switch to [Network Name]" button using `wagmi`'s `useSwitchNetwork` hook instead of the "Claim" button. Added `NETWORK_NAMES` constant in `config.ts`.

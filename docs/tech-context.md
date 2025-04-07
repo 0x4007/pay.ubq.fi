@@ -39,6 +39,7 @@ This document outlines the technology stack and development environment for the 
 *   `wagmi`: React hooks for wallet connection and interaction.
 *   `@cowprotocol/cow-sdk`: For interacting with CowSwap API (quotes, orders).
 *   `@pavlovcik/permit2-rpc-manager`: RPC management library (to be integrated).
+*   `idb-keyval`: Simple key-value storage using IndexedDB (used by caching utilities).
 *   Testing libraries (`@testing-library/react`).
 
 ## 4. Infrastructure & Deployment
