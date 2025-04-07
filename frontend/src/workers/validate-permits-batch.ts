@@ -21,7 +21,7 @@ export async function validatePermitsBatch(permitsToValidate: PermitData[]): Pro
 
   permitsToValidate.forEach((permit) => {
     if (permit.type !== 'erc20-permit') {
-      console.warn(`Worker: Skipping validation for non-ERC20 permit: ${permit.nonce}`);
+
       return;
     };
 
@@ -50,7 +50,7 @@ export async function validatePermitsBatch(permitsToValidate: PermitData[]): Pro
         });
       }
     } else {
-      console.warn(`Worker: Skipping balance/allowance check for permit ${key} due to missing data.`);
+
     }
   });
 
@@ -93,7 +93,7 @@ export async function validatePermitsBatch(permitsToValidate: PermitData[]): Pro
     });
 
   } catch (error: unknown) {
-    console.error("Worker: Error during validation batch RPC request:", error);
+
     permitsToValidate.forEach(permit => {
       const key = `${permit.nonce}-${permit.networkId}`;
       const updateData = checkedPermitsMap.get(key) || { checkError: `Batch request failed: ${error instanceof Error ? error.message : String(error)}` };

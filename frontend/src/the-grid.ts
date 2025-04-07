@@ -55,13 +55,13 @@ export function grid(node = document.body, callback?: () => void) {
     function createShader(gl: WebGLRenderingContext, type: number, source: string) {
       const shader = gl.createShader(type);
       if (!shader) {
-        console.error("An error occurred creating the shaders");
+
         return null;
       }
       gl.shaderSource(shader, source);
       gl.compileShader(shader);
       if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        console.error("An error occurred compiling the shaders: " + gl.getShaderInfoLog(shader));
+
         gl.deleteShader(shader);
         return null;
       }
@@ -71,19 +71,19 @@ export function grid(node = document.body, callback?: () => void) {
     // Create vertex and fragment shaders
     const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
     if (!vertexShader) {
-      console.error("An error occurred creating the vertex shader");
+
       return;
     }
     const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
     if (!fragmentShader) {
-      console.error("An error occurred creating the fragment shader");
+
       return;
     }
 
     // Create program, attach shaders, and link
     const program = gl.createProgram();
     if (!program) {
-      console.error("An error occurred creating the program");
+
       return;
     }
 
@@ -93,7 +93,7 @@ export function grid(node = document.body, callback?: () => void) {
 
     // Verify program link status
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      console.error("Unable to initialize the shader program: " + gl.getProgramInfoLog(program));
+
       return;
     }
 

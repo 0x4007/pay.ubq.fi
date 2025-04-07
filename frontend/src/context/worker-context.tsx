@@ -14,30 +14,30 @@ const initializationListeners: Set<() => void> = new Set(); // To notify compone
 const initializeSharedWorker = () => {
   // Prevent re-initialization
   if (workerInitializationState !== 'idle') {
-    console.log("WorkerContext Module: Initialization already attempted/done. State:", workerInitializationState);
+
     return;
   }
 
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-    console.error("WorkerContext Module: Missing Supabase credentials");
+
     initializationError = "Missing Supabase credentials";
     workerInitializationState = 'error';
     notifyListeners();
     return;
   }
 
-  console.log("WorkerContext Module: Attempting worker initialization...");
+
   workerInitializationState = 'initializing';
 
   try {
     // Use the new unified worker file
     sharedWorker = new Worker(new URL('../workers/app-worker.ts', import.meta.url), { type: 'module' });
-    console.log("WorkerContext Module: Shared worker instance created.");
+
 
     // Set a timeout for initialization
     const initTimeout = setTimeout(() => {
       if (workerInitializationState === 'initializing') {
-        console.error("WorkerContext Module: Worker initialization timed out");
+
         initializationError = "Worker initialization timed out";
         workerInitializationState = 'error';
         notifyListeners();
@@ -46,18 +46,18 @@ const initializeSharedWorker = () => {
 
     const handleInitMessage = (event: MessageEvent) => {
       const { type, error } = event.data;
-      console.log(`WorkerContext Module: Shared worker received message type: ${type}`);
+
 
       if (type === 'INIT_SUCCESS') {
         clearTimeout(initTimeout);
-        console.log("WorkerContext Module: Shared worker initialized successfully.");
+
         workerInitializationState = 'initialized';
         initializationError = null;
         cleanupListeners();
         notifyListeners();
       } else if (type === 'INIT_ERROR') {
         clearTimeout(initTimeout);
-        console.error("WorkerContext Module: Shared worker initialization failed:", error);
+
         initializationError = `Worker initialization failed: ${error}`;
         workerInitializationState = 'error';
         cleanupListeners();
@@ -67,7 +67,7 @@ const initializeSharedWorker = () => {
 
     const handleError = (event: ErrorEvent) => {
       clearTimeout(initTimeout);
-      console.error("WorkerContext Module: Shared worker error:", event.message, event);
+
       initializationError = `Worker error: ${event.message}`;
       workerInitializationState = 'error';
       cleanupListeners();
@@ -87,8 +87,8 @@ const initializeSharedWorker = () => {
       throw new Error("Supabase URL or Anon Key missing.");
     }
 
-    console.log("WorkerContext Module: Sending INIT message to shared worker...");
-    console.log("WorkerContext Module: Sending INIT message to shared worker (including GitHub token if present)...");
+
+
     sharedWorker.postMessage({
       type: 'INIT',
       payload: {
@@ -99,7 +99,7 @@ const initializeSharedWorker = () => {
     });
 
   } catch (e) {
-    console.error("WorkerContext Module: Failed to create worker instance:", e);
+
     initializationError = `Failed to create worker instance: ${e instanceof Error ? e.message : String(e)}`;
     workerInitializationState = 'error';
     notifyListeners(); // Notify about the error state
@@ -144,21 +144,21 @@ export const WorkerProvider: React.FC<WorkerProviderProps> = ({ children }) => {
   useEffect(() => {
     // Callback to update state when notified
     const updateState = () => {
-      console.log("WorkerProvider: Notified of worker state change. New state:", workerInitializationState);
+
       setIsInitialized(workerInitializationState === 'initialized');
       setError(initializationError);
     };
 
     // Subscribe to notifications
     initializationListeners.add(updateState);
-    console.log("WorkerProvider: Subscribed to worker state changes.");
+
 
     // Initial check in case initialization finished before mount
     updateState();
 
     // Cleanup subscription on unmount
     return () => {
-      console.log("WorkerProvider: Unsubscribing from worker state changes.");
+
       initializationListeners.delete(updateState);
     };
   }, []); // Run only once

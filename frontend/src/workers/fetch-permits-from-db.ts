@@ -13,7 +13,7 @@ export async function fetchPermitsFromDb(userGitHubId: number, lastCheckTimestam
   if (lastCheckTimestamp && !isNaN(Date.parse(lastCheckTimestamp))) {
     query = query.gt('created', lastCheckTimestamp);
   } else if (lastCheckTimestamp) {
-    console.warn(`Worker: Received invalid lastCheckTimestamp: ${lastCheckTimestamp}. Fetching all permits.`);
+
   }
 
   const { data: potentialPermitsData, error: permitError } = await query;

@@ -76,14 +76,14 @@ export function DashboardPage() {
         try {
           totalSumInWei += BigInt(permit.amount);
         } catch (e) {
-          console.error(`Error parsing amount for claimableTotalValue calc: ${permit.amount}`, e);
+
         }
       }
     }
     try {
       return parseFloat(formatUnits(totalSumInWei, assumedDecimals));
     } catch (e) {
-      console.error("Error formatting total sum:", e);
+
       return 0;
     }
   }, [claimablePermits]);
@@ -109,11 +109,11 @@ export function DashboardPage() {
       if (permit.tokenAddress?.toLowerCase() === preferredRewardTokenAddress.toLowerCase()) {
         // Add original amount if it's already the preferred token
         if (permit.amount) {
-          try { totalEstimatedValueInWei += BigInt(permit.amount); } catch (e) { console.error(`Error parsing original amount for estimatedTotalValue calc: ${permit.amount}`, e); }
+          try { totalEstimatedValueInWei += BigInt(permit.amount); } catch (e) {  }
         }
       } else if (permit.estimatedAmountOut) {
         // Add estimated amount if quote exists
-         try { totalEstimatedValueInWei += BigInt(permit.estimatedAmountOut); } catch (e) { console.error(`Error parsing estimated amount for estimatedTotalValue calc: ${permit.estimatedAmountOut}`, e); }
+         try { totalEstimatedValueInWei += BigInt(permit.estimatedAmountOut); } catch (e) {  }
       }
       // Ignore permits with quote errors or no quote needed/available
     });
@@ -123,7 +123,7 @@ export function DashboardPage() {
       // Use ~ symbol to indicate estimation
       return `≈ ${formattedValue.toFixed(2)} ${preferredTokenInfo.symbol}`;
     } catch (e) {
-      console.error("Error formatting estimated total value:", e);
+
       return `Error (${preferredTokenInfo.symbol})`;
     }
   }, [claimableTotalValue, preferredRewardTokenAddress, chain?.id, permits, claimablePermits]); // Depends on permits for estimates
@@ -155,7 +155,7 @@ export function DashboardPage() {
   const handlePreferenceChange = useCallback((selectedAddress: Address | null) => {
     setPreferredRewardTokenAddress(selectedAddress);
     // TODO: Trigger quote fetching/recalculation based on the new preference
-    console.log("DashboardPage received preference change:", selectedAddress);
+
   }, []);
 
 

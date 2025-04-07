@@ -1,14 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Legend,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { useLeaderboardData } from "../hooks/use-leaderboard-data.ts";
 import { leaderboardCache } from "../utils/leaderboard-cache.ts";
 import type { LeaderboardEntry } from "../workers/leaderboard-aggregator.ts";
@@ -27,10 +18,26 @@ function displayRepoName(repoId: string): string {
 
 function generateColor(index: number): string {
   const colors = [
-    "#8884d8", "#82ca9d", "#ffc658", "#ff7f50", "#87ceeb", "#da70d6",
-    "#32cd32", "#ff69b4", "#ba55d3", "#cd5c5c", "#ffa500", "#40e0d0",
-    "#ff6347", "#7b68ee", "#00fa9a", "#ffd700", "#dc143c", "#00ced1",
-    "#ff1493", "#1e90ff"
+    "#8884d8",
+    "#82ca9d",
+    "#ffc658",
+    "#ff7f50",
+    "#87ceeb",
+    "#da70d6",
+    "#32cd32",
+    "#ff69b4",
+    "#ba55d3",
+    "#cd5c5c",
+    "#ffa500",
+    "#40e0d0",
+    "#ff6347",
+    "#7b68ee",
+    "#00fa9a",
+    "#ffd700",
+    "#dc143c",
+    "#00ced1",
+    "#ff1493",
+    "#1e90ff",
   ];
   return colors[index % colors.length];
 }
@@ -44,8 +51,8 @@ const getUniqueFilterOptions = (data: LeaderboardEntry[]) => {
   const repositories = new Set<string>();
 
   data.forEach((entry) => {
-    Object.keys(entry.xpByCategory).forEach(cat => categories.add(cat));
-    entry.repositories.forEach(repo => repositories.add(repo));
+    Object.keys(entry.xpByCategory).forEach((cat) => categories.add(cat));
+    entry.repositories.forEach((repo) => repositories.add(repo));
   });
 
   return {
@@ -65,20 +72,23 @@ export function DeveloperLeaderboard() {
     getWhitelistedRepositories().then(setRepoWhitelist);
   }, []);
 
-  const getCacheKey = (weeks: number, repo: string | null | undefined) =>
-    repo ? `${weeks}_weeks_repo_${repo}` : `${weeks}_weeks`;
+  const getCacheKey = (weeks: number, repo: string | null | undefined) => (repo ? `${weeks}_weeks_repo_${repo}` : `${weeks}_weeks`);
 
   const refreshLeaderboard = async () => {
     const cacheKey = getCacheKey(selectedWeeks, selectedRepository);
-    console.log(`DeveloperLeaderboard: Clearing cache for key ${cacheKey} and refreshing leaderboard...`);
+
     await leaderboardCache.clearProcessedData(cacheKey);
     setRefreshCounter((prev) => prev + 1);
   };
 
-  const { leaderboardData: rawLeaderboardData, isLoading, error } = useLeaderboardData({
+  const {
+    leaderboardData: rawLeaderboardData,
+    isLoading,
+    error,
+  } = useLeaderboardData({
     selectedWeeks,
     selectedRepository,
-    refreshCounter
+    refreshCounter,
   });
 
   const { availableCategories, availableRepositories: allRepos } = useMemo(() => {
@@ -89,62 +99,44 @@ export function DeveloperLeaderboard() {
   }, [rawLeaderboardData]);
 
   const whitelistedRepositories = useMemo(() => {
-    console.log("Whitelist (raw):", Array.from(repoWhitelist));
-    console.log("All repos (raw):", allRepos);
+    const normalizedWhitelist = new Set(Array.from(repoWhitelist).map((r) => r.toLowerCase().replace(/\./g, "_").replace(/\//g, "_")));
 
-    const normalizedWhitelist = new Set(
-      Array.from(repoWhitelist).map(r => r.toLowerCase().replace(/\./g, "_").replace(/\//g, "_"))
-    );
-    console.log("Normalized whitelist:", Array.from(normalizedWhitelist));
-
-    const normalizedAllRepos = allRepos.map(r => r.toLowerCase().replace(/\./g, "_").replace(/\//g, "_"));
-    console.log("Normalized all repos:", normalizedAllRepos);
+    const normalizedAllRepos = allRepos.map((r) => r.toLowerCase().replace(/\./g, "_").replace(/\//g, "_"));
 
     const filtered = allRepos.filter((repo, idx) => {
       const normalized = normalizedAllRepos[idx];
       return normalizedWhitelist.has(normalized);
     });
 
-    console.log("Filtered whitelisted repos:", filtered);
     return filtered;
   }, [allRepos, repoWhitelist]);
 
   const filteredLeaderboardData = useMemo(() => {
     if (!Array.isArray(rawLeaderboardData)) return [];
 
-    return rawLeaderboardData.map(entry => {
-      const filteredRepos = entry.repositories.filter(repo => repoWhitelist.has(repo));
-      const filteredXpByRepo: Record<string, number> = {};
-      let totalXp = 0;
-      Object.entries(entry.xpByRepository).forEach(([repoKey, xp]) => {
-        const repoName = repoKey.replace(/_/g, "/");
-        if (repoWhitelist.has(repoName)) {
-          filteredXpByRepo[repoKey] = xp;
-          totalXp += xp;
-        }
-      });
-      return {
-        ...entry,
-        repositories: filteredRepos,
-        xpByRepository: filteredXpByRepo,
-        totalXpForWhitelist: totalXp
-      };
-    }).filter(entry => entry.totalXpForWhitelist > 0);
+    return rawLeaderboardData
+      .map((entry) => {
+        const filteredRepos = entry.repositories.filter((repo) => repoWhitelist.has(repo));
+        const filteredXpByRepo: Record<string, number> = {};
+        let totalXp = 0;
+        Object.entries(entry.xpByRepository).forEach(([repoKey, xp]) => {
+          const repoName = repoKey.replace(/_/g, "/");
+          if (repoWhitelist.has(repoName)) {
+            filteredXpByRepo[repoKey] = xp;
+            totalXp += xp;
+          }
+        });
+        return {
+          ...entry,
+          repositories: filteredRepos,
+          xpByRepository: filteredXpByRepo,
+          totalXpForWhitelist: totalXp,
+        };
+      })
+      .filter((entry) => entry.totalXpForWhitelist > 0);
   }, [rawLeaderboardData, repoWhitelist]);
 
-  console.log("DeveloperLeaderboard render state:", {
-    isLoading,
-    hasError: !!error,
-    errorMessage: error,
-    whitelist: Array.from(repoWhitelist),
-    whitelistedRepositories,
-    rawDataLength: Array.isArray(rawLeaderboardData) ? rawLeaderboardData.length : 0,
-    filteredDataLength: filteredLeaderboardData.length,
-    sampleEntry: filteredLeaderboardData[0]
-  });
-
   if (error) {
-    console.error("DeveloperLeaderboard error:", error);
     return (
       <div className="error-container">
         <h3>Error Loading Leaderboard</h3>
@@ -184,26 +176,20 @@ export function DeveloperLeaderboard() {
       <div className="filters-container">
         <label>
           Category:
-          <select
-            value={selectedCategory ?? ""}
-            onChange={(e) => setSelectedCategory(e.target.value || null)}
-            disabled={isLoading}
-          >
+          <select value={selectedCategory ?? ""} onChange={(e) => setSelectedCategory(e.target.value || null)} disabled={isLoading}>
             <option value="">All Categories</option>
-            {availableCategories.map(category => (
-              <option key={category} value={category}>{category}</option>
+            {availableCategories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
             ))}
           </select>
         </label>
         <label>
           Repository:
-          <select
-            value={selectedRepository ?? ""}
-            onChange={(e) => setSelectedRepository(e.target.value || null)}
-            disabled={isLoading}
-          >
+          <select value={selectedRepository ?? ""} onChange={(e) => setSelectedRepository(e.target.value || null)} disabled={isLoading}>
             <option value="">All Repositories</option>
-            {whitelistedRepositories.map(repo => (
+            {whitelistedRepositories.map((repo) => (
               <option key={repo} value={repo}>
                 {displayRepoName(repo)}
               </option>
@@ -238,20 +224,10 @@ export function DeveloperLeaderboard() {
 
       <div className="chart-container">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart
-            layout="vertical"
-            data={filteredLeaderboardData}
-            margin={{ top: 5, right: 30, left: 100, bottom: 5 }}
-          >
+          <BarChart layout="vertical" data={filteredLeaderboardData} margin={{ top: 5, right: 30, left: 100, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
             <XAxis type="number" stroke="rgba(255, 255, 255, 0.7)" />
-            <YAxis
-              dataKey="githubUsername"
-              type="category"
-              stroke="rgba(255, 255, 255, 0.7)"
-              width={100}
-              tick={{ fontSize: 10 }}
-            />
+            <YAxis dataKey="githubUsername" type="category" stroke="rgba(255, 255, 255, 0.7)" width={100} tick={{ fontSize: 10 }} />
             <Tooltip
               contentStyle={{
                 backgroundColor: "rgba(0, 0, 0, 0.8)",

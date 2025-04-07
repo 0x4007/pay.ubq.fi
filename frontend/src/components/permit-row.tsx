@@ -135,7 +135,7 @@ export function PermitRow({ permit, onClaimPermit, isConnected, chain, isConfirm
           await switchNetwork(config, { chainId: permit.networkId });
           // No need to set loading false here, as component will re-render on network change
         } catch (error) {
-          console.error("Failed to switch network:", error);
+
           setIsSwitchingNetwork(false); // Reset loading state on error
         }
         // Do not set isSwitchingNetwork(false) on success immediately,
@@ -167,7 +167,7 @@ export function PermitRow({ permit, onClaimPermit, isConnected, chain, isConfirm
         return match[1]; // Format as repo#issue
       }
     } catch (e) {
-      console.error("Error parsing GitHub URL:", e);
+
     }
     // Fallback if parsing fails or URL is unexpected
     return "Source Link"; // Fallback text
@@ -235,7 +235,7 @@ export function PermitRow({ permit, onClaimPermit, isConnected, chain, isConfirm
             );
           }
         } catch (e) {
-          console.error("Error formatting estimated amount:", e);
+
           return <span title="Error formatting estimated amount">{ICONS.WARNING} Format Error</span>;
         }
       }

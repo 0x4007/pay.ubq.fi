@@ -4,12 +4,12 @@ export const resetDatabase = async (): Promise<void> => {
     const deleteRequest = indexedDB.deleteDatabase("ubiquityCache");
 
     deleteRequest.onerror = () => {
-      console.error("Failed to delete database:", deleteRequest.error);
+
       reject(deleteRequest.error);
     };
 
     deleteRequest.onsuccess = () => {
-      console.log("Successfully deleted database");
+
       // Recreate the database
       dbRequest = createDB();
       resolve();
@@ -24,7 +24,7 @@ const createDB = (): IDBOpenDBRequest => {
   const request = indexedDB.open(dbName, dbVersion);
 
   request.onerror = () => {
-    console.error("Failed to open IndexedDB:", request.error);
+
   };
 
   request.onupgradeneeded = (event) => {
@@ -58,7 +58,7 @@ export function createIdbKeyval<T>(storeName: string) {
       } else {
         dbRequest.onsuccess = () => resolve(dbRequest.result || null);
         dbRequest.onerror = () => {
-          console.error("Failed to get database:", dbRequest.error);
+
           resolve(null);
         };
       }
@@ -79,7 +79,7 @@ export function createIdbKeyval<T>(storeName: string) {
           request.onerror = () => reject(request.error);
         });
       } catch (error) {
-        console.error(`Error reading from ${storeName}:`, error);
+
         return null;
       }
     },
@@ -97,7 +97,7 @@ export function createIdbKeyval<T>(storeName: string) {
           request.onerror = () => reject(request.error);
         });
       } catch (error) {
-        console.error(`Error writing to ${storeName}:`, error);
+
       }
     },
 
@@ -114,7 +114,7 @@ export function createIdbKeyval<T>(storeName: string) {
           request.onerror = () => reject(request.error);
         });
       } catch (error) {
-        console.error(`Error deleting from ${storeName}:`, error);
+
       }
     },
 
@@ -131,7 +131,7 @@ export function createIdbKeyval<T>(storeName: string) {
           request.onerror = () => reject(request.error);
         });
       } catch (error) {
-        console.error(`Error clearing ${storeName}:`, error);
+
       }
     }
   };

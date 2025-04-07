@@ -22,17 +22,17 @@ import { getSupabase } from "./supabase-singleton.ts"; // Add .ts extension
 
       if (!cleanOwner || !cleanRepo) {
         validateGitHubRepo.validationErrors.emptyFields++;
-        console.debug(`Worker: [Repository] Empty owner/repo: ${owner}/${repo}`);
+
         return undefined;
       }
       if (!validateGitHubRepo.owner(cleanOwner)) {
         validateGitHubRepo.validationErrors.invalidOwner++;
-        console.debug(`Worker: [Repository] Invalid owner format: ${cleanOwner}`);
+
         return undefined;
       }
       if (!validateGitHubRepo.name(cleanRepo)) {
         validateGitHubRepo.validationErrors.invalidRepo++;
-        console.debug(`Worker: [Repository] Invalid repo format: ${cleanRepo}`);
+
         return undefined;
       }
 
@@ -43,9 +43,9 @@ import { getSupabase } from "./supabase-singleton.ts"; // Add .ts extension
 export async function fetchAllPermitsForLeaderboard(cutoffDateIsoString?: string): Promise<CombinedLeaderboardData[]> {
   const supabase = getSupabase();
   if (cutoffDateIsoString) {
-    console.log(`Worker: Querying permits created on or after ${cutoffDateIsoString} for leaderboard (Step 1)...`);
+
   } else {
-    console.log(`Worker: Querying ALL permits for leaderboard (Step 1)...`);
+
   }
 
   // Define permit data type based on the updated query
@@ -90,16 +90,16 @@ export async function fetchAllPermitsForLeaderboard(cutoffDateIsoString?: string
   };
 
   if (permitsError) {
-    console.error("Supabase leaderboard permits fetch error (Step 1):", permitsError);
+
     throw new Error(`Supabase leaderboard permits fetch failed: ${permitsError.message}`);
   }
 
   // Add a type check for permitsData before proceeding
   if (!permitsData || !Array.isArray(permitsData)) {
-    console.log(`Worker: No valid permits data found for leaderboard (Step 1) after date filter.`); // Updated log
+     // Updated log
     return [];
   }
-  console.log(`Worker: Found ${permitsData.length} permits (Step 1) after date filter.`); // Updated log
+   // Updated log
 
   // Step 2: Fetch all discovered permits
   const { data: discoveredPermitsData, error: discoveredPermitsError } = await supabase
@@ -116,40 +116,40 @@ export async function fetchAllPermitsForLeaderboard(cutoffDateIsoString?: string
     };
 
   if (discoveredPermitsError) {
-    console.error("Worker: [Repository] Failed to fetch discovered permits:", discoveredPermitsError);
+
     // Continue without discovered permits if fetch fails
-    console.debug("Worker: [Repository] Continuing without discovered permits data");
+
   } else {
-    console.debug(`Worker: [Repository] Fetched ${discoveredPermitsData?.length ?? 0} discovered permits`);
+
   }
 
   // Create a map of discovered permits by nonce for faster lookups
   const discoveredPermitsByNonce = new Map<string, DiscoveredPermitResult>();
   if (discoveredPermitsData && Array.isArray(discoveredPermitsData)) {
-    console.debug(`Worker: [Repository] Processing ${discoveredPermitsData.length} permits for repository info...`);
+
     discoveredPermitsData.forEach(permit => {
       // Validate permit data structure
       if (!permit || typeof permit !== 'object') {
-        console.debug(`Worker: [Repository] Skipping invalid permit entry`);
+
         return;
       }
 
       // Validate required fields
       if (!permit.permit_nonce) {
-        console.debug(`Worker: [Repository] Skipping permit with missing nonce`);
+
         return;
       }
 
       // Log repository information if present
       if (permit.github_repo_owner && permit.github_repo_name) {
-        console.debug(`Worker: [Repository] Found ${permit.github_repo_owner}/${permit.github_repo_name} for permit ${permit.permit_nonce}`);
+
       }
 
       discoveredPermitsByNonce.set(permit.permit_nonce, permit);
     });
-    console.debug(`Worker: [Repository] Mapped ${discoveredPermitsByNonce.size} permits with repository info`);
+
   } else {
-    console.debug(`Worker: [Repository] No valid discovered permits data found`);
+
   }
 
   // Step 3: Extract unique beneficiary IDs from the *filtered* permitsData
@@ -165,7 +165,7 @@ export async function fetchAllPermitsForLeaderboard(cutoffDateIsoString?: string
   // Step 3: Fetch corresponding GitHub users (if any beneficiary IDs exist)
   const usersMap = new Map<number, GitHubUserInfo>();
   if (beneficiaryIds.length > 0) {
-    console.log(`Worker: Querying ${beneficiaryIds.length} unique GitHub users (Step 2)...`);
+
 
     interface UserQueryResult {
       id: number;
@@ -180,18 +180,18 @@ export async function fetchAllPermitsForLeaderboard(cutoffDateIsoString?: string
       };
 
     if (usersError) {
-      console.error("Supabase GitHub users fetch error (Step 2):", usersError);
-      console.warn("Worker: Failed to fetch GitHub user details. Leaderboard will show placeholders.");
+
+
       // Proceed without user data if fetch fails
     } else {
-      console.log(`Worker: Found ${usersData?.length ?? 0} GitHub users (Step 2).`);
+
       usersData?.forEach(user => {
         const userInfo: GitHubUserInfo = { id: user.id };
         usersMap.set(userInfo.id, userInfo);
       });
     }
   } else {
-    console.log(`Worker: No valid beneficiary IDs found in filtered permits. Skipping user query.`); // Updated log
+     // Updated log
   }
 
   // Step 5: Map and filter permits data (no date filtering needed here anymore)
@@ -199,13 +199,13 @@ export async function fetchAllPermitsForLeaderboard(cutoffDateIsoString?: string
     .map((permit: PermitQueryResult): CombinedLeaderboardData | null => {
       // Check if permit is a valid object and has the core properties
       if (!permit || typeof permit !== 'object' || !('nonce' in permit) || !('beneficiary_id' in permit) || permit.beneficiary_id === null || permit.beneficiary_id === undefined) {
-        console.warn("Worker: Invalid permit data structure received (missing core fields):", permit);
+
         return null;
       }
 
       const beneficiaryIdNum = Number(permit.beneficiary_id);
       if (isNaN(beneficiaryIdNum)) {
-        console.warn("Worker: Invalid beneficiary_id:", permit.beneficiary_id);
+
         return null;
       }
       const github_user = usersMap.get(beneficiaryIdNum) ?? null;
@@ -228,7 +228,7 @@ export async function fetchAllPermitsForLeaderboard(cutoffDateIsoString?: string
       if (discoveredPermit?.github_repo_owner && discoveredPermit?.github_repo_name) {
         repository = validateGitHubRepo.sanitize(discoveredPermit.github_repo_owner, discoveredPermit.github_repo_name);
         if (repository) {
-          console.debug(`Worker: [Repository] Using ${repository} from discovered permit ${permit.nonce}`);
+
         }
       }
 
@@ -242,12 +242,12 @@ export async function fetchAllPermitsForLeaderboard(cutoffDateIsoString?: string
             if (pathParts.length >= 2) {
               repository = validateGitHubRepo.sanitize(pathParts[0], pathParts[1]);
               if (repository) {
-                console.debug(`Worker: [Repository] Extracted ${repository} from URL for permit ${permit.nonce}`);
+
               }
             }
           }
           if (!repository) {
-            console.debug(`Worker: [Repository] Could not extract from URL for permit ${permit.nonce}: ${locationUrl}`);
+
           }
         }
       }

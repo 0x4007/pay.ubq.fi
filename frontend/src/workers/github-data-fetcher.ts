@@ -18,7 +18,7 @@ async function loadFixtureMetadata(
   try {
     const response = await fetch(url);
     if (!response.ok) {
-      console.warn(`GitHubFetcher: Fixture not found at ${url}`);
+
       return null;
     }
     const data = await response.json();
@@ -30,7 +30,7 @@ async function loadFixtureMetadata(
     // Some fixtures may be keyed by usernames (legacy format)
     return { output: data } as PermitCommentMetadata;
   } catch (e) {
-    console.warn(`GitHubFetcher: Failed to load fixture from ${url}`, e);
+
     return null;
   }
 }
@@ -91,11 +91,11 @@ export const fetchAndCacheIssueMetadata = async (
     if (USE_GITHUB_FIXTURES) {
       const metadata = await loadFixtureMetadata(owner, repo, issueNumber);
       if (metadata) {
-        console.log(`GitHubFetcher: Loaded metadata from fixture for ${owner}/${repo}#${issueNumber}`);
+
         await leaderboardCache.setMetadata(issueUrl, metadata);
         return metadata;
       } else {
-        console.warn(`GitHubFetcher: No fixture metadata found for ${owner}/${repo}#${issueNumber}`);
+
         return null;
       }
     }
@@ -106,7 +106,7 @@ export const fetchAndCacheIssueMetadata = async (
     // Try to get metadata from cache first
     const cachedMetadata = await leaderboardCache.getMetadata(issueUrl);
     if (cachedMetadata) {
-      console.log(`GitHubFetcher: Using cached metadata for ${issueUrl}`);
+
       return cachedMetadata;
     }
 
@@ -115,20 +115,20 @@ export const fetchAndCacheIssueMetadata = async (
     let comments: GitHubComment[];
 
     if (cachedComments) {
-      console.log(`GitHubFetcher: Using cached comments for ${owner}/${repo}#${issueNumber}`);
+
       comments = cachedComments.comments;
     } else {
-      console.log(`GitHubFetcher: Fetching comments for ${owner}/${repo}#${issueNumber}`);
+
       const headers: HeadersInit = { Accept: "application/vnd.github.v3+json" };
       if (githubToken) {
         headers["Authorization"] = `Bearer ${githubToken}`;
       } else {
-        console.warn(`GitHubFetcher: No GitHub token provided. Making unauthenticated request to ${apiUrl}.`);
+
       }
 
       const response = await fetch(apiUrl, { headers });
       if (!response.ok) {
-        console.error(`GitHubFetcher: Failed to fetch comments for ${owner}/${repo}#${issueNumber}: ${response.status}`);
+
         return null; // Don't cache failed fetches
       }
 
@@ -137,7 +137,7 @@ export const fetchAndCacheIssueMetadata = async (
 
       // Cache the fetched comments
       await githubCommentCache.setComments(issueUrl, comments);
-      console.log(`GitHubFetcher: Cached comments for ${issueUrl}`);
+
     }
 
     // Parse metadata from comments (cached or freshly fetched)
@@ -145,14 +145,14 @@ export const fetchAndCacheIssueMetadata = async (
 
     if (metadata) {
       await leaderboardCache.setMetadata(issueUrl, metadata);
-      console.log(`GitHubFetcher: Cached metadata for ${issueUrl}`);
+
     } else {
-      console.warn(`GitHubFetcher: No metadata found in comments for ${issueUrl}`);
+
     }
 
     return metadata;
   } catch (e) {
-    console.error(`GitHubFetcher: Error in fetchAndCacheIssueMetadata for ${owner}/${repo}#${issueNumber}:`, e);
+
     return null;
   }
 };
@@ -161,7 +161,7 @@ export const fetchAndCacheIssueMetadata = async (
  * Finds and parses the Ubiquity metadata comment from an array of GitHub comments.
  */
 export const findAndParseMetadataComment = (comments: GitHubComment[]): PermitCommentMetadata | null => {
-  console.log(`GitHubFetcher: findAndParseMetadataComment: Searching ${comments.length} comments...`);
+
   const primaryMarker = "<!-- Ubiquity - GithubCommentModule - GithubCommentModule.getBodyContent";
   for (const comment of comments) {
     if (!comment.body) continue;
@@ -177,20 +177,20 @@ export const findAndParseMetadataComment = (comments: GitHubComment[]): PermitCo
             try {
               const metadata = JSON.parse(potentialJsonString) as PermitCommentMetadata;
               if (metadata && typeof metadata.output === "object") {
-                console.log("GitHubFetcher: findAndParseMetadataComment: Successfully parsed metadata.");
+
                 return metadata;
               } else {
-                 console.warn("GitHubFetcher: Parsed JSON does not match expected metadata structure (missing 'output').");
+
               }
             } catch (e) {
-              console.error("GitHubFetcher: Failed to parse JSON metadata from comment:", e, "\nAttempted JSON String:", potentialJsonString);
+
             }
           }
         }
       }
     }
   }
-  console.log("GitHubFetcher: findAndParseMetadataComment: No valid metadata comment found.");
+
   return null;
 };
 
@@ -204,18 +204,18 @@ export const fetchGitHubUserDetails = async (
 ): Promise<GitHubUserDetails | null> => {
   // Skip fetch and cache if no token is available
   if (!githubToken) {
-    console.warn(`GitHubFetcher: No GitHub token available. Skipping user details fetch for ${userId}`);
+
     return null;
   }
 
   const cachedDetails = await leaderboardCache.getUserDetails(userId);
   // Ensure cached details are valid before returning
   if (cachedDetails && cachedDetails.login && !cachedDetails.login.startsWith('GitHub ID:')) {
-    console.log(`GitHubFetcher: Using cached user details for ID ${userId}`);
+
     return cachedDetails;
   }
 
-  console.log(`GitHubFetcher: Fetching GitHub details for user ID ${userId}`);
+
   const url = `https://api.github.com/user/${userId}`;
   const headers: HeadersInit = {
     Accept: "application/vnd.github.v3+json",
@@ -229,12 +229,12 @@ export const fetchGitHubUserDetails = async (
     if (response.status === 403) {
       const rateLimitRemaining = response.headers.get('x-ratelimit-remaining');
       const rateLimitReset = response.headers.get('x-ratelimit-reset');
-      console.warn(`GitHubFetcher: Rate limited when fetching user ${userId}. Remaining: ${rateLimitRemaining}, Reset: ${rateLimitReset}`);
+
       return null;
     }
 
     if (!response.ok) {
-      console.warn(`GitHubFetcher: GitHub user API request failed for user ${userId}: ${response.status}`);
+
       return null;
     }
 
@@ -242,7 +242,7 @@ export const fetchGitHubUserDetails = async (
 
     // Strict validation of GitHub profile data
     if (!data || typeof data !== 'object') {
-      console.warn(`GitHubFetcher: Invalid response data for user ${userId}`);
+
       return null;
     }
 
@@ -250,28 +250,28 @@ export const fetchGitHubUserDetails = async (
 
     // Validate all required fields
     if (typeof id !== 'number' || id !== userId) {
-      console.warn(`GitHubFetcher: Mismatched or invalid user ID in response for ${userId}`);
+
       return null;
     }
 
     if (typeof login !== 'string' || login.startsWith('GitHub ID:') || !login.trim()) {
-      console.warn(`GitHubFetcher: Invalid login in response for user ${userId}`);
+
       return null;
     }
 
     if (typeof avatar_url !== 'string' || !avatar_url.startsWith('http')) {
-      console.warn(`GitHubFetcher: Invalid avatar URL in response for user ${userId}`);
+
       return null;
     }
 
     const userDetails: GitHubUserDetails = { id, login, avatar_url };
-    console.log(`GitHubFetcher: Successfully fetched details for ${userDetails.login}`);
+
 
     // Only cache valid GitHub profile data
     await leaderboardCache.setUserDetails(userId, userDetails);
     return userDetails;
   } catch (e) {
-    console.error(`GitHubFetcher: Error fetching GitHub details for user ${userId}:`, e);
+
     return null;
   }
 };

@@ -37,20 +37,20 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
   const loadCache = useCallback((): PermitDataCache => {
     try {
       const cachedString = localStorage.getItem(PERMIT_DATA_CACHE_KEY);
-      // console.log(`Loaded cache string for ${PERMIT_DATA_CACHE_KEY}: ${cachedString ? cachedString.substring(0, 100) + '...' : 'null'}`);
+      //
       const cachedData = cachedString ? JSON.parse(cachedString) : {};
 
       // Log any cached permits marked as used
       Object.entries(cachedData).forEach(([, permit]) => { // Removed unused 'key'
         // Type assertion needed here as JSON.parse returns any
         if ((permit as PermitData).isNonceUsed === true) {
-          // // console.log(`loadCache: Found cached permit with isNonceUsed=true.`);
+          // //
         }
       });
 
       return cachedData;
     } catch (e) {
-      console.error("Failed to load permit data cache", e);
+
       return {};
     }
   }, []);
@@ -60,9 +60,9 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
     try {
       const cacheString = JSON.stringify(cache);
       localStorage.setItem(PERMIT_DATA_CACHE_KEY, cacheString);
-      // console.log(`Saved cache for ${PERMIT_DATA_CACHE_KEY}: ${cacheString.substring(0,100)}...`); // Log cache save
+      //  // Log cache save
     } catch (e) {
-      console.error("Failed to save permit data cache", e);
+
     }
   }, []);
 
@@ -76,17 +76,17 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
 
         // Add detailed logging for the filtering decision
         // const permitKey = `${permit.nonce}-${permit.networkId}`;
-        // // console.log(`applyFinalFilter: Checking permit ${permitKey}. isNonceUsed=${permit.isNonceUsed}, nonceCheckFailed=${nonceCheckFailed}, shouldFilter=${shouldFilter}`);
+        // //
 
         if (!shouldFilter) {
             filteredList.push(permit);
         } else {
-            //  // console.log(`applyFinalFilter: Filtering out permit ${permitKey}.`);
+            //  //
         }
     });
-    // console.log(`applyFinalFilter: Filtered list size: ${filteredList.length}. Setting display permits.`);
+    //
     // Log the permits *being set* to the state, focusing on nonce and used status
-    // console.log('applyFinalFilter: Filtered permits being set:', JSON.stringify(filteredList.map(p => ({ nonce: p.nonce, isNonceUsed: p.isNonceUsed }))));
+    //
     setDisplayPermits(filteredList);
   }, []);
 
@@ -101,7 +101,7 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
       return permitsMap; // No preference set or missing info, return map as is
     }
 
-    // console.log(`Starting quote fetching for preferred token: ${preferredRewardTokenAddress}`);
+    //
     setIsQuoting(true);
     const updatedPermitsMap = new Map(permitsMap); // Create a mutable copy
 
@@ -136,7 +136,7 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
           try {
             totalAmountInWei += BigInt(p.amount);
           } catch (e) {
-            console.error(`Error parsing amount for quote: ${p.amount}`, e); // Log the error object
+             // Log the error object
           }
         }
       });
@@ -152,7 +152,7 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
       }
 
       try {
-        // console.log(`Fetching quote: ${totalAmountInWei} ${tokenInAddress} -> ${preferredRewardTokenAddress}`);
+        //
         const quoteResult = await getCowSwapQuote({
           tokenIn: tokenInAddress,
           tokenOut: preferredRewardTokenAddress,
@@ -175,17 +175,17 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
               const individualEstimatedOut_InOutputUnits = (permitAmount_InInputUnits * groupEstimatedTotalOut_InOutputUnits) / totalAmountInWei;
 
               // **** Add Detailed Logging ****
-              // console.log(`DEBUG Permit ${p.nonce}: Input Amount (Input Units): ${permitAmount_InInputUnits}, Group Total Input: ${totalAmountInWei}, Group Total Output (Output Units): ${groupEstimatedTotalOut_InOutputUnits}, Calculated Individual Output (Output Units): ${individualEstimatedOut_InOutputUnits}`);
+              //
               // **** End Logging ****
 
               // **** Add Logging Before toString() ****
-              // console.log(`DEBUG Permit ${p.nonce}: Storing estimatedAmountOut = ${individualEstimatedOut_InOutputUnits} (Type: ${typeof individualEstimatedOut_InOutputUnits})`);
+              //
               // **** End Logging ****
 
               p.estimatedAmountOut = individualEstimatedOut_InOutputUnits.toString(); // Store individual estimate (already in output units)
               p.quoteError = null; // Clear previous errors
             } catch (calcError) {
-               console.error(`Error calculating proportional estimate for permit ${p.nonce}:`, calcError);
+
                p.estimatedAmountOut = undefined; // Clear estimate on error
                p.quoteError = "Calculation error";
             }
@@ -196,10 +196,10 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
           updatedPermitsMap.set(`${p.nonce}-${p.networkId}`, p); // Update the map
         });
         // Correct variable name in log message
-        // console.log(`Quote success for group ${tokenInAddress}: Total Est. Out ${groupEstimatedTotalOut_InOutputUnits} ${preferredRewardTokenAddress}`);
+        //
 
       } catch (quoteError) {
-        console.error(`Quote failed for ${tokenInAddress} -> ${preferredRewardTokenAddress}:`, quoteError);
+
         const errorMessage = quoteError instanceof Error ? quoteError.message : "Quote fetching failed";
         // Apply error to all permits in the group
         groupPermits.forEach(p => {
@@ -211,7 +211,7 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
     }
 
     setIsQuoting(false);
-    // console.log("Quote fetching finished.");
+    //
     return updatedPermitsMap; // Return the map with updated quote info
   }, [preferredRewardTokenAddress, address, chainId]);
 
@@ -226,12 +226,12 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
           error?: string;
       };
       const { type, permits: workerPermits, error: workerError } = event.data as WorkerMessageData;
-      // console.log("usePermitData: Message received from worker:", type);
+      //
 
       switch (type) {
         case 'NEW_PERMITS_VALIDATED': { // Worker returns *only* newly fetched & validated permits
           const validatedNewPermits: PermitData[] = workerPermits || [];
-          // console.log(`usePermitData: Received validation results for ${validatedNewPermits.length} new/updated permits.`);
+          //
           const currentCache = loadCache();
           let cacheUpdated = false;
 
@@ -243,9 +243,9 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
             // Determine the correct isNonceUsed status, prioritizing cache=true
             const finalIsNonceUsed = existingCachedPermit?.isNonceUsed === true || validatedPermit.isNonceUsed === true;
             if (existingCachedPermit?.isNonceUsed === true && !finalIsNonceUsed) {
-                 console.warn(`Nonce used status mismatch for key ${key}! Cache: true, Worker: ${validatedPermit.isNonceUsed}. Forcing true.`);
+
             } else if (existingCachedPermit?.isNonceUsed === true) {
-                 // console.log(`Preserving isNonceUsed=true for key ${key} from cache.`);
+                 //
             }
 
             // Construct the final merged permit object
@@ -261,15 +261,15 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
           });
 
           if (cacheUpdated) {
-            // console.log("usePermitData: Attempting to save updated permit data cache...");
+            //
             saveCache(currentCache);
           }
           // Save the timestamp of this successful check cycle
           try {
             const nowISO = new Date().toISOString();
             localStorage.setItem(PERMIT_LAST_CHECK_TIMESTAMP_KEY, nowISO);
-            // console.log(`usePermitData: Saved last check timestamp (${nowISO}) to localStorage after validation.`); // Log timestamp save
-          } catch (e) { console.error("Failed to save timestamp", e); }
+            //  // Log timestamp save
+          } catch (e) {  }
 
           // Apply filter first based on validation results
           applyFinalFilter(allPermitsRef.current);
@@ -280,14 +280,14 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
               applyFinalFilter(allPermitsRef.current); // Re-apply filter to update UI with quotes
               setIsLoading(false); // Stop loading after validation AND quoting
           }).catch(quoteError => {
-              console.error("Error during post-validation quote fetching:", quoteError);
+
               setError(`Failed to fetch swap quotes: ${quoteError instanceof Error ? quoteError.message : quoteError}`);
               setIsLoading(false); // Still stop loading even if quoting fails
           });
           break;
         }
         case 'PERMITS_ERROR': // Handles errors from fetch or validate steps in worker
-          console.error("Worker error processing permits:", workerError);
+
           setError(`Error processing permits: ${workerError}`);
           // Don't clear permits on error, keep showing cached data
           setIsLoading(false); // Stop loading on error
@@ -326,7 +326,7 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
               allPermitsRef.current = mapWithQuotes;
               applyFinalFilter(allPermitsRef.current);
           }).catch(quoteError => {
-              console.error("Error fetching quotes for cached data:", quoteError);
+
           });
       }
 
@@ -335,17 +335,17 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
       try {
         lastCheckTimestamp = localStorage.getItem(PERMIT_LAST_CHECK_TIMESTAMP_KEY);
       } catch (e) {
-        console.error("Failed to read last check timestamp from localStorage", e);
+
       }
 
       // Ask worker to fetch new permits
-      // console.log(`usePermitData: Posting FETCH_NEW_PERMITS message to worker... Last check: ${lastCheckTimestamp || 'Never'}`);
+      //
       worker.postMessage({ type: 'FETCH_NEW_PERMITS', payload: { address, lastCheckTimestamp } });
 
       // Cleanup function for this effect instance
       return () => {
         worker.removeEventListener('message', handleWorkerMessage);
-        // console.log("usePermitData hook cleanup: Removed message listener.");
+        //
       };
     } else if (!isConnected) {
       // Clear state if disconnected
@@ -369,13 +369,13 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
   useEffect(() => {
     // Only run if worker is ready, user connected, not already loading, and address/chain available
     if (isConnected && address && chainId && isWorkerInitialized && worker && !isLoading) {
-        // console.log("Preference or related state changed, re-fetching quotes...");
+        //
         // Use the current state of permits from the ref map
         fetchQuotesAndUpdatePermits(new Map(allPermitsRef.current)).then(mapWithQuotes => {
             allPermitsRef.current = mapWithQuotes;
             applyFinalFilter(allPermitsRef.current); // Update display with new quotes
         }).catch(quoteError => {
-            console.error("Error re-fetching quotes after preference change:", quoteError);
+
             setError(`Failed to update swap quotes: ${quoteError instanceof Error ? quoteError.message : quoteError}`);
             // Clear quotes on error?
              allPermitsRef.current.forEach(permit => {
@@ -391,7 +391,7 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
 
   // Function to manually update the status cache (e.g., after a successful claim)
   const updatePermitStatusCache = useCallback((permitKey: string, statusUpdate: Partial<PermitData>) => {
-      // console.log(`Attempting to update cache for key: ${permitKey} with status:`, statusUpdate); // Log cache update attempt
+      //  // Log cache update attempt
       const currentCache = loadCache();
       const existingCachedPermit = currentCache[permitKey];
       if (existingCachedPermit) {
@@ -406,7 +406,7 @@ export function usePermitData({ address, isConnected, preferredRewardTokenAddres
               applyFinalFilter(allPermitsRef.current); // Re-filter display list
           }
       } else {
-          console.warn(`Attempted to update cache for non-existent key: ${permitKey}`);
+
       }
   }, [loadCache, saveCache, applyFinalFilter]);
 

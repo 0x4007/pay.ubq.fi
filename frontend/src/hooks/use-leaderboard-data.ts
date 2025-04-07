@@ -35,7 +35,7 @@ export function useLeaderboardData({ selectedWeeks, selectedRepository, refreshC
   const loadData = useCallback(async () => {
     // Ensure worker is ready before proceeding
     if (!isWorkerInitialized) {
-      console.log("useLeaderboardData: Worker not initialized yet, waiting...");
+
       if (workerError) {
         setError(`Worker initialization failed: ${workerError}`);
         setIsLoading(false);
@@ -57,25 +57,25 @@ export function useLeaderboardData({ selectedWeeks, selectedRepository, refreshC
     try {
       // Try to load from cache first
       const cacheKey = getCacheKey(selectedWeeks, selectedRepository);
-      console.log(`useLeaderboardData: Checking cache with key ${cacheKey}...`);
+
       const cachedData = await leaderboardCache.getProcessedData(cacheKey, selectedRepository);
 
       if (cachedData.processedData && cachedData.isComplete) {
-        console.log(`useLeaderboardData: Using cached data (${cachedData.processedData.length} entries)`);
+
         setLeaderboardData(cachedData.processedData);
         setIsLoading(false);
         return; // Exit early if cache hit
       }
 
       // No cache hit, fetch from the shared worker
-      console.log(`useLeaderboardData: Fetching fresh data for ${selectedWeeks} weeks from shared worker...`);
+
 
       // --- Worker Communication ---
 
       // Remove previous listener if it exists to prevent duplicates
       if (messageListenerRef.current) {
         worker.removeEventListener('message', messageListenerRef.current);
-        console.log("useLeaderboardData: Removed previous message listener.");
+
       }
 
       // Define the new listener for this specific request
@@ -84,19 +84,19 @@ export function useLeaderboardData({ selectedWeeks, selectedRepository, refreshC
 
         // Only handle the response for leaderboard data
         if (type === "LEADERBOARD_DATA_RESULT") {
-          console.log(`useLeaderboardData: Received LEADERBOARD_DATA_RESULT`);
+
           // Remove this specific listener after receiving the response
           worker.removeEventListener('message', handleMessage);
           messageListenerRef.current = null; // Clear the ref
 
           if (workerMsgError) {
-            console.error("useLeaderboardData: Worker returned error:", workerMsgError);
+
             setError(workerMsgError);
             setLeaderboardData([]);
           } else {
             const { processedData: freshData, rawData } = payload;
             if (Array.isArray(freshData)) {
-              console.log(`useLeaderboardData: Received ${freshData.length} entries from worker`);
+
               setLeaderboardData(freshData);
               setError(null); // Clear previous errors on success
 
@@ -107,7 +107,7 @@ export function useLeaderboardData({ selectedWeeks, selectedRepository, refreshC
                 getCacheKey(selectedWeeks, selectedRepository),
                 true
               ).then(() => console.log(`useLeaderboardData: Cached ${freshData.length} entries for ${selectedWeeks} weeks`))
-                .catch(cacheError => console.error("useLeaderboardData: Error caching data:", cacheError));
+                .catch(console.error); // Handle cache errors
             }
             setIsLoading(false); // Update loading state
           }
@@ -120,7 +120,7 @@ export function useLeaderboardData({ selectedWeeks, selectedRepository, refreshC
 
       // Add the event listener to the worker
       worker.addEventListener('message', handleMessage);
-      console.log("useLeaderboardData: Added message listener for LEADERBOARD_DATA_RESULT.");
+
 
       // Send the request to the worker
       worker.postMessage({
@@ -130,11 +130,11 @@ export function useLeaderboardData({ selectedWeeks, selectedRepository, refreshC
           selectedRepository
         }
       });
-      console.log(`useLeaderboardData: Sent FETCH_LEADERBOARD_DATA message for ${selectedWeeks} weeks.`);
+
 
     } catch (err) {
       // Catch errors during the setup phase (e.g., cache access)
-      console.error("useLeaderboardData: Error initiating data load:", err);
+
       setError(err instanceof Error ? err.message : String(err));
       setLeaderboardData([]);
       setIsLoading(false);
@@ -149,7 +149,7 @@ export function useLeaderboardData({ selectedWeeks, selectedRepository, refreshC
 
   // Effect to trigger loading data when selectedWeeks, refreshCounter, or worker state changes
   useEffect(() => {
-    console.log("useLeaderboardData useEffect: Running effect. isWorkerInitialized:", isWorkerInitialized, "workerError:", workerError, "refreshCounter:", refreshCounter);
+
     loadData();
 
     // Cleanup function: Remove the message listener when the component unmounts
@@ -157,7 +157,7 @@ export function useLeaderboardData({ selectedWeeks, selectedRepository, refreshC
     return () => {
       if (messageListenerRef.current && worker) {
         worker.removeEventListener('message', messageListenerRef.current);
-        console.log("useLeaderboardData: Cleaned up message listener on unmount/dependency change.");
+
         messageListenerRef.current = null; // Clear ref on cleanup
       }
     };

@@ -29,7 +29,7 @@ export function mapCombinedToLeaderboardData(permit: CombinedLeaderboardData): R
 
   // Basic validation: Ensure we have a valid user and node_url
   if (!githubUser || !nodeUrl) {
-    console.warn(`Worker: Filtering out leaderboard permit nonce ${permit.nonce} due to missing github_user info or node_url.`);
+
     return null;
   }
 
@@ -40,7 +40,7 @@ export function mapCombinedToLeaderboardData(permit: CombinedLeaderboardData): R
       parseFloat(permit.amount);
       if (isNaN(parseFloat(permit.amount))) throw new Error("Amount is NaN");
     } catch (e) {
-      console.warn(`Worker: Filtering out leaderboard permit nonce ${permit.nonce} due to invalid amount format: ${permit.amount}`, e);
+
       return null;
     }
   }

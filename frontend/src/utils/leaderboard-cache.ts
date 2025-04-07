@@ -62,7 +62,7 @@ const initializeStores = () => {
       metadataStore: createIdbKeyval<CachedMetadata>("permitMetadata")
     };
   } catch (error) {
-    console.error("Failed to initialize IndexedDB stores:", error);
+
     return null;
   }
 };
@@ -88,7 +88,7 @@ export const leaderboardCache = {
 
       // Handle version mismatch
       if (!cached.version || cached.version !== CACHE_VERSION) {
-        console.log(`Cache version mismatch for key: ${cacheKey}`);
+
         await stores.processedLeaderboardStore.del(cacheKey);
         return { processedData: null, rawData: null, isComplete: false };
       }
@@ -111,7 +111,7 @@ export const leaderboardCache = {
         isComplete: cached.isComplete
       };
     } catch (error) {
-      console.error("Failed to get processed data:", error);
+
       return { processedData: null, rawData: null, isComplete: false };
     }
   },
@@ -137,7 +137,7 @@ export const leaderboardCache = {
       };
       await stores.processedLeaderboardStore.set(cacheKey, cachedData);
     } catch (error) {
-      console.error(`Failed to cache processed leaderboard data for key ${cacheKey}:`, error);
+
     }
   },
 
@@ -153,7 +153,7 @@ export const leaderboardCache = {
       }
       return cached.details;
     } catch (error) {
-      console.error("Failed to get user details:", error);
+
       return null;
     }
   },
@@ -168,7 +168,7 @@ export const leaderboardCache = {
       };
       await stores.userDetailsStore.set(userId.toString(), cachedData);
     } catch (error) {
-      console.error("Failed to cache user details:", error);
+
     }
   },
 
@@ -184,7 +184,7 @@ export const leaderboardCache = {
       }
       return cached.metadata;
     } catch (error) {
-      console.error("Failed to get metadata:", error);
+
       return null;
     }
   },
@@ -199,7 +199,7 @@ export const leaderboardCache = {
       };
       await stores.metadataStore.set(issueUrl, cachedData);
     } catch (error) {
-      console.error("Failed to cache metadata:", error);
+
     }
   },
 
@@ -212,7 +212,7 @@ export const leaderboardCache = {
         stores.metadataStore.clear()
       ]);
     } catch (error) {
-      console.error("Failed to clear caches:", error);
+
     }
   },
 
@@ -223,9 +223,9 @@ export const leaderboardCache = {
     if (!stores) return;
     try {
       await stores.processedLeaderboardStore.del(cacheKey);
-      console.log(`Cleared leaderboard cache for key: ${cacheKey}`);
+
     } catch (error) {
-      console.error(`Failed to clear leaderboard cache for key ${cacheKey}:`, error);
+
     }
   }
 };

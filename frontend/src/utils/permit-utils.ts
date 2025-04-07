@@ -66,7 +66,7 @@ export const formatAmount = (
     // This handles potential large/small numbers better than direct formatting of the string
     const numericValue = Number(formatted);
     if (isNaN(numericValue)) {
-      console.warn(`formatAmount: formatted value "${formatted}" resulted in NaN.`);
+
       return Number(0).toFixed(displayDecimals);
     }
     // Use toLocaleString with maximumSignificantDigits for better formatting.
@@ -74,7 +74,7 @@ export const formatAmount = (
       maximumSignificantDigits: 2,
     });
   } catch (error) {
-    console.warn(`Amount formatting failed for amount: ${rawAmount}, decimals: ${decimals}`, error);
+
     // Fallback to fixed decimals on error, as significant digits might not make sense for 0
     return Number(0).toFixed(displayDecimals);
   }
@@ -111,8 +111,8 @@ export const hasRequiredFields = (permit: PermitData): boolean => {
   }
 
   if (errors.length > 0) {
-    console.warn(logPrefix, `Missing required fields: ${errors.join(", ")}`);
-    console.warn(logPrefix, "Full Permit data:", permit); // Log full data for debugging
+
+     // Log full data for debugging
     isValid = false;
   }
 
