@@ -12,6 +12,7 @@ export interface LeaderboardEntry {
   avatarUrl: string;
   totalXp: number;
   xpByCategory: Record<string, number>;
+  xpByRepository: Record<string, number>; // New: XP totals per repository
   permitCount: number;
   repositories: string[]; // Change from single repository to array of repositories
 }
@@ -165,11 +166,51 @@ export const processAndAggregateLeaderboardData = async (
   const finalLeaderboard = Object.values(aggregatedDataByUser)
     .map((userData): LeaderboardEntry => {
       const userDetails = userDetailsMap.get(userData.githubId);
-      // Track repositories for this user
+      // Track repositories and XP per repo for this user
       const repositoriesSet = new Set<string>();
+      const xpByRepository: Record<string, number> = {};
+
       combinedDataFromDb.forEach(permit => {
         if (permit.github_user?.id === userData.githubId && permit.repository) {
           repositoriesSet.add(permit.repository);
+
+          // Find metadata for this permit
+          const issueUrl = permit.location?.node_url;
+          const metadata = issueUrl ? metadataByUrl.get(issueUrl) : undefined;
+          if (metadata?.output) {
+            const userMetadataEntry = Object.values(metadata.output).find((entry) => entry.userId === userData.githubId);
+            if (userMetadataEntry) {
+              let permitXp = 0;
+              const knownCategories = ["task", "comments", "reviewRewards"];
+              knownCategories.forEach((category) => {
+                let categoryXp = 0;
+                const categoryData = userMetadataEntry[category as keyof typeof userMetadataEntry];
+
+                try {
+                  if (category === "task" && typeof categoryData === 'object' && categoryData !== null && typeof (categoryData as { reward?: unknown }).reward === 'number') {
+                    categoryXp = (categoryData as { reward: number }).reward;
+                  } else if (category === "comments" && Array.isArray(categoryData)) {
+                    const commentsArray = categoryData as { score?: { reward?: number } }[];
+                    categoryXp = commentsArray.reduce((sum: number, comment) => sum + (comment?.score?.reward || 0), 0);
+                  } else if (category === "reviewRewards" && Array.isArray(categoryData)) {
+                    const reviewRewardsArray = categoryData as { reviews?: { reward?: number }[] }[];
+                    categoryXp = reviewRewardsArray.reduce((sum: number, reviewReward) => {
+                      const reviewSum = Array.isArray(reviewReward?.reviews)
+                        ? reviewReward.reviews.reduce((rSum: number, review: { reward?: number }) => rSum + (review?.reward || 0), 0)
+                        : 0;
+                      return sum + reviewSum;
+                    }, 0);
+                  }
+                } catch {
+                  // ignore parse errors here
+                }
+
+                permitXp += categoryXp;
+              });
+              const sanitizedRepo = permit.repository.replace(/[/.]/g, "_");
+              xpByRepository[sanitizedRepo] = (xpByRepository[sanitizedRepo] || 0) + permitXp;
+            }
+          }
         }
       });
 
@@ -178,8 +219,9 @@ export const processAndAggregateLeaderboardData = async (
         avatarUrl: userDetails?.avatar_url ?? "",
         totalXp: userData.totalXp,
         xpByCategory: userData.xpByCategory,
+        xpByRepository,
         permitCount: userData.permitCount,
-        repositories: Array.from(repositoriesSet), // Use all repositories found for this user
+        repositories: Array.from(repositoriesSet).map(r => r.replace(/[/.]/g, "_")),
       };
     })
     .sort((a, b) => b.totalXp - a.totalXp); // Sort descending by total XP

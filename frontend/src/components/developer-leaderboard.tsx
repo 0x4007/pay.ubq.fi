@@ -17,13 +17,18 @@ import { leaderboardCache } from "../utils/leaderboard-cache.ts";
 import type { LeaderboardEntry } from "../workers/leaderboard-aggregator.ts";
 import "./leaderboard-styles.css"; // Import styles
 
-// Define colors for categories (adjust as needed for better contrast/aesthetics)
-const CATEGORY_COLORS = {
-  comments: "#8884d8",
-  task: "#82ca9d",
-  reviewRewards: "#ffc658",
-  // Add more categories and colors if they exist
-};
+const REPO_COLORS: Record<string, string> = {}; // Will be filled dynamically
+
+// Helper to generate a color palette
+function generateColor(index: number): string {
+  const colors = [
+    "#8884d8", "#82ca9d", "#ffc658", "#ff7f50", "#87ceeb", "#da70d6",
+    "#32cd32", "#ff69b4", "#ba55d3", "#cd5c5c", "#ffa500", "#40e0d0",
+    "#ff6347", "#7b68ee", "#00fa9a", "#ffd700", "#dc143c", "#00ced1",
+    "#ff1493", "#1e90ff"
+  ];
+  return colors[index % colors.length];
+}
 
 // Helper function to format XP (optional) - Keep this if used elsewhere or for tooltip
 function formatXp(xp: number): string {
@@ -109,6 +114,10 @@ export function DeveloperLeaderboard() {
     filteredDataLength: Array.isArray(filteredLeaderboardData) ? filteredLeaderboardData.length : 0,
     sampleEntry: filteredLeaderboardData?.[0]
   });
+
+  if (filteredLeaderboardData.length > 0) {
+    console.log("Sample xpByRepository for first user:", filteredLeaderboardData[0].xpByRepository);
+  }
 
 
   // Prioritize error display over loading state if an error exists
@@ -311,12 +320,22 @@ export function DeveloperLeaderboard() {
               formatter={(value: number, name: string) => [formatXp(value), name]} // Format tooltip value
             />
             <Legend wrapperStyle={{ color: "white", paddingTop: "10px" }} />
-            {/* Define stacked bars for each category */}
-            {/* Ensure the keys match the properties in xpByCategory */}
-            <Bar dataKey="xpByCategory.comments" stackId="a" fill={CATEGORY_COLORS.comments} name="Comments XP" />
-            <Bar dataKey="xpByCategory.task" stackId="a" fill={CATEGORY_COLORS.task} name="Task XP" />
-            <Bar dataKey="xpByCategory.reviewRewards" stackId="a" fill={CATEGORY_COLORS.reviewRewards} name="Reviews XP" />
-            {/* Add more <Bar> components here if other categories exist in xpByCategory */}
+            {/* Define stacked bars for each repository */}
+            {availableRepositories.map((repo, idx) => {
+              const sanitizedRepo = repo.replace(/[/.]/g, "_");
+              if (!REPO_COLORS[sanitizedRepo]) {
+                REPO_COLORS[sanitizedRepo] = generateColor(idx);
+              }
+              return (
+                <Bar
+                  key={sanitizedRepo}
+                  dataKey={`xpByRepository.${sanitizedRepo}`}
+                  stackId="a"
+                  fill={REPO_COLORS[sanitizedRepo]}
+                  name={repo.split('/').pop() || repo}
+                />
+              );
+            })}
           </BarChart>
         </ResponsiveContainer>
       </div>

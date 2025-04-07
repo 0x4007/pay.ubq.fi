@@ -17,7 +17,7 @@ export const resetDatabase = async (): Promise<void> => {
   });
 };
 
-// Create a single instance of IndexedDB for all our key-value stores
+// Original IndexedDB implementation
 const createDB = (): IDBOpenDBRequest => {
   const dbName = "ubiquityCache";
   const dbVersion = 2; // Increment version to trigger schema update
